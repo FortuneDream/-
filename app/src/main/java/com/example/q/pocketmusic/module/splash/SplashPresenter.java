@@ -1,10 +1,9 @@
 package com.example.q.pocketmusic.module.splash;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.BmobInfo;
 import com.example.q.pocketmusic.config.Constant;

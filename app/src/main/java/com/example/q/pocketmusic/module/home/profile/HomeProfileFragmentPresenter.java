@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.module.home.profile;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.model.bean.MyUser;

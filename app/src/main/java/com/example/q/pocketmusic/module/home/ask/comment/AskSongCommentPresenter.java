@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;

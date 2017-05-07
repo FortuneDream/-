@@ -5,11 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.callback.IBaseView;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.user.forget.ForgetActivity;

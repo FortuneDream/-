@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.callback.IBaseView;
 import com.example.q.pocketmusic.util.ConvertUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;

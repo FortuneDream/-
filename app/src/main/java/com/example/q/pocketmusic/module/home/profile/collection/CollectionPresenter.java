@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.module.home.profile.collection;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.Constant;

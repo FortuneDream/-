@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
-import com.example.q.pocketmusic.callback.IBaseView;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.search.net.SearchNetFragment;
 import com.example.q.pocketmusic.module.search.recommend.SearchRecommendFragment;

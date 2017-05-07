@@ -3,10 +3,9 @@ package com.example.q.pocketmusic.module.home.profile.post;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.home.ask.comment.AskSongCommentActivity;

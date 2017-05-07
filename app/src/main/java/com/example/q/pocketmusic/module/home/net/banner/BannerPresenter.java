@@ -2,7 +2,7 @@ package com.example.q.pocketmusic.module.home.net.banner;
 
 import android.content.Context;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 
 /**
  * Created by 鹏君 on 2017/4/23.

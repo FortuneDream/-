@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.module.home.net;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -11,16 +11,13 @@ import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 
-import com.example.q.pocketmusic.module.home.net.banner.BannerActivity;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
 import com.example.q.pocketmusic.module.search.SearchMainActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.ACacheUtil;
-import com.example.q.pocketmusic.util.BmobUtil;
 
 import java.util.List;
 
-import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 
 /**

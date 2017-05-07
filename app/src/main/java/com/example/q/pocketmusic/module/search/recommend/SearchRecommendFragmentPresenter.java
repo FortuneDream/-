@@ -2,34 +2,17 @@ package com.example.q.pocketmusic.module.search.recommend;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 
-import com.example.q.pocketmusic.callback.IBaseView;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
-import com.example.q.pocketmusic.model.bean.collection.CollectionCount;
-import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.model.net.LoadRecommendList;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.search.recommend.list.RecommendListActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.ACacheUtil;
-import com.example.q.pocketmusic.util.LogUtils;
-import com.example.q.pocketmusic.util.MyToast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.QueryListener;
 
 /**
  * Created by 81256 on 2017/4/14.

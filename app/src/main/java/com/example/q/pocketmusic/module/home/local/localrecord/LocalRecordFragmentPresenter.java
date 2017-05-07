@@ -1,41 +1,30 @@
 package com.example.q.pocketmusic.module.home.local.localrecord;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.media.MediaPlayer;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
-import android.util.Log;
 
 import com.example.q.pocketmusic.IAudioPlayerService;
-import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.local.RecordAudio;
 import com.example.q.pocketmusic.model.db.RecordAudioDao;
-import com.example.q.pocketmusic.callback.IBasePresenter;
 import com.example.q.pocketmusic.model.net.LoadLocalRecordList;
-import com.example.q.pocketmusic.model.net.LoadLocalSongList;
 import com.example.q.pocketmusic.model.net.SynchronizeRecordAudio;
-import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.service.MediaPlayerService;
-import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ExecutorService;
 
 /**
  * Created by 81256 on 2016/10/23.

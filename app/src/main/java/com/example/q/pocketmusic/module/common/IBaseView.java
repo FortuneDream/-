@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.callback;
+package com.example.q.pocketmusic.module.common;
 
 /**
  * Created by Cloud on 2017/1/28.

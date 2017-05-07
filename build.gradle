@@ -15,6 +15,7 @@ allprojects {
         jcenter()
         maven { url "https://jitpack.io" }
         mavenCentral()  // GPUImage for Android
+        maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }//Bmob
     }
 }
 task clean(type: Delete) {

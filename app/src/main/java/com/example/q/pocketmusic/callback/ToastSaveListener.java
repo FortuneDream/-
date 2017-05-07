@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.callback;
 import android.content.Context;
 
 import com.example.q.pocketmusic.config.CommonString;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.util.MyToast;
 
 import cn.bmob.v3.exception.BmobException;

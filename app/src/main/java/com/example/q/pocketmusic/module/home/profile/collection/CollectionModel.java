@@ -2,7 +2,7 @@ package com.example.q.pocketmusic.module.home.profile.collection;
 
 import android.content.Context;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;

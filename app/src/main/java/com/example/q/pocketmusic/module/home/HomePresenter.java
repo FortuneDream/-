@@ -121,9 +121,9 @@ public class HomePresenter extends BasePresenter {
         BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
             @Override
             public void onUpdateReturned(int i, UpdateResponse updateResponse) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    MyToast.showToast(context, "在目前暂时不支持Android N 7.0 的自动更新，请到应用商店中下载");
-                }
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    MyToast.showToast(context, "在目前暂时不支持Android N 7.0 的自动更新，请到应用商店中下载");
+//                }
             }
         });//更新监听
     }

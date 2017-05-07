@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.util.MyToast;
 
 import cn.bmob.v3.exception.BmobException;

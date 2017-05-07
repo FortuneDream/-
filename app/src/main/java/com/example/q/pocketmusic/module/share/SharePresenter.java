@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.SQLException;
 import android.text.TextUtils;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
@@ -103,20 +103,19 @@ public class SharePresenter extends BasePresenter {
     //检查是否已经存在
     private void checkHasSong(final String name, final String content) {
         BmobQuery<ShareSong> query = new BmobQuery<>();
+        query.addWhereEqualTo("name", name);
         query.findObjects(new ToastQueryListener<ShareSong>(context, activity) {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                Boolean flag = false;
-                for (ShareSong shareSong : list) {
-                    if (shareSong.getName().equals(name)) {
-                        flag = true;//已经存在相同名字
-                        break;
-                    }
+                Boolean flag = true;
+                if (list == null) {
+                    flag = false;//没有相同的额曲谱
                 }
                 if (flag) {
                     activity.showLoading(false);
                     MyToast.showToast(context, "已经存在相同曲谱~");
                 } else {
+                    LogUtils.e(TAG, "开始批量上传");
                     //批量上传文件
                     uploadBatch(name, content);
                 }

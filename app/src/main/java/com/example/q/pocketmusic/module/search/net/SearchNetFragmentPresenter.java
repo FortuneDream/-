@@ -3,8 +3,7 @@ package com.example.q.pocketmusic.module.search.net;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.callback.IBaseList;
-import com.example.q.pocketmusic.callback.IBaseView;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;

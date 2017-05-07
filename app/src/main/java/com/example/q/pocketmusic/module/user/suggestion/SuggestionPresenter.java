@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.module.user.suggestion;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.q.pocketmusic.callback.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.model.bean.MyUser;

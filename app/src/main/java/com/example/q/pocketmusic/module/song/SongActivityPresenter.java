@@ -15,8 +15,8 @@ import android.support.annotation.NonNull;
 import android.view.Menu;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.callback.IBaseList;
-import com.example.q.pocketmusic.callback.IBasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseList;
+import com.example.q.pocketmusic.module.common.IBasePresenter;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
@@ -33,7 +33,6 @@ import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.bean.local.RecordAudio;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.model.db.RecordAudioDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
