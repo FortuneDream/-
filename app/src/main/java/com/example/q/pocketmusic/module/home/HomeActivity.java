@@ -112,7 +112,7 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView,HomePresenter
 
     @Override
     protected HomePresenter createPresenter() {
-        return new HomePresenter();
+        return new HomePresenter(this);
     }
 
     //恢复视图，在onStart之后，这里默认点击local

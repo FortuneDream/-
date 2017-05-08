@@ -21,8 +21,9 @@ import java.util.List;
 public class SearchRecommendFragmentPresenter extends BasePresenter<SearchRecommendFragmentPresenter.IView> {
     private IView fragment;
 
-    public SearchRecommendFragmentPresenter() {
-        fragment = getIViewRef();
+    public SearchRecommendFragmentPresenter(IView fragment) {
+        attachView(fragment);
+        this.fragment=getIViewRef();
     }
 
 

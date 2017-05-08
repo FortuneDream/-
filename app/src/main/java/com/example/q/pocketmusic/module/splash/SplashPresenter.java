@@ -21,8 +21,9 @@ public class SplashPresenter extends BasePresenter<SplashPresenter.IView> {
     private IView activity;
     private BmobUtil bmobUtil;
 
-    public SplashPresenter() {
-        activity = getIViewRef();
+    public SplashPresenter(IView activity) {
+        attachView(activity);//需要传过一个强引用
+        this.activity = getIViewRef();//得到一个弱引用
         bmobUtil = new BmobUtil();
     }
 

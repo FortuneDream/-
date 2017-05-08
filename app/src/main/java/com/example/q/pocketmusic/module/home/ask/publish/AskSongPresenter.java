@@ -21,8 +21,9 @@ import com.example.q.pocketmusic.util.MyToast;
 public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
     private IView activity;
 
-    public AskSongPresenter() {
-        activity = getIViewRef();
+    public AskSongPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     public void askForSong(String title, final String content, final com.example.q.pocketmusic.model.bean.MyUser user) {

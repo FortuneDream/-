@@ -24,8 +24,9 @@ import cn.bmob.v3.update.UpdateStatus;
 public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
     private IView activity;
 
-    public SettingPresenter() {
-        activity = getIViewRef();
+    public SettingPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     public void checkUpdate(final Boolean showToast) {

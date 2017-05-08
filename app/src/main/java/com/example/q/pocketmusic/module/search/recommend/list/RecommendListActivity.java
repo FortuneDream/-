@@ -83,6 +83,6 @@ public class RecommendListActivity extends BaseActivity<RecommendListActivityPre
 
     @Override
     protected RecommendListActivityPresenter createPresenter() {
-        return new RecommendListActivityPresenter();
+        return new RecommendListActivityPresenter(this);
     }
 }

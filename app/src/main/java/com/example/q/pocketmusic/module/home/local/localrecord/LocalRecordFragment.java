@@ -72,7 +72,6 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
         adapter.setOnItemClickListener(this);
         adapter.setListener(this);
         recycler.setRefreshListener(this);
-
         //初始化
         initRecyclerView(recycler, adapter, 1, true);
         //加载录音列表
@@ -242,7 +241,7 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
 
     @Override
     protected LocalRecordFragmentPresenter createPresenter() {
-        return new LocalRecordFragmentPresenter();
+        return new LocalRecordFragmentPresenter(this);
     }
 
 

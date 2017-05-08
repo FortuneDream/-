@@ -25,7 +25,6 @@ import butterknife.OnClick;
 
 public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, SuggestionPresenter>
         implements SuggestionPresenter.IView, SwipeRefreshLayout.OnRefreshListener {
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
@@ -89,6 +88,6 @@ public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, 
 
     @Override
     protected SuggestionPresenter createPresenter() {
-        return new SuggestionPresenter();
+        return new SuggestionPresenter(this);
     }
 }

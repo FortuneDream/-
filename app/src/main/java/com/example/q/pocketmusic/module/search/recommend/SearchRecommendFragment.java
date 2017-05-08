@@ -72,6 +72,6 @@ public class SearchRecommendFragment extends BaseFragment<SearchRecommendFragmen
 
     @Override
     protected SearchRecommendFragmentPresenter createPresenter() {
-        return new SearchRecommendFragmentPresenter();
+        return new SearchRecommendFragmentPresenter(this);
     }
 }

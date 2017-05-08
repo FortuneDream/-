@@ -22,8 +22,9 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
     private UserPostModel model;
 
 
-    public UserPostPresenter() {
-        activity = getIViewRef();
+    public UserPostPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
         model = new UserPostModel();
     }
 

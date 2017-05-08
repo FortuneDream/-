@@ -24,8 +24,9 @@ public class PianoPresenter extends BasePresenter<PianoPresenter.IView> {
     private static final int DELAY_TIME = 250;
     private Boolean isCloseQuickBack;
 
-    public PianoPresenter() {
-        activity = getIViewRef();
+    public PianoPresenter(IView item) {
+        attachView(item);
+        this.activity=getIViewRef();
         utils = new MusicUtils(activity.getCurrentContext());
         builder = new StringBuilder();
         handler = new Handler(Looper.getMainLooper()) {

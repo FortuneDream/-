@@ -38,8 +38,9 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     private int FLAG;//标记当前Fragment
 
 
-    public HomePresenter() {
-        activity = getIViewRef();
+    public HomePresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
         initFragment();
     }
 

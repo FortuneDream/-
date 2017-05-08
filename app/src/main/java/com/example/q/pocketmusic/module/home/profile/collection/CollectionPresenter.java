@@ -34,8 +34,9 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
         this.user = user;
     }
 
-    public CollectionPresenter() {
-        activity = getIViewRef();
+    public CollectionPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
         collectionModel = new CollectionModel();
 
     }

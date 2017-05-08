@@ -119,6 +119,6 @@ public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, 
 
     @Override
     protected CollectionPresenter createPresenter() {
-        return new CollectionPresenter();
+        return new CollectionPresenter(this);
     }
 }

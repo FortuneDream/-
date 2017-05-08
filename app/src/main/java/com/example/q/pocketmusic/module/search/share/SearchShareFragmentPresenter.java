@@ -23,8 +23,9 @@ import cn.bmob.v3.BmobQuery;
 public class SearchShareFragmentPresenter extends BasePresenter<SearchShareFragmentPresenter.IView> {
     private IView fragment;
 
-    public SearchShareFragmentPresenter() {
-        fragment = getIViewRef();
+    public SearchShareFragmentPresenter(IView fragment) {
+        attachView(fragment);
+        this.fragment=getIViewRef();
     }
 
     public void queryFromShareSongList(String s) {

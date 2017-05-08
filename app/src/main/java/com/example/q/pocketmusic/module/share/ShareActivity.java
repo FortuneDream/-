@@ -104,6 +104,6 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView,SharePresen
 
     @Override
     protected SharePresenter createPresenter() {
-        return new SharePresenter();
+        return new SharePresenter(this);
     }
 }

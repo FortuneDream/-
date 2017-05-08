@@ -21,8 +21,9 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
     private IView activity;
     private int mPage;
 
-    public SongTypeActivityPresenter() {
-        activity = getIViewRef();
+    public SongTypeActivityPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     public int getmPage() {

@@ -131,6 +131,6 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
 
     @Override
     protected HomeNetFragmentPresenter createPresenter() {
-        return new HomeNetFragmentPresenter();
+        return new HomeNetFragmentPresenter(this);
     }
 }

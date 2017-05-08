@@ -24,8 +24,9 @@ import cn.bmob.v3.exception.BmobException;
 public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
     private IView activity;
 
-    public LoginPresenter() {
-        activity = getIViewRef();
+    public LoginPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     //登录

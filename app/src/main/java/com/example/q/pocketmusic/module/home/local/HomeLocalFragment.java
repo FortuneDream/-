@@ -56,7 +56,7 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
 
     @Override
     protected HomeLocalFragmentPresenter createPresenter() {
-        return new HomeLocalFragmentPresenter();
+        return new HomeLocalFragmentPresenter(this);
     }
 
     @Override

@@ -36,8 +36,9 @@ public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
     public final static String FILE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Constant.FILE_NAME + "/";
     private List<String> imgUrls;
 
-    public LeadSongPresenter() {
-        activity = getIViewRef();
+    public LeadSongPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
         localSongDao = new LocalSongDao(activity.getAppContext());
         imgDao = new ImgDao(activity.getAppContext());
         imgUrls = new ArrayList<>();

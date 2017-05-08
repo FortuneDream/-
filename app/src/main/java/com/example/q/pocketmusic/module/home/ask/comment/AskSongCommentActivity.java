@@ -151,6 +151,6 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
 
     @Override
     protected AskSongCommentPresenter createPresenter() {
-        return new AskSongCommentPresenter();
+        return new AskSongCommentPresenter(this);
     }
 }

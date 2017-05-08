@@ -12,8 +12,9 @@ import com.example.q.pocketmusic.module.common.IBaseList;
 public class BannerPresenter extends BasePresenter<BannerPresenter.IView> {
     private IView activity;
 
-    public BannerPresenter() {
-        activity = getIViewRef();
+    public BannerPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     public interface IView extends IBaseList {

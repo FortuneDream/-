@@ -28,8 +28,9 @@ public class SuggestionPresenter extends BasePresenter<SuggestionPresenter.IView
         this.user = user;
     }
 
-    public SuggestionPresenter() {
-        activity=getIViewRef();
+    public SuggestionPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     public void sendSuggestion(String suggestion) {

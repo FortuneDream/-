@@ -70,6 +70,6 @@ public class ContributionActivity extends AuthActivity<ContributionPresenter.IVi
 
     @Override
     protected ContributionPresenter createPresenter() {
-        return new ContributionPresenter();
+        return new ContributionPresenter(this);
     }
 }

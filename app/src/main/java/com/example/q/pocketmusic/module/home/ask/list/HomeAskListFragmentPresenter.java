@@ -23,8 +23,9 @@ public class HomeAskListFragmentPresenter extends BasePresenter<HomeAskListFragm
     private BmobUtil bmobUtil;
     private int mPage;
 
-    public HomeAskListFragmentPresenter() {
-        this.fragment = getIViewRef();
+    public HomeAskListFragmentPresenter(IView fragment) {
+        attachView(fragment);
+        this.fragment=getIViewRef();
         bmobUtil = new BmobUtil();
 
     }

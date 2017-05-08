@@ -24,8 +24,9 @@ public class RecommendListActivityPresenter extends BasePresenter<RecommendListA
     private IView activity;
     private int mPage;
 
-    public RecommendListActivityPresenter() {
-        activity = getIViewRef();
+    public RecommendListActivityPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     //可以得到推荐列表

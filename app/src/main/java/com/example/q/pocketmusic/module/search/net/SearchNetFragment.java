@@ -97,6 +97,6 @@ public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.I
 
     @Override
     protected SearchNetFragmentPresenter createPresenter() {
-        return new SearchNetFragmentPresenter();
+        return new SearchNetFragmentPresenter(this);
     }
 }

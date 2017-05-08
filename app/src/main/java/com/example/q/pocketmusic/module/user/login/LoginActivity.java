@@ -96,14 +96,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter.IView,LoginPresen
 
     @Override
     protected LoginPresenter createPresenter() {
-        return new LoginPresenter();
+        return new LoginPresenter(this);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
 }

@@ -112,6 +112,6 @@ public class HomeAskListFragment extends BaseFragment<HomeAskListFragmentPresent
 
     @Override
     protected HomeAskListFragmentPresenter createPresenter() {
-        return new HomeAskListFragmentPresenter();
+        return new HomeAskListFragmentPresenter(this);
     }
 }

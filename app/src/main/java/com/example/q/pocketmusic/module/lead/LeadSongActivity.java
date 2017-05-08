@@ -92,6 +92,6 @@ public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView,LeadS
 
     @Override
     protected LeadSongPresenter createPresenter() {
-        return new LeadSongPresenter();
+        return new LeadSongPresenter(this);
     }
 }

@@ -19,8 +19,9 @@ public class ContributionPresenter extends BasePresenter<ContributionPresenter.I
     private IView activity;
 
 
-    public ContributionPresenter() {
-        activity =getIViewRef();
+    public ContributionPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     //贡献前十个

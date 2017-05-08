@@ -46,7 +46,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         setContentView(setContentResource());
         unbinder = ButterKnife.bind(this);
         presenter = createPresenter();
-        presenter.attachView((V) this);
         this.context = this;
         initView();
         initLoadingView();

@@ -74,6 +74,6 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView,AskSong
 
     @Override
     protected AskSongPresenter createPresenter() {
-        return new AskSongPresenter();
+        return new AskSongPresenter(this);
     }
 }

@@ -21,8 +21,9 @@ import java.util.regex.Pattern;
 public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
     private IView activity;
 
-    public RegisterPresenter() {
-        activity = getIViewRef();
+    public RegisterPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     public Boolean checkAccount(String email) {

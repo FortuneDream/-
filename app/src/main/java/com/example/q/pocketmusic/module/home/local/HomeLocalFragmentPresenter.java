@@ -15,8 +15,9 @@ import com.example.q.pocketmusic.module.piano.PianoActivity;
 public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentPresenter.IView> {
     private IView fragment;
 
-    public HomeLocalFragmentPresenter() {
-        fragment=getIViewRef();
+    public HomeLocalFragmentPresenter(IView fragment) {
+        attachView(fragment);
+        this.fragment=getIViewRef();
     }
 
     public void enterLeadActivity() {

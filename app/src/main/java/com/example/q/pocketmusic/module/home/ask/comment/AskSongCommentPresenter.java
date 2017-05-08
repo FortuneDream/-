@@ -51,7 +51,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         this.user = user;
     }
 
-    public AskSongCommentPresenter() {
+    public AskSongCommentPresenter(IView activity) {
+        attachView(activity);
         this.activity=getIViewRef();
         model = new AskSongCommentModel();
     }

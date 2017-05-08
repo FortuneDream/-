@@ -36,8 +36,9 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
     private IView fragment;
     private RecordAudioDao recordAudioDao;
 
-    public LocalRecordFragmentPresenter() {
-        fragment = getIViewRef();
+    public LocalRecordFragmentPresenter(IView fragment) {
+        attachView(fragment);
+        this.fragment=getIViewRef();
         recordAudioDao = new RecordAudioDao(fragment.getAppContext());
     }
 

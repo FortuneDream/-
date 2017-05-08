@@ -36,8 +36,9 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
     private IView fragment;
     private MyUser user;
 
-    public HomeProfileFragmentPresenter() {
-        fragment = getIViewRef();
+    public HomeProfileFragmentPresenter(IView fragment) {
+        attachView(fragment);
+        this.fragment=getIViewRef();
     }
 
 

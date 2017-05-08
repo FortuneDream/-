@@ -110,8 +110,9 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
         }
     };
 
-    public SongActivityPresenter() {
-        activity = getIViewRef();
+    public SongActivityPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
 

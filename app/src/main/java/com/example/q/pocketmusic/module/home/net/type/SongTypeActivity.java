@@ -107,6 +107,6 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
 
     @Override
     protected SongTypeActivityPresenter createPresenter() {
-        return new SongTypeActivityPresenter();
+        return new SongTypeActivityPresenter(this);
     }
 }

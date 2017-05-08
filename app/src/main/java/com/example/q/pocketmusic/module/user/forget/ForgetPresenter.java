@@ -23,8 +23,9 @@ import cn.bmob.v3.listener.SaveListener;
 public class ForgetPresenter extends BasePresenter<ForgetPresenter.IView> {
     private IView activity;
 
-    public ForgetPresenter() {
-        activity = getIViewRef();
+    public ForgetPresenter(IView activity) {
+        attachView(activity);
+        this.activity = getIViewRef();
     }
 
     public void checkInfo(final String account, String nickName, final String newPassword, String confirmPassword) {

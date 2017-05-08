@@ -77,6 +77,6 @@ public class SearchShareFragment extends BaseFragment<SearchShareFragmentPresent
 
     @Override
     protected SearchShareFragmentPresenter createPresenter() {
-        return new SearchShareFragmentPresenter();
+        return new SearchShareFragmentPresenter(this);
     }
 }

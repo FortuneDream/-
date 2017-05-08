@@ -113,6 +113,6 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
 
     @Override
     protected SettingPresenter createPresenter() {
-        return new SettingPresenter();
+        return new SettingPresenter(this);
     }
 }

@@ -64,6 +64,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter.IView,Regis
 
     @Override
     protected RegisterPresenter createPresenter() {
-        return new RegisterPresenter();
+        return new RegisterPresenter(this);
     }
 }

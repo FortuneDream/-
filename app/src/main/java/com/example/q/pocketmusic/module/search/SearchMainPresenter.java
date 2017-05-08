@@ -34,8 +34,9 @@ public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView
         this.inputStr = inputStr;
     }
 
-    public SearchMainPresenter() {
-        activity = getIViewRef();
+    public SearchMainPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
         getFragments();
         getTabsTxt();
     }

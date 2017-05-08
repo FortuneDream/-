@@ -94,6 +94,6 @@ public class SearchMainActivity extends BaseActivity<SearchMainPresenter.IView, 
 
     @Override
     protected SearchMainPresenter createPresenter() {
-        return new SearchMainPresenter();
+        return new SearchMainPresenter(this);
     }
 }

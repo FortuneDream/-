@@ -151,7 +151,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     @Override
     protected SongActivityPresenter createPresenter() {
-        return new SongActivityPresenter();
+        return new SongActivityPresenter(this);
     }
 
     //菜单

@@ -50,8 +50,9 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
         return user;
     }
 
-    public SharePresenter() {
-        activity = getIViewRef();
+    public SharePresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     public void setUser(MyUser user) {

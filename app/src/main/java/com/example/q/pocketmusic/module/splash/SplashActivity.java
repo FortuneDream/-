@@ -20,7 +20,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class SplashActivity extends BaseActivity<SplashPresenter.IView,SplashPresenter>
+public class SplashActivity extends BaseActivity<SplashPresenter.IView, SplashPresenter>
         implements EasyPermissions.PermissionCallbacks, SplashPresenter.IView {
     private static final int ENTER_HOME_ACTIVITY = 1001;
     @BindView(R.id.bmob_info_tv)
@@ -62,7 +62,6 @@ public class SplashActivity extends BaseActivity<SplashPresenter.IView,SplashPre
         presenter.getBmobInfo();
         requestPermissions();
     }
-
 
 
     //权限相关
@@ -130,6 +129,6 @@ public class SplashActivity extends BaseActivity<SplashPresenter.IView,SplashPre
 
     @Override
     protected SplashPresenter createPresenter() {
-        return new SplashPresenter();
+        return new SplashPresenter(this);
     }
 }

@@ -9,8 +9,9 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 public class HelpPresenter extends BasePresenter<HelpPresenter.IView> {
     private IView activity;
 
-    public HelpPresenter() {
-        activity = getIViewRef();
+    public HelpPresenter(IView activity) {
+        attachView(activity);
+        this.activity=getIViewRef();
     }
 
     interface IView {

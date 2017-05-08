@@ -22,8 +22,9 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
     private IView fragment;
     private int mPage;
 
-    public SearchNetFragmentPresenter() {
-        fragment = getIViewRef();
+    public SearchNetFragmentPresenter(IView fragment) {
+        attachView(fragment);
+        this.fragment=getIViewRef();
     }
 
     public int getmPage() {

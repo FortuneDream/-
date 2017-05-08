@@ -48,6 +48,6 @@ public class BannerActivity extends BaseActivity<BannerPresenter.IView,BannerPre
 
     @Override
     protected BannerPresenter createPresenter() {
-        return new BannerPresenter();
+        return new BannerPresenter(this);
     }
 }

@@ -183,6 +183,6 @@ public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.I
 
     @Override
     protected LocalSongFragmentPresenter createPresenter() {
-        return new LocalSongFragmentPresenter();
+        return new LocalSongFragmentPresenter(this);
     }
 }

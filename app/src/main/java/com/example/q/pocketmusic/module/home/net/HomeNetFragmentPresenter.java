@@ -26,8 +26,9 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
     private int mPage;
     private HomeNetModel homeNetModel;
 
-    public HomeNetFragmentPresenter() {
-        fragment = getIViewRef();
+    public HomeNetFragmentPresenter(IView fragment) {
+        attachView(fragment);
+        this.fragment=getIViewRef();
         homeNetModel = new HomeNetModel();
     }
 

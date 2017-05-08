@@ -71,6 +71,6 @@ public class ForgetActivity extends BaseActivity<ForgetPresenter.IView,ForgetPre
 
     @Override
     protected ForgetPresenter createPresenter() {
-        return new ForgetPresenter();
+        return new ForgetPresenter(this);
     }
 }

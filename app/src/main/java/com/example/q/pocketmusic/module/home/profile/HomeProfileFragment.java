@@ -159,6 +159,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
 
     @Override
     protected HomeProfileFragmentPresenter createPresenter() {
-        return new HomeProfileFragmentPresenter();
+        return new HomeProfileFragmentPresenter(this);
     }
 }

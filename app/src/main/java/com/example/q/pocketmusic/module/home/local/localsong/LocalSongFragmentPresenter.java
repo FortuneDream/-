@@ -40,8 +40,9 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
 
 
     //Dao有必要关闭吗？iterator呢？
-    public LocalSongFragmentPresenter() {
-        this.fragment = getIViewRef();
+    public LocalSongFragmentPresenter(IView fragment) {
+        attachView(fragment);
+        this.fragment=getIViewRef();
         localSongDao = new LocalSongDao(fragment.getAppContext());
         imgDao = new ImgDao(fragment.getAppContext());
 

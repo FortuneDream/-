@@ -68,6 +68,6 @@ public class UserPostActivity extends AuthActivity<UserPostPresenter.IView,UserP
 
     @Override
     protected UserPostPresenter createPresenter() {
-        return new UserPostPresenter();
+        return new UserPostPresenter(this);
     }
 }

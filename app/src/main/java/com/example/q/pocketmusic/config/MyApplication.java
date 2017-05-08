@@ -36,8 +36,8 @@ public class MyApplication extends Application {
         //自动更新
         initAutoUpdate();
         //发布时，开启异常捕获器
-        CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(this);
+//        CrashHandler crashHandler = CrashHandler.getInstance();
+//        crashHandler.init(this);
         initGalleryFinal();
     }
 
