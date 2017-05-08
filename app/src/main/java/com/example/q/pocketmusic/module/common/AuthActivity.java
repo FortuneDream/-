@@ -13,7 +13,7 @@ import com.example.q.pocketmusic.util.LogUtils;
  * Created by Cloud on 2017/1/13.
  */
 //用于验证的Activity
-public abstract class AuthActivity extends BaseActivity {
+public abstract class AuthActivity<V,T extends BasePresenter<V>> extends BaseActivity<V,T> {
     public static MyUser user;
     public static int a;
     public static final String RESULT_USER = "result_user";//返回的User

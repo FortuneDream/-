@@ -15,7 +15,8 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchMainActivity extends BaseActivity implements ISearchInfo, View.OnKeyListener, View.OnClickListener, SearchMainPresenter.IView, ViewPager.OnPageChangeListener {
+public class SearchMainActivity extends BaseActivity<SearchMainPresenter.IView, SearchMainPresenter>
+        implements ISearchInfo, View.OnKeyListener, View.OnClickListener, SearchMainPresenter.IView, ViewPager.OnPageChangeListener {
     @BindView(R.id.search_edt)
     EditText searchEdt;
     @BindView(R.id.search_iv)
@@ -24,7 +25,6 @@ public class SearchMainActivity extends BaseActivity implements ISearchInfo, Vie
     TabLayout tabLayout;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
-    private SearchMainPresenter presenter;
     private SearchMainAdapter adapter;
 
 
@@ -38,8 +38,6 @@ public class SearchMainActivity extends BaseActivity implements ISearchInfo, Vie
         searchEdt.setOnKeyListener(this);
         searchIv.setOnClickListener(this);
         viewPager.addOnPageChangeListener(this);
-
-        presenter = new SearchMainPresenter(this, this);
         adapter = new SearchMainAdapter(this, getSupportFragmentManager(), presenter.getTabsTxt(), presenter.getFragments());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -92,5 +90,10 @@ public class SearchMainActivity extends BaseActivity implements ISearchInfo, Vie
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    protected SearchMainPresenter createPresenter() {
+        return new SearchMainPresenter();
     }
 }

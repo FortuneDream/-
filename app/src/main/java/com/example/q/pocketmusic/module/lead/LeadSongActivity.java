@@ -23,7 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LeadSongActivity extends BaseActivity implements LeadSongPresenter.IView, RecyclerArrayAdapter.OnItemClickListener {
+public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView,LeadSongPresenter>
+        implements LeadSongPresenter.IView, RecyclerArrayAdapter.OnItemClickListener {
     public static int REQUEST_LEAD=1001;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -41,7 +42,6 @@ public class LeadSongActivity extends BaseActivity implements LeadSongPresenter.
     TextView uploadTxt;
     @BindView(R.id.activity_upload)
     LinearLayout activityUpload;
-    private LeadSongPresenter presenter;
     private SmallPicAdapter adapter;
 
     @Override
@@ -54,7 +54,6 @@ public class LeadSongActivity extends BaseActivity implements LeadSongPresenter.
         adapter = new SmallPicAdapter(this);
         adapter.setOnItemClickListener(this);
 
-        presenter = new LeadSongPresenter(this);
         initToolbar(toolbar, "本地导入");
         recycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         recycler.setAdapter(adapter);
@@ -89,5 +88,10 @@ public class LeadSongActivity extends BaseActivity implements LeadSongPresenter.
     @Override
     public void onItemClick(int position) {
         presenter.checkPic(adapter.getItem(position));
+    }
+
+    @Override
+    protected LeadSongPresenter createPresenter() {
+        return new LeadSongPresenter();
     }
 }

@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 
 import butterknife.BindView;
@@ -15,7 +16,8 @@ import butterknife.OnClick;
  * Created by Cloud on 2016/11/14.
  */
 
-public class RegisterActivity extends BaseActivity implements RegisterPresenter.IView {
+public class RegisterActivity extends BaseActivity<RegisterPresenter.IView,RegisterPresenter>
+        implements RegisterPresenter.IView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -29,7 +31,6 @@ public class RegisterActivity extends BaseActivity implements RegisterPresenter.
     TextEdit confirmPasswordTet;
     @BindView(R.id.ok_txt)
     TextView okTxt;
-    private RegisterPresenter presenter;
 
     @Override
     public int setContentResource() {
@@ -39,7 +40,6 @@ public class RegisterActivity extends BaseActivity implements RegisterPresenter.
     @Override
     public void initView() {
         initToolbar(toolbar, "用户注册");
-        presenter = new RegisterPresenter(this);
     }
 
 
@@ -59,5 +59,11 @@ public class RegisterActivity extends BaseActivity implements RegisterPresenter.
     @Override
     public void showRefreshing(boolean isShow) {
 
+    }
+
+
+    @Override
+    protected RegisterPresenter createPresenter() {
+        return new RegisterPresenter();
     }
 }

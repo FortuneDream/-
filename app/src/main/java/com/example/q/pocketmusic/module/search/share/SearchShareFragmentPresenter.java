@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.search.share;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.Constant;
@@ -19,11 +20,11 @@ import cn.bmob.v3.BmobQuery;
  * Created by 81256 on 2017/4/14.
  */
 
-public class SearchShareFragmentPresenter {
+public class SearchShareFragmentPresenter extends BasePresenter<SearchShareFragmentPresenter.IView> {
     private IView fragment;
 
-    public SearchShareFragmentPresenter(IView fragment) {
-        this.fragment = fragment;
+    public SearchShareFragmentPresenter() {
+        fragment = getIViewRef();
     }
 
     public void queryFromShareSongList(String s) {

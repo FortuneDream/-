@@ -31,13 +31,13 @@ import java.util.Locale;
  * Created by 81256 on 2016/10/23.
  */
 
-public class LocalRecordFragmentPresenter extends BasePresenter {
+public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragmentPresenter.IView> {
     private static final int PROGRESS = 0;
     private IView fragment;
     private RecordAudioDao recordAudioDao;
 
-    public LocalRecordFragmentPresenter(IView fragment) {
-        this.fragment = fragment;
+    public LocalRecordFragmentPresenter() {
+        fragment = getIViewRef();
         recordAudioDao = new RecordAudioDao(fragment.getAppContext());
     }
 

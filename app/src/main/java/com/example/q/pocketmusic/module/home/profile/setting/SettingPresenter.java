@@ -21,11 +21,11 @@ import cn.bmob.v3.update.UpdateStatus;
  * Created by Cloud on 2016/11/14.
  */
 
-public class SettingPresenter extends BasePresenter {
+public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
     private IView activity;
 
-    public SettingPresenter(IView activity) {
-        this.activity = activity;
+    public SettingPresenter() {
+        activity = getIViewRef();
     }
 
     public void checkUpdate(final Boolean showToast) {
@@ -78,8 +78,7 @@ public class SettingPresenter extends BasePresenter {
     }
 
 
-
-    public interface IView extends IBaseView{
+    public interface IView extends IBaseView {
 
         void setCheckUpdateResult(boolean hasUpdate, boolean showToast);
     }

@@ -22,7 +22,8 @@ import butterknife.BindView;
  * Created by Cloud on 2016/11/14.
  */
 
-public class CollectionActivity extends AuthActivity implements CollectionPresenter.IView, SwipeRefreshLayout.OnRefreshListener, CollectionAdapter.OnSelectListener, RecyclerArrayAdapter.OnMoreListener {
+public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, CollectionPresenter>
+        implements CollectionPresenter.IView, SwipeRefreshLayout.OnRefreshListener, CollectionAdapter.OnSelectListener, RecyclerArrayAdapter.OnMoreListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -46,13 +47,12 @@ public class CollectionActivity extends AuthActivity implements CollectionPresen
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
 
-        presenter = new CollectionPresenter( this, user);
+        presenter.setUser(user);
         presenter.setPage(0);
         initToolbar(toolbar, "我的收藏");
         initRecyclerView(recycler, adapter, 1, true);
         onRefresh();
     }
-
 
 
     //弹出底部dialog
@@ -115,5 +115,10 @@ public class CollectionActivity extends AuthActivity implements CollectionPresen
     @Override
     public void onMoreClick() {
 
+    }
+
+    @Override
+    protected CollectionPresenter createPresenter() {
+        return new CollectionPresenter();
     }
 }

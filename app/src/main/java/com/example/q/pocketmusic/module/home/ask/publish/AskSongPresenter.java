@@ -18,11 +18,11 @@ import com.example.q.pocketmusic.util.MyToast;
  * Created by Cloud on 2016/11/14.
  */
 
-public class AskSongPresenter extends BasePresenter {
+public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
     private IView activity;
 
-    public AskSongPresenter(IView activity) {
-        this.activity = activity;
+    public AskSongPresenter() {
+        activity = getIViewRef();
     }
 
     public void askForSong(String title, final String content, final com.example.q.pocketmusic.model.bean.MyUser user) {
@@ -36,7 +36,7 @@ public class AskSongPresenter extends BasePresenter {
         }
         activity.showLoading(true);
         AskSongPost askSongPost = new AskSongPost(user, title, content);
-        askSongPost.save(new ToastSaveListener<String>( activity) {
+        askSongPost.save(new ToastSaveListener<String>(activity) {
             @Override
             public void onSuccess(String s) {
                 user.increment("contribution", -Constant.REDUCE_CONTRIBUTION_ASK);

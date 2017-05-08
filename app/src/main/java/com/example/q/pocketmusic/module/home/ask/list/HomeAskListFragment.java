@@ -21,7 +21,8 @@ import butterknife.OnClick;
 /**
  * Created by Cloud on 2017/1/26.
  */
-public class HomeAskListFragment extends BaseFragment implements HomeAskListFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, HomeAskListAdapter.OnItemClickListener
+public class HomeAskListFragment extends BaseFragment<HomeAskListFragmentPresenter.IView, HomeAskListFragmentPresenter>
+        implements HomeAskListFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, HomeAskListAdapter.OnItemClickListener
         , RecyclerArrayAdapter.OnMoreListener {
     @BindView(R.id.title_bar)
     TitleBar titleBar;
@@ -29,7 +30,6 @@ public class HomeAskListFragment extends BaseFragment implements HomeAskListFrag
     EasyRecyclerView recycler;
     @BindView(R.id.ask_song_fab)
     FloatingDraftButton askSongFab;
-    private HomeAskListFragmentPresenter presenter;
     private HomeAskListAdapter adapter;
 
     @Override
@@ -44,8 +44,6 @@ public class HomeAskListFragment extends BaseFragment implements HomeAskListFrag
         adapter.setListener(this);
         adapter.setMore(R.layout.view_more, this);
         recycler.setRefreshListener(this);
-
-        presenter = new HomeAskListFragmentPresenter( this);
         initRecyclerView(recycler, adapter, 72, false);
         presenter.setmPage(0);
         titleBar.setMyCenterTitle("大家都在找");
@@ -110,5 +108,10 @@ public class HomeAskListFragment extends BaseFragment implements HomeAskListFrag
     @OnClick(R.id.ask_song_fab)
     public void onClick() {
         presenter.enterAskSongActivity();
+    }
+
+    @Override
+    protected HomeAskListFragmentPresenter createPresenter() {
+        return new HomeAskListFragmentPresenter();
     }
 }

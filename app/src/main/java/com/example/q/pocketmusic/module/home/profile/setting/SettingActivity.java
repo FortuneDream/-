@@ -2,13 +2,10 @@ package com.example.q.pocketmusic.module.home.profile.setting;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
@@ -17,7 +14,6 @@ import com.example.q.pocketmusic.util.MyToast;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -25,7 +21,8 @@ import butterknife.OnClick;
  * Created by Cloud on 2016/11/14.
  */
 
-public class SettingActivity extends AuthActivity implements SettingPresenter.IView {
+public class SettingActivity extends AuthActivity<SettingPresenter.IView, SettingPresenter>
+        implements SettingPresenter.IView {
 
 
     @BindView(R.id.toolbar)
@@ -42,7 +39,6 @@ public class SettingActivity extends AuthActivity implements SettingPresenter.IV
     IcoTextItem shareItem;
     @BindView(R.id.logout_item)
     IcoTextItem logoutItem;
-    private SettingPresenter presenter;
 
 
     @Override
@@ -51,15 +47,12 @@ public class SettingActivity extends AuthActivity implements SettingPresenter.IV
     }
 
 
-
     @Override
     public void initUserView() {
-        presenter = new SettingPresenter( this);
         initToolbar(toolbar, "设置");
         presenter.checkUpdate(false);//检测更新
         setVersion();
     }
-
 
 
     private void setVersion() {
@@ -118,4 +111,8 @@ public class SettingActivity extends AuthActivity implements SettingPresenter.IV
         }
     }
 
+    @Override
+    protected SettingPresenter createPresenter() {
+        return new SettingPresenter();
+    }
 }

@@ -64,7 +64,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 /**
  * Created by YQ on 2016/8/30.
  */
-public class SongActivityPresenter extends BasePresenter implements IBasePresenter {
+public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.IView> implements IBasePresenter {
     private IView activity;
     private Intent intent;
     private SongController controller;//状态控制器,用于加载图片
@@ -110,22 +110,12 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
         }
     };
 
-
-    public int getLoadingWay() {
-        return loadingWay;
+    public SongActivityPresenter() {
+        activity = getIViewRef();
     }
 
-    public Song getSong() {
-        return song;
-    }
 
-    public boolean isEnableAgree() {
-        return isEnableAgree;
-    }
-
-    public SongActivityPresenter(IView activity, Intent intent) {
-
-        this.activity = activity;
+    public void setIntent(Intent intent) {
         this.intent = intent;
         SongObject songObject = intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL);
         song = songObject.getSong();
@@ -153,7 +143,21 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
                 file.mkdirs();
             }
         }
+
     }
+
+    public int getLoadingWay() {
+        return loadingWay;
+    }
+
+    public Song getSong() {
+        return song;
+    }
+
+    public boolean isEnableAgree() {
+        return isEnableAgree;
+    }
+
 
     //加载图片
     public void loadPic() {
@@ -279,7 +283,7 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
         query.addWhereRelatedTo("agrees", new BmobPointer(askSongComment));
-        query.findObjects(new ToastQueryListener<MyUser>( activity) {
+        query.findObjects(new ToastQueryListener<MyUser>(activity) {
             @Override
             public void onSuccess(List<MyUser> list) {
                 for (MyUser other : list) {
@@ -320,7 +324,7 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
                 for (CollectionSong collectionSong : list) {
                     if (collectionSong.getName().equals(song.getName())) {
                         activity.showLoading(false);
-                        MyToast.showToast(activity.getCurrentContext(),"已收藏");
+                        MyToast.showToast(activity.getCurrentContext(), "已收藏");
                         return;
                     }
                 }
@@ -338,7 +342,7 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
                 collectionSong.setNeedGrade(song.isNeedGrade());//是否需要积分
                 collectionSong.setIsFrom(isFrom);
                 collectionSong.setContent(song.getContent());
-                collectionSong.save(new ToastSaveListener<String>( activity) {
+                collectionSong.save(new ToastSaveListener<String>(activity) {
 
                     @Override
                     public void onSuccess(String s) {
@@ -351,7 +355,7 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
                             collectionPics.add(collectionPic);
                         }
                         //批量修改
-                        new BmobBatch().insertBatch(collectionPics).doBatch(new ToastQueryListListener<BatchResult>( activity) {
+                        new BmobBatch().insertBatch(collectionPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
                             @Override
                             public void onSuccess(List<BatchResult> list) {
                                 BmobRelation relation = new BmobRelation();

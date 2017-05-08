@@ -21,11 +21,11 @@ import cn.bmob.v3.exception.BmobException;
  * Created by Cloud on 2016/11/14.
  */
 
-public class LoginPresenter extends BasePresenter {
+public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
     private IView activity;
 
-    public LoginPresenter(IView activity) {
-        this.activity = activity;
+    public LoginPresenter() {
+        activity = getIViewRef();
     }
 
     //登录
@@ -38,7 +38,7 @@ public class LoginPresenter extends BasePresenter {
         final MyUser user = new MyUser();
         user.setUsername(account);
         user.setPassword(password);
-        user.login(new ToastSaveListener<MyUser>( activity) {
+        user.login(new ToastSaveListener<MyUser>(activity) {
 
             @Override
             public void onSuccess(MyUser user) {
@@ -59,7 +59,7 @@ public class LoginPresenter extends BasePresenter {
     //跳转到RegistererActivity，如果注册成功就不finish到此页
     public void enterRegisterActivity() {
         Intent intent = new Intent(activity.getCurrentContext(), RegisterActivity.class);
-        ((Activity)activity.getCurrentContext()).startActivityForResult(intent, Constant.REQUEST_REGISTER);
+        ((Activity) activity.getCurrentContext()).startActivityForResult(intent, Constant.REQUEST_REGISTER);
     }
 
     public void enterForgetActivity() {

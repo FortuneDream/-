@@ -37,10 +37,11 @@ import butterknife.ButterKnife;
  * Created by Cloud on 2016/11/17.
  */
 
-public class LocalSongFragment extends BaseFragment implements LocalSongFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener, LocalSongFragmentAdapter.OnItemSelectListener {
+public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.IView,LocalSongFragmentPresenter>
+        implements LocalSongFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener,
+        LocalSongFragmentAdapter.OnItemSelectListener {
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
-    private LocalSongFragmentPresenter presenter;
     private LocalSongFragmentAdapter adapter;
 
 
@@ -62,7 +63,6 @@ public class LocalSongFragment extends BaseFragment implements LocalSongFragment
         adapter.setOnItemClickListener(this);
         adapter.setOnSelectListener(this);
         recycler.setRefreshListener(this);
-        presenter = new LocalSongFragmentPresenter( this);
         //初始化
         initRecyclerView(recycler, adapter, 1, true);
         recycler.setEmptyView(R.layout.view_local_empty);
@@ -179,5 +179,10 @@ public class LocalSongFragment extends BaseFragment implements LocalSongFragment
     @Override
     public void onSelected(int position) {
         alertBottomDialog(position);
+    }
+
+    @Override
+    protected LocalSongFragmentPresenter createPresenter() {
+        return new LocalSongFragmentPresenter();
     }
 }

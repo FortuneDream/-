@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.home.ask.comment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
@@ -37,17 +36,23 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
  * Created by Cloud on 2016/11/14.
  */
 
-public class AskSongCommentPresenter extends BasePresenter {
+public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresenter.IView> {
     private IView activity;
 
     private AskSongCommentModel model;
     private AskSongPost post;
-    private com.example.q.pocketmusic.model.bean.MyUser user;
+    private MyUser user;
 
-    public AskSongCommentPresenter(IView activity, MyUser user, AskSongPost post) {
-        this.activity = activity;
+    public void setPost(AskSongPost post) {
         this.post = post;
+    }
+
+    public void setUser(MyUser user) {
         this.user = user;
+    }
+
+    public AskSongCommentPresenter() {
+        this.activity=getIViewRef();
         model = new AskSongCommentModel();
     }
 

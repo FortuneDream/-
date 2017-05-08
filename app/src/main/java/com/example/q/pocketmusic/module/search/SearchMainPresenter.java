@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
+import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.search.net.SearchNetFragment;
@@ -18,8 +19,7 @@ import java.util.List;
  * Created by 81256 on 2017/4/14.
  */
 
-public class SearchMainPresenter {
-    private Context context;
+public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView> {
     private IView activity;
     private SearchRecommendFragment recommendFragment;
     private SearchNetFragment netFragment;
@@ -34,9 +34,8 @@ public class SearchMainPresenter {
         this.inputStr = inputStr;
     }
 
-    public SearchMainPresenter(Context context, IView activity) {
-        this.context = context;
-        this.activity = activity;
+    public SearchMainPresenter() {
+        activity = getIViewRef();
         getFragments();
         getTabsTxt();
     }
@@ -77,7 +76,7 @@ public class SearchMainPresenter {
         if (!TextUtils.isEmpty(query)) {
             return query;
         } else {
-            MyToast.showToast(context, CommonString.STR_COMPLETE_INFO);
+            MyToast.showToast(activity.getCurrentContext(), CommonString.STR_COMPLETE_INFO);
             return null;
         }
     }

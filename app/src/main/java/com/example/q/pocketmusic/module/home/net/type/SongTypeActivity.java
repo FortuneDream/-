@@ -18,7 +18,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class SongTypeActivity extends BaseActivity implements SongTypeActivityPresenter.IView, RecyclerArrayAdapter.OnMoreListener, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IView,SongTypeActivityPresenter>
+        implements SongTypeActivityPresenter.IView, RecyclerArrayAdapter.OnMoreListener, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.top_iv)
     ImageView topIv;
@@ -34,7 +35,6 @@ public class SongTypeActivity extends BaseActivity implements SongTypeActivityPr
     private int[] topDrawable = new int[]{R.drawable.iv_top_quanbu, R.drawable.iv_top_hulusi, R.drawable.iv_top_jita,
             R.drawable.iv_top_gangqin, R.drawable.iv_top_sakesi, R.drawable.iv_top_erhu, R.drawable.iv_top_guzheng,
             R.drawable.iv_top_dianziqin, R.drawable.iv_top_pipa, R.drawable.iv_top_kouqin};
-    private SongTypeActivityPresenter presenter;
     private SongTypeActivityAdapter adapter;
     private Integer typeId;
     public final static String PARAM_POSITION = "position";
@@ -57,7 +57,6 @@ public class SongTypeActivity extends BaseActivity implements SongTypeActivityPr
         int position = getIntent().getIntExtra(PARAM_POSITION, 0);
         //获取乐器类型
         typeId = position;
-        presenter = new SongTypeActivityPresenter(this);
         initRecyclerView(recycler, adapter, 1, false);
         //设置toolbar
         toolbar.setTitle(Constant.types[typeId]);
@@ -104,5 +103,10 @@ public class SongTypeActivity extends BaseActivity implements SongTypeActivityPr
         presenter.setPage(1);
         adapter.clear();
         presenter.getList(typeId);
+    }
+
+    @Override
+    protected SongTypeActivityPresenter createPresenter() {
+        return new SongTypeActivityPresenter();
     }
 }

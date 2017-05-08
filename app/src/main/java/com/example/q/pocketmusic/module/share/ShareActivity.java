@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
+import com.example.q.pocketmusic.model.bean.share.SharePic;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -20,7 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShareActivity extends AuthActivity implements SharePresenter.IView, RecyclerArrayAdapter.OnItemClickListener {
+public class ShareActivity extends AuthActivity<SharePresenter.IView,SharePresenter>
+        implements SharePresenter.IView, RecyclerArrayAdapter.OnItemClickListener {
 
     public static final String LOCAL_SONG = "LOCAL_SONG";
     @BindView(R.id.name_tet)
@@ -41,7 +43,6 @@ public class ShareActivity extends AuthActivity implements SharePresenter.IView,
     Toolbar toolbar;
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
-    private SharePresenter presenter;
     private SmallPicAdapter adapter;
 
     @Override
@@ -50,21 +51,17 @@ public class ShareActivity extends AuthActivity implements SharePresenter.IView,
     }
 
 
-
     @Override
     public void initUserView() {
         adapter = new SmallPicAdapter(this);
         adapter.setOnItemClickListener(this);
-
-        presenter = new SharePresenter( this, user);
+        presenter.setUser(user);
         initToolbar(toolbar, "上传曲谱");
         LocalSong localSong = (LocalSong) getIntent().getSerializableExtra(LOCAL_SONG);
         presenter.getPicAndName(localSong);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recycler.setAdapter(adapter);
     }
-
-
 
 
     @OnClick({R.id.add_pic_iv, R.id.upload_txt})
@@ -103,5 +100,10 @@ public class ShareActivity extends AuthActivity implements SharePresenter.IView,
     @Override
     public void showRefreshing(boolean isShow) {
         recycler.setRefreshing(isShow);
+    }
+
+    @Override
+    protected SharePresenter createPresenter() {
+        return new SharePresenter();
     }
 }

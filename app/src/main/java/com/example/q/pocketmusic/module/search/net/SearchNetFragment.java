@@ -19,11 +19,12 @@ import butterknife.BindView;
  * Created by 81256 on 2017/4/14.
  */
 
-public class SearchNetFragment extends BaseFragment implements SearchNetFragmentPresenter.IView, RecyclerArrayAdapter.OnItemClickListener
+public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.IView, SearchNetFragmentPresenter>
+        implements SearchNetFragmentPresenter.IView, RecyclerArrayAdapter.OnItemClickListener
         , RecyclerArrayAdapter.OnMoreListener, android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
-    private SearchNetFragmentPresenter presenter;
+
     private SearchNetAdapter adapter;
     private String query;
 
@@ -49,10 +50,7 @@ public class SearchNetFragment extends BaseFragment implements SearchNetFragment
         adapter.setMore(R.layout.view_more, this);
         adapter.setOnItemClickListener(this);
         recycler.setRefreshListener(this);
-
-        presenter = new SearchNetFragmentPresenter( this);
         initRecyclerView(recycler, adapter, 1, true);
-
     }
 
 
@@ -97,4 +95,8 @@ public class SearchNetFragment extends BaseFragment implements SearchNetFragment
     }
 
 
+    @Override
+    protected SearchNetFragmentPresenter createPresenter() {
+        return new SearchNetFragmentPresenter();
+    }
 }

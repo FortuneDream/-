@@ -39,7 +39,9 @@ import butterknife.ButterKnife;
  * Created by Cloud on 2016/11/17.
  */
 
-public class LocalRecordFragment extends BaseFragment implements LocalRecordFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener, LocalRecordFragmentAdapter.OnSelectListener {
+public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresenter.IView,LocalRecordFragmentPresenter>
+        implements LocalRecordFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener,
+        LocalRecordFragmentAdapter.OnSelectListener {
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
     @BindView(R.id.activity_audio_record)
@@ -50,7 +52,6 @@ public class LocalRecordFragment extends BaseFragment implements LocalRecordFrag
     private TextView titleTv;
     private Button closeBtn;
     private LocalRecordFragmentAdapter adapter;
-    private LocalRecordFragmentPresenter presenter;
     private AlertDialog dialog;
 
 
@@ -73,7 +74,6 @@ public class LocalRecordFragment extends BaseFragment implements LocalRecordFrag
         recycler.setRefreshListener(this);
 
         //初始化
-        presenter = new LocalRecordFragmentPresenter(this);
         initRecyclerView(recycler, adapter, 1, true);
         //加载录音列表
         recycler.setRefreshing(true);
@@ -238,6 +238,11 @@ public class LocalRecordFragment extends BaseFragment implements LocalRecordFrag
     public void updateProgress(int currentPosition, String time) {
         seekBar.setProgress(currentPosition);
         durationTv.setText(time);
+    }
+
+    @Override
+    protected LocalRecordFragmentPresenter createPresenter() {
+        return new LocalRecordFragmentPresenter();
     }
 
 

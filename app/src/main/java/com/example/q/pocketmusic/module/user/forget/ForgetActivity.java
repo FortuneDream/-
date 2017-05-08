@@ -29,7 +29,8 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
 
-public class ForgetActivity extends BaseActivity {
+public class ForgetActivity extends BaseActivity<ForgetPresenter.IView,ForgetPresenter>
+        implements ForgetPresenter.IView {
 
 
     @BindView(R.id.toolbar)
@@ -64,52 +65,12 @@ public class ForgetActivity extends BaseActivity {
         String nickName = nickNameTet.getInputString();
         String newPassword = newPasswordTet.getInputString();
         String confirmPassword = confirmPasswordTet.getInputString();
-        checkInfo(account, nickName, newPassword, confirmPassword);
+        presenter.checkInfo(account, nickName, newPassword, confirmPassword);
     }
 
-    private void checkInfo(final String account, String nickName, final String newPassword, final String confirmPassword) {
-        if (TextUtils.isEmpty(account) || TextUtils.isEmpty(nickName) || TextUtils.isEmpty(newPassword) || TextUtils.isEmpty(confirmPassword)) {
-            MyToast.showToast(context, "请输入完整信息");
-            return;
-        }
 
-        if (!newPassword.equals(confirmPassword)) {
-            MyToast.showToast(context, "两次密码输入不同");
-            return;
-        }
-        showLoading(true);
-        BmobQuery<MyUser> bmobQuery = new BmobQuery<>();
-        bmobQuery.addWhereEqualTo("username", account);
-        bmobQuery.addWhereEqualTo("nickName", nickName);
-        bmobQuery.findObjects(new FindListener<MyUser>() {
-            @Override
-            public void done(List<MyUser> list, BmobException e) {
-                if (e == null) {
-
-                    if (list.size() != 1) {
-                        showLoading(false);
-                        MyToast.showToast(context, "没有找到该用户");
-                        return;
-                    }
-
-                    BmobInfo bmobInfo = new BmobInfo(Constant.BMOB_INFO_RESET_PASSWORD, account + ":" + newPassword);
-                    bmobInfo.save(new SaveListener<String>() {
-                        @Override
-                        public void done(String s, BmobException e) {
-                            showLoading(false);
-                            if (e == null) {
-                                MyToast.showToast(context, "已收到修改密码请求，请稍等");
-                                finish();
-                            } else {
-                                MyToast.showToast(context, e.getMessage());
-                            }
-                        }
-                    });
-                } else {
-                    showLoading(false);
-                    MyToast.showToast(context, e.getMessage());
-                }
-            }
-        });
+    @Override
+    protected ForgetPresenter createPresenter() {
+        return new ForgetPresenter();
     }
 }

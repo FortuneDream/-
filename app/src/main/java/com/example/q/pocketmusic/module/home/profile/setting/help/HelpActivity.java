@@ -22,7 +22,8 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
-public class HelpActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class HelpActivity extends BaseActivity<HelpPresenter.IView, HelpPresenter>
+        implements SwipeRefreshLayout.OnRefreshListener {
 
 
     @BindView(R.id.toolbar)
@@ -66,5 +67,10 @@ public class HelpActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 }
             }
         });
+    }
+
+    @Override
+    protected HelpPresenter createPresenter() {
+        return new HelpPresenter();
     }
 }

@@ -12,7 +12,7 @@ import com.example.q.pocketmusic.util.CheckUserUtil;
  * Created by Cloud on 2017/1/26.
  */
 
-public abstract class AuthFragment extends BaseFragment {
+public abstract class AuthFragment<V,T extends BasePresenter<V>> extends BaseFragment<V,T> {
     public static MyUser user;
     public static final String RESULT_USER = "result";
 

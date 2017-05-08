@@ -8,7 +8,8 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 
 import butterknife.BindView;
 
-public class BannerActivity extends BaseActivity implements BannerPresenter.IView {
+public class BannerActivity extends BaseActivity<BannerPresenter.IView,BannerPresenter>
+        implements BannerPresenter.IView {
     public static final String PARAM_PIC_POSITION = "pic_position";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -43,5 +44,10 @@ public class BannerActivity extends BaseActivity implements BannerPresenter.IVie
     @Override
     public void showRefreshing(boolean isShow) {
 
+    }
+
+    @Override
+    protected BannerPresenter createPresenter() {
+        return new BannerPresenter();
     }
 }

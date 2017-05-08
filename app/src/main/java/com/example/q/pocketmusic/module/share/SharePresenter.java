@@ -40,7 +40,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
  * Created by Cloud on 2016/11/10.
  */
 
-public class SharePresenter extends BasePresenter {
+public class SharePresenter extends BasePresenter<SharePresenter.IView> {
     private IView activity;
     private int mNumberPic;//图片数量
     private String[] filePaths;//本地图片路径
@@ -50,9 +50,11 @@ public class SharePresenter extends BasePresenter {
         return user;
     }
 
-    public SharePresenter(IView activity, MyUser user) {
-        this.activity = activity;
+    public SharePresenter() {
+        activity = getIViewRef();
+    }
 
+    public void setUser(MyUser user) {
         this.user = user;
     }
 
@@ -150,7 +152,7 @@ public class SharePresenter extends BasePresenter {
         final ShareSong shareSong = new ShareSong(user, name, content);
         activity.showLoading(true);
         //添加分享曲谱记录
-        shareSong.save(new ToastSaveListener<String>( activity) {
+        shareSong.save(new ToastSaveListener<String>(activity) {
             @Override
             public void onSuccess(String s) {
                 List<BmobObject> sharePics = new ArrayList<>();

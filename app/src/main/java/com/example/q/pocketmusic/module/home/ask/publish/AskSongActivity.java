@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 
 import butterknife.BindView;
@@ -18,7 +19,8 @@ import butterknife.OnClick;
  * Created by Cloud on 2016/11/14.
  */
 
-public class AskSongActivity extends AuthActivity implements AskSongPresenter.IView {
+public class AskSongActivity extends AuthActivity<AskSongPresenter.IView,AskSongPresenter>
+        implements AskSongPresenter.IView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -30,7 +32,6 @@ public class AskSongActivity extends AuthActivity implements AskSongPresenter.IV
     TextEdit contentTet;
     @BindView(R.id.ok_txt)
     TextView okTxt;
-    private AskSongPresenter presenter;
     public static final int REQUEST_ASK = 1001;//跳转到求谱界面
 
 
@@ -43,8 +44,6 @@ public class AskSongActivity extends AuthActivity implements AskSongPresenter.IV
     @Override
     public void initUserView() {
         initToolbar(toolbar, "求谱信息");
-        presenter = new AskSongPresenter(this);
-
     }
 
 
@@ -73,4 +72,8 @@ public class AskSongActivity extends AuthActivity implements AskSongPresenter.IV
 
     }
 
+    @Override
+    protected AskSongPresenter createPresenter() {
+        return new AskSongPresenter();
+    }
 }

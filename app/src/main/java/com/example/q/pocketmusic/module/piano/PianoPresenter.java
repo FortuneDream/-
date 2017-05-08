@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.widget.LinearLayout;
 
+import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.MusicUtils;
 import com.example.q.pocketmusic.util.MyToast;
@@ -14,7 +15,7 @@ import com.example.q.pocketmusic.util.MyToast;
  * Created by 鹏君 on 2017/4/22.
  */
 
-public class PianoPresenter {
+public class PianoPresenter extends BasePresenter<PianoPresenter.IView> {
     private IView activity;
     private MusicUtils utils;
     private StringBuilder builder;
@@ -23,8 +24,8 @@ public class PianoPresenter {
     private static final int DELAY_TIME = 250;
     private Boolean isCloseQuickBack;
 
-    public PianoPresenter(final IView activity) {
-        this.activity = activity;
+    public PianoPresenter() {
+        activity = getIViewRef();
         utils = new MusicUtils(activity.getCurrentContext());
         builder = new StringBuilder();
         handler = new Handler(Looper.getMainLooper()) {

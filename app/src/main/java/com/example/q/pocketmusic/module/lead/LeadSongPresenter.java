@@ -29,15 +29,15 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
  * Created by 81256 on 2017/4/1.
  */
 
-public class LeadSongPresenter extends BasePresenter {
+public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
     private IView activity;
     private LocalSongDao localSongDao;
     private ImgDao imgDao;
     public final static String FILE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Constant.FILE_NAME + "/";
     private List<String> imgUrls;
 
-    public LeadSongPresenter(IView activity) {
-        this.activity = activity;
+    public LeadSongPresenter() {
+        activity = getIViewRef();
         localSongDao = new LocalSongDao(activity.getAppContext());
         imgDao = new ImgDao(activity.getAppContext());
         imgUrls = new ArrayList<>();

@@ -18,11 +18,11 @@ import butterknife.BindView;
  * Created by 81256 on 2017/4/14.
  */
 
-public class SearchShareFragment extends BaseFragment implements SearchShareFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener {
+public class SearchShareFragment extends BaseFragment<SearchShareFragmentPresenter.IView, SearchShareFragmentPresenter>
+        implements SearchShareFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener {
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
     private SearchShareAdapter adapter;
-    private SearchShareFragmentPresenter presenter;
 
     @Override
     public void showRefreshing(boolean isShow) {
@@ -44,8 +44,6 @@ public class SearchShareFragment extends BaseFragment implements SearchShareFrag
         adapter = new SearchShareAdapter(getContext());
         recycler.setRefreshListener(this);
         adapter.setOnItemClickListener(this);
-
-        presenter = new SearchShareFragmentPresenter( this);
         initRecyclerView(recycler, adapter, 1, true);
     }
 
@@ -57,7 +55,7 @@ public class SearchShareFragment extends BaseFragment implements SearchShareFrag
 
     @Override
     public void onRefresh() {
-        LogUtils.e(TAG,"onRefresh");
+        LogUtils.e(TAG, "onRefresh");
         String query = ((ISearchInfo) getActivity()).getQueryStr();
         if (query == null) {
             recycler.showEmpty();
@@ -75,5 +73,10 @@ public class SearchShareFragment extends BaseFragment implements SearchShareFrag
     @Override
     public void setShareSongList(List<ShareSong> list) {
         adapter.addAll(list);
+    }
+
+    @Override
+    protected SearchShareFragmentPresenter createPresenter() {
+        return new SearchShareFragmentPresenter();
     }
 }

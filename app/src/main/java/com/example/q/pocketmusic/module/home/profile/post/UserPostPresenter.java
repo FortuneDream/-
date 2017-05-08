@@ -16,16 +16,19 @@ import java.util.List;
  * Created by 鹏君 on 2017/5/4.
  */
 
-public class UserPostPresenter extends BasePresenter {
+public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
     private IView activity;
     private MyUser user;
     private UserPostModel model;
 
 
-    public UserPostPresenter(IView activity, MyUser user) {
-        this.activity = activity;
-        this.user = user;
+    public UserPostPresenter() {
+        activity = getIViewRef();
         model = new UserPostModel();
+    }
+
+    public void setUser(MyUser user) {
+        this.user = user;
     }
 
     public void getUserPostList() {

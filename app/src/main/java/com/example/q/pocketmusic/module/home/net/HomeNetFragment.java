@@ -24,15 +24,14 @@ import butterknife.OnClick;
  * Created by Cloud on 2016/11/17.
  */
 //网络Fragment
-public class HomeNetFragment extends BaseFragment implements HomeNetFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, NetFragmentAdapter.OnOptionListener, RecyclerArrayAdapter.OnMoreListener {
+public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView, HomeNetFragmentPresenter>
+        implements HomeNetFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, NetFragmentAdapter.OnOptionListener, RecyclerArrayAdapter.OnMoreListener {
 
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
     @BindView(R.id.search_rl)
     RelativeLayout searchRl;
     private NetFragmentAdapter adapter;
-    private HomeNetFragmentPresenter presenter;
-
 
     @Override
     public int setContentResource() {
@@ -49,7 +48,6 @@ public class HomeNetFragment extends BaseFragment implements HomeNetFragmentPres
         recycler.setOnScrollListener(new SearchViewListener(searchRl));
         adapter.setMore(R.layout.view_more, this);
         //初始化
-        presenter = new HomeNetFragmentPresenter(this);
         presenter.setSharePage(0);
         initRecyclerView(recycler, adapter);
         recycler.setEmptyView(R.layout.view_not_found);
@@ -129,5 +127,10 @@ public class HomeNetFragment extends BaseFragment implements HomeNetFragmentPres
     @Override
     public void showRefreshing(boolean isShow) {
         recycler.setRefreshing(isShow);
+    }
+
+    @Override
+    protected HomeNetFragmentPresenter createPresenter() {
+        return new HomeNetFragmentPresenter();
     }
 }

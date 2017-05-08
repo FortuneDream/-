@@ -18,13 +18,13 @@ import java.util.List;
  * Created by Cloud on 2017/1/26.
  */
 
-public class HomeAskListFragmentPresenter extends BasePresenter {
+public class HomeAskListFragmentPresenter extends BasePresenter<HomeAskListFragmentPresenter.IView> {
     private IView fragment;
     private BmobUtil bmobUtil;
     private int mPage;
 
-    public HomeAskListFragmentPresenter(IView fragment) {
-        this.fragment = fragment;
+    public HomeAskListFragmentPresenter() {
+        this.fragment = getIViewRef();
         bmobUtil = new BmobUtil();
 
     }

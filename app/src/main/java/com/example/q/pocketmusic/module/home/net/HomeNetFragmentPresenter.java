@@ -21,13 +21,13 @@ import cn.bmob.v3.exception.BmobException;
 /**
  * Created by YQ on 2016/8/29.
  */
-public class HomeNetFragmentPresenter extends BasePresenter {
+public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPresenter.IView> {
     private IView fragment;
     private int mPage;
     private HomeNetModel homeNetModel;
 
-    public HomeNetFragmentPresenter(IView fragment) {
-        this.fragment = fragment;
+    public HomeNetFragmentPresenter() {
+        fragment = getIViewRef();
         homeNetModel = new HomeNetModel();
     }
 

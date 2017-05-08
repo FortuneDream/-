@@ -32,13 +32,12 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
  * Created by Cloud on 2017/1/26.
  */
 
-public class HomeProfileFragmentPresenter extends BasePresenter {
+public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragmentPresenter.IView> {
     private IView fragment;
     private MyUser user;
 
-    public HomeProfileFragmentPresenter(IView fragment) {
-        this.fragment = fragment;
-
+    public HomeProfileFragmentPresenter() {
+        fragment = getIViewRef();
     }
 
 

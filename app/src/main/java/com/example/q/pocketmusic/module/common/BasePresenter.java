@@ -18,13 +18,14 @@ public abstract class BasePresenter<T> {
     public final String TAG = this.getClass().getName();
     protected Reference<T> mViewRef;// View借口类型的弱引用
 
-    protected T getView() {
+    protected T getIViewRef() {
         return mViewRef.get();
     }
 
-    public void attachView(T view) {
-        mViewRef = new WeakReference<T>(view);//建立关联
+    public void attachView(T activity) {
+        mViewRef = new WeakReference<T>(activity);//建立关联
     }
+
 
     protected boolean isViewAttached() {
         return mViewRef != null && mViewRef.get() != null;

@@ -18,11 +18,11 @@ import java.util.List;
  * Created by 81256 on 2017/4/14.
  */
 
-public class SearchRecommendFragmentPresenter extends BasePresenter {
+public class SearchRecommendFragmentPresenter extends BasePresenter<SearchRecommendFragmentPresenter.IView> {
     private IView fragment;
 
-    public SearchRecommendFragmentPresenter(IView fragment) {
-        this.fragment = fragment;
+    public SearchRecommendFragmentPresenter() {
+        fragment = getIViewRef();
     }
 
 

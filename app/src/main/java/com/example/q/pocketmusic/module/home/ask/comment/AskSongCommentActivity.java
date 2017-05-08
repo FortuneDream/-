@@ -27,7 +27,8 @@ import butterknife.BindView;
  * Created by Cloud on 2016/11/14.
  */
 
-public class AskSongCommentActivity extends AuthActivity implements AskSongCommentPresenter.IView, View.OnClickListener, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter.IView, AskSongCommentPresenter>
+        implements AskSongCommentPresenter.IView, View.OnClickListener, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -43,7 +44,6 @@ public class AskSongCommentActivity extends AuthActivity implements AskSongComme
     EasyRecyclerView recycler;
     @BindView(R.id.number_pic_tv)
     TextView numberPicTv;
-    private AskSongCommentPresenter presenter;
     private AskSongCommentAdapter adapter;
     private PicDialog picDialog;
     public static final String PARAM_POST = "param_post";
@@ -64,7 +64,8 @@ public class AskSongCommentActivity extends AuthActivity implements AskSongComme
         adapter.setOnItemClickListener(this);
         //数据初始化
         final AskSongPost post = (AskSongPost) getIntent().getSerializableExtra(PARAM_POST);
-        presenter = new AskSongCommentPresenter(this, user, post);
+        presenter.setPost(post);
+        presenter.setUser(user);
         initToolbar(toolbar, presenter.getPost().getTitle());
         initRecyclerView(recycler, adapter);
         adapter.addHeader(new PostHeadView(context,
@@ -75,7 +76,6 @@ public class AskSongCommentActivity extends AuthActivity implements AskSongComme
                 presenter.getPost().getCreatedAt()));
         onRefresh();
     }
-
 
 
     //加载评论列表
@@ -147,5 +147,10 @@ public class AskSongCommentActivity extends AuthActivity implements AskSongComme
     @Override
     public void showRefreshing(boolean isShow) {
         recycler.setRefreshing(isShow);
+    }
+
+    @Override
+    protected AskSongCommentPresenter createPresenter() {
+        return new AskSongCommentPresenter();
     }
 }

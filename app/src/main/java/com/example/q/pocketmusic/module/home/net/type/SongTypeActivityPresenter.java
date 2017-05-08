@@ -1,4 +1,5 @@
 package com.example.q.pocketmusic.module.home.net.type;
+
 import android.content.Context;
 import android.content.Intent;
 
@@ -16,12 +17,12 @@ import java.util.List;
 /**
  * Created by YQ on 2016/8/29.
  */
-public class SongTypeActivityPresenter extends BasePresenter {
+public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPresenter.IView> {
     private IView activity;
     private int mPage;
 
-    public SongTypeActivityPresenter(IView activity) {
-        this.activity = activity;
+    public SongTypeActivityPresenter() {
+        activity = getIViewRef();
     }
 
     public int getmPage() {
@@ -52,7 +53,7 @@ public class SongTypeActivityPresenter extends BasePresenter {
         activity.getCurrentContext().startActivity(intent);
     }
 
-    public interface IView extends IBaseView{
+    public interface IView extends IBaseView {
 
         void setList(List<Song> songs);
     }

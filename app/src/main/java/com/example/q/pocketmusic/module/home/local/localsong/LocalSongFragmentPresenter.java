@@ -33,15 +33,15 @@ import java.util.Locale;
 /**
  * Created by YQ on 2016/9/2.
  */
-public class LocalSongFragmentPresenter extends BasePresenter {
+public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentPresenter.IView> {
     private IView fragment;
     private LocalSongDao localSongDao;
     private ImgDao imgDao;
 
 
     //Dao有必要关闭吗？iterator呢？
-    public LocalSongFragmentPresenter(IView fragment) {
-        this.fragment = fragment;
+    public LocalSongFragmentPresenter() {
+        this.fragment = getIViewRef();
         localSongDao = new LocalSongDao(fragment.getAppContext());
         imgDao = new ImgDao(fragment.getAppContext());
 

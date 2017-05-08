@@ -17,7 +17,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UserPostActivity extends AuthActivity implements UserPostPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener {
+public class UserPostActivity extends AuthActivity<UserPostPresenter.IView,UserPostPresenter>
+        implements UserPostPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
@@ -25,7 +26,6 @@ public class UserPostActivity extends AuthActivity implements UserPostPresenter.
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
     private UserPostAdapter adapter;
-    private UserPostPresenter presenter;
 
     @Override
     public int setContentResource() {
@@ -38,7 +38,7 @@ public class UserPostActivity extends AuthActivity implements UserPostPresenter.
         recycler.setRefreshListener(this);
         adapter.setOnItemClickListener(this);
 
-        presenter = new UserPostPresenter( this, user);
+        presenter.setUser(user);
         initToolbar(toolbar, "我的求谱");
         initRecyclerView(recycler, adapter, 1, true);
         onRefresh();
@@ -64,5 +64,10 @@ public class UserPostActivity extends AuthActivity implements UserPostPresenter.
     @Override
     public void setInitPostList(List<AskSongPost> list) {
         adapter.addAll(list);
+    }
+
+    @Override
+    protected UserPostPresenter createPresenter() {
+        return new UserPostPresenter();
     }
 }

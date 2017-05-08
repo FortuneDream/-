@@ -12,12 +12,11 @@ import com.example.q.pocketmusic.module.piano.PianoActivity;
  * Created by Cloud on 2016/11/17.
  */
 
-public class HomeLocalFragmentPresenter extends BasePresenter {
+public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentPresenter.IView> {
     private IView fragment;
 
-    public HomeLocalFragmentPresenter(IView fragment) {
-        this.fragment = fragment;
-
+    public HomeLocalFragmentPresenter() {
+        fragment=getIViewRef();
     }
 
     public void enterLeadActivity() {

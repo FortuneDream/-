@@ -23,7 +23,8 @@ import butterknife.OnClick;
  * Created by Cloud on 2016/11/14.
  */
 
-public class LoginActivity extends BaseActivity implements LoginPresenter.IView {
+public class LoginActivity extends BaseActivity<LoginPresenter.IView,LoginPresenter>
+        implements LoginPresenter.IView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -39,8 +40,6 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.IView 
     TextView registerTxt;
     @BindView(R.id.forget_password_iv)
     ImageView forgetPasswordIv;
-    private LoginPresenter presenter;
-
 
     @Override
     public int setContentResource() {
@@ -49,7 +48,6 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.IView 
 
     @Override
     public void initView() {
-        presenter = new LoginPresenter( this);
         initToolbar(toolbar, "用户登录");
     }
 
@@ -94,6 +92,11 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.IView 
     @Override
     public void showRefreshing(boolean isShow) {
 
+    }
+
+    @Override
+    protected LoginPresenter createPresenter() {
+        return new LoginPresenter();
     }
 
     @Override

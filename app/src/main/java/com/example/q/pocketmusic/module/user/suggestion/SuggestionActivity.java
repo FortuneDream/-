@@ -23,7 +23,8 @@ import butterknife.OnClick;
  * Created by Cloud on 2016/11/14.
  */
 
-public class SuggestionActivity extends AuthActivity implements SuggestionPresenter.IView, SwipeRefreshLayout.OnRefreshListener {
+public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, SuggestionPresenter>
+        implements SuggestionPresenter.IView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -37,7 +38,7 @@ public class SuggestionActivity extends AuthActivity implements SuggestionPresen
     Button sendSuggestionBtn;
     @BindView(R.id.input_ll)
     LinearLayout inputLl;
-    private SuggestionPresenter presenter;
+
     private SuggestionAdapter adapter;
 
     @Override
@@ -49,16 +50,13 @@ public class SuggestionActivity extends AuthActivity implements SuggestionPresen
     @Override
     public void initUserView() {
         recycler.setRefreshListener(this);
-
-        presenter = new SuggestionPresenter( this, user);
+        presenter.setUser(user);
         adapter = new SuggestionAdapter(this);
         initToolbar(toolbar, "反馈意见");
         initRecyclerView(recycler, adapter);
         adapter.addHeader(new SuggestionHeader(context));
         onRefresh();
     }
-
-
 
 
     @OnClick(R.id.send_suggestion_btn)
@@ -89,4 +87,8 @@ public class SuggestionActivity extends AuthActivity implements SuggestionPresen
         recycler.setRefreshing(isShow);
     }
 
+    @Override
+    protected SuggestionPresenter createPresenter() {
+        return new SuggestionPresenter();
+    }
 }

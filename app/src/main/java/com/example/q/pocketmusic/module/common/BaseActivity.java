@@ -31,18 +31,22 @@ import butterknife.Unbinder;
  * Created by YQ on 2016/10/1.
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity implements IBaseView {
     public Activity context;
+    protected T presenter;
     public final String TAG = this.getClass().getName();
     public AlertDialog mLoadingDialog;//这个dialog一般在上传，下载，的时候才会用到
     private Unbinder unbinder;
 
+    protected abstract T createPresenter();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setContentResource());
         unbinder = ButterKnife.bind(this);
+        presenter = createPresenter();
+        presenter.attachView((V) this);
         this.context = this;
         initView();
         initLoadingView();
@@ -148,6 +152,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        presenter.detachView();
         mLoadingDialog.dismiss();
         unbinder.unbind();
     }

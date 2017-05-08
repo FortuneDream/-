@@ -25,16 +25,21 @@ import butterknife.Unbinder;
  * Created by Cloud on 2017/1/16.
  */
 
-public abstract class BaseFragment extends Fragment implements IBaseView {
+public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment implements IBaseView {
+    protected T presenter;
     public static AlertDialog mLoadingDialog;
     public Context context;
     public final String TAG = this.getClass().getName();
     private Unbinder unbinder;
 
+    protected abstract T createPresenter();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.context = getContext();
+        presenter = createPresenter();
+        presenter.attachView((V) this);
         if (mLoadingDialog == null) {
             mLoadingDialog = new AlertDialog.Builder(getActivity())
                     .setView(R.layout.view_loading_wait)
@@ -97,5 +102,11 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
     }
 }

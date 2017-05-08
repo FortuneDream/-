@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.home.profile.collection;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
@@ -22,17 +23,19 @@ import java.util.List;
  * Created by Cloud on 2016/11/14.
  */
 
-public class CollectionPresenter {
+public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView> {
     private IView activity;
 
     private MyUser user;
     private CollectionModel collectionModel;
     private int mPage;
 
-    public CollectionPresenter(IView activity, MyUser user) {
-        this.activity = activity;
-
+    public void setUser(MyUser user) {
         this.user = user;
+    }
+
+    public CollectionPresenter() {
+        activity = getIViewRef();
         collectionModel = new CollectionModel();
 
     }

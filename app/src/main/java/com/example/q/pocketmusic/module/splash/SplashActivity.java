@@ -20,7 +20,8 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class SplashActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks, SplashPresenter.IView {
+public class SplashActivity extends BaseActivity<SplashPresenter.IView,SplashPresenter>
+        implements EasyPermissions.PermissionCallbacks, SplashPresenter.IView {
     private static final int ENTER_HOME_ACTIVITY = 1001;
     @BindView(R.id.bmob_info_tv)
     TextView bmobInfoTv;
@@ -33,7 +34,6 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     private static String[] requestPermissions = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
     };
-    private SplashPresenter presenter;
     public static final int REQUEST_PERMISSION = 1111;
     private Handler handler = new Handler() {
         @Override
@@ -59,7 +59,6 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
 
     @Override
     public void initView() {
-        presenter = new SplashPresenter( this);
         presenter.getBmobInfo();
         requestPermissions();
     }
@@ -129,4 +128,8 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
         bmobInfoTv.setText(bmobInfo.getContent());
     }
 
+    @Override
+    protected SplashPresenter createPresenter() {
+        return new SplashPresenter();
+    }
 }

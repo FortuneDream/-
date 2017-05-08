@@ -17,7 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PianoActivity extends BaseActivity implements PianoPresenter.IView, View.OnTouchListener {
+public class PianoActivity extends BaseActivity<PianoPresenter.IView,PianoPresenter>
+        implements PianoPresenter.IView, View.OnTouchListener {
     @BindView(R.id.content_tv)
     TextView contentTv;
     @BindView(R.id.do_1)
@@ -59,7 +60,6 @@ public class PianoActivity extends BaseActivity implements PianoPresenter.IView,
     @Override
     public void initView() {
         backIv.setOnTouchListener(this);
-        presenter = new PianoPresenter( this);
     }
 
     //强制横屏
@@ -139,6 +139,11 @@ public class PianoActivity extends BaseActivity implements PianoPresenter.IView,
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected PianoPresenter createPresenter() {
+        return new PianoPresenter();
     }
 
     @Override

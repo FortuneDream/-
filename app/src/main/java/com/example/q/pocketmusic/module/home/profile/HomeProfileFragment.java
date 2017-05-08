@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthFragment;
+import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.util.DisplayStrategy;
 import com.example.q.pocketmusic.view.widget.view.GuaGuaKa;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
@@ -22,7 +23,8 @@ import butterknife.OnClick;
  * Created by Cloud on 2017/1/26.
  */
 
-public class HomeProfileFragment extends AuthFragment implements HomeProfileFragmentPresenter.IView {
+public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresenter.IView, HomeProfileFragmentPresenter>
+        implements HomeProfileFragmentPresenter.IView {
     @BindView(R.id.head_iv)
     ImageView headIv;
     @BindView(R.id.user_name_tv)
@@ -42,7 +44,6 @@ public class HomeProfileFragment extends AuthFragment implements HomeProfileFrag
     @BindView(R.id.post_item)
     IcoTextItem postItem;
 
-    private HomeProfileFragmentPresenter presenter;
     private AlertDialog signInDialog;
 
 
@@ -53,7 +54,6 @@ public class HomeProfileFragment extends AuthFragment implements HomeProfileFrag
 
     @Override
     public void initView() {
-        presenter = new HomeProfileFragmentPresenter( this);
         initProfileView();
     }
 
@@ -157,4 +157,8 @@ public class HomeProfileFragment extends AuthFragment implements HomeProfileFrag
     }
 
 
+    @Override
+    protected HomeProfileFragmentPresenter createPresenter() {
+        return new HomeProfileFragmentPresenter();
+    }
 }

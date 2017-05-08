@@ -17,7 +17,8 @@ import com.example.q.pocketmusic.view.widget.view.TabView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class HomeActivity extends BaseActivity implements HomePresenter.IView {
+public class HomeActivity extends BaseActivity<HomePresenter.IView,HomePresenter>
+        implements HomePresenter.IView {
 
     @BindView(R.id.home_content)
     FrameLayout homeContent;
@@ -29,7 +30,7 @@ public class HomeActivity extends BaseActivity implements HomePresenter.IView {
     TabView homeTabAskTab;
     @BindView(R.id.home_tab_profile_tab)
     TabView homeTabProfileTab;
-    private HomePresenter presenter;
+
     private static boolean isExit = false;  // 定义一个变量，来标识是否退出
     public static final String ACTION_RETURN_HOME = "action_return_home";
     private Handler mHandler = new Handler() {
@@ -47,7 +48,7 @@ public class HomeActivity extends BaseActivity implements HomePresenter.IView {
 
     @Override
     public void initView() {
-        presenter = new HomePresenter(this, getSupportFragmentManager());
+        presenter.setFragmentManager(getSupportFragmentManager());
         presenter.checkVersion();
         presenter.clickLocal();
     }
@@ -107,6 +108,11 @@ public class HomeActivity extends BaseActivity implements HomePresenter.IView {
             finish();
             System.exit(0);
         }
+    }
+
+    @Override
+    protected HomePresenter createPresenter() {
+        return new HomePresenter();
     }
 
     //恢复视图，在onStart之后，这里默认点击local

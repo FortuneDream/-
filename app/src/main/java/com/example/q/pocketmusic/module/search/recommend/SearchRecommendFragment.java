@@ -25,7 +25,8 @@ import butterknife.Unbinder;
  */
 
 //包括桃李醉春风和收藏夹
-public class SearchRecommendFragment extends BaseFragment implements SearchRecommendFragmentPresenter.IView, TagFlowLayout.OnTagClickListener {
+public class SearchRecommendFragment extends BaseFragment<SearchRecommendFragmentPresenter.IView,SearchRecommendFragmentPresenter>
+        implements SearchRecommendFragmentPresenter.IView, TagFlowLayout.OnTagClickListener {
 
     @BindView(R.id.recommend_left_tv)
     TextView recommendLeftTv;
@@ -33,8 +34,6 @@ public class SearchRecommendFragment extends BaseFragment implements SearchRecom
     ImageView recommendRightIv;
     @BindView(R.id.recommend_flow_layout)
     TagFlowLayout recommendFlowLayout;
-    Unbinder unbinder;
-    private SearchRecommendFragmentPresenter presenter;
     private SearchRecommendAdapter recommendAdapter;
 
     @Override
@@ -50,8 +49,6 @@ public class SearchRecommendFragment extends BaseFragment implements SearchRecom
     @Override
     public void initView() {
         recommendFlowLayout.setOnTagClickListener(this);
-
-        presenter = new SearchRecommendFragmentPresenter(this);
         presenter.getRecommendList();//推荐列表
     }
 
@@ -73,4 +70,8 @@ public class SearchRecommendFragment extends BaseFragment implements SearchRecom
         presenter.enterRecommendListActivity();
     }
 
+    @Override
+    protected SearchRecommendFragmentPresenter createPresenter() {
+        return new SearchRecommendFragmentPresenter();
+    }
 }

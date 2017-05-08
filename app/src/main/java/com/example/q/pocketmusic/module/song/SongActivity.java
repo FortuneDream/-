@@ -34,7 +34,8 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 //查看大图界面
 
-public class SongActivity extends BaseActivity implements SongActivityPresenter.IView, EasyPermissions.PermissionCallbacks {
+public class SongActivity extends BaseActivity<SongActivityPresenter.IView, SongActivityPresenter>
+        implements SongActivityPresenter.IView, EasyPermissions.PermissionCallbacks {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -52,7 +53,6 @@ public class SongActivity extends BaseActivity implements SongActivityPresenter.
     RelativeLayout recordRl;
     @BindView(R.id.page_tv)
     TextView pageTv;
-    private SongActivityPresenter presenter;
     private SongActivityAdapter adapter;
 
 
@@ -77,18 +77,20 @@ public class SongActivity extends BaseActivity implements SongActivityPresenter.
         //屏幕不灭
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         //根据来自搜索和乐器类型，得到不同的song的IvUrls
-        presenter = new SongActivityPresenter(this, getIntent());
+        presenter.setIntent(getIntent());
         initToolbar(toolbar, presenter.getSong().getName());
-
         //是否隐藏录音栏
+        checkHideRecord();
+        //查找图片
+        presenter.loadPic();
+    }
+
+    private void checkHideRecord() {
         if (presenter.getLoadingWay() == Constant.LOCAL) {
             recordRl.setVisibility(View.VISIBLE);
         } else if (presenter.getLoadingWay() == Constant.NET) {
             recordRl.setVisibility(View.GONE);
         }
-        //查找图片
-
-        presenter.loadPic();
     }
 
     //加载失败
@@ -146,6 +148,11 @@ public class SongActivity extends BaseActivity implements SongActivityPresenter.
         editDialog.dismiss();
     }
 
+
+    @Override
+    protected SongActivityPresenter createPresenter() {
+        return new SongActivityPresenter();
+    }
 
     //菜单
     @Override

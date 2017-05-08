@@ -16,8 +16,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class ContributionActivity extends AuthActivity implements SwipeRefreshLayout.OnRefreshListener, ContributionPresenter.IView {
-
+public class ContributionActivity extends AuthActivity<ContributionPresenter.IView, ContributionPresenter>
+        implements SwipeRefreshLayout.OnRefreshListener, ContributionPresenter.IView {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
@@ -31,7 +31,6 @@ public class ContributionActivity extends AuthActivity implements SwipeRefreshLa
     @BindView(R.id.contribution_tv)
     TextView contributionTv;
     private ContributionAdapter adapter;
-    private ContributionPresenter presenter;
 
     @Override
     public int setContentResource() {
@@ -44,7 +43,6 @@ public class ContributionActivity extends AuthActivity implements SwipeRefreshLa
         adapter = new ContributionAdapter(this);
         recycler.setRefreshListener(this);
         //初始化
-        presenter = new ContributionPresenter( this);
         new DisplayStrategy().displayCircle(this, user.getHeadImg(), topIv);
         nickNameTv.setText(user.getNickName());
         contributionTv.setText("硬币：" + user.getContribution() + "枚");
@@ -68,5 +66,10 @@ public class ContributionActivity extends AuthActivity implements SwipeRefreshLa
     @Override
     public void showRefreshing(boolean isShow) {
         recycler.setRefreshing(isShow);
+    }
+
+    @Override
+    protected ContributionPresenter createPresenter() {
+        return new ContributionPresenter();
     }
 }

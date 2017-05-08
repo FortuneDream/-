@@ -31,7 +31,8 @@ import butterknife.Unbinder;
 /**
  * Created by YQ on 2016/8/28.
  */
-public class HomeLocalFragment extends BaseFragment implements HomeLocalFragmentPresenter.IView, ViewPager.OnPageChangeListener {
+public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.IView,HomeLocalFragmentPresenter>
+        implements HomeLocalFragmentPresenter.IView, ViewPager.OnPageChangeListener {
     @BindView(R.id.local_tab_layout)
     TabLayout localTabLayout;
     @BindView(R.id.app_bar)
@@ -46,14 +47,17 @@ public class HomeLocalFragment extends BaseFragment implements HomeLocalFragment
     FloatingActionMenu menuFab;
     @BindView(R.id.activity_audio_record)
     RelativeLayout activityAudioRecord;
-    Unbinder unbinder;
     private LocalFragmentPagerAdapter adapter;
     private FragmentManager fm;
     private List<String> tabs = new ArrayList<>();
     private LocalRecordFragment localRecordFragment;
     private LocalSongFragment localSongFragment;
     private List<Fragment> fragmentList = new ArrayList<>();
-    private HomeLocalFragmentPresenter presenter;
+
+    @Override
+    protected HomeLocalFragmentPresenter createPresenter() {
+        return new HomeLocalFragmentPresenter();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,7 +72,6 @@ public class HomeLocalFragment extends BaseFragment implements HomeLocalFragment
         localRecordFragment = new LocalRecordFragment();
         fragmentList.add(localSongFragment);
         fragmentList.add(localRecordFragment);
-        presenter = new HomeLocalFragmentPresenter(this);
     }
 
     @Override

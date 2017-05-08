@@ -20,12 +20,12 @@ import java.util.List;
  * Created by Cloud on 2016/11/14.
  */
 
-public class RecommendListActivityPresenter  extends BasePresenter {
+public class RecommendListActivityPresenter extends BasePresenter<RecommendListActivityPresenter.IView> {
     private IView activity;
     private int mPage;
 
-    public RecommendListActivityPresenter(IView activity) {
-        this.activity = activity;
+    public RecommendListActivityPresenter() {
+        activity = getIViewRef();
     }
 
     //可以得到推荐列表
@@ -35,7 +35,7 @@ public class RecommendListActivityPresenter  extends BasePresenter {
             @Override
             protected void onPostExecute(List<Song> songs) {
                 super.onPostExecute(songs);
-                LogUtils.e(TAG,"songs");
+                LogUtils.e(TAG, "songs");
                 activity.setList(songs);
             }
         }.execute(url);
@@ -47,17 +47,17 @@ public class RecommendListActivityPresenter  extends BasePresenter {
 
 
     public void setPage(int page) {
-        this.mPage=page;
+        this.mPage = page;
     }
 
     public void enterSongActivity(Song song) {
         Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
-        SongObject object=new SongObject(song, Constant.FROM_RECOMMEND,Constant.SHOW_COLLECTION_MENU,Constant.NET);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL,object);
+        SongObject object = new SongObject(song, Constant.FROM_RECOMMEND, Constant.SHOW_COLLECTION_MENU, Constant.NET);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, object);
         activity.getCurrentContext().startActivity(intent);
     }
 
-    public interface IView extends IBaseView{
+    public interface IView extends IBaseView {
         void setList(List<Song> list);
     }
 }

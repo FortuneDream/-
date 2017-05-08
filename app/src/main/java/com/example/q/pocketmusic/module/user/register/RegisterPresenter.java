@@ -18,11 +18,11 @@ import java.util.regex.Pattern;
  * Created by Cloud on 2016/11/14.
  */
 
-public class RegisterPresenter extends BasePresenter {
+public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
     private IView activity;
 
-    public RegisterPresenter(IView activity) {
-        this.activity = activity;
+    public RegisterPresenter() {
+        activity = getIViewRef();
     }
 
     public Boolean checkAccount(String email) {

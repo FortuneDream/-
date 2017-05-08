@@ -19,14 +19,17 @@ import cn.bmob.v3.datatype.BmobPointer;
  * Created by Cloud on 2016/11/14.
  */
 
-public class SuggestionPresenter extends BasePresenter {
+public class SuggestionPresenter extends BasePresenter<SuggestionPresenter.IView> {
     private IView activity;
 
     private MyUser user;
 
-    public SuggestionPresenter(IView activity, MyUser user) {
-        this.activity = activity;
+    public void setUser(MyUser user) {
         this.user = user;
+    }
+
+    public SuggestionPresenter() {
+        activity=getIViewRef();
     }
 
     public void sendSuggestion(String suggestion) {

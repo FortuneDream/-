@@ -22,7 +22,7 @@ import cn.bmob.v3.update.UpdateResponse;
  * Created by Cloud on 2016/11/22.
  */
 
-public class HomePresenter extends BasePresenter {
+public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     private IView activity;
     private List<Fragment> fragments;
     private FragmentManager fm;
@@ -38,9 +38,8 @@ public class HomePresenter extends BasePresenter {
     private int FLAG;//标记当前Fragment
 
 
-    public HomePresenter(IView activity, FragmentManager fm) {
-        this.fm = fm;
-        this.activity = activity;
+    public HomePresenter() {
+        activity = getIViewRef();
         initFragment();
     }
 
@@ -114,6 +113,10 @@ public class HomePresenter extends BasePresenter {
 //                }
             }
         });//更新监听
+    }
+
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        this.fm=fragmentManager;
     }
 
 

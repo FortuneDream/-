@@ -22,12 +22,12 @@ import butterknife.ButterKnife;
  * Created by Cloud on 2016/11/14.
  */
 
-public class RecommendListActivity extends BaseActivity implements RecommendListActivityPresenter.IView, RecyclerArrayAdapter.OnItemClickListener, RecyclerArrayAdapter.OnMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class RecommendListActivity extends BaseActivity<RecommendListActivityPresenter.IView,RecommendListActivityPresenter>
+        implements RecommendListActivityPresenter.IView, RecyclerArrayAdapter.OnItemClickListener, RecyclerArrayAdapter.OnMoreListener, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
-    private RecommendListActivityPresenter presenter;
     private RecommendListAdapter adapter;
 
     @Override
@@ -42,7 +42,6 @@ public class RecommendListActivity extends BaseActivity implements RecommendList
         adapter.setOnItemClickListener(this);
         recycler.setRefreshListener(this);
 
-        presenter = new RecommendListActivityPresenter(this);
         initToolbar(toolbar, "推荐列表");
         initRecyclerView(recycler, adapter, 1, false);
         onRefresh();
@@ -80,5 +79,10 @@ public class RecommendListActivity extends BaseActivity implements RecommendList
         adapter.clear();
         presenter.setPage(1);
         presenter.getList();
+    }
+
+    @Override
+    protected RecommendListActivityPresenter createPresenter() {
+        return new RecommendListActivityPresenter();
     }
 }

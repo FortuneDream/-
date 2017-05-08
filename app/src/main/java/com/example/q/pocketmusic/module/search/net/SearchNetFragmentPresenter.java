@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.search.net;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -17,12 +18,12 @@ import java.util.List;
  * Created by 81256 on 2017/4/14.
  */
 
-public class SearchNetFragmentPresenter {
+public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentPresenter.IView> {
     private IView fragment;
     private int mPage;
 
-    public SearchNetFragmentPresenter(IView fragment) {
-        this.fragment = fragment;
+    public SearchNetFragmentPresenter() {
+        fragment = getIViewRef();
     }
 
     public int getmPage() {
