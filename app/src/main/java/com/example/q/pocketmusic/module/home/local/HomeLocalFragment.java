@@ -9,9 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.example.q.pocketmusic.R;
@@ -26,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -71,7 +68,7 @@ public class HomeLocalFragment extends BaseFragment implements HomeLocalFragment
         localRecordFragment = new LocalRecordFragment();
         fragmentList.add(localSongFragment);
         fragmentList.add(localRecordFragment);
-        presenter = new HomeLocalFragmentPresenter(getContext(), this);
+        presenter = new HomeLocalFragmentPresenter(this);
     }
 
     @Override
@@ -79,24 +76,18 @@ public class HomeLocalFragment extends BaseFragment implements HomeLocalFragment
         return R.layout.fragment_home_local;
     }
 
+
     @Override
-    public void setListener() {
+    public void initView() {
+        //监听
         localViewPager.addOnPageChangeListener(this);
-    }
-
-    @Override
-    public void init() {
-        initView();
-    }
-
-
-    private void initView() {
         //viewpager
         fm = getChildFragmentManager();
         adapter = new LocalFragmentPagerAdapter(getActivity(), fm, tabs, fragmentList);
         localViewPager.setAdapter(adapter);
         localTabLayout.setupWithViewPager(localViewPager);
     }
+
 
     //必须要在onResume中设置
     @Override

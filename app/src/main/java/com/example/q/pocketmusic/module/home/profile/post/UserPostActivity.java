@@ -33,15 +33,12 @@ public class UserPostActivity extends AuthActivity implements UserPostPresenter.
     }
 
     @Override
-    public void setListener() {
+    public void initUserView() {
         adapter = new UserPostAdapter(this);
         recycler.setRefreshListener(this);
         adapter.setOnItemClickListener(this);
-    }
 
-    @Override
-    public void initView() {
-        presenter = new UserPostPresenter(this, this, user);
+        presenter = new UserPostPresenter( this, user);
         initToolbar(toolbar, "我的求谱");
         initRecyclerView(recycler, adapter, 1, true);
         onRefresh();

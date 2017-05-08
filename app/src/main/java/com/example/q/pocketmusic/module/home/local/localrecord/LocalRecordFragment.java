@@ -65,20 +65,21 @@ public class LocalRecordFragment extends BaseFragment implements LocalRecordFrag
     }
 
     @Override
-    public void setListener() {
+    public void initView() {
+        //监听
         adapter = new LocalRecordFragmentAdapter(getActivity());
         adapter.setOnItemClickListener(this);
         adapter.setListener(this);
         recycler.setRefreshListener(this);
-    }
 
-    public void init() {
-        presenter = new LocalRecordFragmentPresenter(getContext(), this);
-        initRecyclerView(recycler, adapter, 1,true);
+        //初始化
+        presenter = new LocalRecordFragmentPresenter(this);
+        initRecyclerView(recycler, adapter, 1, true);
         //加载录音列表
         recycler.setRefreshing(true);
         presenter.loadRecordList();
     }
+
 
     @Override
     public void onItemClick(int position) {

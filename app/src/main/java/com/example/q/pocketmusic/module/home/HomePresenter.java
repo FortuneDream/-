@@ -1,25 +1,15 @@
 package com.example.q.pocketmusic.module.home;
 
-import android.content.Context;
-import android.content.pm.ProviderInfo;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
-import android.view.KeyEvent;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.ask.list.HomeAskListFragment;
 import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
-
-import com.example.q.pocketmusic.util.MyToast;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +24,6 @@ import cn.bmob.v3.update.UpdateResponse;
 
 public class HomePresenter extends BasePresenter {
     private IView activity;
-    private Context context;
     private List<Fragment> fragments;
     private FragmentManager fm;
     private Fragment totalFragment;
@@ -49,10 +38,9 @@ public class HomePresenter extends BasePresenter {
     private int FLAG;//标记当前Fragment
 
 
-    public HomePresenter(IView activity, Context context, FragmentManager fm) {
+    public HomePresenter(IView activity, FragmentManager fm) {
         this.fm = fm;
         this.activity = activity;
-        this.context = context;
         initFragment();
     }
 
@@ -117,7 +105,7 @@ public class HomePresenter extends BasePresenter {
 
     public void checkVersion() {
         BmobUpdateAgent.setUpdateOnlyWifi(false);//在任意情况下都会提示
-        BmobUpdateAgent.update(context);//更新
+        BmobUpdateAgent.update(activity.getCurrentContext());//更新
         BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
             @Override
             public void onUpdateReturned(int i, UpdateResponse updateResponse) {
@@ -129,7 +117,7 @@ public class HomePresenter extends BasePresenter {
     }
 
 
-    public interface IView {
+    public interface IView extends IBaseView {
 
         void onSelectLocal();
 

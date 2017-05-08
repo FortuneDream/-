@@ -51,18 +51,18 @@ public class CollectionModel {
         BmobRelation relation = new BmobRelation();
         relation.remove(collectionSong);
         user.setCollections(relation);
-        user.update(new ToastUpdateListener(context, activity) {
+        user.update(new ToastUpdateListener( activity) {
             @Override
             public void onSuccess() {
                 //删除收藏多个图片表,
                 BmobQuery<CollectionPic> query = new BmobQuery<CollectionPic>();
                 query.addWhereEqualTo("collectionSong", collectionSong);
-                query.findObjects(new ToastQueryListener<CollectionPic>(context, activity) {
+                query.findObjects(new ToastQueryListener<CollectionPic>( activity) {
                     @Override
                     public void onSuccess(List<CollectionPic> list) {
                         List<BmobObject> pics = new ArrayList<BmobObject>();
                         pics.addAll(list);
-                        new BmobBatch().deleteBatch(pics).doBatch(new ToastQueryListListener<BatchResult>(context, activity) {
+                        new BmobBatch().deleteBatch(pics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
                             @Override
                             public void onSuccess(List<BatchResult> list) {
                                 //删除收藏记录

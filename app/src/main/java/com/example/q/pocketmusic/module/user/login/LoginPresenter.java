@@ -23,28 +23,26 @@ import cn.bmob.v3.exception.BmobException;
 
 public class LoginPresenter extends BasePresenter {
     private IView activity;
-    private Context context;
 
-    public LoginPresenter(IView activity, Context context) {
+    public LoginPresenter(IView activity) {
         this.activity = activity;
-        this.context = context;
     }
 
     //登录
     public void login(final String account, String password) {
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
-            MyToast.showToast(context, CommonString.STR_COMPLETE_INFO);
+            MyToast.showToast(activity.getCurrentContext(), CommonString.STR_COMPLETE_INFO);
             return;
         }
         activity.showLoading(true);
         final MyUser user = new MyUser();
         user.setUsername(account);
         user.setPassword(password);
-        user.login(new ToastSaveListener<MyUser>(context, activity) {
+        user.login(new ToastSaveListener<MyUser>( activity) {
 
             @Override
             public void onSuccess(MyUser user) {
-                MyToast.showToast(context, "欢迎尊贵的VIP！ ");
+                MyToast.showToast(activity.getCurrentContext(), "欢迎尊贵的VIP！ ");
                 activity.loginToResult(Constant.SUCCESS, user);
                 activity.finish();//关闭登录界面
             }
@@ -60,12 +58,12 @@ public class LoginPresenter extends BasePresenter {
 
     //跳转到RegistererActivity，如果注册成功就不finish到此页
     public void enterRegisterActivity() {
-        Intent intent = new Intent(context, RegisterActivity.class);
-        ((Activity) context).startActivityForResult(intent, Constant.REQUEST_REGISTER);
+        Intent intent = new Intent(activity.getCurrentContext(), RegisterActivity.class);
+        ((Activity)activity.getCurrentContext()).startActivityForResult(intent, Constant.REQUEST_REGISTER);
     }
 
     public void enterForgetActivity() {
-        context.startActivity(new Intent(context, ForgetActivity.class));
+        activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), ForgetActivity.class));
 
     }
 

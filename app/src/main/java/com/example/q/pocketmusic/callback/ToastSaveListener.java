@@ -14,13 +14,11 @@ import cn.bmob.v3.listener.SaveListener;
  */
 //封装添加，失败后会消除loadingView，且弹出Toast和错误信息
 public abstract class ToastSaveListener<T> extends SaveListener<T> {
-    private Context context;
     private IBaseList baseList;
 
     public abstract void onSuccess(T t);
 
-    public ToastSaveListener(Context context, IBaseList baseList) {
-        this.context = context;
+    public ToastSaveListener(IBaseList baseList) {
         this.baseList = baseList;
     }
 
@@ -37,13 +35,11 @@ public abstract class ToastSaveListener<T> extends SaveListener<T> {
     public void onFail(T t, BmobException e) {
         baseList.showLoading(false);
         baseList.showRefreshing(false);
-        MyToast.showToast(context, CommonString.STR_ERROR_INFO + e.getMessage());
+        MyToast.showToast(baseList.getCurrentContext(), CommonString.STR_ERROR_INFO + e.getMessage());
         e.printStackTrace();
         //        CrashHandler handler=CrashHandler.getInstance();
 //        handler.uncaughtException(Thread.currentThread(),e);
     }
-
-
 
 
 }

@@ -39,16 +39,15 @@ public class AskSongActivity extends AuthActivity implements AskSongPresenter.IV
         return R.layout.activity_ask_song;
     }
 
-    @Override
-    public void setListener() {
-
-    }
 
     @Override
-    public void initView() {
+    public void initUserView() {
         initToolbar(toolbar, "求谱信息");
-        presenter = new AskSongPresenter(this, this);
+        presenter = new AskSongPresenter(this);
+
     }
+
+
 
 
     @OnClick({R.id.ok_txt})

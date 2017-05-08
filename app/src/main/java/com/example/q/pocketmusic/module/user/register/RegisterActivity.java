@@ -1,7 +1,5 @@
 package com.example.q.pocketmusic.module.user.register;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -11,7 +9,6 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -40,14 +37,9 @@ public class RegisterActivity extends BaseActivity implements RegisterPresenter.
     }
 
     @Override
-    public void setListener() {
-
-    }
-
-    @Override
-    public void init() {
+    public void initView() {
         initToolbar(toolbar, "用户注册");
-        presenter = new RegisterPresenter(this, this);
+        presenter = new RegisterPresenter(this);
     }
 
 

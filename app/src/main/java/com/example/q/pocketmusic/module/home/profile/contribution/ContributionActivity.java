@@ -1,29 +1,20 @@
 package com.example.q.pocketmusic.module.home.profile.contribution;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.callback.IDisplayStrategy;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.DisplayStrategy;
-import com.example.q.pocketmusic.util.LogUtils;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ContributionActivity extends AuthActivity implements SwipeRefreshLayout.OnRefreshListener, ContributionPresenter.IView {
 
@@ -47,20 +38,16 @@ public class ContributionActivity extends AuthActivity implements SwipeRefreshLa
         return R.layout.activity_contribution;
     }
 
-
     @Override
-    public void setListener() {
+    public void initUserView() {
+        //监听
         adapter = new ContributionAdapter(this);
         recycler.setRefreshListener(this);
-    }
-
-
-    @Override
-    public void initView() {
-        presenter = new ContributionPresenter(this, this);
+        //初始化
+        presenter = new ContributionPresenter( this);
         new DisplayStrategy().displayCircle(this, user.getHeadImg(), topIv);
         nickNameTv.setText(user.getNickName());
-        contributionTv.setText("硬币：" + user.getContribution()+"枚");
+        contributionTv.setText("硬币：" + user.getContribution() + "枚");
         initToolbar(toolbar, "硬币榜");
         initRecyclerView(recycler, adapter);
         onRefresh();

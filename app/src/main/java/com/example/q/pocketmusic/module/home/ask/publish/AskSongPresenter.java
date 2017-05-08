@@ -20,33 +20,30 @@ import com.example.q.pocketmusic.util.MyToast;
 
 public class AskSongPresenter extends BasePresenter {
     private IView activity;
-    private Context context;
 
-    public AskSongPresenter(IView activity, Context context) {
+    public AskSongPresenter(IView activity) {
         this.activity = activity;
-        this.context = context;
-
     }
 
     public void askForSong(String title, final String content, final com.example.q.pocketmusic.model.bean.MyUser user) {
         if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title)) {
-            MyToast.showToast(context, CommonString.STR_COMPLETE_INFO);
+            MyToast.showToast(activity.getCurrentContext(), CommonString.STR_COMPLETE_INFO);
             return;
         }
-        if (!CheckUserUtil.checkUserContribution((BaseActivity) context, Constant.REDUCE_CONTRIBUTION_ASK)) {
-            MyToast.showToast(context, CommonString.STR_NOT_ENOUGH_COIN);
+        if (!CheckUserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), Constant.REDUCE_CONTRIBUTION_ASK)) {
+            MyToast.showToast(activity.getCurrentContext(), CommonString.STR_NOT_ENOUGH_COIN);
             return;
         }
         activity.showLoading(true);
         AskSongPost askSongPost = new AskSongPost(user, title, content);
-        askSongPost.save(new ToastSaveListener<String>(context, activity) {
+        askSongPost.save(new ToastSaveListener<String>( activity) {
             @Override
             public void onSuccess(String s) {
                 user.increment("contribution", -Constant.REDUCE_CONTRIBUTION_ASK);
-                user.update(new ToastUpdateListener(context, activity) {
+                user.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
-                        MyToast.showToast(context, CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_ASK);
+                        MyToast.showToast(activity.getCurrentContext(), CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_ASK);
                         activity.showLoading(false);
                         activity.setAskResult(Constant.SUCCESS);
                         activity.finish();

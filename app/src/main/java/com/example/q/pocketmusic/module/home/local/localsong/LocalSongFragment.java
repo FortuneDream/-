@@ -54,22 +54,17 @@ public class LocalSongFragment extends BaseFragment implements LocalSongFragment
         return R.layout.fragment_local_song;
     }
 
+
     @Override
-    public void setListener() {
+    public void initView() {
+        //监听
         adapter = new LocalSongFragmentAdapter(getContext());
         adapter.setOnItemClickListener(this);
         adapter.setOnSelectListener(this);
         recycler.setRefreshListener(this);
-    }
-
-    @Override
-    public void init() {
-        presenter = new LocalSongFragmentPresenter(getActivity(), this);
-        initRecyclerView(recycler, adapter, 1,true);
-        initView();
-    }
-
-    private void initView() {
+        presenter = new LocalSongFragmentPresenter( this);
+        //初始化
+        initRecyclerView(recycler, adapter, 1, true);
         recycler.setEmptyView(R.layout.view_local_empty);
         if (adapter.getCount() == 0) {
             recycler.showEmpty();

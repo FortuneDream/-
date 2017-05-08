@@ -37,17 +37,15 @@ public class HomeAskListFragment extends BaseFragment implements HomeAskListFrag
         return R.layout.fragment_home_ask_list;
     }
 
+
     @Override
-    public void setListener() {
+    public void initView() {
         adapter = new HomeAskListAdapter(getContext());
         adapter.setListener(this);
         adapter.setMore(R.layout.view_more, this);
         recycler.setRefreshListener(this);
-    }
 
-    @Override
-    public void init() {
-        presenter = new HomeAskListFragmentPresenter(context, this);
+        presenter = new HomeAskListFragmentPresenter( this);
         initRecyclerView(recycler, adapter, 72, false);
         presenter.setmPage(0);
         titleBar.setMyCenterTitle("大家都在找");

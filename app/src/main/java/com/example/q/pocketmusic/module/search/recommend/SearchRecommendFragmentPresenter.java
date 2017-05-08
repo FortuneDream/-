@@ -19,11 +19,9 @@ import java.util.List;
  */
 
 public class SearchRecommendFragmentPresenter extends BasePresenter {
-    private Context context;
     private IView fragment;
 
-    public SearchRecommendFragmentPresenter(Context context, IView fragment) {
-        this.context = context;
+    public SearchRecommendFragmentPresenter(IView fragment) {
         this.fragment = fragment;
     }
 
@@ -48,15 +46,15 @@ public class SearchRecommendFragmentPresenter extends BasePresenter {
 
     //进入推荐列表
     public void enterRecommendListActivity() {
-        context.startActivity(new Intent(context, RecommendListActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), RecommendListActivity.class));
     }
 
     //进入歌曲详情
     public void enterSongActivityByRecommendTag(Song song) {
-        Intent intent = new Intent(context, SongActivity.class);
+        Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, Constant.FROM_RECOMMEND, Constant.SHOW_COLLECTION_MENU, Constant.NET);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, object);
-        context.startActivity(intent);
+        fragment.getCurrentContext().startActivity(intent);
     }
 
 

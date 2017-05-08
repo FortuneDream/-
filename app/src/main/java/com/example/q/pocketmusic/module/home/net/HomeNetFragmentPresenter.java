@@ -1,16 +1,14 @@
 package com.example.q.pocketmusic.module.home.net;
 
-import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
-
+import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
 import com.example.q.pocketmusic.module.search.SearchMainActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
@@ -25,19 +23,17 @@ import cn.bmob.v3.exception.BmobException;
  */
 public class HomeNetFragmentPresenter extends BasePresenter {
     private IView fragment;
-    private Context context;
     private int mPage;
     private HomeNetModel homeNetModel;
 
-    public HomeNetFragmentPresenter(IView fragment, Context context) {
+    public HomeNetFragmentPresenter(IView fragment) {
         this.fragment = fragment;
-        this.context = context;
         homeNetModel = new HomeNetModel();
     }
 
     public void loadMore() {
         mPage++;
-        homeNetModel.getMoreShareList(mPage, new ToastQueryListener<ShareSong>(context, fragment) {
+        homeNetModel.getMoreShareList(mPage, new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 fragment.setMore(list);
@@ -47,17 +43,17 @@ public class HomeNetFragmentPresenter extends BasePresenter {
     }
 
     public void getShareList() {
-        homeNetModel.getInitShareList(new ToastQueryListener<ShareSong>(context, fragment) {
+        homeNetModel.getInitShareList(new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                ACacheUtil.putShareSongCache(context, list);//添加缓存
+                ACacheUtil.putShareSongCache(fragment.getAppContext(), list);//添加缓存
                 fragment.setList(list);
             }
 
             @Override
             public void onFail(BmobException e) {
                 super.onFail(e);
-                fragment.setList(ACacheUtil.getShareSongCache(context));
+                fragment.setList(ACacheUtil.getShareSongCache(fragment.getAppContext()));
             }
         });
 
@@ -73,23 +69,23 @@ public class HomeNetFragmentPresenter extends BasePresenter {
         song.setNeedGrade(true);//需要积分
         song.setContent(shareSong.getContent());
         song.setName(shareSong.getName());
-        Intent intent = new Intent(context, SongActivity.class);
+        Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         SongObject songObject = new SongObject(song, Constant.FROM_SHARE, Constant.SHOW_COLLECTION_MENU, Constant.NET);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, songObject);
         intent.putExtra(SongActivity.SHARE_SONG, shareSong);
-        context.startActivity(intent);
+        fragment.getCurrentContext().startActivity(intent);
     }
 
     //进入乐器类型界面
     public void enterTypeActivity(int position) {
-        Intent intent = new Intent(context, SongTypeActivity.class);
+        Intent intent = new Intent(fragment.getCurrentContext(), SongTypeActivity.class);
         intent.putExtra(SongTypeActivity.PARAM_POSITION, position);
-        context.startActivity(intent);
+        fragment.getCurrentContext().startActivity(intent);
     }
 
     //获取缓存
     public void getCacheList() {
-        List<ShareSong> list = ACacheUtil.getShareSongCache(context);//先获取缓存
+        List<ShareSong> list = ACacheUtil.getShareSongCache(fragment.getAppContext());//先获取缓存
         if (list == null) {
             getShareList();
         }
@@ -103,7 +99,7 @@ public class HomeNetFragmentPresenter extends BasePresenter {
     }
 
     public void enterSearchMainActivity() {
-        context.startActivity(new Intent(context, SearchMainActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SearchMainActivity.class));
     }
 
     public interface IView extends IBaseList {

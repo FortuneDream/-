@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.common;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,11 +42,21 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setContentResource());
-        unbinder=ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         this.context = this;
-        setListener();//如果有adapter，需在这里初始化
-        init();
+        initView();
         initLoadingView();
+    }
+
+
+    @Override
+    public Context getAppContext() {
+        return getApplicationContext();
+    }
+
+    @Override
+    public Context getCurrentContext() {
+        return this;
     }
 
     public void initToolbar(Toolbar toolbar, String titleName) {
@@ -57,22 +68,21 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     //dp1=paddingLeft
-    public void initRecyclerView(EasyRecyclerView recyclerView, RecyclerArrayAdapter<?> adapter,int dp1,boolean setEmpty) {
-        initRecyclerView(recyclerView,adapter);
+    public void initRecyclerView(EasyRecyclerView recyclerView, RecyclerArrayAdapter<?> adapter, int dp1, boolean setEmpty) {
+        initRecyclerView(recyclerView, adapter);
         int dp = ConvertUtil.Dp2Px(context, dp1);
-        recyclerView.addItemDecoration(new DividerDecoration(ContextCompat.getColor(context,R.color.setting_divider), 1, dp, 1));
-        if (setEmpty){
+        recyclerView.addItemDecoration(new DividerDecoration(ContextCompat.getColor(context, R.color.setting_divider), 1, dp, 1));
+        if (setEmpty) {
             recyclerView.setEmptyView(R.layout.view_not_found);
         }
     }
 
     //无分割线
-    public void initRecyclerView(EasyRecyclerView recyclerView, RecyclerArrayAdapter<?> adapter){
+    public void initRecyclerView(EasyRecyclerView recyclerView, RecyclerArrayAdapter<?> adapter) {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setRefreshingColorResources(R.color.colorAccent);
         recyclerView.setAdapter(adapter);
     }
-
 
 
     private void initLoadingView() {
@@ -107,7 +117,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     protected boolean onPrepareOptionsPanel(View view, Menu menu) {
         if (menu != null) {
             if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
-                try{
+                try {
                     Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
                     m.setAccessible(true);
                     m.invoke(menu, true);

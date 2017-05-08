@@ -17,6 +17,7 @@ import com.example.q.pocketmusic.model.db.RecordAudioDao;
 import com.example.q.pocketmusic.model.net.LoadLocalRecordList;
 import com.example.q.pocketmusic.model.net.SynchronizeRecordAudio;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.service.MediaPlayerService;
 import com.example.q.pocketmusic.util.MyToast;
 
@@ -32,22 +33,20 @@ import java.util.Locale;
 
 public class LocalRecordFragmentPresenter extends BasePresenter {
     private static final int PROGRESS = 0;
-    private Context context;
-    private IView activity;
+    private IView fragment;
     private RecordAudioDao recordAudioDao;
 
-    public LocalRecordFragmentPresenter(Context context, IView activity) {
-        this.context = context;
-        this.activity = activity;
-        recordAudioDao = new RecordAudioDao(context);
+    public LocalRecordFragmentPresenter(IView fragment) {
+        this.fragment = fragment;
+        recordAudioDao = new RecordAudioDao(fragment.getAppContext());
     }
 
     public void loadRecordList() {
-        new LoadLocalRecordList(context, recordAudioDao) {
+        new LoadLocalRecordList(fragment.getAppContext(), recordAudioDao) {
             @Override
             protected void onPostExecute(List<RecordAudio> recordAudios) {
                 super.onPostExecute(recordAudios);
-                activity.setList(recordAudios);
+                fragment.setList(recordAudios);
             }
         }.execute();
     }
@@ -55,12 +54,12 @@ public class LocalRecordFragmentPresenter extends BasePresenter {
     //同步录音
     public void synchronizedRecord() {
         //先遍历文件夹的录音，添加到数据库（不重复添加），然后再从数据库取出来
-        new SynchronizeRecordAudio(recordAudioDao, context) {
+        new SynchronizeRecordAudio(recordAudioDao, fragment.getAppContext()) {
             @Override
             protected void onPostExecute(Boolean isSucceed) {
                 super.onPostExecute(isSucceed);
                 if (!isSucceed) {
-                    MyToast.showToast(context, "某些名字相同，已合并新旧录音");
+                    MyToast.showToast(fragment.getCurrentContext(), "某些名字相同，已合并新旧录音");
                 }
                 loadRecordList();
             }
@@ -123,7 +122,7 @@ public class LocalRecordFragmentPresenter extends BasePresenter {
                     try {
                         currentPosition = mService.getCurrentPosition();
                         String time = durationFormat.format(new Date(mService.getCurrentPosition())) + "/" + durationFormat.format(new Date(mService.getDuration()));
-                        activity.updateProgress(currentPosition, time);
+                        fragment.updateProgress(currentPosition, time);
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
@@ -142,12 +141,12 @@ public class LocalRecordFragmentPresenter extends BasePresenter {
                     String name = mService.getAudioName();
                     String time = durationFormat.format(new Date(mService.getCurrentPosition())) + "/" + durationFormat.format(new Date(mService.getDuration()));
                     int duration = mService.getDuration();
-                    activity.setViewStatus(name, time, duration);
+                    fragment.setViewStatus(name, time, duration);
                     isDestroy = false;
                     mHandler.sendEmptyMessage(PROGRESS);
                 } else if (notify.equals(MediaPlayerService.COMPLETE)) {//结束
                     isDestroy = true;
-                    activity.setPlayOrPauseImage(true);
+                    fragment.setPlayOrPauseImage(true);
                     mService.openAudio(position);//初始化
 //                    mService.pause();//这里不能直接暂停，因为是异步播放的
 
@@ -163,15 +162,15 @@ public class LocalRecordFragmentPresenter extends BasePresenter {
     public void registerReceiver() {
         IntentFilter filter = new IntentFilter(MediaPlayerService.RECEIVER_ACTION);
         mMediaReceiver = new MediaReceiver();
-        context.registerReceiver(mMediaReceiver, filter);
+        fragment.getCurrentContext().registerReceiver(mMediaReceiver, filter);
         //Log.e("TAG", "registerReceiver()");
     }
 
     //绑定服务,设定位置
     public void bindService(int position) {
         this.position = position;
-        Intent intent = new Intent(context, MediaPlayerService.class);
-        context.bindService(intent, connection, Context.BIND_AUTO_CREATE);
+        Intent intent = new Intent(fragment.getCurrentContext(), MediaPlayerService.class);
+        fragment.getCurrentContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
         //Log.e("TAG", "bindService");
     }
 
@@ -207,13 +206,13 @@ public class LocalRecordFragmentPresenter extends BasePresenter {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        context.unbindService(connection);
-        context.unregisterReceiver(mMediaReceiver);
+        fragment.getCurrentContext().unbindService(connection);
+        fragment.getCurrentContext().unregisterReceiver(mMediaReceiver);
         mMediaReceiver = null;
     }
 
 
-    public interface IView {
+    public interface IView extends IBaseView {
         void setList(List<RecordAudio> list);
 
         void setViewStatus(String name, String time, int duration);

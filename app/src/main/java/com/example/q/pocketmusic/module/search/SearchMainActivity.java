@@ -34,20 +34,19 @@ public class SearchMainActivity extends BaseActivity implements ISearchInfo, Vie
     }
 
     @Override
-    public void setListener() {
+    public void initView() {
         searchEdt.setOnKeyListener(this);
         searchIv.setOnClickListener(this);
         viewPager.addOnPageChangeListener(this);
-    }
 
-    @Override
-    public void init() {
         presenter = new SearchMainPresenter(this, this);
         adapter = new SearchMainAdapter(this, getSupportFragmentManager(), presenter.getTabsTxt(), presenter.getFragments());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.colorTitle), ContextCompat.getColor(this, R.color.colorTitle));
         tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.colorTitle));
+
+
     }
 
     //Enter键

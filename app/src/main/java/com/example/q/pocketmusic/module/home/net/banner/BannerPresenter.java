@@ -9,11 +9,9 @@ import com.example.q.pocketmusic.module.common.IBaseList;
  */
 
 public class BannerPresenter {
-    private Context context;
     private IView activity;
 
-    public BannerPresenter(Context context, IView activity) {
-        this.context = context;
+    public BannerPresenter(IView activity) {
         this.activity = activity;
     }
 

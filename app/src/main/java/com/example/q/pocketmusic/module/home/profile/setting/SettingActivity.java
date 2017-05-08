@@ -50,18 +50,17 @@ public class SettingActivity extends AuthActivity implements SettingPresenter.IV
         return R.layout.activity_setting;
     }
 
-    @Override
-    public void setListener() {
 
-    }
 
     @Override
-    public void initView() {
-        presenter = new SettingPresenter(this, this);
+    public void initUserView() {
+        presenter = new SettingPresenter( this);
         initToolbar(toolbar, "设置");
         presenter.checkUpdate(false);//检测更新
         setVersion();
     }
+
+
 
     private void setVersion() {
         try {

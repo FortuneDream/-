@@ -53,12 +53,7 @@ public class ForgetActivity extends BaseActivity {
     }
 
     @Override
-    public void setListener() {
-
-    }
-
-    @Override
-    public void init() {
+    public void initView() {
         initToolbar(toolbar, "忘记密码");
     }
 

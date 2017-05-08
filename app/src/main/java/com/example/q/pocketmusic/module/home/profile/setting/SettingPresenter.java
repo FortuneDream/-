@@ -8,6 +8,7 @@ import android.net.Uri;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.setting.help.HelpActivity;
 import com.example.q.pocketmusic.util.MyToast;
 
@@ -22,11 +23,9 @@ import cn.bmob.v3.update.UpdateStatus;
 
 public class SettingPresenter extends BasePresenter {
     private IView activity;
-    private Context context;
 
-    public SettingPresenter(IView activity, Context context) {
+    public SettingPresenter(IView activity) {
         this.activity = activity;
-        this.context = context;
     }
 
     public void checkUpdate(final Boolean showToast) {
@@ -40,7 +39,7 @@ public class SettingPresenter extends BasePresenter {
                 }
             }
         });
-        BmobUpdateAgent.forceUpdate(context);
+        BmobUpdateAgent.forceUpdate(activity.getCurrentContext());
 
     }
 
@@ -48,20 +47,20 @@ public class SettingPresenter extends BasePresenter {
     public void logOut() {
         MyUser.logOut();
         android.os.Process.killProcess(android.os.Process.myPid());
-        ContextWrapper wrapper = ((ContextWrapper) context);
+        ContextWrapper wrapper = ((ContextWrapper) activity.getCurrentContext());
         Intent i = wrapper.getBaseContext().getPackageManager()
                 .getLaunchIntentForPackage(wrapper.getBaseContext().getPackageName());
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(i);//重启app
+        activity.getCurrentContext().startActivity(i);//重启app
     }
 
     public void grade() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=" + context.getPackageName()));
-        if (intent.resolveActivity(context.getPackageManager()) != null) { //可以接收
-            context.startActivity(intent);
+        intent.setData(Uri.parse("market://details?id=" + activity.getCurrentContext().getPackageName()));
+        if (intent.resolveActivity(activity.getCurrentContext().getPackageManager()) != null) { //可以接收
+            activity.getCurrentContext().startActivity(intent);
         } else {
-            MyToast.showToast(context, "没有找到应用市场~");
+            MyToast.showToast(activity.getCurrentContext(), "没有找到应用市场~");
         }
     }
 
@@ -71,16 +70,16 @@ public class SettingPresenter extends BasePresenter {
         intent.addCategory("android.intent.category.DEFAULT");
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, "推荐一款app:" + "<口袋乐谱>" + "---官网地址：" + "http://pocketmusic.bmob.site/");
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(intent);
+        if (intent.resolveActivity(activity.getCurrentContext().getPackageManager()) != null) {
+            activity.getCurrentContext().startActivity(intent);
         } else {
-            MyToast.showToast(context, "你的手机不支持分享~");
+            MyToast.showToast(activity.getCurrentContext(), "你的手机不支持分享~");
         }
     }
 
 
 
-    public interface IView {
+    public interface IView extends IBaseView{
 
         void setCheckUpdateResult(boolean hasUpdate, boolean showToast);
     }

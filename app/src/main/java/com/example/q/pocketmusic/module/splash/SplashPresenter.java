@@ -17,18 +17,16 @@ import java.util.List;
  */
 
 public class SplashPresenter {
-    private Context context;
     private IView activity;
     private BmobUtil bmobUtil;
 
-    public SplashPresenter(Context context, IView activity) {
-        this.context = context;
+    public SplashPresenter(IView activity) {
         this.activity = activity;
         bmobUtil=new BmobUtil();
     }
 
     public void getBmobInfo() {
-        bmobUtil.getInitListWithEqual(BmobInfo.class, null, "type", Constant.BMOB_INFO_LABA, new ToastQueryListener<BmobInfo>(context,activity) {
+        bmobUtil.getInitListWithEqual(BmobInfo.class, null, "type", Constant.BMOB_INFO_LABA, new ToastQueryListener<BmobInfo>(activity) {
             @Override
             public void onSuccess(List<BmobInfo> list) {
                 activity.setLaBaText(list.get(0));
@@ -37,7 +35,7 @@ public class SplashPresenter {
     }
 
     public void enterHomeActivity() {
-        context.startActivity(new Intent(context, HomeActivity.class));
+        activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), HomeActivity.class));
     }
 
     public interface IView extends IBaseList{

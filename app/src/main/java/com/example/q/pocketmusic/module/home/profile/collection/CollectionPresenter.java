@@ -24,14 +24,14 @@ import java.util.List;
 
 public class CollectionPresenter {
     private IView activity;
-    private Context context;
+
     private MyUser user;
     private CollectionModel collectionModel;
     private int mPage;
 
-    public CollectionPresenter(IView activity, Context context, MyUser user) {
+    public CollectionPresenter(IView activity, MyUser user) {
         this.activity = activity;
-        this.context = context;
+
         this.user = user;
         collectionModel = new CollectionModel();
 
@@ -39,7 +39,7 @@ public class CollectionPresenter {
 
     //获得收藏曲谱列表
     public void getCollectionList() {
-        collectionModel.getInitCollectionList(user, new ToastQueryListener<CollectionSong>(context, activity) {
+        collectionModel.getInitCollectionList(user, new ToastQueryListener<CollectionSong>(activity) {
             @Override
             public void onSuccess(List<CollectionSong> list) {
                 activity.setCollectionList(list);
@@ -50,7 +50,7 @@ public class CollectionPresenter {
     //加载更多
     public void getMoreList() {
         mPage++;
-        collectionModel.getMoreList(user, mPage, new ToastQueryListener<CollectionSong>(context, activity) {
+        collectionModel.getMoreList(user, mPage, new ToastQueryListener<CollectionSong>(activity) {
             @Override
             public void onSuccess(List<CollectionSong> list) {
                 activity.setCollectionList(list);
@@ -61,7 +61,7 @@ public class CollectionPresenter {
     //先查询，后进入SongActivity
     public void queryAndEnterSongActivity(final CollectionSong collectionSong) {
         activity.showLoading(true);
-        collectionModel.querySong(collectionSong, new ToastQueryListener<CollectionPic>(context, activity) {
+        collectionModel.querySong(collectionSong, new ToastQueryListener<CollectionPic>(activity) {
             @Override
             public void onSuccess(List<CollectionPic> list) {
                 activity.showLoading(false);
@@ -74,20 +74,20 @@ public class CollectionPresenter {
                 }
                 song.setIvUrl(urls);
                 song.setNeedGrade(collectionSong.getNeedGrade());//设置消耗
-                Intent intent = new Intent(context, SongActivity.class);
+                Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
                 SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.SHOW_ONLY_DOWNLOAD, Constant.NET);
                 intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, songObject);
-                context.startActivity(intent);
+                activity.getCurrentContext().startActivity(intent);
             }
         });
     }
 
     //删除收藏
     public void deleteCollection(final CollectionSong collectionSong) {
-        collectionModel.deleteCollection(user, collectionSong, context, activity, new ToastUpdateListener(context, activity) {
+        collectionModel.deleteCollection(user, collectionSong, activity.getCurrentContext(), activity, new ToastUpdateListener(activity) {
             @Override
             public void onSuccess() {
-                MyToast.showToast(context, "已删除");
+                MyToast.showToast(activity.getCurrentContext(), "已删除");
             }
         });
     }

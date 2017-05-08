@@ -16,11 +16,10 @@ import cn.bmob.v3.listener.UploadBatchListener;
  */
 
 public class ToastUploadBatchListener implements UploadBatchListener {
-    private Context context;
+
     private IBaseList baseList;
 
-    public ToastUploadBatchListener(Context context, IBaseList baseList) {
-        this.context = context;
+    public ToastUploadBatchListener(IBaseList baseList) {
         this.baseList = baseList;
     }
 
@@ -39,7 +38,7 @@ public class ToastUploadBatchListener implements UploadBatchListener {
     public void onError(int i, String s) {
         baseList.showLoading(false);
         baseList.showRefreshing(false);
-        MyToast.showToast(context, CommonString.STR_ERROR_INFO+"第" + i + "张图片上传错误:" + s);
+        MyToast.showToast(baseList.getCurrentContext(), CommonString.STR_ERROR_INFO + "第" + i + "张图片上传错误:" + s);
         //        CrashHandler handler=CrashHandler.getInstance();
 //        handler.uncaughtException(Thread.currentThread(),e);
     }

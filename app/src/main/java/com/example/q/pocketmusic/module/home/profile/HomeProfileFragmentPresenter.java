@@ -33,12 +33,10 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
  */
 
 public class HomeProfileFragmentPresenter extends BasePresenter {
-    private Context context;
     private IView fragment;
     private MyUser user;
 
-    public HomeProfileFragmentPresenter(Context context, IView fragment) {
-        this.context = context;
+    public HomeProfileFragmentPresenter(IView fragment) {
         this.fragment = fragment;
 
     }
@@ -62,12 +60,12 @@ public class HomeProfileFragmentPresenter extends BasePresenter {
                     public void done(BmobException e) {
                         if (e != null) {
                             fragment.showLoading(false);
-                            MyToast.showToast(context, CommonString.STR_ERROR_INFO + e.getMessage());
+                            MyToast.showToast(fragment.getCurrentContext(), CommonString.STR_ERROR_INFO + e.getMessage());
                             return;
                         }
                         //修改用户表的headIv属性
                         user.setHeadImg(bmobFile.getFileUrl());
-                        user.update(new ToastUpdateListener(context, fragment) {
+                        user.update(new ToastUpdateListener(fragment) {
                             @Override
                             public void onSuccess() {
                                 fragment.showLoading(false);
@@ -82,7 +80,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter {
             @Override
             public void onHanlderFailure(int requestCode, String errorMsg) {
                 fragment.showLoading(false);
-                MyToast.showToast(context, CommonString.STR_ERROR_INFO + errorMsg);
+                MyToast.showToast(fragment.getCurrentContext(), CommonString.STR_ERROR_INFO + errorMsg);
             }
         });
 
@@ -96,18 +94,18 @@ public class HomeProfileFragmentPresenter extends BasePresenter {
 
     //跳转到用户邮箱界面
     public void enterSuggestionActivity() {
-        context.startActivity(new Intent(context, SuggestionActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SuggestionActivity.class));
     }
 
 
     //跳转到设置界面
     public void enterSettingActivity() {
-        context.startActivity(new Intent(context, SettingActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SettingActivity.class));
     }
 
     //调转到收藏界面
     public void enterCollectionActivity() {
-        context.startActivity(new Intent(context, CollectionActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), CollectionActivity.class));
     }
 
 
@@ -115,10 +113,10 @@ public class HomeProfileFragmentPresenter extends BasePresenter {
     public void addReward(final int reward) {
         user.increment("contribution", reward);
         user.setLastSignInDate(dateFormat.format(new Date()));//设置最新签到时间
-        user.update(new ToastUpdateListener(context, fragment) {
+        user.update(new ToastUpdateListener(fragment) {
             @Override
             public void onSuccess() {
-                MyToast.showToast(context, CommonString.ADD_COIN_BASE + reward);
+                MyToast.showToast(fragment.getCurrentContext(), CommonString.ADD_COIN_BASE + reward);
             }
         });
     }
@@ -128,10 +126,10 @@ public class HomeProfileFragmentPresenter extends BasePresenter {
         if (user.getLastSignInDate() == null) {//之前没有这个列
             user.setLastSignInDate(dateFormat.format(new Date()));//设置当前时间为最后时间
             user.increment("contribution", 5);//第一次都加5
-            user.update(new ToastUpdateListener(context, fragment) {
+            user.update(new ToastUpdateListener(fragment) {
                 @Override
                 public void onSuccess() {
-                    MyToast.showToast(context, "今天已签到：" + CommonString.ADD_COIN_BASE + 1);
+                    MyToast.showToast(fragment.getCurrentContext(), "今天已签到：" + CommonString.ADD_COIN_BASE + 1);
                 }
             });
         } else {
@@ -143,7 +141,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter {
                 if (remainTime > 24 * 60 * 60 * 1000) {//距离上次签到已经超过24小时
                     fragment.alertSignInDialog();
                 } else {
-                    MyToast.showToast(context, "24小时之内只能签到一次哦！");
+                    MyToast.showToast(fragment.getCurrentContext(), "24小时之内只能签到一次哦！");
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -154,16 +152,16 @@ public class HomeProfileFragmentPresenter extends BasePresenter {
 
     //进入硬币榜
     public void enterContributionActivity() {
-        context.startActivity(new Intent(context, ContributionActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ContributionActivity.class));
     }
 
     //进入帮助
     public void enterHelpActivity() {
-        context.startActivity(new Intent(context, HelpActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), HelpActivity.class));
     }
 
     public void enterUserPostActivity() {
-        context.startActivity(new Intent(context, UserPostActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), UserPostActivity.class));
     }
 
 

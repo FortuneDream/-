@@ -39,26 +39,19 @@ public class HomeNetFragment extends BaseFragment implements HomeNetFragmentPres
         return R.layout.fragment_home_net;
     }
 
+
     @Override
-    public void setListener() {
+    public void initView() {
+        //监听
         adapter = new NetFragmentAdapter(getContext());
         recycler.setRefreshListener(this);
         adapter.setListener(this);
         recycler.setOnScrollListener(new SearchViewListener(searchRl));
         adapter.setMore(R.layout.view_more, this);
-    }
-
-    @Override
-    public void init() {
-        presenter = new HomeNetFragmentPresenter(this, getActivity());
+        //初始化
+        presenter = new HomeNetFragmentPresenter(this);
         presenter.setSharePage(0);
         initRecyclerView(recycler, adapter);
-        initView();
-    }
-
-
-    //没有设置下拉刷新
-    private void initView() {
         recycler.setEmptyView(R.layout.view_not_found);
         initList();
         presenter.getCacheList();

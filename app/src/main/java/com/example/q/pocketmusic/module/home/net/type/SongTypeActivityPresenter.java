@@ -7,6 +7,7 @@ import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.net.LoadTypeSongList;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
 
 import java.util.List;
@@ -16,12 +17,10 @@ import java.util.List;
  * Created by YQ on 2016/8/29.
  */
 public class SongTypeActivityPresenter extends BasePresenter {
-    private Context context;
     private IView activity;
     private int mPage;
 
-    public SongTypeActivityPresenter(IView activity, Context context) {
-        this.context = context;
+    public SongTypeActivityPresenter(IView activity) {
         this.activity = activity;
     }
 
@@ -47,13 +46,13 @@ public class SongTypeActivityPresenter extends BasePresenter {
     }
 
     public void enterSongActivity(Song song) {
-        Intent intent = new Intent(context, SongActivity.class);
+        Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, Constant.FROM_TYPE, Constant.SHOW_COLLECTION_MENU, Constant.NET);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, object);
-        context.startActivity(intent);
+        activity.getCurrentContext().startActivity(intent);
     }
 
-    public interface IView {
+    public interface IView extends IBaseView{
 
         void setList(List<Song> songs);
     }

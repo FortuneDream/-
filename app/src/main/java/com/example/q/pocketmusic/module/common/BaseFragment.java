@@ -48,9 +48,18 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(setContentResource(), container, false);
         unbinder = ButterKnife.bind(this, view);
-        setListener();
-        init();
+        initView();
         return view;
+    }
+
+    @Override
+    public Context getAppContext() {
+        return getContext().getApplicationContext();
+    }
+
+    @Override
+    public Context getCurrentContext() {
+        return getContext();
     }
 
     public void showLoading(boolean isShow) {

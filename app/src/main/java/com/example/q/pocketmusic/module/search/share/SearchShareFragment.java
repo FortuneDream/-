@@ -40,15 +40,12 @@ public class SearchShareFragment extends BaseFragment implements SearchShareFrag
     }
 
     @Override
-    public void setListener() {
+    public void initView() {
         adapter = new SearchShareAdapter(getContext());
         recycler.setRefreshListener(this);
         adapter.setOnItemClickListener(this);
-    }
 
-    @Override
-    public void init() {
-        presenter = new SearchShareFragmentPresenter(getContext(), this);
+        presenter = new SearchShareFragmentPresenter( this);
         initRecyclerView(recycler, adapter, 1, true);
     }
 

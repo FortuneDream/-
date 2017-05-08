@@ -10,6 +10,8 @@ import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.db.ImgDao;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.song.state.BaseState;
 import com.example.q.pocketmusic.util.FileUtils;
 import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
@@ -28,18 +30,16 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
  */
 
 public class LeadSongPresenter extends BasePresenter {
-    private Context context;
     private IView activity;
     private LocalSongDao localSongDao;
     private ImgDao imgDao;
     public final static String FILE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Constant.FILE_NAME + "/";
     private List<String> imgUrls;
 
-    public LeadSongPresenter(Context context, IView activity) {
-        this.context = context;
+    public LeadSongPresenter(IView activity) {
         this.activity = activity;
-        localSongDao = new LocalSongDao(context);
-        imgDao = new ImgDao(context);
+        localSongDao = new LocalSongDao(activity.getAppContext());
+        imgDao = new ImgDao(activity.getAppContext());
         imgUrls = new ArrayList<>();
     }
 
@@ -94,10 +94,10 @@ public class LeadSongPresenter extends BasePresenter {
 
     public void leadSong(String name) {
         if (TextUtils.isEmpty(name)) {
-            MyToast.showToast(context, "名字不能为空");
+            MyToast.showToast(activity.getCurrentContext(), "名字不能为空");
             return;
         } else if (imgUrls.size() <= 0) {
-            MyToast.showToast(context, "请添加图片");
+            MyToast.showToast(activity.getCurrentContext(), "请添加图片");
             return;
         }
         moveFileAndAddDatabase(name, imgUrls);
@@ -119,7 +119,7 @@ public class LeadSongPresenter extends BasePresenter {
         });
     }
 
-    interface IView {
+    interface IView extends IBaseView {
 
         void showSmallPic(List<String> imgUrls);
 

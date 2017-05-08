@@ -48,13 +48,10 @@ public class SearchRecommendFragment extends BaseFragment implements SearchRecom
     }
 
     @Override
-    public void setListener() {
+    public void initView() {
         recommendFlowLayout.setOnTagClickListener(this);
-    }
 
-    @Override
-    public void init() {
-        presenter = new SearchRecommendFragmentPresenter(getContext(), this);
+        presenter = new SearchRecommendFragmentPresenter(this);
         presenter.getRecommendList();//推荐列表
     }
 

@@ -19,13 +19,11 @@ import java.util.List;
  */
 
 public class HomeAskListFragmentPresenter extends BasePresenter {
-    private Context context;
     private IView fragment;
     private BmobUtil bmobUtil;
     private int mPage;
 
-    public HomeAskListFragmentPresenter(Context context, IView fragment) {
-        this.context = context;
+    public HomeAskListFragmentPresenter(IView fragment) {
         this.fragment = fragment;
         bmobUtil = new BmobUtil();
 
@@ -33,7 +31,7 @@ public class HomeAskListFragmentPresenter extends BasePresenter {
 
     //得到帖子列表
     public void getPostList() {
-        bmobUtil.getInitList(AskSongPost.class, "user", new ToastQueryListener<AskSongPost>(context, fragment) {
+        bmobUtil.getInitList(AskSongPost.class, "user", new ToastQueryListener<AskSongPost>(fragment) {
             @Override
             public void onSuccess(List<AskSongPost> list) {
                 fragment.setPostList(list);
@@ -44,7 +42,7 @@ public class HomeAskListFragmentPresenter extends BasePresenter {
     //加载更多
     public void getMore() {
         mPage++;
-        bmobUtil.getMoreList(AskSongPost.class, "user", mPage, new ToastQueryListener<AskSongPost>(context,fragment) {
+        bmobUtil.getMoreList(AskSongPost.class, "user", mPage, new ToastQueryListener<AskSongPost>(fragment) {
             @Override
             public void onSuccess(List<AskSongPost> list) {
                 fragment.setPostList(list);
@@ -63,15 +61,15 @@ public class HomeAskListFragmentPresenter extends BasePresenter {
 
     //跳转到评论CommentActivity(
     public void enterCommentActivity(AskSongPost askSongPost) {
-        Intent intent = new Intent(context, AskSongCommentActivity.class);
+        Intent intent = new Intent(fragment.getCurrentContext(), AskSongCommentActivity.class);
         intent.putExtra(AskSongCommentActivity.PARAM_POST, askSongPost);
-        context.startActivity(intent);
+        fragment.getCurrentContext().startActivity(intent);
 
     }
 
     //跳转到AskSongActivity
     public void enterAskSongActivity() {
-        Intent intent = new Intent(context, AskSongActivity.class);
+        Intent intent = new Intent(fragment.getCurrentContext(), AskSongActivity.class);
         //注意这里使用的是Fragment的方法，而不能用Activity的方法
         ((BaseFragment) fragment).startActivityForResult(intent, AskSongActivity.REQUEST_ASK);
     }

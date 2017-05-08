@@ -65,7 +65,6 @@ import pub.devrel.easypermissions.EasyPermissions;
  * Created by YQ on 2016/8/30.
  */
 public class SongActivityPresenter extends BasePresenter implements IBasePresenter {
-    private Context context;
     private IView activity;
     private Intent intent;
     private SongController controller;//状态控制器,用于加载图片
@@ -124,8 +123,8 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
         return isEnableAgree;
     }
 
-    public SongActivityPresenter(Context context, IView activity, Intent intent) {
-        this.context = context;
+    public SongActivityPresenter(IView activity, Intent intent) {
+
         this.activity = activity;
         this.intent = intent;
         SongObject songObject = intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL);
@@ -134,10 +133,10 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
         this.showMenuFlag = songObject.getShowMenu();
         this.loadingWay = songObject.getLoadingWay();
 
-        controller = SongController.getInstance(intent, context, activity);
+        controller = SongController.getInstance(intent, activity.getCurrentContext(), activity);
 
         if (controller == null) {
-            MyToast.showToast(context, "无法进入页面");
+            MyToast.showToast(activity.getCurrentContext(), "无法进入页面");
             activity.finish();
         }
 
@@ -148,7 +147,7 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
 
         //本地可以录音
         if (loadingWay == Constant.LOCAL) {
-            recordAudioDao = new RecordAudioDao(context);
+            recordAudioDao = new RecordAudioDao(activity.getCurrentContext());
             File file = new File(RECORD_DIR);
             if (!file.exists()) {
                 file.mkdirs();
@@ -166,13 +165,13 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
     public void CreateMenuByFrom(Menu menu) {
         switch (showMenuFlag) {
             case Constant.SHOW_ALL_MENU:
-                ((BaseActivity) context).getMenuInflater().inflate(R.menu.menu_song_all, menu);//下载，收藏，点赞
+                ((BaseActivity) activity.getCurrentContext()).getMenuInflater().inflate(R.menu.menu_song_all, menu);//下载，收藏，点赞
                 break;
             case Constant.SHOW_COLLECTION_MENU:
-                ((BaseActivity) context).getMenuInflater().inflate(R.menu.menu_song_collection, menu);//下载和收藏
+                ((BaseActivity) activity.getCurrentContext()).getMenuInflater().inflate(R.menu.menu_song_collection, menu);//下载和收藏
                 break;
             case Constant.SHOW_ONLY_DOWNLOAD:
-                ((BaseActivity) context).getMenuInflater().inflate(R.menu.menu_song_download, menu);//下载
+                ((BaseActivity) activity.getCurrentContext()).getMenuInflater().inflate(R.menu.menu_song_download, menu);//下载
                 break;
             case Constant.SHOW_NO_MENU://不显示Menu
                 break;
@@ -182,7 +181,7 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
     //下载
     public void download(final String name) {
         activity.showLoading(true);
-        DownloadUtil downloadUtil = new DownloadUtil(context);
+        DownloadUtil downloadUtil = new DownloadUtil(activity.getCurrentContext());
         downloadUtil.setOnDownloadListener(new DownloadUtil.OnDownloadListener() {
                                                @Override
                                                public DownloadInfo onStart() {
@@ -213,30 +212,30 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
             return new DownloadInfo("没有图片", false);
         }
         //如果本地已经存在
-        if (new LocalSongDao(context).isExist(song.getName())) {
+        if (new LocalSongDao(activity.getCurrentContext()).isExist(song.getName())) {
             activity.showLoading(false);
             return new DownloadInfo("本地已存在", false);
         }
 
         //需要硬币
         if (song.isNeedGrade()) {
-            MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) context);
+            MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) activity.getCurrentContext());
             //找不到用户
             if (user == null) {
                 activity.showLoading(false);
                 return new DownloadInfo("找不到用户", false);
             }
             //硬币不足
-            if (!CheckUserUtil.checkUserContribution(((BaseActivity) context), Constant.REDUCE_COIN_UPLOAD)) {
+            if (!CheckUserUtil.checkUserContribution(((BaseActivity) activity.getCurrentContext()), Constant.REDUCE_COIN_UPLOAD)) {
                 activity.showLoading(false);
                 return new DownloadInfo(CommonString.STR_NOT_ENOUGH_COIN, false);
             }
             //扣除硬币
             user.increment("contribution", -Constant.REDUCE_COIN_UPLOAD);
-            user.update(new ToastUpdateListener(context, activity) {
+            user.update(new ToastUpdateListener(activity) {
                 @Override
                 public void onSuccess() {
-                    MyToast.showToast(context, CommonString.REDUCE_COIN_BASE + (Constant.REDUCE_COIN_UPLOAD));
+                    MyToast.showToast(activity.getCurrentContext(), CommonString.REDUCE_COIN_BASE + (Constant.REDUCE_COIN_UPLOAD));
                 }
             });
         }
@@ -253,21 +252,21 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
             AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
             askSongComment.setAgrees(relation);
             askSongComment.increment("agreeNum");//原子操作，点赞数加一
-            askSongComment.update(new ToastUpdateListener(context, activity) {
+            askSongComment.update(new ToastUpdateListener(activity) {
                 @Override
                 public void onSuccess() {
-                    MyToast.showToast(context, "已点赞");
+                    MyToast.showToast(activity.getCurrentContext(), "已点赞");
                     user.increment("contribution", Constant.ADD_CONTRIBUTION_AGREE);
-                    user.update(new ToastUpdateListener(context, activity) {
+                    user.update(new ToastUpdateListener(activity) {
                         @Override
                         public void onSuccess() {
-                            MyToast.showToast(context, CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
+                            MyToast.showToast(activity.getCurrentContext(), CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
                         }
                     });
                 }
             });
         } else {
-            MyToast.showToast(context, "已经赞过了哦~");
+            MyToast.showToast(activity.getCurrentContext(), "已经赞过了哦~");
         }
 
 
@@ -280,7 +279,7 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
         query.addWhereRelatedTo("agrees", new BmobPointer(askSongComment));
-        query.findObjects(new ToastQueryListener<MyUser>(context, activity) {
+        query.findObjects(new ToastQueryListener<MyUser>( activity) {
             @Override
             public void onSuccess(List<MyUser> list) {
                 for (MyUser other : list) {
@@ -299,36 +298,36 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
     //添加收藏
     public void addCollection() {
         activity.showLoading(true);
-        final MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) context);
+        final MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) activity.getCurrentContext());
         if (user == null) {
             activity.showLoading(false);
-            MyToast.showToast(context, "请先登录~");
+            MyToast.showToast(activity.getCurrentContext(), "请先登录~");
             return;
         }
         if (song.getIvUrl() == null || song.getIvUrl().size() <= 0) {
             activity.showLoading(false);
-            MyToast.showToast(context, "图片为空");
+            MyToast.showToast(activity.getCurrentContext(), "图片为空");
             return;
         }
         //检测是否已经收藏
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         query.order("-updatedAt");
         query.addWhereRelatedTo("collections", new BmobPointer(user));//在user表的Collections找user
-        query.findObjects(new ToastQueryListener<CollectionSong>(context, activity) {
+        query.findObjects(new ToastQueryListener<CollectionSong>(activity) {
             @Override
             public void onSuccess(List<CollectionSong> list) {
                 //是否已收藏
                 for (CollectionSong collectionSong : list) {
                     if (collectionSong.getName().equals(song.getName())) {
                         activity.showLoading(false);
-                        MyToast.showToast(context, "已收藏");
+                        MyToast.showToast(activity.getCurrentContext(),"已收藏");
                         return;
                     }
                 }
                 //贡献度是否足够
-                if (!CheckUserUtil.checkUserContribution(((BaseActivity) context), Constant.REDUCE_CONTRIBUTION_COLLECTION)) {
+                if (!CheckUserUtil.checkUserContribution(((BaseActivity) activity.getCurrentContext()), Constant.REDUCE_CONTRIBUTION_COLLECTION)) {
                     activity.showLoading(false);
-                    MyToast.showToast(context, "贡献值不够~");
+                    MyToast.showToast(activity.getCurrentContext(), "贡献值不够~");
                     return;
                 }
 
@@ -339,7 +338,7 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
                 collectionSong.setNeedGrade(song.isNeedGrade());//是否需要积分
                 collectionSong.setIsFrom(isFrom);
                 collectionSong.setContent(song.getContent());
-                collectionSong.save(new ToastSaveListener<String>(context, activity) {
+                collectionSong.save(new ToastSaveListener<String>( activity) {
 
                     @Override
                     public void onSuccess(String s) {
@@ -352,22 +351,22 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
                             collectionPics.add(collectionPic);
                         }
                         //批量修改
-                        new BmobBatch().insertBatch(collectionPics).doBatch(new ToastQueryListListener<BatchResult>(context, activity) {
+                        new BmobBatch().insertBatch(collectionPics).doBatch(new ToastQueryListListener<BatchResult>( activity) {
                             @Override
                             public void onSuccess(List<BatchResult> list) {
                                 BmobRelation relation = new BmobRelation();
                                 relation.add(collectionSong);
                                 user.setCollections(relation);//添加用户收藏
-                                user.update(new ToastUpdateListener(context, activity) {
+                                user.update(new ToastUpdateListener(activity) {
                                     @Override
                                     public void onSuccess() {
-                                        MyToast.showToast(context, "已收藏");
+                                        MyToast.showToast(activity.getCurrentContext(), "已收藏");
                                         user.increment("contribution", -Constant.REDUCE_CONTRIBUTION_COLLECTION);//贡献值-1
-                                        user.update(new ToastUpdateListener(context, activity) {
+                                        user.update(new ToastUpdateListener(activity) {
                                             @Override
                                             public void onSuccess() {
                                                 activity.showLoading(false);
-                                                MyToast.showToast(context, CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_COLLECTION);
+                                                MyToast.showToast(activity.getCurrentContext(), CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_COLLECTION);
                                             }
                                         });
                                     }
@@ -393,7 +392,7 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
                 break;
         }
         if (list == null || list.size() <= 0) {
-            MyToast.showToast(context, "没有图片");
+            MyToast.showToast(activity.getCurrentContext(), "没有图片");
             return;
         }
 
@@ -406,10 +405,10 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
         intent.addCategory("android.intent.category.DEFAULT");
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, "推荐一首歌：" + "<<" + song.getName() + ">>:" + sb.toString());
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(intent);
+        if (intent.resolveActivity(activity.getCurrentContext().getPackageManager()) != null) {
+            activity.getCurrentContext().startActivity(intent);
         } else {
-            MyToast.showToast(context, "你的手机不支持分享~");
+            MyToast.showToast(activity.getCurrentContext(), "你的手机不支持分享~");
         }
     }
 
@@ -417,11 +416,11 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
     @NonNull
     private ArrayList<String> getLocalImgs() {
         LocalSong localsong = (LocalSong) intent.getSerializableExtra(SongActivity.LOCAL_SONG);
-        LocalSongDao localSongDao = new LocalSongDao(context);
+        LocalSongDao localSongDao = new LocalSongDao(activity.getAppContext());
         ArrayList<String> imgUrls = new ArrayList<>();
         LocalSong localSong = localSongDao.findBySongId(localsong.getId());
         if (localSong == null) {
-            MyToast.showToast(context, "曲谱消失在了异次元。");
+            MyToast.showToast(activity.getCurrentContext(), "曲谱消失在了异次元。");
             activity.finish();
             return new ArrayList<>();
         }
@@ -446,8 +445,8 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
     public void record() {
         //请求权限
         String[] perms = {Manifest.permission.RECORD_AUDIO};
-        if (!EasyPermissions.hasPermissions(context, perms)) {
-            EasyPermissions.requestPermissions((BaseActivity) context, "录音权限", REQUEST_RECORD_AUDIO, perms);
+        if (!EasyPermissions.hasPermissions(activity.getCurrentContext(), perms)) {
+            EasyPermissions.requestPermissions((BaseActivity) activity.getCurrentContext(), "录音权限", REQUEST_RECORD_AUDIO, perms);
             return;
         }
 
@@ -498,9 +497,9 @@ public class SongActivityPresenter extends BasePresenter implements IBasePresent
     //进入系统设置中心
     public void enterSystemSetting() {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", context.getPackageName(), null);
+        Uri uri = Uri.fromParts("package", activity.getCurrentContext().getPackageName(), null);
         intent.setData(uri);
-        context.startActivity(intent);
+        activity.getCurrentContext().startActivity(intent);
     }
 
     //s:歌曲名=editText的输入

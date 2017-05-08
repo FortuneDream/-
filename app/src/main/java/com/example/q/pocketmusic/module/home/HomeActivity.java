@@ -46,17 +46,12 @@ public class HomeActivity extends BaseActivity implements HomePresenter.IView {
     }
 
     @Override
-    public void setListener() {
-
-    }
-
-    @Override
-    public void init() {
-        presenter = new HomePresenter(this, this, getSupportFragmentManager());
+    public void initView() {
+        presenter = new HomePresenter(this, getSupportFragmentManager());
         presenter.checkVersion();
         presenter.clickLocal();
-//        MyToast.showToast(context,"加了补丁了");
     }
+
 
     //触发SingleTask
     @Override

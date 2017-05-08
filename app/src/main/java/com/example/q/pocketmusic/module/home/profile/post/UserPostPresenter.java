@@ -17,21 +17,19 @@ import java.util.List;
  */
 
 public class UserPostPresenter extends BasePresenter {
-    private Context context;
     private IView activity;
     private MyUser user;
     private UserPostModel model;
 
 
-    public UserPostPresenter(Context context, IView activity, MyUser user) {
-        this.context = context;
+    public UserPostPresenter(IView activity, MyUser user) {
         this.activity = activity;
         this.user = user;
         model = new UserPostModel();
     }
 
     public void getUserPostList() {
-        model.getInitPostList(user, new ToastQueryListener<AskSongPost>(context, activity) {
+        model.getInitPostList(user, new ToastQueryListener<AskSongPost>(activity) {
             @Override
             public void onSuccess(List<AskSongPost> list) {
                 activity.setInitPostList(list);
@@ -41,9 +39,9 @@ public class UserPostPresenter extends BasePresenter {
     }
 
     public void enterPostInfo(AskSongPost item) {
-        Intent intent = new Intent(context, AskSongCommentActivity.class);
+        Intent intent = new Intent(activity.getCurrentContext(), AskSongCommentActivity.class);
         intent.putExtra(AskSongCommentActivity.PARAM_POST, item);
-        context.startActivity(intent);
+        activity.getCurrentContext().startActivity(intent);
     }
 
     public interface IView extends IBaseList {

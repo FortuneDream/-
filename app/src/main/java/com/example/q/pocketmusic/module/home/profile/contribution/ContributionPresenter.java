@@ -15,12 +15,10 @@ import cn.bmob.v3.BmobQuery;
  */
 
 public class ContributionPresenter {
-    private Context context;
     private IView activity;
 
 
-    public ContributionPresenter(Context context, IView activity) {
-        this.context = context;
+    public ContributionPresenter(IView activity) {
         this.activity = activity;
     }
 
@@ -29,7 +27,7 @@ public class ContributionPresenter {
         BmobQuery<MyUser> query = new BmobQuery<>();
         query.setLimit(10);
         query.order("-contribution");
-        query.findObjects(new ToastQueryListener<MyUser>(context, activity) {
+        query.findObjects(new ToastQueryListener<MyUser>(activity) {
             @Override
             public void onSuccess(List<MyUser> list) {
                 activity.setListResult(list);

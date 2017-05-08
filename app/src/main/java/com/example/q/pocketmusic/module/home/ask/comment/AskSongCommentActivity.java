@@ -53,21 +53,18 @@ public class AskSongCommentActivity extends AuthActivity implements AskSongComme
         return R.layout.activity_ask_song_comment;
     }
 
+
     @Override
-    public void setListener() {
-        //回复
+    public void initUserView() {
+        //各种监听
         adapter = new AskSongCommentAdapter(AskSongCommentActivity.this);
         recycler.setRefreshListener(this);
         sendCommentBtn.setOnClickListener(this);
         addPic.setOnClickListener(this);
         adapter.setOnItemClickListener(this);
-    }
-
-
-    @Override
-    public void initView() {
+        //数据初始化
         final AskSongPost post = (AskSongPost) getIntent().getSerializableExtra(PARAM_POST);
-        presenter = new AskSongCommentPresenter(AskSongCommentActivity.this, AskSongCommentActivity.this, user, post);
+        presenter = new AskSongCommentPresenter(this, user, post);
         initToolbar(toolbar, presenter.getPost().getTitle());
         initRecyclerView(recycler, adapter);
         adapter.addHeader(new PostHeadView(context,
@@ -78,6 +75,7 @@ public class AskSongCommentActivity extends AuthActivity implements AskSongComme
                 presenter.getPost().getCreatedAt()));
         onRefresh();
     }
+
 
 
     //加载评论列表

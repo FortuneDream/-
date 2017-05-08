@@ -1,10 +1,7 @@
 package com.example.q.pocketmusic.module.home.profile;
 
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,18 +9,13 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthFragment;
 import com.example.q.pocketmusic.util.DisplayStrategy;
-import com.example.q.pocketmusic.view.dialog.ListDialog;
 import com.example.q.pocketmusic.view.widget.view.GuaGuaKa;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 
 /**
@@ -49,7 +41,6 @@ public class HomeProfileFragment extends AuthFragment implements HomeProfileFrag
     IcoTextItem settingItem;
     @BindView(R.id.post_item)
     IcoTextItem postItem;
-    Unbinder unbinder;
 
     private HomeProfileFragmentPresenter presenter;
     private AlertDialog signInDialog;
@@ -61,23 +52,18 @@ public class HomeProfileFragment extends AuthFragment implements HomeProfileFrag
     }
 
     @Override
-    public void setListener() {
-
-    }
-
-    @Override
-    public void init() {
-        presenter = new HomeProfileFragmentPresenter(context, this);
-        initView();
+    public void initView() {
+        presenter = new HomeProfileFragmentPresenter( this);
+        initProfileView();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        initView();
+        initProfileView();
     }
 
-    private void initView() {
+    private void initProfileView() {
         if (user != null) {
             //设置
             presenter.setUser(user);

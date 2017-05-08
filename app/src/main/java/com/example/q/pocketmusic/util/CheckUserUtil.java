@@ -61,7 +61,7 @@ public class CheckUserUtil {
         }
         BmobQuery<MyUser> query = new BmobQuery<>();
         query.addWhereEqualTo("username", user.getUsername());
-        query.findObjects(new ToastQueryListener<MyUser>(context, fragment) {
+        query.findObjects(new ToastQueryListener<MyUser>( fragment) {
             @Override
             public void onSuccess(List<MyUser> list) {
                 MyUser nowUser = list.get(0);

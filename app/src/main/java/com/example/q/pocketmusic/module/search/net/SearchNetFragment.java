@@ -44,18 +44,17 @@ public class SearchNetFragment extends BaseFragment implements SearchNetFragment
     }
 
     @Override
-    public void setListener() {
+    public void initView() {
         adapter = new SearchNetAdapter(getContext());
         adapter.setMore(R.layout.view_more, this);
         adapter.setOnItemClickListener(this);
         recycler.setRefreshListener(this);
+
+        presenter = new SearchNetFragmentPresenter( this);
+        initRecyclerView(recycler, adapter, 1, true);
+
     }
 
-    @Override
-    public void init() {
-        presenter = new SearchNetFragmentPresenter(getContext(), this);
-        initRecyclerView(recycler, adapter, 1, true);
-    }
 
     @Override
     public void onResume() {

@@ -45,21 +45,19 @@ public class SongTypeActivity extends BaseActivity implements SongTypeActivityPr
         return R.layout.activity_type_song;
     }
 
-
     @Override
-    public void setListener() {
+    public void initView() {
+        //监听
         adapter = new SongTypeActivityAdapter(this);
         adapter.setOnItemClickListener(this);
         adapter.setMore(R.layout.view_more, this);
         recycler.setRefreshListener(this);
-    }
 
-    @Override
-    public void init() {
+        //初始化
         int position = getIntent().getIntExtra(PARAM_POSITION, 0);
         //获取乐器类型
         typeId = position;
-        presenter = new SongTypeActivityPresenter(this, this);
+        presenter = new SongTypeActivityPresenter(this);
         initRecyclerView(recycler, adapter, 1, false);
         //设置toolbar
         toolbar.setTitle(Constant.types[typeId]);
@@ -76,6 +74,7 @@ public class SongTypeActivity extends BaseActivity implements SongTypeActivityPr
         topIv.setBackgroundResource(topDrawable[typeId]);
         onRefresh();
     }
+
 
 
     @Override

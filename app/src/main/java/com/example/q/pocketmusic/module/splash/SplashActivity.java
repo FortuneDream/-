@@ -58,16 +58,12 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     }
 
     @Override
-    public void setListener() {
-
-    }
-
-    @Override
-    public void init() {
-        presenter = new SplashPresenter(this, this);
+    public void initView() {
+        presenter = new SplashPresenter( this);
         presenter.getBmobInfo();
         requestPermissions();
     }
+
 
 
     //权限相关

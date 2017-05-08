@@ -45,20 +45,20 @@ public class SuggestionActivity extends AuthActivity implements SuggestionPresen
         return R.layout.activity_suggestion;
     }
 
-    @Override
-    public void setListener() {
-        recycler.setRefreshListener(this);
-    }
 
     @Override
-    public void initView() {
-        presenter = new SuggestionPresenter(this, this, user);
+    public void initUserView() {
+        recycler.setRefreshListener(this);
+
+        presenter = new SuggestionPresenter( this, user);
         adapter = new SuggestionAdapter(this);
         initToolbar(toolbar, "反馈意见");
         initRecyclerView(recycler, adapter);
         adapter.addHeader(new SuggestionHeader(context));
         onRefresh();
     }
+
+
 
 
     @OnClick(R.id.send_suggestion_btn)

@@ -15,6 +15,7 @@ import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.model.net.LoadLocalSongList;
 import com.example.q.pocketmusic.model.net.SynchronizeLocalSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.share.ShareActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.LogUtils;
@@ -33,23 +34,21 @@ import java.util.Locale;
  * Created by YQ on 2016/9/2.
  */
 public class LocalSongFragmentPresenter extends BasePresenter {
-    private Context context;
     private IView fragment;
     private LocalSongDao localSongDao;
     private ImgDao imgDao;
 
 
     //Dao有必要关闭吗？iterator呢？
-    public LocalSongFragmentPresenter(Context context, IView fragment) {
-        this.context = context;
+    public LocalSongFragmentPresenter(IView fragment) {
         this.fragment = fragment;
-        localSongDao = new LocalSongDao(context);
-        imgDao = new ImgDao(context);
+        localSongDao = new LocalSongDao(fragment.getAppContext());
+        imgDao = new ImgDao(fragment.getAppContext());
 
     }
 
     public void loadLocalSong() {
-        new LoadLocalSongList(localSongDao, context) {
+        new LoadLocalSongList(localSongDao, fragment.getAppContext()) {
             @Override
             protected void onPostExecute(List<LocalSong> localSongs) {
                 super.onPostExecute(localSongs);
@@ -98,7 +97,7 @@ public class LocalSongFragmentPresenter extends BasePresenter {
     //同步乐谱
     public void synchronizedSong() {
         //先遍历文件夹的图片，添加到数据库（不重复添加），然后再从数据库取出来
-        new SynchronizeLocalSong(imgDao,localSongDao){
+        new SynchronizeLocalSong(imgDao, localSongDao) {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
@@ -109,32 +108,32 @@ public class LocalSongFragmentPresenter extends BasePresenter {
 
 
     public void enterShareActivity(LocalSong localSong) {
-        Intent intent = new Intent(context, ShareActivity.class);
+        Intent intent = new Intent(fragment.getCurrentContext(), ShareActivity.class);
         intent.putExtra(ShareActivity.LOCAL_SONG, localSong);
-        context.startActivity(intent);
+        fragment.getCurrentContext().startActivity(intent);
     }
 
     public void enterPictureActivity(LocalSong localSong) {
-        Intent intent = new Intent(context, SongActivity.class);
+        Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         Song song = new Song();
         song.setName(localSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_LOCAL, Constant.SHOW_NO_MENU, Constant.LOCAL);
         intent.putExtra(SongActivity.LOCAL_SONG, localSong);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, songObject);
-        context.startActivity(intent);
+        fragment.getCurrentContext().startActivity(intent);
     }
 
     public void setTop(LocalSong item) {
-        int top_value=SharedPrefsUtil.getInt(Constant.sort_key,Constant.sort_value);
+        int top_value = SharedPrefsUtil.getInt(Constant.sort_key, Constant.sort_value);
         top_value++;
         item.setSort(top_value);
-        SharedPrefsUtil.putInt(Constant.sort_key,top_value);//修改最高值
+        SharedPrefsUtil.putInt(Constant.sort_key, top_value);//修改最高值
         localSongDao.update(item);
         fragment.onRefresh();
     }
 
 
-    public interface IView {
+    public interface IView extends IBaseView {
         void setList(List<LocalSong> list);
 
 

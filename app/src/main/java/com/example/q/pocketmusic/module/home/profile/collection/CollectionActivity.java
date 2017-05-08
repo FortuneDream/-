@@ -38,22 +38,21 @@ public class CollectionActivity extends AuthActivity implements CollectionPresen
         return R.layout.activity_collection;
     }
 
+
     @Override
-    public void setListener() {
+    public void initUserView() {
         adapter = new CollectionAdapter(this);
         adapter.setOnSelectListener(this);
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
-    }
 
-    @Override
-    public void initView() {
-        presenter = new CollectionPresenter(this, this, user);
+        presenter = new CollectionPresenter( this, user);
         presenter.setPage(0);
         initToolbar(toolbar, "我的收藏");
         initRecyclerView(recycler, adapter, 1, true);
         onRefresh();
     }
+
 
 
     //弹出底部dialog

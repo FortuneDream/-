@@ -35,21 +35,19 @@ public class RecommendListActivity extends BaseActivity implements RecommendList
         return R.layout.activity_recommend_list;
     }
 
-
-    public void setListener() {
+    @Override
+    public void initView() {
         adapter = new RecommendListAdapter(this);
         adapter.setMore(R.layout.view_more, this);
         adapter.setOnItemClickListener(this);
         recycler.setRefreshListener(this);
-    }
 
-    @Override
-    public void init() {
-        presenter = new RecommendListActivityPresenter(this, this);
+        presenter = new RecommendListActivityPresenter(this);
         initToolbar(toolbar, "推荐列表");
         initRecyclerView(recycler, adapter, 1, false);
         onRefresh();
     }
+
 
 
     @Override

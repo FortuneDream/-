@@ -22,15 +22,11 @@ public class BannerActivity extends BaseActivity implements BannerPresenter.IVie
     }
 
     @Override
-    public void setListener() {
-
-    }
-
-    @Override
-    public void init() {
+    public void initView() {
         position = getIntent().getIntExtra(PARAM_PIC_POSITION, 0);
         initToolbar(toolbar, getTitle(position));
     }
+
 
     private String getTitle(int position) {
         String title;

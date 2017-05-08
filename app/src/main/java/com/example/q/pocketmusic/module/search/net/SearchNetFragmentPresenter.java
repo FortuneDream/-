@@ -18,12 +18,10 @@ import java.util.List;
  */
 
 public class SearchNetFragmentPresenter {
-    private Context context;
     private IView fragment;
     private int mPage;
 
-    public SearchNetFragmentPresenter(Context context, IView fragment) {
-        this.context = context;
+    public SearchNetFragmentPresenter(IView fragment) {
         this.fragment = fragment;
     }
 
@@ -55,10 +53,10 @@ public class SearchNetFragmentPresenter {
     }
 
     public void enterSongActivity(Song song, int searchFrom) {
-        Intent intent = new Intent(context, SongActivity.class);
+        Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, searchFrom, Constant.SHOW_COLLECTION_MENU, Constant.NET);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, object);
-        context.startActivity(intent);
+        fragment.getCurrentContext().startActivity(intent);
     }
 
     public interface IView extends IBaseList {

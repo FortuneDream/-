@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
@@ -38,14 +39,13 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 public class AskSongCommentPresenter extends BasePresenter {
     private IView activity;
-    private Context context;
+
     private AskSongCommentModel model;
     private AskSongPost post;
     private com.example.q.pocketmusic.model.bean.MyUser user;
 
-    public AskSongCommentPresenter(IView activity, Context context, com.example.q.pocketmusic.model.bean.MyUser user, AskSongPost post) {
+    public AskSongCommentPresenter(IView activity, MyUser user, AskSongPost post) {
         this.activity = activity;
-        this.context = context;
         this.post = post;
         this.user = user;
         model = new AskSongCommentModel();
@@ -58,7 +58,7 @@ public class AskSongCommentPresenter extends BasePresenter {
 
     //获得初始列表
     public void getInitCommentList() {
-        model.getInitCommentList(post, new ToastQueryListener<AskSongComment>(context, activity) {
+        model.getInitCommentList(post, new ToastQueryListener<AskSongComment>(activity) {
             @Override
             public void onSuccess(List<AskSongComment> list) {
                 activity.setCommentList(list);
@@ -79,12 +79,12 @@ public class AskSongCommentPresenter extends BasePresenter {
         activity.showLoading(true);
         activity.setCommentInput("");//空
         //添加评论表记录
-        askSongComment.save(new ToastSaveListener<String>(context, activity) {
+        askSongComment.save(new ToastSaveListener<String>(activity) {
             @Override
             public void onSuccess(final String s) {
                 //帖子表的评论数+1
                 post.increment("commentNum", 1);
-                post.update(new ToastUpdateListener(context, activity) {
+                post.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
                         if (model.getPicUrls().size() <= 0) {//无图
@@ -103,15 +103,15 @@ public class AskSongCommentPresenter extends BasePresenter {
                                         askSongPics.add(askSongPic);
                                     }
                                     //批量添加AskSongPic表
-                                    new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(context, activity) {
+                                    new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
                                         @Override
                                         public void onSuccess(List<BatchResult> list) {
                                             user.increment("contribution", Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
-                                            user.update(new ToastUpdateListener(context, activity) {
+                                            user.update(new ToastUpdateListener(activity) {
                                                 @Override
                                                 public void onSuccess() {
                                                     activity.showLoading(false);
-                                                    MyToast.showToast(context, CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                                                    MyToast.showToast(activity.getCurrentContext(), CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
                                                     activity.sendCommentResult(s, askSongComment);
                                                 }
                                             });
@@ -129,7 +129,7 @@ public class AskSongCommentPresenter extends BasePresenter {
                             public void onError(int i, String s) {
                                 //文件上传失败
                                 activity.showLoading(false);
-                                MyToast.showToast(context, CommonString.STR_ERROR_INFO + s);
+                                MyToast.showToast(activity.getCurrentContext(), CommonString.STR_ERROR_INFO + s);
                             }
                         });
                     }
@@ -158,7 +158,7 @@ public class AskSongCommentPresenter extends BasePresenter {
 
             @Override
             public void onHanlderFailure(int requestCode, String errorMsg) {
-                MyToast.showToast(context, CommonString.STR_ERROR_INFO + errorMsg);
+                MyToast.showToast(activity.getCurrentContext(), CommonString.STR_ERROR_INFO + errorMsg);
             }
         });
     }
@@ -168,7 +168,7 @@ public class AskSongCommentPresenter extends BasePresenter {
         if (askSongComment.getHasPic()) {
             activity.showLoading(true);
             //查询有多少张图片
-            model.getPicList(askSongComment, new ToastQueryListener<AskSongPic>(context, activity) {
+            model.getPicList(askSongComment, new ToastQueryListener<AskSongPic>(activity) {
                 @Override
                 public void onSuccess(List<AskSongPic> list) {
                     final Song song = new Song(askSongComment.getContent(), null);//将评论者的内容当做标题
@@ -188,12 +188,12 @@ public class AskSongCommentPresenter extends BasePresenter {
 
     //进入SongActivity
     public void enterSongActivity(Song song, AskSongComment askSongComment) {
-        Intent intent = new Intent(context, SongActivity.class);
+        Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         song.setNeedGrade(true);//收费
         SongObject songObject = new SongObject(song, Constant.FROM_ASK, Constant.SHOW_ALL_MENU, Constant.NET);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, songObject);
         intent.putExtra(SongActivity.ASK_COMMENT, askSongComment);
-        context.startActivity(intent);
+        activity.getCurrentContext().startActivity(intent);
     }
 
 

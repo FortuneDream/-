@@ -48,15 +48,11 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.IView 
     }
 
     @Override
-    public void setListener() {
-
-    }
-
-    @Override
-    public void init() {
-        presenter = new LoginPresenter(this, this);
+    public void initView() {
+        presenter = new LoginPresenter( this);
         initToolbar(toolbar, "用户登录");
     }
+
 
 
     //通过基类AuthActivity跳转来，登录成功后返回user，没有则返回null

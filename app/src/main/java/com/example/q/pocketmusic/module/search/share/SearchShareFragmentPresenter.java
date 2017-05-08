@@ -20,18 +20,16 @@ import cn.bmob.v3.BmobQuery;
  */
 
 public class SearchShareFragmentPresenter {
-    private Context context;
     private IView fragment;
 
-    public SearchShareFragmentPresenter(Context context, IView fragment) {
-        this.context = context;
+    public SearchShareFragmentPresenter(IView fragment) {
         this.fragment = fragment;
     }
 
     public void queryFromShareSongList(String s) {
         BmobQuery<ShareSong> query = new BmobQuery<>();
         query.addWhereEqualTo("name", s);
-        query.findObjects(new ToastQueryListener<ShareSong>(context, fragment) {
+        query.findObjects(new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 fragment.setShareSongList(list);
@@ -44,11 +42,11 @@ public class SearchShareFragmentPresenter {
         song.setNeedGrade(true);//需要积分
         song.setContent(shareSong.getContent());
         song.setName(shareSong.getName());
-        Intent intent = new Intent(context, SongActivity.class);
+        Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         SongObject songObject = new SongObject(song, Constant.FROM_SHARE, Constant.SHOW_COLLECTION_MENU, Constant.NET);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, songObject);
         intent.putExtra(SongActivity.SHARE_SONG, shareSong);
-        context.startActivity(intent);
+        fragment.getCurrentContext().startActivity(intent);
     }
 
     interface IView extends IBaseList {

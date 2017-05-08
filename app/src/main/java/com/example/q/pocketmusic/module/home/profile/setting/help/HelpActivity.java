@@ -41,13 +41,10 @@ public class HelpActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     }
 
     @Override
-    public void setListener() {
+    public void initView() {
         adapter = new HelpAdapter(this);
         recycler.setRefreshListener(this);
-    }
 
-    @Override
-    public void init() {
         initToolbar(toolbar, "帮助信息");
         initRecyclerView(recycler, adapter);
         onRefresh();

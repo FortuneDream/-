@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.song;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
@@ -30,7 +29,6 @@ import com.wang.avi.AVLoadingIndicatorView;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -75,16 +73,11 @@ public class SongActivity extends BaseActivity implements SongActivityPresenter.
     }
 
     @Override
-    public void setListener() {
-
-    }
-
-    @Override
-    public void init() {
+    public void initView() {
         //屏幕不灭
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         //根据来自搜索和乐器类型，得到不同的song的IvUrls
-        presenter = new SongActivityPresenter(this, this, getIntent());
+        presenter = new SongActivityPresenter(this, getIntent());
         initToolbar(toolbar, presenter.getSong().getName());
 
         //是否隐藏录音栏

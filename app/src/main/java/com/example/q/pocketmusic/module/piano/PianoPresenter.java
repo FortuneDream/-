@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.widget.LinearLayout;
 
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.MusicUtils;
 import com.example.q.pocketmusic.util.MyToast;
 
@@ -14,7 +15,6 @@ import com.example.q.pocketmusic.util.MyToast;
  */
 
 public class PianoPresenter {
-    private Context context;
     private IView activity;
     private MusicUtils utils;
     private StringBuilder builder;
@@ -23,10 +23,9 @@ public class PianoPresenter {
     private static final int DELAY_TIME = 250;
     private Boolean isCloseQuickBack;
 
-    public PianoPresenter(Context context, final IView activity) {
-        this.context = context;
+    public PianoPresenter(final IView activity) {
         this.activity = activity;
-        utils = new MusicUtils(context);
+        utils = new MusicUtils(activity.getCurrentContext());
         builder = new StringBuilder();
         handler = new Handler(Looper.getMainLooper()) {
             @Override
@@ -76,10 +75,10 @@ public class PianoPresenter {
     }
 
     public void keepPic(String title) {
-        MyToast.showToast(context,"保存(未实现)");
+        MyToast.showToast(activity.getCurrentContext(), "保存(未实现)");
     }
 
-    public interface IView {
+    public interface IView extends IBaseView {
 
         void back();
     }

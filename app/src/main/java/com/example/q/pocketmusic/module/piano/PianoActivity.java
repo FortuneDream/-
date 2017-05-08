@@ -57,8 +57,9 @@ public class PianoActivity extends BaseActivity implements PianoPresenter.IView,
     }
 
     @Override
-    public void setListener() {
+    public void initView() {
         backIv.setOnTouchListener(this);
+        presenter = new PianoPresenter( this);
     }
 
     //强制横屏
@@ -70,10 +71,7 @@ public class PianoActivity extends BaseActivity implements PianoPresenter.IView,
         }
     }
 
-    @Override
-    public void init() {
-        presenter = new PianoPresenter(this, this);
-    }
+
 
 
     @OnClick({R.id.back_iv, R.id.tab_iv, R.id.enter_iv, R.id.bo_lang_iv, R.id.do_1, R.id.re_2, R.id.mi_3, R.id.fa_4, R.id.sol_5, R.id.la_6, R.id.xi_7,R.id.keep_iv})

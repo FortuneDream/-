@@ -50,14 +50,11 @@ public class LeadSongActivity extends BaseActivity implements LeadSongPresenter.
     }
 
     @Override
-    public void setListener() {
+    public void initView() {
         adapter = new SmallPicAdapter(this);
         adapter.setOnItemClickListener(this);
-    }
 
-    @Override
-    public void init() {
-        presenter = new LeadSongPresenter(this, this);
+        presenter = new LeadSongPresenter(this);
         initToolbar(toolbar, "本地导入");
         recycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         recycler.setAdapter(adapter);
