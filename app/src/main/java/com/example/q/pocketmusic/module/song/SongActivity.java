@@ -126,6 +126,9 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     //下载结果
     @Override
     public void downloadResult(Integer result, String info) {
+        if (recordRl == null || toolbar == null) {
+            return;
+        }
         if (result.equals(Constant.FAIL)) {
             MyToast.showToast(this, info);
         } else {
@@ -196,6 +199,9 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     @Override
     public void setPicResult(List<String> ivUrl, int from) {
+        if (pageTv == null || viewPager == null) {
+            return;
+        }
         //本地和网络加载图片的地址有所不同
         adapter = new SongActivityAdapter(this, ivUrl, from);
         final int page = ivUrl.size();

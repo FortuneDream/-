@@ -21,16 +21,11 @@ public class SearchRecommendAdapter extends TagAdapter<Song> {
 
     public SearchRecommendAdapter(List<Song> datas, Context context) {
         super(datas);
-        if (context != null) {
-            inflater = LayoutInflater.from(context);
-        }
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
     public View getView(FlowLayout parent, int position, Song song) {
-        if (inflater == null) {
-            return null;
-        }
         TextView tagTv = (TextView) inflater.inflate(R.layout.item_recommend_tag, parent, false);
         tagTv.setText(song.getName());
         return tagTv;

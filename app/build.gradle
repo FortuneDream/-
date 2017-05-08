@@ -29,7 +29,7 @@ dependencies {
     compile 'cn.bmob.android:http-legacy:1.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.jakewharton:butterknife:8.5.1'
     compile 'com.jude:easyrecyclerview:4.4.0'
     compile 'org.jsoup:jsoup:1.9.2'
     compile 'com.google.android.gms:play-services-appindexing:9.8.0'
@@ -38,7 +38,6 @@ dependencies {
     compile 'com.github.jinatonic.confetti:confetti:1.0.0'
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.zcw:togglebutton-library:1.0.0'
     compile 'com.jude:rollviewpager:1.4.5'
     compile 'com.zhy:flowlayout-lib:1.0.3'
@@ -49,5 +48,5 @@ dependencies {
     compile 'pub.devrel:easypermissions:0.3.0'
     compile 'com.github.clans:fab:1.6.4'
     testCompile 'junit:junit:4.12'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.5.1'
 }

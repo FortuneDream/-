@@ -6,7 +6,8 @@
 
 你还在为练习口琴、吉他、钢琴等乐器却找不到乐谱而伤神吗？  
 口袋乐谱，内置口琴、电子琴、吉他等十余项乐器的乐谱搜索，推荐，下载。神奇的口袋里，你想要的All in One。    
-口袋乐谱为你提供各类乐器的最新、最流行、最经典的乐谱，让您无论身处何方，不用带着沉重的乐谱书，也可以实现自己的音乐梦。  
+口袋乐谱为你提供各类乐器的最新、最流行、最经典的乐谱，让您无论身处何方，不用带着沉重的乐谱书，也可以实现自己的音乐梦。
+ 
 **搜索乐谱**：可以搜索到任意最新，最全的曲谱。
 
 **支持多种曲谱类型**：包括吉他谱，钢琴谱，简谱等等。
@@ -23,25 +24,54 @@
 
 **网络收藏**：如果想保存在云端，可以试试收藏功能哦！
 
+**电子钢琴**: 可以弹奏的电子钢琴（尝鲜版）
+
 ### 示例：
 
-#### 搜索乐谱
+#### 乐谱界面
+* 本地曲谱可以录音
+* 网络曲谱可以下载，收藏，分享
+
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_1.png)
 
 #### 本地乐谱
+* 曲谱来源：本地导入，网络下载
+* 另外有一个小钢琴~(目前正在完善功能中)
+
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_2.png)
 
-#### 网络推荐
+#### 网络乐谱
+* 直接搜索
+* 乐器类型
+* 谱友来荐
+
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_3.png)
 
-#### 我的主页
+#### 求谱
+* 点击右下角的小飞机发布求谱帖~
+
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_4.png)
 
+#### 个人界面
+* 反馈意见
+* 我的求谱
+* 我的硬币（通过每日签到或者分享曲谱可以获得）
+* 我的收藏
+* 帮助文档
+* 设置中心
 
+![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_5.png)
+
+#### 某种乐器
+
+![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_6.png)
+
+#### 直接搜索
+![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_7.png)
 
 ### 实现
-* MVP架构
-* iOS与Android的混合UI风格
+* **T-MVP** 架构
+* iOS 与 Android的混合UI风格
 * 加载图片 [Glide](https://github.com/bumptech/glide)
 * 展示图片 [PhotoView](https://github.com/chrisbanes/PhotoView)
 * 网络请求 [OkHttp](https://github.com/square/okhttp)
@@ -51,27 +81,39 @@
 * 各种UI轮子
 
 ### 技术尝试
-* 设计模式：Builder,Listener,Single,Proxy-Stub,Strategy
-* Recycler通过viewType实现多种holder
+* 设计模式：
+    * Builder,
+    * Listener,
+    * Single
+    * Proxy-Stub
+    * Strategy
+    * State
+    * Factory
+* Recycler通过viewType实现多种ViewHolder
 * Activity的异常生命周期处理和启动模式
-* 数据库一对多，多对多的设计
-* Fragment的Hide和Show
-* Presenter.IView写法
-* 利用线程池的阻塞队列实现顺序下来（3.0版本使用递归）
+* 数据库
+    * 一对多
+    * 多对多
+* T-MVP与弱引用
+* 利用线程池的阻塞队列实现顺序下载
 * AIDL,广播，服务
-* 机型适配
+* 适配
+    * 屏幕适配（VectorDrawable）
+    * Android 6.0 权限适配
 
 ### 下载安装
 
-* 目前已登陆豌豆荚,应用宝平台
+* 目前已登陆小米应用商店,应用宝
 
-* [官方网站](http://pocketmusic.bmob.cn)
+* [官方网站](http://http://pocketmusic.bmob.site/)
 
 * Andriod兼容版本：**4.1.1** 及以上
 
 ### 注意事项
 
-* 录制音频需要开启录音权限（运行时权限）
-
+* 权限说明
+    * 手机信息（上传手机型号，Android版本，Crash分析）   
+    * SD卡权限（本地存储乐谱） 
+    * 录制音频需要开启录音权限（运行时权限）
 
 #### By 鹏君

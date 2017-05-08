@@ -30,7 +30,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     public static AlertDialog mLoadingDialog;
     public Context context;
     public final String TAG = this.getClass().getName();
-    private Unbinder unbinder;
+
 
     protected abstract T createPresenter();
 
@@ -52,7 +52,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(setContentResource(), container, false);
-        unbinder = ButterKnife.bind(this, view);
+         ButterKnife.bind(this, view);
         initView();
         return view;
     }
@@ -98,11 +98,6 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         toolbar.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 
     @Override
     public void onDestroy() {
