@@ -52,7 +52,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
     public SharePresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
     }
 
     public void setUser(MyUser user) {
@@ -109,7 +109,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 Boolean flag = true;
-                if (list == null) {
+                if (list == null || list.size() == 0) {
                     flag = false;//没有相同的额曲谱
                 }
                 if (flag) {

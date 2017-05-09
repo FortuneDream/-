@@ -24,14 +24,12 @@ import butterknife.BindView;
 
 public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, CollectionPresenter>
         implements CollectionPresenter.IView, SwipeRefreshLayout.OnRefreshListener, CollectionAdapter.OnSelectListener, RecyclerArrayAdapter.OnMoreListener {
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
-    private CollectionPresenter presenter;
     private CollectionAdapter adapter;
 
     @Override

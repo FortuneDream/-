@@ -50,8 +50,6 @@ public class PianoActivity extends BaseActivity<PianoPresenter.IView,PianoPresen
     @BindView(R.id.keep_iv)
     ImageView keepIv;
 
-    private PianoPresenter presenter;
-
     @Override
     public int setContentResource() {
         return R.layout.activity_piano;

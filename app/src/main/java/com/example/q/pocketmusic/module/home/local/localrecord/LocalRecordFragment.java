@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
  * Created by Cloud on 2016/11/17.
  */
 
-public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresenter.IView,LocalRecordFragmentPresenter>
+public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresenter.IView, LocalRecordFragmentPresenter>
         implements LocalRecordFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener,
         LocalRecordFragmentAdapter.OnSelectListener {
     @BindView(R.id.recycler)
@@ -75,8 +75,7 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
         //初始化
         initRecyclerView(recycler, adapter, 1, true);
         //加载录音列表
-        recycler.setRefreshing(true);
-        presenter.loadRecordList();
+        onRefresh();
     }
 
 
@@ -97,7 +96,6 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
         LogUtils.e(TAG, "录音数目：" + list.size());
         adapter.clear();
         adapter.addAll(list);
-        recycler.setRefreshing(false);
     }
 
     //播放dialog
