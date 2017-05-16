@@ -10,6 +10,7 @@ import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.search.net.SearchNetFragment;
 import com.example.q.pocketmusic.module.search.recommend.SearchRecommendFragment;
 import com.example.q.pocketmusic.module.search.share.SearchShareFragment;
+import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
 
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView
     //刷新版块
     public void onRefreshFragment(int flag) {
         if (flag == POSITION_NET_FRAGMENT) {
+            LogUtils.e(TAG,"netFragment.onRefresh");
             netFragment.onRefresh();
         } else if (flag == POSITION_SHARE_FRAGMENT) {
             shareFragment.onRefresh();

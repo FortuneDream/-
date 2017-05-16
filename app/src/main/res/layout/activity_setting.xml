@@ -19,6 +19,17 @@
         android:layout_marginBottom="24dp"
         tools:text="当前版本：" />
 
+
+    <View style="@style/SettingDivider" />
+
+
+    <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+        android:id="@+id/email_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemTitleIco="@drawable/ic_vec_profile_email"
+        app:itemTitleText="反馈意见" />
+
     <View style="@style/SettingDivider" />
 
     <com.example.q.pocketmusic.view.widget.view.IcoTextItem
@@ -28,16 +39,6 @@
         app:itemTitleIco="@drawable/ic_vec_setting_update"
         app:itemTitleText="检测新版本" />
 
-
-    <View style="@style/SettingDivider" />
-
-
-    <com.example.q.pocketmusic.view.widget.view.IcoTextItem
-        android:id="@+id/grade_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemTitleIco="@drawable/ic_vec_setting_pingfen"
-        app:itemTitleText="评个分吧！" />
 
     <View style="@style/SettingDivider" />
 

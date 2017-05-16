@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
+import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.StringUtil;
 
 import org.jsoup.Jsoup;
@@ -34,7 +35,7 @@ public class LoadSearchSongList extends AsyncTask<String, Void, List<Song>> {
      */
     @Override
     protected List<Song> doInBackground(String... strings) {
-        List<Song> songs=new ArrayList<>();
+        List<Song> songs = new ArrayList<>();
         String query = strings[0];
         String urlCode = null;//转换为URLCode
         int number = 0;
@@ -45,10 +46,11 @@ public class LoadSearchSongList extends AsyncTask<String, Void, List<Song>> {
         }
         try {
             Document doc = Jsoup.connect(Constant.SO_PU_SEARCH + urlCode + "&start=" + page * 10)
-                    .userAgent(Constant.USER_AGENT)
                     .timeout(6000)
+                    .userAgent(Constant.USER_AGENT)
                     .get();
             //得到总数量
+
             String info = doc.getElementById("labelSummary").text().replace(" ", "");
             number = Integer.parseInt(info.substring(info.indexOf("约") + 1, info.indexOf("篇")));
             if (number <= page * 10) {
@@ -66,7 +68,7 @@ public class LoadSearchSongList extends AsyncTask<String, Void, List<Song>> {
                 String name = lis.get(0).getElementsByTag("a").get(0).text();
                 //内容,这个内容需要处理一下
                 String content = StringUtil.fixName5(lis.get(1).text());
-                Song song = new Song(name,url);
+                Song song = new Song(name, url);
                 song.setContent(content);
                 songs.add(song);
             }

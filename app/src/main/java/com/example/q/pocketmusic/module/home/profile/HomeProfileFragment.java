@@ -1,14 +1,16 @@
 package com.example.q.pocketmusic.module.home.profile;
 
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthFragment;
-import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.util.DisplayStrategy;
 import com.example.q.pocketmusic.view.widget.view.GuaGuaKa;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
@@ -16,7 +18,9 @@ import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 import java.util.Random;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 /**
@@ -25,14 +29,18 @@ import butterknife.OnClick;
 
 public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresenter.IView, HomeProfileFragmentPresenter>
         implements HomeProfileFragmentPresenter.IView {
+
+
     @BindView(R.id.head_iv)
     ImageView headIv;
     @BindView(R.id.user_name_tv)
     TextView userNameTv;
     @BindView(R.id.sign_in_btn)
     Button signInBtn;
-    @BindView(R.id.email_item)
-    IcoTextItem emailItem;
+    @BindView(R.id.grade_item)
+    IcoTextItem gradeItem;
+    @BindView(R.id.post_item)
+    IcoTextItem postItem;
     @BindView(R.id.contribution_item)
     IcoTextItem contributionItem;
     @BindView(R.id.collection_item)
@@ -41,9 +49,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     IcoTextItem helpItem;
     @BindView(R.id.setting_item)
     IcoTextItem settingItem;
-    @BindView(R.id.post_item)
-    IcoTextItem postItem;
-
     private AlertDialog signInDialog;
 
 
@@ -79,14 +84,14 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     }
 
 
-    @OnClick({R.id.head_iv, R.id.setting_item, R.id.email_item, R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn, R.id.help_item, R.id.post_item})
+    @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item, R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn, R.id.help_item, R.id.post_item})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.head_iv://设置头像
                 presenter.setHeadIv();
                 break;
-            case R.id.email_item://用户邮箱
-                presenter.enterSuggestionActivity();
+            case R.id.grade_item://评分
+                presenter.grade();
                 break;
             case R.id.post_item://用户求谱帖子
                 presenter.enterUserPostActivity();

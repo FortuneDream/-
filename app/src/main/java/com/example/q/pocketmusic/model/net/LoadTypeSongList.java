@@ -35,11 +35,18 @@ public class LoadTypeSongList extends AsyncTask<String, Void, List<Song> > {
         String typeUrl = strings[0];
         List<Song> list=new ArrayList<>();
         try {
-            Document doc = Jsoup.connect(typeUrl).userAgent(Constant.USER_AGENT).timeout(6000).get();
-            Element tbody =  doc.select("table.opern_list").get(0).getElementsByTag("tbody").get(0);
+            Document doc = Jsoup.connect(typeUrl)
+                    .userAgent(Constant.USER_AGENT)
+                    .timeout(6000)
+                    .get();
+            Element tbody =  doc.select("table.opern_list")
+                    .get(0)
+                    .getElementsByTag("tbody")
+                    .get(0);
             Elements trs = tbody.getElementsByTag("tr");
-            trs.remove(23);
-            trs.remove(17);
+            trs.remove(24);
+            trs.remove(18);
+            trs.remove(12);
             trs.remove(11);
             trs.remove(5);//一定要倒着去横线！！不然会顺序错误
             for (Element tr : trs) {

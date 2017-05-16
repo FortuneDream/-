@@ -120,7 +120,7 @@ public class Song implements Parcelable,Serializable {
         artist = in.readString();
         typeId = in.readInt();
         date = in.readString();
-        ivUrl = in.createStringArrayList();
+        ivUrl=in.createStringArrayList();
         content = in.readString();
         searchFrom = in.readInt();
         needGrade = in.readByte() != 0;

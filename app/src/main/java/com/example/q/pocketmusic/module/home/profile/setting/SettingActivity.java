@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.profile.setting;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +15,7 @@ import com.example.q.pocketmusic.util.MyToast;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -24,22 +26,20 @@ import butterknife.OnClick;
 public class SettingActivity extends AuthActivity<SettingPresenter.IView, SettingPresenter>
         implements SettingPresenter.IView {
 
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
     @BindView(R.id.version_tv)
     TextView versionTv;
+    @BindView(R.id.email_item)
+    IcoTextItem emailItem;
     @BindView(R.id.update_item)
     IcoTextItem updateItem;
-    @BindView(R.id.grade_item)
-    IcoTextItem gradeItem;
     @BindView(R.id.share_item)
     IcoTextItem shareItem;
     @BindView(R.id.logout_item)
     IcoTextItem logoutItem;
-
 
     @Override
     public int setContentResource() {
@@ -65,17 +65,17 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
 
     }
 
-    @OnClick({R.id.update_item, R.id.logout_item, R.id.grade_item, R.id.share_item})
+    @OnClick({R.id.update_item, R.id.logout_item, R.id.email_item, R.id.share_item})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.update_item:
-                presenter.checkUpdate(true);//检测更新
+            case R.id.update_item://检测更新
+                presenter.checkUpdate(true);
                 break;
             case R.id.logout_item://退出登录
                 alertLogoutDialog();
                 break;
-            case R.id.grade_item:
-                presenter.grade();//评分
+            case R.id.email_item://意见信箱
+                presenter.enterSuggestionActivity();
                 break;
             case R.id.share_item://分享app
                 presenter.shareApp();
@@ -115,4 +115,5 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
     protected SettingPresenter createPresenter() {
         return new SettingPresenter(this);
     }
+
 }

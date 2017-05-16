@@ -63,8 +63,9 @@ public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, 
                     public void onBottomSheetItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.delete://删除收藏
-                                adapter.remove(adapter.getItem(position));
-                                presenter.deleteCollection(adapter.getItem(position));
+                                CollectionSong collectionSong=adapter.getItem(position);
+                                adapter.remove(collectionSong);
+                                presenter.deleteCollection(collectionSong);
                                 break;
                         }
                     }

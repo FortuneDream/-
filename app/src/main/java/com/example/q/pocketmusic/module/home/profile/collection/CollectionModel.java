@@ -47,7 +47,7 @@ public class CollectionModel {
         queryComment.findObjects(listener);
     }
 
-    public void deleteCollection(MyUser user, final CollectionSong collectionSong, final Context context, final IBaseList activity, final ToastUpdateListener listener) {
+    public void deleteCollection(MyUser user, final CollectionSong collectionSong, final IBaseList activity, final ToastUpdateListener listener) {
         BmobRelation relation = new BmobRelation();
         relation.remove(collectionSong);
         user.setCollections(relation);

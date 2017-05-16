@@ -10,6 +10,7 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.setting.help.HelpActivity;
+import com.example.q.pocketmusic.module.user.suggestion.SuggestionActivity;
 import com.example.q.pocketmusic.util.MyToast;
 
 import cn.bmob.v3.listener.BmobUpdateListener;
@@ -55,15 +56,7 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
         activity.getCurrentContext().startActivity(i);//重启app
     }
 
-    public void grade() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=" + activity.getCurrentContext().getPackageName()));
-        if (intent.resolveActivity(activity.getCurrentContext().getPackageManager()) != null) { //可以接收
-            activity.getCurrentContext().startActivity(intent);
-        } else {
-            MyToast.showToast(activity.getCurrentContext(), "没有找到应用市场~");
-        }
-    }
+
 
     //分享apk
     public void shareApp() {
@@ -76,6 +69,11 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
         } else {
             MyToast.showToast(activity.getCurrentContext(), "你的手机不支持分享~");
         }
+    }
+
+    //跳转到用户邮箱界面
+    public void enterSuggestionActivity() {
+        activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), SuggestionActivity.class));
     }
 
 

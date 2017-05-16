@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
@@ -38,7 +39,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     public HomeProfileFragmentPresenter(IView fragment) {
         attachView(fragment);
-        this.fragment=getIViewRef();
+        this.fragment = getIViewRef();
     }
 
 
@@ -90,11 +91,6 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     public void setUser(MyUser user) {
         this.user = user;
-    }
-
-    //跳转到用户邮箱界面
-    public void enterSuggestionActivity() {
-        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SuggestionActivity.class));
     }
 
 
@@ -162,6 +158,17 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     public void enterUserPostActivity() {
         fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), UserPostActivity.class));
+    }
+
+    //App商店
+    public void grade() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=" + fragment.getCurrentContext().getPackageName()));
+        if (intent.resolveActivity(fragment.getCurrentContext().getPackageManager()) != null) { //可以接收
+            fragment.getCurrentContext().startActivity(intent);
+        } else {
+            MyToast.showToast(fragment.getCurrentContext(), "没有找到应用市场~");
+        }
     }
 
 

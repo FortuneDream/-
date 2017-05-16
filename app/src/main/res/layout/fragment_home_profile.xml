@@ -49,12 +49,15 @@
 
         <View style="@style/SettingBigDivider" />
 
+
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
-            android:id="@+id/email_item"
+            android:id="@+id/grade_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:itemTitleIco="@drawable/ic_vec_profile_email"
-            app:itemTitleText="反馈意见" />
+            app:itemTitleIco="@drawable/ic_vec_setting_pingfen"
+            app:itemTitleText="评个分吧！" />
+
+
 
         <View style="@style/SettingBigDivider" />
 

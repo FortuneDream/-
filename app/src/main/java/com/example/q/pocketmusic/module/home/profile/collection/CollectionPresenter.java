@@ -88,7 +88,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
 
     //删除收藏
     public void deleteCollection(final CollectionSong collectionSong) {
-        collectionModel.deleteCollection(user, collectionSong, activity.getCurrentContext(), activity, new ToastUpdateListener(activity) {
+        collectionModel.deleteCollection(user, collectionSong, activity, new ToastUpdateListener(activity) {
             @Override
             public void onSuccess() {
                 MyToast.showToast(activity.getCurrentContext(), "已删除");

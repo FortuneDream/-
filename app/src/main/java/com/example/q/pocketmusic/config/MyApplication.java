@@ -33,8 +33,7 @@ public class MyApplication extends Application {
         Bmob.initialize(this, Constant.APP_ID, "Bmob");
         //官网SDK
         AppStat.i(Constant.APP_ID, "Bmob");
-        //自动更新
-        initAutoUpdate();
+        //    initAutoUpdate(); //自动表创建
         //发布时，开启异常捕获器
 //        CrashHandler crashHandler = CrashHandler.getInstance();
 //        crashHandler.init(this);
@@ -43,7 +42,6 @@ public class MyApplication extends Application {
 
     private void initAutoUpdate() {
         BmobUpdateAgent.initAppVersion();
-
     }
 
 
