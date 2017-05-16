@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.module.home.ask.comment.PicAdapter;
+import com.example.q.pocketmusic.module.home.seek.ask.comment.PicAdapter;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
 import java.util.List;

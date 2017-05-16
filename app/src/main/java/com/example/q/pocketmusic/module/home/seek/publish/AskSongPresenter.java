@@ -1,6 +1,5 @@
-package com.example.q.pocketmusic.module.home.ask.publish;
+package com.example.q.pocketmusic.module.home.seek.publish;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import com.example.q.pocketmusic.module.common.IBaseList;

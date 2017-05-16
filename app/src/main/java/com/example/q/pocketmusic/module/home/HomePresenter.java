@@ -9,7 +9,8 @@ import android.support.v4.app.FragmentManager;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.ask.list.HomeAskListFragment;
+import com.example.q.pocketmusic.module.home.seek.HomeSeekFragment;
+import com.example.q.pocketmusic.module.home.seek.ask.AskListFragment;
 import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
@@ -33,14 +34,14 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     private List<Fragment> fragments;
     private FragmentManager fm;
     private Fragment totalFragment;
-    private static int FLAG_SELECT_LOCAL = 1001;
-    private static int FLAG_SELECT_NET = 1002;
-    private static int FLAG_SELECT_ASK = 1003;
+    private static int FLAG_SELECT_NET = 1001;
+    private static int FLAG_SELECT_ASK = 1002;
+    private static int FLAG_SELECT_LOCAL = 1003;
     private static int FLAG_SELECT_PROFILE = 1004;
-    private HomeLocalFragment homeLocalFragment;
-    private HomeNetFragment homeNetFragment;
-    private HomeAskListFragment homeAskListFragment;
-    private HomeProfileFragment homeProfileFragment;
+    private HomeNetFragment homeNetFragment;//1
+    private HomeSeekFragment homeSeekFragment;//2
+    private HomeLocalFragment homeLocalFragment;//3
+    private HomeProfileFragment homeProfileFragment;//4
     private int FLAG;//标记当前Fragment
 
 
@@ -52,39 +53,41 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
 
     private void initFragment() {
         fragments = new ArrayList<>();
-        homeLocalFragment = new HomeLocalFragment();
         homeNetFragment = new HomeNetFragment();
-        homeAskListFragment = new HomeAskListFragment();
+        homeSeekFragment = new HomeSeekFragment();
+        homeLocalFragment = new HomeLocalFragment();
         homeProfileFragment = new HomeProfileFragment();
-        fragments.add(homeLocalFragment);
         fragments.add(homeNetFragment);
-        fragments.add(homeAskListFragment);
+        fragments.add(homeSeekFragment);
+        fragments.add(homeLocalFragment);
         fragments.add(homeProfileFragment);
     }
 
-    //点击本地
-    public void clickLocal() {
-        if (FLAG != FLAG_SELECT_LOCAL) {
-            FLAG = FLAG_SELECT_LOCAL;
-            showFragment(fragments.get(0));
-            activity.onSelectLocal();
-        }
-    }
-
-
+    //网络
     public void clickNet() {
         if (FLAG != FLAG_SELECT_NET) {
             FLAG = FLAG_SELECT_NET;
-            showFragment(fragments.get(1));
+            showFragment(fragments.get(0));
             activity.onSelectNet();
         }
     }
 
+
+    //求谱
     public void clickAsk() {
         if (FLAG != FLAG_SELECT_ASK) {
             FLAG = FLAG_SELECT_ASK;
-            showFragment(fragments.get(2));
+            showFragment(fragments.get(1));
             activity.onSelectAsk();
+        }
+    }
+
+    //本地
+    public void clickLocal() {
+        if (FLAG != FLAG_SELECT_LOCAL) {
+            FLAG = FLAG_SELECT_LOCAL;
+            showFragment(fragments.get(2));
+            activity.onSelectLocal();
         }
     }
 

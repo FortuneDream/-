@@ -1,53 +1,51 @@
-package com.example.q.pocketmusic.module.home.ask.list;
+package com.example.q.pocketmusic.module.home.seek.ask;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.module.home.ask.publish.AskSongActivity;
-import com.example.q.pocketmusic.view.widget.net.FloatingDraftButton;
-import com.example.q.pocketmusic.view.widget.net.TitleBar;
+import com.example.q.pocketmusic.module.home.seek.publish.AskSongActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by Cloud on 2017/1/26.
  */
-public class HomeAskListFragment extends BaseFragment<HomeAskListFragmentPresenter.IView, HomeAskListFragmentPresenter>
-        implements HomeAskListFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, HomeAskListAdapter.OnItemClickListener
+public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView, AskListFragmentPresenter>
+        implements AskListFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, AskListAdapter.OnItemClickListener
         , RecyclerArrayAdapter.OnMoreListener {
-    @BindView(R.id.title_bar)
-    TitleBar titleBar;
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
-    @BindView(R.id.ask_song_fab)
-    FloatingDraftButton askSongFab;
-    private HomeAskListAdapter adapter;
+    private AskListAdapter adapter;
 
     @Override
     public int setContentResource() {
-        return R.layout.fragment_home_ask_list;
+        return R.layout.fragment_ask_list;
     }
 
 
     @Override
     public void initView() {
-        adapter = new HomeAskListAdapter(getContext());
+        adapter = new AskListAdapter(getContext());
         adapter.setListener(this);
         adapter.setMore(R.layout.view_more, this);
         recycler.setRefreshListener(this);
         initRecyclerView(recycler, adapter, 72, false);
         presenter.setmPage(0);
-        titleBar.setMyCenterTitle("大家都在找");
-        titleBar.setBackgroundColor(getContext().getResources().getColor(R.color.colorPrimary));
         presenter.getPostList();
     }
 
@@ -105,13 +103,9 @@ public class HomeAskListFragment extends BaseFragment<HomeAskListFragmentPresent
     }
 
 
-    @OnClick(R.id.ask_song_fab)
-    public void onClick() {
-        presenter.enterAskSongActivity();
-    }
 
     @Override
-    protected HomeAskListFragmentPresenter createPresenter() {
-        return new HomeAskListFragmentPresenter(this);
+    protected AskListFragmentPresenter createPresenter() {
+        return new AskListFragmentPresenter(this);
     }
 }

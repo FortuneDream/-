@@ -1,22 +1,17 @@
-package com.example.q.pocketmusic.module.home.net;
+package com.example.q.pocketmusic.module.home.seek.share;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
-import com.example.q.pocketmusic.util.ACacheUtil;
 import com.example.q.pocketmusic.util.BmobUtil;
 
-import java.util.List;
-
-import cn.bmob.v3.exception.BmobException;
-
 /**
- * Created by 鹏君 on 2017/4/22.
+ * Created by 鹏君 on 2017/5/16.
  */
 
-public class HomeNetModel {
+public class ShareListModel {
     private BmobUtil bmobUtil;
 
-    public HomeNetModel() {
+    public ShareListModel() {
         bmobUtil = new BmobUtil();
     }
 
@@ -27,6 +22,4 @@ public class HomeNetModel {
     public void getMoreShareList(int mPage, ToastQueryListener<ShareSong> toastQueryListener) {
         bmobUtil.getMoreList(ShareSong.class, "user", mPage, toastQueryListener);
     }
-
-
 }

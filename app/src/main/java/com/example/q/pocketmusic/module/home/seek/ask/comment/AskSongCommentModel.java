@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.home.ask.comment;
+package com.example.q.pocketmusic.module.home.seek.ask.comment;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;

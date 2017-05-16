@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.IDisplayStrategy;
+import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.model.flag.BannerBean;
 import com.example.q.pocketmusic.model.flag.ContentLL;
@@ -27,32 +29,27 @@ import com.jude.rollviewpager.RollPagerView;
  */
 //暂时取消点赞功能
 public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
-    private Context context;
     public static final int BANNER = 0;
     public static final int TEXT = 1;
     public static final int TYPE_SONG = 2;
     public static final int DIVIDER = 3;
-    public static final int UPLOAD_SONG = 4;
+    public static final int RECOMMEND = 4;
     private OnOptionListener listener;
-    private IDisplayStrategy displayStrategy;
 
     public void setListener(OnOptionListener listener) {
         this.listener = listener;
-        this.displayStrategy = new GlideStrategy();
     }
 
     public interface OnOptionListener {
         void onSelectType(int position);
 
-        void onSelectShare(int position);
-
+        void onSelectRecommendSong(int position);
 
         void onSelectRollView(int picPosition);
     }
 
     public NetFragmentAdapter(Context context) {
         super(context);
-        this.context = context;
     }
 
 
@@ -67,10 +64,8 @@ public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
                 return new TypeViewHolder(parent);
             case DIVIDER:
                 return new DividerViewHolder(parent);
-            case UPLOAD_SONG:
-                return new UploadViewHolder(parent);
         }
-        return new UploadViewHolder(parent);
+        return new RecommendViewHolder(parent);
     }
 
     @Override
@@ -84,41 +79,9 @@ public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
         } else if (getItem(position) instanceof Divider) {
             return DIVIDER;
         } else
-            return UPLOAD_SONG;
+            return RECOMMEND;
     }
 
-    //上传list的holder
-    class UploadViewHolder extends BaseViewHolder<ShareSong> {
-        TextView nameTv;
-        TextView contentTv;
-        ImageView headIv;
-        LinearLayout contentRl;
-
-        public UploadViewHolder(ViewGroup parent) {
-            super(parent, R.layout.item_combination_upload);
-            nameTv = $(R.id.name_tv);
-            contentTv = $(R.id.content_tv);
-            contentRl = $(R.id.content_rl);
-            headIv = $(R.id.head_iv);
-            contentRl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onSelectShare(getAdapterPosition());//得到的position表示上传的position
-                    }
-                }
-            });
-
-        }
-
-        @Override
-        public void setData(final ShareSong data) {
-            super.setData(data);
-            nameTv.setText("上传曲谱：" + data.getName());
-            contentTv.setText("描述：" + data.getContent());
-            displayStrategy.displayCircle(context, data.getUser().getHeadImg(), headIv);
-        }
-    }
 
     //乐器list的holder
     class TypeViewHolder extends BaseViewHolder<ContentLL> implements View.OnClickListener {
@@ -238,5 +201,40 @@ public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
             });
 
         }
+    }
+
+    //热门曲谱的holder
+    class RecommendViewHolder extends BaseViewHolder<Song> {
+        TextView nameTv;
+        TextView artistTv;
+        RelativeLayout contentRl;
+
+        public RecommendViewHolder(ViewGroup parent) {
+            super(parent, R.layout.item_recommend_list);
+            nameTv = $(R.id.name_tv);
+            artistTv = $(R.id.artist_tv);
+            contentRl=$(R.id.recommend_content);
+            contentRl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onSelectRecommendSong(getAdapterPosition());
+                    }
+                }
+            });
+
+        }
+
+        @Override
+        public void setData(Song data) {
+            super.setData(data);
+            nameTv.setText(data.getName());
+            if (data.getArtist() != null) {
+                artistTv.setText(data.getArtist());
+            } else {
+                artistTv.setText("暂无");
+            }
+        }
+
     }
 }

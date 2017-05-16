@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="28dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_search_view"
+            android:background="@drawable/shape_search_view"
             android:hint="请输入"
             android:maxLines="1"
             android:textColorHint="@color/white" />

@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.home.ask.comment;
+package com.example.q.pocketmusic.module.home.seek.ask.comment;
 
 import android.content.Intent;
 import android.text.TextUtils;

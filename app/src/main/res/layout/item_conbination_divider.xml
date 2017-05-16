@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/item_padding_16dp"
     android:orientation="vertical">
 
     <View
-        style="@style/SettingDivider" />
+        style="@style/SettingBigDivider" />
 </LinearLayout>

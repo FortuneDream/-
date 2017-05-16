@@ -1,7 +1,6 @@
-package com.example.q.pocketmusic.module.home.ask.comment;
+package com.example.q.pocketmusic.module.home.seek.ask.comment;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 

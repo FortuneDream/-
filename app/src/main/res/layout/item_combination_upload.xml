@@ -4,10 +4,8 @@
     android:id="@+id/content_rl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/item_padding_16dp"
-    android:paddingBottom="@dimen/item_padding_16dp"
-    android:paddingRight="@dimen/item_padding_16dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="@dimen/item_padding_16dp">
 
     <ImageView
         android:id="@+id/head_iv"
@@ -37,8 +35,8 @@
             tools:text="描述" />
 
         <View
-            android:layout_marginTop="16dp"
-            style="@style/SettingDivider" />
+            style="@style/SettingDivider"
+            android:layout_marginTop="16dp" />
     </LinearLayout>
 
 

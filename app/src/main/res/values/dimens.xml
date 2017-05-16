@@ -8,7 +8,7 @@
     <dimen name="sub_text">13sp</dimen>
     <dimen name="tab_text">12dp</dimen>
 
-    <dimen name="banner_height">200dp</dimen>
+    <dimen name="banner_height">150dp</dimen>
     <dimen name="search_view_top_offset">208dp</dimen>
     <dimen name="search_text_offset">16dp</dimen>
 

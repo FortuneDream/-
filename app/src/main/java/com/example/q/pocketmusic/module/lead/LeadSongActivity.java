@@ -1,7 +1,5 @@
 package com.example.q.pocketmusic.module.lead;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -20,12 +18,12 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView,LeadSongPresenter>
+//本地导入
+public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView, LeadSongPresenter>
         implements LeadSongPresenter.IView, RecyclerArrayAdapter.OnItemClickListener {
-    public static int REQUEST_LEAD=1001;
+    public static int REQUEST_LEAD = 1001;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)

@@ -1,6 +1,5 @@
-package com.example.q.pocketmusic.module.home.ask.publish;
+package com.example.q.pocketmusic.module.home.seek.publish;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -8,11 +7,9 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

@@ -19,7 +19,6 @@ import butterknife.OnClick;
 
 public class HomeActivity extends BaseActivity<HomePresenter.IView,HomePresenter>
         implements HomePresenter.IView {
-
     @BindView(R.id.home_content)
     FrameLayout homeContent;
     @BindView(R.id.home_tab_local_tab)
@@ -50,7 +49,7 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView,HomePresenter
     public void initView() {
         presenter.setFragmentManager(getSupportFragmentManager());
         presenter.checkVersion();
-        presenter.clickLocal();
+        presenter.clickNet();
     }
 
 
@@ -141,7 +140,6 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView,HomePresenter
     //选择网络tab
     @Override
     public void onSelectNet() {
-
         homeTabLocalTab.onSelect(false);
         homeTabNetTab.onSelect(true);
         homeTabAskTab.onSelect(false);

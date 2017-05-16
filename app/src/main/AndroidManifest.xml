@@ -68,9 +68,9 @@
         <activity android:name=".module.search.recommend.list.RecommendListActivity" />
         <activity android:name=".module.user.login.LoginActivity" />
         <activity android:name=".module.user.register.RegisterActivity" />
-        <activity android:name=".module.home.ask.publish.AskSongActivity" />
+        <activity android:name=".module.home.seek.publish.AskSongActivity" />
         <activity
-            android:name=".module.home.ask.comment.AskSongCommentActivity"
+            android:name=".module.home.seek.ask.comment.AskSongCommentActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".module.user.suggestion.SuggestionActivity"

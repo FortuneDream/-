@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.share;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -11,17 +10,16 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.bean.share.SharePic;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShareActivity extends AuthActivity<SharePresenter.IView,SharePresenter>
+//分享具体曲谱
+public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePresenter>
         implements SharePresenter.IView, RecyclerArrayAdapter.OnItemClickListener {
 
     public static final String LOCAL_SONG = "LOCAL_SONG";

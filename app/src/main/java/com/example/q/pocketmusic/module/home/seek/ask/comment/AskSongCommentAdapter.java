@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.home.ask.comment;
+package com.example.q.pocketmusic.module.home.seek.ask.comment;
 
 import android.content.Context;
 import android.view.View;
@@ -7,13 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.util.DisplayStrategy;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-
-import butterknife.BindView;
 
 /**
  * Created by Cloud on 2017/1/12.

@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.home.ask.list;
+package com.example.q.pocketmusic.module.home.seek.ask;
 
 import android.content.Context;
 import android.view.View;
@@ -18,13 +18,13 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
  * Created by Cloud on 2017/1/26.
  */
 
-public class HomeAskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
+public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
     private DisplayStrategy displayStrategy;
     private Context context;
     private OnItemClickListener listener;
 
 
-    public HomeAskListAdapter(Context context) {
+    public AskListAdapter(Context context) {
         super(context);
         this.context = context;
         displayStrategy = new DisplayStrategy();

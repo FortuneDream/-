@@ -1,24 +1,29 @@
 package com.example.q.pocketmusic.module.home.net;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.widget.RelativeLayout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
+import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.flag.BannerBean;
 import com.example.q.pocketmusic.model.flag.ContentLL;
 import com.example.q.pocketmusic.model.flag.Divider;
 import com.example.q.pocketmusic.model.flag.TextTv;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.module.search.SearchMainActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by Cloud on 2016/11/17.
@@ -26,11 +31,13 @@ import butterknife.OnClick;
 //网络Fragment
 public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView, HomeNetFragmentPresenter>
         implements HomeNetFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, NetFragmentAdapter.OnOptionListener, RecyclerArrayAdapter.OnMoreListener {
-
+    @BindView(R.id.email_iv)
+    ImageView emailIv;
+    @BindView(R.id.search_rl)
+    LinearLayout searchRl;
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
-    @BindView(R.id.search_rl)
-    RelativeLayout searchRl;
+    Unbinder unbinder;
     private NetFragmentAdapter adapter;
 
     @Override
@@ -43,55 +50,57 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
     public void initView() {
         //监听
         adapter = new NetFragmentAdapter(getContext());
-        recycler.setRefreshListener(this);
-        adapter.setListener(this);
-        recycler.setOnScrollListener(new SearchViewListener(searchRl));
-        adapter.setMore(R.layout.view_more, this);
-        //初始化
-        presenter.setSharePage(0);
         initRecyclerView(recycler, adapter);
+        recycler.setRefreshListener(this);
+        adapter.setMore(R.layout.view_more, this);
+        adapter.setListener(this);
+        //初始化
         recycler.setEmptyView(R.layout.view_not_found);
-        initList();
-        presenter.getCacheList();
+        onRefresh();
     }
+
+
+    //加载更多
+    @Override
+    public void onMoreShow() {
+        presenter.setPage(presenter.getmPage() + 1);
+        presenter.getList();
+    }
+
+    @Override
+    public void onMoreClick() {
+
+    }
+
 
     private void initList() {
         TextTv textTv1 = new TextTv();
-        textTv1.setName("我的乐器");
+        textTv1.setName("- 我的乐器 -");
         TextTv textTv2 = new TextTv();
-        textTv2.setName("谱友来荐");
+        textTv2.setName("- 热门谱单 -");
         adapter.add(new BannerBean());//轮播
-        adapter.add(textTv1);//文字
+        adapter.add(textTv1);
         adapter.add(new ContentLL());//乐器类型
-        adapter.add(textTv2);//文字
         adapter.add(new Divider());//分割线
+        adapter.add(textTv2);//文字
         adapter.notifyDataSetChanged();
     }
 
-    @OnClick(R.id.search_rl)
-    public void onClick() {
-        presenter.enterSearchMainActivity();
-    }
-
 
     @Override
-    public void setList(List<ShareSong> list) {
-        adapter.addAll(list);
-    }
-
-    @Override
-    public void setMore(List<ShareSong> list) {
+    public void setList(List<Song> list) {
         adapter.addAll(list);
     }
 
 
     @Override
     public void onRefresh() {
-        presenter.setSharePage(0);
         adapter.clear();
         initList();
-        presenter.getShareList();
+        presenter.setPage(1);
+        presenter.getList();
     }
+
 
     @Override
     public void finish() {
@@ -104,25 +113,17 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
     }
 
     @Override
-    public void onSelectShare(int position) {
-        ShareSong shareSong = (ShareSong) adapter.getItem(position);
-        presenter.enterSongActivityByShare(shareSong);
+    public void onSelectRecommendSong(int position) {
+        Song song = (Song) adapter.getItem(position);
+        presenter.enterSongActivity(song);
     }
+
 
     @Override
     public void onSelectRollView(int picPosition) {
         presenter.enterBannerActivity(picPosition);
     }
 
-    @Override
-    public void onMoreShow() {
-        presenter.loadMore();
-    }
-
-    @Override
-    public void onMoreClick() {
-
-    }
 
     @Override
     public void showRefreshing(boolean isShow) {
@@ -132,5 +133,18 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
     @Override
     protected HomeNetFragmentPresenter createPresenter() {
         return new HomeNetFragmentPresenter(this);
+    }
+
+
+    @OnClick({R.id.email_iv, R.id.search_rl})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.email_iv:
+                presenter.enterSuggestionActivity();
+                break;
+            case R.id.search_rl:
+                presenter.enterSearchMainActivity();
+                break;
+        }
     }
 }

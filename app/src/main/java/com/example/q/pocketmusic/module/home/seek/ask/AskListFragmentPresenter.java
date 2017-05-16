@@ -1,6 +1,5 @@
-package com.example.q.pocketmusic.module.home.ask.list;
+package com.example.q.pocketmusic.module.home.seek.ask;
 
-import android.content.Context;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.module.common.IBaseList;
@@ -8,8 +7,8 @@ import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.common.BasePresenter;
-import com.example.q.pocketmusic.module.home.ask.comment.AskSongCommentActivity;
-import com.example.q.pocketmusic.module.home.ask.publish.AskSongActivity;
+import com.example.q.pocketmusic.module.home.seek.ask.comment.AskSongCommentActivity;
+import com.example.q.pocketmusic.module.home.seek.publish.AskSongActivity;
 import com.example.q.pocketmusic.util.BmobUtil;
 
 import java.util.List;
@@ -18,12 +17,12 @@ import java.util.List;
  * Created by Cloud on 2017/1/26.
  */
 
-public class HomeAskListFragmentPresenter extends BasePresenter<HomeAskListFragmentPresenter.IView> {
+public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPresenter.IView> {
     private IView fragment;
     private BmobUtil bmobUtil;
     private int mPage;
 
-    public HomeAskListFragmentPresenter(IView fragment) {
+    public AskListFragmentPresenter(IView fragment) {
         attachView(fragment);
         this.fragment=getIViewRef();
         bmobUtil = new BmobUtil();
@@ -66,13 +65,6 @@ public class HomeAskListFragmentPresenter extends BasePresenter<HomeAskListFragm
         intent.putExtra(AskSongCommentActivity.PARAM_POST, askSongPost);
         fragment.getCurrentContext().startActivity(intent);
 
-    }
-
-    //跳转到AskSongActivity
-    public void enterAskSongActivity() {
-        Intent intent = new Intent(fragment.getCurrentContext(), AskSongActivity.class);
-        //注意这里使用的是Fragment的方法，而不能用Activity的方法
-        ((BaseFragment) fragment).startActivityForResult(intent, AskSongActivity.REQUEST_ASK);
     }
 
     public void setmPage(int mPage) {

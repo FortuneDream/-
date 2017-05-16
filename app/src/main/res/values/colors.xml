@@ -3,8 +3,8 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
-
-    <color name="colorPrimary">@color/md_yellow_300</color>
+<!--518400  1638400   2156800   1468-->
+    <color name="colorPrimary">@color/md_green_A700</color>
     <color name="colorPrimaryDark">#FBC02D</color>
     <color name="colorAccent">#FFC107</color>
     <color name="colorPrimaryLight">#FFF9C4</color>
