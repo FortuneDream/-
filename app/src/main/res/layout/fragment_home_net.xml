@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
@@ -14,7 +15,7 @@
             android:id="@+id/email_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_vec_email" />
+            app:srcCompat="@drawable/ic_vec_profile_email" />
 
         <LinearLayout
             android:id="@+id/search_rl"
@@ -38,8 +39,13 @@
                 android:text="点点我吧~~"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
+            <View
+                android:background="@color/white"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
 
             <ImageView
+                android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_vec_search" />

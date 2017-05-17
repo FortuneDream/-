@@ -13,7 +13,7 @@
         <attr name="itemTitleText" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="TabView">
+    <declare-styleable name="BottomTabView">
         <attr name="itemTabNoSelectIco" format="reference" />
         <attr name="itemTabSelectIco" format="reference" />
         <attr name="itemTabName" format="string" />
@@ -37,5 +37,10 @@
         <attr name="Reward_Text_Size" format="dimension" />
         <attr name="Reward_Eraser_Size" format="dimension" />
         <attr name="Reward_Resource" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="TopTabView">
+        <attr name="Left_Text" format="string"/>
+        <attr name="Right_Text" format="string"/>
     </declare-styleable>
 </resources>

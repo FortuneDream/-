@@ -1,73 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_audio_record"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/local_tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            fab:tabGravity="center" />
-    </android.support.design.widget.AppBarLayout>
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/local_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/app_bar" />
-
-
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menu_fab"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="48dp"
-        android:layout_marginRight="32dp"
-        fab:menu_animationDelayPerItem="50"
-        fab:menu_backgroundColor="@android:color/transparent"
-        fab:menu_buttonSpacing="0dp"
-        fab:menu_colorNormal="@color/colorPrimary"
-        fab:menu_colorPressed="@color/colorPrimary"
-        fab:menu_colorRipple="#99FFFFFF"
-        fab:menu_icon="@drawable/fab_local_add"
-        fab:menu_openDirection="up"
-        fab:menu_shadowColor="#44000000"
-        fab:menu_shadowRadius="2dp"
-        fab:menu_shadowXOffset="1dp"
-        fab:menu_shadowYOffset="1dp"
-        fab:menu_showShadow="true">
+        android:background="@color/colorPrimary">
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item_add_local"
+        <ImageView
+            android:id="@+id/add_local_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ico_fab_add_local"
-            fab:fab_colorNormal="@color/colorAccent"
-            fab:fab_colorPressed="@color/colorAccent"
-            fab:fab_label="本地添加"
-            fab:fab_size="mini" />
+            fab:srcCompat="@drawable/ic_vec_add_local" />
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item_piano"
+        <com.example.q.pocketmusic.view.widget.view.TopTabView
+            android:id="@+id/top_tab_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ico_fab_piano"
-            fab:fab_colorNormal="@color/colorAccent"
-            fab:fab_colorPressed="@color/colorAccent"
-            fab:fab_label="电子钢琴(尝鲜版)"
-            fab:fab_size="mini" />
+            android:layout_gravity="center"
+            fab:Left_Text="下载曲谱"
+            fab:Right_Text="我的独奏" />
 
-    </com.github.clans.fab.FloatingActionMenu>
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/piano_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            fab:srcCompat="@drawable/ic_vec_piano" />
+    </android.support.v7.widget.Toolbar>
+
+
+    <FrameLayout
+        android:id="@+id/home_local_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

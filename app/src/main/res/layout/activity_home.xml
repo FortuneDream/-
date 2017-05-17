@@ -19,7 +19,7 @@
         android:background="@color/white"
         android:gravity="center">
 
-        <com.example.q.pocketmusic.view.widget.view.TabView
+        <com.example.q.pocketmusic.view.widget.view.BottomTabView
             android:id="@+id/home_tab_net_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             app:itemTabNoSelectIco="@drawable/tab_home_net_normal"
             app:itemTabSelectIco="@drawable/tab_home_net_press" />
 
-        <com.example.q.pocketmusic.view.widget.view.TabView
+        <com.example.q.pocketmusic.view.widget.view.BottomTabView
             android:id="@+id/home_tab_ask_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             app:itemTabNoSelectIco="@drawable/tab_home_ask_normal"
             app:itemTabSelectIco="@drawable/tab_home_ask_press" />
 
-        <com.example.q.pocketmusic.view.widget.view.TabView
+        <com.example.q.pocketmusic.view.widget.view.BottomTabView
             android:id="@+id/home_tab_local_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             app:itemTabSelectIco="@drawable/tab_home_local_press" />
 
 
-        <com.example.q.pocketmusic.view.widget.view.TabView
+        <com.example.q.pocketmusic.view.widget.view.BottomTabView
             android:id="@+id/home_tab_profile_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

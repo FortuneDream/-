@@ -8,7 +8,6 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.search.net.SearchNetFragment;
-import com.example.q.pocketmusic.module.search.recommend.SearchRecommendFragment;
 import com.example.q.pocketmusic.module.search.share.SearchShareFragment;
 import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
@@ -22,12 +21,10 @@ import java.util.List;
 
 public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView> {
     private IView activity;
-    private SearchRecommendFragment recommendFragment;
     private SearchNetFragment netFragment;
     private SearchShareFragment shareFragment;
-    public static final int POSITION_RECOMMEND_FRAGMENT = 0;//第一个位置
-    public static final int POSITION_NET_FRAGMENT = 1;//第二个位置
-    public static final int POSITION_SHARE_FRAGMENT = 2;//第三个位置
+    public static final int POSITION_NET_FRAGMENT = 0;//第一个位置
+    public static final int POSITION_SHARE_FRAGMENT = 1;//第二个位置
     public static int FLAG_NOW_FRAGMENT = 0;
     private String inputStr;
 
@@ -44,18 +41,15 @@ public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView
 
     public List<String> getTabsTxt() {
         List<String> list = new ArrayList<>();
-        list.add("热点曲谱");
         list.add("网络搜索");
         list.add("本站搜索");
         return list;
     }
 
     public List<Fragment> getFragments() {
-        recommendFragment = new SearchRecommendFragment();
         netFragment = new SearchNetFragment();
         shareFragment = new SearchShareFragment();
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(recommendFragment);
         fragments.add(netFragment);
         fragments.add(shareFragment);
         return fragments;
@@ -64,7 +58,6 @@ public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView
     //刷新版块
     public void onRefreshFragment(int flag) {
         if (flag == POSITION_NET_FRAGMENT) {
-            LogUtils.e(TAG,"netFragment.onRefresh");
             netFragment.onRefresh();
         } else if (flag == POSITION_SHARE_FRAGMENT) {
             shareFragment.onRefresh();

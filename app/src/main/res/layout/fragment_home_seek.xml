@@ -15,34 +15,15 @@
             android:id="@+id/publish_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ico_fab_ask_song" />
+            app:srcCompat="@drawable/ic_vec_publish" />
 
-        <LinearLayout
+        <com.example.q.pocketmusic.view.widget.view.TopTabView
+            android:id="@+id/top_tab_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/ask_list_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="8dp"
-                android:text="求谱" />
-
-            <TextView
-                android:id="@+id/share_list_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="8dp"
-                android:text="分享" />
-        </LinearLayout>
+            app:Left_Text="求谱"
+            app:Right_Text="分享" />
 
         <ImageView
             android:id="@+id/search_iv"

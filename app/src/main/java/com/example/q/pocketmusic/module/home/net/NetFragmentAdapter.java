@@ -207,14 +207,14 @@ public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
     class RecommendViewHolder extends BaseViewHolder<Song> {
         TextView nameTv;
         TextView artistTv;
-        RelativeLayout contentRl;
+        LinearLayout contentLl;
 
         public RecommendViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_recommend_list);
             nameTv = $(R.id.name_tv);
             artistTv = $(R.id.artist_tv);
-            contentRl=$(R.id.recommend_content);
-            contentRl.setOnClickListener(new View.OnClickListener() {
+            contentLl=$(R.id.recommend_content);
+            contentLl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {

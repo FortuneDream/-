@@ -4,7 +4,7 @@
     <color name="white">#FFFFFF</color>
 
 <!--518400  1638400   2156800   1468-->
-    <color name="colorPrimary">@color/md_green_A700</color>
+    <color name="colorPrimary">#2cc17b</color>
     <color name="colorPrimaryDark">#FBC02D</color>
     <color name="colorAccent">#FFC107</color>
     <color name="colorPrimaryLight">#FFF9C4</color>

@@ -12,7 +12,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.MyToast;
-import com.example.q.pocketmusic.view.widget.view.TabView;
+import com.example.q.pocketmusic.view.widget.view.BottomTabView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -22,13 +22,13 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView,HomePresenter
     @BindView(R.id.home_content)
     FrameLayout homeContent;
     @BindView(R.id.home_tab_local_tab)
-    TabView homeTabLocalTab;
+    BottomTabView homeTabLocalTab;
     @BindView(R.id.home_tab_net_tab)
-    TabView homeTabNetTab;
+    BottomTabView homeTabNetTab;
     @BindView(R.id.home_tab_ask_tab)
-    TabView homeTabAskTab;
+    BottomTabView homeTabAskTab;
     @BindView(R.id.home_tab_profile_tab)
-    TabView homeTabProfileTab;
+    BottomTabView homeTabProfileTab;
 
     private static boolean isExit = false;  // 定义一个变量，来标识是否退出
     public static final String ACTION_RETURN_HOME = "action_return_home";

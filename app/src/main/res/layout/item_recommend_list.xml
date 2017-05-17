@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/recommend_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:orientation="vertical"
+    android:paddingRight="8dp"
+    android:paddingLeft="8dp"
+    android:paddingTop="8dp">
 
     <LinearLayout
         style="@style/TwoTextLinear"
@@ -27,4 +30,9 @@
             android:layout_height="wrap_content"
             tools:text="内容" />
     </LinearLayout>
-</RelativeLayout>
+
+    <View
+        style="@style/SettingDivider"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

@@ -1,7 +1,11 @@
 package com.example.q.pocketmusic.module.home.net;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnScrollListener;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +41,8 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
     LinearLayout searchRl;
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     Unbinder unbinder;
     private NetFragmentAdapter adapter;
 
@@ -83,7 +89,6 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
         adapter.add(new ContentLL());//乐器类型
         adapter.add(new Divider());//分割线
         adapter.add(textTv2);//文字
-        adapter.notifyDataSetChanged();
     }
 
 
@@ -147,4 +152,5 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
                 break;
         }
     }
+
 }
