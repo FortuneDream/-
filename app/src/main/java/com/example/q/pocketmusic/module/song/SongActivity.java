@@ -135,7 +135,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
             //撒花
             ConfettiUtil.getCommonConfetti(recordRl);
             //返回主页
-            SnackBarUtil.IndefiniteSnackbar(toolbar, "下载成功\\(^o^)/，是否立即查看", 4000, R.color.black, SnackBarUtil.orange).setAction("是", new View.OnClickListener() {
+            SnackBarUtil.IndefiniteSnackbar(toolbar, "下载成功\\(^o^)/，是否立即查看", 4000, R.color.black, SnackBarUtil.green).setAction("是", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(SongActivity.this, HomeActivity.class);

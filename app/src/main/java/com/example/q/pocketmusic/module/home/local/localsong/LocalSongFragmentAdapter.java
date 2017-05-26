@@ -23,7 +23,9 @@ public class LocalSongFragmentAdapter extends RecyclerArrayAdapter<LocalSong> {
     private OnItemSelectListener onUploadListener;
 
     public interface OnItemSelectListener {
-        void onSelected(int position);
+        void onSelectedMore(int position);
+
+        void onSelectedTop(int position);
     }
 
     public void setOnSelectListener(OnItemSelectListener onUploadListener) {
@@ -44,13 +46,14 @@ public class LocalSongFragmentAdapter extends RecyclerArrayAdapter<LocalSong> {
         TextView nameTv;
         TextView dateTv;
         ImageView moreIv;
+        ImageView topIv;
 
         MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_local_song);
             nameTv = $(R.id.name_tv);
             dateTv = $(R.id.date_tv);
             moreIv = $(R.id.more_iv);
-
+            topIv = $(R.id.top_iv);
         }
 
         @Override
@@ -61,8 +64,16 @@ public class LocalSongFragmentAdapter extends RecyclerArrayAdapter<LocalSong> {
             moreIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onUploadListener!=null){
-                        onUploadListener.onSelected(getAdapterPosition());
+                    if (onUploadListener != null) {
+                        onUploadListener.onSelectedMore(getAdapterPosition());
+                    }
+                }
+            });
+            topIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onUploadListener != null) {
+                        onUploadListener.onSelectedTop(getAdapterPosition());
                     }
                 }
             });

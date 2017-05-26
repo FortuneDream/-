@@ -48,7 +48,7 @@ public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, 
         presenter.setUser(user);
         presenter.setPage(0);
         initToolbar(toolbar, "我的收藏");
-        initRecyclerView(recycler, adapter, 1, true);
+        initRecyclerView(recycler, adapter, 1);
         onRefresh();
     }
 

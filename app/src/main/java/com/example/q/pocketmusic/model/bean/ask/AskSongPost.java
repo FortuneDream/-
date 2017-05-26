@@ -9,8 +9,9 @@ import cn.bmob.v3.BmobObject;
  */
 
 public class AskSongPost extends BmobObject {
-    private com.example.q.pocketmusic.model.bean.MyUser user;//帖子的发布者，一对一
+    private MyUser user;//帖子的发布者，一对一
     private String title;//帖子标题
+    private int type;//所求曲谱类型
     private String content;//帖子内容
     private Integer commentNum;//回复数量
 
@@ -18,11 +19,20 @@ public class AskSongPost extends BmobObject {
     public AskSongPost() {
     }
 
-    public AskSongPost(com.example.q.pocketmusic.model.bean.MyUser user, String title, String content) {
+    public AskSongPost(MyUser user, String title, int type,String content) {
         this.user = user;
         this.title = title;
         this.content = content;
+        this.type=type;
         this.commentNum = 0;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getTitle() {
@@ -41,11 +51,11 @@ public class AskSongPost extends BmobObject {
         this.content = content;
     }
 
-    public com.example.q.pocketmusic.model.bean.MyUser getUser() {
+    public MyUser getUser() {
         return user;
     }
 
-    public void setUser(com.example.q.pocketmusic.model.bean.MyUser user) {
+    public void setUser(MyUser user) {
         this.user = user;
     }
 

@@ -47,6 +47,7 @@ dependencies {
     compile 'com.github.rubensousa:bottomsheetbuilder:1.5.1'
     compile 'pub.devrel:easypermissions:0.3.0'
     compile 'com.github.clans:fab:1.6.4'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.5.1'
 }

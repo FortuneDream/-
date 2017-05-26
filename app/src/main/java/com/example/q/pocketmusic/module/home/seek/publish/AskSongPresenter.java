@@ -1,7 +1,9 @@
 package com.example.q.pocketmusic.module.home.seek.publish;
 
 import android.text.TextUtils;
+import android.util.ArraySet;
 
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
@@ -11,22 +13,30 @@ import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.util.CheckUserUtil;
+import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by Cloud on 2016/11/14.
  */
 
 public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
+    private final int NOT_SELECT = -1;
     private IView activity;
+    private int type;
 
     public AskSongPresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
+        type = NOT_SELECT;
     }
 
-    public void askForSong(String title, final String content, final com.example.q.pocketmusic.model.bean.MyUser user) {
-        if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title)) {
+    public void askForSong(String title, final String content, final MyUser user) {
+        if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title) || type == NOT_SELECT) {
             MyToast.showToast(activity.getCurrentContext(), CommonString.STR_COMPLETE_INFO);
             return;
         }
@@ -35,7 +45,7 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
             return;
         }
         activity.showLoading(true);
-        AskSongPost askSongPost = new AskSongPost(user, title, content);
+        AskSongPost askSongPost = new AskSongPost(user, title, type, content);
         askSongPost.save(new ToastSaveListener<String>(activity) {
             @Override
             public void onSuccess(String s) {
@@ -53,6 +63,15 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
         });
 
 
+    }
+
+    public void setSelectedTag(Set<Integer> selectPosSet) {
+        Iterator<Integer> iterator = selectPosSet.iterator();
+        if (iterator.hasNext()) {
+            type = iterator.next();
+        } else {
+            type = NOT_SELECT;//没有选
+        }
     }
 
     public interface IView extends IBaseList {

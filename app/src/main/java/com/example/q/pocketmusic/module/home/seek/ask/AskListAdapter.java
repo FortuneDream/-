@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 
 import com.example.q.pocketmusic.util.DisplayStrategy;
@@ -48,15 +49,16 @@ public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
     class MyViewHolder extends BaseViewHolder<AskSongPost> {
         TextView postUserTitleTv;
         TextView postUserContentTv;
+        TextView postUserTypeTv;
         TextView postUserNameTv;
         TextView postUserDateTv;
         TextView postUserCommentNumTv;
-
         ImageView postUserHeadIv;
         LinearLayout contentLl;
 
         public MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_ask_song);
+            postUserTypeTv = $(R.id.post_user_type_tv);
             postUserTitleTv = $(R.id.post_user_title_tv);
             postUserContentTv = $(R.id.post_user_content_tv);
             postUserNameTv = $(R.id.post_user_name_tv);
@@ -87,12 +89,31 @@ public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
         @Override
         public void setData(AskSongPost data) {
             super.setData(data);
+            setPostType(data);
             postUserTitleTv.setText("标题：" + data.getTitle());
             postUserContentTv.setText("描述：" + data.getContent());
             postUserNameTv.setText(data.getUser().getNickName());
             displayStrategy.displayCircle(context, data.getUser().getHeadImg(), postUserHeadIv);
             postUserDateTv.setText(data.getCreatedAt());
             postUserCommentNumTv.setText(String.valueOf(data.getCommentNum()));
+        }
+
+        private void setPostType(AskSongPost data) {
+            int type = data.getType();
+            switch (type) {
+                case Constant.qi_ta_pu:
+                    postUserTypeTv.setText("求谱类型：" + "其他类型");
+                    break;
+                case Constant.ji_ta_pu:
+                    postUserTypeTv.setText("求谱类型：" + "吉他谱");
+                    break;
+                case Constant.gang_qin_pu:
+                    postUserTypeTv.setText("求谱类型：" + "钢琴谱");
+                    break;
+                case Constant.jian_pu:
+                    postUserTypeTv.setText("求谱类型：" + "简谱");
+                    break;
+            }
         }
 
     }

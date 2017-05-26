@@ -24,8 +24,8 @@ public class SynchronizeRecordAudio extends AsyncTask<Void, Void, Boolean> {
     private RecordAudioDao recordAudioDao;
     private Context context;
 
-    public SynchronizeRecordAudio(RecordAudioDao recordAudioDao, Context context) {
-        this.recordAudioDao = recordAudioDao;
+    public SynchronizeRecordAudio(Context context) {
+        recordAudioDao=new RecordAudioDao(context);
         this.context = context;
     }
 

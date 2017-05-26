@@ -14,11 +14,14 @@ import com.example.q.pocketmusic.module.home.profile.contribution.ContributionAc
 import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.help.HelpActivity;
+import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
 import com.example.q.pocketmusic.module.user.suggestion.SuggestionActivity;
+import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -132,12 +135,13 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
             String lastSignIn = user.getLastSignInDate();
             try {
                 Date last = dateFormat.parse(lastSignIn);
-                Date date = new Date();
-                long remainTime = date.getTime() - last.getTime();
+                Date now = new Date();
+                long remainTime = now.getTime() - last.getTime();  //11   10,10  10
                 if (remainTime > 24 * 60 * 60 * 1000) {//距离上次签到已经超过24小时
                     fragment.alertSignInDialog();
                 } else {
-                    MyToast.showToast(fragment.getCurrentContext(), "24小时之内只能签到一次哦！");
+                    long hour = 24 - remainTime / 1000 / 60 / 60;
+                    MyToast.showToast(fragment.getCurrentContext(), "距离下次签到还剩:" + hour + "小时");
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -169,6 +173,10 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         } else {
             MyToast.showToast(fragment.getCurrentContext(), "没有找到应用市场~");
         }
+    }
+
+    public void enterUserShareActivity() {
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), UserShareActivity.class));
     }
 
 

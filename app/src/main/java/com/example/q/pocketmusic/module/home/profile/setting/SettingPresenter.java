@@ -71,11 +71,6 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
         }
     }
 
-    //跳转到用户邮箱界面
-    public void enterSuggestionActivity() {
-        activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), SuggestionActivity.class));
-    }
-
 
     public interface IView extends IBaseView {
 

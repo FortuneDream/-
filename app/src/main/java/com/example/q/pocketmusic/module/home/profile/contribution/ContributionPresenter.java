@@ -18,7 +18,6 @@ import cn.bmob.v3.BmobQuery;
 public class ContributionPresenter extends BasePresenter<ContributionPresenter.IView> {
     private IView activity;
 
-
     public ContributionPresenter(IView activity) {
         attachView(activity);
         this.activity=getIViewRef();

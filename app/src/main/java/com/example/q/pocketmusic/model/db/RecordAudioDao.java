@@ -18,7 +18,7 @@ public class RecordAudioDao {
 
     public RecordAudioDao(Context context) {
         try {
-            helper = DatabaseHelper.getHelper(context);
+            helper = DatabaseHelper.getHelper(context.getApplicationContext());
             recordAudioOpe = helper.getDao(RecordAudio.class);
         } catch (SQLException e) {
             e.printStackTrace();

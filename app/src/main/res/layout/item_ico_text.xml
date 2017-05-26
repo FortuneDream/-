@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="12dp">
 
     <ImageView
         android:id="@+id/ico"
@@ -10,12 +11,13 @@
         android:layout_height="24dp" />
 
     <TextView
+        tools:text="名字"
         android:id="@+id/title_tv"
         style="@style/TwoTextMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="48dp" />
+        android:layout_marginLeft="36dp" />
 
     <TextView
         android:id="@+id/subtitle_tv"

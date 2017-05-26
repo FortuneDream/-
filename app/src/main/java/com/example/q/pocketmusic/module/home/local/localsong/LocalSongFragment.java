@@ -85,9 +85,6 @@ public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.I
                             case R.id.delete://删除
                                 showDeleteDialog(position);
                                 break;
-                            case R.id.top:
-                                presenter.setTop(adapter.getItem(position));//置顶
-                                break;
                         }
                     }
                 })
@@ -176,9 +173,16 @@ public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.I
         presenter.enterPictureActivity(localSong);
     }
 
+    //选择更多
     @Override
-    public void onSelected(int position) {
+    public void onSelectedMore(int position) {
         alertBottomDialog(position);
+    }
+
+    //选择置顶
+    @Override
+    public void onSelectedTop(int position) {
+        presenter.setTop(adapter.getItem(position));//置顶
     }
 
     @Override

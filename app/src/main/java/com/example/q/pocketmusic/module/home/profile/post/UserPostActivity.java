@@ -40,7 +40,7 @@ public class UserPostActivity extends AuthActivity<UserPostPresenter.IView,UserP
 
         presenter.setUser(user);
         initToolbar(toolbar, "我的求谱");
-        initRecyclerView(recycler, adapter, 1, true);
+        initRecyclerView(recycler, adapter, 1);
         onRefresh();
     }
 

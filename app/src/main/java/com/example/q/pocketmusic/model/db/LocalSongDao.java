@@ -24,7 +24,7 @@ public class LocalSongDao {
 
     public LocalSongDao(Context context) {
         try {
-            helper = DatabaseHelper.getHelper(context);
+            helper = DatabaseHelper.getHelper(context.getApplicationContext());
             localSongOpe = helper.getDao(LocalSong.class);
         } catch (SQLException e) {
             e.printStackTrace();

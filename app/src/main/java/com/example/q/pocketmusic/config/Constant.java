@@ -93,6 +93,13 @@ public class Constant {
     public static int sort_value = 1;
     public final static String sort_key = "top_key";
 
+    //求谱类型
+    public static final int qi_ta_pu = 0;
+    public static final int jian_pu = 1;
+    public static final int gang_qin_pu = 2;
+    public static final int ji_ta_pu = 3;
+
+
     //增加本地曲谱需要获得顺序
     public static int getSort() {
         int oldSort = SharedPrefsUtil.getInt(sort_key, sort_value);

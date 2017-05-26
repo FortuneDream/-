@@ -38,12 +38,12 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
 
     public LocalRecordFragmentPresenter(IView fragment) {
         attachView(fragment);
-        this.fragment=getIViewRef();
+        this.fragment = getIViewRef();
         recordAudioDao = new RecordAudioDao(fragment.getAppContext());
     }
 
     private void loadRecordList() {
-        new LoadLocalRecordList(fragment.getAppContext(), recordAudioDao) {
+        new LoadLocalRecordList(fragment.getAppContext()) {
             @Override
             protected void onPostExecute(List<RecordAudio> recordAudios) {
                 super.onPostExecute(recordAudios);
@@ -55,12 +55,12 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
     //同步录音
     public void synchronizedRecord() {
         //先遍历文件夹的录音，添加到数据库（不重复添加），然后再从数据库取出来
-        new SynchronizeRecordAudio(recordAudioDao, fragment.getAppContext()) {
+        new SynchronizeRecordAudio(fragment.getAppContext()) {
             @Override
             protected void onPostExecute(Boolean isSucceed) {
                 super.onPostExecute(isSucceed);
                 if (!isSucceed) {
-                 //MyToast.showToast(fragment.getCurrentContext(), "某些名字相同，已合并新旧录音");
+                    //MyToast.showToast(fragment.getCurrentContext(), "某些名字相同，已合并新旧录音");
                 }
                 loadRecordList();
             }

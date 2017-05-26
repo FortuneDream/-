@@ -24,15 +24,6 @@
 
 
     <com.example.q.pocketmusic.view.widget.view.IcoTextItem
-        android:id="@+id/email_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemTitleIco="@drawable/ic_vec_profile_email"
-        app:itemTitleText="反馈意见" />
-
-    <View style="@style/SettingDivider" />
-
-    <com.example.q.pocketmusic.view.widget.view.IcoTextItem
         android:id="@+id/update_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

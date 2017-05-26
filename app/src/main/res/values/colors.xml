@@ -43,6 +43,9 @@
 
     <color name="textPressAttention">@color/upload_name</color>
 
+    <color name="homeTabNormal">#FF000000</color>
+    <color name="homeTabPress">@color/md_red_300</color>
+
 
     <!--Material Design颜色备选项-->
     <!--reds-->

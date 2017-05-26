@@ -54,6 +54,10 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
     private LocalRecordFragmentAdapter adapter;
     private AlertDialog dialog;
 
+    @Override
+    protected LocalRecordFragmentPresenter createPresenter() {
+        return new LocalRecordFragmentPresenter(this);
+    }
 
     @Override
     public void finish() {
@@ -237,10 +241,6 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
         durationTv.setText(time);
     }
 
-    @Override
-    protected LocalRecordFragmentPresenter createPresenter() {
-        return new LocalRecordFragmentPresenter(this);
-    }
 
 
 //    //退出前台,关闭音乐

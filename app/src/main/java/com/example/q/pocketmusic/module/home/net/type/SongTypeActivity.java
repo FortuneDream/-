@@ -57,7 +57,7 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
         int position = getIntent().getIntExtra(PARAM_POSITION, 0);
         //获取乐器类型
         typeId = position;
-        initRecyclerView(recycler, adapter, 1, false);
+        initRecyclerView(recycler, adapter, 1);
         //设置toolbar
         toolbar.setTitle(Constant.types[typeId]);
         toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.colorTitle));

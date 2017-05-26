@@ -16,9 +16,9 @@ public class LoadLocalRecordList extends AsyncTask<Void, Void, List<RecordAudio>
     private Context context;
     private RecordAudioDao recordAudioDao;
 
-    public LoadLocalRecordList(Context context, RecordAudioDao recordAudioDao) {
+    public LoadLocalRecordList(Context context) {
         this.context = context;
-        this.recordAudioDao = recordAudioDao;
+        recordAudioDao = new RecordAudioDao(context);
     }
 
     @Override

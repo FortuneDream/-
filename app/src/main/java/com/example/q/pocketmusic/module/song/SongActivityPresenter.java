@@ -186,7 +186,7 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
     //下载
     public void download(final String name) {
         activity.showLoading(true);
-        DownloadUtil downloadUtil = new DownloadUtil(activity.getCurrentContext());
+        DownloadUtil downloadUtil = new DownloadUtil(activity.getAppContext());
         downloadUtil.setOnDownloadListener(new DownloadUtil.OnDownloadListener() {
                                                @Override
                                                public DownloadInfo onStart() {

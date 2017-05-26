@@ -10,8 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,9 +56,16 @@
             app:itemTitleText="评个分吧！" />
 
 
-
         <View style="@style/SettingBigDivider" />
 
+        <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+            android:id="@+id/contribution_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemTitleIco="@drawable/ic_vec_profile_coin"
+            app:itemTitleText="我的硬币" />
+
+        <View style="@style/SettingDivider" />
 
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
             android:id="@+id/post_item"
@@ -73,24 +78,24 @@
 
 
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
-            android:id="@+id/contribution_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemTitleIco="@drawable/ic_vec_profile_coin"
-            app:itemTitleText="我的硬币" />
-
-        <View style="@style/SettingDivider" />
-
-        <com.example.q.pocketmusic.view.widget.view.IcoTextItem
             android:id="@+id/collection_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemTitleIco="@drawable/ic_vec_profile_collection"
             app:itemTitleText="我的收藏" />
 
+        <View style="@style/SettingDivider" />
+
+        <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+            android:id="@+id/share_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemTitleIco="@drawable/ic_vec_profile_share"
+            app:itemTitleText="我的分享" />
 
 
         <View style="@style/SettingBigDivider" />
+
 
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
             android:id="@+id/help_item"

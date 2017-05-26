@@ -20,7 +20,7 @@ public class RecordDao {
     private DatabaseHelper helper;
 
     public RecordDao(Context context) {
-        helper = DatabaseHelper.getHelper(context);
+        helper = DatabaseHelper.getHelper(context.getApplicationContext());
         try {
             recordOpe = helper.getDao(Record.class);
         } catch (SQLException e) {

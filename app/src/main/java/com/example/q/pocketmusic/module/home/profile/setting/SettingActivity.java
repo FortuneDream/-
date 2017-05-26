@@ -32,8 +32,6 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
     AppBarLayout appBar;
     @BindView(R.id.version_tv)
     TextView versionTv;
-    @BindView(R.id.email_item)
-    IcoTextItem emailItem;
     @BindView(R.id.update_item)
     IcoTextItem updateItem;
     @BindView(R.id.share_item)
@@ -65,7 +63,7 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
 
     }
 
-    @OnClick({R.id.update_item, R.id.logout_item, R.id.email_item, R.id.share_item})
+    @OnClick({R.id.update_item, R.id.logout_item, R.id.share_item})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.update_item://检测更新
@@ -73,9 +71,6 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
                 break;
             case R.id.logout_item://退出登录
                 alertLogoutDialog();
-                break;
-            case R.id.email_item://意见信箱
-                presenter.enterSuggestionActivity();
                 break;
             case R.id.share_item://分享app
                 presenter.shareApp();

@@ -17,7 +17,7 @@ public class ImgDao {
     private DatabaseHelper helper;
 
     public ImgDao(Context context) {
-        helper = DatabaseHelper.getHelper(context);
+        helper = DatabaseHelper.getHelper(context.getApplicationContext());
         try {
             imgOpe = helper.getDao(Img.class);
         } catch (SQLException e) {

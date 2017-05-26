@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.view.widget.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
@@ -50,9 +51,9 @@ public class BottomTabView extends LinearLayout {
     public void onSelect(Boolean isSelect) {
         if (isSelect) {
             ico.setImageResource(selectResource);
-            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.homeTabPress));
         } else {
-            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.Text));
+            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.homeTabNormal));
             ico.setImageResource(noSelectResource);
         }
     }

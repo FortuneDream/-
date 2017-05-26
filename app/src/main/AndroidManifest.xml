@@ -65,7 +65,6 @@
         <activity
             android:name="cn.bmob.v3.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".module.search.recommend.list.RecommendListActivity" />
         <activity android:name=".module.user.login.LoginActivity" />
         <activity android:name=".module.user.register.RegisterActivity" />
         <activity android:name=".module.home.seek.publish.AskSongActivity" />
@@ -102,7 +101,8 @@
             android:name=".module.piano.PianoActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".module.home.net.banner.BannerActivity" />
-        <activity android:name=".module.home.profile.post.UserPostActivity"></activity>
+        <activity android:name=".module.home.profile.post.UserPostActivity" />
+        <activity android:name=".module.home.profile.share.UserShareActivity"></activity>
     </application>
 
 </manifest>

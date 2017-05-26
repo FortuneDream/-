@@ -19,6 +19,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.share.ShareActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.LogUtils;
+import com.example.q.pocketmusic.util.MyToast;
 import com.example.q.pocketmusic.util.SharedPrefsUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
@@ -42,7 +43,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
     //Dao有必要关闭吗？iterator呢？
     public LocalSongFragmentPresenter(IView fragment) {
         attachView(fragment);
-        this.fragment=getIViewRef();
+        this.fragment = getIViewRef();
         localSongDao = new LocalSongDao(fragment.getAppContext());
         imgDao = new ImgDao(fragment.getAppContext());
 
@@ -130,6 +131,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
         item.setSort(top_value);
         SharedPrefsUtil.putInt(Constant.sort_key, top_value);//修改最高值
         localSongDao.update(item);
+        MyToast.showToast(fragment.getCurrentContext(), "已置顶");
         fragment.onRefresh();
     }
 

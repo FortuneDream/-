@@ -70,13 +70,10 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
     //dp1=paddingLeft
-    public void initRecyclerView(EasyRecyclerView recyclerView, RecyclerArrayAdapter<?> adapter, int dp1, boolean setEmpty) {
+    public void initRecyclerView(EasyRecyclerView recyclerView, RecyclerArrayAdapter<?> adapter, int dp1) {
         initRecyclerView(recyclerView, adapter);
         int dp = ConvertUtil.Dp2Px(context, dp1);
         recyclerView.addItemDecoration(new DividerDecoration(ContextCompat.getColor(context, R.color.setting_divider), 1, dp, 1));
-        if (setEmpty) {
-            recyclerView.setEmptyView(R.layout.view_not_found);
-        }
     }
 
     //无分割线
