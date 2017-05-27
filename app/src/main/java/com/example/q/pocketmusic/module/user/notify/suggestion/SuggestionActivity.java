@@ -1,6 +1,5 @@
-package com.example.q.pocketmusic.module.user.suggestion;
+package com.example.q.pocketmusic.module.user.notify.suggestion;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +15,6 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -54,7 +52,7 @@ public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, 
         initToolbar(toolbar, "反馈意见");
         initRecyclerView(recycler, adapter);
         adapter.addHeader(new SuggestionHeader(context));
-        onRefresh();
+        presenter.getSuggestionList(false);
     }
 
 
@@ -76,15 +74,16 @@ public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, 
     }
 
     @Override
-    public void onRefresh() {
+    public void getSuggestionListResultWithRefreshing(List<UserSuggestion> list) {
         adapter.clear();
-        presenter.getSuggestionList();
+        adapter.addAll(list);
     }
 
     @Override
-    public void showRefreshing(boolean isShow) {
-        recycler.setRefreshing(isShow);
+    public void onRefresh() {
+        presenter.getSuggestionList(true);
     }
+
 
     @Override
     protected SuggestionPresenter createPresenter() {

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".module.user.notify.UserNotifyActivity">
+
+    <include layout="@layout/include_appbar_toolbar" />
+
+    <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+        android:id="@+id/official_info_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemTitleIco="@drawable/ic_vec_update"
+        app:itemTitleText="版本更新日记" />
+
+    <View style="@style/SettingDivider" />
+
+    <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+        android:id="@+id/user_suggestion_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemTitleIco="@drawable/ic_vec_suggestion"
+        app:itemTitleText="用户意见反馈" />
+
+    <View style="@style/SettingDivider" />
+</LinearLayout>

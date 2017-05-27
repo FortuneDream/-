@@ -1,27 +1,23 @@
 package com.example.q.pocketmusic.module.home.profile;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.collection.CollectionActivity;
 import com.example.q.pocketmusic.module.home.profile.contribution.ContributionActivity;
 import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.help.HelpActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
-import com.example.q.pocketmusic.module.user.suggestion.SuggestionActivity;
-import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
 
 import java.io.File;
 import java.text.ParseException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -180,7 +176,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
     }
 
 
-    public interface IView extends IBaseList {
+    public interface IView extends IBaseView {
 
         void setHeadIvResult(String photoPath);
 

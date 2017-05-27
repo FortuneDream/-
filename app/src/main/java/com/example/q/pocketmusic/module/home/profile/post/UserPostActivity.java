@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UserPostActivity extends AuthActivity<UserPostPresenter.IView,UserPostPresenter>
+public class UserPostActivity extends AuthActivity<UserPostPresenter.IView, UserPostPresenter>
         implements UserPostPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -41,14 +41,13 @@ public class UserPostActivity extends AuthActivity<UserPostPresenter.IView,UserP
         presenter.setUser(user);
         initToolbar(toolbar, "我的求谱");
         initRecyclerView(recycler, adapter, 1);
-        onRefresh();
+        presenter.getUserPostList(false);
     }
 
 
     @Override
     public void onRefresh() {
-        adapter.clear();
-        presenter.getUserPostList();
+        presenter.getUserPostList(true);
     }
 
     @Override
@@ -56,13 +55,15 @@ public class UserPostActivity extends AuthActivity<UserPostPresenter.IView,UserP
         presenter.enterPostInfo(adapter.getItem(position));
     }
 
-    @Override
-    public void showRefreshing(boolean isShow) {
-        recycler.setRefreshing(isShow);
-    }
 
     @Override
     public void setInitPostList(List<AskSongPost> list) {
+        adapter.addAll(list);
+    }
+
+    @Override
+    public void setInitPostListWithRefreshing(List<AskSongPost> list) {
+        adapter.clear();
         adapter.addAll(list);
     }
 

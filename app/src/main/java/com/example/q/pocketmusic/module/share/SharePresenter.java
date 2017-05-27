@@ -16,7 +16,7 @@ import com.example.q.pocketmusic.model.bean.share.SharePic;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BasePresenter;
-import com.example.q.pocketmusic.module.common.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
 import com.j256.ormlite.dao.CloseableIterator;
@@ -221,7 +221,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
     }
 
 
-    public interface IView extends IBaseList {
+    public interface IView extends IBaseView {
 
         void finish();
 

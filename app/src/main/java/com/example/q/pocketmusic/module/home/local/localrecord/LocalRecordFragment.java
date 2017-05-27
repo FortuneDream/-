@@ -77,7 +77,7 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
         adapter.setListener(this);
         recycler.setRefreshListener(this);
         //初始化
-        initRecyclerView(recycler, adapter, 1, true);
+        initRecyclerView(recycler, adapter, 1);
         //加载录音列表
         onRefresh();
     }

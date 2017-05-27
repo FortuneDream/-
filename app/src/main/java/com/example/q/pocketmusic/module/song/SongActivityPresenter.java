@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.song;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.database.SQLException;
 import android.media.MediaPlayer;
@@ -15,8 +14,6 @@ import android.support.annotation.NonNull;
 import android.view.Menu;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.module.common.IBaseList;
-import com.example.q.pocketmusic.module.common.IBasePresenter;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
@@ -37,6 +34,8 @@ import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.model.db.RecordAudioDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.state.SongController;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.DownloadUtil;
@@ -186,7 +185,7 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
     //下载
     public void download(final String name) {
         activity.showLoading(true);
-        DownloadUtil downloadUtil = new DownloadUtil(activity.getAppContext());
+        DownloadUtil downloadUtil = new DownloadUtil(activity.getCurrentContext());
         downloadUtil.setOnDownloadListener(new DownloadUtil.OnDownloadListener() {
                                                @Override
                                                public DownloadInfo onStart() {
@@ -568,7 +567,7 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
     }
 
 
-    public interface IView extends IBaseList {
+    public interface IView extends IBaseView {
         void loadFail();
 
         void downloadResult(Integer result, String info);

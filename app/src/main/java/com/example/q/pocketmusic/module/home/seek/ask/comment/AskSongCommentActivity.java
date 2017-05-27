@@ -74,13 +74,19 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                 presenter.getPost().getTitle(),
                 presenter.getPost().getUser().getHeadImg(),
                 presenter.getPost().getCreatedAt()));
-        onRefresh();
+        presenter.getInitCommentList(false);
     }
 
 
     //加载评论列表
     @Override
     public void setCommentList(List<AskSongComment> list) {
+        adapter.addAll(list);
+    }
+
+    @Override
+    public void setCommentListWithRefreshing(List<AskSongComment> list) {
+        adapter.clear();
         adapter.addAll(list);
     }
 
@@ -120,6 +126,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
         picDialog.show();
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -140,14 +147,10 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
 
     @Override
     public void onRefresh() {
-        adapter.clear();
-        presenter.getInitCommentList();
+
+        presenter.getInitCommentList(true);
     }
 
-    @Override
-    public void showRefreshing(boolean isShow) {
-        recycler.setRefreshing(isShow);
-    }
 
     @Override
     protected AskSongCommentPresenter createPresenter() {

@@ -1,22 +1,19 @@
 package com.example.q.pocketmusic.module.home.seek.publish;
 
 import android.text.TextUtils;
-import android.util.ArraySet;
 
-import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.module.common.IBaseList;
+import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
-import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.CheckUserUtil;
-import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -74,7 +71,7 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
         }
     }
 
-    public interface IView extends IBaseList {
+    public interface IView extends IBaseView {
         void finish();
 
         void setAskResult(Integer success);

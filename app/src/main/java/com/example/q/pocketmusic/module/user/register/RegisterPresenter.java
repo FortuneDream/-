@@ -8,7 +8,7 @@ import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
-import com.example.q.pocketmusic.module.common.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.MyToast;
 
 import java.util.regex.Matcher;
@@ -48,7 +48,6 @@ public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
             user.setEmail(account);//账号作为邮箱,打开邮箱验证
             user.setNickName(nickName);
             user.signUp(new ToastSaveListener<MyUser>(activity) {
-
                 @Override
                 public void onSuccess(MyUser user) {
                     activity.showLoading(false);
@@ -58,10 +57,9 @@ public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
                 }
             });
         }
-
     }
 
-    public interface IView extends IBaseList {
+    public interface IView extends IBaseView {
         void finish();
 
         void showLoading(boolean isShow);

@@ -45,7 +45,7 @@ public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, Sh
         presenter.setSharePage(0);
         initRecyclerView(recycler, adapter);
         recycler.setEmptyView(R.layout.view_not_found);
-        presenter.getCacheList();
+        presenter.getShareList(false);
     }
 
     @Override
@@ -54,10 +54,15 @@ public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, Sh
     }
 
     @Override
+    public void setListWithRefreshing(List<ShareSong> list) {
+        adapter.clear();
+        adapter.addAll(list);
+    }
+
+    @Override
     public void onRefresh() {
         presenter.setSharePage(0);
-        adapter.clear();
-        presenter.getShareList();
+        presenter.getShareList(true);
     }
 
     @Override
@@ -67,7 +72,7 @@ public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, Sh
 
     @Override
     public void onMoreShow() {
-        presenter.loadMore();
+        presenter.getMoreShareList();
     }
 
     @Override
@@ -75,10 +80,6 @@ public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, Sh
 
     }
 
-    @Override
-    public void showRefreshing(boolean isShow) {
-
-    }
 
     @Override
     protected ShareListPresenter createPresenter() {

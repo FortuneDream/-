@@ -13,8 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:src="@drawable/tab_home_local_normal" />
+        android:layout_marginBottom="4dp"/>
 
     <TextView
 

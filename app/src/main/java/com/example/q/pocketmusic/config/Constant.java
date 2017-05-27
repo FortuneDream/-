@@ -99,6 +99,9 @@ public class Constant {
     public static final int gang_qin_pu = 2;
     public static final int ji_ta_pu = 3;
 
+    public static final String BMOB_CREATE_AT="-createdAt";
+    public static final String BMOB_USER="user";
+
 
     //增加本地曲谱需要获得顺序
     public static int getSort() {

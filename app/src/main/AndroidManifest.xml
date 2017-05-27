@@ -72,7 +72,7 @@
             android:name=".module.home.seek.ask.comment.AskSongCommentActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
-            android:name=".module.user.suggestion.SuggestionActivity"
+            android:name=".module.user.notify.suggestion.SuggestionActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".module.home.profile.setting.SettingActivity" />
         <activity android:name=".module.home.profile.collection.CollectionActivity" />
@@ -102,7 +102,8 @@
             android:screenOrientation="landscape" />
         <activity android:name=".module.home.net.banner.BannerActivity" />
         <activity android:name=".module.home.profile.post.UserPostActivity" />
-        <activity android:name=".module.home.profile.share.UserShareActivity"></activity>
+        <activity android:name=".module.home.profile.share.UserShareActivity" />
+        <activity android:name=".module.user.notify.UserNotifyActivity"></activity>
     </application>
 
 </manifest>

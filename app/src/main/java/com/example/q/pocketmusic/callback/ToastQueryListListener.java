@@ -1,13 +1,10 @@
 package com.example.q.pocketmusic.callback;
 
-import android.content.Context;
-
 import com.example.q.pocketmusic.config.CommonString;
-import com.example.q.pocketmusic.module.common.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.MyToast;
 
 import java.util.List;
-
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListListener;
@@ -17,10 +14,10 @@ import cn.bmob.v3.listener.QueryListListener;
  */
 
 public abstract class ToastQueryListListener<BatchResult> extends QueryListListener<BatchResult> {
-    private IBaseList baseList;
+    private IBaseView baseView;
 
-    public ToastQueryListListener(IBaseList baseView) {
-        this.baseList = baseView;
+    public ToastQueryListListener(IBaseView baseView) {
+        this.baseView = baseView;
     }
 
     public abstract void onSuccess(List<BatchResult> list);
@@ -36,9 +33,8 @@ public abstract class ToastQueryListListener<BatchResult> extends QueryListListe
     }
 
     public void onFail(BmobException e) {
-        baseList.showLoading(false);
-        baseList.showRefreshing(false);
-        MyToast.showToast(baseList.getCurrentContext(), CommonString.STR_ERROR_INFO + e.getMessage());
+        baseView.showLoading(false);
+        MyToast.showToast(baseView.getCurrentContext(), CommonString.STR_ERROR_INFO + e.getMessage());
         e.printStackTrace();
         //        CrashHandler handler=CrashHandler.getInstance();
 //        handler.uncaughtException(Thread.currentThread(),e);

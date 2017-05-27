@@ -1,10 +1,7 @@
 package com.example.q.pocketmusic.module.home.profile.collection;
 
-import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.module.common.BasePresenter;
-import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.Constant;
@@ -13,6 +10,8 @@ import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.collection.CollectionPic;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
+import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.MyToast;
 
@@ -42,11 +41,17 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
     }
 
     //获得收藏曲谱列表
-    public void getCollectionList() {
+    public void getCollectionList(final boolean isRefreshing) {
         collectionModel.getInitCollectionList(user, new ToastQueryListener<CollectionSong>(activity) {
             @Override
             public void onSuccess(List<CollectionSong> list) {
-                activity.setCollectionList(list);
+                if (!isRefreshing){
+                    activity.setCollectionList(list);
+                }else {
+                    activity.setCollectionListWithRefreshing(list);
+                }
+
+
             }
         });
     }
@@ -101,9 +106,10 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
     }
 
 
-    public interface IView extends IBaseList {
+    public interface IView extends IBaseView {
 
         void setCollectionList(List<CollectionSong> list);
 
+        void setCollectionListWithRefreshing(List<CollectionSong> list);
     }
 }

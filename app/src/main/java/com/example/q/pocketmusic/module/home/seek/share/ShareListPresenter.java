@@ -8,9 +8,9 @@ import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
-import com.example.q.pocketmusic.module.common.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.ACacheUtil;
+
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
         model = new ShareListModel();
     }
 
-    public void loadMore() {
+    public void getMoreShareList() {
         mPage++;
         model.getMoreShareList(mPage, new ToastQueryListener<ShareSong>(fragment) {
             @Override
@@ -42,29 +42,18 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
 
     }
 
-    public void getShareList() {
+    public void getShareList(final boolean isRefreshing) {
         model.getInitShareList(new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                ACacheUtil.putShareSongCache(fragment.getAppContext(), list);//添加缓存
-                fragment.setList(list);
-            }
+                if (!isRefreshing){
+                    fragment.setList(list);
+                }else {
+                    fragment.setListWithRefreshing(list);
+                }
 
-            @Override
-            public void onFail(BmobException e) {
-                super.onFail(e);
-                fragment.setList(ACacheUtil.getShareSongCache(fragment.getAppContext()));
             }
         });
-    }
-
-    //获取缓存
-    public void getCacheList() {
-        List<ShareSong> list = ACacheUtil.getShareSongCache(fragment.getAppContext());//先获取缓存
-        if (list == null) {
-            getShareList();
-        }
-        fragment.setList(list);
     }
 
     public void setSharePage(int page) {
@@ -84,10 +73,12 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
         fragment.getCurrentContext().startActivity(intent);
     }
 
-    interface IView extends IBaseList {
+    interface IView extends IBaseView {
 
         void setMore(List<ShareSong> list);
 
         void setList(List<ShareSong> shareSongCache);
+
+        void setListWithRefreshing(List<ShareSong> list);
     }
 }

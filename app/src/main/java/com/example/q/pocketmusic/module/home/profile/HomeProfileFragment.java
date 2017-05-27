@@ -161,11 +161,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
         getActivity().finish();
     }
 
-    //空接口
-    @Override
-    public void showRefreshing(boolean isShow) {
-
-    }
 
 
     @Override

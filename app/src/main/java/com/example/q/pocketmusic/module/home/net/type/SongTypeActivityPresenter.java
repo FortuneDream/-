@@ -23,7 +23,7 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
 
     public SongTypeActivityPresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
     }
 
     public int getmPage() {
@@ -31,13 +31,18 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
     }
 
 
-    public void getList(int typeId) {
+    public void getList(int typeId, final boolean isRefreshing) {
         String url = Constant.BASE_URL + "/qiyue/" + Constant.namesUrl[typeId] + mPage + ".html";
         new LoadTypeSongList(typeId) {
             @Override
             protected void onPostExecute(List<Song> songs) {
                 super.onPostExecute(songs);
-                activity.setList(songs);
+                if (!isRefreshing) {
+                    activity.setList(songs);
+                } else {
+                    activity.setListWithRefreshing(songs);
+                }
+
             }
         }.execute(url);
     }
@@ -57,5 +62,7 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
     public interface IView extends IBaseView {
 
         void setList(List<Song> songs);
+
+        void setListWithRefreshing(List<Song> songs);
     }
 }

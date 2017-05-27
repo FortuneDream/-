@@ -1,11 +1,9 @@
 package com.example.q.pocketmusic.module.home.profile.contribution;
 
-import android.content.Context;
-
-import com.example.q.pocketmusic.module.common.BasePresenter;
-import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 
 import java.util.List;
 
@@ -36,7 +34,7 @@ public class ContributionPresenter extends BasePresenter<ContributionPresenter.I
         });
     }
 
-    interface IView extends IBaseList {
+    interface IView extends IBaseView {
 
         void setListResult(List<MyUser> list);
     }

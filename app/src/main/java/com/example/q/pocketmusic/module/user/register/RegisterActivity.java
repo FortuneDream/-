@@ -56,10 +56,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter.IView,Regis
         }
     }
 
-    @Override
-    public void showRefreshing(boolean isShow) {
 
-    }
 
 
     @Override

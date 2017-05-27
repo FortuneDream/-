@@ -2,6 +2,9 @@
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/ic_vec_laba">
     <target
-        android:animation="@animator/anim_laba"
-        android:name="laba"/>
+        android:name="laba_sound_1"
+        android:animation="@animator/anim_laba" />
+    <target
+        android:name="laba_sound_2"
+        android:animation="@animator/anim_laba" />
 </animated-vector>

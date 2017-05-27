@@ -21,7 +21,6 @@ import com.example.q.pocketmusic.util.ConvertUtil;
 //假如继承LinearLayout会不会报错？
 public class IcoTextItem extends RelativeLayout {
     private TextView mTitleTv;
-    private TextView mSubTv;
     private AppCompatImageView mIco;
 
     private String mTitle;
@@ -46,7 +45,6 @@ public class IcoTextItem extends RelativeLayout {
         inflate(getContext(), R.layout.item_ico_text, this);
         mTitleTv = getView(R.id.title_tv);
         mIco = getView(R.id.ico);
-        mSubTv = getView(R.id.subtitle_tv);
 
         TypedArray types = getContext().obtainStyledAttributes(attrs, R.styleable.IcoTextItem);
         mTitle = types.getString(R.styleable.IcoTextItem_itemTitleText);
@@ -58,10 +56,6 @@ public class IcoTextItem extends RelativeLayout {
         mIco.setImageResource(icoId);
     }
 
-    public void setSubText(String subText) {
-        mSubTv.setVisibility(VISIBLE);
-        mSubTv.setText(subText);
-    }
 
     public void bindBadge(Boolean isBind) {
         if (isBind) {

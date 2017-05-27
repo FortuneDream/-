@@ -48,25 +48,21 @@ public class ContributionActivity extends AuthActivity<ContributionPresenter.IVi
         contributionTv.setText("硬币：" + user.getContribution() + "枚");
         initToolbar(toolbar, "硬币榜");
         initRecyclerView(recycler, adapter);
-        onRefresh();
+        presenter.init();
     }
 
 
     @Override
     public void onRefresh() {
-        adapter.clear();
         presenter.init();
     }
 
     @Override
     public void setListResult(List<MyUser> list) {
+        adapter.clear();
         adapter.addAll(list);
     }
 
-    @Override
-    public void showRefreshing(boolean isShow) {
-        recycler.setRefreshing(isShow);
-    }
 
     @Override
     protected ContributionPresenter createPresenter() {

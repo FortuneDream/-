@@ -44,12 +44,11 @@ public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, 
         adapter.setOnSelectListener(this);
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
-
         presenter.setUser(user);
-        presenter.setPage(0);
         initToolbar(toolbar, "我的收藏");
         initRecyclerView(recycler, adapter, 1);
-        onRefresh();
+        presenter.setPage(0);
+        presenter.getCollectionList(true);
     }
 
 
@@ -63,7 +62,7 @@ public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, 
                     public void onBottomSheetItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.delete://删除收藏
-                                CollectionSong collectionSong=adapter.getItem(position);
+                                CollectionSong collectionSong = adapter.getItem(position);
                                 adapter.remove(collectionSong);
                                 presenter.deleteCollection(collectionSong);
                                 break;
@@ -80,12 +79,17 @@ public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, 
         adapter.addAll(list);
     }
 
+    @Override
+    public void setCollectionListWithRefreshing(List<CollectionSong> list) {
+        adapter.clear();
+        adapter.addAll(list);
+    }
+
 
     @Override
     public void onRefresh() {
-        adapter.clear();
         presenter.setPage(0);
-        presenter.getCollectionList();
+        presenter.getCollectionList(true);
     }
 
     //更多选项
@@ -98,11 +102,6 @@ public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, 
     @Override
     public void onSelectItem(int position) {
         presenter.queryAndEnterSongActivity(adapter.getItem(position));
-    }
-
-    @Override
-    public void showRefreshing(boolean isShow) {
-        recycler.setRefreshing(isShow);
     }
 
     //加载更多

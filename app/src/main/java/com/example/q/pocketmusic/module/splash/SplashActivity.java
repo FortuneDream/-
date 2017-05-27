@@ -2,20 +2,27 @@ package com.example.q.pocketmusic.module.splash;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.BmobInfo;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -27,6 +34,8 @@ public class SplashActivity extends BaseActivity<SplashPresenter.IView, SplashPr
     TextView bmobInfoTv;
     @BindView(R.id.activity_splash)
     RelativeLayout activitySplash;
+    @BindView(R.id.laba_iv)
+    ImageView labaIv;
     private boolean isEnter = false;
     private static final int REQUEST_STORAGE = 3001;//READ_EXTERNAL_STORAGE    ,    WRITE_EXTERNAL_STORAGE
     private static final int REQUEST_PHONE = 4001;//READ_PHONE_STATE
@@ -60,7 +69,15 @@ public class SplashActivity extends BaseActivity<SplashPresenter.IView, SplashPr
     @Override
     public void initView() {
         presenter.getBmobInfo();
+        List<ImageView> list = new ArrayList<>();
+        list.add(labaIv);
+        bindAnimatableDrawble(list);
+        list.clear();
         requestPermissions();
+    }
+
+    private void initLabaAnimator() {
+
     }
 
 
@@ -101,7 +118,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter.IView, SplashPr
     @AfterPermissionGranted(REQUEST_PERMISSION)
     public void sendEnterHomeMessage() {
         handler.removeMessages(ENTER_HOME_ACTIVITY);
-        handler.sendEmptyMessageDelayed(ENTER_HOME_ACTIVITY, 1200);
+        handler.sendEmptyMessageDelayed(ENTER_HOME_ACTIVITY, 1500);
     }
 
     @Override
@@ -114,10 +131,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter.IView, SplashPr
         }
     }
 
-    @Override
-    public void showRefreshing(boolean isShow) {
 
-    }
 
     @Override
     public void setLaBaText(BmobInfo bmobInfo) {
@@ -131,4 +145,5 @@ public class SplashActivity extends BaseActivity<SplashPresenter.IView, SplashPr
     protected SplashPresenter createPresenter() {
         return new SplashPresenter(this);
     }
+
 }

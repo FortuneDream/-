@@ -18,7 +18,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IView,SongTypeActivityPresenter>
+public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IView, SongTypeActivityPresenter>
         implements SongTypeActivityPresenter.IView, RecyclerArrayAdapter.OnMoreListener, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.top_iv)
@@ -71,9 +71,9 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
 
         //设置顶部图片
         topIv.setBackgroundResource(topDrawable[typeId]);
-        onRefresh();
+        presenter.setPage(1);
+        presenter.getList(typeId, false);
     }
-
 
 
     @Override
@@ -81,11 +81,17 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
         adapter.addAll(songs);
     }
 
+    @Override
+    public void setListWithRefreshing(List<Song> songs) {
+        adapter.clear();
+        adapter.addAll(songs);
+    }
+
 
     @Override
     public void onMoreShow() {
-        presenter.setPage(presenter.getmPage()+1);
-        presenter.getList(typeId);
+        presenter.setPage(presenter.getmPage() + 1);
+        presenter.getList(typeId, false);
     }
 
     @Override
@@ -101,8 +107,7 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     @Override
     public void onRefresh() {
         presenter.setPage(1);
-        adapter.clear();
-        presenter.getList(typeId);
+        presenter.getList(typeId, true);
     }
 
     @Override

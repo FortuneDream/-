@@ -28,12 +28,6 @@ public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.I
     private SearchNetAdapter adapter;
     private String query;
 
-
-    @Override
-    public void showRefreshing(boolean isShow) {
-        recycler.setRefreshing(isShow);
-    }
-
     @Override
     public void finish() {
 
@@ -47,7 +41,7 @@ public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.I
     @Override
     public void initView() {
         adapter = new SearchNetAdapter(getContext());
-        initRecyclerView(recycler, adapter, 1, true);
+        initRecyclerView(recycler, adapter, 1);
         adapter.setMore(R.layout.view_more, this);
         adapter.setOnItemClickListener(this);
         recycler.setRefreshListener(this);
@@ -61,7 +55,8 @@ public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.I
     }
 
     @Override
-    public void setList(List<Song> lists) {
+    public void setListWithRefreshing(List<Song> lists) {
+        adapter.clear();
         adapter.addAll(lists);
     }
 
@@ -83,13 +78,10 @@ public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.I
 
     @Override
     public void onRefresh() {
-        LogUtils.e(TAG, "onRefresh");
         query = ((ISearchInfo) getActivity()).getQueryStr();
         if (query == null) {
-            recycler.showEmpty();
             return;
         }
-        adapter.clear();
         presenter.setPage(0);
         presenter.getList(query);
     }

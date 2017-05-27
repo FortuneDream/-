@@ -1,16 +1,12 @@
 package com.example.q.pocketmusic.module.home.profile.setting;
 
-import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import android.net.Uri;
 
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.profile.setting.help.HelpActivity;
-import com.example.q.pocketmusic.module.user.suggestion.SuggestionActivity;
 import com.example.q.pocketmusic.util.MyToast;
 
 import cn.bmob.v3.listener.BmobUpdateListener;

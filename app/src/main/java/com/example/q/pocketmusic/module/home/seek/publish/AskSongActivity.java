@@ -86,12 +86,6 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
     }
 
 
-    //空接口
-    @Override
-    public void showRefreshing(boolean isShow) {
-
-    }
-
     @Override
     protected AskSongPresenter createPresenter() {
         return new AskSongPresenter(this);

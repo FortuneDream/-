@@ -89,10 +89,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter.IView,LoginPresen
         }
     }
 
-    @Override
-    public void showRefreshing(boolean isShow) {
-
-    }
 
     @Override
     protected LoginPresenter createPresenter() {

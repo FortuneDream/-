@@ -95,10 +95,6 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePrese
         presenter.checkPic(adapter.getItem(position));
     }
 
-    @Override
-    public void showRefreshing(boolean isShow) {
-        recycler.setRefreshing(isShow);
-    }
 
     @Override
     protected SharePresenter createPresenter() {

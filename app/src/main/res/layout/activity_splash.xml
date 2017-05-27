@@ -16,9 +16,11 @@
         android:padding="8dp">
 
         <ImageView
+
+            android:id="@+id/laba_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_vec_laba" />
+            app:srcCompat="@drawable/anim_ic_vec_laba" />
 
         <TextView
             android:id="@+id/bmob_info_tv"

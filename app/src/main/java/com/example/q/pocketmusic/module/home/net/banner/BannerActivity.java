@@ -41,10 +41,6 @@ public class BannerActivity extends BaseActivity<BannerPresenter.IView,BannerPre
         return title;
     }
 
-    @Override
-    public void showRefreshing(boolean isShow) {
-
-    }
 
     @Override
     protected BannerPresenter createPresenter() {

@@ -3,20 +3,20 @@ package com.example.q.pocketmusic.module.home.seek.ask.comment;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPic;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.MyToast;
 
@@ -63,11 +63,16 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     }
 
     //获得初始列表
-    public void getInitCommentList() {
+    public void getInitCommentList(final boolean isRefreshing) {
         model.getInitCommentList(post, new ToastQueryListener<AskSongComment>(activity) {
             @Override
             public void onSuccess(List<AskSongComment> list) {
-                activity.setCommentList(list);
+                if (!isRefreshing){
+                    activity.setCommentList(list);
+                }else {
+                    activity.setCommentListWithRefreshing(list);
+                }
+
             }
         });
     }
@@ -203,7 +208,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     }
 
 
-    public interface IView extends IBaseList {
+    public interface IView extends IBaseView {
 
         void setCommentList(List<AskSongComment> list);
 
@@ -214,5 +219,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         void setCommentInput(String s);
 
         void showPicDialog(Song song, AskSongComment askSongComment);
+
+        void setCommentListWithRefreshing(List<AskSongComment> list);
     }
 }

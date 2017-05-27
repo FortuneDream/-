@@ -17,7 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class UserShareActivity extends AuthActivity<UserSharePresenter.IView, UserSharePresenter>
-        implements UserSharePresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener {
+        implements UserSharePresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener
+        , RecyclerArrayAdapter.OnMoreListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
@@ -41,30 +42,44 @@ public class UserShareActivity extends AuthActivity<UserSharePresenter.IView, Us
         presenter.setUser(user);
         adapter = new UserShareAdapter(getCurrentContext());
         recycler.setRefreshListener(this);
+        adapter.setMore(R.layout.view_more, this);
         adapter.setOnItemClickListener(this);
         initToolbar(toolbar, "我的分享");
         initRecyclerView(recycler, adapter, 1);
-        onRefresh();
+        presenter.setPage(0);
+        presenter.getInitList(false);
     }
 
-    @Override
-    public void showRefreshing(boolean isShow) {
-        recycler.setRefreshing(isShow);
-    }
 
     @Override
     public void onRefresh() {
-        adapter.clear();
-        presenter.getInitList();
+        presenter.setPage(0);
+        presenter.getInitList(true);
     }
 
     @Override
-    public void setInitList(List<ShareSong> list) {
+    public void setList(List<ShareSong> list) {
+        adapter.addAll(list);
+    }
+
+    @Override
+    public void setListWithRefreshing(List<ShareSong> list) {
+        adapter.clear();
         adapter.addAll(list);
     }
 
     @Override
     public void onItemClick(int position) {
-            presenter.enterSongActivity(adapter.getItem(position));
+        presenter.enterSongActivity(adapter.getItem(position));
+    }
+
+    @Override
+    public void onMoreShow() {
+        presenter.getMoreList();
+    }
+
+    @Override
+    public void onMoreClick() {
+
     }
 }

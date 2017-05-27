@@ -30,7 +30,7 @@ public class BmobUtil {
         BmobQuery<T> query = new BmobQuery<>();
         query.order(DEFAULT_SORT);
         query.setLimit(DEFAULT_LIST_NUM);
-        query.setSkip(page * 10);
+        query.setSkip(page * DEFAULT_LIST_NUM);
         if (include != null) {
             query.include(include);
         }
@@ -42,6 +42,18 @@ public class BmobUtil {
     public <T> void getInitListWithEqual(Class<T> t, String include, String line, Object pointer, ToastQueryListener<T> listener) {
         BmobQuery<T> queryComment = new BmobQuery<>();
         queryComment.order(DEFAULT_SORT);
+        queryComment.setLimit(DEFAULT_LIST_NUM);
+        queryComment.addWhereEqualTo(line, pointer);
+        if (include != null) {
+            queryComment.include(include);
+        }
+        queryComment.findObjects(listener);
+    }
+
+    public <T> void getMoreListWithEqual(Class<T> t, String include, int page, String line, Object pointer, ToastQueryListener<T> listener) {
+        BmobQuery<T> queryComment = new BmobQuery<>();
+        queryComment.order(DEFAULT_SORT);
+        queryComment.setSkip(page * DEFAULT_LIST_NUM);
         queryComment.setLimit(DEFAULT_LIST_NUM);
         queryComment.addWhereEqualTo(line, pointer);
         if (include != null) {

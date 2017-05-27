@@ -3,6 +3,8 @@ package com.example.q.pocketmusic.module.common;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.util.ConvertUtil;
@@ -22,6 +25,8 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -36,6 +41,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected T presenter;
     public final String TAG = this.getClass().getName();
     public AlertDialog mLoadingDialog;//这个dialog一般在上传，下载，的时候才会用到
+    private List<Drawable> drawableList = new ArrayList<>();
 
     protected abstract T createPresenter();
 
@@ -43,7 +49,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setContentResource());
-         ButterKnife.bind(this);
+        ButterKnife.bind(this);
         presenter = createPresenter();
         this.context = this;
         initView();
@@ -81,6 +87,14 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setRefreshingColorResources(R.color.colorAccent);
         recyclerView.setAdapter(adapter);
+    }
+
+    //绑定动画Drawable
+    public void bindAnimatableDrawble(List<ImageView> imageViews) {
+        for (ImageView imageView : imageViews) {
+            Drawable drawable = imageView.getDrawable();
+            drawableList.add(drawable);
+        }
     }
 
 
@@ -145,8 +159,42 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
 
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        startVectorAnim();
+    }
+
+    //开始属性动画
+    private void startVectorAnim() {
+        if (drawableList != null && drawableList.size() > 0) {
+            for (Drawable drawable : drawableList) {
+                ((Animatable) drawable).start();
+            }
+        }
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopVectorAnim();
+    }
+
+    //停止属性动画
+    private void stopVectorAnim() {
+        if (drawableList != null && drawableList.size() > 0) {
+            for (Drawable drawable : drawableList) {
+                if (((Animatable) drawable).isRunning()) {
+                    ((Animatable) drawable).stop();
+                }
+            }
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
+        drawableList.clear();
         mLoadingDialog.dismiss();
         presenter.detachView();
     }

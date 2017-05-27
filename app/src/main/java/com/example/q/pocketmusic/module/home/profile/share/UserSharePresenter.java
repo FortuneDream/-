@@ -9,12 +9,12 @@ import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
-import com.example.q.pocketmusic.module.common.IBaseList;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
+import com.example.q.pocketmusic.util.BmobUtil;
 
 import java.util.List;
 
-import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
 
 /**
@@ -24,19 +24,35 @@ import cn.bmob.v3.datatype.BmobPointer;
 public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> {
     private IView activity;
     private MyUser user;
+    private int mPage;
+    private BmobUtil bmobUtil;
 
     public UserSharePresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
+        bmobUtil = new BmobUtil();
     }
 
-    public void getInitList() {
-        BmobQuery<ShareSong> query = new BmobQuery<>();
-        query.addWhereEqualTo("user", new BmobPointer(user));
-        query.findObjects(new ToastQueryListener<ShareSong>(activity) {
+    public void getInitList(final boolean isRefreshing) {
+        bmobUtil.getInitListWithEqual(ShareSong.class, null, Constant.BMOB_USER, new BmobPointer(user), new ToastQueryListener<ShareSong>(activity) {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                activity.setInitList(list);
+                if (!isRefreshing){
+                    activity.setList(list);
+                }else {
+                    activity.setListWithRefreshing(list);
+                }
+
+            }
+        });
+    }
+
+    public void getMoreList() {
+        mPage++;
+        bmobUtil.getMoreListWithEqual(ShareSong.class, null, mPage, Constant.BMOB_USER, new BmobPointer(user), new ToastQueryListener<ShareSong>(activity) {
+            @Override
+            public void onSuccess(List<ShareSong> list) {
+                activity.setList(list);
             }
         });
     }
@@ -57,8 +73,13 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
         activity.getCurrentContext().startActivity(intent);
     }
 
-    interface IView extends IBaseList {
+    public void setPage(int page) {
+        this.mPage = page;
+    }
 
-        void setInitList(List<ShareSong> list);
+    interface IView extends IBaseView {
+        void setList(List<ShareSong> list);
+
+        void setListWithRefreshing(List<ShareSong> list);
     }
 }

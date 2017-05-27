@@ -1,13 +1,12 @@
 package com.example.q.pocketmusic.module.splash;
 
-import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.module.common.BasePresenter;
-import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.BmobInfo;
 import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.HomeActivity;
 import com.example.q.pocketmusic.util.BmobUtil;
 
@@ -40,7 +39,7 @@ public class SplashPresenter extends BasePresenter<SplashPresenter.IView> {
         activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), HomeActivity.class));
     }
 
-    public interface IView extends IBaseList {
+    public interface IView extends IBaseView {
 
         void setLaBaText(BmobInfo bmobInfo);
     }

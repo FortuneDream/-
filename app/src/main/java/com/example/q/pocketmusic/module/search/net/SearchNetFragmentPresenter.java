@@ -1,17 +1,15 @@
 package com.example.q.pocketmusic.module.search.net;
 
-import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.module.common.BasePresenter;
-import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.net.LoadSearchSongList;
+import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,7 +38,7 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
         new LoadSearchSongList(mPage) {
             @Override
             protected void onPostExecute(final List<Song> list) {
-                fragment.setList(list);
+                fragment.setListWithRefreshing(list);
             }
         }.execute(query);
     }
@@ -56,7 +54,7 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
         fragment.getCurrentContext().startActivity(intent);
     }
 
-    public interface IView extends IBaseList {
-        void setList(List<Song> list);
+    public interface IView extends IBaseView {
+        void setListWithRefreshing(List<Song> list);
     }
 }

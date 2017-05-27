@@ -276,11 +276,6 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     }
 
     @Override
-    public void showRefreshing(boolean isShow) {
-
-    }
-
-    @Override
     protected void onStop() {
         presenter.onStop();
         super.onStop();

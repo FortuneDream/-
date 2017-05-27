@@ -1,16 +1,15 @@
 package com.example.q.pocketmusic.module.user.login;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.example.q.pocketmusic.module.common.IBaseList;
+import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.user.forget.ForgetActivity;
 import com.example.q.pocketmusic.module.user.register.RegisterActivity;
 import com.example.q.pocketmusic.util.MyToast;
@@ -68,7 +67,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
 
     }
 
-    public interface IView extends IBaseList {
+    public interface IView extends IBaseView {
         void finish();
 
         void loginToResult(Integer success, MyUser myUser);

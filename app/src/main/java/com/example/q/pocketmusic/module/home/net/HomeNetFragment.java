@@ -62,7 +62,9 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
         adapter.setListener(this);
         //初始化
         recycler.setEmptyView(R.layout.view_not_found);
-        onRefresh();
+        initList();
+        presenter.setPage(1);
+        presenter.getList(false);
     }
 
 
@@ -70,7 +72,7 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
     @Override
     public void onMoreShow() {
         presenter.setPage(presenter.getmPage() + 1);
-        presenter.getList();
+        presenter.getList(false);
     }
 
     @Override
@@ -97,13 +99,18 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
         adapter.addAll(list);
     }
 
+    @Override
+    public void setInitListWithRefreshing(List<Song> songs) {
+        adapter.clear();
+        initList();
+        adapter.addAll(songs);
+    }
+
 
     @Override
     public void onRefresh() {
-        adapter.clear();
-        initList();
         presenter.setPage(1);
-        presenter.getList();
+        presenter.getList(true);
     }
 
 
@@ -129,11 +136,6 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
         presenter.enterBannerActivity(picPosition);
     }
 
-
-    @Override
-    public void showRefreshing(boolean isShow) {
-        recycler.setRefreshing(isShow);
-    }
 
     @Override
     protected HomeNetFragmentPresenter createPresenter() {

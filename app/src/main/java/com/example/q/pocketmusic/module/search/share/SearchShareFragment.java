@@ -6,7 +6,6 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.search.ISearchInfo;
-import com.example.q.pocketmusic.util.LogUtils;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -25,11 +24,6 @@ public class SearchShareFragment extends BaseFragment<SearchShareFragmentPresent
     private SearchShareAdapter adapter;
 
     @Override
-    public void showRefreshing(boolean isShow) {
-        recycler.setRefreshing(isShow);
-    }
-
-    @Override
     public void finish() {
         getActivity().finish();
     }
@@ -44,7 +38,7 @@ public class SearchShareFragment extends BaseFragment<SearchShareFragmentPresent
         adapter = new SearchShareAdapter(getContext());
         recycler.setRefreshListener(this);
         adapter.setOnItemClickListener(this);
-        initRecyclerView(recycler, adapter, 1, true);
+        initRecyclerView(recycler, adapter, 1);
     }
 
     @Override
@@ -55,14 +49,11 @@ public class SearchShareFragment extends BaseFragment<SearchShareFragmentPresent
 
     @Override
     public void onRefresh() {
-        LogUtils.e(TAG, "onRefresh");
         String query = ((ISearchInfo) getActivity()).getQueryStr();
         if (query == null) {
-            recycler.showEmpty();
             return;
         }
-        adapter.clear();
-        presenter.queryFromShareSongList(query);
+        presenter.queryFromShareSongListWithRefreing(query);
     }
 
     @Override
@@ -71,7 +62,8 @@ public class SearchShareFragment extends BaseFragment<SearchShareFragmentPresent
     }
 
     @Override
-    public void setShareSongList(List<ShareSong> list) {
+    public void setShareSongListWithRefreshing(List<ShareSong> list) {
+        adapter.clear();
         adapter.addAll(list);
     }
 

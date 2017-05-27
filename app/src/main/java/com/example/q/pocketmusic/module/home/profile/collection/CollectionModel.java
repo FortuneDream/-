@@ -1,14 +1,12 @@
 package com.example.q.pocketmusic.module.home.profile.collection;
 
-import android.content.Context;
-
-import com.example.q.pocketmusic.module.common.IBaseList;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.collection.CollectionPic;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.BmobUtil;
 
 import java.util.ArrayList;
@@ -47,7 +45,7 @@ public class CollectionModel {
         queryComment.findObjects(listener);
     }
 
-    public void deleteCollection(MyUser user, final CollectionSong collectionSong, final IBaseList activity, final ToastUpdateListener listener) {
+    public void deleteCollection(MyUser user, final CollectionSong collectionSong, final IBaseView activity, final ToastUpdateListener listener) {
         BmobRelation relation = new BmobRelation();
         relation.remove(collectionSong);
         user.setCollections(relation);

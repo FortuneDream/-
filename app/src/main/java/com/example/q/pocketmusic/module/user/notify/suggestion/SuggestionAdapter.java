@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.user.suggestion;
+package com.example.q.pocketmusic.module.user.notify.suggestion;
 
 import android.content.Context;
 import android.view.ViewGroup;
