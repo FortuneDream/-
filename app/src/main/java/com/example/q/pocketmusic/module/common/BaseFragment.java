@@ -95,6 +95,10 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         toolbar.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
     }
 
+    @Override
+    public void finish() {
+        getActivity().finish();
+    }
 
     @Override
     public void onDestroy() {

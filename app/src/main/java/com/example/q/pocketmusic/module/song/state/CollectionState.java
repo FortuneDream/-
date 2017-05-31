@@ -12,10 +12,9 @@ import com.example.q.pocketmusic.module.song.SongActivityPresenter;
  */
 //收藏
 public class CollectionState extends BaseState implements IState {
-    private Context context;
     private SongActivityPresenter.IView activity;
 
-    public CollectionState(Song song, Context context, SongActivityPresenter.IView activity) {
+    public CollectionState(Song song, SongActivityPresenter.IView activity) {
         super(song, Constant.NET);
         this.activity = activity;
     }

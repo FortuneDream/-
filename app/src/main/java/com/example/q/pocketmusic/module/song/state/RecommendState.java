@@ -13,12 +13,11 @@ import com.example.q.pocketmusic.module.song.SongActivityPresenter;
  */
 //推荐状态
 public class RecommendState extends BaseState implements IState {
-    private Context context;
+
     private SongActivityPresenter.IView activity;
 
-    public RecommendState(Song song, Context context, SongActivityPresenter.IView activity) {
+    public RecommendState(Song song, SongActivityPresenter.IView activity) {
         super(song, Constant.NET);
-        this.context = context;
         this.activity = activity;
     }
 

@@ -21,13 +21,11 @@ import cn.bmob.v3.datatype.BmobPointer;
 //分享状态
 public class ShareState extends BaseState implements IState {
     private ShareSong shareSong;
-    private Context context;
     private SongActivityPresenter.IView activity;
 
-    public ShareState(Song song, ShareSong shareSong,Context context,SongActivityPresenter.IView activity) {
+    public ShareState(Song song, ShareSong shareSong,SongActivityPresenter.IView activity) {
         super(song,Constant.NET);
         this.shareSong=shareSong;
-        this.context=context;
         this.activity=activity;
     }
 

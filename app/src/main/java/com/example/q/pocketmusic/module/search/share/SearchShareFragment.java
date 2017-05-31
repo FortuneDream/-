@@ -1,11 +1,10 @@
 package com.example.q.pocketmusic.module.search.share;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.module.search.ISearchInfo;
+import com.example.q.pocketmusic.module.search.ISearchActivity;
+import com.example.q.pocketmusic.module.search.ISearchFragment;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -18,7 +17,7 @@ import butterknife.BindView;
  */
 
 public class SearchShareFragment extends BaseFragment<SearchShareFragmentPresenter.IView, SearchShareFragmentPresenter>
-        implements SearchShareFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener {
+        implements SearchShareFragmentPresenter.IView, RecyclerArrayAdapter.OnItemClickListener,ISearchFragment {
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
     private SearchShareAdapter adapter;
@@ -36,25 +35,21 @@ public class SearchShareFragment extends BaseFragment<SearchShareFragmentPresent
     @Override
     public void initView() {
         adapter = new SearchShareAdapter(getContext());
-        recycler.setRefreshListener(this);
         adapter.setOnItemClickListener(this);
         initRecyclerView(recycler, adapter, 1);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        onRefresh();
-    }
-
-    @Override
-    public void onRefresh() {
-        String query = ((ISearchInfo) getActivity()).getQueryStr();
+    public void getInitSearchList() {
+        String query = ((ISearchActivity) getActivity()).getQueryStr();
         if (query == null) {
             return;
         }
-        presenter.queryFromShareSongListWithRefreing(query);
+        adapter.clear();
+        presenter.queryFromShareSongList(query);
     }
+
+
 
     @Override
     public void onItemClick(int position) {
@@ -62,8 +57,7 @@ public class SearchShareFragment extends BaseFragment<SearchShareFragmentPresent
     }
 
     @Override
-    public void setShareSongListWithRefreshing(List<ShareSong> list) {
-        adapter.clear();
+    public void setShareSongList(List<ShareSong> list) {
         adapter.addAll(list);
     }
 

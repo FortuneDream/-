@@ -23,12 +23,11 @@ import java.util.ArrayList;
 //本地状态
 public class LocalState extends BaseState implements IState {
     private LocalSong localSong;
-    private Context context;
     private SongActivityPresenter.IView activity;
 
-    public LocalState(Song song, LocalSong localSong, Context context, SongActivityPresenter.IView activity) {
+    public LocalState(Song song, LocalSong localSong, SongActivityPresenter.IView activity) {
         super(song, Constant.LOCAL);
-        this.context = context;
+
         this.activity = activity;
         this.localSong = localSong;
     }
@@ -41,11 +40,11 @@ public class LocalState extends BaseState implements IState {
 
     @NonNull
     private ArrayList<String> getLocalImgs() {
-        LocalSongDao localSongDao = new LocalSongDao(context);
+        LocalSongDao localSongDao = new LocalSongDao(activity.getCurrentContext());
         ArrayList<String> imgUrls = new ArrayList<>();
         LocalSong localSong = localSongDao.findBySongId(this.localSong.getId());
         if (localSong == null) {
-            MyToast.showToast(context, "曲谱消失在了异次元。");
+            MyToast.showToast(activity.getCurrentContext(), "曲谱消失在了异次元。");
             activity.finish();
             return new ArrayList<>();
         }

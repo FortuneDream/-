@@ -14,14 +14,12 @@ import com.example.q.pocketmusic.module.song.SongActivityPresenter;
 //求谱
 public class AskState extends BaseState implements IState {
     private AskSongComment askSongComment;
-    private Context context;
     private SongActivityPresenter.IView activity;
 
 
-    public AskState(Song song, AskSongComment askSongComment, Context context, SongActivityPresenter.IView activity) {
+    public AskState(Song song, AskSongComment askSongComment,SongActivityPresenter.IView activity) {
         super(song, Constant.NET);
         this.askSongComment = askSongComment;
-        this.context = context;
         this.activity = activity;
     }
 

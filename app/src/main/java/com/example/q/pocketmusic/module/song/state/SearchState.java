@@ -13,14 +13,12 @@ import com.example.q.pocketmusic.module.song.SongActivityPresenter;
  */
 //搜索状态
 public class SearchState extends BaseState implements IState {
-    private Context context;
     private SongActivityPresenter.IView activity;
 
 
 
-    public SearchState(Song song, Context context, SongActivityPresenter.IView activity) {
+    public SearchState(Song song, SongActivityPresenter.IView activity) {
         super(song, Constant.NET);
-        this.context = context;
         this.activity = activity;
     }
 

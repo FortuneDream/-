@@ -27,13 +27,13 @@ public class SearchShareFragmentPresenter extends BasePresenter<SearchShareFragm
         this.fragment=getIViewRef();
     }
 
-    public void queryFromShareSongListWithRefreing(String s) {
+    public void queryFromShareSongList(String s) {
         BmobQuery<ShareSong> query = new BmobQuery<>();
         query.addWhereEqualTo("name", s);
         query.findObjects(new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                fragment.setShareSongListWithRefreshing(list);
+                fragment.setShareSongList(list);
             }
         });
     }
@@ -52,7 +52,7 @@ public class SearchShareFragmentPresenter extends BasePresenter<SearchShareFragm
 
     interface IView extends IBaseView {
 
-        void setShareSongListWithRefreshing(List<ShareSong> list);
+        void setShareSongList(List<ShareSong> list);
     }
 
 }

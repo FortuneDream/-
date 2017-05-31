@@ -52,7 +52,6 @@ public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView
 
     @Override
     public void setPostList(List<AskSongPost> list) {
-        recycler.setRefreshing(false);
         adapter.addAll(list);
     }
 

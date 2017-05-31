@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SearchMainActivity extends BaseActivity<SearchMainPresenter.IView, SearchMainPresenter>
-        implements ISearchInfo, View.OnKeyListener, View.OnClickListener, SearchMainPresenter.IView, ViewPager.OnPageChangeListener {
+        implements ISearchActivity, View.OnKeyListener, View.OnClickListener, SearchMainPresenter.IView, ViewPager.OnPageChangeListener {
     @BindView(R.id.search_edt)
     EditText searchEdt;
     @BindView(R.id.search_iv)

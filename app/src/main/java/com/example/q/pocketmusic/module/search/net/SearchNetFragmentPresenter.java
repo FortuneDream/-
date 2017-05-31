@@ -22,7 +22,7 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
 
     public SearchNetFragmentPresenter(IView fragment) {
         attachView(fragment);
-        this.fragment=getIViewRef();
+        this.fragment = getIViewRef();
     }
 
     public int getmPage() {
@@ -38,7 +38,10 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
         new LoadSearchSongList(mPage) {
             @Override
             protected void onPostExecute(final List<Song> list) {
-                fragment.setListWithRefreshing(list);
+                //默认是刷新操作，主线程adapter.clear,所以要保证list不为空
+                if (list != null) {
+                    fragment.setList(list);
+                }
             }
         }.execute(query);
     }
@@ -47,14 +50,14 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
         this.mPage = page;
     }
 
-    public void enterSongActivity(Song song, int searchFrom) {
+    public void enterSongActivity(Song song) {
         Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
-        SongObject object = new SongObject(song, searchFrom, Constant.SHOW_COLLECTION_MENU, Constant.NET);
+        SongObject object = new SongObject(song, song.getSearchFrom(), Constant.SHOW_COLLECTION_MENU, Constant.NET);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, object);
         fragment.getCurrentContext().startActivity(intent);
     }
 
     public interface IView extends IBaseView {
-        void setListWithRefreshing(List<Song> list);
+        void setList(List<Song> list);
     }
 }

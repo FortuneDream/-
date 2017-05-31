@@ -56,6 +56,7 @@ public class LoadSearchSongList extends AsyncTask<String, Void, List<Song>> {
             if (number <= page * 10) {
                 return null;
             }
+//            LogUtils.e("TAG", "搜索到了" + number + "页");
             Element c_list = doc.select("div.c_list").get(0);
             Elements uls = c_list.getElementsByTag("ul");
             //判断数量
@@ -69,6 +70,7 @@ public class LoadSearchSongList extends AsyncTask<String, Void, List<Song>> {
                 //内容,这个内容需要处理一下
                 String content = StringUtil.fixName5(lis.get(1).text());
                 Song song = new Song(name, url);
+                song.setSearchFrom(Constant.FROM_SEARCH_NET);
                 song.setContent(content);
                 songs.add(song);
             }

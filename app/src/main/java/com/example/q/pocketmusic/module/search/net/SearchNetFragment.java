@@ -1,13 +1,10 @@
 package com.example.q.pocketmusic.module.search.net;
 
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.module.search.ISearchInfo;
-import com.example.q.pocketmusic.util.LogUtils;
+import com.example.q.pocketmusic.module.search.ISearchActivity;
+import com.example.q.pocketmusic.module.search.ISearchFragment;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -20,8 +17,8 @@ import butterknife.BindView;
  */
 
 public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.IView, SearchNetFragmentPresenter>
-        implements SearchNetFragmentPresenter.IView, RecyclerArrayAdapter.OnItemClickListener
-        , RecyclerArrayAdapter.OnMoreListener, android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener {
+        implements SearchNetFragmentPresenter.IView, RecyclerArrayAdapter.OnItemClickListener, ISearchFragment
+        , RecyclerArrayAdapter.OnMoreListener {
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
 
@@ -44,25 +41,27 @@ public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.I
         initRecyclerView(recycler, adapter, 1);
         adapter.setMore(R.layout.view_more, this);
         adapter.setOnItemClickListener(this);
-        recycler.setRefreshListener(this);
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        onRefresh();
     }
 
     @Override
-    public void setListWithRefreshing(List<Song> lists) {
+    public void getInitSearchList() {
+        query = ((ISearchActivity) getActivity()).getQueryStr();
+        if (query == null) {
+            return;
+        }
         adapter.clear();
+        presenter.setPage(0);
+        presenter.getList(query);
+    }
+
+    @Override
+    public void setList(List<Song> lists) {
         adapter.addAll(lists);
     }
 
     @Override
     public void onItemClick(int position) {
-        presenter.enterSongActivity(adapter.getItem(position), adapter.getItem(position).getSearchFrom());
+        presenter.enterSongActivity(adapter.getItem(position));
     }
 
     @Override
@@ -74,16 +73,6 @@ public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.I
     @Override
     public void onMoreClick() {
 
-    }
-
-    @Override
-    public void onRefresh() {
-        query = ((ISearchInfo) getActivity()).getQueryStr();
-        if (query == null) {
-            return;
-        }
-        presenter.setPage(0);
-        presenter.getList(query);
     }
 
 

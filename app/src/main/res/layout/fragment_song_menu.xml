@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/item_padding_16dp">
+
+
+    <ImageView
+        android:id="@+id/download_iv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/ico_menu_download" />
+
+    <ImageView
+        android:id="@+id/agree_iv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/ico_menu_agree" />
+
+    <ImageView
+        android:id="@+id/collection_iv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/ico_menu_collection" />
+
+    <ImageView
+        android:id="@+id/share_iv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/ico_menu_share" />
+</LinearLayout>
