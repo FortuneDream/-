@@ -103,7 +103,7 @@
         <activity android:name=".module.home.net.banner.BannerActivity" />
         <activity android:name=".module.home.profile.post.UserPostActivity" />
         <activity android:name=".module.home.profile.share.UserShareActivity" />
-        <activity android:name=".module.user.notify.UserNotifyActivity"></activity>
+        <activity android:name=".module.user.notify.UserNotifyActivity" />
     </application>
 
 </manifest>

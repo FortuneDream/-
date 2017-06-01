@@ -22,14 +22,12 @@ public class SongObject implements Parcelable{
         this.loadingWay = loadingWay;
     }
 
-
     protected SongObject(Parcel in) {
+        song = in.readParcelable(Song.class.getClassLoader());
         from = in.readInt();
         showMenu = in.readInt();
         loadingWay = in.readInt();
-        song=in.readParcelable(Thread.currentThread().getContextClassLoader());
     }
-
 
     public static final Creator<SongObject> CREATOR = new Creator<SongObject>() {
         @Override
@@ -50,10 +48,10 @@ public class SongObject implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(song, flags);
         dest.writeInt(from);
         dest.writeInt(showMenu);
         dest.writeInt(loadingWay);
-        dest.writeParcelable(song,0);
     }
 
     public Song getSong() {
@@ -87,6 +85,4 @@ public class SongObject implements Parcelable{
     public void setLoadingWay(int loadingWay) {
         this.loadingWay = loadingWay;
     }
-
-
 }
