@@ -114,7 +114,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
     @Override
     public void showPicDialog(final Song song, final AskSongComment askSongComment) {
         picDialog = new PicDialog.Builder(context)
-                .setList(song.getIvUrl())
+                .setFirstPath(song.getIvUrl().get(0))
                 .setOnSelectListener(new PicDialog.Builder.OnSelectListener() {
                     @Override
                     public void onSelectOk() {
@@ -147,7 +147,6 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
 
     @Override
     public void onRefresh() {
-
         presenter.getInitCommentList(true);
     }
 

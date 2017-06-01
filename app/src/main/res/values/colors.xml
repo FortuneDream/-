@@ -3,7 +3,7 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
-<!--518400  1638400   2156800   1468-->
+    <!--518400  1638400   2156800   1468-->
     <color name="colorPrimary">#2cc17b</color>
     <color name="colorPrimaryDark">#FBC02D</color>
     <color name="colorAccent">#FFC107</color>
@@ -44,7 +44,7 @@
     <color name="textPressAttention">@color/upload_name</color>
 
     <color name="homeTabNormal">#FF000000</color>
-    <color name="homeTabPress">@color/md_red_300</color>
+    <color name="homeTabPress">@color/colorPrimary</color>
 
 
     <!--Material Design颜色备选项-->

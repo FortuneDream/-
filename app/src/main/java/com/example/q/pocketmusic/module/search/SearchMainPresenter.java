@@ -56,7 +56,7 @@ public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView
     }
 
     //刷新版块
-    public void onRefreshFragment(int flag) {
+    public void searchSong(int flag) {
         if (flag == POSITION_NET_FRAGMENT) {
             netFragment.getInitSearchList();
         } else if (flag == POSITION_SHARE_FRAGMENT) {

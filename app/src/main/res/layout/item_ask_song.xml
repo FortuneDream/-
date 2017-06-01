@@ -49,7 +49,6 @@
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="56dp"
         android:maxLines="1"
         tools:text="求谱啊啊~~~~" />
 
@@ -58,13 +57,11 @@
         style="@style/TextAppearance.AppCompat.Caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="56dp"
         tools:text="曲谱类型" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="56dp"
         android:gravity="center"
         android:orientation="horizontal">
 

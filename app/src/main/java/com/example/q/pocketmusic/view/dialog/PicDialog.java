@@ -2,26 +2,21 @@ package com.example.q.pocketmusic.view.dialog;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.module.home.seek.ask.comment.PicAdapter;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-
-import java.util.List;
+import com.example.q.pocketmusic.util.DisplayStrategy;
 
 /**
  * Created by Cloud on 2017/2/5.
  */
 
 public class PicDialog {
-    private EasyRecyclerView recycler;
     private Button enterBtn;
     private ImageView closeIv;
-    private PicAdapter picAdapter;
+    private ImageView firstIv;
     private AlertDialog dialog;
 
 
@@ -30,7 +25,7 @@ public class PicDialog {
         dialog = new AlertDialog.Builder(builder.getContext())
                 .setView(view)
                 .create();
-        recycler = (EasyRecyclerView) view.findViewById(R.id.dialog_recycler);
+        firstIv= (ImageView) view.findViewById(R.id.first_iv);
         enterBtn = (Button) view.findViewById(R.id.enter_btn);
         closeIv = (ImageView) view.findViewById(R.id.close_iv);
         enterBtn.setOnClickListener(new View.OnClickListener() {
@@ -48,11 +43,7 @@ public class PicDialog {
                 dismiss();
             }
         });
-
-        picAdapter = new PicAdapter(builder.getContext());
-        recycler.setLayoutManager(new LinearLayoutManager(builder.getContext()));
-        picAdapter.addAll(builder.getList());
-        recycler.setAdapter(picAdapter);
+        new DisplayStrategy().display(builder.getContext(),builder.getFirstPic(),firstIv);
     }
 
     public PicDialog show() {
@@ -67,7 +58,7 @@ public class PicDialog {
     public static class Builder {
         private OnSelectListener onSelectListener;
         private Context context;
-        private List<String> list;
+        private String firstPic;
 
         public OnSelectListener getOnSelectListener() {
             return onSelectListener;
@@ -90,12 +81,12 @@ public class PicDialog {
             this.context = context;
         }
 
-        public List<String> getList() {
-            return list;
+        public String getFirstPic() {
+            return firstPic;
         }
 
-        public Builder setList(List<String> list) {
-            this.list = list;
+        public Builder setFirstPath(String firstPic) {
+            this.firstPic = firstPic;
             return this;
         }
 

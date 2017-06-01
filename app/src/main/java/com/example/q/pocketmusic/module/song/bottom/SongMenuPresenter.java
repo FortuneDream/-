@@ -62,9 +62,6 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         return song;
     }
 
-    public boolean isEnableAgree() {
-        return isEnableAgree;
-    }
 
 
     //下载
@@ -131,6 +128,31 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         return new DownloadInfo("", true);
     }
 
+    //判断当前的评论的图片是否可以点赞
+    public void checkHasAgree() {
+        BmobQuery<MyUser> query = new BmobQuery<>();
+        final MyUser user = MyUser.getCurrentUser(MyUser.class);
+        AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
+        query.addWhereRelatedTo("agrees", new BmobPointer(askSongComment));
+        query.findObjects(new ToastQueryListener<MyUser>(fragment) {
+            @Override
+            public void onSuccess(List<MyUser> list) {
+                for (MyUser other : list) {
+                    if (other.getObjectId().equals(user.getObjectId())) {
+                        //已经点赞
+                        isEnableAgree = false;
+                        break;
+                    }
+                    isEnableAgree = true;
+                }
+            }
+        });
+    }
+
+    public boolean isEnableAgree() {
+        return isEnableAgree;
+    }
+
 
     //点赞
     public void agree() {
@@ -157,32 +179,11 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         } else {
             MyToast.showToast(fragment.getCurrentContext(), "已经赞过了哦~");
         }
-
-
     }
 
 
-    //判断当前的评论的图片是否可以点赞
-    public void checkHasAgree() {
-        BmobQuery<MyUser> query = new BmobQuery<>();
-        final MyUser user = MyUser.getCurrentUser(MyUser.class);
-        AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
-        query.addWhereRelatedTo("agrees", new BmobPointer(askSongComment));
-        query.findObjects(new ToastQueryListener<MyUser>(fragment) {
-            @Override
-            public void onSuccess(List<MyUser> list) {
-                for (MyUser other : list) {
-                    if (other.getObjectId().equals(user.getObjectId())) {
-                        //已经点赞
-                        isEnableAgree = false;
-                        break;
-                    }
-                    isEnableAgree = true;
-                }
-            }
-        });
 
-    }
+
 
     //添加收藏
     public void addCollection() {

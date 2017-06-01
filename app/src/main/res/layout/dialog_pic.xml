@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.jude.easyrecyclerview.EasyRecyclerView
-        android:id="@+id/dialog_recycler"
+    <ImageView
+        android:id="@+id/first_iv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 
     <ImageView
@@ -26,5 +26,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/bg_button"
-        android:text="查看大图" />
+        android:text="查看全部" />
 </RelativeLayout>

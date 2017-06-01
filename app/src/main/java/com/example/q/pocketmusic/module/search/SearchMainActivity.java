@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.search;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -13,7 +12,6 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SearchMainActivity extends BaseActivity<SearchMainPresenter.IView, SearchMainPresenter>
         implements ISearchActivity, View.OnKeyListener, View.OnClickListener, SearchMainPresenter.IView, ViewPager.OnPageChangeListener {
@@ -43,8 +41,6 @@ public class SearchMainActivity extends BaseActivity<SearchMainPresenter.IView, 
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.colorTitle), ContextCompat.getColor(this, R.color.colorTitle));
         tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.colorTitle));
-
-
     }
 
     //Enter键
@@ -74,7 +70,7 @@ public class SearchMainActivity extends BaseActivity<SearchMainPresenter.IView, 
     public void beginSearch() {
         presenter.setInputStr(searchEdt.getText().toString().trim());
         viewPager.setCurrentItem(presenter.setSearchItemPage(), true);
-        presenter.onRefreshFragment(viewPager.getCurrentItem());
+        presenter.searchSong(viewPager.getCurrentItem());
     }
 
     @Override

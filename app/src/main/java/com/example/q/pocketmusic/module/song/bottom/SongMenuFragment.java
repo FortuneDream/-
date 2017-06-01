@@ -4,18 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.HomeActivity;
-import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.MyToast;
 import com.example.q.pocketmusic.view.dialog.EditDialog;
 import com.example.q.pocketmusic.view.widget.net.ConfettiUtil;
@@ -32,18 +30,18 @@ import butterknife.Unbinder;
 
 public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, SongMenuPresenter>
         implements SongMenuPresenter.IView {
-    @BindView(R.id.download_iv)
-    ImageView downloadIv;
-    @BindView(R.id.agree_iv)
-    ImageView agreeIv;
-    @BindView(R.id.collection_iv)
-    ImageView collectionIv;
-    @BindView(R.id.share_iv)
-    ImageView shareIv;
-    private static final String PARAM_Intent = "intent";
     @BindView(R.id.content_ll)
     LinearLayout contentLl;
+    @BindView(R.id.download_iv)
+    AppCompatImageView downloadIv;
+    @BindView(R.id.agree_iv)
+    AppCompatImageView agreeIv;
+    @BindView(R.id.collection_iv)
+    AppCompatImageView collectionIv;
+    @BindView(R.id.share_iv)
+    AppCompatImageView shareIv;
     private EditDialog editDialog;//编辑框
+    private static final String PARAM_Intent = "intent";
 
 
     @Override
@@ -99,9 +97,12 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
             case R.id.agree_iv:
                 presenter.agree();
                 view.setEnabled(false);//点赞之后就不可再次点击
+                ((AppCompatImageView) view).setImageResource(R.drawable.ic_vec_song_bottom_agree_press);
                 break;
             case R.id.collection_iv:
                 presenter.addCollection();
+                view.setEnabled(false);//点击收藏之后不可再次点击
+                ((AppCompatImageView) view).setImageResource(R.drawable.ic_vec_song_bottom_collection_press);//改变状态
                 break;
             case R.id.share_iv:
                 presenter.share();

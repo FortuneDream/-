@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/content_ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,31 +8,31 @@
     android:padding="@dimen/item_padding_16dp">
 
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/download_iv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/ico_menu_download" />
+        app:srcCompat="@drawable/ic_vec_song_bottom_download_normal" />
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/agree_iv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/ico_menu_agree" />
+        app:srcCompat="@drawable/ic_vec_song_bottom_agree_normal" />
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/collection_iv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/ico_menu_collection" />
+        app:srcCompat="@drawable/ic_vec_song_bottom_collection_normal" />
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/share_iv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/ico_menu_share" />
+        app:srcCompat="@drawable/ic_vec_song_bottom_share_normal" />
 </LinearLayout>

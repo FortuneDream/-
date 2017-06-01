@@ -31,20 +31,15 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
 
     //这里有问题，最好是能够先搜Bmob再搜全网
     public void getList(final String query) {
-        getListFromNet(query);
-    }
-
-    private void getListFromNet(String query) {
         new LoadSearchSongList(mPage) {
             @Override
             protected void onPostExecute(final List<Song> list) {
                 //默认是刷新操作，主线程adapter.clear,所以要保证list不为空
-                if (list != null) {
-                    fragment.setList(list);
-                }
+                fragment.setList(list);
             }
         }.execute(query);
     }
+
 
     public void setPage(int page) {
         this.mPage = page;

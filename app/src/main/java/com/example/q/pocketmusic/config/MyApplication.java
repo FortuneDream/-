@@ -35,8 +35,8 @@ public class MyApplication extends Application {
         AppStat.i(Constant.APP_ID, "Bmob");
         //    initAutoUpdate(); //自动表创建
         //发布时，开启异常捕获器
-//        CrashHandler crashHandler = CrashHandler.getInstance();
-//        crashHandler.init(this);
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(this);
         initGalleryFinal();
     }
 
