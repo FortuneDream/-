@@ -75,6 +75,7 @@
 #### 直接搜索
 * 网络搜索
 * 本站搜索
+
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_6.png)
 
 ### 实现
