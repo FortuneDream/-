@@ -28,6 +28,10 @@
 
 ### 示例：
 
+#### Splash
+![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_0.png)
+* ~~嘿嘿嘿，好像有什么奇怪的东西加进来了~~
+
 #### 乐谱界面
 * 本地曲谱可以录音
 * 网络曲谱可以下载，收藏，分享
@@ -36,38 +40,41 @@
 
 #### 本地乐谱
 * 曲谱来源：本地导入，网络下载
-* 另外有一个小钢琴~(目前正在完善功能中)
+* 演奏模式：可以录音的哦~
 
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_2.png)
 
 #### 网络乐谱
 * 直接搜索
+* 推荐曲谱
 * 乐器类型
-* 谱友来荐
+* 信息反馈
 
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_3.png)
 
 #### 求谱
+* 谱友来荐
+* 求谱帖子
 * 点击右下角的小飞机发布求谱帖~
 
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_4.png)
 
 #### 个人界面
-* 反馈意见
-* 我的求谱
+* 应用评分
 * 我的硬币（通过每日签到或者分享曲谱可以获得）
+* 我的求谱
 * 我的收藏
+* 我的分享
 * 帮助文档
 * 设置中心
 
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_5.png)
 
-#### 某种乐器
-
-![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_6.png)
 
 #### 直接搜索
-![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_7.png)
+* 网络搜索
+* 本站搜索
+![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_6.png)
 
 ### 实现
 * **T-MVP** 架构
@@ -117,3 +124,4 @@
     * 录制音频需要开启录音权限（运行时权限）
 
 #### By 鹏君
+项目大小：Java：2万行，历时一年，独立开发
