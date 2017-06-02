@@ -42,6 +42,9 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
     }
 
     private void loadRecordList() {
+        if (fragment.getAppContext()==null){
+            return;
+        }
         new LoadLocalRecordList(fragment.getAppContext()) {
             @Override
             protected void onPostExecute(List<RecordAudio> recordAudios) {

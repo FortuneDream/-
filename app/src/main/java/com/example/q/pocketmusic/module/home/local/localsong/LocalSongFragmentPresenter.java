@@ -45,6 +45,9 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
     }
 
     public void loadLocalSong() {
+        if (fragment.getAppContext() == null) {
+            return;
+        }
         new LoadLocalSongList(localSongDao, fragment.getAppContext()) {
             @Override
             protected void onPostExecute(List<LocalSong> localSongs) {

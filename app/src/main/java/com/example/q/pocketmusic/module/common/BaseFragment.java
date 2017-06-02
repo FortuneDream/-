@@ -51,14 +51,14 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(setContentResource(), container, false);
-         ButterKnife.bind(this, view);
+        ButterKnife.bind(this, view);
         initView();
         return view;
     }
 
     @Override
     public Context getAppContext() {
-        return getContext().getApplicationContext();
+        return getContext()!=null?getContext().getApplicationContext():null;
     }
 
     @Override
