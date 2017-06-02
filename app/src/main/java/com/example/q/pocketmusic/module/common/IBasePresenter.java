@@ -1,10 +1,7 @@
 package com.example.q.pocketmusic.module.common;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 /**
- * Created by 81256 on 2016/10/23.
+ * Created by 鹏君 on 2016/10/23.
  */
 
 public interface IBasePresenter {

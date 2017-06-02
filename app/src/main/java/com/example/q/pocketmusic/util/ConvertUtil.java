@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.util;
 import android.content.Context;
 
 /**
- * Created by YQ on 2016/9/10.
+ * Created by 鹏君 on 2016/9/10.
  */
 public class ConvertUtil {
     //dp->px

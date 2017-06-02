@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.piano;
 
 import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +13,6 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PianoActivity extends BaseActivity<PianoPresenter.IView,PianoPresenter>

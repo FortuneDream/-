@@ -29,11 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 /**
- * Created by YQ on 2016/10/1.
+ * Created by 鹏君 on 2016/10/1.
  */
 
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity implements IBaseView {

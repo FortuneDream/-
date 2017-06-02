@@ -2,7 +2,6 @@ package com.example.q.pocketmusic.util;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 
-import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
 

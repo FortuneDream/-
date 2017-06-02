@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.view.widget.net;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by YQ on 2016/9/22.
+ * Created by 鹏君 on 2016/9/22.
  */
 
 public class ConfettiUtil {

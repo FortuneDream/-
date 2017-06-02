@@ -1,12 +1,10 @@
 package com.example.q.pocketmusic.module.home.profile.post;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -15,7 +13,6 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class UserPostActivity extends AuthActivity<UserPostPresenter.IView, UserPostPresenter>
         implements UserPostPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener {

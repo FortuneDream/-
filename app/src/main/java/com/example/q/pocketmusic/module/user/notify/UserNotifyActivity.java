@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.user.notify;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,7 +9,6 @@ import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UserNotifyActivity extends AuthActivity<UserNotifyPresenter.IView, UserNotifyPresenter>

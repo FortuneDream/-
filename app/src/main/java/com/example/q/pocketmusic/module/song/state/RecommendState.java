@@ -1,11 +1,8 @@
 package com.example.q.pocketmusic.module.song.state;
 
-import android.content.Context;
-
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.net.LoadRecommendSongPic;
-import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.module.song.SongActivityPresenter;
 
 /**

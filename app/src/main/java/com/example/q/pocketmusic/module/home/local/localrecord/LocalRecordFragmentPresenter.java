@@ -19,7 +19,6 @@ import com.example.q.pocketmusic.model.net.SynchronizeRecordAudio;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.service.MediaPlayerService;
-import com.example.q.pocketmusic.util.MyToast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -28,7 +27,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by 81256 on 2016/10/23.
+ * Created by 鹏君 on 2016/10/23.
  */
 
 public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragmentPresenter.IView> {

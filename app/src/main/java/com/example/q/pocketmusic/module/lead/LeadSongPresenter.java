@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.lead;
 
-import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
 
@@ -11,7 +10,6 @@ import com.example.q.pocketmusic.model.db.ImgDao;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.song.state.BaseState;
 import com.example.q.pocketmusic.util.FileUtils;
 import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
@@ -26,7 +24,7 @@ import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 /**
- * Created by 81256 on 2017/4/1.
+ * Created by 鹏君 on 2017/4/1.
  */
 
 public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {

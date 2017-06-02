@@ -1,7 +1,5 @@
 package com.example.q.pocketmusic.module.song.state;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.config.Constant;

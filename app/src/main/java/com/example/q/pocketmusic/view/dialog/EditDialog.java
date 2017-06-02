@@ -11,7 +11,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.util.MyToast;
 
 /**
- * Created by Cloud on 2016/11/22.
+ * Created by 鹏君 on 2016/11/22.
  */
 
 //Builder设计模式

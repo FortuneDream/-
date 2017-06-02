@@ -10,7 +10,7 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.UploadBatchListener;
 
 /**
- * Created by Cloud on 2017/1/31.
+ * Created by 鹏君 on 2017/1/31.
  */
 
 public class ToastUploadBatchListener implements UploadBatchListener {

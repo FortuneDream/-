@@ -1,10 +1,7 @@
-package com.example.q.pocketmusic.view.widget.view;
-
-
-
-/**
- * Created by YQ on 2016/9/10.
+package com.example.q.pocketmusic.view.widget.view; /**
+ * Created by 鹏君 on 2016/9/10.
  */
+
 
 import android.content.Context;
 import android.content.res.TypedArray;

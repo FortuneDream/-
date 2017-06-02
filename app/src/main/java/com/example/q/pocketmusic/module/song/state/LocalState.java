@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.song.state;
 
-import android.content.Context;
 import android.database.SQLException;
 import android.support.annotation.NonNull;
 

@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by 81256 on 2017/4/17.
+ * Created by 鹏君 on 2017/4/17.
  */
 
 public class MusicUtils {

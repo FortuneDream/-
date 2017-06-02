@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
- * Created by 81256 on 2017/4/14.
+ * Created by 鹏君 on 2017/4/14.
  */
 //ViewPager Adapter
 public class SearchMainAdapter  extends FragmentPagerAdapter {

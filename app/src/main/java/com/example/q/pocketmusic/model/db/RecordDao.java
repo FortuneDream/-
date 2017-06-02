@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.model.db;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.example.q.pocketmusic.model.bean.local.Record;
 import com.j256.ormlite.dao.Dao;
@@ -12,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by YQ on 2016/9/21.
+ * Created by 鹏君 on 2016/9/21.
  */
 
 public class RecordDao {

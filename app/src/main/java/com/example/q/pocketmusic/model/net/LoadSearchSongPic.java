@@ -14,7 +14,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 
 /**
- * Created by YQ on 2016/9/4.
+ * Created by 鹏君 on 2016/9/4.
  */
 public class LoadSearchSongPic extends AsyncTask<Song, Void, Integer> {
     private Song song;

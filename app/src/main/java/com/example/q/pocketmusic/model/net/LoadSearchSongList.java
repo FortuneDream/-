@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.StringUtil;
 
 import org.jsoup.Jsoup;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by YQ on 2016/9/4.
+ * Created by 鹏君 on 2016/9/4.
  */
 public class LoadSearchSongList extends AsyncTask<String, Void, List<Song>> {
     private int page;

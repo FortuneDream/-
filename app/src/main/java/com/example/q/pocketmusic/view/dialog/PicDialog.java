@@ -10,7 +10,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.util.DisplayStrategy;
 
 /**
- * Created by Cloud on 2017/2/5.
+ * Created by 鹏君 on 2017/2/5.
  */
 
 public class PicDialog {

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Created by YQ on 2016/9/19.
+ * Created by 鹏君 on 2016/9/19.
  */
 public class ImgDao {
     private Dao<Img, Integer> imgOpe;

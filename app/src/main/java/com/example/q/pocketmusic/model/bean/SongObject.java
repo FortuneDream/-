@@ -3,10 +3,8 @@ package com.example.q.pocketmusic.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-
 /**
- * Created by Cloud on 2017/2/5.
+ * Created by 鹏君 on 2017/2/5.
  */
 //Intent传递
 public class SongObject implements Parcelable{

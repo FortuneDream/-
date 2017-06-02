@@ -1,15 +1,12 @@
 package com.example.q.pocketmusic.module.home.seek.publish;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
@@ -18,11 +15,10 @@ import java.util.List;
 import java.util.Set;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Cloud on 2016/11/14.
+ * Created by 鹏君 on 2016/11/14.
  */
 
 public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSongPresenter>

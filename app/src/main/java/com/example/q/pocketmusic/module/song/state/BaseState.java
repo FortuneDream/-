@@ -1,8 +1,6 @@
 package com.example.q.pocketmusic.module.song.state;
 
-import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 
 /**
  * Created by 鹏君 on 2017/5/4.

@@ -6,11 +6,10 @@ import android.os.Parcelable;
 import com.example.q.pocketmusic.config.Constant;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by YQ on 2016/8/28.
+ * Created by 鹏君 on 2016/8/28.
  */
 public class Song implements Parcelable,Serializable {
     private String name;//曲谱名字

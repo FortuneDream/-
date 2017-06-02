@@ -1,8 +1,5 @@
 package com.example.q.pocketmusic.module.home.net;
 
-import android.content.Context;
-import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,10 +7,9 @@ import android.widget.ImageView;
 import com.example.q.pocketmusic.R;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.LoopPagerAdapter;
-import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 
 /**
- * Created by Cloud on 2016/11/18.
+ * Created by 鹏君 on 2016/11/18.
  */
 
 //最好能设定成后台自定义图片

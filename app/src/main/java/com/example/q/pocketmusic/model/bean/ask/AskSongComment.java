@@ -4,7 +4,7 @@ import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobRelation;
 
 /**
- * Created by Cloud on 2017/1/11.
+ * Created by 鹏君 on 2017/1/11.
  */
 
 public class AskSongComment extends BmobObject {

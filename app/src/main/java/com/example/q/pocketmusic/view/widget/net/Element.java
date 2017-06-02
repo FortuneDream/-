@@ -1,7 +1,7 @@
 package com.example.q.pocketmusic.view.widget.net;
 
 /**
- * Created by wayww on 2016/9/8.
+ * Created by 鹏君 on 2016/9/8.
  */
 public class Element {
     public int color;

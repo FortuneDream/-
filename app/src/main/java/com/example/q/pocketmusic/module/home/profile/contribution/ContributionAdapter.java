@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.home.profile.contribution;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,10 +12,8 @@ import com.example.q.pocketmusic.util.GlideStrategy;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
-import org.w3c.dom.Text;
-
 /**
- * Created by 81256 on 2017/3/12.
+ * Created by 鹏君 on 2017/3/12.
  */
 
 public class ContributionAdapter extends RecyclerArrayAdapter<MyUser> {

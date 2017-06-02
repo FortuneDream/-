@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.model.bean.bmob;
 import cn.bmob.v3.BmobObject;
 
 /**
- * Created by YQ on 2016/9/12.
+ * Created by 鹏君 on 2016/9/12.
  */
 public class ExceptionBean extends BmobObject {
     private String version;

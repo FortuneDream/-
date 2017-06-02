@@ -16,7 +16,7 @@ import com.example.q.pocketmusic.module.user.notify.suggestion.SuggestionActivit
 import java.util.List;
 
 /**
- * Created by YQ on 2016/8/29.
+ * Created by 鹏君 on 2016/8/29.
  */
 public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPresenter.IView> {
     private IView fragment;

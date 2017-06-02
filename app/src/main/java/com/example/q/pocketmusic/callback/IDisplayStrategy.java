@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 /**
- * Created by Cloud on 2016/12/12.
+ * Created by 鹏君 on 2016/12/12.
  */
 
 //策略模式

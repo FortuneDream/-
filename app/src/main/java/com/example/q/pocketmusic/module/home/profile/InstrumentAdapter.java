@@ -9,7 +9,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 /**
- * Created by Cloud on 2017/1/13.
+ * Created by 鹏君 on 2017/1/13.
  */
 
 public class InstrumentAdapter extends RecyclerArrayAdapter<String> {

@@ -2,21 +2,4 @@
 <resources>
 
 
-    <string-array name="instrument">
-        <item>钢琴</item>
-        <item>电子琴</item>
-        <item>手风琴</item>
-        <item>萨克斯</item>
-        <item>长笛</item>
-        <item>铜管</item>
-        <item>吉他</item>
-        <item>古筝</item>
-        <item>笛子</item>
-        <item>葫芦丝</item>
-        <item>琵琶</item>
-        <item>二胡</item>
-        <item>口琴</item>
-        <item>小提琴</item>
-        <item>其他</item>
-    </string-array>
 </resources>

@@ -1,16 +1,13 @@
 package com.example.q.pocketmusic.module.common;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.util.CheckUserUtil;
-import com.example.q.pocketmusic.util.LogUtils;
 
 /**
- * Created by Cloud on 2017/1/13.
+ * Created by 鹏君 on 2017/1/13.
  */
 //用于验证的Activity
 public abstract class AuthActivity<V,T extends BasePresenter<V>> extends BaseActivity<V,T> {

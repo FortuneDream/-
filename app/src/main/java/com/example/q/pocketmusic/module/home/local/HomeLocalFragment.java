@@ -3,9 +3,7 @@ package com.example.q.pocketmusic.module.home.local;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,13 +14,12 @@ import com.example.q.pocketmusic.module.lead.LeadSongActivity;
 import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
 /**
- * Created by YQ on 2016/8/28.
+ * Created by 鹏君 on 2016/8/28.
  */
 public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.IView, HomeLocalFragmentPresenter>
         implements HomeLocalFragmentPresenter.IView, TopTabView.TopTabListener {

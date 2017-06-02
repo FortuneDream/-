@@ -2,12 +2,10 @@ package com.example.q.pocketmusic.model.bean.share;
 
 import com.example.q.pocketmusic.model.bean.MyUser;
 
-import java.util.List;
-
 import cn.bmob.v3.BmobObject;
 
 /**
- * Created by Cloud on 2017/1/16.
+ * Created by 鹏君 on 2017/1/16.
  */
 //分享乐谱，用于替换UploadSong
 public class ShareSong extends BmobObject {

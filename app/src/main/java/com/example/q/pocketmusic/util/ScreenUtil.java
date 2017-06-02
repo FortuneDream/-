@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import java.lang.reflect.Method;
 
 /**
- * Created by Cloud on 2016/12/11.
+ * Created by 鹏君 on 2016/12/11.
  */
 public class ScreenUtil {
 

@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.model.bean.local;
 
-import com.example.q.pocketmusic.config.Constant;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
@@ -9,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 
 /**
- * Created by YQ on 2016/8/31.
+ * Created by 鹏君 on 2016/8/31.
  */
 @DatabaseTable(tableName = "tb_localsong")
 public class LocalSong implements Serializable {

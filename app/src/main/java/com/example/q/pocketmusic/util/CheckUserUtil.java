@@ -16,7 +16,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 
 /**
- * Created by Cloud on 2017/1/26.
+ * Created by 鹏君 on 2017/1/26.
  */
 
 public class CheckUserUtil {
@@ -46,11 +46,7 @@ public class CheckUserUtil {
 
     public static boolean checkUserContribution(FragmentActivity activity, Integer needContribution) {
         MyUser user = checkLocalUser(activity);
-        if (user.getContribution() >= needContribution) {
-            return true;
-        } else {
-            return false;
-        }
+        return user.getContribution() >= needContribution;
     }
 
 

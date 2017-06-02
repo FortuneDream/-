@@ -17,7 +17,7 @@ import com.example.q.pocketmusic.util.MyToast;
 import cn.bmob.v3.exception.BmobException;
 
 /**
- * Created by Cloud on 2016/11/14.
+ * Created by 鹏君 on 2016/11/14.
  */
 
 public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {

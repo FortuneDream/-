@@ -10,10 +10,8 @@ import com.example.q.pocketmusic.R;
 
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-
-/**
- * Created by YQ on 2016/8/28.
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter; /**
+ * Created by 鹏君 on 2016/8/28.
  */
 
 /**

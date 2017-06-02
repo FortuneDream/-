@@ -3,7 +3,6 @@ package com.example.q.pocketmusic.view.widget.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 
 /**
- * Created by Cloud on 2016/11/18.
+ * Created by 鹏君 on 2016/11/18.
  */
 
 public class TypeView extends LinearLayout {

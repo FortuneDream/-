@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 
 /**
- * Created by YQ on 2016/10/9.
+ * Created by 鹏君 on 2016/10/9.
  */
 
 public class TitleBar extends Toolbar {

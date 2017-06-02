@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.model.bean.share;
 import cn.bmob.v3.BmobObject;
 
 /**
- * Created by Cloud on 2017/1/16.
+ * Created by 鹏君 on 2017/1/16.
  */
 
 public class SharePic extends BmobObject {

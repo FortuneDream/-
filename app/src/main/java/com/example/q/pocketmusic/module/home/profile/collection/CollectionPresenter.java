@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Cloud on 2016/11/14.
+ * Created by 鹏君 on 2016/11/14.
  */
 
 public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView> {
@@ -77,7 +77,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
                 Song song = new Song();
                 song.setName(collectionSong.getName());
                 song.setContent(collectionSong.getContent());
-                List<String> urls = new ArrayList<String>();
+                List<String> urls = new ArrayList<>();
                 for (CollectionPic pic : list) {
                     urls.add(pic.getUrl());
                 }

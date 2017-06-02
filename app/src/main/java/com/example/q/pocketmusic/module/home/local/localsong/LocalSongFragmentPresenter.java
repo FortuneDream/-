@@ -1,9 +1,7 @@
 package com.example.q.pocketmusic.module.home.local.localsong;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.SQLException;
-import android.os.Environment;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -26,13 +24,10 @@ import com.j256.ormlite.dao.ForeignCollection;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
- * Created by YQ on 2016/9/2.
+ * Created by 鹏君 on 2016/9/2.
  */
 public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentPresenter.IView> {
     private IView fragment;

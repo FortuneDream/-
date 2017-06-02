@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.Locale;
 
 /**
- * Created by 81256 on 2017/3/14.
+ * Created by 鹏君 on 2017/3/14.
  */
 
 public class LocalSongComparator implements Comparator<LocalSong> {
@@ -18,8 +18,7 @@ public class LocalSongComparator implements Comparator<LocalSong> {
     public int compare(LocalSong o1, LocalSong o2) {
         int o1_top = o1.getSort();
         int o2_top = o2.getSort();
-        int result = compareTop(o1_top, o2_top);
-        return result;
+        return compareTop(o1_top, o2_top);
     }
 
     public int compareTop(int x, int y) {

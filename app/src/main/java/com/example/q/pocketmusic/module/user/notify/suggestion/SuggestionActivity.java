@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by Cloud on 2016/11/14.
+ * Created by 鹏君 on 2016/11/14.
  */
 
 public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, SuggestionPresenter>

@@ -1,26 +1,17 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="title_right_margin">16dp</dimen>
-    <dimen name="big_text">16sp</dimen>
     <dimen name="text">15sp</dimen>
     <dimen name="sub_text">13sp</dimen>
-    <dimen name="tab_text">12dp</dimen>
 
     <dimen name="banner_height">150dp</dimen>
-    <dimen name="search_view_top_offset">208dp</dimen>
-    <dimen name="search_text_offset">16dp</dimen>
 
     <dimen name="item_padding_16dp">16dp</dimen>
 
     <dimen name="item_two_txt_main_14sp">14sp</dimen>
     <dimen name="item_two_txt_second_12sp">12sp</dimen>
-    <dimen name="item_two_txt_right_margin_16dp">16dp</dimen>
-    <dimen name="item_two_txt_height_72dp">72dp</dimen>
 
     <dimen name="item_head">48dp</dimen>
-    <dimen name="item_number">24dp</dimen>
 
     <dimen name="ico_launcher_64dp">64dp</dimen>
 

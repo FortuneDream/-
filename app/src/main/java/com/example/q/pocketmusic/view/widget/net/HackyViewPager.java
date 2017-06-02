@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * Created by YQ on 2016/9/20.
+ * Created by 鹏君 on 2016/9/20.
  */
 public class HackyViewPager extends ViewPager {
 

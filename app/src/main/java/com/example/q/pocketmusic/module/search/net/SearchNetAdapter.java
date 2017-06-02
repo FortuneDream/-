@@ -10,7 +10,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 /**
- * Created by 81256 on 2017/4/14.
+ * Created by 鹏君 on 2017/4/14.
  */
 
 public class SearchNetAdapter extends RecyclerArrayAdapter<Song> {

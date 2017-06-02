@@ -10,7 +10,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 /**
- * Created by Cloud on 2016/11/15.
+ * Created by 鹏君 on 2016/11/15.
  */
 
 public class SuggestionAdapter extends RecyclerArrayAdapter<UserSuggestion> {

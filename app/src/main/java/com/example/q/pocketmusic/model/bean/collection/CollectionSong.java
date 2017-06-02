@@ -4,7 +4,7 @@ import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobRelation;
 
 /**
- * Created by Cloud on 2017/1/26.
+ * Created by 鹏君 on 2017/1/26.
  */
 //用户收藏的
 public class CollectionSong extends BmobObject {

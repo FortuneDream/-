@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.config;
 import com.example.q.pocketmusic.util.SharedPrefsUtil;
 
 /**
- * Created by YQ on 2016/8/28.
+ * Created by 鹏君 on 2016/8/28.
  */
 //静态数据,存放标记，url
 public class Constant {

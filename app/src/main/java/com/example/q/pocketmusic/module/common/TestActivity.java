@@ -2,11 +2,10 @@ package com.example.q.pocketmusic.module.common;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 /**
- * Created by YQ on 2016/10/11.
+ * Created by 鹏君 on 2016/10/11.
  */
 //用于测试Activity生命周期
 public  abstract class TestActivity extends BaseActivity {

@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
- * Created by Cloud on 2017/1/31.
+ * Created by 鹏君 on 2017/1/31.
  */
 
 public abstract class BasePresenter<T> {
@@ -20,7 +20,7 @@ public abstract class BasePresenter<T> {
     }
 
     public void attachView(T activity) {
-        mViewRef = new WeakReference<T>(activity);//建立关联
+        mViewRef = new WeakReference<>(activity);//建立关联
     }
 
 

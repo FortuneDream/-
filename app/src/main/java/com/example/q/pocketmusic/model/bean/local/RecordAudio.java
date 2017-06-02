@@ -4,7 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * Created by 81256 on 2016/10/23.
+ * Created by 鹏君 on 2016/10/23.
  */
 @DatabaseTable(tableName = "record_audio_tbl")
 public class RecordAudio {

@@ -14,8 +14,6 @@ import com.example.q.pocketmusic.module.song.SongActivity;
 
 import java.util.List;
 
-import cn.bmob.v3.exception.BmobException;
-
 /**
  * Created by 鹏君 on 2017/5/16.
  */

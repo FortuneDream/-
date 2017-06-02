@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by YQ on 2016/9/24.
+ * Created by 鹏君 on 2016/9/24.
  */
 
 //可自定义Toast（未使用）

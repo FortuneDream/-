@@ -1,13 +1,9 @@
 package com.example.q.pocketmusic.util;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.IDisplayStrategy;
 
@@ -16,7 +12,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 
 /**
- * Created by Cloud on 2016/12/12.
+ * Created by 鹏君 on 2016/12/12.
  */
 
 public class GlideStrategy implements IDisplayStrategy {

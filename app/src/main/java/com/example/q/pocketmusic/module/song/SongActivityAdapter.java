@@ -14,10 +14,8 @@ import com.example.q.pocketmusic.util.DisplayStrategy;
 import java.io.File;
 import java.util.List;
 
-import uk.co.senab.photoview.PhotoView;
-
-/**
- * Created by YQ on 2016/8/30.
+import uk.co.senab.photoview.PhotoView; /**
+ * Created by 鹏君 on 2016/8/30.
  */
 
 /**

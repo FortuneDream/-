@@ -1,8 +1,5 @@
 package com.example.q.pocketmusic.module.song.state;
 
-import android.content.Context;
-import android.os.AsyncTask;
-
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.net.LoadSearchSongPic;

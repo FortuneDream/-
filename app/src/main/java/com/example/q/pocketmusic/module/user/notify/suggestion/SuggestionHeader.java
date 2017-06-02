@@ -9,7 +9,7 @@ import com.example.q.pocketmusic.R;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 /**
- * Created by Cloud on 2017/2/19.
+ * Created by 鹏君 on 2017/2/19.
  */
 
 public class SuggestionHeader implements RecyclerArrayAdapter.ItemView {

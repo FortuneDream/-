@@ -2,7 +2,6 @@ package com.example.q.pocketmusic.module.home.profile.setting;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -15,12 +14,11 @@ import com.example.q.pocketmusic.util.MyToast;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 /**
- * Created by Cloud on 2016/11/14.
+ * Created by 鹏君 on 2016/11/14.
  */
 
 public class SettingActivity extends AuthActivity<SettingPresenter.IView, SettingPresenter>

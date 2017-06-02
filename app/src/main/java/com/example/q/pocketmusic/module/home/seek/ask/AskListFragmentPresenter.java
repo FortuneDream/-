@@ -13,7 +13,7 @@ import com.example.q.pocketmusic.util.BmobUtil;
 import java.util.List;
 
 /**
- * Created by Cloud on 2017/1/26.
+ * Created by 鹏君 on 2017/1/26.
  */
 
 public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPresenter.IView> {

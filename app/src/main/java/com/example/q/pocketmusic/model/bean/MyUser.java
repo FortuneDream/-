@@ -2,14 +2,11 @@ package com.example.q.pocketmusic.model.bean;
 
 import com.example.q.pocketmusic.config.Constant;
 
-import java.util.List;
-
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 
 /**
- * Created by Cloud on 2017/1/10.
+ * Created by 鹏君 on 2017/1/10.
  */
 //用户类，内置
 // username: 用户的用户名，使用邮箱，验证正则

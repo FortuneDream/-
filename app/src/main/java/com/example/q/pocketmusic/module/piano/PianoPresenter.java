@@ -1,10 +1,8 @@
 package com.example.q.pocketmusic.module.piano;
 
-import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.widget.LinearLayout;
 
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;

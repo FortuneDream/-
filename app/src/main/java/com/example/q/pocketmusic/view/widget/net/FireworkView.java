@@ -18,7 +18,7 @@ import java.util.LinkedList;
 
 
 /**
- * Created by wayww on 2016/9/8.
+ * Created by 鹏君 on 2016/9/8.
  */
 //暂停使用
 public class FireworkView extends View {

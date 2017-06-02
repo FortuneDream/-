@@ -13,7 +13,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 /**
- * Created by Cloud on 2017/1/12.
+ * Created by 鹏君 on 2017/1/12.
  */
 
 public class AskSongCommentAdapter extends RecyclerArrayAdapter<AskSongComment> {

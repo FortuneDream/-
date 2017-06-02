@@ -24,7 +24,7 @@ import butterknife.Unbinder;
 
 
 /**
- * Created by Cloud on 2017/1/26.
+ * Created by 鹏君 on 2017/1/26.
  */
 
 public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresenter.IView, HomeProfileFragmentPresenter>
@@ -166,20 +166,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     @Override
     protected HomeProfileFragmentPresenter createPresenter() {
         return new HomeProfileFragmentPresenter(this);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
 }

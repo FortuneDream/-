@@ -54,9 +54,8 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
         recycler.setRefreshListener(this);
 
         //初始化
-        int position = getIntent().getIntExtra(PARAM_POSITION, 0);
         //获取乐器类型
-        typeId = position;
+        typeId = getIntent().getIntExtra(PARAM_POSITION, 0);
         initRecyclerView(recycler, adapter, 1);
         //设置toolbar
         toolbar.setTitle(Constant.types[typeId]);

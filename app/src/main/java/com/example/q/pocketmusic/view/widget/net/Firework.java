@@ -2,7 +2,6 @@ package com.example.q.pocketmusic.view.widget.net;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.animation.AccelerateInterpolator;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by wayww on 2016/9/8.
+ * Created by 鹏君 on 2016/9/8.
  */
 public class Firework  {
 

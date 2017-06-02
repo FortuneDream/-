@@ -4,28 +4,23 @@ import android.content.Context;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.callback.IDisplayStrategy;
 import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.model.flag.BannerBean;
 import com.example.q.pocketmusic.model.flag.ContentLL;
 import com.example.q.pocketmusic.model.flag.TextTv;
 
 import com.example.q.pocketmusic.model.flag.Divider;
-import com.example.q.pocketmusic.util.GlideStrategy;
 import com.example.q.pocketmusic.view.widget.view.TypeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.rollviewpager.RollPagerView;
 
 /**
- * Created by 81256 on 2016/11/7.
+ * Created by 鹏君 on 2016/11/7.
  */
 //暂时取消点赞功能
 public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {

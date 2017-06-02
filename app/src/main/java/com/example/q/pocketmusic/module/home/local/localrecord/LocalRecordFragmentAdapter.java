@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by 81256 on 2016/10/23.
+ * Created by 鹏君 on 2016/10/23.
  */
 
 public class LocalRecordFragmentAdapter extends RecyclerArrayAdapter<RecordAudio> {

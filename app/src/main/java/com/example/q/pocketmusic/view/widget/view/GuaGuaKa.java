@@ -21,7 +21,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.util.ConvertUtil;
 
 /**
- * Created by Cloud on 2017/3/5.
+ * Created by 鹏君 on 2017/3/5.
  */
 
 public class GuaGuaKa extends View {

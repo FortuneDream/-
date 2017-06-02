@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import com.example.q.pocketmusic.callback.IDisplayStrategy;
 
 /**
- * Created by Cloud on 2016/12/12.
+ * Created by 鹏君 on 2016/12/12.
  */
 
 public class DisplayStrategy {

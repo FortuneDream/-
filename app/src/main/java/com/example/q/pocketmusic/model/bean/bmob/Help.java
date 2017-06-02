@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.model.bean.bmob;
 import cn.bmob.v3.BmobObject;
 
 /**
- * Created by Cloud on 2017/2/15.
+ * Created by 鹏君 on 2017/2/15.
  */
 
 public class Help extends BmobObject{

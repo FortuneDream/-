@@ -11,7 +11,7 @@ import com.example.q.pocketmusic.util.DisplayStrategy;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 /**
- * Created by Cloud on 2017/1/22.
+ * Created by 鹏君 on 2017/1/22.
  */
 
 public class PostHeadView implements RecyclerArrayAdapter.ItemView {

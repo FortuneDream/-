@@ -10,7 +10,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 
 /**
- * Created by 81256 on 2017/3/13.
+ * Created by 鹏君 on 2017/3/13.
  */
 
 public class ContributionPresenter extends BasePresenter<ContributionPresenter.IView> {

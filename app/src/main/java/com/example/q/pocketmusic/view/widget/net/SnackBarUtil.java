@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 
 /**
- * Created by YQ on 2016/9/24.
+ * Created by 鹏君 on 2016/9/24.
  */
 
 public class SnackBarUtil {
@@ -133,9 +133,7 @@ public class SnackBarUtil {
      */
     public static void setSnackbarColor(Snackbar snackbar, int backgroundColor) {
         View view = snackbar.getView();
-        if(view!=null){
-            view.setBackgroundColor(backgroundColor);
-        }
+        view.setBackgroundColor(backgroundColor);
     }
 
     /**
@@ -146,10 +144,8 @@ public class SnackBarUtil {
      */
     public static void setSnackbarColor(Snackbar snackbar, int messageColor, int backgroundColor) {
         View view = snackbar.getView();
-        if(view!=null){
-            view.setBackgroundColor(backgroundColor);
-            ((TextView) view.findViewById(R.id.snackbar_text)).setTextColor(messageColor);
-        }
+        view.setBackgroundColor(backgroundColor);
+        ((TextView) view.findViewById(R.id.snackbar_text)).setTextColor(messageColor);
     }
 
     /**

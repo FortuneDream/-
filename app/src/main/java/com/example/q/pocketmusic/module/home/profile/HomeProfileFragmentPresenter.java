@@ -29,7 +29,7 @@ import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 /**
- * Created by Cloud on 2017/1/26.
+ * Created by 鹏君 on 2017/1/26.
  */
 
 public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragmentPresenter.IView> {

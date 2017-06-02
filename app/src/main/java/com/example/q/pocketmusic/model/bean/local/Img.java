@@ -5,7 +5,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * Created by YQ on 2016/9/19.
+ * Created by 鹏君 on 2016/9/19.
  */
 @DatabaseTable(tableName = "tb_img")
 public class Img {

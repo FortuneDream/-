@@ -2,7 +2,6 @@ package com.example.q.pocketmusic.view.widget.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 
 /**
- * Created by Cloud on 2017/2/11.
+ * Created by 鹏君 on 2017/2/11.
  */
 
 public class BottomTabView extends LinearLayout {

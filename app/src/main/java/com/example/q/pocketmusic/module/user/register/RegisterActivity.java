@@ -6,14 +6,13 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by Cloud on 2016/11/14.
+ * Created by 鹏君 on 2016/11/14.
  */
 
 public class RegisterActivity extends BaseActivity<RegisterPresenter.IView,RegisterPresenter>

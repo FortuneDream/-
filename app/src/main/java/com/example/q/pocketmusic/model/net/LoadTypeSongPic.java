@@ -12,7 +12,7 @@ import org.jsoup.nodes.Element;
 import java.util.ArrayList;
 
 /**
- * Created by YQ on 2016/8/30.
+ * Created by 鹏君 on 2016/8/30.
  */
 public class LoadTypeSongPic extends AsyncTask<Song, Void, Integer> {
     private Song song;

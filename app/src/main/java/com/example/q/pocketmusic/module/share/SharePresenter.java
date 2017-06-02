@@ -37,7 +37,7 @@ import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 /**
- * Created by Cloud on 2016/11/10.
+ * Created by 鹏君 on 2016/11/10.
  */
 
 public class SharePresenter extends BasePresenter<SharePresenter.IView> {

@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.home.local;
 
 import android.content.Intent;
-import android.content.pm.ProviderInfo;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Cloud on 2016/11/17.
+ * Created by 鹏君 on 2016/11/17.
  */
 
 public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentPresenter.IView> {

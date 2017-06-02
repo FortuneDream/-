@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by Cloud on 2017/2/11.
+ * Created by 鹏君 on 2017/2/11.
  */
 
 public class SynchronizeRecordAudio extends AsyncTask<Void, Void, Boolean> {

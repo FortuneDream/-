@@ -1,7 +1,7 @@
 package com.example.q.pocketmusic.model.bean.bmob;
 
 /**
- * Created by 81256 on 2017/3/14.
+ * Created by 鹏君 on 2017/3/14.
  */
 
 public class BmobBanner {

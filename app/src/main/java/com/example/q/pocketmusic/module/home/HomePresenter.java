@@ -10,7 +10,6 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.seek.HomeSeekFragment;
-import com.example.q.pocketmusic.module.home.seek.ask.AskListFragment;
 import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
@@ -26,7 +25,7 @@ import cn.bmob.v3.update.UpdateResponse;
 import cn.bmob.v3.update.UpdateStatus;
 
 /**
- * Created by Cloud on 2016/11/22.
+ * Created by 鹏君 on 2016/11/22.
  */
 
 public class HomePresenter extends BasePresenter<HomePresenter.IView> {

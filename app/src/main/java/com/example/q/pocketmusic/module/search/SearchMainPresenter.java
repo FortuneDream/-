@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.search;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
@@ -9,14 +8,13 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.search.net.SearchNetFragment;
 import com.example.q.pocketmusic.module.search.share.SearchShareFragment;
-import com.example.q.pocketmusic.util.LogUtils;
 import com.example.q.pocketmusic.util.MyToast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 81256 on 2017/4/14.
+ * Created by 鹏君 on 2017/4/14.
  */
 
 public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView> {

@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.song;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
@@ -20,7 +19,6 @@ import com.example.q.pocketmusic.view.widget.net.HackyViewPager;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import pub.devrel.easypermissions.EasyPermissions;
 
 //查看大图界面

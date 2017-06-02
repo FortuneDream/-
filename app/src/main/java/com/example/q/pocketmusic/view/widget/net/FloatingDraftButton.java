@@ -3,18 +3,13 @@ package com.example.q.pocketmusic.view.widget.net;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.q.pocketmusic.util.ScreenUtil;
 
-import java.util.ArrayList;
-
 /**
- * Created by Cloud on 2016/12/11.
+ * Created by 鹏君 on 2016/12/11.
  */
 
 public class FloatingDraftButton extends FloatingActionButton implements View.OnTouchListener {

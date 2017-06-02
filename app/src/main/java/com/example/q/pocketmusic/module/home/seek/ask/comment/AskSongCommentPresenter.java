@@ -33,7 +33,7 @@ import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 /**
- * Created by Cloud on 2016/11/14.
+ * Created by 鹏君 on 2016/11/14.
  */
 
 public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresenter.IView> {
@@ -184,7 +184,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 public void onSuccess(List<AskSongPic> list) {
                     final Song song = new Song(askSongComment.getContent(), null);//将评论者的内容当做标题
                     song.setDate(askSongComment.getCreatedAt());
-                    List<String> urls = new ArrayList<String>();
+                    List<String> urls = new ArrayList<>();
                     for (AskSongPic askSongPic : list) {
                         urls.add(askSongPic.getUrl());
                     }

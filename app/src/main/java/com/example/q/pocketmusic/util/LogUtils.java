@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.util;
 import android.util.Log;
 
 /**
- * Created by KiSoo on 2016/10/2.
+ * Created by 鹏君 on 2016/10/2.
  */
 
 public class LogUtils {

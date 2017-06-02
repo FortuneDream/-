@@ -233,7 +233,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                     @Override
                     public void onSuccess(String s) {
                         final int numPic = song.getIvUrl().size();
-                        List<BmobObject> collectionPics = new ArrayList<BmobObject>();
+                        List<BmobObject> collectionPics = new ArrayList<>();
                         for (int i = 0; i < numPic; i++) {
                             CollectionPic collectionPic = new CollectionPic();
                             collectionPic.setCollectionSong(collectionSong);

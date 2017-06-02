@@ -4,19 +4,16 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.allenliu.badgeview.BadgeFactory;
 import com.allenliu.badgeview.BadgeView;
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.util.ConvertUtil;
 
 /**
- * Created by YQ on 2016/10/17.
+ * Created by 鹏君 on 2016/10/17.
  */
 //假如继承LinearLayout会不会报错？
 public class IcoTextItem extends RelativeLayout {

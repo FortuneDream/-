@@ -1,11 +1,7 @@
 package com.example.q.pocketmusic.module.home.seek.ask;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.Constant;
@@ -18,12 +14,9 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
- * Created by Cloud on 2017/1/26.
+ * Created by 鹏君 on 2017/1/26.
  */
 public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView, AskListFragmentPresenter>
         implements AskListFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, AskListAdapter.OnItemClickListener

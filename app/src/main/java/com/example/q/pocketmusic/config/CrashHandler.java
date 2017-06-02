@@ -9,7 +9,6 @@ import android.os.Process;
 import android.util.Log;
 
 import com.example.q.pocketmusic.model.bean.bmob.ExceptionBean;
-import com.example.q.pocketmusic.util.SharedPrefsUtil;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,7 +22,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
- * Created by YQ on 2016/9/11.
+ * Created by 鹏君 on 2016/9/11.
  */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private static final String TAG = "CrashHandler";

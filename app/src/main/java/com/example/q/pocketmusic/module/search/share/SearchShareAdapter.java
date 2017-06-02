@@ -1,9 +1,6 @@
 package com.example.q.pocketmusic.module.search.share;
 
 import android.content.Context;
-import android.content.pm.ProviderInfo;
-import android.support.annotation.LayoutRes;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +14,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 /**
- * Created by 81256 on 2017/4/14.
+ * Created by 鹏君 on 2017/4/14.
  */
 
 public class SearchShareAdapter extends RecyclerArrayAdapter<ShareSong> {

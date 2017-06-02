@@ -21,7 +21,7 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import java.util.List;
 
 /**
- * Created by Cloud on 2017/1/13.
+ * Created by 鹏君 on 2017/1/13.
  */
 
 public class ListDialog {

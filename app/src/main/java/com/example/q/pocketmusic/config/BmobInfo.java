@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.config;
 import cn.bmob.v3.BmobObject;
 
 /**
- * Created by 81256 on 2017/4/2.
+ * Created by 鹏君 on 2017/4/2.
  */
 
 public class BmobInfo extends BmobObject{

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by YQ on 2016/9/25.
+ * Created by 鹏君 on 2016/9/25.
  */
 //需要研究代码实现原理
 @SuppressLint("NewApi") public class CustomRadioGroup extends LinearLayout {
@@ -28,7 +28,6 @@ import java.util.List;
     private static final int TEXT_START_COLOR= Color.GRAY,END_COLOR=Color.parseColor("#448AFF"),
             TEXT_START_R=Color.red(TEXT_START_COLOR),       TEXT_START_G=Color.green(TEXT_START_COLOR),         TEXT_START_B=Color.blue(TEXT_START_COLOR),
             TEXT_DIF_R=Color.red(END_COLOR)-TEXT_START_R,   TEXT_DIF_G=Color.green(END_COLOR)-TEXT_START_G,     TEXT_DIF_B=Color.blue(END_COLOR)-TEXT_START_B;
-    ;
     //相关的资源ID：
     private final int ID_LAYOUT=R.layout.custom_radio_button,ID_IMAGE_TOP=R.id.custom_radio_button_image_top,ID_IMAGE_BOTTOM=R.id.custom_radio_button_image_botom,ID_TEXT=R.id.custom_radio_button_text,ID_NEWS=R.id.custom_radio_button_news;
     //条目变更监听
@@ -39,7 +38,7 @@ import java.util.List;
     //当前选择的条目
     private int checkedIndex=0;
     //条目列表
-    private List<RadioButton> lists=new ArrayList<RadioButton>();
+    private List<RadioButton> lists= new ArrayList<>();
     public CustomRadioGroup(Context c) {
         super(c);
         init();

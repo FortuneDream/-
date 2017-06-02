@@ -6,7 +6,6 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.example.q.pocketmusic.IAudioPlayerService;
 import com.example.q.pocketmusic.model.bean.local.RecordAudio;
@@ -17,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by 81256 on 2016/11/1.
+ * Created by 鹏君 on 2016/11/1.
  */
 //疑问：Service运行在主线程，为什么没有阻塞线程?
 public class MediaPlayerService extends Service {
@@ -143,10 +142,7 @@ public class MediaPlayerService extends Service {
     }
 
     private boolean isPlaying() {
-        if (player != null) {
-            return player.isPlaying();
-        }
-        return false;
+        return player != null && player.isPlaying();
     }
 
     private void preSong() {

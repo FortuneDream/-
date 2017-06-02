@@ -1,10 +1,7 @@
 package com.example.q.pocketmusic.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by YQ on 2016/8/30.
+ * Created by 鹏君 on 2016/8/30.
  */
 public class StringUtil {
     //《abc》（dce）-->abc和dce  或者 《abc》--->abc
@@ -14,8 +11,7 @@ public class StringUtil {
                 .replace("（", "\n").replace("）", "")
                 .replace("演唱", "")
                 .replace("(", "").replace(")", "");
-        String[] list = temp.split("\n");
-        return list;
+        return temp.split("\n");
     }
 
     //abc(dce)-> abc
@@ -45,10 +41,7 @@ public class StringUtil {
 
     //判断是否含有中文
     public static boolean hasFullChar(String str) {
-        if (str.getBytes().length == str.length()) {
-            return false;
-        }
-        return true;
+        return str.getBytes().length != str.length();
     }
 
 }

@@ -5,7 +5,7 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import cn.bmob.v3.BmobObject;
 
 /**
- * Created by Cloud on 2016/11/15.
+ * Created by 鹏君 on 2016/11/15.
  */
 
 public class AskSongPost extends BmobObject {

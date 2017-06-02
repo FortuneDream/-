@@ -9,7 +9,7 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 
 /**
- * Created by Cloud on 2017/1/26.
+ * Created by 鹏君 on 2017/1/26.
  */
 
 public abstract class AuthFragment<V,T extends BasePresenter<V>> extends BaseFragment<V,T> {

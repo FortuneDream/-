@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.home.profile.share;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +13,6 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class UserShareActivity extends AuthActivity<UserSharePresenter.IView, UserSharePresenter>
         implements UserSharePresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener

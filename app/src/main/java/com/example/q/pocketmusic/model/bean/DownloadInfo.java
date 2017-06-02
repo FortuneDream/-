@@ -1,7 +1,7 @@
 package com.example.q.pocketmusic.model.bean;
 
 /**
- * Created by Cloud on 2017/2/20.
+ * Created by 鹏君 on 2017/2/20.
  */
 
 public class DownloadInfo {

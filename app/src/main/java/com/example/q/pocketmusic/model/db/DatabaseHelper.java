@@ -14,10 +14,8 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
-
-/**
- * Created by YQ on 2016/8/31.
+import java.util.Map; /**
+ * Created by 鹏君 on 2016/8/31.
  */
 
 /**
@@ -26,7 +24,7 @@ import java.util.Map;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String TABLE_NAME = "sqlite-song.db";//数据库名
     private static final int TABLE_VERSION = 6;//删除LocalSong-GroupId,增加LocalSong-Sort
-    private Map<String, Dao> daos = new HashMap<String, Dao>();
+    private Map<String, Dao> daos = new HashMap<>();
     private static DatabaseHelper helper;
 
     public DatabaseHelper(Context context) {

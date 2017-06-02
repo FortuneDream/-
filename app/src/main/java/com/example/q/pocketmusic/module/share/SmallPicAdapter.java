@@ -10,7 +10,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 /**
- * Created by Cloud on 2016/11/10.
+ * Created by 鹏君 on 2016/11/10.
  */
 
 public class SmallPicAdapter extends RecyclerArrayAdapter<String> {

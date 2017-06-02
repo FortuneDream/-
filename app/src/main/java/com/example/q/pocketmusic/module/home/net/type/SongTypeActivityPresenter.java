@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.home.net.type;
 
-import android.content.Context;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.config.Constant;
@@ -15,7 +14,7 @@ import java.util.List;
 
 
 /**
- * Created by YQ on 2016/8/29.
+ * Created by 鹏君 on 2016/8/29.
  */
 public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPresenter.IView> {
     private IView activity;

@@ -10,7 +10,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListListener;
 
 /**
- * Created by Cloud on 2017/1/28.
+ * Created by 鹏君 on 2017/1/28.
  */
 
 public abstract class ToastQueryListListener<BatchResult> extends QueryListListener<BatchResult> {

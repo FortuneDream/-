@@ -53,12 +53,12 @@ public class CollectionModel {
             @Override
             public void onSuccess() {
                 //删除收藏多个图片表,
-                BmobQuery<CollectionPic> query = new BmobQuery<CollectionPic>();
+                BmobQuery<CollectionPic> query = new BmobQuery<>();
                 query.addWhereEqualTo("collectionSong", collectionSong);
                 query.findObjects(new ToastQueryListener<CollectionPic>( activity) {
                     @Override
                     public void onSuccess(List<CollectionPic> list) {
-                        List<BmobObject> pics = new ArrayList<BmobObject>();
+                        List<BmobObject> pics = new ArrayList<>();
                         pics.addAll(list);
                         new BmobBatch().deleteBatch(pics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
                             @Override

@@ -2,16 +2,10 @@ package com.example.q.pocketmusic.module.home.local.localsong;
 
 import android.content.DialogInterface;
 import android.database.SQLException;
-import android.os.Bundle;
-import android.os.Looper;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.Img;
@@ -27,14 +21,12 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
- * Created by Cloud on 2016/11/17.
+ * Created by 鹏君 on 2016/11/17.
  */
 
 public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.IView,LocalSongFragmentPresenter>

@@ -1,19 +1,15 @@
 package com.example.q.pocketmusic.config;
 
 import android.app.Application;
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.util.GlideImageLoader;
-import com.example.q.pocketmusic.util.MyToast;
 import com.example.q.pocketmusic.util.SharedPrefsUtil;
 
 import cn.bmob.v3.Bmob;
-import cn.bmob.v3.listener.BmobUpdateListener;
 import cn.bmob.v3.statistics.AppStat;
 import cn.bmob.v3.update.BmobUpdateAgent;
-import cn.bmob.v3.update.UpdateResponse;
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -21,7 +17,7 @@ import cn.finalteam.galleryfinal.ImageLoader;
 import cn.finalteam.galleryfinal.ThemeConfig;
 
 /**
- * Created by YQ on 2016/9/10.
+ * Created by 鹏君 on 2016/9/10.
  */
 
 public class MyApplication extends Application {

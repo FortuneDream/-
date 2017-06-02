@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.home.seek.share;
 
 import android.content.Context;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;

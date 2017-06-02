@@ -19,10 +19,9 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
- * Created by Cloud on 2017/1/16.
+ * Created by 鹏君 on 2017/1/16.
  */
 
 public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment implements IBaseView {

@@ -13,7 +13,7 @@ import com.example.q.pocketmusic.R;
 import cn.finalteam.galleryfinal.widget.GFImageView;
 
 /**
- * Created by YQ on 2016/9/23.
+ * Created by 鹏君 on 2016/9/23.
  */
 
 public class GlideImageLoader implements cn.finalteam.galleryfinal.ImageLoader {

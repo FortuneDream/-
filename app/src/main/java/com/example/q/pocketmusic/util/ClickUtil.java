@@ -1,7 +1,7 @@
 package com.example.q.pocketmusic.util;
 
 /**
- * Created by YQ on 2016/9/19.
+ * Created by 鹏君 on 2016/9/19.
  */
 //防止快速点击
 public class ClickUtil {

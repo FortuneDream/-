@@ -5,19 +5,15 @@ import android.content.res.TypedArray;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.InputType;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 
 
 /**
- * Created by Cloud on 2017/2/10.
+ * Created by 鹏君 on 2017/2/10.
  */
 
 public class TextEdit extends LinearLayout {

@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.home.profile.setting.help;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
@@ -8,7 +7,6 @@ import android.widget.LinearLayout;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.CommonString;
-import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.bmob.Help;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.MyToast;
@@ -17,7 +15,6 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;

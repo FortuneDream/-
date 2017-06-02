@@ -3,25 +3,19 @@ package com.example.q.pocketmusic.module.song.bottom;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.module.song.SongActivityPresenter;
 import com.example.q.pocketmusic.util.MyToast;
 import com.example.q.pocketmusic.view.dialog.EditDialog;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by 鹏君 on 2017/5/31.
@@ -41,7 +35,7 @@ public class SongRecordFragment extends BaseFragment<SongRecordPresenter.IView, 
     private final static String PARAM_Intent = "intent";
 
 
-    public static final SongRecordFragment newInstance(Intent intent) {
+    public static SongRecordFragment newInstance(Intent intent) {
         SongRecordFragment songRecordFragment = new SongRecordFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(PARAM_Intent, intent);

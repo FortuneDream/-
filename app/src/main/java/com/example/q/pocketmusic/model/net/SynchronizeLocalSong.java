@@ -1,27 +1,21 @@
 package com.example.q.pocketmusic.model.net;
 
-import android.content.Context;
-import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Environment;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.bean.local.RecordAudio;
 import com.example.q.pocketmusic.model.db.ImgDao;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
-import com.example.q.pocketmusic.model.db.RecordAudioDao;
-import com.example.q.pocketmusic.util.MyToast;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by Cloud on 2017/2/11.
+ * Created by 鹏君 on 2017/2/11.
  */
 
 public class SynchronizeLocalSong extends AsyncTask<Void, Void, Void> {

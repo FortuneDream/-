@@ -9,7 +9,7 @@ import com.example.q.pocketmusic.model.db.LocalSongDao;
 import java.util.List;
 
 /**
- * Created by Cloud on 2017/2/10.
+ * Created by 鹏君 on 2017/2/10.
  */
 
 public class LoadLocalSongList extends AsyncTask<Void,Void,List<LocalSong>>{
@@ -23,7 +23,6 @@ public class LoadLocalSongList extends AsyncTask<Void,Void,List<LocalSong>>{
 
     @Override
     protected List<LocalSong> doInBackground(Void... params) {
-        List<LocalSong> list = localSongDao.queryForAll();
-        return list;
+        return localSongDao.queryForAll();
     }
 }

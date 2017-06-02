@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -20,9 +19,7 @@ import com.example.q.pocketmusic.view.widget.net.ConfettiUtil;
 import com.example.q.pocketmusic.view.widget.net.SnackBarUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by 鹏君 on 2017/5/31.
@@ -50,7 +47,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
         presenter.setIntent((Intent) getArguments().getParcelable(PARAM_Intent));
     }
 
-    public static final SongMenuFragment newInstance(Intent intent) {
+    public static SongMenuFragment newInstance(Intent intent) {
         SongMenuFragment fragment = new SongMenuFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(PARAM_Intent, intent);

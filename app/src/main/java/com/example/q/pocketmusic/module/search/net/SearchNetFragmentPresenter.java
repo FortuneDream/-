@@ -13,7 +13,7 @@ import com.example.q.pocketmusic.module.song.SongActivity;
 import java.util.List;
 
 /**
- * Created by 81256 on 2017/4/14.
+ * Created by 鹏君 on 2017/4/14.
  */
 
 public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentPresenter.IView> {

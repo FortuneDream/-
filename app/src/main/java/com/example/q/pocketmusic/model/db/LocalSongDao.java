@@ -3,16 +3,12 @@ package com.example.q.pocketmusic.model.db;
 import android.content.Context;
 
 
-import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.util.LogUtils;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
-import java.util.List;
-
-/**
- * Created by YQ on 2016/8/31.
+import java.util.List; /**
+ * Created by 鹏君 on 2016/8/31.
  */
 
 /**
@@ -103,10 +99,6 @@ public class LocalSongDao {
     //检测某个名字是否存在
     public boolean isExist(String name) {
         LocalSong queryResult = findByName(name);
-        if (queryResult == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return queryResult != null;
     }
 }

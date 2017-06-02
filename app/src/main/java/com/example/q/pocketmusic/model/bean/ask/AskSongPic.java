@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.model.bean.ask;
 import cn.bmob.v3.BmobObject;
 
 /**
- * Created by Cloud on 2017/1/11.
+ * Created by 鹏君 on 2017/1/11.
  */
 
 public class AskSongPic extends BmobObject {

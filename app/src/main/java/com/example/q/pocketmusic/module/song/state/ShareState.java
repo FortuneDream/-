@@ -1,7 +1,5 @@
 package com.example.q.pocketmusic.module.song.state;
 
-import android.content.Context;
-
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -36,7 +34,7 @@ public class ShareState extends BaseState implements IState {
         query.findObjects(new ToastQueryListener<SharePic>(activity) {
             @Override
             public void onSuccess(List<SharePic> list) {
-                List<String> pics = new ArrayList<String>();
+                List<String> pics = new ArrayList<>();
                 for (SharePic sharePic : list) {
                     pics.add(sharePic.getUrl());
                 }
