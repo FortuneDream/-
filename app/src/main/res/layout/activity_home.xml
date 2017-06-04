@@ -14,31 +14,34 @@
     <View style="@style/SettingDivider" />
 
     <LinearLayout
+        android:layout_marginLeft="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center">
+        android:background="@color/white">
 
         <com.example.q.pocketmusic.view.widget.view.BottomTabView
             android:id="@+id/home_tab_net_tab"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:itemTabName="首页"
             app:itemTabNoSelectIco="@drawable/ic_vec_tab_home_net_normal"
             app:itemTabSelectIco="@drawable/ic_vec_tab_home_net_press" />
 
         <com.example.q.pocketmusic.view.widget.view.BottomTabView
             android:id="@+id/home_tab_ask_tab"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:itemTabName="求谱"
             app:itemTabNoSelectIco="@drawable/ic_vec_tab_home_ask_normal"
             app:itemTabSelectIco="@drawable/ic_vec_tab_home_ask_press" />
 
         <com.example.q.pocketmusic.view.widget.view.BottomTabView
             android:id="@+id/home_tab_local_tab"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:itemTabName="本地谱单"
             app:itemTabNoSelectIco="@drawable/ic_vec_tab_home_local_normal"
             app:itemTabSelectIco="@drawable/ic_vec_tab_home_local_press" />
@@ -46,8 +49,9 @@
 
         <com.example.q.pocketmusic.view.widget.view.BottomTabView
             android:id="@+id/home_tab_profile_tab"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:itemTabName="我的"
             app:itemTabNoSelectIco="@drawable/ic_vec_tab_home_profile_normal"
             app:itemTabSelectIco="@drawable/ic_vec_tab_home_profile_press" />

@@ -37,7 +37,7 @@ public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView
         adapter.setListener(this);
         adapter.setMore(R.layout.view_more, this);
         recycler.setRefreshListener(this);
-        initRecyclerView(recycler, adapter, 72);
+        initRecyclerView(recycler, adapter, 1);
         presenter.setmPage(0);
         presenter.getPostList(false);
     }

@@ -12,6 +12,7 @@
         android:background="@color/colorPrimary">
 
         <ImageView
+            android:layout_marginLeft="16dp"
             android:id="@+id/email_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,22 +23,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="16dp"
             android:background="@drawable/shape_toolbar_search_view"
             android:orientation="horizontal"
             android:paddingBottom="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:paddingRight="4dp"
             android:paddingTop="4dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
+                android:paddingLeft="48dp"
+                android:paddingRight="48dp"
                 android:text="点击搜索"
-                android:textColor="@color/white"
+                android:gravity="center"
+                android:textColor="#50ffffff"
                 android:textSize="16sp" />
 
             <View
@@ -48,8 +49,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-
+               android:paddingLeft="8dp"
                 app:srcCompat="@drawable/ic_vec_search" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>

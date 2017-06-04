@@ -1,8 +1,14 @@
 package com.example.q.pocketmusic.module.home.seek.ask.comment;
 
+import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.CursorWrapper;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +19,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
+import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.util.MyToast;
 import com.example.q.pocketmusic.view.dialog.PicDialog;
@@ -135,9 +142,53 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                 presenter.sendComment(comment);
                 break;
             case R.id.add_pic://添加图片
-                presenter.addPic();
+                alertSelectedDialog();
                 break;
         }
+    }
+
+    //从本地或者相册选择曲谱
+    private void alertSelectedDialog() {
+        final CharSequence[] charSequences = new CharSequence[2];
+        charSequences[0] = "--> 本地曲谱 <--";
+        charSequences[1] = "--> 手机相册 <--";
+        new AlertDialog.Builder(getCurrentContext())
+                .setSingleChoiceItems(charSequences, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {//从本地曲谱中选
+                            presenter.queryLocalSongList();
+                        } else {//从手机相册中选
+                            presenter.addPicByAlbum();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+    }
+
+    //弹出框，选择本地曲谱中的某一首
+    @Override
+    public void alertLocalSongDialog(List<String> list) {
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getCurrentContext()
+                , android.R.layout.select_dialog_item
+                , android.R.id.text1
+                , list);
+
+        new AlertDialog.Builder(getCurrentContext())
+                .setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.addPicByLocalSong(adapter.getItem(which));//得到他的图片路径
+                    }
+                })
+                .show();
     }
 
     @Override

@@ -2,14 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="8dp"
-    android:paddingRight="@dimen/item_padding_16dp">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="-8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
         <com.example.q.pocketmusic.view.widget.view.TypeView
@@ -60,6 +59,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginLeft="-8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

@@ -1,6 +1,8 @@
 package com.example.q.pocketmusic.module.home.seek.ask.comment;
 
 import android.content.Intent;
+import android.database.SQLException;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
@@ -15,13 +17,21 @@ import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPic;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
+import com.example.q.pocketmusic.model.bean.local.Img;
+import com.example.q.pocketmusic.model.bean.local.LocalSong;
+import com.example.q.pocketmusic.model.db.ImgDao;
+import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.MyToast;
+import com.j256.ormlite.dao.CloseableIterator;
+import com.j256.ormlite.dao.ForeignCollection;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
@@ -31,6 +41,11 @@ import cn.bmob.v3.listener.UploadBatchListener;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
+import rx.Observer;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by 鹏君 on 2016/11/14.
@@ -53,7 +68,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
     public AskSongCommentPresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
         model = new AskSongCommentModel();
     }
 
@@ -67,9 +82,9 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         model.getInitCommentList(post, new ToastQueryListener<AskSongComment>(activity) {
             @Override
             public void onSuccess(List<AskSongComment> list) {
-                if (!isRefreshing){
+                if (!isRefreshing) {
                     activity.setCommentList(list);
-                }else {
+                } else {
                     activity.setCommentListWithRefreshing(list);
                 }
 
@@ -153,7 +168,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
 
     //添加图片
-    public void addPic() {
+    public void addPicByAlbum() {
         FunctionConfig config = new FunctionConfig.Builder()
                 .setMutiSelectMaxSize(8)
                 .build();
@@ -207,6 +222,76 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         activity.getCurrentContext().startActivity(intent);
     }
 
+    //RxJava,先查询本地曲谱的列表
+    public void queryLocalSongList() {
+        rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
+            @Override
+            public void call(Subscriber<? super List<String>> subscriber) {
+                LocalSongDao dao = new LocalSongDao(activity.getCurrentContext());
+                List<LocalSong> list = dao.queryForAll();
+                List<String> names = new ArrayList<String>();
+                for (LocalSong localSong : list) {
+                    names.add(localSong.getName());
+                }
+                subscriber.onNext(names);
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<String>>() {
+                    @Override
+                    public void call(List<String> strings) {
+                        activity.alertLocalSongDialog(strings);
+                    }
+                });
+    }
+
+    //通过曲谱的名字找到本地图片的路径，并添加，显示已添加的图片数量
+    public void addPicByLocalSong(final String name) {
+        rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
+            @Override
+            public void call(Subscriber<? super List<String>> subscriber) {
+                subscriber.onNext(getLocalImgs(name));
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<String>>() {
+                    @Override
+                    public void call(List<String> strings) {
+                        model.getPicUrls().clear();
+                        model.getPicUrls().addAll(strings);
+                        activity.addPicResult(model.getPicUrls());
+                    }
+                });
+    }
+
+    @NonNull
+    private List<String> getLocalImgs(String name) {
+        LocalSongDao localSongDao = new LocalSongDao(activity.getCurrentContext());
+        List<String> imgUrls = new ArrayList<>();
+        LocalSong localSong = localSongDao.findByName(name);
+        if (localSong == null) {
+            MyToast.showToast(activity.getCurrentContext(), "曲谱消失在了异次元。");
+            return new ArrayList<>();
+        }
+        ForeignCollection<Img> imgs = localSong.getImgs();
+        CloseableIterator<Img> iterator = imgs.closeableIterator();
+        try {
+            while (iterator.hasNext()) {
+                Img img = iterator.next();
+                imgUrls.add(img.getUrl());
+            }
+        } finally {
+            try {
+                iterator.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return imgUrls;
+    }
+
 
     public interface IView extends IBaseView {
 
@@ -221,5 +306,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         void showPicDialog(Song song, AskSongComment askSongComment);
 
         void setCommentListWithRefreshing(List<AskSongComment> list);
+
+        void alertLocalSongDialog(List<String> localSongs);
     }
 }
