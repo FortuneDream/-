@@ -9,7 +9,7 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,11 +35,11 @@ public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
     public void register(String account, String password, String confirmPassword, String nickName) {
         Boolean isConfirm = checkAccount(account);//邮箱验证账号
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password) || TextUtils.isEmpty(nickName) || TextUtils.isEmpty(confirmPassword)) {
-            MyToast.showToast(activity.getCurrentContext(), CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
         } else if (!isConfirm) {
-            MyToast.showToast(activity.getCurrentContext(), "邮箱格式错误~");
+            ToastUtil.showToast( "邮箱格式错误~");
         } else if (!confirmPassword.equals(password)) {
-            MyToast.showToast(activity.getCurrentContext(), "两次输入的密码要相同哦~");
+            ToastUtil.showToast( "两次输入的密码要相同哦~");
         } else {
             activity.showLoading(true);
             final MyUser user = new MyUser();
@@ -51,7 +51,7 @@ public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
                 @Override
                 public void onSuccess(MyUser user) {
                     activity.showLoading(false);
-                    MyToast.showToast(activity.getCurrentContext(), "注册成功，\\(^o^)/~");
+                    ToastUtil.showToast( "注册成功，\\(^o^)/~");
                     ((Activity) activity.getCurrentContext()).setResult(Constant.SUCCESS);
                     activity.finish();
                 }

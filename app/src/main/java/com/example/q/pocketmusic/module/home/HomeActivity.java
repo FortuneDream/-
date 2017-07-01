@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.CheckUserUtil;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.BottomTabView;
 
 import butterknife.BindView;
@@ -100,7 +100,7 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView,HomePresenter
     private void exit() {
         if (!isExit) {
             isExit = true;
-            MyToast.showToast(this, "再按一次退出程序");
+            ToastUtil.showToast("再按一次退出程序");
             // 利用handler延迟发送更改状态信息
             mHandler.sendEmptyMessageDelayed(0, 2000);
         } else {

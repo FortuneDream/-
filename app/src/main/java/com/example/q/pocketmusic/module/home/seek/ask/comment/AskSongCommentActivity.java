@@ -1,13 +1,10 @@
 package com.example.q.pocketmusic.module.home.seek.ask.comment;
 
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.CursorWrapper;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,9 +16,8 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.PicDialog;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -108,7 +104,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
     //添加图片返回,最好有个列表可以展示
     @Override
     public void addPicResult(List<String> picUrls) {
-        MyToast.showToast(context, "已经添加" + picUrls.size());
+        ToastUtil.showToast("已经添加" + picUrls.size());
         numberPicTv.setText(picUrls.size() + " 张");
     }
 

@@ -1,10 +1,7 @@
 package com.example.q.pocketmusic.module.home.profile;
 
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +15,6 @@ import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 import java.util.Random;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -79,10 +75,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
             userNameTv.setText(user.getNickName());
             //设置头像
             new DisplayStrategy().displayCircle(context, user.getHeadImg(), headIv);
-            //设置乐器
-
-            //设置贡献值，数据更新有问题
-//            contributionItem.setSubText(String.valueOf(user.getContribution()) + " 点");
         }
     }
 
@@ -124,7 +116,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     //签到Dialog
     public void alertSignInDialog() {
         Random random = new Random();
-        final int reward = random.nextInt(5) + 3;//随机3--6点
+        final int reward = random.nextInt(1) + 4;//随机1--5点
         View view = View.inflate(getContext(), R.layout.dialog_sign_in, null);
         GuaGuaKa guaGuaKa = (GuaGuaKa) view.findViewById(R.id.gua_gua_ka);
         guaGuaKa.setAwardText(String.valueOf(reward) + " 枚硬币");
@@ -142,7 +134,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
         getRewardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addReward(reward);
+                presenter.signIn(reward);
                 signInDialog.dismiss();
             }
         });

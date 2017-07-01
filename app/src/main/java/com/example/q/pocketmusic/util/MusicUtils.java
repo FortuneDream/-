@@ -45,7 +45,7 @@ public class MusicUtils {
         if (isComplete) {
             soundPool.play(soundPoolMap.get(no), 1.0f, 1.0f, 1, 0, 1.0f);
         } else {
-            MyToast.showToast(context, "正在加载音频~请稍后");
+            ToastUtil.showToast( "正在加载音频~请稍后");
         }
     }
 

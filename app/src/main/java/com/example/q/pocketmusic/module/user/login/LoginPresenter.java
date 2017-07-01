@@ -12,7 +12,7 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.user.forget.ForgetActivity;
 import com.example.q.pocketmusic.module.user.register.RegisterActivity;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import cn.bmob.v3.exception.BmobException;
 
@@ -31,7 +31,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
     //登录
     public void login(final String account, String password) {
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
-            MyToast.showToast(activity.getCurrentContext(), CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast( CommonString.STR_COMPLETE_INFO);
             return;
         }
         activity.showLoading(true);
@@ -42,7 +42,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
 
             @Override
             public void onSuccess(MyUser user) {
-                MyToast.showToast(activity.getCurrentContext(), "欢迎尊贵的VIP！ ");
+                ToastUtil.showToast( "欢迎尊贵的VIP！ ");
                 activity.loginToResult(Constant.SUCCESS, user);
                 activity.finish();//关闭登录界面
             }

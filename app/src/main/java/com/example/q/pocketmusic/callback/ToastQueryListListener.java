@@ -2,7 +2,7 @@ package com.example.q.pocketmusic.callback;
 
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.util.List;
 
@@ -20,6 +20,8 @@ public abstract class ToastQueryListListener<BatchResult> extends QueryListListe
         this.baseView = baseView;
     }
 
+    public ToastQueryListListener(){}
+
     public abstract void onSuccess(List<BatchResult> list);
 
     @Override
@@ -33,8 +35,10 @@ public abstract class ToastQueryListListener<BatchResult> extends QueryListListe
     }
 
     public void onFail(BmobException e) {
-        baseView.showLoading(false);
-        MyToast.showToast(baseView.getCurrentContext(), CommonString.STR_ERROR_INFO + e.getMessage());
+        if (baseView!=null){
+            baseView.showLoading(false);
+            ToastUtil.showToast(CommonString.STR_ERROR_INFO + e.getMessage());
+        }
         e.printStackTrace();
         //        CrashHandler handler=CrashHandler.getInstance();
 //        handler.uncaughtException(Thread.currentThread(),e);

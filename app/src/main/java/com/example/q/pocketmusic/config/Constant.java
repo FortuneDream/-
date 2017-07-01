@@ -78,15 +78,15 @@ public class Constant {
 
 
     //贡献度+
-    public final static int ADD_CONTRIBUTION_UPLOAD = 3;//上传
-    public final static int ADD_CONTRIBUTION_COMMENT_WITH_PIC = 2;//评论加图
-    public final static int ADD_CONTRIBUTION_INIT = 10;//初始
-    public final static int ADD_CONTRIBUTION_AGREE = 1;//点赞+1
+    public final static int ADD_CONTRIBUTION_INIT = 15;//初始
+    public final static int ADD_CONTRIBUTION_UPLOAD = 4;//上传
+    public final static int ADD_CONTRIBUTION_COMMENT_WITH_PIC = 4;//评论加图
+    public final static int ADD_CONTRIBUTION_AGREE = 2;//点赞+1，赞数比较多时，给予额外加成
 
     //贡献度-
-    public final static int REDUCE_COIN_UPLOAD = 2;//下载上传-2
-    public final static int REDUCE_CONTRIBUTION_COLLECTION = 1;//收藏-1
-    public final static int REDUCE_CONTRIBUTION_ASK = 1;//求谱减一
+    public final static int REDUCE_CONTRIBUTION_ASK = 5;//求谱减一
+    public final static int REDUCE_COIN_UPLOAD = 3;//下载上传-2
+    public final static int REDUCE_CONTRIBUTION_COLLECTION = 2;//收藏-1
 
 
     //置顶
@@ -99,8 +99,8 @@ public class Constant {
     public static final int gang_qin_pu = 2;
     public static final int ji_ta_pu = 3;
 
-    public static final String BMOB_CREATE_AT="-createdAt";
-    public static final String BMOB_USER="user";
+    public static final String BMOB_CREATE_AT = "-createdAt";
+    public static final String BMOB_USER = "user";
 
 
     //增加本地曲谱需要获得顺序

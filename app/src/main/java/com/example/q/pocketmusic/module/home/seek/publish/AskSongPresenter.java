@@ -12,7 +12,7 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.CheckUserUtil;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -34,11 +34,11 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
 
     public void askForSong(String title, final String content, final MyUser user) {
         if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title) || type == NOT_SELECT) {
-            MyToast.showToast(activity.getCurrentContext(), CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
             return;
         }
         if (!CheckUserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), Constant.REDUCE_CONTRIBUTION_ASK)) {
-            MyToast.showToast(activity.getCurrentContext(), CommonString.STR_NOT_ENOUGH_COIN);
+            ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
             return;
         }
         activity.showLoading(true);
@@ -50,7 +50,7 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
                 user.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
-                        MyToast.showToast(activity.getCurrentContext(), CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_ASK);
+                        ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_ASK);
                         activity.showLoading(false);
                         activity.setAskResult(Constant.SUCCESS);
                         activity.finish();

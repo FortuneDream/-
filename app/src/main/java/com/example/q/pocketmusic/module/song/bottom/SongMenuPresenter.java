@@ -26,7 +26,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.DownloadUtil;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
 
@@ -63,10 +63,8 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     }
 
 
-
     //下载
     public void download(final String name) {
-        fragment.showLoading(true);
         DownloadUtil downloadUtil = new DownloadUtil(fragment.getCurrentContext());
         downloadUtil.setOnDownloadListener(new DownloadUtil.OnDownloadListener() {
                                                @Override
@@ -77,13 +75,11 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
                                                @Override
                                                public void onSuccess() {
-                                                   fragment.showLoading(false);
                                                    fragment.downloadResult(Constant.SUCCESS, "下载成功");
                                                }
 
                                                @Override
                                                public void onFailed(String info) {
-                                                   fragment.showLoading(false);
                                                    fragment.downloadResult(Constant.FAIL, info);
                                                }
                                            }
@@ -94,12 +90,10 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     private DownloadInfo downloadStartCheck() {
         //如果无图
         if (song.getIvUrl() == null || song.getIvUrl().size() <= 0) {
-            fragment.showLoading(false);
             return new DownloadInfo("没有图片", false);
         }
         //如果本地已经存在
         if (new LocalSongDao(fragment.getCurrentContext()).isExist(song.getName())) {
-            fragment.showLoading(false);
             return new DownloadInfo("本地已存在", false);
         }
 
@@ -108,12 +102,10 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
             //找不到用户
             if (user == null) {
-                fragment.showLoading(false);
                 return new DownloadInfo("找不到用户", false);
             }
             //硬币不足
             if (!CheckUserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_COIN_UPLOAD)) {
-                fragment.showLoading(false);
                 return new DownloadInfo(CommonString.STR_NOT_ENOUGH_COIN, false);
             }
             //扣除硬币
@@ -121,7 +113,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             user.update(new ToastUpdateListener(fragment) {
                 @Override
                 public void onSuccess() {
-                    MyToast.showToast(fragment.getCurrentContext(), CommonString.REDUCE_COIN_BASE + (Constant.REDUCE_COIN_UPLOAD));
+                    ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + (Constant.REDUCE_COIN_UPLOAD));
                 }
             });
         }
@@ -163,26 +155,23 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
             askSongComment.setAgrees(relation);
             askSongComment.increment("agreeNum");//原子操作，点赞数加一
-            askSongComment.update(new ToastUpdateListener(fragment) {
+            askSongComment.update(new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
-                    MyToast.showToast(fragment.getCurrentContext(), "已点赞");
+                    ToastUtil.showToast("已点赞");
                     user.increment("contribution", Constant.ADD_CONTRIBUTION_AGREE);
-                    user.update(new ToastUpdateListener(fragment) {
+                    user.update(new ToastUpdateListener() {
                         @Override
                         public void onSuccess() {
-                            MyToast.showToast(fragment.getCurrentContext(), CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
+                            ToastUtil.showToast(CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
                         }
                     });
                 }
             });
         } else {
-            MyToast.showToast(fragment.getCurrentContext(), "已经赞过了哦~");
+            ToastUtil.showToast("已经赞过了哦~");
         }
     }
-
-
-
 
 
     //添加收藏
@@ -191,12 +180,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         final MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
         if (user == null) {
             fragment.showLoading(false);
-            MyToast.showToast(fragment.getCurrentContext(), "请先登录~");
+            ToastUtil.showToast("请先登录~");
             return;
         }
         if (song.getIvUrl() == null || song.getIvUrl().size() <= 0) {
             fragment.showLoading(false);
-            MyToast.showToast(fragment.getCurrentContext(), "图片为空");
+            ToastUtil.showToast("图片为空");
             return;
         }
         //检测是否已经收藏
@@ -210,14 +199,14 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                 for (CollectionSong collectionSong : list) {
                     if (collectionSong.getName().equals(song.getName())) {
                         fragment.showLoading(false);
-                        MyToast.showToast(fragment.getCurrentContext(), "已收藏");
+                        ToastUtil.showToast("已收藏");
                         return;
                     }
                 }
                 //贡献度是否足够
                 if (!CheckUserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_CONTRIBUTION_COLLECTION)) {
                     fragment.showLoading(false);
-                    MyToast.showToast(fragment.getCurrentContext(), "贡献值不够~");
+                    ToastUtil.showToast("贡献值不够~");
                     return;
                 }
 
@@ -250,13 +239,13 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                                 user.update(new ToastUpdateListener(fragment) {
                                     @Override
                                     public void onSuccess() {
-                                        MyToast.showToast(fragment.getCurrentContext(), "已收藏");
+                                        ToastUtil.showToast("已收藏");
                                         user.increment("contribution", -Constant.REDUCE_CONTRIBUTION_COLLECTION);//贡献值-1
                                         user.update(new ToastUpdateListener(fragment) {
                                             @Override
                                             public void onSuccess() {
                                                 fragment.showLoading(false);
-                                                MyToast.showToast(fragment.getCurrentContext(), CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_COLLECTION);
+                                                ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_COLLECTION);
                                             }
                                         });
                                     }
@@ -284,7 +273,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                 break;
         }
         if (list == null || list.size() <= 0) {
-            MyToast.showToast(fragment.getCurrentContext(), "没有图片");
+            ToastUtil.showToast("没有图片");
             return;
         }
 
@@ -300,7 +289,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         if (intent.resolveActivity(fragment.getCurrentContext().getPackageManager()) != null) {
             fragment.getCurrentContext().startActivity(intent);
         } else {
-            MyToast.showToast(fragment.getCurrentContext(), "你的手机不支持分享~");
+            ToastUtil.showToast("你的手机不支持分享~");
         }
     }
 
@@ -312,7 +301,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         ArrayList<String> imgUrls = new ArrayList<>();
         LocalSong localSong = localSongDao.findBySongId(localsong.getId());
         if (localSong == null) {
-            MyToast.showToast(fragment.getCurrentContext(), "曲谱消失在了异次元。");
+            ToastUtil.showToast("曲谱消失在了异次元。");
             fragment.finish();
             return new ArrayList<>();
         }
@@ -340,7 +329,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     public void init() {
         SongObject songObject = intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL);
         isFrom = songObject.getFrom();
-        song=songObject.getSong();
+        song = songObject.getSong();
 
         //求谱，检测是否可以点赞,
         if (isFrom == Constant.FROM_ASK) {

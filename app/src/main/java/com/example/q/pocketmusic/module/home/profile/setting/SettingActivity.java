@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 
 import butterknife.BindView;
@@ -100,7 +100,7 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
     public void setCheckUpdateResult(boolean hasUpdate, boolean showToast) {
         updateItem.bindBadge(hasUpdate);
         if (!hasUpdate && showToast) {
-            MyToast.showToast(context, "当前已是最新版本~");
+            ToastUtil.showToast( "当前已是最新版本~");
         }
     }
 

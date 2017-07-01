@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.EditDialog;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -112,10 +112,10 @@ public class SongRecordFragment extends BaseFragment<SongRecordPresenter.IView, 
     @Override
     public void setAddResult(boolean isSucceed) {
         if (isSucceed) {
-            MyToast.showToast(context, "保存成功！");
+            ToastUtil.showToast("保存成功！");
             editDialog.dismiss();
         } else {
-            MyToast.showToast(context, "不能添加同名的语音");
+            ToastUtil.showToast("不能添加同名的语音");
         }
     }
 

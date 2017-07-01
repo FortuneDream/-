@@ -7,7 +7,7 @@ import android.os.Message;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.MusicUtils;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 /**
  * Created by 鹏君 on 2017/4/22.
@@ -75,7 +75,7 @@ public class PianoPresenter extends BasePresenter<PianoPresenter.IView> {
     }
 
     public void keepPic(String title) {
-        MyToast.showToast(activity.getCurrentContext(), "保存(未实现)");
+        ToastUtil.showToast( "保存(未实现)");
     }
 
     public interface IView extends IBaseView {

@@ -2,7 +2,7 @@ package com.example.q.pocketmusic.callback;
 
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.util.List;
 
@@ -21,6 +21,8 @@ public class ToastUploadBatchListener implements UploadBatchListener {
         this.baseView = baseView;
     }
 
+    public ToastUploadBatchListener() {
+    }
 
     @Override
     public void onSuccess(List<BmobFile> list, List<String> list1) {
@@ -34,8 +36,10 @@ public class ToastUploadBatchListener implements UploadBatchListener {
 
     @Override
     public void onError(int i, String s) {
-        baseView.showLoading(false);
-        MyToast.showToast(baseView.getCurrentContext(), CommonString.STR_ERROR_INFO + "第" + i + "张图片上传错误:" + s);
+        if (baseView != null) {
+            baseView.showLoading(false);
+            ToastUtil.showToast( CommonString.STR_ERROR_INFO + "第" + i + "张图片上传错误:" + s);
+        }
         //        CrashHandler handler=CrashHandler.getInstance();
 //        handler.uncaughtException(Thread.currentThread(),e);
     }

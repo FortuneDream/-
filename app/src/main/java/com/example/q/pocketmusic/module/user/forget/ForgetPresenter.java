@@ -7,7 +7,7 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.util.List;
 
@@ -30,12 +30,12 @@ public class ForgetPresenter extends BasePresenter<ForgetPresenter.IView> {
 
     public void checkInfo(final String account, String nickName, final String newPassword, String confirmPassword) {
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(nickName) || TextUtils.isEmpty(newPassword) || TextUtils.isEmpty(confirmPassword)) {
-            MyToast.showToast(activity.getCurrentContext(), "请输入完整信息");
+            ToastUtil.showToast( "请输入完整信息");
             return;
         }
 
         if (!newPassword.equals(confirmPassword)) {
-            MyToast.showToast(activity.getCurrentContext(), "两次密码输入不同");
+            ToastUtil.showToast( "两次密码输入不同");
             return;
         }
         activity.showLoading(true);
@@ -49,7 +49,7 @@ public class ForgetPresenter extends BasePresenter<ForgetPresenter.IView> {
 
                     if (list.size() != 1) {
                         activity.showLoading(false);
-                        MyToast.showToast(activity.getCurrentContext(), "没有找到该用户");
+                        ToastUtil.showToast( "没有找到该用户");
                         return;
                     }
 
@@ -59,16 +59,16 @@ public class ForgetPresenter extends BasePresenter<ForgetPresenter.IView> {
                         public void done(String s, BmobException e) {
                             activity.showLoading(false);
                             if (e == null) {
-                                MyToast.showToast(activity.getCurrentContext(), "已收到修改密码请求，请稍等");
+                                ToastUtil.showToast( "已收到修改密码请求，请稍等");
                                 activity.finish();
                             } else {
-                                MyToast.showToast(activity.getCurrentContext(), e.getMessage());
+                                ToastUtil.showToast(e.getMessage());
                             }
                         }
                     });
                 } else {
                     activity.showLoading(false);
-                    MyToast.showToast(activity.getCurrentContext(), e.getMessage());
+                    ToastUtil.showToast(e.getMessage());
                 }
             }
         });

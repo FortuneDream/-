@@ -7,7 +7,7 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import cn.bmob.v3.listener.BmobUpdateListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
@@ -63,7 +63,7 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
         if (intent.resolveActivity(activity.getCurrentContext().getPackageManager()) != null) {
             activity.getCurrentContext().startActivity(intent);
         } else {
-            MyToast.showToast(activity.getCurrentContext(), "你的手机不支持分享~");
+            ToastUtil.showToast( "你的手机不支持分享~");
         }
     }
 

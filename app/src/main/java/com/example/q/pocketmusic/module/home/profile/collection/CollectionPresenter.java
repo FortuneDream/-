@@ -13,7 +13,7 @@ import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +96,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
         collectionModel.deleteCollection(user, collectionSong, activity, new ToastUpdateListener(activity) {
             @Override
             public void onSuccess() {
-                MyToast.showToast(activity.getCurrentContext(), "已删除");
+                ToastUtil.showToast( "已删除");
             }
         });
     }

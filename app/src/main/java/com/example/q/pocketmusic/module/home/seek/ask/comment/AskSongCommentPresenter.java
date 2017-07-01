@@ -19,19 +19,17 @@ import com.example.q.pocketmusic.model.bean.ask.AskSongPic;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.db.ImgDao;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
@@ -41,7 +39,6 @@ import cn.bmob.v3.listener.UploadBatchListener;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
-import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -137,7 +134,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                                                 @Override
                                                 public void onSuccess() {
                                                     activity.showLoading(false);
-                                                    MyToast.showToast(activity.getCurrentContext(), CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                                                    ToastUtil.showToast( CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
                                                     activity.sendCommentResult(s, askSongComment);
                                                 }
                                             });
@@ -155,7 +152,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                             public void onError(int i, String s) {
                                 //文件上传失败
                                 activity.showLoading(false);
-                                MyToast.showToast(activity.getCurrentContext(), CommonString.STR_ERROR_INFO + s);
+                                ToastUtil.showToast( CommonString.STR_ERROR_INFO + s);
                             }
                         });
                     }
@@ -184,7 +181,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
             @Override
             public void onHanlderFailure(int requestCode, String errorMsg) {
-                MyToast.showToast(activity.getCurrentContext(), CommonString.STR_ERROR_INFO + errorMsg);
+                ToastUtil.showToast(CommonString.STR_ERROR_INFO + errorMsg);
             }
         });
     }
@@ -272,7 +269,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         List<String> imgUrls = new ArrayList<>();
         LocalSong localSong = localSongDao.findByName(name);
         if (localSong == null) {
-            MyToast.showToast(activity.getCurrentContext(), "曲谱消失在了异次元。");
+            ToastUtil.showToast( "曲谱消失在了异次元。");
             return new ArrayList<>();
         }
         ForeignCollection<Img> imgs = localSong.getImgs();

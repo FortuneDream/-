@@ -13,7 +13,7 @@ import com.example.q.pocketmusic.module.home.seek.HomeSeekFragment;
 import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,9 +129,9 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
                 if (i == UpdateStatus.Yes) {//版本有更新
                     toastIgnoreAndroidN();
                 } else if (i == UpdateStatus.ErrorSizeFormat) {
-                    MyToast.showToast(activity.getCurrentContext(), "稍等片刻~正在准备更新中~");
+                    ToastUtil.showToast( "稍等片刻~正在准备更新中~");
                 } else if (i == UpdateStatus.TimeOut) {
-                    MyToast.showToast(activity.getCurrentContext(), "查询出错或查询超时");
+                    ToastUtil.showToast("查询出错或查询超时");
                 }
             }
         });//更新监听
@@ -145,14 +145,14 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
         if (intent.resolveActivity(activity.getCurrentContext().getPackageManager()) != null) { //可以接收
             activity.getCurrentContext().startActivity(intent);
         } else {
-            MyToast.showToast(activity.getCurrentContext(), "没有找到应用市场~");
+            ToastUtil.showToast( "没有找到应用市场~");
         }
     }
 
     //忽略
     private void toastIgnoreAndroidN() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//7.0 不更新
-            MyToast.showToast(activity.getCurrentContext(), "在目前暂时不支持Android N 7.0 的自动更新，请到应用商店中下载");
+            ToastUtil.showToast( "在目前暂时不支持Android N 7.0 的自动更新，请到应用商店中下载");
         }
     }
 

@@ -2,7 +2,7 @@ package com.example.q.pocketmusic.callback;
 
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -20,6 +20,8 @@ public abstract class ToastSaveListener<T> extends SaveListener<T> {
         this.baseView = baseView;
     }
 
+    public ToastSaveListener(){}
+
     //不允许重写
     @Override
     final public void done(T t, BmobException e) {
@@ -31,8 +33,10 @@ public abstract class ToastSaveListener<T> extends SaveListener<T> {
     }
 
     public void onFail(T t, BmobException e) {
-        baseView.showLoading(false);
-        MyToast.showToast(baseView.getCurrentContext(), CommonString.STR_ERROR_INFO + e.getMessage());
+        if (baseView!=null){
+            baseView.showLoading(false);
+            ToastUtil.showToast( CommonString.STR_ERROR_INFO + e.getMessage());
+        }
         e.printStackTrace();
         //        CrashHandler handler=CrashHandler.getInstance();
 //        handler.uncaughtException(Thread.currentThread(),e);

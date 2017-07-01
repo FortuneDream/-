@@ -13,7 +13,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.HomeActivity;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.EditDialog;
 import com.example.q.pocketmusic.view.widget.net.ConfettiUtil;
 import com.example.q.pocketmusic.view.widget.net.SnackBarUtil;
@@ -115,7 +115,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                 .setListener(new EditDialog.Builder.OnSelectedListener() {
                     @Override
                     public void onSelectedOk(String str) {
-                        MyToast.showToast(getCurrentContext(), "后台下载中~");
+                        ToastUtil.showToast("后台下载中~");
                         presenter.download(str);
                     }
 
@@ -132,7 +132,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     @Override
     public void downloadResult(Integer result, String info) {
         if (result.equals(Constant.FAIL)) {
-            MyToast.showToast(getCurrentContext(), info);
+            ToastUtil.showToast( info);
         } else {
             //撒花
             if (getActivity() == null) {

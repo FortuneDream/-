@@ -15,7 +15,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.RecordAudio;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.util.LogUtils;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetMenuDialog;
 import com.github.rubensousa.bottomsheetbuilder.adapter.BottomSheetItemClickListener;
@@ -113,7 +113,7 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
                     public void onBottomSheetItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.upload://上传分享
-                                MyToast.showToast(context, "目前暂不支持分享");
+                                ToastUtil.showToast( "目前暂不支持分享");
                                 break;
                             case R.id.delete://删除
                                 presenter.deleteRecord(recordAudio);

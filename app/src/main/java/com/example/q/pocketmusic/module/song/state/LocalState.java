@@ -9,7 +9,7 @@ import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.song.SongActivityPresenter;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
 
@@ -43,7 +43,7 @@ public class LocalState extends BaseState implements IState {
         ArrayList<String> imgUrls = new ArrayList<>();
         LocalSong localSong = localSongDao.findBySongId(this.localSong.getId());
         if (localSong == null) {
-            MyToast.showToast(activity.getCurrentContext(), "曲谱消失在了异次元。");
+            ToastUtil.showToast( "曲谱消失在了异次元。");
             activity.finish();
             return new ArrayList<>();
         }

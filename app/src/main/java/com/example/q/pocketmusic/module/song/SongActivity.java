@@ -13,7 +13,7 @@ import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 import com.example.q.pocketmusic.view.widget.net.HackyViewPager;
 
 import java.util.List;
@@ -67,7 +67,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     //加载失败
     @Override
     public void loadFail() {
-        MyToast.showToast(this, CommonString.STR_NOT_NET);
+        ToastUtil.showToast( CommonString.STR_NOT_NET);
         finish();
     }
 
@@ -115,12 +115,12 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-        MyToast.showToast(context, "成功获得权限");
+        ToastUtil.showToast( "成功获得权限");
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        MyToast.showToast(context, "录音权限被拒绝,如需录音请到设置中心--权限管理中修改");
+        ToastUtil.showToast( "录音权限被拒绝,如需录音请到设置中心--权限管理中修改");
         //presenter.enterSystemSetting();
     }
 

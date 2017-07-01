@@ -62,7 +62,7 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
             protected void onPostExecute(Boolean isSucceed) {
                 super.onPostExecute(isSucceed);
                 if (!isSucceed) {
-                    //MyToast.showToast(fragment.getCurrentContext(), "某些名字相同，已合并新旧录音");
+                    //ToastUtil.showToast(fragment.getCurrentContext(), "某些名字相同，已合并新旧录音");
                 }
                 loadRecordList();
             }

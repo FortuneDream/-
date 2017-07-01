@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import com.example.q.pocketmusic.IAudioPlayerService;
 import com.example.q.pocketmusic.model.bean.local.RecordAudio;
 import com.example.q.pocketmusic.model.db.RecordAudioDao;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,9 +21,9 @@ import java.util.List;
 //疑问：Service运行在主线程，为什么没有阻塞线程?
 public class MediaPlayerService extends Service {
     public static final String RECEIVER_ACTION = "Receiver_action";//用不同的intent
-    public static final String NOTIFY="notify";
-    public static final String PROGRESS="progress";
-    public static final String COMPLETE="complete";
+    public static final String NOTIFY = "notify";
+    public static final String PROGRESS = "progress";
+    public static final String COMPLETE = "complete";
 
     private MediaPlayer player;
     private List<RecordAudio> list;
@@ -92,7 +92,7 @@ public class MediaPlayerService extends Service {
         player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                MyToast.showToast(MediaPlayerService.this, "播放出错了");
+                ToastUtil.showToast("播放出错了");
                 return false;
             }
         });
@@ -187,7 +187,7 @@ public class MediaPlayerService extends Service {
     private void notifyChange(String notify) {
         Intent intent = new Intent();
         intent.setAction(RECEIVER_ACTION);
-        intent.putExtra(NOTIFY,notify);
+        intent.putExtra(NOTIFY, notify);
         sendBroadcast(intent);
     }
 

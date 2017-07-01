@@ -12,7 +12,7 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.FileUtils;
 import com.example.q.pocketmusic.util.LogUtils;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -93,10 +93,10 @@ public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
 
     public void leadSong(String name) {
         if (TextUtils.isEmpty(name)) {
-            MyToast.showToast(activity.getCurrentContext(), "名字不能为空");
+            ToastUtil.showToast("名字不能为空");
             return;
         } else if (imgUrls.size() <= 0) {
-            MyToast.showToast(activity.getCurrentContext(), "请添加图片");
+            ToastUtil.showToast("请添加图片");
             return;
         }
         moveFileAndAddDatabase(name, imgUrls);

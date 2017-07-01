@@ -8,7 +8,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.search.net.SearchNetFragment;
 import com.example.q.pocketmusic.module.search.share.SearchShareFragment;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +70,7 @@ public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView
         if (!TextUtils.isEmpty(query)) {
             return query;
         } else {
-            MyToast.showToast(activity.getCurrentContext(), CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast( CommonString.STR_COMPLETE_INFO);
             return null;
         }
     }

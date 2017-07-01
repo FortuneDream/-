@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 /**
  * Created by 鹏君 on 2016/11/22.
@@ -57,7 +57,7 @@ public class EditDialog {
                 if (listener != null) {
                     String str = hintEdit.getText().toString().trim();
                     if (TextUtils.isEmpty(str)) {
-                        MyToast.showToast(view.getContext(), "不能为空哦~");
+                        ToastUtil.showToast( "不能为空哦~");
                     } else {
                         listener.onSelectedOk(str);
                     }

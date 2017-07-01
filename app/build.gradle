@@ -48,4 +48,5 @@ dependencies {
     compile 'pub.devrel:easypermissions:0.3.0'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile files('libs/qqdriver_android.jar')
 }

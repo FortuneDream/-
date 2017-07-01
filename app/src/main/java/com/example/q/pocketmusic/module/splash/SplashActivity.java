@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.BmobInfo;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,13 +85,13 @@ public class SplashActivity extends BaseActivity<SplashPresenter.IView, SplashPr
 
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-        MyToast.showToast(context, "成功获得权限");
+        ToastUtil.showToast( "成功获得权限");
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
         for (String permission : perms) {
-            MyToast.showToast(context, permission + "权限被拒绝,请到设置中心修改");
+            ToastUtil.showToast( permission + "权限被拒绝,请到设置中心修改");
         }
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             new AppSettingsDialog.Builder(this).

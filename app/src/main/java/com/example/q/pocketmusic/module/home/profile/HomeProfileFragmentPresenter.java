@@ -14,7 +14,7 @@ import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.help.HelpActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
-import com.example.q.pocketmusic.util.MyToast;
+import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.io.File;
 import java.text.ParseException;
@@ -60,7 +60,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                     public void done(BmobException e) {
                         if (e != null) {
                             fragment.showLoading(false);
-                            MyToast.showToast(fragment.getCurrentContext(), CommonString.STR_ERROR_INFO + e.getMessage());
+                            ToastUtil.showToast(CommonString.STR_ERROR_INFO + e.getMessage());
                             return;
                         }
                         //修改用户表的headIv属性
@@ -80,7 +80,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
             @Override
             public void onHanlderFailure(int requestCode, String errorMsg) {
                 fragment.showLoading(false);
-                MyToast.showToast(fragment.getCurrentContext(), CommonString.STR_ERROR_INFO + errorMsg);
+                ToastUtil.showToast( CommonString.STR_ERROR_INFO + errorMsg);
             }
         });
 
@@ -105,13 +105,13 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
 
     //签到
-    public void addReward(final int reward) {
+    public void signIn(final int reward) {
         user.increment("contribution", reward);
         user.setLastSignInDate(dateFormat.format(new Date()));//设置最新签到时间
-        user.update(new ToastUpdateListener(fragment) {
+        user.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                MyToast.showToast(fragment.getCurrentContext(), CommonString.ADD_COIN_BASE + reward);
+                ToastUtil.showToast( CommonString.ADD_COIN_BASE + reward);
             }
         });
     }
@@ -121,10 +121,10 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         if (user.getLastSignInDate() == null) {//之前没有这个列
             user.setLastSignInDate(dateFormat.format(new Date()));//设置当前时间为最后时间
             user.increment("contribution", 5);//第一次都加5
-            user.update(new ToastUpdateListener(fragment) {
+            user.update(new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
-                    MyToast.showToast(fragment.getCurrentContext(), "今天已签到：" + CommonString.ADD_COIN_BASE + 1);
+                    ToastUtil.showToast( "今天已签到：" + CommonString.ADD_COIN_BASE + 1);
                 }
             });
         } else {
@@ -137,7 +137,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                     fragment.alertSignInDialog();
                 } else {
                     long hour = 24 - remainTime / 1000 / 60 / 60;
-                    MyToast.showToast(fragment.getCurrentContext(), "距离下次签到还剩:" + hour + "小时");
+                    ToastUtil.showToast("距离下次签到还剩:" + hour + "小时");
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -167,7 +167,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         if (intent.resolveActivity(fragment.getCurrentContext().getPackageManager()) != null) { //可以接收
             fragment.getCurrentContext().startActivity(intent);
         } else {
-            MyToast.showToast(fragment.getCurrentContext(), "没有找到应用市场~");
+            ToastUtil.showToast( "没有找到应用市场~");
         }
     }
 
