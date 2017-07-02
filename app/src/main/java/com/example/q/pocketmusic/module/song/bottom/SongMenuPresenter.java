@@ -176,15 +176,17 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //添加收藏
     public void addCollection() {
-        fragment.showLoading(true);
         final MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
         if (user == null) {
-            fragment.showLoading(false);
             ToastUtil.showToast("请先登录~");
             return;
         }
+        if (song == null) {
+            ToastUtil.showToast("发生未知错误，请重新打开乐谱后添加");
+            return;
+        }
+
         if (song.getIvUrl() == null || song.getIvUrl().size() <= 0) {
-            fragment.showLoading(false);
             ToastUtil.showToast("图片为空");
             return;
         }
@@ -192,35 +194,41 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         query.order("-updatedAt");
         query.addWhereRelatedTo("collections", new BmobPointer(user));//在user表的Collections找user
-        query.findObjects(new ToastQueryListener<CollectionSong>(fragment) {
+        query.findObjects(new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
+                if (song == null||intent==null) {
+                    ToastUtil.showToast("发生未知错误，请重新打开乐谱后添加");
+                    return;
+                }
+
                 //是否已收藏
                 for (CollectionSong collectionSong : list) {
                     if (collectionSong.getName().equals(song.getName())) {
-                        fragment.showLoading(false);
                         ToastUtil.showToast("已收藏");
                         return;
                     }
                 }
                 //贡献度是否足够
                 if (!CheckUserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_CONTRIBUTION_COLLECTION)) {
-                    fragment.showLoading(false);
                     ToastUtil.showToast("贡献值不够~");
                     return;
                 }
-
-
                 //添加收藏记录
                 final CollectionSong collectionSong = new CollectionSong();
                 collectionSong.setName(song.getName());
                 collectionSong.setNeedGrade(song.isNeedGrade());//是否需要积分
                 collectionSong.setIsFrom(((SongObject) intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL)).getFrom());
                 collectionSong.setContent(song.getContent());
-                collectionSong.save(new ToastSaveListener<String>(fragment) {
+                collectionSong.save(new ToastSaveListener<String>() {
 
                     @Override
                     public void onSuccess(String s) {
+                        if (song == null) {
+                            ToastUtil.showToast("发生未知错误，请重新打开乐谱后添加");
+                            return;
+                        }
+
                         final int numPic = song.getIvUrl().size();
                         List<BmobObject> collectionPics = new ArrayList<>();
                         for (int i = 0; i < numPic; i++) {
@@ -230,21 +238,20 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                             collectionPics.add(collectionPic);
                         }
                         //批量修改
-                        new BmobBatch().insertBatch(collectionPics).doBatch(new ToastQueryListListener<BatchResult>(fragment) {
+                        new BmobBatch().insertBatch(collectionPics).doBatch(new ToastQueryListListener<BatchResult>() {
                             @Override
                             public void onSuccess(List<BatchResult> list) {
                                 BmobRelation relation = new BmobRelation();
                                 relation.add(collectionSong);
                                 user.setCollections(relation);//添加用户收藏
-                                user.update(new ToastUpdateListener(fragment) {
+                                user.update(new ToastUpdateListener() {
                                     @Override
                                     public void onSuccess() {
                                         ToastUtil.showToast("已收藏");
                                         user.increment("contribution", -Constant.REDUCE_CONTRIBUTION_COLLECTION);//贡献值-1
-                                        user.update(new ToastUpdateListener(fragment) {
+                                        user.update(new ToastUpdateListener() {
                                             @Override
                                             public void onSuccess() {
-                                                fragment.showLoading(false);
                                                 ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_COLLECTION);
                                             }
                                         });

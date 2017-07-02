@@ -97,9 +97,9 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                 ((AppCompatImageView) view).setImageResource(R.drawable.ic_vec_song_bottom_agree_press);
                 break;
             case R.id.collection_iv:
-                presenter.addCollection();
                 view.setEnabled(false);//点击收藏之后不可再次点击
                 ((AppCompatImageView) view).setImageResource(R.drawable.ic_vec_song_bottom_collection_press);//改变状态
+                presenter.addCollection();
                 break;
             case R.id.share_iv:
                 presenter.share();
@@ -132,7 +132,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     @Override
     public void downloadResult(Integer result, String info) {
         if (result.equals(Constant.FAIL)) {
-            ToastUtil.showToast( info);
+            ToastUtil.showToast(info);
         } else {
             //撒花
             if (getActivity() == null) {

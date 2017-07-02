@@ -35,8 +35,8 @@ public abstract class ToastSaveListener<T> extends SaveListener<T> {
     public void onFail(T t, BmobException e) {
         if (baseView!=null){
             baseView.showLoading(false);
-            ToastUtil.showToast( CommonString.STR_ERROR_INFO + e.getMessage());
         }
+        ToastUtil.showToast( CommonString.STR_ERROR_INFO + e.getMessage());
         e.printStackTrace();
         //        CrashHandler handler=CrashHandler.getInstance();
 //        handler.uncaughtException(Thread.currentThread(),e);

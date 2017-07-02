@@ -13,6 +13,7 @@ import com.example.q.pocketmusic.module.home.seek.HomeSeekFragment;
 import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
+import com.example.q.pocketmusic.service.update.UpdateUtils;
 import com.example.q.pocketmusic.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -114,28 +115,21 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     //检查版本更新
     public void checkVersion() {
         BmobUpdateAgent.setUpdateOnlyWifi(false);//在任意情况下都会提示
-        BmobUpdateAgent.setDialogListener(new BmobDialogButtonListener() {
-            @Override
-            public void onClick(int i) {
-                if (i == UpdateStatus.Update) {
-                    toastIgnoreAndroidN();
-                    enterAppStore();
-                }
-            }
-        });
         BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
             @Override
             public void onUpdateReturned(int i, UpdateResponse updateResponse) {
                 if (i == UpdateStatus.Yes) {//版本有更新
+                    //updateResponse.path
+                    new UpdateUtils().update(activity.getCurrentContext(), updateResponse.path);
+                    ToastUtil.showToast("有新版！！");
                     toastIgnoreAndroidN();
                 } else if (i == UpdateStatus.ErrorSizeFormat) {
-                    ToastUtil.showToast( "稍等片刻~正在准备更新中~");
+                    ToastUtil.showToast("稍等片刻~正在准备更新中~");
                 } else if (i == UpdateStatus.TimeOut) {
                     ToastUtil.showToast("查询出错或查询超时");
                 }
             }
         });//更新监听
-        BmobUpdateAgent.update(activity.getCurrentContext());//更新
     }
 
     //进入AppStore
@@ -145,14 +139,14 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
         if (intent.resolveActivity(activity.getCurrentContext().getPackageManager()) != null) { //可以接收
             activity.getCurrentContext().startActivity(intent);
         } else {
-            ToastUtil.showToast( "没有找到应用市场~");
+            ToastUtil.showToast("没有找到应用市场~");
         }
     }
 
     //忽略
     private void toastIgnoreAndroidN() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//7.0 不更新
-            ToastUtil.showToast( "在目前暂时不支持Android N 7.0 的自动更新，请到应用商店中下载");
+            ToastUtil.showToast("在目前暂时不支持Android N 7.0 的自动更新，请到应用商店中下载");
         }
     }
 

@@ -85,6 +85,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
                 song.setNeedGrade(collectionSong.getNeedGrade());//设置消耗
                 Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
                 SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.SHOW_ONLY_DOWNLOAD, Constant.NET);
+                intent.setExtrasClassLoader(getClass().getClassLoader());
                 intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, songObject);
                 activity.getCurrentContext().startActivity(intent);
             }

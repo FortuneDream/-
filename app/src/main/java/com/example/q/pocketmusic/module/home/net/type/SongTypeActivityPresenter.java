@@ -54,6 +54,7 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
     public void enterSongActivity(Song song) {
         Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, Constant.FROM_TYPE, Constant.SHOW_COLLECTION_MENU, Constant.NET);
+        intent.setExtrasClassLoader(getClass().getClassLoader());
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, object);
         activity.getCurrentContext().startActivity(intent);
     }

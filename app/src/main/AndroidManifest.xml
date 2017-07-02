@@ -104,6 +104,11 @@
         <activity android:name=".module.home.profile.post.UserPostActivity" />
         <activity android:name=".module.home.profile.share.UserShareActivity" />
         <activity android:name=".module.user.notify.UserNotifyActivity" />
+
+        <service
+            android:name=".service.update.DownloadService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

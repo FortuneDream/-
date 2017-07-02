@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+
+import com.example.q.pocketmusic.service.update.UpdateUtils;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.BottomTabView;
@@ -17,7 +19,7 @@ import com.example.q.pocketmusic.view.widget.view.BottomTabView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class HomeActivity extends BaseActivity<HomePresenter.IView,HomePresenter>
+public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresenter>
         implements HomePresenter.IView {
     @BindView(R.id.home_content)
     FrameLayout homeContent;
@@ -80,8 +82,6 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView,HomePresenter
                     presenter.clickProfile();
                 }
                 break;
-
-
         }
     }
 

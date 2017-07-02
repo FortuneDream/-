@@ -143,6 +143,12 @@ public class DownloadUtil {
             }
         }
         //截取格式
+        if (urls == null || urls.size() == 0) {
+            if (onDownloadListener != null) {
+                onDownloadListener.onFailed("地址错误");
+                return;
+            }
+        }
         String urlType = URLConnection.guessContentTypeFromName(urls.get(0));
 
         if (urlType == null) {

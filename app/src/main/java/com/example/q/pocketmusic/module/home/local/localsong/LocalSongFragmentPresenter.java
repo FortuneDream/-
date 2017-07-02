@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.local.localsong;
 
 import android.content.Intent;
 import android.database.SQLException;
+import android.os.Bundle;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -118,8 +119,9 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
         Song song = new Song();
         song.setName(localSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_LOCAL, Constant.SHOW_NO_MENU, Constant.LOCAL);
-        intent.putExtra(SongActivity.LOCAL_SONG, localSong);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, songObject);
+        intent.setExtrasClassLoader(getClass().getClassLoader());
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL,songObject);
+        intent.putExtra(SongActivity.LOCAL_SONG,localSong);
         fragment.getCurrentContext().startActivity(intent);
     }
 

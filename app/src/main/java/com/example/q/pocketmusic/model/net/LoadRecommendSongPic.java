@@ -23,7 +23,7 @@ public class LoadRecommendSongPic extends AsyncTask<Song,Void,Integer> {
         song=params[0];
         ArrayList<String> list=new ArrayList<>();
         try {
-            Document doc =Jsoup.connect(song.getUrl()).userAgent(Constant.USER_AGENT).get();
+            Document doc =Jsoup.connect(song.getUrl()).userAgent(Constant.USER_AGENT).timeout(5000).get();
             Elements as=doc.select("div.imageList").get(0).getElementsByTag("a");
             for (Element a:as){
                 String href=a.attr("href");
