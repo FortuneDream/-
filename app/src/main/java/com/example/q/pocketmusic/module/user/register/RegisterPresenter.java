@@ -9,7 +9,7 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

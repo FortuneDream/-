@@ -1,6 +1,6 @@
 package com.example.q.pocketmusic.config;
 
-import com.example.q.pocketmusic.util.SharedPrefsUtil;
+import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 
 /**
  * Created by 鹏君 on 2016/8/28.

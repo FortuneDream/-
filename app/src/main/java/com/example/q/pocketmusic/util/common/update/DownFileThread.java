@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.service.update;
+package com.example.q.pocketmusic.util.common.update;
 
 /**
  * Created by 鹏君 on 2017/7/1.
@@ -13,13 +13,12 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
-import com.example.q.pocketmusic.util.LogUtils;
+import com.example.q.pocketmusic.util.common.LogUtils;
 
 import android.annotation.SuppressLint;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 public class DownFileThread implements Runnable {
     public final static int DOWNLOAD_COMPLETE = -2;

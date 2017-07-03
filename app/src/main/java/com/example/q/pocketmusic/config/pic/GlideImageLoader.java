@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.util;
+package com.example.q.pocketmusic.config.pic;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;

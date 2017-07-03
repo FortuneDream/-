@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.util.DisplayStrategy;
+import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 
 /**
  * Created by 鹏君 on 2017/2/5.

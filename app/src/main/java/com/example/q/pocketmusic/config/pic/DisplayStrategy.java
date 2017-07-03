@@ -1,9 +1,7 @@
-package com.example.q.pocketmusic.util;
+package com.example.q.pocketmusic.config.pic;
 
 import android.content.Context;
 import android.widget.ImageView;
-
-import com.example.q.pocketmusic.callback.IDisplayStrategy;
 
 /**
  * Created by 鹏君 on 2016/12/12.

@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.service.update;
+package com.example.q.pocketmusic.util.common.update;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -9,11 +9,12 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.home.HomeActivity;
-import com.example.q.pocketmusic.util.LogUtils;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.LogUtils;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,16 +64,17 @@ public class DownloadService extends Service {
     //安装apk
     private void installApk() {
         //Android N以上需要特殊处理
+        Intent intent = new Intent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri installUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".fileProvider", downFileThread.getApkFile());
+            intent.setDataAndType(installUri, "application/vnd.android.package-archive");
         } else {
-            Uri uri = Uri.fromFile(downFileThread.getApkFile());
-            Intent installIntent = new Intent(Intent.ACTION_VIEW);
-            installIntent.setDataAndType(uri,
-                    "application/vnd.android.package-archive");
-            installIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(installIntent);
+            intent.setDataAndType(Uri.fromFile(downFileThread.getApkFile()), "application/vnd.android.package-archive");
         }
+        startActivity(intent);
     }
 
     @Override
@@ -125,9 +127,9 @@ public class DownloadService extends Service {
         LogUtils.e("service", "onDestroy");
         if (downFileThread != null)
             downFileThread.interuptThread();
-//      if (null != downloadApkNotification) {
-//          downloadApkNotification.removeNotification();
-//      }
+        if (null != downloadApkNotification) {
+            downloadApkNotification.removeNotification();
+        }
         stopSelf();
         super.onDestroy();
     }

@@ -2,7 +2,6 @@ package com.example.q.pocketmusic.module.home.local.localsong;
 
 import android.content.Intent;
 import android.database.SQLException;
-import android.os.Bundle;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -17,9 +16,9 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.share.ShareActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.LogUtils;
-import com.example.q.pocketmusic.util.ToastUtil;
-import com.example.q.pocketmusic.util.SharedPrefsUtil;
+import com.example.q.pocketmusic.util.common.LogUtils;
+import com.example.q.pocketmusic.util.common.ToastUtil;
+import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
 
@@ -62,37 +61,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
 
     //删除乐谱要删除数据库和list.position,还有本地的文件！
     public void deleteSong(LocalSong localSong) {
-        deleteFromDatabase(localSong);
-    }
-
-    private void deleteFromDatabase(LocalSong localSong) {
-        //从数据库删除
-        localSongDao.delete(localSong);
-        ForeignCollection<Img> imgs = localSong.getImgs();
-        CloseableIterator<Img> iterator = imgs.closeableIterator();
-        String parent = null;
-        try {
-            while (iterator.hasNext()) {
-                Img img = iterator.next();
-                imgDao.delete(img);
-                //删除文件
-                File file = new File(img.getUrl());
-                parent = file.getParent();
-                if (file.exists()) {
-                    file.delete();
-                }
-            }
-            //删除文件夹
-            if (parent != null) {
-                new File(parent).delete();
-            }
-        } finally {
-            try {
-                iterator.close();
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
-            }
-        }
+        localSongDao.deleteLocalRelation(fragment.getCurrentContext(),localSong);
     }
 
     //同步乐谱

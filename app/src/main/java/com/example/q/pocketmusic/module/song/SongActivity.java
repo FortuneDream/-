@@ -13,7 +13,7 @@ import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.net.HackyViewPager;
 
 import java.util.List;

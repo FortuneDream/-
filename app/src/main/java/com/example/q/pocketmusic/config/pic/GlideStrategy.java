@@ -1,11 +1,10 @@
-package com.example.q.pocketmusic.util;
+package com.example.q.pocketmusic.config.pic;
 
 import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.callback.IDisplayStrategy;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;

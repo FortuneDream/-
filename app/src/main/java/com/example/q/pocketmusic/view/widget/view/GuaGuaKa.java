@@ -18,7 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.util.ConvertUtil;
+import com.example.q.pocketmusic.util.common.ConvertUtil;
 
 /**
  * Created by 鹏君 on 2017/3/5.

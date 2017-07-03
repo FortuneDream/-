@@ -14,7 +14,8 @@ import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.help.HelpActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.IntentUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.io.File;
 import java.text.ParseException;
@@ -80,7 +81,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
             @Override
             public void onHanlderFailure(int requestCode, String errorMsg) {
                 fragment.showLoading(false);
-                ToastUtil.showToast( CommonString.STR_ERROR_INFO + errorMsg);
+                ToastUtil.showToast(CommonString.STR_ERROR_INFO + errorMsg);
             }
         });
 
@@ -111,7 +112,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         user.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                ToastUtil.showToast( CommonString.ADD_COIN_BASE + reward);
+                ToastUtil.showToast(CommonString.ADD_COIN_BASE + reward);
             }
         });
     }
@@ -124,7 +125,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
             user.update(new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
-                    ToastUtil.showToast( "今天已签到：" + CommonString.ADD_COIN_BASE + 1);
+                    ToastUtil.showToast("今天已签到：" + CommonString.ADD_COIN_BASE + 1);
                 }
             });
         } else {
@@ -162,13 +163,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //App商店
     public void grade() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=" + fragment.getCurrentContext().getPackageName()));
-        if (intent.resolveActivity(fragment.getCurrentContext().getPackageManager()) != null) { //可以接收
-            fragment.getCurrentContext().startActivity(intent);
-        } else {
-            ToastUtil.showToast( "没有找到应用市场~");
-        }
+        IntentUtil.enterAppStore(fragment.getCurrentContext());
     }
 
     public void enterUserShareActivity() {

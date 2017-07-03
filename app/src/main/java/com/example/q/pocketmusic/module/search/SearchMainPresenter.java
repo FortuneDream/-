@@ -8,7 +8,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.search.net.SearchNetFragment;
 import com.example.q.pocketmusic.module.search.share.SearchShareFragment;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,9 +6,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.callback.IDisplayStrategy;
+import com.example.q.pocketmusic.config.pic.IDisplayStrategy;
 import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.util.GlideStrategy;
+import com.example.q.pocketmusic.config.pic.GlideStrategy;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

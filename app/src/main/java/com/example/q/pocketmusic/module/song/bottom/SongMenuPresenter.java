@@ -26,7 +26,8 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.DownloadUtil;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.IntentUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
 
@@ -288,45 +289,16 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         for (String url : list) {
             sb.append(url).append(",");
         }
-
-        Intent intent = new Intent("android.intent.action.SEND");
-        intent.addCategory("android.intent.category.DEFAULT");
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, "推荐一首歌：" + "<<" + song.getName() + ">>:" + sb.toString());
-        if (intent.resolveActivity(fragment.getCurrentContext().getPackageManager()) != null) {
-            fragment.getCurrentContext().startActivity(intent);
-        } else {
-            ToastUtil.showToast("你的手机不支持分享~");
-        }
+        //分享
+        IntentUtil.shareText(fragment.getCurrentContext(), "推荐一首歌：" + "<<" + song.getName() + ">>:" + sb.toString());
     }
 
     //得到本地图片
     @NonNull
-    private ArrayList<String> getLocalImgs() {
+    private List<String> getLocalImgs() {
         LocalSong localsong = (LocalSong) intent.getSerializableExtra(SongActivity.LOCAL_SONG);
-        LocalSongDao localSongDao = new LocalSongDao(fragment.getAppContext());
-        ArrayList<String> imgUrls = new ArrayList<>();
-        LocalSong localSong = localSongDao.findBySongId(localsong.getId());
-        if (localSong == null) {
-            ToastUtil.showToast("曲谱消失在了异次元。");
-            fragment.finish();
-            return new ArrayList<>();
-        }
-        ForeignCollection<Img> imgs = localSong.getImgs();
-        CloseableIterator<Img> iterator = imgs.closeableIterator();
-        try {
-            while (iterator.hasNext()) {
-                Img img = iterator.next();
-                imgUrls.add(img.getUrl());
-            }
-        } finally {
-            try {
-                iterator.close();
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return imgUrls;
+        LocalSongDao localSongDao=new LocalSongDao(fragment.getCurrentContext());
+        return localSongDao.getLocalImgsPath(fragment.getCurrentContext(),localsong);
     }
 
     public void setIntent(Intent intent) {

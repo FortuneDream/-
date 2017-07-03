@@ -56,7 +56,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name=".service.MediaPlayerService" />
+        <service android:name=".service.music.MediaPlayerService" />
 
         <activity
             android:name=".module.share.ShareActivity"
@@ -106,7 +106,7 @@
         <activity android:name=".module.user.notify.UserNotifyActivity" />
 
         <service
-            android:name=".service.update.DownloadService"
+            android:name=".util.common.update.DownloadService"
             android:enabled="true"
             android:exported="true"></service>
     </application>

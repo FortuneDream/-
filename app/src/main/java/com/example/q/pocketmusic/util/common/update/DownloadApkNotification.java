@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.service.update;
+package com.example.q.pocketmusic.util.common.update;
 
 /**
  * Created by 鹏君 on 2017/7/1.

@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.util.ConvertUtil;
+import com.example.q.pocketmusic.util.common.ConvertUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
@@ -58,7 +58,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
 
     @Override
     public Context getAppContext() {
-        return getContext()!=null?getContext().getApplicationContext():null;
+        return getContext() != null ? getContext().getApplicationContext() : null;
     }
 
     @Override

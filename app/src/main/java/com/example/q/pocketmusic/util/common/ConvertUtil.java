@@ -1,10 +1,11 @@
-package com.example.q.pocketmusic.util;
+package com.example.q.pocketmusic.util.common;
 
 import android.content.Context;
 
 /**
  * Created by 鹏君 on 2016/9/10.
  */
+//转换工具包
 public class ConvertUtil {
     //dp->px
     public static int Dp2Px(Context context, float dp) {

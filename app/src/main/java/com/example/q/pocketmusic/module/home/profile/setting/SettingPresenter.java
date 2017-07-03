@@ -7,7 +7,7 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.IntentUtil;
 
 import cn.bmob.v3.listener.BmobUpdateListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
@@ -23,7 +23,7 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
 
     public SettingPresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
     }
 
     public void checkUpdate(final Boolean showToast) {
@@ -53,18 +53,9 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
     }
 
 
-
     //分享apk
     public void shareApp() {
-        Intent intent = new Intent("android.intent.action.SEND");
-        intent.addCategory("android.intent.category.DEFAULT");
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, "推荐一款app:" + "<口袋乐谱>" + "---官网地址：" + "http://pocketmusic.bmob.site/");
-        if (intent.resolveActivity(activity.getCurrentContext().getPackageManager()) != null) {
-            activity.getCurrentContext().startActivity(intent);
-        } else {
-            ToastUtil.showToast( "你的手机不支持分享~");
-        }
+        IntentUtil.shareText(activity.getCurrentContext(), "推荐一款app:" + "<口袋乐谱>" + "---官网地址：" + "http://pocketmusic.bmob.site/");
     }
 
 

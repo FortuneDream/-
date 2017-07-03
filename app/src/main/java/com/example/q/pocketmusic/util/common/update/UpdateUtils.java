@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.service.update;
+package com.example.q.pocketmusic.util.common.update;
 
 import android.content.Context;
 import android.content.Intent;

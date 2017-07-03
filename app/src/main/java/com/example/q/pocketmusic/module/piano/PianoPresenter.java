@@ -7,7 +7,7 @@ import android.os.Message;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.MusicUtils;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 /**
  * Created by 鹏君 on 2017/4/22.

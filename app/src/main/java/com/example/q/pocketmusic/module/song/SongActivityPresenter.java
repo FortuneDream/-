@@ -11,7 +11,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.bottom.SongMenuFragment;
 import com.example.q.pocketmusic.module.song.bottom.SongRecordFragment;
 import com.example.q.pocketmusic.module.song.state.SongController;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
 

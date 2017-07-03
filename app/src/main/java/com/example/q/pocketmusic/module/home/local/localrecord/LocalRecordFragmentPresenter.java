@@ -18,7 +18,8 @@ import com.example.q.pocketmusic.model.net.LoadLocalRecordList;
 import com.example.q.pocketmusic.model.net.SynchronizeRecordAudio;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.service.MediaPlayerService;
+import com.example.q.pocketmusic.service.music.MediaPlayerService;
+import com.example.q.pocketmusic.util.common.FileUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -61,9 +62,6 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
             @Override
             protected void onPostExecute(Boolean isSucceed) {
                 super.onPostExecute(isSucceed);
-                if (!isSucceed) {
-                    //ToastUtil.showToast(fragment.getCurrentContext(), "某些名字相同，已合并新旧录音");
-                }
                 loadRecordList();
             }
         }.execute();
@@ -72,8 +70,7 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
     //长按删除记录
     public void deleteRecord(RecordAudio item) {
         //删除文件
-        File file = new File(item.getPath());
-        file.delete();
+        FileUtils.deleteFile(new File(item.getPath()));
         //数据库删除
         recordAudioDao.delete(item);
     }

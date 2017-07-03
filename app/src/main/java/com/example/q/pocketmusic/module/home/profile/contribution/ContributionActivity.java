@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.util.DisplayStrategy;
+import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
 import java.util.List;

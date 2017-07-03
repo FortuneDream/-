@@ -1,10 +1,10 @@
-package com.example.q.pocketmusic.util;
+package com.example.q.pocketmusic.util.common;
 
 /**
- * Created by 鹏君 on 2016/9/19.
+ * Created by 鹏君 on 2017/3/12.
  */
-//防止快速点击
-public class ClickUtil {
+
+public class XUtil {
     private static long lastClickTime;
     public synchronized static boolean isFastDoubleClick(int min) {
         long time = System.currentTimeMillis();

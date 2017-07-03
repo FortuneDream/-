@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.q.pocketmusic.util.ScreenUtil;
+import com.example.q.pocketmusic.util.common.ScreenUtil;
 
 /**
  * Created by 鹏君 on 2016/12/11.

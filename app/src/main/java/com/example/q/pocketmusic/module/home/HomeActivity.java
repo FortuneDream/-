@@ -11,9 +11,8 @@ import android.widget.FrameLayout;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 
-import com.example.q.pocketmusic.service.update.UpdateUtils;
 import com.example.q.pocketmusic.util.CheckUserUtil;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.BottomTabView;
 
 import butterknife.BindView;

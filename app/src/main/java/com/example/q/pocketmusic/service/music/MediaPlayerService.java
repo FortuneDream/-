@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.service;
+package com.example.q.pocketmusic.service.music;
 
 import android.app.Service;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import com.example.q.pocketmusic.IAudioPlayerService;
 import com.example.q.pocketmusic.model.bean.local.RecordAudio;
 import com.example.q.pocketmusic.model.db.RecordAudioDao;
-import com.example.q.pocketmusic.util.ToastUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.io.IOException;
 import java.util.List;

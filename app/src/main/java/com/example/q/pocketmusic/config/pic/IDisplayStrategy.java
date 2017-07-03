@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.callback;
+package com.example.q.pocketmusic.config.pic;
 
 import android.content.Context;
 import android.widget.ImageView;

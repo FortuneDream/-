@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthFragment;
-import com.example.q.pocketmusic.util.DisplayStrategy;
+import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.example.q.pocketmusic.view.widget.view.GuaGuaKa;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 

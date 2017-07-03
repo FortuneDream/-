@@ -19,7 +19,7 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.FileUtils;
+import com.example.q.pocketmusic.util.common.FileUtils;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.util;
+package com.example.q.pocketmusic.util.common;
 
 import android.app.Activity;
 import android.content.Context;
