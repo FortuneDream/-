@@ -1,5 +1,6 @@
 package com.example.q.pocketmusic.module.song.bottom;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.HomeActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
+import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.dialog.EditDialog;
 import com.example.q.pocketmusic.view.widget.net.ConfettiUtil;
 import com.example.q.pocketmusic.view.widget.net.SnackBarUtil;
@@ -89,17 +91,15 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.download_iv:
-                setDownloadDialog();
+                alertCheckDownloadDialog(view, Constant.REDUCE_DOWNLOAD);
                 break;
             case R.id.agree_iv:
-                presenter.agree();
                 view.setEnabled(false);//点赞之后就不可再次点击
                 ((AppCompatImageView) view).setImageResource(R.drawable.ic_vec_song_bottom_agree_press);
+                presenter.agree();
                 break;
             case R.id.collection_iv:
-                view.setEnabled(false);//点击收藏之后不可再次点击
-                ((AppCompatImageView) view).setImageResource(R.drawable.ic_vec_song_bottom_collection_press);//改变状态
-                presenter.addCollection();
+                alertCheckCollectionDialog(view, Constant.REDUCE_CONTRIBUTION_COLLECTION);
                 break;
             case R.id.share_iv:
                 presenter.share();
@@ -107,25 +107,25 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
         }
     }
 
-    //设置下载弹窗框
-    private void setDownloadDialog() {
-        //编辑框
-        editDialog = new EditDialog.Builder(getActivity())
-                .setEditStr(presenter.getSong().getName())
-                .setListener(new EditDialog.Builder.OnSelectedListener() {
-                    @Override
-                    public void onSelectedOk(String str) {
-                        ToastUtil.showToast("后台下载中~");
-                        presenter.download(str);
-                    }
 
+    public void alertCheckCollectionDialog(final View view, int coin) {
+        new CoinDialogBuilder(getCurrentContext(), coin)
+                .setPositiveButton(new DialogInterface.OnClickListener() {
                     @Override
-                    public void onSelectedCancel() {
-                        editDialog.dismiss();
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        view.setEnabled(false);//点击收藏之后不可再次点击
+                        ((AppCompatImageView) view).setImageResource(R.drawable.ic_vec_song_bottom_collection_press);//改变状态
+                        presenter.addCollection();
                     }
                 })
-                .create();
-        editDialog.show();
+                .setNegativeButton(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     //下载结果
@@ -150,6 +150,44 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                 }
             }).setActionTextColor(ContextCompat.getColor(getCurrentContext(), R.color.white)).show();
         }
+    }
+
+    public void alertCheckDownloadDialog(final View view, int coin) {
+        new CoinDialogBuilder(getCurrentContext(), coin)
+                .setPositiveButton(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        alertDownloadDialog(view);
+                    }
+                })
+                .setNegativeButton(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void alertDownloadDialog(final View view) {
+        editDialog = new EditDialog.Builder(getActivity())
+                .setEditStr(presenter.getSong().getName())
+                .setListener(new EditDialog.Builder.OnSelectedListener() {
+                    @Override
+                    public void onSelectedOk(String str) {
+                        ToastUtil.showToast("后台下载中~");
+                        view.setEnabled(false);//下载键
+                        presenter.download(str);
+                    }
+
+                    @Override
+                    public void onSelectedCancel() {
+                        editDialog.dismiss();
+                    }
+                })
+                .create();
+        editDialog.show();
     }
 
     @Override

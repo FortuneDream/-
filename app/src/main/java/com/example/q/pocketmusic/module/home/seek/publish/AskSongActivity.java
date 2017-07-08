@@ -1,12 +1,15 @@
 package com.example.q.pocketmusic.module.home.seek.publish;
 
+import android.content.DialogInterface;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
@@ -71,9 +74,29 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
             case R.id.ok_txt:
                 String title = titleTet.getInputString();
                 String content = contentTet.getInputString();
-                presenter.askForSong(title, content,user);
+                presenter.checkAsk(title, content, user);
                 break;
         }
+    }
+
+    //消耗硬币确认
+    @Override
+    public void alertCoinDialog(int coin, final String title, final String content, final MyUser user) {
+        new CoinDialogBuilder(this, coin)
+                .setPositiveButton(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.askForSong(title, content, user);
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     @Override

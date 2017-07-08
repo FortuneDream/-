@@ -109,7 +109,6 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                 ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + (Constant.REDUCE_DOWNLOAD));
             }
         });
-
         return new DownloadInfo("", true);
     }
 

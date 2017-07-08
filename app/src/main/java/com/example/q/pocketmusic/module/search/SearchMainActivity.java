@@ -1,5 +1,6 @@
 package com.example.q.pocketmusic.module.search;
 
+import android.graphics.drawable.Animatable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.util.common.LogUtils;
 
 import butterknife.BindView;
 
@@ -68,6 +70,9 @@ public class SearchMainActivity extends BaseActivity<SearchMainPresenter.IView, 
 
     //得到输入，跳转到第二页，刷新
     public void beginSearch() {
+        if (searchIv.getDrawable() instanceof Animatable) {
+            ((Animatable) (searchIv.getDrawable())).start();
+        }
         presenter.setInputStr(searchEdt.getText().toString().trim());
         viewPager.setCurrentItem(presenter.setSearchItemPage(), true);
         presenter.searchSong(viewPager.getCurrentItem());

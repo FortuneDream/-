@@ -33,7 +33,7 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
         type = NOT_SELECT;
     }
 
-    public void askForSong(String title, final String content, final MyUser user) {
+    public void checkAsk(String title, final String content, final MyUser user) {
         if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title) || type == NOT_SELECT) {
             ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
             return;
@@ -42,6 +42,19 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
             ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
             return;
         }
+        activity.alertCoinDialog(Constant.REDUCE_CONTRIBUTION_ASK,title,content,user);
+    }
+
+    public void setSelectedTag(Set<Integer> selectPosSet) {
+        Iterator<Integer> iterator = selectPosSet.iterator();
+        if (iterator.hasNext()) {
+            type = iterator.next();
+        } else {
+            type = NOT_SELECT;//没有选
+        }
+    }
+
+    public void askForSong(String title, String content, final MyUser user) {
         activity.showLoading(true);
         AskSongPost askSongPost = new AskSongPost(user, title, type, content);
         askSongPost.save(new ToastSaveListener<String>(activity) {
@@ -59,23 +72,13 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
                 });
             }
         });
-
-
-    }
-
-    public void setSelectedTag(Set<Integer> selectPosSet) {
-        Iterator<Integer> iterator = selectPosSet.iterator();
-        if (iterator.hasNext()) {
-            type = iterator.next();
-        } else {
-            type = NOT_SELECT;//没有选
-        }
-        LogUtils.e("type:"+String.valueOf(type));
     }
 
     public interface IView extends IBaseView {
         void finish();
 
         void setAskResult(Integer success);
+
+        void alertCoinDialog(int coin,String title,String content,MyUser user);
     }
 }
