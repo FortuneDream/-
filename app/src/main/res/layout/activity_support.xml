@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.q.pocketmusic.module.home.profile.support.SupportActivity">
+
+    <include layout="@layout/include_appbar_toolbar" />
+
+    <TextView
+        style="@style/TwoTextMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开发计划" />
+
+    <TextView
+        android:id="@+id/dev_plan_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1.这是开发计划说明" />
+
+    <TextView
+        style="@style/TwoTextMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="捐赠支持" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/alipay_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="支付宝" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="微信" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/TwoTextMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="捐赠彩蛋" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="凭借捐赠截图获得获取硬币 " />
+
+    <TextView
+        style="@style/TwoTextMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="捐赠榜单" />
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

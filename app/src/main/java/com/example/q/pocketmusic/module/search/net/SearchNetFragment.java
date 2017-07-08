@@ -5,6 +5,7 @@ import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.search.ISearchActivity;
 import com.example.q.pocketmusic.module.search.ISearchFragment;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -56,6 +57,10 @@ public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.I
 
     @Override
     public void setList(List<Song> lists) {
+        if (lists == null || lists.size() == 0) {
+            ToastUtil.showToast("没有找到~");
+            return;
+        }
         adapter.addAll(lists);
     }
 

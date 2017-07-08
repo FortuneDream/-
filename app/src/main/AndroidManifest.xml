@@ -108,7 +108,9 @@
         <service
             android:name=".util.common.update.DownloadService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".module.home.profile.support.SupportActivity"></activity>
     </application>
 
 </manifest>

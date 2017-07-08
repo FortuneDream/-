@@ -14,6 +14,7 @@ import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.help.HelpActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
+import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
@@ -168,6 +169,10 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     public void enterUserShareActivity() {
         fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), UserShareActivity.class));
+    }
+
+    public void enterSupportActivity() {
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SupportActivity.class));
     }
 
 

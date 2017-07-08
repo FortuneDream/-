@@ -34,9 +34,9 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
             @Override
             protected void onPostExecute(List<Song> songs) {
                 super.onPostExecute(songs);
-                if (!isRefreshing){
+                if (!isRefreshing) {
                     fragment.setList(songs);
-                }else {
+                } else {
                     fragment.setInitListWithRefreshing(songs);
                 }
 

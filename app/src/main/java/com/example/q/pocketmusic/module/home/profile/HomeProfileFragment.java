@@ -1,20 +1,24 @@
 package com.example.q.pocketmusic.module.home.profile;
 
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.module.common.AuthFragment;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
+import com.example.q.pocketmusic.module.common.AuthFragment;
 import com.example.q.pocketmusic.view.widget.view.GuaGuaKa;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 
 import java.util.Random;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -48,6 +52,9 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     @BindView(R.id.share_item)
     IcoTextItem shareItem;
     Unbinder unbinder;
+    @BindView(R.id.support_item)
+    IcoTextItem supportItem;
+    Unbinder unbinder1;
     private AlertDialog signInDialog;
 
 
@@ -79,7 +86,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     }
 
 
-    @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item, R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn, R.id.help_item, R.id.post_item,R.id.share_item})
+    @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item, R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn, R.id.help_item, R.id.post_item, R.id.share_item,R.id.support_item})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.head_iv://设置头像
@@ -109,7 +116,9 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
             case R.id.help_item:
                 presenter.enterHelpActivity();
                 break;
-
+            case R.id.support_item:
+                presenter.enterSupportActivity();
+                break;
         }
     }
 
@@ -154,10 +163,11 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     }
 
 
-
     @Override
     protected HomeProfileFragmentPresenter createPresenter() {
         return new HomeProfileFragmentPresenter(this);
     }
+
+
 
 }
