@@ -40,7 +40,6 @@ public class SearchShareFragmentPresenter extends BasePresenter<SearchShareFragm
 
     public void enterSongActivity(ShareSong shareSong) {
         Song song = new Song();
-        song.setNeedGrade(true);//需要积分
         song.setContent(shareSong.getContent());
         song.setName(shareSong.getName());
         Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);

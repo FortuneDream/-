@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.song.bottom;
 
 import android.content.Intent;
-import android.database.SQLException;
 import android.support.annotation.NonNull;
 
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
@@ -17,7 +16,6 @@ import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.collection.CollectionPic;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
-import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
@@ -28,10 +26,7 @@ import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.DownloadUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
-import com.j256.ormlite.dao.CloseableIterator;
-import com.j256.ormlite.dao.ForeignCollection;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,27 +92,24 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         if (new LocalSongDao(fragment.getCurrentContext()).isExist(song.getName())) {
             return new DownloadInfo("本地已存在", false);
         }
-
-        //需要硬币
-        if (song.isNeedGrade()) {
-            MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
-            //找不到用户
-            if (user == null) {
-                return new DownloadInfo("找不到用户", false);
-            }
-            //硬币不足
-            if (!CheckUserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_COIN_UPLOAD)) {
-                return new DownloadInfo(CommonString.STR_NOT_ENOUGH_COIN, false);
-            }
-            //扣除硬币
-            user.increment("contribution", -Constant.REDUCE_COIN_UPLOAD);
-            user.update(new ToastUpdateListener(fragment) {
-                @Override
-                public void onSuccess() {
-                    ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + (Constant.REDUCE_COIN_UPLOAD));
-                }
-            });
+        MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
+        //找不到用户
+        if (user == null) {
+            return new DownloadInfo("找不到用户", false);
         }
+        //硬币不足
+        if (!CheckUserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_DOWNLOAD)) {
+            return new DownloadInfo(CommonString.STR_NOT_ENOUGH_COIN, false);
+        }
+        //扣除硬币
+        user.increment("contribution", -Constant.REDUCE_DOWNLOAD);
+        user.update(new ToastUpdateListener(fragment) {
+            @Override
+            public void onSuccess() {
+                ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + (Constant.REDUCE_DOWNLOAD));
+            }
+        });
+
         return new DownloadInfo("", true);
     }
 
@@ -198,7 +190,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         query.findObjects(new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
-                if (song == null||intent==null) {
+                if (song == null || intent == null) {
                     ToastUtil.showToast("发生未知错误，请重新打开乐谱后添加");
                     return;
                 }
@@ -218,7 +210,6 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                 //添加收藏记录
                 final CollectionSong collectionSong = new CollectionSong();
                 collectionSong.setName(song.getName());
-                collectionSong.setNeedGrade(song.isNeedGrade());//是否需要积分
                 collectionSong.setIsFrom(((SongObject) intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL)).getFrom());
                 collectionSong.setContent(song.getContent());
                 collectionSong.save(new ToastSaveListener<String>() {
@@ -297,8 +288,8 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     @NonNull
     private List<String> getLocalImgs() {
         LocalSong localsong = (LocalSong) intent.getSerializableExtra(SongActivity.LOCAL_SONG);
-        LocalSongDao localSongDao=new LocalSongDao(fragment.getCurrentContext());
-        return localSongDao.getLocalImgsPath(fragment.getCurrentContext(),localsong);
+        LocalSongDao localSongDao = new LocalSongDao(fragment.getCurrentContext());
+        return localSongDao.getLocalImgsPath(fragment.getCurrentContext(), localsong);
     }
 
     public void setIntent(Intent intent) {

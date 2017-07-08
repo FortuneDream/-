@@ -98,6 +98,7 @@ public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
             postUserCommentNumTv.setText(String.valueOf(data.getCommentNum()));
         }
 
+
         private void setPostType(AskSongPost data) {
             int type = data.getType();
             switch (type) {

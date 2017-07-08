@@ -82,7 +82,6 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
                     urls.add(pic.getUrl());
                 }
                 song.setIvUrl(urls);
-                song.setNeedGrade(collectionSong.getNeedGrade());//设置消耗
                 Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
                 SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.SHOW_ONLY_DOWNLOAD, Constant.NET);
                 intent.setExtrasClassLoader(getClass().getClassLoader());

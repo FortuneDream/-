@@ -20,7 +20,6 @@ public class Song implements Parcelable,Serializable {
     private List<String> ivUrl;//曲谱集合
     private String content;//曲谱描述
     private int searchFrom;//曲谱来自
-    private boolean needGrade;//是否需要积分
 
     public Song(String name) {
         this.name = name;
@@ -90,13 +89,9 @@ public class Song implements Parcelable,Serializable {
         this.searchFrom = searchFrom;
     }
 
-    public boolean isNeedGrade() {
-        return needGrade;
-    }
 
-    public void setNeedGrade(boolean needGrade) {
-        this.needGrade = needGrade;
-    }
+
+
 
     public Song() {
     }
@@ -110,7 +105,6 @@ public class Song implements Parcelable,Serializable {
         this.ivUrl = null;
         this.content = "暂无";
         this.searchFrom = Constant.FROM_SEARCH_NET;//默认来自搜索
-        this.needGrade = false;//默认不需要积分
     }
 
     protected Song(Parcel in) {
@@ -122,7 +116,6 @@ public class Song implements Parcelable,Serializable {
         ivUrl=in.createStringArrayList();
         content = in.readString();
         searchFrom = in.readInt();
-        needGrade = in.readByte() != 0;
     }
 
     @Override
@@ -135,7 +128,6 @@ public class Song implements Parcelable,Serializable {
         dest.writeStringList(ivUrl);
         dest.writeString(content);
         dest.writeInt(searchFrom);
-        dest.writeByte((byte) (needGrade ? 1 : 0));
     }
 
     @Override

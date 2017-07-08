@@ -12,6 +12,7 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.CheckUserUtil;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.Iterator;
@@ -69,6 +70,7 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
         } else {
             type = NOT_SELECT;//没有选
         }
+        LogUtils.e("type:"+String.valueOf(type));
     }
 
     public interface IView extends IBaseView {

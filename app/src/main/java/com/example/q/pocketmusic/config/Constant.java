@@ -2,6 +2,9 @@ package com.example.q.pocketmusic.config;
 
 import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by 鹏君 on 2016/8/28.
  */
@@ -79,25 +82,26 @@ public class Constant {
 
     //贡献度+
     public final static int ADD_CONTRIBUTION_INIT = 15;//初始
-    public final static int ADD_CONTRIBUTION_UPLOAD = 4;//上传
-    public final static int ADD_CONTRIBUTION_COMMENT_WITH_PIC = 4;//评论加图
-    public final static int ADD_CONTRIBUTION_AGREE = 2;//点赞+1，赞数比较多时，给予额外加成
+    public final static int ADD_CONTRIBUTION_UPLOAD = 3;//上传
+    public final static int ADD_CONTRIBUTION_COMMENT_WITH_PIC = 3;//评论加图
+    public final static int ADD_CONTRIBUTION_AGREE = 1;//点赞，赞数比较多时，给予额外加成
 
     //贡献度-
-    public final static int REDUCE_CONTRIBUTION_ASK = 5;//求谱减一
-    public final static int REDUCE_COIN_UPLOAD = 3;//下载上传-2
-    public final static int REDUCE_CONTRIBUTION_COLLECTION = 2;//收藏-1
+    public final static int REDUCE_CONTRIBUTION_ASK = 4;//求谱
+    public final static int REDUCE_DOWNLOAD = 3;//下载
+    public final static int REDUCE_CONTRIBUTION_COLLECTION = 2;//收藏
 
 
     //置顶
     public static int sort_value = 1;
     public final static String sort_key = "top_key";
 
-    //求谱类型
-    public static final int qi_ta_pu = 0;
+    //求谱类型,最好用Hap映射
+    public static final int ji_ta_pu = 0;
     public static final int jian_pu = 1;
     public static final int gang_qin_pu = 2;
-    public static final int ji_ta_pu = 3;
+    public static final int qi_ta_pu = 3;
+
 
     public static final String BMOB_CREATE_AT = "-createdAt";
     public static final String BMOB_USER = "user";

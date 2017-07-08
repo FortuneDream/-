@@ -61,7 +61,6 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
     //通过分享乐曲item进入SongActivity
     public void enterSongActivityByShare(ShareSong shareSong) {
         Song song = new Song();
-        song.setNeedGrade(true);//需要积分
         song.setContent(shareSong.getContent());
         song.setName(shareSong.getName());
         Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);

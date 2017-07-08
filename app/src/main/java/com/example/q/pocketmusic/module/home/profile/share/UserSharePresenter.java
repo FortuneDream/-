@@ -63,7 +63,6 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
 
     public void enterSongActivity(ShareSong shareSong) {
         Song song = new Song();
-        song.setNeedGrade(true);//需要积分
         song.setContent(shareSong.getContent());
         song.setName(shareSong.getName());
         Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
