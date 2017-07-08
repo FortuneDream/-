@@ -1,4 +1,4 @@
-![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_logo.jpg)
+![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_logo.png)
 
 # 口袋乐谱
 

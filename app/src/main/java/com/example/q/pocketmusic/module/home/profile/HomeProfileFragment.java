@@ -1,10 +1,8 @@
 package com.example.q.pocketmusic.module.home.profile;
 
-import android.os.Bundle;
+import android.animation.ValueAnimator;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +16,6 @@ import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 import java.util.Random;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -82,11 +79,37 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
             userNameTv.setText(user.getNickName());
             //设置头像
             new DisplayStrategy().displayCircle(context, user.getHeadImg(), headIv);
+            checkIsSign();
         }
     }
 
+    //检测是否已经签到
+    private void checkIsSign() {
+        boolean isSignIn = presenter.isSignIn();
+        if (isSignIn) {
+            signInBtn.setVisibility(View.GONE);
+        } else {
+            signInBtn.setVisibility(View.VISIBLE);
+            startSignInAnimator();
+        }
+    }
 
-    @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item, R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn, R.id.help_item, R.id.post_item, R.id.share_item,R.id.support_item})
+    //执行可签到的动画,横向滑动
+    private void startSignInAnimator() {
+        ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
+        animator.setDuration(1500);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float percent = (float) animation.getAnimatedValue();
+                signInBtn.setTranslationX(-100 * percent);
+            }
+        });
+        animator.start();
+    }
+
+
+    @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item, R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn, R.id.help_item, R.id.post_item, R.id.share_item, R.id.support_item})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.head_iv://设置头像
@@ -111,7 +134,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 presenter.enterContributionActivity();
                 break;
             case R.id.sign_in_btn://签到
-                presenter.checkHasSignIn();
+                presenter.SignIn();
                 break;
             case R.id.help_item:
                 presenter.enterHelpActivity();
@@ -124,6 +147,10 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
 
     //签到Dialog
     public void alertSignInDialog() {
+        //签到Btn消失
+        signInBtn.setVisibility(View.GONE);
+
+        //随机签到
         Random random = new Random();
         final int reward = random.nextInt(1) + 4;//随机1--5点
         View view = View.inflate(getContext(), R.layout.dialog_sign_in, null);
@@ -143,7 +170,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
         getRewardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.signIn(reward);
+                presenter.addCoin(reward);
                 signInDialog.dismiss();
             }
         });
@@ -167,7 +194,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     protected HomeProfileFragmentPresenter createPresenter() {
         return new HomeProfileFragmentPresenter(this);
     }
-
 
 
 }

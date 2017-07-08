@@ -107,19 +107,43 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
 
     //签到
-    public void signIn(final int reward) {
-        user.increment("contribution", reward);
+    public void addCoin(final int coin) {
+        user.increment("contribution", coin);
         user.setLastSignInDate(dateFormat.format(new Date()));//设置最新签到时间
         user.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                ToastUtil.showToast(CommonString.ADD_COIN_BASE + reward);
+                ToastUtil.showToast(CommonString.ADD_COIN_BASE + coin);
             }
         });
     }
 
     //检测是否已经签到
-    public void checkHasSignIn() {
+    public boolean isSignIn() {
+        if (user.getLastSignInDate() == null) {//之前没有这个列,可以签到
+            return false;
+        } else {
+            String lastSignIn = user.getLastSignInDate();
+            try {
+                Date last = dateFormat.parse(lastSignIn);
+                Date now = new Date();
+                long remainTime = now.getTime() - last.getTime();  //11   10,10  10
+                if (remainTime > 24 * 60 * 60 * 1000) {//距离上次签到已经超过24小时
+                    return false;
+                } else {
+                    long hour = 24 - remainTime / 1000 / 60 / 60;
+                    ToastUtil.showToast("距离下次签到还剩:" + hour + "小时");
+                    return true;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return true;
+            }
+        }
+    }
+
+    //检测是否已经签到
+    public void SignIn() {
         if (user.getLastSignInDate() == null) {//之前没有这个列
             user.setLastSignInDate(dateFormat.format(new Date()));//设置当前时间为最后时间
             user.increment("contribution", 5);//第一次都加5
@@ -130,20 +154,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                 }
             });
         } else {
-            String lastSignIn = user.getLastSignInDate();
-            try {
-                Date last = dateFormat.parse(lastSignIn);
-                Date now = new Date();
-                long remainTime = now.getTime() - last.getTime();  //11   10,10  10
-                if (remainTime > 24 * 60 * 60 * 1000) {//距离上次签到已经超过24小时
-                    fragment.alertSignInDialog();
-                } else {
-                    long hour = 24 - remainTime / 1000 / 60 / 60;
-                    ToastUtil.showToast("距离下次签到还剩:" + hour + "小时");
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            fragment.alertSignInDialog();
         }
 
     }
@@ -180,8 +191,8 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
         void setHeadIvResult(String photoPath);
 
-
         void alertSignInDialog();
+
 
     }
 }

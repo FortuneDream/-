@@ -10,18 +10,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:orientation="vertical"
             android:padding="16dp">
 
             <ImageView
                 android:id="@+id/head_iv"
                 android:layout_width="@dimen/ico_launcher_64dp"
                 android:layout_height="@dimen/ico_launcher_64dp"
-                android:layout_gravity="center"
+                android:layout_centerInParent="true"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="16dp"
                 android:src="@mipmap/ico_launcher" />
@@ -31,18 +30,23 @@
                 style="@style/TwoTextMain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="8dp" />
+                android:layout_below="@id/head_iv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp" />
 
             <Button
                 android:id="@+id/sign_in_btn"
                 android:layout_width="@dimen/button_sign_width"
                 android:layout_height="@dimen/button_sign_height"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
                 android:layout_gravity="center"
-                android:background="@drawable/bg_button"
-                android:text="签到" />
+                android:background="@drawable/shape_sign_in"
+                android:text="签到"
+                android:textColor="@color/md_red_300" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <View style="@style/SettingBigDivider" />
