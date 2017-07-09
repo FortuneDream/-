@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.profile.setting;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +15,7 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -32,8 +34,6 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
     TextView versionTv;
     @BindView(R.id.update_item)
     IcoTextItem updateItem;
-    @BindView(R.id.share_item)
-    IcoTextItem shareItem;
     @BindView(R.id.logout_item)
     IcoTextItem logoutItem;
 
@@ -61,18 +61,16 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
 
     }
 
-    @OnClick({R.id.update_item, R.id.logout_item, R.id.share_item})
+    @OnClick({R.id.update_item, R.id.logout_item})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.update_item://检测更新
-                presenter.checkUpdate(true);
+            case R.id.update_item://App更新
+                presenter.appUpdate();
                 break;
             case R.id.logout_item://退出登录
                 alertLogoutDialog();
                 break;
-            case R.id.share_item://分享app
-                presenter.shareApp();
-                break;
+
         }
     }
 
@@ -96,13 +94,6 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
                 .show();
     }
 
-    @Override
-    public void setCheckUpdateResult(boolean hasUpdate, boolean showToast) {
-        updateItem.bindBadge(hasUpdate);
-        if (!hasUpdate && showToast) {
-            ToastUtil.showToast( "当前已是最新版本~");
-        }
-    }
 
     @Override
     protected SettingPresenter createPresenter() {

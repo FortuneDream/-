@@ -140,7 +140,7 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.email_iv:
-                presenter.enterSuggestionActivity();
+                presenter.enterUserNotifyActivity();
                 break;
             case R.id.search_rl:
                 presenter.enterSearchMainActivity();

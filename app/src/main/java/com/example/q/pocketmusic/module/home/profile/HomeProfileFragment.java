@@ -1,8 +1,11 @@
 package com.example.q.pocketmusic.module.home.profile;
 
 import android.animation.ValueAnimator;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 import java.util.Random;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -27,7 +31,6 @@ import butterknife.Unbinder;
 public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresenter.IView, HomeProfileFragmentPresenter>
         implements HomeProfileFragmentPresenter.IView {
 
-
     @BindView(R.id.head_iv)
     ImageView headIv;
     @BindView(R.id.user_name_tv)
@@ -36,21 +39,19 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     Button signInBtn;
     @BindView(R.id.grade_item)
     IcoTextItem gradeItem;
-    @BindView(R.id.post_item)
-    IcoTextItem postItem;
     @BindView(R.id.contribution_item)
     IcoTextItem contributionItem;
+    @BindView(R.id.post_item)
+    IcoTextItem postItem;
     @BindView(R.id.collection_item)
     IcoTextItem collectionItem;
-    @BindView(R.id.help_item)
-    IcoTextItem helpItem;
-    @BindView(R.id.setting_item)
-    IcoTextItem settingItem;
     @BindView(R.id.share_item)
     IcoTextItem shareItem;
+    @BindView(R.id.setting_item)
+    IcoTextItem settingItem;
     Unbinder unbinder;
-    @BindView(R.id.support_item)
-    IcoTextItem supportItem;
+    @BindView(R.id.share_app_item)
+    IcoTextItem shareAppItem;
     Unbinder unbinder1;
     private AlertDialog signInDialog;
 
@@ -109,7 +110,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     }
 
 
-    @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item, R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn, R.id.help_item, R.id.post_item, R.id.share_item, R.id.support_item})
+    @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item, R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn, R.id.post_item, R.id.share_app_item})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.head_iv://设置头像
@@ -136,11 +137,8 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
             case R.id.sign_in_btn://签到
                 presenter.SignIn();
                 break;
-            case R.id.help_item:
-                presenter.enterHelpActivity();
-                break;
-            case R.id.support_item:
-                presenter.enterSupportActivity();
+            case R.id.share_app_item://分享app
+                presenter.shareApp();
                 break;
         }
     }
@@ -195,5 +193,21 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
         return new HomeProfileFragmentPresenter(this);
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder1 = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder1.unbind();
+    }
+
+    @OnClick()
+    public void onViewClicked() {
+    }
 }

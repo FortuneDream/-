@@ -29,7 +29,6 @@
         android:paddingTop="8dp">
 
         <EditText
-            android:textCursorDrawable="@drawable/ico_cursor"
             android:id="@+id/search_edt"
             android:layout_width="0dp"
             android:layout_height="28dp"

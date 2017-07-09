@@ -44,6 +44,7 @@ public class Constant {
     //BmobInfo
     public final static Integer BMOB_INFO_RESET_PASSWORD = 1;//请求重置密码
     public final static Integer BMOB_INFO_LABA = 2;//小喇叭
+    public final static Integer BMOB_INFO_PLAN = 3;//开发计划
 
     //乐器对应
     public final static String[] types = {"全部", "葫芦丝", "吉他", "钢琴", "萨克斯", "二胡", "古筝", "电子琴", "琵琶", "口琴", "桃李醉春风"};

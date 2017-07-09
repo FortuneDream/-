@@ -1,24 +1,35 @@
 package com.example.q.pocketmusic.module.home;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.seek.HomeSeekFragment;
 import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.update.UpdateUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.BmobUpdateListener;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.update.AppVersion;
 import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.bmob.v3.update.UpdateResponse;
 import cn.bmob.v3.update.UpdateStatus;
@@ -112,24 +123,8 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
 
     //检查版本更新
     public void checkVersion() {
-        BmobUpdateAgent.setUpdateOnlyWifi(false);//在任意情况下都会提示
-        BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
-            @Override
-            public void onUpdateReturned(int i, UpdateResponse updateResponse) {
-                if (i == UpdateStatus.Yes) {//版本有更新
-                    //updateResponse.path
-                    new UpdateUtils().update(activity.getCurrentContext(), updateResponse.path);
-                    ToastUtil.showToast("有新版！！");
-                } else if (i == UpdateStatus.ErrorSizeFormat) {
-                    ToastUtil.showToast("稍等片刻~正在准备更新中~");
-                } else if (i == UpdateStatus.TimeOut) {
-                    ToastUtil.showToast("查询出错或查询超时");
-                }
-            }
-        });//更新监听
+        UpdateUtils.getInstanse().update(activity.getCurrentContext());
     }
-
-
 
 
     public void setFragmentManager(FragmentManager fragmentManager) {

@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.allenliu.badgeview.BadgeFactory;
-import com.allenliu.badgeview.BadgeView;
 import com.example.q.pocketmusic.R;
 
 /**
@@ -22,7 +20,6 @@ public class IcoTextItem extends RelativeLayout {
 
     private String mTitle;
     private int icoId;
-    private BadgeView badgeView;
 
     public IcoTextItem(Context context) {
         this(context, null);
@@ -54,18 +51,6 @@ public class IcoTextItem extends RelativeLayout {
     }
 
 
-    public void bindBadge(Boolean isBind) {
-        if (isBind) {
-            if (badgeView == null) {
-                badgeView = BadgeFactory.createDot(getContext())
-                        .bind(mIco);
-            }
-        } else {
-            if (badgeView != null) {
-                badgeView.unbind();
-            }
-        }
-    }
 
     public <T extends View> T getView(int id) {
         return (T) findViewById(id);

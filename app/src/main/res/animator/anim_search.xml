@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="2000"
+    android:duration="1500"
     android:propertyName="trimPathStart"
     android:repeatMode="restart"
     android:valueFrom="1"

@@ -76,19 +76,9 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".module.home.profile.setting.SettingActivity" />
         <activity android:name=".module.home.profile.collection.CollectionActivity" />
-        <activity android:name=".module.home.profile.setting.help.HelpActivity" />
+        <activity android:name=".module.user.notify.help.HelpActivity" />
         <activity android:name=".module.home.profile.contribution.ContributionActivity" />
-
-        <!-- <meta-data -->
-        <!-- android:name="com.taobao.android.hotfix.IDSECRET" -->
-        <!-- android:value="@string/IDSECRET" /> -->
-        <!-- <meta-data -->
-        <!-- android:name="com.taobao.android.hotfix.APPSECRET" -->
-        <!-- android:value="@string/APPSECRET" /> -->
-        <!-- <meta-data -->
-        <!-- android:name="com.taobao.android.hotfix.RSASECRET" -->
-        <!-- android:value="@string/RSASECRET" /> -->
-
+        <activity android:name="cn.bmob.pay.v3.act.PayAct" />
         <activity
             android:name=".module.lead.LeadSongActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
@@ -110,7 +100,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".module.home.profile.support.SupportActivity"></activity>
+        <activity android:name=".module.home.profile.support.SupportActivity" />
+        <activity android:name=".module.user.notify.version.PreviewVersionActivity"></activity>
     </application>
 
 </manifest>

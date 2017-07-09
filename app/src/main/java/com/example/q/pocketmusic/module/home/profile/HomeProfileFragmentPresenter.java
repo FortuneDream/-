@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.home.profile;
 
 import android.content.Intent;
-import android.net.Uri;
 
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
@@ -12,7 +11,7 @@ import com.example.q.pocketmusic.module.home.profile.collection.CollectionActivi
 import com.example.q.pocketmusic.module.home.profile.contribution.ContributionActivity;
 import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
-import com.example.q.pocketmusic.module.home.profile.setting.help.HelpActivity;
+import com.example.q.pocketmusic.module.user.notify.help.HelpActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
 import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
 import com.example.q.pocketmusic.util.common.IntentUtil;
@@ -37,6 +36,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragmentPresenter.IView> {
     private IView fragment;
     private MyUser user;
+    private static boolean mShowSignInToast = true;
 
     public HomeProfileFragmentPresenter(IView fragment) {
         attachView(fragment);
@@ -132,7 +132,11 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                     return false;
                 } else {
                     long hour = 24 - remainTime / 1000 / 60 / 60;
-                    ToastUtil.showToast("距离下次签到还剩:" + hour + "小时");
+                    if (mShowSignInToast) {
+                        ToastUtil.showToast("距离下次签到还剩:" + hour + "小时");
+                        mShowSignInToast = false;
+                    }
+
                     return true;
                 }
             } catch (ParseException e) {
@@ -145,18 +149,23 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
     //检测是否已经签到
     public void SignIn() {
         if (user.getLastSignInDate() == null) {//之前没有这个列
+            final int coin = 5;
             user.setLastSignInDate(dateFormat.format(new Date()));//设置当前时间为最后时间
-            user.increment("contribution", 5);//第一次都加5
+            user.increment("contribution", coin);//第一次都加5
             user.update(new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
-                    ToastUtil.showToast("今天已签到：" + CommonString.ADD_COIN_BASE + 1);
+                    ToastUtil.showToast("今天已签到：" + CommonString.ADD_COIN_BASE + coin);
                 }
             });
         } else {
             fragment.alertSignInDialog();
         }
+    }
 
+    //分享apk
+    public void shareApp() {
+        IntentUtil.shareText(fragment.getCurrentContext(), "推荐一款app:" + "<口袋乐谱>" + "---官网地址：" + "http://pocketmusic.bmob.site/");
     }
 
     //进入硬币榜
@@ -164,10 +173,6 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ContributionActivity.class));
     }
 
-    //进入帮助
-    public void enterHelpActivity() {
-        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), HelpActivity.class));
-    }
 
     public void enterUserPostActivity() {
         fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), UserPostActivity.class));

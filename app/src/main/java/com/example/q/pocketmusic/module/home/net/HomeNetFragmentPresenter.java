@@ -11,6 +11,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
 import com.example.q.pocketmusic.module.search.SearchMainActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
+import com.example.q.pocketmusic.module.user.notify.UserNotifyActivity;
 import com.example.q.pocketmusic.module.user.notify.suggestion.SuggestionActivity;
 
 import java.util.List;
@@ -80,8 +81,8 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
         fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SearchMainActivity.class));
     }
 
-    public void enterSuggestionActivity() {
-        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SuggestionActivity.class));
+    public void enterUserNotifyActivity() {
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), UserNotifyActivity.class));
     }
 
     public interface IView extends IBaseView {

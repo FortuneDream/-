@@ -8,6 +8,8 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.common.IntentUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
+import com.example.q.pocketmusic.util.common.update.UpdateUtils;
 
 import cn.bmob.v3.listener.BmobUpdateListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
@@ -27,13 +29,14 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
     }
 
     public void checkUpdate(final Boolean showToast) {
+        BmobUpdateAgent.setUpdateOnlyWifi(false);
         BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
             @Override
             public void onUpdateReturned(int i, UpdateResponse updateResponse) {
                 if (i == UpdateStatus.Yes) {
-                    activity.setCheckUpdateResult(true, showToast);
-                } else if (i == UpdateStatus.No) {
-                    activity.setCheckUpdateResult(false, showToast);
+                    ToastUtil.showToast("有新版哦~");
+                } else {
+                    ToastUtil.showToast("当前已是最新版哦~");
                 }
             }
         });
@@ -52,15 +55,12 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
         activity.getCurrentContext().startActivity(i);//重启app
     }
 
-
-    //分享apk
-    public void shareApp() {
-        IntentUtil.shareText(activity.getCurrentContext(), "推荐一款app:" + "<口袋乐谱>" + "---官网地址：" + "http://pocketmusic.bmob.site/");
+    public void appUpdate() {
+        UpdateUtils.getInstanse().update(activity.getCurrentContext());
     }
 
 
     public interface IView extends IBaseView {
 
-        void setCheckUpdateResult(boolean hasUpdate, boolean showToast);
     }
 }

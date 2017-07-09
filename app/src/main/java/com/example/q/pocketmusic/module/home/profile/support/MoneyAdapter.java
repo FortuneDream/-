@@ -16,14 +16,14 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
  * （￣m￣）
  */
 
-public class SupportAdapter extends RecyclerArrayAdapter<MoneySupport> {
-    public SupportAdapter(Context context) {
+public class MoneyAdapter extends RecyclerArrayAdapter<MoneySupport> {
+    public MoneyAdapter(Context context) {
         super(context);
     }
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        return new MyViewHolder(parent);
     }
 
     class MyViewHolder extends BaseViewHolder<MoneySupport> {

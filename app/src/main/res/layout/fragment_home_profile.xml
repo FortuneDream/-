@@ -27,13 +27,14 @@
 
             <TextView
                 android:id="@+id/user_name_tv"
-                style="@style/TwoTextMain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/head_iv"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:textColor="@color/Text"
+                android:textSize="22sp" />
 
             <Button
                 android:id="@+id/sign_in_btn"
@@ -62,11 +63,11 @@
         <View style="@style/SettingDivider" />
 
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
-            android:id="@+id/support_item"
+            android:id="@+id/share_app_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:itemTitleIco="@drawable/ic_vec_profile_support"
-            app:itemTitleText="支持开发者" />
+            app:itemTitleIco="@drawable/ic_vec_setting_share"
+            app:itemTitleText="分享小口袋" />
 
         <View style="@style/SettingBigDivider" />
 
@@ -108,15 +109,6 @@
 
         <View style="@style/SettingBigDivider" />
 
-
-        <com.example.q.pocketmusic.view.widget.view.IcoTextItem
-            android:id="@+id/help_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemTitleIco="@drawable/ic_vec_setting_help"
-            app:itemTitleText="帮助" />
-
-        <View style="@style/SettingDivider" />
 
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
             android:id="@+id/setting_item"

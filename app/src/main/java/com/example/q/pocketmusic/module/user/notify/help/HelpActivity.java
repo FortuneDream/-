@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.home.profile.setting.help;
+package com.example.q.pocketmusic.module.user.notify.help;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;

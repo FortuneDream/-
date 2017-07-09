@@ -28,18 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemTitleIco="@drawable/ic_vec_setting_update"
-        app:itemTitleText="检测新版本" />
+        app:itemTitleText="下载最新版" />
 
-
-    <View style="@style/SettingDivider" />
-
-
-    <com.example.q.pocketmusic.view.widget.view.IcoTextItem
-        android:id="@+id/share_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemTitleIco="@drawable/ic_vec_setting_share"
-        app:itemTitleText="分享小口袋" />
 
     <View style="@style/SettingDivider" />
 

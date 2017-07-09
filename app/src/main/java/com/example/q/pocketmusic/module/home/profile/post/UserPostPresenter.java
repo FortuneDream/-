@@ -23,7 +23,7 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
 
     public UserPostPresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
         model = new UserPostModel();
     }
 
@@ -32,12 +32,12 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
     }
 
     public void getUserPostList(final boolean isRefreshing) {
-        model.getInitPostList(user, new ToastQueryListener<AskSongPost>(activity) {
+        model.getInitPostList(user, new ToastQueryListener<AskSongPost>() {
             @Override
             public void onSuccess(List<AskSongPost> list) {
-                if (!isRefreshing){
+                if (!isRefreshing) {
                     activity.setInitPostList(list);
-                }else {
+                } else {
                     activity.setInitPostListWithRefreshing(list);
                 }
 
@@ -49,6 +49,7 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
     public void enterPostInfo(AskSongPost item) {
         Intent intent = new Intent(activity.getCurrentContext(), AskSongCommentActivity.class);
         intent.putExtra(AskSongCommentActivity.PARAM_POST, item);
+        intent.setExtrasClassLoader(getClass().getClassLoader());
         activity.getCurrentContext().startActivity(intent);
     }
 
