@@ -76,7 +76,12 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".module.home.profile.setting.SettingActivity" />
         <activity android:name=".module.home.profile.collection.CollectionActivity" />
-        <activity android:name=".module.user.notify.help.HelpActivity" />
+        <activity android:name=".module.user.notify.help.HelpActivity" >
+            <intent-filter>
+                <action android:name="help_activity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".module.home.profile.contribution.ContributionActivity" />
         <activity android:name="cn.bmob.pay.v3.act.PayAct" />
         <activity

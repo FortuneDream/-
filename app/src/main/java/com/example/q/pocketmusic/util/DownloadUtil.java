@@ -69,7 +69,7 @@ public class DownloadUtil {
         try {
             Response response = client.newCall(request).execute();
             saveFile(response, dirPath, destPath);//保存文件
-            saveLocalSongToDatabase(name, Constant.types[typeId], destPath);//保存到数据库
+            saveLocalSongToDatabase(name, InstrumentFlagUtil.getTypeName(typeId), destPath);//保存到数据库
         } catch (IOException e) {
             e.printStackTrace();
             ((BaseActivity) context).runOnUiThread(new Runnable() {

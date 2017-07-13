@@ -14,10 +14,14 @@ import com.example.q.pocketmusic.model.flag.ContentLL;
 import com.example.q.pocketmusic.model.flag.TextTv;
 
 import com.example.q.pocketmusic.model.flag.Divider;
+import com.example.q.pocketmusic.util.InstrumentFlagUtil;
 import com.example.q.pocketmusic.view.widget.view.TypeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.rollviewpager.RollPagerView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by 鹏君 on 2016/11/7.
@@ -80,76 +84,33 @@ public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
 
     //乐器list的holder
     class TypeViewHolder extends BaseViewHolder<ContentLL> implements View.OnClickListener {
-        TypeView quanbu;
-        TypeView hulusi;
-        TypeView jita;
-        TypeView gangqin;
-        TypeView sakesi;
-        TypeView erhu;
-        TypeView guzheng;
-        TypeView dianziqin;
-        TypeView pipa;
-        TypeView kouqin;
+
 
         public TypeViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_combination_type_ll);
-            quanbu = $(R.id.type_0_tv);
-            hulusi = $(R.id.type_1_tv);
-            jita = $(R.id.type_2_tv);
-            gangqin = $(R.id.type_3_tv);
-            sakesi = $(R.id.type_4_tv);
-            erhu = $(R.id.type_5_tv);
-            guzheng = $(R.id.type_6_tv);
-            dianziqin = $(R.id.type_7_tv);
-            pipa = $(R.id.type_8_tv);
-            kouqin = $(R.id.type_9_tv);
-            quanbu.setOnClickListener(this);
-            hulusi.setOnClickListener(this);
-            jita.setOnClickListener(this);
-            gangqin.setOnClickListener(this);
-            sakesi.setOnClickListener(this);
-            erhu.setOnClickListener(this);
-            guzheng.setOnClickListener(this);
-            dianziqin.setOnClickListener(this);
-            pipa.setOnClickListener(this);
-            kouqin.setOnClickListener(this);
+            ($(R.id.type_quanbu_tv)).setOnClickListener(this);
+            ($(R.id.type_hulu_tv)).setOnClickListener(this);
+            ($(R.id.type_jita_tv)).setOnClickListener(this);
+            ($(R.id.type_gangqin_tv)).setOnClickListener(this);
+            ($(R.id.type_sakesi_tv)).setOnClickListener(this);
+            ($(R.id.type_erhu_tv)).setOnClickListener(this);
+            ($(R.id.type_guzheng_tv)).setOnClickListener(this);
+            ($(R.id.type_dianziqin_tv)).setOnClickListener(this);
+            ($(R.id.type_pipa_tv)).setOnClickListener(this);
+            ($(R.id.type_kouqin_tv)).setOnClickListener(this);
+            ($(R.id.type_changdi_tv)).setOnClickListener(this);
+            ($(R.id.type_dixiao_tv)).setOnClickListener(this);
+            ($(R.id.type_shoufengqin_tv)).setOnClickListener(this);
+            ($(R.id.type_tiqin_tv)).setOnClickListener(this);
+            ($(R.id.type_tongguan_tv)).setOnClickListener(this);
+            ($(R.id.type_yangqin_tv)).setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (listener != null) {
-                switch (v.getId()) {
-                    case R.id.type_0_tv:
-                        listener.onSelectType(0);
-                        break;
-                    case R.id.type_1_tv:
-                        listener.onSelectType(1);
-                        break;
-                    case R.id.type_2_tv:
-                        listener.onSelectType(2);
-                        break;
-                    case R.id.type_3_tv:
-                        listener.onSelectType(3);
-                        break;
-                    case R.id.type_4_tv:
-                        listener.onSelectType(4);
-                        break;
-                    case R.id.type_5_tv:
-                        listener.onSelectType(5);
-                        break;
-                    case R.id.type_6_tv:
-                        listener.onSelectType(6);
-                        break;
-                    case R.id.type_7_tv:
-                        listener.onSelectType(7);
-                        break;
-                    case R.id.type_8_tv:
-                        listener.onSelectType(8);
-                        break;
-                    case R.id.type_9_tv:
-                        listener.onSelectType(9);
-                        break;
-                }
+                int position = InstrumentFlagUtil.getFlag(v.getId());
+                listener.onSelectType(position);
             }
         }
     }
@@ -208,7 +169,7 @@ public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
             super(parent, R.layout.item_recommend_list);
             nameTv = $(R.id.name_tv);
             artistTv = $(R.id.artist_tv);
-            contentLl=$(R.id.recommend_content);
+            contentLl = $(R.id.recommend_content);
             contentLl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

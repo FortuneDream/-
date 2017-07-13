@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.pic.GlideImageLoader;
+import com.example.q.pocketmusic.util.InstrumentFlagUtil;
 import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
@@ -26,6 +27,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ToastUtil.init(this);
+        InstrumentFlagUtil.init();
         SharedPrefsUtil.init(getApplicationContext());
         Bmob.initialize(this, Constant.APP_ID, "Bmob");
         //官网SDK

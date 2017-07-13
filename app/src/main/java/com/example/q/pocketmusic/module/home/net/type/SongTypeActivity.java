@@ -11,6 +11,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.util.InstrumentFlagUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -32,9 +33,7 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
     //500*300
-    private int[] topDrawable = new int[]{R.drawable.iv_top_quanbu, R.drawable.iv_top_hulusi, R.drawable.iv_top_jita,
-            R.drawable.iv_top_gangqin, R.drawable.iv_top_sakesi, R.drawable.iv_top_erhu, R.drawable.iv_top_guzheng,
-            R.drawable.iv_top_dianziqin, R.drawable.iv_top_pipa, R.drawable.iv_top_kouqin};
+
     private SongTypeActivityAdapter adapter;
     private Integer typeId;
     public final static String PARAM_POSITION = "position";
@@ -58,7 +57,7 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
         typeId = getIntent().getIntExtra(PARAM_POSITION, 0);
         initRecyclerView(recycler, adapter, 1);
         //设置toolbar
-        toolbar.setTitle(Constant.types[typeId]);
+        toolbar.setTitle(InstrumentFlagUtil.getTypeName(typeId));
         toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.colorTitle));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,10 +65,10 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
         //只能通过这样才可以设置标题的颜色
         collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorTitle));
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.colorTranslate));
-        collapsingToolbarLayout.setTitle(Constant.types[typeId]);
+        collapsingToolbarLayout.setTitle(InstrumentFlagUtil.getTypeName(typeId));
 
         //设置顶部图片
-        topIv.setBackgroundResource(topDrawable[typeId]);
+        topIv.setBackgroundResource(InstrumentFlagUtil.getTopDrawableResource(typeId));
         presenter.setPage(1);
         presenter.getList(typeId, false);
     }

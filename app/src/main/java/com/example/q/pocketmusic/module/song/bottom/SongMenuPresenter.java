@@ -297,6 +297,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     public void init() {
         SongObject songObject = intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL);
+        intent.setExtrasClassLoader(getClass().getClassLoader());
         isFrom = songObject.getFrom();
         song = songObject.getSong();
 

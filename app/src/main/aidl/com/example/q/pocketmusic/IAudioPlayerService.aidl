@@ -1,7 +1,7 @@
 // IAudioPlayerService.aidl
 package com.example.q.pocketmusic;
 
-// Declare any non-default types here with import statements
+// Declare any non-default typeNames here with import statements
 
 interface IAudioPlayerService {
         //发广播

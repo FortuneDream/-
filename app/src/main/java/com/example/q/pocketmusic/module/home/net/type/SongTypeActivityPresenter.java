@@ -9,6 +9,7 @@ import com.example.q.pocketmusic.model.net.LoadTypeSongList;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
+import com.example.q.pocketmusic.util.InstrumentFlagUtil;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
 
 
     public void getList(int typeId, final boolean isRefreshing) {
-        String url = Constant.BASE_URL + "/qiyue/" + Constant.namesUrl[typeId] + mPage + ".html";
+        String url = Constant.BASE_URL + "/qiyue/" + InstrumentFlagUtil.getUrl(typeId) + mPage + ".html";
         new LoadTypeSongList(typeId) {
             @Override
             protected void onPostExecute(List<Song> songs) {

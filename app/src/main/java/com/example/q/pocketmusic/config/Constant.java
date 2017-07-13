@@ -29,26 +29,13 @@ public class Constant {
     public final static Integer SUCCESS = 1;
     public final static Integer FAIL = 0;
 
-//    public final static Integer QU_BU = 0;
-//    public final static Integer HU_LU_SI = 1;
-//    public final static Integer JI_TA = 2;
-//    public final static Integer GANG_QIN = 3;
-//    public final static Integer SA_KE_SI = 4;
-//    public final static Integer ER_HU = 5;
-//    public final static Integer GU_ZHENG = 6;
-//    public final static Integer DIAN_ZI_QIN = 7;
-//    public final static Integer PI_PA = 8;
-//    public final static Integer KOU_QIN = 9;
-//    public final static Integer RECOMMEND = 10;
+
 
     //BmobInfo
     public final static Integer BMOB_INFO_RESET_PASSWORD = 1;//请求重置密码
     public final static Integer BMOB_INFO_LABA = 2;//小喇叭
     public final static Integer BMOB_INFO_PLAN = 3;//开发计划
 
-    //乐器对应
-    public final static String[] types = {"全部", "葫芦丝", "吉他", "钢琴", "萨克斯", "二胡", "古筝", "电子琴", "琵琶", "口琴", "桃李醉春风"};
-    public final static String[] namesUrl = {"qita/", "hulusi/", "jita/", "gangqin/", "sakesi/", "huqin/", "guzhengguqin/", "dianziqin/", "pipa/", "kouqin/"};
 
 
     //Intent Flag:本地/网络
