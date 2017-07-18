@@ -8,6 +8,7 @@ import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.net.LoadRecommendList;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.home.net.acg.ACGActivity;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
 import com.example.q.pocketmusic.module.search.SearchMainActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
@@ -70,9 +71,8 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
 
 
     public void enterBannerActivity(int picPosition) {
-//        Intent intent=new Intent(context,BannerActivity.class);
-//        intent.putExtra(BannerActivity.PARAM_PIC_POSITION,picPosition);
-//        context.startActivity(intent);
+
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ACGActivity.class));
     }
 
     public void enterSearchMainActivity() {

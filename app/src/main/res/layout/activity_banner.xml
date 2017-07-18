@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:context=".module.home.net.banner.BannerActivity">
+        tools:context=".module.home.net.acg.BannerActivity">
 
         <include layout="@layout/include_appbar_toolbar" />
 

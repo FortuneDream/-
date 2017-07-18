@@ -76,10 +76,11 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".module.home.profile.setting.SettingActivity" />
         <activity android:name=".module.home.profile.collection.CollectionActivity" />
-        <activity android:name=".module.user.notify.help.HelpActivity" >
+        <activity android:name=".module.user.notify.help.HelpActivity">
             <intent-filter>
-                <action android:name="help_activity"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="help_activity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".module.home.profile.contribution.ContributionActivity" />
@@ -95,7 +96,7 @@
         <activity
             android:name=".module.piano.PianoActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".module.home.net.banner.BannerActivity" />
+        <activity android:name=".module.home.net.acg.BannerActivity" />
         <activity android:name=".module.home.profile.post.UserPostActivity" />
         <activity android:name=".module.home.profile.share.UserShareActivity" />
         <activity android:name=".module.user.notify.UserNotifyActivity" />
@@ -105,9 +106,11 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".module.home.profile.support.SupportActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.user.notify.version.PreviewVersionActivity"/>
+        <activity
+            android:name=".module.home.profile.support.SupportActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".module.user.notify.version.PreviewVersionActivity" />
+        <activity android:name=".module.home.net.acg.ACGActivity"></activity>
     </application>
 
 </manifest>

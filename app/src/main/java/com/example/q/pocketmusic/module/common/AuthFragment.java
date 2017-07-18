@@ -8,11 +8,15 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FetchUserInfoListener;
+
 /**
  * Created by 鹏君 on 2017/1/26.
  */
 
-public abstract class AuthFragment<V,T extends BasePresenter<V>> extends BaseFragment<V,T> {
+public abstract class AuthFragment<V, T extends BasePresenter<V>> extends BaseFragment<V, T> {
     public static MyUser user;
     public static final String RESULT_USER = "result";
 
@@ -20,8 +24,17 @@ public abstract class AuthFragment<V,T extends BasePresenter<V>> extends BaseFra
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         user = CheckUserUtil.checkLocalUser(this);
+        if (user != null) {
+            BmobUser.fetchUserInfo(new FetchUserInfoListener<BmobUser>() {
+                @Override
+                public void done(BmobUser bmobUser, BmobException e) {
+                    if (e != null) {
+                        user = (MyUser) bmobUser;
+                    }
+                }
+            });
+        }
     }
-
 
 
     @Override
