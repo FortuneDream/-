@@ -3,11 +3,13 @@ package com.example.q.pocketmusic.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Created by 鹏君 on 2017/2/5.
  */
 //Intent传递
-public class SongObject implements Parcelable{
+public class SongObject implements Serializable {
     private Song song;
     private int from;
     private int showMenu;
@@ -20,37 +22,6 @@ public class SongObject implements Parcelable{
         this.loadingWay = loadingWay;
     }
 
-    protected SongObject(Parcel in) {
-        song = in.readParcelable(Song.class.getClassLoader());
-        from = in.readInt();
-        showMenu = in.readInt();
-        loadingWay = in.readInt();
-    }
-
-    public static final Creator<SongObject> CREATOR = new Creator<SongObject>() {
-        @Override
-        public SongObject createFromParcel(Parcel in) {
-            return new SongObject(in);
-        }
-
-        @Override
-        public SongObject[] newArray(int size) {
-            return new SongObject[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(song, flags);
-        dest.writeInt(from);
-        dest.writeInt(showMenu);
-        dest.writeInt(loadingWay);
-    }
 
     public Song getSong() {
         return song;

@@ -10,7 +10,7 @@ import cn.bmob.v3.BmobObject;
 public class MoneySupport extends BmobObject {
     private MyUser user;
     private String content;
-    private String money;
+    private double money;
 
 
     public MyUser getUser() {
@@ -29,11 +29,11 @@ public class MoneySupport extends BmobObject {
         this.content = content;
     }
 
-    public String getMoney() {
+    public double getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 }

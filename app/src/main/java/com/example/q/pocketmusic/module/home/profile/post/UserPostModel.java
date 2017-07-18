@@ -22,6 +22,6 @@ public class UserPostModel {
     }
 
     public void getInitPostList(MyUser user, ToastQueryListener<AskSongPost> listener) {
-        bmobUtil.getInitListWithEqual(AskSongPost.class, null, "user", new BmobPointer(user), listener);
+        bmobUtil.getInitListWithEqual(AskSongPost.class, "user", "user", new BmobPointer(user), listener);
     }
 }

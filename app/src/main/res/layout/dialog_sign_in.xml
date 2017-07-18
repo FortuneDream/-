@@ -24,7 +24,7 @@
         android:layout_width="48dp"
         android:layout_height="32dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/bg_button"
+        android:background="@drawable/shape_button"
         android:text="获取"
         android:visibility="gone" />
 </LinearLayout>

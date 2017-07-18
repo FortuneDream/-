@@ -68,7 +68,7 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
         Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject songObject = new SongObject(song, Constant.FROM_SHARE, Constant.SHOW_COLLECTION_MENU, Constant.NET);
         intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, songObject);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, songObject);
         intent.putExtra(SongActivity.SHARE_SONG, shareSong);
         activity.getCurrentContext().startActivity(intent);
     }

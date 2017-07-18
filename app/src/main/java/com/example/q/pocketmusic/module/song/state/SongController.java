@@ -23,27 +23,27 @@ public class SongController {
     }
 
     public static SongController getInstance(Intent intent, SongActivityPresenter.IView activity) {
-        SongObject songObject = intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL);
+        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE);
         Song song = songObject.getSong();
         int isFrom = songObject.getFrom();
         switch (isFrom) {
             case Constant.FROM_SHARE:
                 ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
-                return new SongController(new ShareState(song, shareSong,  activity));//分享
+                return new SongController(new ShareState(song, shareSong, activity));//分享
             case Constant.FROM_ASK:
                 AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
-                return new SongController(new AskState(song, askSongComment,  activity));//求谱
+                return new SongController(new AskState(song, askSongComment, activity));//求谱
             case Constant.FROM_COLLECTION:
-                return new SongController(new CollectionState(song,  activity));//收藏
+                return new SongController(new CollectionState(song, activity));//收藏
             case Constant.FROM_LOCAL:
                 LocalSong localsong = (LocalSong) intent.getSerializableExtra(SongActivity.LOCAL_SONG);
                 return new SongController(new LocalState(song, localsong, activity));//本地
             case Constant.FROM_RECOMMEND:
                 return new SongController(new RecommendState(song, activity));//推荐
             case Constant.FROM_SEARCH_NET:
-                return new SongController(new SearchState(song,activity));//搜索
+                return new SongController(new SearchState(song, activity));//搜索
             case Constant.FROM_TYPE:
-                return new SongController(new TypeState(song,  activity));//类型
+                return new SongController(new TypeState(song, activity));//类型
             default:
                 return null;
         }

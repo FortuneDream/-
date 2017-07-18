@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:background="@drawable/bg_text_press"
+        android:background="@drawable/shape_text_press"
         android:text="确定" />
 
 </LinearLayout>

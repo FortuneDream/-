@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_button"
+        android:background="@drawable/shape_button"
         android:text="关闭" />
 
     <com.jude.easyrecyclerview.EasyRecyclerView

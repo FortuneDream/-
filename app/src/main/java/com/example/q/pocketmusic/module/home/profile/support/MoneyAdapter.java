@@ -7,7 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.example.q.pocketmusic.model.bean.MoneySupport;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -17,8 +19,11 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
  */
 
 public class MoneyAdapter extends RecyclerArrayAdapter<MoneySupport> {
+    private DisplayStrategy displayStrategy;
+
     public MoneyAdapter(Context context) {
         super(context);
+        displayStrategy = new DisplayStrategy();
     }
 
     @Override
@@ -35,8 +40,8 @@ public class MoneyAdapter extends RecyclerArrayAdapter<MoneySupport> {
 
         public MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_money_support);
-            headIv = $(R.id.head_iv);
-            nickNameTv = $(R.id.nick_name_tv);
+            headIv = $(R.id.head_support_iv);
+            nickNameTv = $(R.id.nick_name_support_tv);
             moneyTv = $(R.id.money_tv);
             contentTv = $(R.id.content_tv);
             dateTv = $(R.id.date_tv);
@@ -45,8 +50,11 @@ public class MoneyAdapter extends RecyclerArrayAdapter<MoneySupport> {
         @Override
         public void setData(MoneySupport data) {
             super.setData(data);
+            displayStrategy.displayCircle(getContext(), data.getUser().getHeadImg(), headIv);
             nickNameTv.setText(data.getUser().getNickName());
-            moneyTv.setText(data.getMoney());
+            moneyTv.setText(String.valueOf(data.getMoney()) + "元");
+            LogUtils.e(data.getUser().getNickName());
+            LogUtils.e(data.getUser().getHeadImg());
             contentTv.setText(data.getContent());
             dateTv.setText(data.getCreatedAt());
         }

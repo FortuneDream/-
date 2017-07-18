@@ -1,12 +1,10 @@
 package com.example.q.pocketmusic.module.home.local.localsong;
 
 import android.content.Intent;
-import android.database.SQLException;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
-import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.db.ImgDao;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
@@ -19,11 +17,7 @@ import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
-import com.j256.ormlite.dao.CloseableIterator;
-import com.j256.ormlite.dao.ForeignCollection;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -89,7 +83,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
         song.setName(localSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_LOCAL, Constant.SHOW_NO_MENU, Constant.LOCAL);
         intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL,songObject);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE,songObject);
         intent.putExtra(SongActivity.LOCAL_SONG,localSong);
         fragment.getCurrentContext().startActivity(intent);
     }

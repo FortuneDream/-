@@ -13,7 +13,6 @@ import cn.bmob.v3.datatype.BmobRelation;
 //password: 用户的密码。
 public class MyUser extends BmobUser {
     private String nickName;//昵称
-    private String instrument;//乐器
     private String headImg;//头像
     private String lastSignInDate;//最后一次签到时间
     private Integer contribution;//贡献值
@@ -29,7 +28,6 @@ public class MyUser extends BmobUser {
 
     public MyUser() {
         this.nickName = "匿名";
-        this.instrument = "无";
         this.headImg = Constant.COMMON_HEAD_IV_URL;
         this.contribution = Constant.ADD_CONTRIBUTION_INIT;
     }
@@ -66,11 +64,4 @@ public class MyUser extends BmobUser {
         this.nickName = nickName;
     }
 
-    public String getInstrument() {
-        return instrument;
-    }
-
-    public void setInstrument(String instrument) {
-        this.instrument = instrument;
-    }
 }

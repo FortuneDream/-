@@ -93,6 +93,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     //发送评论
     public void sendComment(final String comment) {
         if (TextUtils.isEmpty(comment)) {
+            ToastUtil.showToast("评论文字不能为空哦~");
             return;
         }
         Boolean hasPic;
@@ -214,7 +215,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject songObject = new SongObject(song, Constant.FROM_ASK, Constant.SHOW_ALL_MENU, Constant.NET);
         intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, songObject);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, songObject);
         intent.putExtra(SongActivity.ASK_COMMENT, askSongComment);
         activity.getCurrentContext().startActivity(intent);
     }

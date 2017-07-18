@@ -37,7 +37,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     private SongActivityAdapter adapter;
 
 
-    public final static String PARAM_SONG_OBJECT_PARCEL = "PARAM_SONG_OBJECT_PARCEL";//Parcel
+    public final static String PARAM_SONG_OBJECT_SERIALIZEABLE = "PARAM_SONG_OBJECT_SERIALIZEABLE";//Serializeable
 
     public final static String LOCAL_SONG = "LOCAL_SONG";//可选的传递参数，用于传递本地的localSong
 
@@ -57,7 +57,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         presenter.setIntent(getIntent());//设置intent
         presenter.init(getSupportFragmentManager());//初始化
-        SongObject songObject = getIntent().getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL);
+        SongObject songObject = (SongObject) getIntent().getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE);
         Song song = songObject.getSong();
         initToolbar(toolbar, song.getName());//toolbar
         presenter.loadPic();  //查找图片

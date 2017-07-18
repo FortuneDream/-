@@ -52,6 +52,14 @@
 
         <View style="@style/SettingBigDivider" />
 
+        <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+            android:id="@+id/support_me_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemTitleIco="@drawable/ic_vec_profile_support"
+            app:itemTitleText="支持开发者" />
+
+        <View style="@style/SettingDivider" />
 
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
             android:id="@+id/grade_item"

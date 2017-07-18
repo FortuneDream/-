@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="305dp"
     android:layout_height="165dp"
-    android:background="@drawable/bg_dialog"
+    android:background="@drawable/shape_dialog"
     android:orientation="vertical">
 
     <TextView
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="22dp"
-        android:background="@drawable/bg_button"
+        android:background="@drawable/shape_button"
         android:text="关闭"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp" />

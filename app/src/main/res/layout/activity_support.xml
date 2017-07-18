@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,47 +10,64 @@
 
     <include layout="@layout/include_appbar_toolbar" />
 
-
-    <TextView
-        style="@style/TwoTextMain"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="捐赠说明" />
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_rose" />
+
+        <TextView
+            style="@style/TwoTextMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="捐赠说明 (•̀ᴗ•́)و ̑̑ " />
+    </LinearLayout>
+
+
+    <View style="@style/SettingDivider" />
 
     <TextView
         style="@style/TwoTextMain"
-        android:padding="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:text="@string/money_explain" />
+
+    <TextView
+        android:id="@+id/support_me_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_support_me"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="支持"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_rose" />
 
         <TextView
-            android:id="@+id/alipay_tv"
-            android:layout_width="0dp"
+            style="@style/TwoTextMain"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="支付宝" />
-
-        <TextView
-            android:id="@+id/weixin_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="微信" />
+            android:padding="8dp"
+            android:text="捐献榜单 ✪ε✪" />
     </LinearLayout>
 
-    <TextView
-        style="@style/TwoTextMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="捐赠榜单" />
+    <View style="@style/SettingDivider" />
 
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recycler"

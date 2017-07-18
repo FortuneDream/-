@@ -180,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            app:itemIco="@drawable/ico_yueqi_gangqin"
+            app:itemIco="@drawable/ico_yueqi_yangqin"
             app:itemName="扬琴" />
     </LinearLayout>
 </LinearLayout>

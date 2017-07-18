@@ -85,7 +85,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
                 Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
                 SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.SHOW_ONLY_DOWNLOAD, Constant.NET);
                 intent.setExtrasClassLoader(getClass().getClassLoader());
-                intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, songObject);
+                intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, songObject);
                 activity.getCurrentContext().startActivity(intent);
             }
         });

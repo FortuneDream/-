@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by 鹏君 on 2016/8/28.
  */
-public class Song implements Parcelable,Serializable {
+public class Song implements Serializable {
     private String name;//曲谱名字
     private String url;//曲谱url
     private String artist;//所属，不局限于艺术家
@@ -107,43 +107,6 @@ public class Song implements Parcelable,Serializable {
         this.searchFrom = Constant.FROM_SEARCH_NET;//默认来自搜索
     }
 
-    protected Song(Parcel in) {
-        name = in.readString();
-        url = in.readString();
-        artist = in.readString();
-        typeId = in.readInt();
-        date = in.readString();
-        ivUrl=in.createStringArrayList();
-        content = in.readString();
-        searchFrom = in.readInt();
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(url);
-        dest.writeString(artist);
-        dest.writeInt(typeId);
-        dest.writeString(date);
-        dest.writeStringList(ivUrl);
-        dest.writeString(content);
-        dest.writeInt(searchFrom);
-    }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<Song> CREATOR = new Creator<Song>() {
-        @Override
-        public Song createFromParcel(Parcel in) {
-            return new Song(in);
-        }
-
-        @Override
-        public Song[] newArray(int size) {
-            return new Song[size];
-        }
-    };
 }

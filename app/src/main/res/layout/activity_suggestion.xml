@@ -31,14 +31,14 @@
             android:layout_weight="1"
             android:minLines="1"
             android:maxLines="3"
-            android:background="@drawable/bg_edt_send" />
+            android:background="@drawable/shape_edt_send" />
 
         <Button
             android:id="@+id/send_suggestion_btn"
             android:layout_width="@dimen/button_send_width"
             android:layout_height="@dimen/button_send_height"
             android:layout_marginLeft="8dp"
-            android:background="@drawable/bg_button"
+            android:background="@drawable/shape_button"
             android:text="发送" />
     </LinearLayout>
 

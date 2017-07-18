@@ -31,7 +31,7 @@ public class MyApplication extends Application {
         SharedPrefsUtil.init(getApplicationContext());
         Bmob.initialize(this, Constant.APP_ID, "Bmob");
         //官网SDK
-       // BP.init(Constant.APP_ID);
+        BP.init(Constant.APP_ID);
         AppStat.i(Constant.APP_ID, "Bmob");
         //发布时，开启异常捕获器
         CrashHandler crashHandler = CrashHandler.getInstance();

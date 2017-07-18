@@ -209,7 +209,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                 //添加收藏记录
                 final CollectionSong collectionSong = new CollectionSong();
                 collectionSong.setName(song.getName());
-                collectionSong.setIsFrom(((SongObject) intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL)).getFrom());
+                collectionSong.setIsFrom(((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE)).getFrom());
                 collectionSong.setContent(song.getContent());
                 collectionSong.save(new ToastSaveListener<String>() {
 
@@ -260,7 +260,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     //分享乐谱,本地和网络
     public void share() {
         List<String> list = null;
-        SongObject songObject = intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL);
+        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE);
         int loadingWay = songObject.getLoadingWay();
         switch (loadingWay) {
             case Constant.NET:
@@ -296,8 +296,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     }
 
     public void init() {
-        SongObject songObject = intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL);
-        intent.setExtrasClassLoader(getClass().getClassLoader());
+        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE);
         isFrom = songObject.getFrom();
         song = songObject.getSong();
 
@@ -308,7 +307,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     }
 
     public int getShowMenuFlag() {
-        return ((SongObject) intent.getParcelableExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL)).getShowMenu();
+        return ((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE)).getShowMenu();
     }
 
 

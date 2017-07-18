@@ -105,8 +105,9 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".module.home.profile.support.SupportActivity" />
-        <activity android:name=".module.user.notify.version.PreviewVersionActivity"></activity>
+        <activity android:name=".module.home.profile.support.SupportActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".module.user.notify.version.PreviewVersionActivity"/>
     </application>
 
 </manifest>

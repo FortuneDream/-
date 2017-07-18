@@ -12,7 +12,6 @@ import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
 import com.example.q.pocketmusic.module.search.SearchMainActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.module.user.notify.UserNotifyActivity;
-import com.example.q.pocketmusic.module.user.notify.suggestion.SuggestionActivity;
 
 import java.util.List;
 
@@ -57,8 +56,7 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
     public void enterSongActivity(Song song) {
         Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, Constant.FROM_RECOMMEND, Constant.SHOW_COLLECTION_MENU, Constant.NET);
-        intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_PARCEL, object);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, object);
         fragment.getCurrentContext().startActivity(intent);
     }
 

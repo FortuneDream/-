@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="32dp"
         android:layout_margin="8dp"
-        android:background="@drawable/bg_edt"
+        android:background="@drawable/shape_edt"
         android:gravity="center"
         android:hint="请输入标题" />
 
@@ -37,7 +37,7 @@
             tools:text="1322156465411111111111111111111111" />
 
         <LinearLayout
-            android:background="@drawable/bg_piano_normal"
+            android:background="@drawable/shape_piano_normal"
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -98,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_piano"
+            android:background="@drawable/shape_piano"
             android:text="1" />
 
         <Button
@@ -106,7 +106,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_piano"
+            android:background="@drawable/shape_piano"
             android:text="2" />
 
         <Button
@@ -114,7 +114,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_piano"
+            android:background="@drawable/shape_piano"
             android:text="3" />
 
         <Button
@@ -122,7 +122,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_piano"
+            android:background="@drawable/shape_piano"
             android:text="4" />
 
         <Button
@@ -130,7 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_piano"
+            android:background="@drawable/shape_piano"
             android:text="5" />
 
         <Button
@@ -138,7 +138,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_piano"
+            android:background="@drawable/shape_piano"
             android:text="6" />
 
         <Button
@@ -146,7 +146,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_piano"
+            android:background="@drawable/shape_piano"
             android:text="7" />
     </LinearLayout>
 

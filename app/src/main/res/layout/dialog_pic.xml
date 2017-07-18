@@ -25,6 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/bg_button"
+        android:background="@drawable/shape_button"
         android:text="查看全部" />
 </RelativeLayout>
