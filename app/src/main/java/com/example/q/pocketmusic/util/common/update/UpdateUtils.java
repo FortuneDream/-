@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.util.common.LogUtils;
 
 import java.util.List;
 
@@ -25,9 +26,10 @@ public class UpdateUtils {
 
     public static UpdateUtils mUpdateUtils;
 
-    private UpdateUtils(){
+    private UpdateUtils() {
 
     }
+
     public static UpdateUtils getInstanse() {
         if (null == mUpdateUtils) {
             mUpdateUtils = new UpdateUtils();
@@ -45,7 +47,10 @@ public class UpdateUtils {
             query.findObjects(new ToastQueryListener<AppVersion>() {
                 @Override
                 public void onSuccess(List<AppVersion> list) {
-                    alertUpdateDialog(context,list.get(0));
+                    if (list.size() >= 1) {
+                        alertUpdateDialog(context, list.get(list.size() - 1));
+                    }
+
                 }
 
 

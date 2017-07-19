@@ -8,8 +8,8 @@ android {
         applicationId "com.example.q.pocketmusic"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 30
-        versionName "5.2"
+        versionCode 31
+        versionName "5.3"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -49,5 +49,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.5.1'
-    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile files('libs/okhttp-3.8.1.jar')
 }

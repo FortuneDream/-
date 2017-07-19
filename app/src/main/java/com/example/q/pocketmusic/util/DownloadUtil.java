@@ -11,10 +11,13 @@ import com.example.q.pocketmusic.model.db.ImgDao;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
