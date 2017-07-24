@@ -12,6 +12,7 @@ import cn.bmob.v3.datatype.BmobRelation;
 // username: 用户的用户名，使用邮箱，验证正则
 //password: 用户的密码。
 public class MyUser extends BmobUser {
+    private String signature;//个人签名
     private String nickName;//昵称
     private String headImg;//头像
     private String lastSignInDate;//最后一次签到时间
@@ -27,9 +28,18 @@ public class MyUser extends BmobUser {
     }
 
     public MyUser() {
+        this.signature="这个人没有签名哦~";
         this.nickName = "匿名";
         this.headImg = Constant.COMMON_HEAD_IV_URL;
         this.contribution = Constant.ADD_CONTRIBUTION_INIT;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
     public String getHeadImg() {

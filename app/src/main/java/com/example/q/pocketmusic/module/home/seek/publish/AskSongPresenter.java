@@ -26,6 +26,7 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
     private final int NOT_SELECT = -1;
     private IView activity;
     private int type;
+    private int index;
 
     public AskSongPresenter(IView activity) {
         attachView(activity);
@@ -33,16 +34,18 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
         type = NOT_SELECT;
     }
 
+    //指数*2+基础求谱硬币
     public void checkAsk(String title, final String content, final MyUser user) {
         if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title) || type == NOT_SELECT) {
             ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
             return;
         }
-        if (!CheckUserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), Constant.REDUCE_CONTRIBUTION_ASK)) {
+        int coin = Constant.REDUCE_CONTRIBUTION_ASK + index * 2;
+        if (!CheckUserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
             ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
             return;
         }
-        activity.alertCoinDialog(Constant.REDUCE_CONTRIBUTION_ASK,title,content,user);
+        activity.alertCoinDialog(coin, title, content, user);
     }
 
     public void setSelectedTag(Set<Integer> selectPosSet) {
@@ -56,15 +59,17 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
 
     public void askForSong(String title, String content, final MyUser user) {
         activity.showLoading(true);
+        final int coin = Constant.REDUCE_CONTRIBUTION_ASK + index * 2;
         AskSongPost askSongPost = new AskSongPost(user, title, type, content);
+        askSongPost.setIndex(index);
         askSongPost.save(new ToastSaveListener<String>(activity) {
             @Override
             public void onSuccess(String s) {
-                user.increment("contribution", -Constant.REDUCE_CONTRIBUTION_ASK);
+                user.increment("contribution", -coin);
                 user.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
-                        ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_ASK);
+                        ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + coin);
                         activity.showLoading(false);
                         activity.setAskResult(Constant.SUCCESS);
                         activity.finish();
@@ -74,11 +79,28 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
         });
     }
 
+    public void setIndex(int i) {
+        index = 0;
+        activity.changeIndex(index);
+    }
+
+    public void addIndex() {
+        index++;
+        activity.changeIndex(index);
+    }
+
+    public void reduceIndex() {
+        index--;
+        activity.changeIndex(index);
+    }
+
     public interface IView extends IBaseView {
         void finish();
 
         void setAskResult(Integer success);
 
-        void alertCoinDialog(int coin,String title,String content,MyUser user);
+        void alertCoinDialog(int coin, String title, String content, MyUser user);
+
+        void changeIndex(int index);
     }
 }

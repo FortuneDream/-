@@ -14,6 +14,7 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.share.ShareActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
+import com.example.q.pocketmusic.util.SortUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
@@ -89,10 +90,10 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
     }
 
     public void setTop(LocalSong item) {
-        int top_value = SharedPrefsUtil.getInt(Constant.sort_key, Constant.sort_value);
+        int top_value = SharedPrefsUtil.getInt(SortUtil.sort_key, SortUtil.sort_value);
         top_value++;
         item.setSort(top_value);
-        SharedPrefsUtil.putInt(Constant.sort_key, top_value);//修改最高值
+        SharedPrefsUtil.putInt(SortUtil.sort_key, top_value);//修改最高值
         localSongDao.update(item);
         ToastUtil.showToast( "已置顶");
         fragment.onRefresh();

@@ -60,9 +60,9 @@ public class UpdateUtils {
         }
     }
 
-    //弹出dialog
+    //弹出dialog,是否强制升级
     private void alertUpdateDialog(final Context context, final AppVersion updateResponse) {
-        new AlertDialog.Builder(context)
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle("新版本：" + updateResponse.getVersion())
                 .setMessage(updateResponse.getUpdate_log())
                 .setPositiveButton("更新", new DialogInterface.OnClickListener() {
@@ -72,15 +72,18 @@ public class UpdateUtils {
                         String dirPath = Environment.getExternalStorageDirectory().getPath();
                         download(context, updateResponse.getPath().getUrl(), dirPath);
                     }
-                })
-                .setNegativeButton("算了", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-
+                });
+        if (updateResponse.getIsforce()) {
+            builder.setCancelable(false);
+        } else {
+            builder.setNegativeButton("算了", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        builder.show();
     }
 
     //开始下载

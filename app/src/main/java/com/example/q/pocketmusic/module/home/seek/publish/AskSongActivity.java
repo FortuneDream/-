@@ -1,9 +1,11 @@
 package com.example.q.pocketmusic.module.home.seek.publish;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -40,6 +43,12 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
     public static final int REQUEST_ASK = 1001;//跳转到求谱界面
     @BindView(R.id.tag_flow_layout)
     TagFlowLayout tagFlowLayout;
+    @BindView(R.id.add_index_iv)
+    ImageView addIndexIv;
+    @BindView(R.id.index_tv)
+    TextView indexTv;
+    @BindView(R.id.reduce_index_iv)
+    ImageView reduceIndexIv;
 
 
     @Override
@@ -59,6 +68,7 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
         list.add("其他类型");
         tagFlowLayout.setAdapter(new AskTagAdapter(list, getCurrentContext()));
         tagFlowLayout.setOnSelectListener(this);
+        presenter.setIndex(0);
     }
 
     //Tag选中
@@ -68,13 +78,19 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
     }
 
 
-    @OnClick({R.id.ok_txt})
+    @OnClick({R.id.ok_txt, R.id.index_tv, R.id.reduce_index_iv,R.id.add_index_iv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ok_txt:
                 String title = titleTet.getInputString();
                 String content = contentTet.getInputString();
                 presenter.checkAsk(title, content, user);
+                break;
+            case R.id.add_index_iv:
+                presenter.addIndex();
+                break;
+            case R.id.reduce_index_iv:
+                presenter.reduceIndex();
                 break;
         }
     }
@@ -100,6 +116,11 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
     }
 
     @Override
+    public void changeIndex(int index) {
+        indexTv.setText(String.valueOf(index));
+    }
+
+    @Override
     public void setAskResult(Integer success) {
         setResult(success);
     }
@@ -110,5 +131,12 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
         return new AskSongPresenter(this);
     }
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 
 }

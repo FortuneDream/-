@@ -16,8 +16,8 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="@dimen/ico_launcher_64dp"
-            android:layout_height="@dimen/ico_launcher_64dp"
+            android:layout_width="@dimen/ico_launcher_72dp"
+            android:layout_height="@dimen/ico_launcher_72dp"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
@@ -54,6 +54,43 @@
         android:layout_marginLeft="32dp"
         app:max_select="1" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="求谱指数(额外消耗：1点/2枚硬币):"
+            android:textColor="@color/md_red_300" />
+
+        <ImageView
+            android:id="@+id/add_index_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_add_index" />
+
+        <TextView
+            android:id="@+id/index_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0" />
+
+        <ImageView
+            android:id="@+id/reduce_index_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_reduce_index" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/ok_txt"

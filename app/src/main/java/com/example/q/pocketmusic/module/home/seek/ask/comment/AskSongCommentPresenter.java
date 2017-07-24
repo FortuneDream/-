@@ -20,9 +20,11 @@ import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
+import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
+import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
@@ -84,7 +86,6 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 } else {
                     activity.setCommentListWithRefreshing(list);
                 }
-
             }
         });
     }
@@ -135,7 +136,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                                                 @Override
                                                 public void onSuccess() {
                                                     activity.showLoading(false);
-                                                    ToastUtil.showToast( CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                                                    ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
                                                     activity.sendCommentResult(s, askSongComment);
                                                 }
                                             });
@@ -153,7 +154,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                             public void onError(int i, String s) {
                                 //文件上传失败
                                 activity.showLoading(false);
-                                ToastUtil.showToast( CommonString.STR_ERROR_INFO + s);
+                                ToastUtil.showToast(CommonString.STR_ERROR_INFO + s);
                             }
                         });
                     }
@@ -270,7 +271,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         List<String> imgUrls = new ArrayList<>();
         LocalSong localSong = localSongDao.findByName(name);
         if (localSong == null) {
-            ToastUtil.showToast( "曲谱消失在了异次元。");
+            ToastUtil.showToast("曲谱消失在了异次元。");
             return new ArrayList<>();
         }
         ForeignCollection<Img> imgs = localSong.getImgs();
@@ -288,6 +289,30 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
             }
         }
         return imgUrls;
+    }
+
+    //消耗硬币，置顶
+    public void reduceIndexCoin() {
+        final int coin = 2;
+        if (!CheckUserUtil.checkUserContribution((BaseActivity) activity, coin)) {
+            ToastUtil.showToast("硬币不够哦~");
+            return;
+        }
+
+        post.increment("index", coin / 2);
+        post.update(new ToastUpdateListener() {
+            @Override
+            public void onSuccess() {
+                user.increment(Constant.BMOB_COIN, -coin);
+                user.update(new ToastUpdateListener() {
+                    @Override
+                    public void onSuccess() {
+                        ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + coin);
+                    }
+                });
+            }
+        });
+
     }
 
 

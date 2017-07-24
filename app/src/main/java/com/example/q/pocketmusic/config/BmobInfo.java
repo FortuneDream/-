@@ -6,7 +6,7 @@ import cn.bmob.v3.BmobObject;
  * Created by 鹏君 on 2017/4/2.
  */
 
-public class BmobInfo extends BmobObject{
+public class BmobInfo extends BmobObject {
     private int type;
     private String content;
 

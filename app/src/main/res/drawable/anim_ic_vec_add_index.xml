@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_vec_user_add_index">
+    <target
+        android:name="add_index_1"
+        android:animation="@animator/anim_user_add_index" />
+    <target
+        android:name="add_index_2"
+        android:animation="@animator/anim_user_add_index" />
+</animated-vector>

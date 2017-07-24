@@ -1,12 +1,15 @@
 package com.example.q.pocketmusic.module.home.profile;
 
 import android.animation.ValueAnimator;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,14 +34,20 @@ import butterknife.Unbinder;
 public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresenter.IView, HomeProfileFragmentPresenter>
         implements HomeProfileFragmentPresenter.IView {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.head_iv)
     ImageView headIv;
-    @BindView(R.id.user_name_tv)
-    TextView userNameTv;
+    @BindView(R.id.user_signature_tv)
+    TextView userSignatureTv;
     @BindView(R.id.sign_in_btn)
     Button signInBtn;
+    @BindView(R.id.support_me_item)
+    IcoTextItem supportMeItem;
     @BindView(R.id.grade_item)
     IcoTextItem gradeItem;
+    @BindView(R.id.share_app_item)
+    IcoTextItem shareAppItem;
     @BindView(R.id.contribution_item)
     IcoTextItem contributionItem;
     @BindView(R.id.post_item)
@@ -50,11 +59,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     @BindView(R.id.setting_item)
     IcoTextItem settingItem;
     Unbinder unbinder;
-    @BindView(R.id.share_app_item)
-    IcoTextItem shareAppItem;
-    Unbinder unbinder1;
-    @BindView(R.id.support_me_item)
-    IcoTextItem supportMeItem;
     private AlertDialog signInDialog;
 
 
@@ -79,9 +83,15 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
             //设置
             presenter.setUser(user);
             //设置昵称
-            userNameTv.setText(user.getNickName());
+            initToolbar(toolbar, user.getNickName());
             //设置头像
             new DisplayStrategy().displayCircle(context, user.getHeadImg(), headIv);
+            //设置签名
+            if (user.getSignature() == null) {
+                userSignatureTv.setText("这个人没有签名~");
+            } else {
+                userSignatureTv.setText(user.getSignature());
+            }
             checkIsSign();
         }
     }
@@ -114,7 +124,8 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
 
     @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item,
             R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn,
-            R.id.post_item, R.id.share_app_item,R.id.support_me_item,R.id.share_item})
+            R.id.post_item, R.id.share_app_item, R.id.support_me_item, R.id.share_item,
+            R.id.user_signature_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.support_me_item:
@@ -147,17 +158,34 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
             case R.id.share_app_item://分享app
                 presenter.shareApp();
                 break;
+            case R.id.user_signature_tv:
+                alertSignatureDialog();
         }
+    }
+
+    //设置签名dialog
+    private void alertSignatureDialog() {
+        final EditText inputServer = new EditText(getCurrentContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getCurrentContext());
+        builder.setTitle("设置签名").setIcon(R.drawable.ico_signature).setView(inputServer)
+                .setNegativeButton("算了", null);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                String text = inputServer.getText().toString();
+                presenter.setSignature(text);
+            }
+        });
+        builder.show();
     }
 
     //签到Dialog
     public void alertSignInDialog() {
         //签到Btn消失
         signInBtn.setVisibility(View.GONE);
-
         //随机签到
         Random random = new Random();
-        final int reward = random.nextInt(1) + 4;//随机1--5点
+        final int reward = random.nextInt(8) + 1;//随机1--8点
         View view = View.inflate(getContext(), R.layout.dialog_sign_in, null);
         GuaGuaKa guaGuaKa = (GuaGuaKa) view.findViewById(R.id.gua_gua_ka);
         guaGuaKa.setAwardText(String.valueOf(reward) + " 枚硬币");
@@ -182,6 +210,11 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
         signInDialog.show();
     }
 
+    @Override
+    public void setSignature(String signature) {
+        userSignatureTv.setText(signature);
+    }
+
 
     @Override
     public void setHeadIvResult(String photoPath) {
@@ -198,14 +231,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     @Override
     protected HomeProfileFragmentPresenter createPresenter() {
         return new HomeProfileFragmentPresenter(this);
-    }
-
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder1.unbind();
     }
 
 

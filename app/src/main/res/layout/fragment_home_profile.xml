@@ -10,31 +10,36 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/head_iv"
-                android:layout_width="@dimen/ico_launcher_64dp"
-                android:layout_height="@dimen/ico_launcher_64dp"
-                android:layout_centerInParent="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="@dimen/ico_launcher_72dp"
+                android:layout_height="@dimen/ico_launcher_72dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
                 android:src="@mipmap/ico_launcher" />
 
             <TextView
-                android:id="@+id/user_name_tv"
+                android:id="@+id/user_signature_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/head_iv"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/Text"
-                android:textSize="22sp" />
+                android:layout_marginTop="24dp"
+                android:text="签名"
+                android:textColor="@color/background"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/sign_in_btn"

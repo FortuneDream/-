@@ -13,8 +13,7 @@
 
     <dimen name="item_head">48dp</dimen>
 
-    <dimen name="ico_launcher_64dp">64dp</dimen>
-
+    <dimen name="ico_launcher_72dp">72dp</dimen>
     <dimen name="text_press_width">80dp</dimen>
     <dimen name="text_press_height">48dp</dimen>
 

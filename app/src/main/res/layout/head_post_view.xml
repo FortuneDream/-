@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_ll"
     android:layout_width="match_parent"
@@ -20,8 +21,9 @@
 
         <LinearLayout
             style="@style/TwoTextLinear"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -38,6 +40,13 @@
                 android:layout_height="wrap_content"
                 tools:text="2017.1.1" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/post_add_index_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/anim_ic_vec_add_index" />
 
     </LinearLayout>
 

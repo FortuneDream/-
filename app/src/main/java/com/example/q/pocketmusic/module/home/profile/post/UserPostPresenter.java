@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -49,7 +50,7 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
     public void enterPostInfo(AskSongPost item) {
         Intent intent = new Intent(activity.getCurrentContext(), AskSongCommentActivity.class);
         intent.putExtra(AskSongCommentActivity.PARAM_POST, item);
-        intent.setExtrasClassLoader(getClass().getClassLoader());
+        intent.putExtra(AskSongCommentActivity.PARAM_IS_FROM_USER, true);
         activity.getCurrentContext().startActivity(intent);
     }
 

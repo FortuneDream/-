@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.seek.share;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +20,16 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 public class ShareListAdapter extends RecyclerArrayAdapter<ShareSong> {
     private IDisplayStrategy displayStrategy;
+    private OnClickHeadListener listener;
+
+    public interface  OnClickHeadListener{
+        void onClick(int position);
+    }
+
+
+    public void setListener(OnClickHeadListener listener) {
+        this.listener = listener;
+    }
 
     public ShareListAdapter(Context context) {
         super(context);
@@ -43,6 +54,14 @@ public class ShareListAdapter extends RecyclerArrayAdapter<ShareSong> {
             contentTv = $(R.id.content_tv);
             contentRl = $(R.id.content_rl);
             headIv = $(R.id.head_iv);
+            headIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        listener.onClick(getAdapterPosition());
+                    }
+                }
+            });
         }
 
         @Override

@@ -4,12 +4,14 @@ import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
+import com.example.q.pocketmusic.module.user.other.OtherProfileActivity;
 
 
 import java.util.List;
@@ -68,6 +70,12 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
         intent.setExtrasClassLoader(getClass().getClassLoader());
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, songObject);
         intent.putExtra(SongActivity.SHARE_SONG, shareSong);
+        fragment.getCurrentContext().startActivity(intent);
+    }
+
+    public void enterOtherProfileActivity(MyUser other) {
+        Intent intent = new Intent(fragment.getCurrentContext(), OtherProfileActivity.class);
+        intent.putExtra(OtherProfileActivity.PARAM_USER, other);
         fragment.getCurrentContext().startActivity(intent);
     }
 

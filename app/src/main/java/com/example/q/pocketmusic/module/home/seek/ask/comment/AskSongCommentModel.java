@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.seek.ask.comment;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPic;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
@@ -17,16 +18,19 @@ import cn.bmob.v3.datatype.BmobPointer;
  */
 
 public class AskSongCommentModel {
-    private BmobUtil bmobUtil;
     private List<String> picUrls;
 
     public AskSongCommentModel() {
-        bmobUtil = new BmobUtil();
         picUrls = new ArrayList<>();
     }
 
     public void getInitCommentList(AskSongPost post, ToastQueryListener<AskSongComment> listener) {
-        bmobUtil.getInitListWithEqual(AskSongComment.class, "user,post.user", "post", new BmobPointer(post), listener);
+        BmobQuery<AskSongComment> queryComment = new BmobQuery<>();
+        queryComment.order("-agreeNum," + Constant.BMOB_CREATE_AT);
+        queryComment.setLimit(10);
+        queryComment.addWhereEqualTo("post", new BmobPointer(post));
+        queryComment.include("user,post.user");
+        queryComment.findObjects(listener);
     }
 
     public void getPicList(AskSongComment askSongComment, ToastQueryListener<AskSongPic> listener) {

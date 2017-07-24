@@ -30,12 +30,10 @@ public class Constant {
     public final static Integer FAIL = 0;
 
 
-
     //BmobInfo
     public final static Integer BMOB_INFO_RESET_PASSWORD = 1;//请求重置密码
     public final static Integer BMOB_INFO_LABA = 2;//小喇叭
     public final static Integer BMOB_INFO_PLAN = 3;//开发计划
-
 
 
     //Intent Flag:本地/网络
@@ -80,10 +78,6 @@ public class Constant {
     public final static int REDUCE_CONTRIBUTION_COLLECTION = 2;//收藏
 
 
-    //置顶
-    public static int sort_value = 1;
-    public final static String sort_key = "top_key";
-
     //求谱类型,最好用Hap映射
     public static final int ji_ta_pu = 0;
     public static final int jian_pu = 1;
@@ -93,12 +87,7 @@ public class Constant {
 
     public static final String BMOB_CREATE_AT = "-createdAt";
     public static final String BMOB_USER = "user";
+    public static final String BMOB_COIN = "contribution";
 
 
-    //增加本地曲谱需要获得顺序
-    public static int getSort() {
-        int oldSort = SharedPrefsUtil.getInt(sort_key, sort_value);
-        SharedPrefsUtil.putInt(sort_key, oldSort + 1);//放入新的值
-        return oldSort;
-    }
 }

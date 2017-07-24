@@ -10,6 +10,7 @@ import com.example.q.pocketmusic.model.db.ImgDao;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.util.SortUtil;
 import com.example.q.pocketmusic.util.common.FileUtils;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
@@ -77,7 +78,7 @@ public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
         LocalSong localSong = new LocalSong();
         localSong.setName(name);
         localSong.setDate(dateFormat.format(new Date()));
-        localSong.setSort(Constant.getSort());
+        localSong.setSort(SortUtil.getSort());
         localSongDao.add(localSong);
 
         for (int i = 0; i < list.size(); i++) {

@@ -19,6 +19,7 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -128,10 +129,10 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                 Date last = dateFormat.parse(lastSignIn);
                 Date now = new Date();
                 long remainTime = now.getTime() - last.getTime();  //11   10,10  10
-                if (remainTime > 24 * 60 * 60 * 1000) {//距离上次签到已经超过24小时
+                if (remainTime > 18 * 60 * 60 * 1000) {//距离上次签到已经超过18小时
                     return false;
                 } else {
-                    long hour = 24 - remainTime / 1000 / 60 / 60;
+                    long hour = 18 - remainTime / 1000 / 60 / 60;
                     if (mShowSignInToast) {
                         ToastUtil.showToast("距离下次签到还剩:" + hour + "小时");
                         mShowSignInToast = false;
@@ -191,6 +192,18 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SupportActivity.class));
     }
 
+    public void setSignature(final String signature) {
+        user.setSignature(signature);
+        user.update(new ToastUpdateListener() {
+            @Override
+            public void onSuccess() {
+                ToastUtil.showToast("已修改签名~");
+                fragment.setSignature(signature);
+
+            }
+        });
+    }
+
 
     public interface IView extends IBaseView {
 
@@ -199,5 +212,6 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         void alertSignInDialog();
 
 
+        void setSignature(String signature);
     }
 }

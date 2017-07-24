@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/item_padding_16dp">
+
+
+    <TextView
+        android:id="@+id/share_name_tv"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="曲谱名"
+        android:textSize="@dimen/item_two_txt_main_14sp" />
+
+    <TextView
+        android:id="@+id/share_content_tv"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="曲谱描述"
+        android:textSize="@dimen/item_two_txt_second_12sp" />
+
+</LinearLayout>

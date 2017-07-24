@@ -14,17 +14,27 @@ public class AskSongPost extends BmobObject {
     private int type;//所求曲谱类型
     private String content;//帖子内容
     private Integer commentNum;//回复数量
+    private int index;//先按照指数，再创建时间逆序
 
 
     public AskSongPost() {
     }
 
-    public AskSongPost(MyUser user, String title, int type,String content) {
+    public AskSongPost(MyUser user, String title, int type, String content) {
         this.user = user;
         this.title = title;
         this.content = content;
-        this.type=type;
+        this.type = type;
         this.commentNum = 0;
+        this.index = 0;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public int getType() {

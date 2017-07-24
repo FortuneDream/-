@@ -18,7 +18,7 @@ import butterknife.BindView;
 
 public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, ShareListPresenter>
         implements ShareListPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener
-        , RecyclerArrayAdapter.OnMoreListener {
+        , RecyclerArrayAdapter.OnMoreListener, ShareListAdapter.OnClickHeadListener {
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
     private ShareListAdapter adapter;
@@ -46,6 +46,7 @@ public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, Sh
         initRecyclerView(recycler, adapter);
         recycler.setEmptyView(R.layout.view_not_found);
         presenter.getShareList(false);
+        adapter.setListener(this);
     }
 
     @Override
@@ -91,5 +92,10 @@ public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, Sh
     public void onItemClick(int position) {
         ShareSong shareSong = adapter.getItem(position);
         presenter.enterSongActivityByShare(shareSong);
+    }
+
+    @Override
+    public void onClick(int position) {
+        presenter.enterOtherProfileActivity(adapter.getItem(position).getUser());
     }
 }

@@ -110,7 +110,8 @@
             android:name=".module.home.profile.support.SupportActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".module.user.notify.version.PreviewVersionActivity" />
-        <activity android:name=".module.home.net.acg.ACGActivity"></activity>
+        <activity android:name=".module.home.net.acg.ACGActivity" />
+        <activity android:name=".module.user.other.OtherProfileActivity"></activity>
     </application>
 
 </manifest>

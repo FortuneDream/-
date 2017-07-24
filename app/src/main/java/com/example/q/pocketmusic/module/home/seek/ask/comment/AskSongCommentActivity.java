@@ -18,6 +18,7 @@ import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
+import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.dialog.PicDialog;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -31,7 +32,7 @@ import butterknife.BindView;
  */
 
 public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter.IView, AskSongCommentPresenter>
-        implements AskSongCommentPresenter.IView, View.OnClickListener, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+        implements AskSongCommentPresenter.IView, View.OnClickListener, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, PostHeadView.OnClickIndexListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -50,6 +51,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
     private AskSongCommentAdapter adapter;
     private PicDialog picDialog;
     public static final String PARAM_POST = "param_post";
+    public final static String PARAM_IS_FROM_USER = "param_is_from_user";//是否个人
 
     @Override
     public int setContentResource() {
@@ -67,17 +69,20 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
         adapter.setOnItemClickListener(this);
         //数据初始化
         final AskSongPost post = (AskSongPost) getIntent().getSerializableExtra(PARAM_POST);
+        Boolean isFromUser = getIntent().getBooleanExtra(PARAM_IS_FROM_USER, false);
         presenter.setPost(post);
         presenter.setUser(user);
         initToolbar(toolbar, presenter.getPost().getTitle());
         initRecyclerView(recycler, adapter);
-        adapter.addHeader(new PostHeadView(context,
+        PostHeadView headView = new PostHeadView(context,
                 presenter.getPost().getContent(),
                 presenter.getPost().getUser().getNickName(),
                 presenter.getPost().getTitle(),
                 presenter.getPost().getUser().getHeadImg(),
-                presenter.getPost().getCreatedAt()));
+                presenter.getPost().getCreatedAt(), isFromUser);
+        adapter.addHeader(headView);
         presenter.getInitCommentList(false);
+        headView.setOnClickIndexListener(this);
     }
 
 
@@ -201,5 +206,28 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
     @Override
     protected AskSongCommentPresenter createPresenter() {
         return new AskSongCommentPresenter(this);
+    }
+
+    @Override
+    public void onClick() {
+        alertCoinDialog();
+    }
+
+    private void alertCoinDialog() {
+        new CoinDialogBuilder(this, 2)
+                .setMessage("增加求谱指数:1点/2枚硬币")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                            presenter.reduceIndexCoin();
+                    }
+                })
+                .setNegativeButton("算了", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 }

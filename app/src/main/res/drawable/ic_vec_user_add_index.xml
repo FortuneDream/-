@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportHeight="1024.0"
+    android:viewportWidth="1024.0">
+    <group android:name="add_index_1">
+        <path
+            android:fillColor="@color/md_red_600"
+            android:pathData="M722.8,556a64,64 0,1 0,90.5 -90.5l-254.7,-254.7a64,64 0,0 0,-90.5 0l-257.3,257.3a64,64 0,1 0,90.5 90.5L513.3,346.5l209.5,209.5z" />
+
+    </group>
+    <group android:name="add_index_2">
+        <path
+            android:fillColor="@color/md_red_600"
+            android:pathData="M576,768V384a64,64 0,1 0,-128 0v384a64,64 0,1 0,128 0z" />
+    </group>
+
+</vector>
