@@ -308,6 +308,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                     @Override
                     public void onSuccess() {
                         ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + coin);
+                        activity.addHotIndex();
                     }
                 });
             }
@@ -331,5 +332,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         void setCommentListWithRefreshing(List<AskSongComment> list);
 
         void alertLocalSongDialog(List<String> localSongs);
+
+        void addHotIndex();
     }
 }

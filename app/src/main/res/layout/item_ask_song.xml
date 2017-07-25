@@ -73,17 +73,34 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginLeft="56dp"
             android:id="@+id/post_user_type_tv"
             style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="56dp"
             tools:text="曲谱类型" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48dp"
+            app:srcCompat="@drawable/ic_vec_hot" />
+
+        <TextView
+            android:id="@+id/post_user_hot_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32dp"
+            tools:text="0" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
             app:srcCompat="@drawable/ic_vec_comment" />
 

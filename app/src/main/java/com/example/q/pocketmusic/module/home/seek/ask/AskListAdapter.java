@@ -45,6 +45,7 @@ public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
     }
 
     class MyViewHolder extends BaseViewHolder<AskSongPost> {
+        TextView postUserHotTv;
         TextView postUserTitleTv;
         TextView postUserContentTv;
         TextView postUserTypeTv;
@@ -63,6 +64,7 @@ public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
             postUserHeadIv = $(R.id.post_user_head_iv);
             postUserDateTv = $(R.id.post_user_date_tv);
             postUserCommentNumTv = $(R.id.post_user_comment_num_tv);
+            postUserHotTv = $(R.id.post_user_hot_tv);
             contentLl = $(R.id.content_ll);
         }
 
@@ -76,6 +78,7 @@ public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
             displayStrategy.displayCircle(context, data.getUser().getHeadImg(), postUserHeadIv);
             postUserDateTv.setText(data.getCreatedAt());
             postUserCommentNumTv.setText(String.valueOf(data.getCommentNum()));
+            postUserHotTv.setText(String.valueOf(data.getIndex()));
             contentLl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

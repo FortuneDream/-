@@ -53,8 +53,6 @@ public class MoneyAdapter extends RecyclerArrayAdapter<MoneySupport> {
             displayStrategy.displayCircle(getContext(), data.getUser().getHeadImg(), headIv);
             nickNameTv.setText(data.getUser().getNickName());
             moneyTv.setText(String.valueOf(data.getMoney()) + "元");
-            LogUtils.e(data.getUser().getNickName());
-            LogUtils.e(data.getUser().getHeadImg());
             contentTv.setText(data.getContent());
             dateTv.setText(data.getCreatedAt());
         }

@@ -34,12 +34,28 @@
                 tools:text="鹏君" />
 
             <TextView
+
                 android:id="@+id/post_user_date_tv"
                 style="@style/TwoTextSecond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="2017.1.1" />
         </LinearLayout>
+
+        <ImageView
+            android:layout_marginRight="8dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_hot" />
+
+        <TextView
+            android:layout_marginRight="8dp"
+            android:layout_gravity="center"
+            android:id="@+id/post_user_hot_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="0" />
 
         <ImageView
             android:id="@+id/post_add_index_iv"

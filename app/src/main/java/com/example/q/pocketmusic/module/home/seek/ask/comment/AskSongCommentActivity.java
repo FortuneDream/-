@@ -51,6 +51,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
     TextView numberPicTv;
     private AskSongCommentAdapter adapter;
     private PicDialog picDialog;
+    private PostHeadView headView;
     public static final String PARAM_POST = "param_post";
     public final static String PARAM_IS_FROM_USER = "param_is_from_user";//是否个人
 
@@ -74,12 +75,13 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
         presenter.setUser(user);
         initToolbar(toolbar, presenter.getPost().getTitle());
         initRecyclerView(recycler, adapter);
-        PostHeadView headView = new PostHeadView(context,
+        headView = new PostHeadView(context,
                 presenter.getPost().getContent(),
                 presenter.getPost().getUser().getNickName(),
                 presenter.getPost().getTitle(),
                 presenter.getPost().getUser().getHeadImg(),
-                presenter.getPost().getCreatedAt(), isFromUser);
+                presenter.getPost().getCreatedAt(), isFromUser,
+                presenter.getPost().getIndex());
         adapter.addHeader(headView);
         presenter.getInitCommentList(false);
         headView.setOnClickIndexListener(this);
@@ -199,6 +201,11 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
     }
 
     @Override
+    public void addHotIndex() {
+        headView.addHotIndex();
+    }
+
+    @Override
     public void onRefresh() {
         presenter.getInitCommentList(true);
     }
@@ -220,7 +227,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                            presenter.reduceIndexCoin();
+                        presenter.reduceIndexCoin();
                     }
                 })
                 .setNegativeButton("算了", new DialogInterface.OnClickListener() {
