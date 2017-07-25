@@ -66,15 +66,6 @@ public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPrese
         });
     }
 
-    //跳转到其他人的个人界面
-    public void enterOtherProfileActivity(AskSongPost askSongPost) {
-        MyUser other=askSongPost.getUser();
-        Intent intent = new Intent(fragment.getCurrentContext(), OtherProfileActivity.class);
-        intent.putExtra(OtherProfileActivity.PARAM_USER, other);
-        fragment.getCurrentContext().startActivity(intent);
-    }
-
-    //跳转到评论CommentActivity(
     public void enterCommentActivity(AskSongPost askSongPost) {
         Intent intent = new Intent(fragment.getCurrentContext(), AskSongCommentActivity.class);
         intent.putExtra(AskSongCommentActivity.PARAM_POST, askSongPost);

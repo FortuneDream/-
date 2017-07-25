@@ -26,6 +26,8 @@ public class OtherShareAdapter extends RecyclerArrayAdapter<ShareSong> {
         return new ViewHolder(parent);
     }
 
+
+
     class ViewHolder extends BaseViewHolder<ShareSong> {
         TextView nameTv;
         TextView contentTv;

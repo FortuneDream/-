@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.home.seek.share;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -18,7 +19,7 @@ import butterknife.BindView;
 
 public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, ShareListPresenter>
         implements ShareListPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener
-        , RecyclerArrayAdapter.OnMoreListener, ShareListAdapter.OnClickHeadListener {
+        , RecyclerArrayAdapter.OnMoreListener {
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
     private ShareListAdapter adapter;
@@ -46,7 +47,12 @@ public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, Sh
         initRecyclerView(recycler, adapter);
         recycler.setEmptyView(R.layout.view_not_found);
         presenter.getShareList(false);
-        adapter.setListener(this);
+        adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {
+            @Override
+            public void onClickItem(int position) {
+                presenter.enterOtherProfileActivity(adapter.getItem(position).getUser());
+            }
+        });
     }
 
     @Override
@@ -92,10 +98,5 @@ public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, Sh
     public void onItemClick(int position) {
         ShareSong shareSong = adapter.getItem(position);
         presenter.enterSongActivityByShare(shareSong);
-    }
-
-    @Override
-    public void onClick(int position) {
-        presenter.enterOtherProfileActivity(adapter.getItem(position).getUser());
     }
 }

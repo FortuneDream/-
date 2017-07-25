@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BaseFragment;
@@ -19,7 +20,7 @@ import butterknife.BindView;
  * Created by 鹏君 on 2017/1/26.
  */
 public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView, AskListFragmentPresenter>
-        implements AskListFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, AskListAdapter.OnItemClickListener
+        implements AskListFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener
         , RecyclerArrayAdapter.OnMoreListener {
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
@@ -34,12 +35,18 @@ public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView
     @Override
     public void initView() {
         adapter = new AskListAdapter(getContext());
-        adapter.setListener(this);
         adapter.setMore(R.layout.view_more, this);
         recycler.setRefreshListener(this);
         initRecyclerView(recycler, adapter, 1);
         presenter.setmPage(0);
         presenter.getPostList(false);
+
+        adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {
+            @Override
+            public void onClickItem(int position) {
+                presenter.enterCommentActivity(adapter.getItem(position));
+            }
+        });
     }
 
 
@@ -72,16 +79,6 @@ public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView
     @Override
     public void finish() {
         getActivity().finish();
-    }
-
-    @Override
-    public void onClickHeadIv(int position) {
-        presenter.enterOtherProfileActivity(adapter.getItem(position));
-    }
-
-    @Override
-    public void onClickContent(int position) {
-        presenter.enterCommentActivity(adapter.getItem(position));
     }
 
     @Override

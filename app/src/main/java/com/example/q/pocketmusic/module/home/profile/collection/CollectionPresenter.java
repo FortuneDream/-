@@ -50,8 +50,6 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
                 }else {
                     activity.setCollectionListWithRefreshing(list);
                 }
-
-
             }
         });
     }

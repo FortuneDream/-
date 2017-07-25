@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -19,6 +22,11 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 public class AskSongCommentAdapter extends RecyclerArrayAdapter<AskSongComment> {
     private DisplayStrategy displayStrategy;
     private Context context;
+    private AbsOnClickItemHeadListener absOnClickItemHeadListener;
+
+    public void setAbsOnClickItemHeadListener(AbsOnClickItemHeadListener absOnClickItemHeadListener) {
+        this.absOnClickItemHeadListener = absOnClickItemHeadListener;
+    }
 
     public AskSongCommentAdapter(Context context) {
         super(context);
@@ -38,6 +46,7 @@ public class AskSongCommentAdapter extends RecyclerArrayAdapter<AskSongComment> 
         TextView agreeTv;
         TextView dateTv;
         ImageView userHeadIv;
+        LinearLayout contentLl;
 
         public MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_ask_song_comment);
@@ -47,15 +56,36 @@ public class AskSongCommentAdapter extends RecyclerArrayAdapter<AskSongComment> 
             hasPicTv = $(R.id.has_pic_tv);
             agreeTv = $(R.id.agree_tv);
             dateTv = $(R.id.date_tv);
+            contentLl = $(R.id.content_ll);
+            contentLl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (absOnClickItemHeadListener != null) {
+                        absOnClickItemHeadListener.onClickItem(getAdapterPosition());
+                    }
+                }
+            });
         }
 
         @Override
-        public void setData(AskSongComment data) {
+        public void setData(final AskSongComment data) {
             super.setData(data);
             dateTv.setText(data.getCreatedAt());
             userContentTv.setText(data.getContent());
             userNameTv.setText(data.getUser().getNickName());
             displayStrategy.displayCircle(context, data.getUser().getHeadImg(), userHeadIv);
+            isShowMorePic(data);
+            userHeadIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (absOnClickItemHeadListener != null) {
+                        absOnClickItemHeadListener.onClickHead(getContext(), data.getUser());
+                    }
+                }
+            });
+        }
+
+        private void isShowMorePic(AskSongComment data) {
             if (!data.getHasPic()) {
                 hasPicTv.setVisibility(View.GONE);
                 agreeTv.setVisibility(View.GONE);

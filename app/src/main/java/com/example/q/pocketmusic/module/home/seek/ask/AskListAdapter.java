@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.seek.ask;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -8,10 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
+import com.example.q.pocketmusic.module.user.other.OtherProfileActivity;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -22,8 +26,11 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
     private DisplayStrategy displayStrategy;
     private Context context;
-    private OnItemClickListener listener;
+    private AbsOnClickItemHeadListener absOnClickItemHeadListener;
 
+    public void setAbsOnClickItemHeadListener(AbsOnClickItemHeadListener absOnClickItemHeadListener) {
+        this.absOnClickItemHeadListener = absOnClickItemHeadListener;
+    }
 
     public AskListAdapter(Context context) {
         super(context);
@@ -31,15 +38,6 @@ public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
         displayStrategy = new DisplayStrategy();
     }
 
-    public void setListener(OnItemClickListener onItemClickListener) {
-        this.listener = onItemClickListener;
-    }
-
-    public interface OnItemClickListener {
-        void onClickHeadIv(int position);
-
-        void onClickContent(int position);
-    }
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
@@ -66,28 +64,10 @@ public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
             postUserDateTv = $(R.id.post_user_date_tv);
             postUserCommentNumTv = $(R.id.post_user_comment_num_tv);
             contentLl = $(R.id.content_ll);
-            //点击内容
-            contentLl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onClickContent(getAdapterPosition());
-                    }
-                }
-            });
-            //点击头像
-            postUserHeadIv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onClickHeadIv(getAdapterPosition());
-                    }
-                }
-            });
         }
 
         @Override
-        public void setData(AskSongPost data) {
+        public void setData(final AskSongPost data) {
             super.setData(data);
             setPostType(data);
             postUserTitleTv.setText("标题：" + data.getTitle());
@@ -96,6 +76,23 @@ public class AskListAdapter extends RecyclerArrayAdapter<AskSongPost> {
             displayStrategy.displayCircle(context, data.getUser().getHeadImg(), postUserHeadIv);
             postUserDateTv.setText(data.getCreatedAt());
             postUserCommentNumTv.setText(String.valueOf(data.getCommentNum()));
+            contentLl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (absOnClickItemHeadListener != null) {
+                        absOnClickItemHeadListener.onClickItem(getAdapterPosition());
+                    }
+                }
+            });
+            postUserHeadIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MyUser other = data.getUser();
+                    if (absOnClickItemHeadListener != null) {
+                        absOnClickItemHeadListener.onClickHead(context, other);
+                    }
+                }
+            });
         }
 
 

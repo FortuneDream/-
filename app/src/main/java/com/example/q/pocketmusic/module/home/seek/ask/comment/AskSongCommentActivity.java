@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
@@ -32,7 +33,7 @@ import butterknife.BindView;
  */
 
 public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter.IView, AskSongCommentPresenter>
-        implements AskSongCommentPresenter.IView, View.OnClickListener, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, PostHeadView.OnClickIndexListener {
+        implements AskSongCommentPresenter.IView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, PostHeadView.OnClickIndexListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -62,11 +63,10 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
     @Override
     public void initUserView() {
         //各种监听
-        adapter = new AskSongCommentAdapter(AskSongCommentActivity.this);
+        adapter = new AskSongCommentAdapter(this);
         recycler.setRefreshListener(this);
         sendCommentBtn.setOnClickListener(this);
         addPic.setOnClickListener(this);
-        adapter.setOnItemClickListener(this);
         //数据初始化
         final AskSongPost post = (AskSongPost) getIntent().getSerializableExtra(PARAM_POST);
         Boolean isFromUser = getIntent().getBooleanExtra(PARAM_IS_FROM_USER, false);
@@ -83,6 +83,12 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
         adapter.addHeader(headView);
         presenter.getInitCommentList(false);
         headView.setOnClickIndexListener(this);
+        adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {
+            @Override
+            public void onClickItem(int position) {
+                presenter.alertPicDialog(adapter.getItem(position));  //弹出简略图
+            }
+        });
     }
 
 
@@ -190,11 +196,6 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                     }
                 })
                 .show();
-    }
-
-    @Override
-    public void onItemClick(int position) {
-        presenter.alertPicDialog(adapter.getItem(position));  //弹出简略图
     }
 
     @Override

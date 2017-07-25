@@ -1,9 +1,6 @@
 package com.example.q.pocketmusic.module.user.other.collection;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.MyUser;
@@ -11,12 +8,11 @@ import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.module.common.AuthFragment;
 import com.example.q.pocketmusic.module.user.other.OtherProfileActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by 鹏君 on 2017/7/24.
@@ -24,7 +20,7 @@ import butterknife.Unbinder;
  */
 
 public class OtherCollectionFragment extends AuthFragment<OtherCollectionPresenter.IView, OtherCollectionPresenter>
-        implements OtherCollectionPresenter.IView {
+        implements OtherCollectionPresenter.IView, RecyclerArrayAdapter.OnItemClickListener, RecyclerArrayAdapter.OnMoreListener, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.collection_recycler)
     EasyRecyclerView collectionRecycler;
     private OtherCollectionAdapter adapter;
@@ -40,7 +36,10 @@ public class OtherCollectionFragment extends AuthFragment<OtherCollectionPresent
         adapter = new OtherCollectionAdapter(getCurrentContext());
         initRecyclerView(collectionRecycler, adapter, 1);
         other = ((OtherProfileActivity) getActivity()).otherUser;
-        presenter.getOtherCollectionList(other);
+        adapter.setOnItemClickListener(this);
+        adapter.setMore(R.layout.view_more, this);
+        collectionRecycler.setRefreshListener(this);
+        onRefresh();
     }
 
     @Override
@@ -52,5 +51,32 @@ public class OtherCollectionFragment extends AuthFragment<OtherCollectionPresent
     @Override
     public void setOtherCollectionList(List<CollectionSong> list) {
         adapter.addAll(list);
+    }
+
+    @Override
+    public void setOtherCollectionListWithRefreshing(List<CollectionSong> list) {
+        adapter.clear();
+        adapter.addAll(list);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        presenter.enterSongActivity(adapter.getItem(position));
+    }
+
+    @Override
+    public void onMoreShow() {
+        presenter.getMoreOtherCollectionList(other);
+    }
+
+    @Override
+    public void onMoreClick() {
+
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.setPage(0);
+        presenter.getOtherCollectionList(other, true);
     }
 }

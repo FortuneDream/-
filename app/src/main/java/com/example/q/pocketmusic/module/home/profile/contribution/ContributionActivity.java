@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
@@ -49,6 +50,12 @@ public class ContributionActivity extends AuthActivity<ContributionPresenter.IVi
         initToolbar(toolbar, "硬币榜");
         initRecyclerView(recycler, adapter);
         presenter.init();
+        adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {
+            @Override
+            public void onClickItem(int position) {
+                //什么都不做
+            }
+        });
     }
 
 

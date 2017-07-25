@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.user.other.share;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.AuthFragment;
 import com.example.q.pocketmusic.module.user.other.OtherProfileActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ import butterknife.Unbinder;
  */
 
 public class OtherShareFragment extends AuthFragment<OtherSharePresenter.IView, OtherSharePresenter>
-        implements OtherSharePresenter.IView {
+        implements OtherSharePresenter.IView, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener,RecyclerArrayAdapter.OnMoreListener {
     @BindView(R.id.share_recycler)
     EasyRecyclerView shareRecycler;
     private OtherShareAdapter adapter;
@@ -40,7 +42,10 @@ public class OtherShareFragment extends AuthFragment<OtherSharePresenter.IView, 
         adapter = new OtherShareAdapter(getCurrentContext());
         initRecyclerView(shareRecycler, adapter, 1);
         other = ((OtherProfileActivity) getActivity()).otherUser;
-        presenter.getOtherShareList(other);
+        adapter.setOnItemClickListener(this);
+        adapter.setMore(R.layout.view_more,this);
+        shareRecycler.setRefreshListener(this);
+        onRefresh();
     }
 
     @Override
@@ -51,5 +56,32 @@ public class OtherShareFragment extends AuthFragment<OtherSharePresenter.IView, 
     @Override
     public void setOtherShareList(List<ShareSong> list) {
         adapter.addAll(list);
+    }
+
+    @Override
+    public void setOtherShareListWithRefreshing(List<ShareSong> list) {
+        adapter.clear();
+        adapter.addAll(list);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        presenter.enterSongActivity(adapter.getItem(position));
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.setPage(0);
+        presenter.getOtherCollectionList(other, true);
+    }
+
+    @Override
+    public void onMoreShow() {
+        presenter.getMoreOtherCollectionList(other);
+    }
+
+    @Override
+    public void onMoreClick() {
+
     }
 }

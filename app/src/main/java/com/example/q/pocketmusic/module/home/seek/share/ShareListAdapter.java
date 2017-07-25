@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.config.pic.IDisplayStrategy;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.config.pic.GlideStrategy;
@@ -20,15 +21,10 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 public class ShareListAdapter extends RecyclerArrayAdapter<ShareSong> {
     private IDisplayStrategy displayStrategy;
-    private OnClickHeadListener listener;
+    private AbsOnClickItemHeadListener absOnClickItemHeadListener;
 
-    public interface  OnClickHeadListener{
-        void onClick(int position);
-    }
-
-
-    public void setListener(OnClickHeadListener listener) {
-        this.listener = listener;
+    public void setAbsOnClickItemHeadListener(AbsOnClickItemHeadListener absOnClickItemHeadListener) {
+        this.absOnClickItemHeadListener = absOnClickItemHeadListener;
     }
 
     public ShareListAdapter(Context context) {
@@ -54,11 +50,11 @@ public class ShareListAdapter extends RecyclerArrayAdapter<ShareSong> {
             contentTv = $(R.id.content_tv);
             contentRl = $(R.id.content_rl);
             headIv = $(R.id.head_iv);
-            headIv.setOnClickListener(new View.OnClickListener() {
+            contentRl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener!=null){
-                        listener.onClick(getAdapterPosition());
+                    if (absOnClickItemHeadListener != null) {
+                        absOnClickItemHeadListener.onClickItem(getAdapterPosition());
                     }
                 }
             });
@@ -70,6 +66,14 @@ public class ShareListAdapter extends RecyclerArrayAdapter<ShareSong> {
             nameTv.setText("上传曲谱：" + data.getName());
             contentTv.setText("描述：" + data.getContent());
             displayStrategy.displayCircle(getContext(), data.getUser().getHeadImg(), headIv);
+            headIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (absOnClickItemHeadListener != null) {
+                        absOnClickItemHeadListener.onClickHead(getContext(), data.getUser());
+                    }
+                }
+            });
         }
     }
 }
