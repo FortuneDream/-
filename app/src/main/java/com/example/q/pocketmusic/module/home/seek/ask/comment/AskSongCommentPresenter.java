@@ -56,6 +56,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     private AskSongCommentModel model;
     private AskSongPost post;
     private MyUser user;
+    private int mPage;
 
     public void setPost(AskSongPost post) {
         this.post = post;
@@ -314,6 +315,20 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
             }
         });
 
+    }
+
+    public void setPage(int page) {
+        this.mPage = page;
+    }
+
+    public void getMoreCommentList() {
+        mPage++;
+        model.getMoreCommentList(post, mPage, new ToastQueryListener<AskSongComment>() {
+            @Override
+            public void onSuccess(List<AskSongComment> list) {
+                activity.setCommentList(list);
+            }
+        });
     }
 
 

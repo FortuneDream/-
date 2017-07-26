@@ -33,7 +33,8 @@ import butterknife.BindView;
  */
 
 public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter.IView, AskSongCommentPresenter>
-        implements AskSongCommentPresenter.IView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, PostHeadView.OnClickIndexListener {
+        implements AskSongCommentPresenter.IView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, PostHeadView.OnClickIndexListener
+        , RecyclerArrayAdapter.OnMoreListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -82,7 +83,9 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                 presenter.getPost().getUser().getHeadImg(),
                 presenter.getPost().getCreatedAt(), isFromUser,
                 presenter.getPost().getIndex());
+        presenter.setPage(0);
         adapter.addHeader(headView);
+        adapter.setMore(R.layout.view_more, this);
         presenter.getInitCommentList(false);
         headView.setOnClickIndexListener(this);
         adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {
@@ -207,6 +210,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
 
     @Override
     public void onRefresh() {
+        presenter.setPage(0);
         presenter.getInitCommentList(true);
     }
 
@@ -237,5 +241,15 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                     }
                 })
                 .show();
+    }
+
+    @Override
+    public void onMoreShow() {
+        presenter.getMoreCommentList();
+    }
+
+    @Override
+    public void onMoreClick() {
+
     }
 }

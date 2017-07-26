@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="48dp"
+            android:layout_marginRight="56dp"
             app:srcCompat="@drawable/ic_vec_hot" />
 
         <TextView
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="40dp"
             tools:text="0" />
 
         <ImageView

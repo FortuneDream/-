@@ -28,6 +28,17 @@ public class AskSongCommentModel {
         BmobQuery<AskSongComment> queryComment = new BmobQuery<>();
         queryComment.order("-agreeNum," + Constant.BMOB_CREATE_AT);
         queryComment.setLimit(10);
+        queryComment.setSkip(0);
+        queryComment.addWhereEqualTo("post", new BmobPointer(post));
+        queryComment.include("user,post.user");
+        queryComment.findObjects(listener);
+    }
+
+    public void getMoreCommentList(AskSongPost post, int page, ToastQueryListener<AskSongComment> listener) {
+        BmobQuery<AskSongComment> queryComment = new BmobQuery<>();
+        queryComment.order("-agreeNum," + Constant.BMOB_CREATE_AT);
+        queryComment.setLimit(10);
+        queryComment.setSkip(10 * page);
         queryComment.addWhereEqualTo("post", new BmobPointer(post));
         queryComment.include("user,post.user");
         queryComment.findObjects(listener);

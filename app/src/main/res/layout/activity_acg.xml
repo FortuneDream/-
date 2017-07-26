@@ -9,9 +9,8 @@
 
     <include layout="@layout/include_appbar_toolbar" />
 
-    <TextView
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="\n\tACG专区开发中~有什么需求请在首页-->小铃铛-->意见反馈给我吧!\n\t或者群里直接Q我也行哦！" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -74,11 +74,12 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
     public void enterBannerActivity(int picPosition) {
         if (picPosition == 0) {
             joinQQGroup();
-        } else if (picPosition == 1) {
-            fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ACGActivity.class));
-        } else {
-            fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ACGActivity.class));
         }
+//        } else if (picPosition == 1) {
+//            fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ACGActivity.class));
+//        } else {
+//            fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ACGActivity.class));
+//        }
     }
 
     //加群
