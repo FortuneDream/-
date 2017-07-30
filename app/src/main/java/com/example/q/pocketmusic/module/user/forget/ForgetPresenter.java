@@ -2,7 +2,7 @@ package com.example.q.pocketmusic.module.user.forget;
 
 import android.text.TextUtils;
 
-import com.example.q.pocketmusic.config.BmobInfo;
+import com.example.q.pocketmusic.model.BmobInfo;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;

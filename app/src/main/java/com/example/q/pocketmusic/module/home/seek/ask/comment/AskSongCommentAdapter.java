@@ -61,7 +61,7 @@ public class AskSongCommentAdapter extends RecyclerArrayAdapter<AskSongComment> 
                 @Override
                 public void onClick(View v) {
                     if (absOnClickItemHeadListener != null) {
-                        absOnClickItemHeadListener.onClickItem(getAdapterPosition());
+                        absOnClickItemHeadListener.onClickItem(getAdapterPosition()-1);
                     }
                 }
             });

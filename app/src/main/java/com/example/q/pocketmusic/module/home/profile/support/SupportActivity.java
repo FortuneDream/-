@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.profile.support;
 
 import android.support.annotation.IdRes;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -23,7 +24,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class SupportActivity extends AuthActivity<SupportPresenter.IView, SupportPresenter>
-        implements SupportPresenter.IView,RecyclerArrayAdapter.OnMoreListener {
+        implements SupportPresenter.IView,RecyclerArrayAdapter.OnMoreListener, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
@@ -54,14 +55,17 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
         mMoneyAdapter = new MoneyAdapter(this);
         initToolbar(toolbar, "支持开发者");
         initRecyclerView(recycler, mMoneyAdapter, 1);
+        recycler.setRefreshListener(this);
         mMoneyAdapter.setMore(R.layout.view_more,this);
-        presenter.setPage(0);
         presenter.setUser(user);
-        presenter.getInitMoneyList();
+        presenter.getSupportMoneyList(true);
     }
 
     @Override
-    public void setMoneyList(List<MoneySupport> list) {
+    public void setMoneyList(boolean isRefreshing,List<MoneySupport> list) {
+        if (isRefreshing){
+            mMoneyAdapter.clear();
+        }
         mMoneyAdapter.addAll(list);
     }
 
@@ -116,5 +120,10 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
     @Override
     public void onMoreClick() {
 
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.getSupportMoneyList(true);
     }
 }

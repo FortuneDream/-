@@ -15,11 +15,8 @@ public class ShareListModel {
         bmobUtil = new BmobUtil();
     }
 
-    public void getInitShareList(ToastQueryListener<ShareSong> listener) {
-        bmobUtil.getInitList(ShareSong.class, "user", listener);
-    }
 
-    public void getMoreShareList(int mPage, ToastQueryListener<ShareSong> toastQueryListener) {
+    public void getUserShareList(int mPage, ToastQueryListener<ShareSong> toastQueryListener) {
         bmobUtil.getMoreList(ShareSong.class, "user", mPage, toastQueryListener);
     }
 }

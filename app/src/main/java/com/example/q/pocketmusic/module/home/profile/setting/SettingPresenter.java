@@ -28,7 +28,7 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
         this.activity = getIViewRef();
     }
 
-    public void checkUpdate(final Boolean showToast) {
+    public void checkUpdate() {
         BmobUpdateAgent.setUpdateOnlyWifi(false);
         BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
             @Override

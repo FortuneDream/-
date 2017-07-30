@@ -38,9 +38,7 @@ public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView
         adapter.setMore(R.layout.view_more, this);
         recycler.setRefreshListener(this);
         initRecyclerView(recycler, adapter, 1);
-        presenter.setmPage(0);
-        presenter.getPostList(false);
-
+        presenter.getPostList(true);
         adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {
             @Override
             public void onClickItem(int position) {
@@ -51,13 +49,10 @@ public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView
 
 
     @Override
-    public void setPostList(List<AskSongPost> list) {
-        adapter.addAll(list);
-    }
-
-    @Override
-    public void setPostListWithRefreshing(List<AskSongPost> list) {
-        adapter.clear();
+    public void setPostList(boolean isRefreshing, List<AskSongPost> list) {
+        if (isRefreshing) {
+            adapter.clear();
+        }
         adapter.addAll(list);
     }
 
@@ -72,7 +67,6 @@ public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView
 
     @Override
     public void onRefresh() {
-        presenter.setmPage(0);
         presenter.getPostList(true);
     }
 

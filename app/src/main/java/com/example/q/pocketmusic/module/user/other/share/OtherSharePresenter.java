@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.user.other.share;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -48,7 +49,7 @@ public class OtherSharePresenter extends BasePresenter<OtherSharePresenter.IView
         query.setLimit(10);
         query.include("user");
         query.addWhereEqualTo("user", new BmobPointer(other));
-        query.order(Constant.BMOB_CREATE_AT);
+        query.order( BmobConstant.BMOB_CREATE_AT);
         query.findObjects(new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
@@ -73,7 +74,7 @@ public class OtherSharePresenter extends BasePresenter<OtherSharePresenter.IView
         query.setSkip(10 * mPage);
         query.include("user");
         query.addWhereEqualTo("user", new BmobPointer(other));
-        query.order(Constant.BMOB_CREATE_AT);
+        query.order( BmobConstant.BMOB_CREATE_AT);
         query.findObjects(new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {

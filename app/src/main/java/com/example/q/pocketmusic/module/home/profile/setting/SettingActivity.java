@@ -46,7 +46,7 @@ public class SettingActivity extends AuthActivity<SettingPresenter.IView, Settin
     @Override
     public void initUserView() {
         initToolbar(toolbar, "设置");
-        presenter.checkUpdate(false);//检测更新
+        presenter.checkUpdate();//检测更新
         setVersion();
     }
 

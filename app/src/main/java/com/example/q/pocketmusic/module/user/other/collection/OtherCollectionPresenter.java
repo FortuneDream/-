@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.user.other.collection;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -40,7 +41,7 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         query.setLimit(10);
         query.addWhereRelatedTo("collections", new BmobPointer(other));
-        query.order(Constant.BMOB_CREATE_AT);
+        query.order( BmobConstant.BMOB_CREATE_AT);
         query.findObjects(new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
@@ -57,7 +58,7 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
 
     public void enterSongActivity(final CollectionSong collectionSong) {
         fragment.showLoading(true);
-        collectionModel.querySong(collectionSong, new ToastQueryListener<CollectionPic>(fragment) {
+        collectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>(fragment) {
             @Override
             public void onSuccess(List<CollectionPic> list) {
                 fragment.showLoading(false);
@@ -87,7 +88,7 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
         query.addWhereRelatedTo("collections", new BmobPointer(other));
         query.setLimit(10);
         query.setSkip(mPage * 10);
-        query.order(Constant.BMOB_CREATE_AT);
+        query.order( BmobConstant.BMOB_CREATE_AT);
         query.findObjects(new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {

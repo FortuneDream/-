@@ -26,7 +26,7 @@ public class ContributionPresenter extends BasePresenter<ContributionPresenter.I
         BmobQuery<MyUser> query = new BmobQuery<>();
         query.setLimit(10);
         query.order("-contribution");
-        query.findObjects(new ToastQueryListener<MyUser>(activity) {
+        query.findObjects(new ToastQueryListener<MyUser>() {
             @Override
             public void onSuccess(List<MyUser> list) {
                 activity.setListResult(list);

@@ -1,9 +1,8 @@
 package com.example.q.pocketmusic.module.user.notify.version;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.config.BmobInfo;
+import com.example.q.pocketmusic.model.BmobInfo;
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 

@@ -58,7 +58,7 @@ public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.I
     @Override
     public void setList(List<Song> lists) {
         if (lists == null || lists.size() == 0) {
-            ToastUtil.showToast("没有找到~");
+            ToastUtil.showToast("没有找到~多试几次哦~");
             return;
         }
         adapter.addAll(lists);

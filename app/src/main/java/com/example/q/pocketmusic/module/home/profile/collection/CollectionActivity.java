@@ -74,20 +74,16 @@ public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, 
 
 
     @Override
-    public void setCollectionList(List<CollectionSong> list) {
-        adapter.addAll(list);
-    }
-
-    @Override
-    public void setCollectionListWithRefreshing(List<CollectionSong> list) {
-        adapter.clear();
+    public void setCollectionList(boolean isRefreshing,List<CollectionSong> list) {
+        if (isRefreshing){
+            adapter.clear();
+        }
         adapter.addAll(list);
     }
 
 
     @Override
     public void onRefresh() {
-        presenter.setPage(0);
         presenter.getCollectionList(true);
     }
 

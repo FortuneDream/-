@@ -33,25 +33,23 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
 
     public void getMoreShareList() {
         mPage++;
-        model.getMoreShareList(mPage, new ToastQueryListener<ShareSong>(fragment) {
+        model.getUserShareList(mPage, new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                fragment.setMore(list);
+                fragment.setList(false, list);
             }
         });
 
     }
 
     public void getShareList(final boolean isRefreshing) {
-        model.getInitShareList(new ToastQueryListener<ShareSong>(fragment) {
+        if (isRefreshing) {
+            mPage = 0;
+        }
+        model.getUserShareList(mPage, new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                if (!isRefreshing){
-                    fragment.setList(list);
-                }else {
-                    fragment.setListWithRefreshing(list);
-                }
-
+                fragment.setList(isRefreshing, list);
             }
         });
     }
@@ -81,10 +79,6 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
 
     interface IView extends IBaseView {
 
-        void setMore(List<ShareSong> list);
-
-        void setList(List<ShareSong> shareSongCache);
-
-        void setListWithRefreshing(List<ShareSong> list);
+        void setList(boolean isRefreshing, List<ShareSong> shareSongCache);
     }
 }

@@ -24,7 +24,6 @@ import java.util.List;
 
 public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView> {
     private IView activity;
-
     private MyUser user;
     private CollectionModel collectionModel;
     private int mPage;
@@ -35,21 +34,19 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
 
     public CollectionPresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
         collectionModel = new CollectionModel();
-
     }
 
     //获得收藏曲谱列表
     public void getCollectionList(final boolean isRefreshing) {
-        collectionModel.getInitCollectionList(user, new ToastQueryListener<CollectionSong>(activity) {
+        if (isRefreshing) {
+            mPage = 0;//置为零0
+        }
+        collectionModel.getUserCollectionList(user, mPage, new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
-                if (!isRefreshing){
-                    activity.setCollectionList(list);
-                }else {
-                    activity.setCollectionListWithRefreshing(list);
-                }
+                activity.setCollectionList(isRefreshing, list);
             }
         });
     }
@@ -57,10 +54,10 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
     //加载更多
     public void getMoreList() {
         mPage++;
-        collectionModel.getMoreList(user, mPage, new ToastQueryListener<CollectionSong>(activity) {
+        collectionModel.getUserCollectionList(user, mPage, new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
-                activity.setCollectionList(list);
+                activity.setCollectionList(false, list);
             }
         });
     }
@@ -68,7 +65,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
     //先查询，后进入SongActivity
     public void queryAndEnterSongActivity(final CollectionSong collectionSong) {
         activity.showLoading(true);
-        collectionModel.querySong(collectionSong, new ToastQueryListener<CollectionPic>(activity) {
+        collectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>(activity) {
             @Override
             public void onSuccess(List<CollectionPic> list) {
                 activity.showLoading(false);
@@ -91,10 +88,10 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
 
     //删除收藏
     public void deleteCollection(final CollectionSong collectionSong) {
-        collectionModel.deleteCollection(user, collectionSong, activity, new ToastUpdateListener(activity) {
+        collectionModel.deleteCollection(user, collectionSong, new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                ToastUtil.showToast( "已删除");
+                ToastUtil.showToast("已删除");
             }
         });
     }
@@ -106,8 +103,6 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
 
     public interface IView extends IBaseView {
 
-        void setCollectionList(List<CollectionSong> list);
-
-        void setCollectionListWithRefreshing(List<CollectionSong> list);
+        void setCollectionList(boolean isRefreshing, List<CollectionSong> list);
     }
 }

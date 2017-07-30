@@ -3,13 +3,11 @@ package com.example.q.pocketmusic.module.home.seek.ask;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.seek.ask.comment.AskSongCommentActivity;
-import com.example.q.pocketmusic.module.user.other.OtherProfileActivity;
 import com.example.q.pocketmusic.util.BmobUtil;
 
 import java.util.List;
@@ -34,18 +32,18 @@ public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPrese
 
     //得到帖子列表
     public void getPostList(final boolean isRefreshing) {
+        if (isRefreshing) {
+            mPage = 0;
+        }
         BmobQuery<AskSongPost> query = new BmobQuery<>();
-        query.order("-index," + Constant.BMOB_CREATE_AT);
+        query.order("-index," + BmobConstant.BMOB_CREATE_AT);
         query.setLimit(10);
-        query.include(Constant.BMOB_USER);
+        query.setSkip(10 * mPage);
+        query.include(BmobConstant.BMOB_USER);
         query.findObjects(new ToastQueryListener<AskSongPost>() {
             @Override
             public void onSuccess(List<AskSongPost> list) {
-                if (!isRefreshing) {
-                    fragment.setPostList(list);
-                } else {
-                    fragment.setPostListWithRefreshing(list);
-                }
+                fragment.setPostList(isRefreshing, list);
             }
         });
     }
@@ -53,23 +51,13 @@ public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPrese
     //加载更多
     public void getMore() {
         mPage++;
-        BmobQuery<AskSongPost> query = new BmobQuery<>();
-        query.order("-index," + Constant.BMOB_CREATE_AT);
-        query.setLimit(10);
-        query.setSkip(10 * mPage);
-        query.include(Constant.BMOB_USER);
-        query.findObjects(new ToastQueryListener<AskSongPost>() {
-            @Override
-            public void onSuccess(List<AskSongPost> list) {
-                fragment.setPostList(list);
-            }
-        });
+        getPostList(false);
     }
 
     public void enterCommentActivity(AskSongPost askSongPost) {
         Intent intent = new Intent(fragment.getCurrentContext(), AskSongCommentActivity.class);
         intent.putExtra(AskSongCommentActivity.PARAM_POST, askSongPost);
-        intent.putExtra(AskSongCommentActivity.PARAM_IS_FROM_USER,false);
+        intent.putExtra(AskSongCommentActivity.PARAM_IS_FROM_USER, false);
         fragment.getCurrentContext().startActivity(intent);
 
     }
@@ -80,8 +68,7 @@ public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPrese
 
 
     public interface IView extends IBaseView {
-        void setPostList(List<AskSongPost> list);
+        void setPostList(boolean isRefreshing, List<AskSongPost> list);
 
-        void setPostListWithRefreshing(List<AskSongPost> list);
     }
 }

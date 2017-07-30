@@ -85,9 +85,7 @@ public class Constant {
     public static final int qi_ta_pu = 3;
 
 
-    public static final String BMOB_CREATE_AT = "-createdAt";
-    public static final String BMOB_USER = "user";
-    public static final String BMOB_COIN = "contribution";
+
 
 
 }

@@ -4,7 +4,6 @@ import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -20,6 +19,7 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
     private IView activity;
     private MyUser user;
     private UserPostModel model;
+    private int mPage;
 
 
     public UserPostPresenter(IView activity) {
@@ -33,15 +33,13 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
     }
 
     public void getUserPostList(final boolean isRefreshing) {
-        model.getInitPostList(user, new ToastQueryListener<AskSongPost>() {
+        if (isRefreshing) {
+            mPage = 0;
+        }
+        model.getUserPostList(user, mPage, new ToastQueryListener<AskSongPost>() {
             @Override
             public void onSuccess(List<AskSongPost> list) {
-                if (!isRefreshing) {
-                    activity.setInitPostList(list);
-                } else {
-                    activity.setInitPostListWithRefreshing(list);
-                }
-
+                activity.setUserPostList(isRefreshing, list);
             }
         });
 
@@ -54,10 +52,18 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
         activity.getCurrentContext().startActivity(intent);
     }
 
+    public void getMoreList() {
+        mPage++;
+        model.getUserPostList(user, mPage, new ToastQueryListener<AskSongPost>() {
+            @Override
+            public void onSuccess(List<AskSongPost> list) {
+                activity.setUserPostList(false,list);
+            }
+        });
+    }
+
     public interface IView extends IBaseView {
 
-        void setInitPostList(List<AskSongPost> list);
-
-        void setInitPostListWithRefreshing(List<AskSongPost> list);
+        void setUserPostList(boolean isRefreshing, List<AskSongPost> list);
     }
 }

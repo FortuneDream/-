@@ -9,6 +9,7 @@ import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
@@ -72,6 +73,10 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         model = new AskSongCommentModel();
     }
 
+    public void setPage(int page) {
+        this.mPage = page;
+    }
+
     //获得发帖人
     public AskSongPost getPost() {
         return post;
@@ -79,14 +84,24 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
     //获得初始列表
     public void getInitCommentList(final boolean isRefreshing) {
-        model.getInitCommentList(post, new ToastQueryListener<AskSongComment>(activity) {
+        if (isRefreshing) {
+            mPage = 0;
+        }
+        model.getUserCommentList(post, mPage, new ToastQueryListener<AskSongComment>() {
             @Override
             public void onSuccess(List<AskSongComment> list) {
-                if (!isRefreshing) {
-                    activity.setCommentList(list);
-                } else {
-                    activity.setCommentListWithRefreshing(list);
-                }
+                activity.setCommentList(isRefreshing, list);
+            }
+        });
+    }
+
+    //获得更多
+    public void getMoreCommentList() {
+        mPage++;
+        model.getUserCommentList(post, mPage, new ToastQueryListener<AskSongComment>() {
+            @Override
+            public void onSuccess(List<AskSongComment> list) {
+                activity.setCommentList(false, list);
             }
         });
     }
@@ -304,7 +319,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         post.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                user.increment(Constant.BMOB_COIN, -coin);
+                user.increment(BmobConstant.BMOB_COIN, -coin);
                 user.update(new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
@@ -317,24 +332,10 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
     }
 
-    public void setPage(int page) {
-        this.mPage = page;
-    }
-
-    public void getMoreCommentList() {
-        mPage++;
-        model.getMoreCommentList(post, mPage, new ToastQueryListener<AskSongComment>() {
-            @Override
-            public void onSuccess(List<AskSongComment> list) {
-                activity.setCommentList(list);
-            }
-        });
-    }
-
 
     public interface IView extends IBaseView {
 
-        void setCommentList(List<AskSongComment> list);
+        void setCommentList(boolean isRefreshing, List<AskSongComment> list);
 
         void sendCommentResult(String s, AskSongComment askSongComment);
 
@@ -343,8 +344,6 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         void setCommentInput(String s);
 
         void showPicDialog(Song song, AskSongComment askSongComment);
-
-        void setCommentListWithRefreshing(List<AskSongComment> list);
 
         void alertLocalSongDialog(List<String> localSongs);
 

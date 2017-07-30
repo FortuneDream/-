@@ -76,6 +76,8 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
         presenter.setUser(user);
         initToolbar(toolbar, presenter.getPost().getTitle());
         initRecyclerView(recycler, adapter);
+        adapter.setMore(R.layout.view_more, this);
+
         headView = new PostHeadView(context,
                 presenter.getPost().getContent(),
                 presenter.getPost().getUser().getNickName(),
@@ -83,10 +85,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                 presenter.getPost().getUser().getHeadImg(),
                 presenter.getPost().getCreatedAt(), isFromUser,
                 presenter.getPost().getIndex());
-        presenter.setPage(0);
         adapter.addHeader(headView);
-        adapter.setMore(R.layout.view_more, this);
-        presenter.getInitCommentList(false);
         headView.setOnClickIndexListener(this);
         adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {
             @Override
@@ -94,20 +93,19 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                 presenter.alertPicDialog(adapter.getItem(position));  //弹出简略图
             }
         });
+        presenter.getInitCommentList(true);
     }
 
 
     //加载评论列表
     @Override
-    public void setCommentList(List<AskSongComment> list) {
+    public void setCommentList(boolean isRefreshing,List<AskSongComment> list) {
+        if (isRefreshing){
+            adapter.clear();
+        }
         adapter.addAll(list);
     }
 
-    @Override
-    public void setCommentListWithRefreshing(List<AskSongComment> list) {
-        adapter.clear();
-        adapter.addAll(list);
-    }
 
     //发送评论返回
     @Override
@@ -210,7 +208,6 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
 
     @Override
     public void onRefresh() {
-        presenter.setPage(0);
         presenter.getInitCommentList(true);
     }
 

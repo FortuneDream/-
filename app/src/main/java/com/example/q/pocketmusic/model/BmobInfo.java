@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.config;
+package com.example.q.pocketmusic.model;
 
 import cn.bmob.v3.BmobObject;
 

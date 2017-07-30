@@ -44,25 +44,20 @@ public class UserShareActivity extends AuthActivity<UserSharePresenter.IView, Us
         adapter.setOnItemClickListener(this);
         initToolbar(toolbar, "我的分享");
         initRecyclerView(recycler, adapter, 1);
-        presenter.setPage(0);
-        presenter.getInitList(false);
+        onRefresh();
     }
 
 
     @Override
     public void onRefresh() {
-        presenter.setPage(0);
-        presenter.getInitList(true);
+        presenter.getUserShareList(true);
     }
 
     @Override
-    public void setList(List<ShareSong> list) {
-        adapter.addAll(list);
-    }
-
-    @Override
-    public void setListWithRefreshing(List<ShareSong> list) {
-        adapter.clear();
+    public void setList(boolean isRefreshing, List<ShareSong> list) {
+        if (isRefreshing) {
+            adapter.clear();
+        }
         adapter.addAll(list);
     }
 

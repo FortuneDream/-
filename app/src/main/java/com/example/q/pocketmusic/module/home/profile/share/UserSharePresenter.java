@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.home.profile.share;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -33,26 +34,24 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
         bmobUtil = new BmobUtil();
     }
 
-    public void getInitList(final boolean isRefreshing) {
-        bmobUtil.getInitListWithEqual(ShareSong.class, null, Constant.BMOB_USER, new BmobPointer(user), new ToastQueryListener<ShareSong>(activity) {
+    public void getUserShareList(final boolean isRefreshing) {
+        if (isRefreshing) {
+            mPage = 0;
+        }
+        bmobUtil.getMoreListWithEqual(ShareSong.class, null, mPage, BmobConstant.BMOB_USER, new BmobPointer(user), new ToastQueryListener<ShareSong>(activity) {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                if (!isRefreshing){
-                    activity.setList(list);
-                }else {
-                    activity.setListWithRefreshing(list);
-                }
-
+                activity.setList(isRefreshing, list);
             }
         });
     }
 
     public void getMoreList() {
         mPage++;
-        bmobUtil.getMoreListWithEqual(ShareSong.class, null, mPage, Constant.BMOB_USER, new BmobPointer(user), new ToastQueryListener<ShareSong>(activity) {
+        bmobUtil.getMoreListWithEqual(ShareSong.class, null, mPage, BmobConstant.BMOB_USER, new BmobPointer(user), new ToastQueryListener<ShareSong>(activity) {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                activity.setList(list);
+                activity.setList(false, list);
             }
         });
     }
@@ -77,8 +76,7 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
     }
 
     interface IView extends IBaseView {
-        void setList(List<ShareSong> list);
+        void setList(boolean isRefreshing, List<ShareSong> list);
 
-        void setListWithRefreshing(List<ShareSong> list);
     }
 }

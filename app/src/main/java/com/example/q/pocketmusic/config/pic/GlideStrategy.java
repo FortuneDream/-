@@ -22,7 +22,7 @@ public class GlideStrategy implements IDisplayStrategy {
                 .load(url)
                 .placeholder(R.drawable.loading_bg)
                 .crossFade()
-                .centerCrop()
+                .fitCenter()
                 .into(imageView);
     }
 

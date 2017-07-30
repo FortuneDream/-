@@ -12,7 +12,7 @@ import android.text.TextUtils;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.BmobInfo;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MoneySupport;
@@ -20,7 +20,6 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.BmobUtil;
-import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
@@ -32,7 +31,6 @@ import java.util.regex.Pattern;
 
 import c.b.BP;
 import c.b.PListener;
-import cn.bmob.v3.BmobQuery;
 
 /**
  * Created by 鹏君 on 2017/7/8.
@@ -52,11 +50,29 @@ public class SupportPresenter extends BasePresenter<SupportPresenter.IView> {
     }
 
 
-    public void getInitMoneyList() {
-        util.getInitList(MoneySupport.class, Constant.BMOB_USER, new ToastQueryListener<MoneySupport>() {
+    public void getSupportMoneyList(final boolean isRefreshing) {
+        if (isRefreshing){
+            mPage=0;
+        }
+
+        util.getMoreList(MoneySupport.class,  BmobConstant.BMOB_USER, mPage, new ToastQueryListener<MoneySupport>() {
             @Override
             public void onSuccess(List<MoneySupport> list) {
-                activity.setMoneyList(list);
+                activity.setMoneyList(isRefreshing,list);
+            }
+        });
+    }
+
+    public void setPage(int page) {
+        this.mPage = page;
+    }
+
+    public void getMoreMoneyList() {
+        mPage++;
+        util.getMoreList(MoneySupport.class,  BmobConstant.BMOB_USER, mPage, new ToastQueryListener<MoneySupport>() {
+            @Override
+            public void onSuccess(List<MoneySupport> list) {
+                activity.setMoneyList(false,list);
             }
         });
     }
@@ -216,24 +232,12 @@ public class SupportPresenter extends BasePresenter<SupportPresenter.IView> {
         }
     }
 
-    public void setPage(int page) {
-        this.mPage = page;
-    }
 
-    public void getMoreMoneyList() {
-        mPage++;
-        util.getMoreList(MoneySupport.class, Constant.BMOB_USER, mPage, new ToastQueryListener<MoneySupport>() {
-            @Override
-            public void onSuccess(List<MoneySupport> list) {
-                activity.setMoneyList(list);
-            }
-        });
-    }
 
 
     public interface IView extends IBaseView {
 
 
-        void setMoneyList(List<MoneySupport> list);
+        void setMoneyList(boolean isRefreshing,List<MoneySupport> list);
     }
 }

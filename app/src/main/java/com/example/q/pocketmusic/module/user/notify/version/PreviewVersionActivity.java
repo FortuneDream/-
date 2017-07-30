@@ -5,7 +5,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.config.BmobInfo;
+import com.example.q.pocketmusic.model.BmobInfo;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
