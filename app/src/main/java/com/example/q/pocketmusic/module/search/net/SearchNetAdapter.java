@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.Song;
+import com.example.q.pocketmusic.model.flag.Text;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

@@ -1,6 +1,8 @@
 package com.example.q.pocketmusic.module.home.profile;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
@@ -202,6 +204,23 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
             }
         });
+    }
+
+    //设置用户属于哪个版本
+    public void setUserBelongToVersion() {
+        try {
+            PackageManager pm = fragment.getCurrentContext().getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(fragment.getCurrentContext().getPackageName(), PackageManager.GET_ACTIVITIES);
+            user.setVersion(pi.versionName);
+            user.update(new ToastUpdateListener() {
+                @Override
+                public void onSuccess() {
+
+                }
+            });
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

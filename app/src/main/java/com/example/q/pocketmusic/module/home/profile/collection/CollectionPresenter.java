@@ -78,7 +78,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
                 }
                 song.setIvUrl(urls);
                 Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
-                SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.SHOW_ONLY_DOWNLOAD, Constant.NET);
+                SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.MENU_DOWNLOAD_SHARE, Constant.NET);
                 intent.setExtrasClassLoader(getClass().getClassLoader());
                 intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, songObject);
                 activity.getCurrentContext().startActivity(intent);

@@ -7,6 +7,7 @@ import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.DownloadInfo;
@@ -17,6 +18,7 @@ import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.collection.CollectionPic;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
+import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
@@ -25,6 +27,7 @@ import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.DownloadUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
@@ -71,6 +74,9 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
                                                @Override
                                                public void onSuccess() {
+                                                   if (isFrom == Constant.FROM_SHARE) {
+                                                       addDownLoadNum();//增加下载量
+                                                   }
                                                    fragment.downloadResult(Constant.SUCCESS, "下载成功");
                                                }
 
@@ -80,6 +86,18 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                                                }
                                            }
         ).downloadBatchPic(name, song.getIvUrl(), song.getTypeId());
+    }
+
+    //添加下载量
+    private void addDownLoadNum() {
+        ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
+        shareSong.increment("downloadNum");
+        shareSong.update(new ToastUpdateListener() {
+            @Override
+            public void onSuccess() {
+                LogUtils.e("下载量+1");
+            }
+        });
     }
 
     //下载检测
@@ -113,12 +131,33 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     }
 
     //判断当前的评论的图片是否可以点赞
-    public void checkHasAgree() {
+    public void checkAskHasAgree() {
         BmobQuery<MyUser> query = new BmobQuery<>();
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
         query.addWhereRelatedTo("agrees", new BmobPointer(askSongComment));
-        query.findObjects(new ToastQueryListener<MyUser>(fragment) {
+        query.findObjects(new ToastQueryListener<MyUser>() {
+            @Override
+            public void onSuccess(List<MyUser> list) {
+                for (MyUser other : list) {
+                    if (other.getObjectId().equals(user.getObjectId())) {
+                        //已经点赞
+                        isEnableAgree = false;
+                        break;
+                    }
+                    isEnableAgree = true;
+                }
+            }
+        });
+    }
+
+    //检查分享是否能点赞
+    private void checkShareHasAgree() {
+        BmobQuery<MyUser> query = new BmobQuery<>();
+        final MyUser user = MyUser.getCurrentUser(MyUser.class);
+        ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
+        query.addWhereRelatedTo("agrees", new BmobPointer(shareSong));
+        query.findObjects(new ToastQueryListener<MyUser>() {
             @Override
             public void onSuccess(List<MyUser> list) {
                 for (MyUser other : list) {
@@ -141,28 +180,62 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     //点赞
     public void agree() {
         if (isEnableAgree()) {
-            BmobRelation relation = new BmobRelation();
-            final MyUser user = MyUser.getCurrentUser(MyUser.class);
-            relation.add(user);
-            AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
-            askSongComment.setAgrees(relation);
-            askSongComment.increment("agreeNum");//原子操作，点赞数加一
-            askSongComment.update(new ToastUpdateListener() {
-                @Override
-                public void onSuccess() {
-                    ToastUtil.showToast("已点赞");
-                    user.increment("contribution", Constant.ADD_CONTRIBUTION_AGREE);
-                    user.update(new ToastUpdateListener() {
-                        @Override
-                        public void onSuccess() {
-                            ToastUtil.showToast(CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
-                        }
-                    });
-                }
-            });
+            if (isFrom == Constant.FROM_ASK) {
+                agreeWithCommentPic();
+            }
+            if (isFrom == Constant.FROM_SHARE) {
+                agreeWithSharePic();
+            }
+
         } else {
             ToastUtil.showToast("已经赞过了哦~");
         }
+    }
+
+    //分享点赞
+    private void agreeWithSharePic() {
+        BmobRelation relation = new BmobRelation();
+        final MyUser user = MyUser.getCurrentUser(MyUser.class);
+        relation.add(user);
+        ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
+        shareSong.setAgrees(relation);
+        shareSong.increment("agreeNum");//原子操作，点赞数加一
+        shareSong.update(new ToastUpdateListener() {
+            @Override
+            public void onSuccess() {
+                ToastUtil.showToast("已点赞");
+                user.increment("contribution", Constant.ADD_CONTRIBUTION_AGREE);
+                user.update(new ToastUpdateListener() {
+                    @Override
+                    public void onSuccess() {
+                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
+                    }
+                });
+            }
+        });
+    }
+
+    //评论图片点赞
+    private void agreeWithCommentPic() {
+        BmobRelation relation = new BmobRelation();
+        final MyUser user = MyUser.getCurrentUser(MyUser.class);
+        relation.add(user);
+        AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
+        askSongComment.setAgrees(relation);
+        askSongComment.increment("agreeNum");//原子操作，点赞数加一
+        askSongComment.update(new ToastUpdateListener() {
+            @Override
+            public void onSuccess() {
+                ToastUtil.showToast("已点赞");
+                user.increment("contribution", Constant.ADD_CONTRIBUTION_AGREE);
+                user.update(new ToastUpdateListener() {
+                    @Override
+                    public void onSuccess() {
+                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
+                    }
+                });
+            }
+        });
     }
 
 
@@ -302,9 +375,15 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
         //求谱，检测是否可以点赞,
         if (isFrom == Constant.FROM_ASK) {
-            checkHasAgree();
+            checkAskHasAgree();
         }
+
+        if (isFrom == Constant.FROM_SHARE) {
+            checkShareHasAgree();
+        }
+
     }
+
 
     public int getShowMenuFlag() {
         return ((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE)).getShowMenu();

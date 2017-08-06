@@ -93,6 +93,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 userSignatureTv.setText(user.getSignature());
             }
             checkIsSign();
+            presenter.setUserBelongToVersion();//用户属于哪个版本
         }
     }
 

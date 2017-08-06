@@ -12,6 +12,8 @@ public class AskSongComment extends BmobObject {
     private AskSongPost post;//一个评论属于一个帖子,一对多
     private BmobRelation agrees;//点赞的多个用户，多对多
     private Integer agreeNum;//点赞用户的数量
+    private String content;//评论内容
+    private Boolean hasPic;//是否有图片
 
     public Integer getAgreeNum() {
         return agreeNum;
@@ -29,8 +31,7 @@ public class AskSongComment extends BmobObject {
         this.agrees = agrees;
     }
 
-    private String content;//评论内容
-    private Boolean hasPic;//是否有图片
+
 
 
     public AskSongComment() {

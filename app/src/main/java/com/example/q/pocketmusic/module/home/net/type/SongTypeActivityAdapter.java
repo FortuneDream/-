@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.Song;
+import com.example.q.pocketmusic.model.flag.Text;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -27,6 +28,7 @@ public class SongTypeActivityAdapter extends RecyclerArrayAdapter<Song> {
     class MyViewHolder extends BaseViewHolder<Song> {
         TextView nameTv;
         TextView artistTv;
+
 
         public MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_song_list);

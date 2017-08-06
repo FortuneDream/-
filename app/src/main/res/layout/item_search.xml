@@ -20,6 +20,13 @@
             tools:text="歌曲名" />
 
         <TextView
+            android:id="@+id/upload_user_name"
+            style="@style/TwoTextSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上传者:大隐隐于世" />
+
+        <TextView
             android:id="@+id/content_tv"
             style="@style/TwoTextSecond"
             android:layout_width="wrap_content"

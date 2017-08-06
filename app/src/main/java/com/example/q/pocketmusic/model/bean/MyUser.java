@@ -18,6 +18,8 @@ public class MyUser extends BmobUser {
     private String lastSignInDate;//最后一次签到时间
     private Integer contribution;//贡献值
     private BmobRelation collections;//某个用户收藏的所有曲谱
+    private String versionFlag;
+
 
     public String getLastSignInDate() {
         return lastSignInDate;
@@ -28,10 +30,14 @@ public class MyUser extends BmobUser {
     }
 
     public MyUser() {
-        this.signature="这个人没有签名哦~";
+        this.signature = "这个人没有签名哦~";
         this.nickName = "匿名";
         this.headImg = Constant.COMMON_HEAD_IV_URL;
         this.contribution = Constant.ADD_CONTRIBUTION_INIT;
+    }
+
+    public void setVersion(String version) {
+        this.versionFlag = version;
     }
 
     public String getSignature() {

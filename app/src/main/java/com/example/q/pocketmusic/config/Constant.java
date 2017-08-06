@@ -50,9 +50,9 @@ public class Constant {
     public final static int FROM_LOCAL = 10;
 
     //Intent Flag:显示Menu
-    public final static int SHOW_ALL_MENU = 1001;//下载，点赞，收藏
-    public final static int SHOW_COLLECTION_MENU = 1002;//下载，收藏
-    public final static int SHOW_ONLY_DOWNLOAD = 1003;//下载
+    public final static int MENU_DOWNLOAD_COLLECTION_AGREE_SHARE = 1001;//下载，点赞，收藏
+    public final static int MENU_DOWNLOAD_COLLECTION_SHARE = 1002;//下载，收藏
+    public final static int MENU_DOWNLOAD_SHARE = 1003;//下载
     public final static int SHOW_NO_MENU = 1004;//显示menu（之后改成显示录音功能menu）
 
     //请求
@@ -84,8 +84,9 @@ public class Constant {
     public static final int gang_qin_pu = 2;
     public static final int qi_ta_pu = 3;
 
-
-
-
-
+    //bmobinfo
+    private static final int change_password = 1;//改密码
+    private static final int splash_flag = 2;//闪屏页问题
+    private static final int update_version_info = 3; //版本更新
+    private static final int report_content = 4;//
 }
