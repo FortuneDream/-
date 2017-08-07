@@ -1,10 +1,5 @@
 package com.example.q.pocketmusic.config;
 
-import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by 鹏君 on 2016/8/28.
  */

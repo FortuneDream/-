@@ -1,9 +1,11 @@
 package com.example.q.pocketmusic.model.net;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
+import com.example.q.pocketmusic.util.common.LogUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -33,6 +35,7 @@ public class LoadTypeSongList extends AsyncTask<String, Void, List<Song> > {
     @Override
     protected List<Song> doInBackground(String... strings) {
         String typeUrl = strings[0];
+        LogUtils.e(typeUrl);
         List<Song> list=new ArrayList<>();
         try {
             Document doc = Jsoup.connect(typeUrl)
@@ -44,9 +47,8 @@ public class LoadTypeSongList extends AsyncTask<String, Void, List<Song> > {
                     .getElementsByTag("tbody")
                     .get(0);
             Elements trs = tbody.getElementsByTag("tr");
-            trs.remove(24);
-            trs.remove(18);
-            trs.remove(12);
+            trs.remove(23);
+            trs.remove(17);
             trs.remove(11);
             trs.remove(5);//一定要倒着去横线！！不然会顺序错误
             for (Element tr : trs) {
