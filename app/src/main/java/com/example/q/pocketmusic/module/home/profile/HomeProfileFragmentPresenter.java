@@ -5,7 +5,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
+import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -223,6 +225,23 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         }
     }
 
+    public void setNickName(final String nickName) {
+        user.setNickName(nickName);
+        user.update(new ToastUpdateListener() {
+            @Override
+            public void onSuccess() {
+                user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_CHANG_NICK_NAME);
+                user.update(new ToastUpdateListener() {
+                    @Override
+                    public void onSuccess() {
+                        ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CHANG_NICK_NAME);
+                        fragment.setNickName(nickName);
+                    }
+                });
+            }
+        });
+    }
+
 
     public interface IView extends IBaseView {
 
@@ -232,5 +251,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
 
         void setSignature(String signature);
+
+        void setNickName(String nickName);
     }
 }

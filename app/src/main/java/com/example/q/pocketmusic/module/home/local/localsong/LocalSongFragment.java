@@ -71,9 +71,6 @@ public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.I
                     @Override
                     public void onBottomSheetItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.upload://上传分享
-                                presenter.enterShareActivity(adapter.getItem(position));
-                                break;
                             case R.id.delete://删除
                                 showDeleteDialog(position);
                                 break;
@@ -169,6 +166,11 @@ public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.I
     @Override
     public void onSelectedMore(int position) {
         alertBottomDialog(position);
+    }
+
+    @Override
+    public void onSelectedShare(int position) {
+        presenter.enterShareActivity(adapter.getItem(position));
     }
 
     //选择置顶

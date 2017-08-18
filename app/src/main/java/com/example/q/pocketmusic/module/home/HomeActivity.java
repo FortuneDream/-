@@ -1,9 +1,11 @@
 package com.example.q.pocketmusic.module.home;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -51,6 +53,26 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
         presenter.setFragmentManager(getSupportFragmentManager());
         presenter.checkVersion();
         presenter.clickNet();
+        presenter.checkAlertSupportDialog();
+    }
+
+    public void alertSupportDialog() {
+        new AlertDialog.Builder(getCurrentContext())
+                .setTitle("支持开发者")
+                .setMessage("如果您觉得这款应用做的不错~可以支持一下我~")
+                .setPositiveButton("好的", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.enterSupportActivity();
+                    }
+                })
+                .setNegativeButton("算了", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
 

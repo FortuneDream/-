@@ -112,9 +112,6 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
                     @Override
                     public void onBottomSheetItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.upload://上传分享
-                                ToastUtil.showToast( "目前暂不支持分享");
-                                break;
                             case R.id.delete://删除
                                 presenter.deleteRecord(recordAudio);
                                 adapter.remove(recordAudio);

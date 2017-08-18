@@ -14,15 +14,18 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
 import com.example.q.pocketmusic.module.home.seek.HomeSeekFragment;
 import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
 import com.example.q.pocketmusic.util.common.LogUtils;
+import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 import com.example.q.pocketmusic.util.common.update.UpdateUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -131,6 +134,19 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
         this.fm = fragmentManager;
     }
 
+    public void enterSupportActivity() {
+        activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), SupportActivity.class));
+    }
+
+    public void checkAlertSupportDialog() {
+        long ago = SharedPrefsUtil.getLong("support_date", 1503071043854L);
+        long now = System.currentTimeMillis();
+        if (now - ago >= 1000 * 24 * 60 * 60) {
+            SharedPrefsUtil.putLong("support_date", now);
+            activity.alertSupportDialog();
+        }
+    }
+
 
     public interface IView extends IBaseView {
 
@@ -141,5 +157,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
         void onSelectAsk();
 
         void onSelectProfile();
+
+        void alertSupportDialog();
     }
 }

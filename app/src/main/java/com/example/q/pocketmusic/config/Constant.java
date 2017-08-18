@@ -71,6 +71,7 @@ public class Constant {
     public final static int REDUCE_CONTRIBUTION_ASK = 4;//求谱
     public final static int REDUCE_DOWNLOAD = 3;//下载
     public final static int REDUCE_CONTRIBUTION_COLLECTION = 2;//收藏
+    public final static int REDUCE_CHANG_NICK_NAME = 20;
 
 
     //求谱类型,最好用Hap映射

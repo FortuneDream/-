@@ -27,6 +27,7 @@ import com.example.q.pocketmusic.util.common.ConvertUtil;
 public class GuaGuaKa extends View {
     private Paint mMainPaint;//主要
     private Paint mTextPaint;//底部文字
+    private Paint mSurfaceTextPaint;//表面文字
     private Path path;
     private Bitmap bitmap;//表面
     private Canvas mCanvas;//缓冲画布
@@ -56,7 +57,7 @@ public class GuaGuaKa extends View {
         this(context, attrs, 0);
     }
 
-    public interface OnCompleteListener{
+    public interface OnCompleteListener {
         void onComplete();
     }
 
@@ -89,9 +90,12 @@ public class GuaGuaKa extends View {
         setMeasuredDimension(measureWidth, measureHeight);
         //图层灰色
         //在这里创建，不会创建多次重新绘制
+        mSurfaceTextPaint = new Paint();
+        mSurfaceTextPaint.setColor(getResources().getColor(R.color.md_red_400));
         bitmap = Bitmap.createBitmap(measureWidth, measureHeight, Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(bitmap);
         mCanvas.drawColor(Color.GRAY);
+        mCanvas.drawText("刮开有硬币哦~", 100, 100, mSurfaceTextPaint);
     }
 
     //设置图片

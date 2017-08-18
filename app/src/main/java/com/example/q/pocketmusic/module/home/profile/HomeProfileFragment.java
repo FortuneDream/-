@@ -2,27 +2,25 @@ package com.example.q.pocketmusic.module.home.profile;
 
 import android.animation.ValueAnimator;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.example.q.pocketmusic.module.common.AuthFragment;
+import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.widget.view.GuaGuaKa;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 
 import java.util.Random;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -93,8 +91,37 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 userSignatureTv.setText(user.getSignature());
             }
             checkIsSign();
+            //点击标题栏修改NickName
+            toolbar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new CoinDialogBuilder(getCurrentContext(), Constant.REDUCE_CHANG_NICK_NAME)
+                            .setPositiveButton(new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertNickNameDialog();
+                                }
+                            })
+                            .show();
+                }
+            });
             presenter.setUserBelongToVersion();//用户属于哪个版本
         }
+    }
+
+    private void alertNickNameDialog() {
+        final EditText inputServer = new EditText(getCurrentContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getCurrentContext());
+        builder.setTitle("设置签名").setIcon(R.drawable.ico_signature).setView(inputServer)
+                .setNegativeButton("算了", null);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                String text = inputServer.getText().toString();
+                presenter.setNickName(text);
+            }
+        });
+        builder.show();
     }
 
     //检测是否已经签到
@@ -161,6 +188,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 break;
             case R.id.user_signature_tv:
                 alertSignatureDialog();
+                break;
         }
     }
 
@@ -214,6 +242,11 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     @Override
     public void setSignature(String signature) {
         userSignatureTv.setText(signature);
+    }
+
+    @Override
+    public void setNickName(String nickName) {
+        initToolbar(toolbar, user.getNickName());
     }
 
 
