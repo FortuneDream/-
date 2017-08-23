@@ -66,4 +66,11 @@ public class ShareSong extends BmobObject {
         this.content = content;
     }
 
+    public int getDownloadNum() {
+        return downloadNum;
+    }
+
+    public void setDownloadNum(int downloadNum) {
+        this.downloadNum = downloadNum;
+    }
 }

@@ -9,4 +9,8 @@ public class BmobConstant {
     public static final String BMOB_CREATE_AT = "-createdAt";
     public static final String BMOB_USER = "user";
     public static final String BMOB_COIN = "contribution";
+    public static final String BMOB_AGREE_NUM = "agreeNum";
+    public static final String BMOB_AGREES = "agrees";
+    public static final String BMOB_COLLECTIONS="collections";
+    public static final String BMOB_DOWNLOAD_NUM="downloadNum";
 }

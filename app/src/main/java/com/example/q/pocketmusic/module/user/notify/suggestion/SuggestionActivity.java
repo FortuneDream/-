@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.user.notify.suggestion;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,7 +52,8 @@ public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, 
         adapter = new SuggestionAdapter(this);
         initToolbar(toolbar, "反馈意见");
         initRecyclerView(recycler, adapter);
-        adapter.addHeader(new SuggestionHeader(context));
+        recycler.addItemDecoration(new LeftAndRightTagDecoration(getCurrentContext()));
+        recycler.addItemDecoration(new DividerItemDecoration(getCurrentContext(), DividerItemDecoration.VERTICAL));
         presenter.getSuggestionList(false);
     }
 

@@ -91,7 +91,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     //添加下载量
     private void addDownLoadNum() {
         ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
-        shareSong.increment("downloadNum");
+        shareSong.increment(BmobConstant.BMOB_DOWNLOAD_NUM);
         shareSong.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
@@ -120,7 +120,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             return new DownloadInfo(CommonString.STR_NOT_ENOUGH_COIN, false);
         }
         //扣除硬币
-        user.increment("contribution", -Constant.REDUCE_DOWNLOAD);
+        user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_DOWNLOAD);
         user.update(new ToastUpdateListener(fragment) {
             @Override
             public void onSuccess() {
@@ -135,7 +135,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         BmobQuery<MyUser> query = new BmobQuery<>();
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
-        query.addWhereRelatedTo("agrees", new BmobPointer(askSongComment));
+        query.addWhereRelatedTo(BmobConstant.BMOB_AGREES, new BmobPointer(askSongComment));
         query.findObjects(new ToastQueryListener<MyUser>() {
             @Override
             public void onSuccess(List<MyUser> list) {
@@ -199,12 +199,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         relation.add(user);
         ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
         shareSong.setAgrees(relation);
-        shareSong.increment("agreeNum");//原子操作，点赞数加一
+        shareSong.increment(BmobConstant.BMOB_AGREE_NUM);//原子操作，点赞数加一
         shareSong.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
                 ToastUtil.showToast("已点赞");
-                user.increment("contribution", Constant.ADD_CONTRIBUTION_AGREE);
+                user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_AGREE);
                 user.update(new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
@@ -222,12 +222,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         relation.add(user);
         AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
         askSongComment.setAgrees(relation);
-        askSongComment.increment("agreeNum");//原子操作，点赞数加一
+        askSongComment.increment(BmobConstant.BMOB_AGREE_NUM);//原子操作，点赞数加一
         askSongComment.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
                 ToastUtil.showToast("已点赞");
-                user.increment("contribution", Constant.ADD_CONTRIBUTION_AGREE);
+                user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_AGREE);
                 user.update(new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
@@ -258,7 +258,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         //检测是否已经收藏
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         query.order("-updatedAt");
-        query.addWhereRelatedTo("collections", new BmobPointer(user));//在user表的Collections找user
+        query.addWhereRelatedTo(BmobConstant.BMOB_COLLECTIONS, new BmobPointer(user));//在user表的Collections找user
         query.findObjects(new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
@@ -312,7 +312,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                                     @Override
                                     public void onSuccess() {
                                         ToastUtil.showToast("已收藏");
-                                        user.increment("contribution", -Constant.REDUCE_CONTRIBUTION_COLLECTION);//贡献值-1
+                                        user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_CONTRIBUTION_COLLECTION);//贡献值-1
                                         user.update(new ToastUpdateListener() {
                                             @Override
                                             public void onSuccess() {

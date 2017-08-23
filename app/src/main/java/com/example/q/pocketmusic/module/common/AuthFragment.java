@@ -7,10 +7,13 @@ import android.support.annotation.Nullable;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.util.CheckUserUtil;
+import com.example.q.pocketmusic.util.common.LogUtils;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FetchUserInfoListener;
+import cn.bmob.v3.listener.QueryListener;
 
 /**
  * Created by 鹏君 on 2017/1/26.
@@ -24,12 +27,14 @@ public abstract class AuthFragment<V, T extends BasePresenter<V>> extends BaseFr
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         user = CheckUserUtil.checkLocalUser(this);
+        LogUtils.e("更新前："+String.valueOf(user.getContribution()));
         if (user != null) {
-            BmobUser.fetchUserInfo(new FetchUserInfoListener<BmobUser>() {
+            MyUser.fetchUserInfo(new FetchUserInfoListener<MyUser>() {
                 @Override
-                public void done(BmobUser bmobUser, BmobException e) {
+                public void done(MyUser bmobUser, BmobException e) {
                     if (e != null) {
                         user = (MyUser) bmobUser;
+                        LogUtils.e("更新后："+String.valueOf(user.getContribution()));
                     }
                 }
             });

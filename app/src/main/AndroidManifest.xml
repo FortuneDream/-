@@ -111,7 +111,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".module.user.notify.version.PreviewVersionActivity" />
         <activity android:name=".module.home.net.acg.ACGActivity" />
-        <activity android:name=".module.user.other.OtherProfileActivity"></activity>
+        <activity android:name=".module.user.other.OtherProfileActivity" />
+        <activity android:name=".module.home.net.type.study.StudyActivity"></activity>
     </application>
 
 </manifest>

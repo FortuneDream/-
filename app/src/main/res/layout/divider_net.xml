@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/black"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingBottom="8dp"
     android:paddingTop="8dp">
 
     <TextView
         tools:text="- 热门曲谱 -"
-        android:id="@+id/text_tv"
+        android:id="@+id/header_tv"
         android:textSize="16sp"
         android:textColor="#999999"
         android:layout_width="match_parent"

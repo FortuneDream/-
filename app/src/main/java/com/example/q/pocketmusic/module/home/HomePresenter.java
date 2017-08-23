@@ -138,6 +138,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
         activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), SupportActivity.class));
     }
 
+    //弹出支持开发者的字段
     public void checkAlertSupportDialog() {
         long ago = SharedPrefsUtil.getLong("support_date", 1503071043854L);
         long now = System.currentTimeMillis();

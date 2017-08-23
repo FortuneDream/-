@@ -5,6 +5,15 @@
     android:orientation="vertical">
 
     <include layout="@layout/include_appbar_toolbar" />
+    <TextView
+        android:id="@+id/head_tv"
+        android:padding="@dimen/item_padding_16dp"
+        style="@style/TextPressAttention"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="尽情吐槽,我会在后台暗中观察的ㄟ( ▔, ▔ )ㄏ。\n对于口袋乐谱的发展具有建设性的建议，将获得不定量的硬币奖励哦！" />
+
+    <View style="@style/SettingDivider"/>
 
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recycler"

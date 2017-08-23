@@ -1,14 +1,10 @@
 package com.example.q.pocketmusic.module.home.net.acg;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.model.bean.acg.ACGAlbum;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -16,7 +12,6 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ACGActivity extends BaseActivity<ACGPresenter.IView, ACGPresenter>
         implements ACGPresenter.IView {

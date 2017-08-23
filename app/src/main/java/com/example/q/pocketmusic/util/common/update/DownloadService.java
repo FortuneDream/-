@@ -24,16 +24,13 @@ public class DownloadService extends Service {
     private final static int DOWNLOAD_FAIL = -1;
 
     // 自定义通知栏类
-    DownloadApkNotification downloadApkNotification;
+    private DownloadApkNotification downloadApkNotification;
 
-    String filePathString; // 下载文件绝对路径(包括文件名)
-
+    private String filePathString; // 下载文件绝对路径(包括文件名)
     // 通知栏跳转Intent
-    private Intent updateIntent = null;
+    private Intent updateIntent;
 
-    private PendingIntent updatePendingIntent = null;
-
-    DownFileThread downFileThread; // 自定义文件下载线程
+    private DownFileThread downFileThread; // 自定义文件下载线程
 
 
     private Handler updateHandler = new Handler() {

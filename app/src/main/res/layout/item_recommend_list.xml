@@ -39,8 +39,5 @@
             tools:text="内容" />
     </LinearLayout>
 
-    <View
-        style="@style/SettingDivider"
-        android:layout_marginTop="8dp" />
 
 </LinearLayout>

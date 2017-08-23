@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +26,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +42,39 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     public Activity context;
     protected T presenter;
     public final String TAG = this.getClass().getName();
+    private static final int FLAG_DISMISS_DIALOG = 2001;
     public AlertDialog mLoadingDialog;//这个dialog一般在上传，下载，的时候才会用到
     private List<Drawable> drawableList = new ArrayList<>();
 
     protected abstract T createPresenter();
+
+    private Handler handler = new UIHandler(this);
+
+    //防止dialog内存泄漏
+    private static class UIHandler extends Handler {
+        WeakReference<BaseActivity> softActivity;
+
+        UIHandler(BaseActivity baseActivity) {
+            softActivity = new WeakReference<>(baseActivity);//使用弱引用+static 一是为了Activity可以在只有Handler引用的情况下立即被清除，而是为了可以调用activity的方法。
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case FLAG_DISMISS_DIALOG:
+                    BaseActivity activity = softActivity.get();
+                    if (activity == null) {
+                        return;
+                    }
+                    if (activity.mLoadingDialog != null && activity.mLoadingDialog.isShowing()) {
+                        activity.mLoadingDialog.dismiss();
+                    }
+                    break;
+            }
+        }
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,6 +140,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     public void showLoading(boolean isShow) {
         if (isShow) {
             mLoadingDialog.show();
+            handler.sendEmptyMessageDelayed(FLAG_DISMISS_DIALOG, 5 * 1000);
         } else {
             mLoadingDialog.dismiss();
         }

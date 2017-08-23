@@ -24,18 +24,18 @@ public class DownFileThread implements Runnable {
     public final static int DOWNLOAD_COMPLETE = -2;
     public final static int DOWNLOAD_FAIL = -1;
     public final static String TAG = "DownFileThread";
-    Handler mHandler; // 传入的Handler,用于像Activity或service通知下载进度
-    String urlStr; // 下载URL
-    File apkFile; // 文件保存路径
-    boolean isFinished; // 下载是否完成
-    boolean interupted = false; // 是否强制停止下载线程
+    private Handler mHandler; // 传入的Handler,用于像Activity或service通知下载进度
+    private String urlStr; // 下载URL
+    private File apkFile; // 文件保存路径
+    private boolean isFinished; // 下载是否完成
+    private boolean interupted = false; // 是否强制停止下载线程
 
     public DownFileThread(Handler handler, String urlStr, String filePath) {
         LogUtils.i(TAG, urlStr);
         this.mHandler = handler;
         this.urlStr = urlStr;
-        apkFile = new File(filePath);
-        isFinished = false;
+        this.apkFile = new File(filePath);
+        this.isFinished = false;
     }
 
     public File getApkFile() {

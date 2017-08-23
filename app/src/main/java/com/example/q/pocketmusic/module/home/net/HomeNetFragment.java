@@ -10,8 +10,6 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.flag.BannerBean;
 import com.example.q.pocketmusic.model.flag.ContentLL;
-import com.example.q.pocketmusic.model.flag.Divider;
-import com.example.q.pocketmusic.model.flag.TextTv;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -50,6 +48,7 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
         //监听
         adapter = new NetFragmentAdapter(getContext());
         initRecyclerView(recycler, adapter);
+        recycler.addItemDecoration(new NetFragmentDecoration(getCurrentContext()));
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
         adapter.setListener(this);
@@ -75,15 +74,8 @@ public class HomeNetFragment extends BaseFragment<HomeNetFragmentPresenter.IView
 
 
     private void initList() {
-        TextTv textTv1 = new TextTv();
-        textTv1.setName("- 我的乐器 -");
-        TextTv textTv2 = new TextTv();
-        textTv2.setName("- 热门谱单 -");
         adapter.add(new BannerBean());//轮播
-        adapter.add(textTv1);
         adapter.add(new ContentLL());//乐器类型
-        adapter.add(new Divider());//分割线
-        adapter.add(textTv2);//文字
     }
 
 

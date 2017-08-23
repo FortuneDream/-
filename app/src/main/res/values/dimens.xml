@@ -29,4 +29,6 @@
 
     <dimen name="setting_big_divider">8dp</dimen>
     <dimen name="setting_divider">0.5dp</dimen>
+
+    <dimen name="net_fragment_text">16sp</dimen>
 </resources>

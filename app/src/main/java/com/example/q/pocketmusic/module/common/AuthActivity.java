@@ -5,6 +5,7 @@ import android.content.Intent;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.util.CheckUserUtil;
+import com.example.q.pocketmusic.util.common.LogUtils;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;

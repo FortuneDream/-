@@ -1,7 +1,9 @@
 package com.example.q.pocketmusic.module.user.notify.suggestion;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
@@ -26,21 +28,23 @@ public class SuggestionAdapter extends RecyclerArrayAdapter<UserSuggestion> {
     class MyViewHolder extends BaseViewHolder<UserSuggestion> {
         TextView suggestionTv;
         TextView replyTv;
+        LinearLayout rightLl;
 
         public MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_suggestion);
             suggestionTv = $(R.id.suggestion_tv);
             replyTv = $(R.id.reply_tv);
+            rightLl = $(R.id.right_ll);
         }
 
         @Override
         public void setData(UserSuggestion data) {
             super.setData(data);
-            suggestionTv.setText("我: "+data.getSuggestion());
+            suggestionTv.setText("我: " + data.getSuggestion());
             if (data.getReply() == null) {
-                replyTv.setText("管理员：暂无");
+                rightLl.setVisibility(View.GONE);
             } else {
-                replyTv.setText("管理员:"+data.getReply());
+                replyTv.setText("管理员:" + data.getReply());
             }
 
         }

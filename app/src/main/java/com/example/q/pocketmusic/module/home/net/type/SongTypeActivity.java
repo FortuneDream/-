@@ -1,14 +1,15 @@
 package com.example.q.pocketmusic.module.home.net.type;
 
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.InstrumentFlagUtil;
@@ -18,6 +19,8 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IView, SongTypeActivityPresenter>
         implements SongTypeActivityPresenter.IView, RecyclerArrayAdapter.OnMoreListener, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
@@ -32,6 +35,8 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     AppBarLayout appBar;
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
+    @BindView(R.id.study_fab)
+    FloatingActionButton studyFab;
     //500*300
 
     private SongTypeActivityAdapter adapter;
@@ -111,5 +116,10 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     @Override
     protected SongTypeActivityPresenter createPresenter() {
         return new SongTypeActivityPresenter(this);
+    }
+
+    @OnClick(R.id.study_fab)
+    public void onViewClicked() {
+        presenter.enterStudyActivity(typeId);
     }
 }

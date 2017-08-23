@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.home.net;
 
 import android.content.Context;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -11,17 +10,10 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.flag.BannerBean;
 import com.example.q.pocketmusic.model.flag.ContentLL;
-import com.example.q.pocketmusic.model.flag.TextTv;
-
-import com.example.q.pocketmusic.model.flag.Divider;
 import com.example.q.pocketmusic.util.InstrumentFlagUtil;
-import com.example.q.pocketmusic.view.widget.view.TypeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.rollviewpager.RollPagerView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by 鹏君 on 2016/11/7.
@@ -29,10 +21,8 @@ import java.util.Map;
 //暂时取消点赞功能
 public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
     public static final int BANNER = 0;
-    public static final int TEXT = 1;
-    public static final int TYPE_SONG = 2;
-    public static final int DIVIDER = 3;
-    public static final int RECOMMEND = 4;
+    public static final int TYPE_SONG = 1;
+    public static final int RECOMMEND = 2;
     private OnOptionListener listener;
 
     public void setListener(OnOptionListener listener) {
@@ -57,28 +47,21 @@ public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
         switch (viewType) {
             case BANNER:
                 return new BannerViewHolder(parent);
-            case TEXT:
-                return new TextViewHolder(parent);
             case TYPE_SONG:
                 return new TypeViewHolder(parent);
-            case DIVIDER:
-                return new DividerViewHolder(parent);
         }
         return new RecommendViewHolder(parent);
     }
 
     @Override
     public int getViewType(int position) {
-        if (getItem(position) instanceof TextTv) {
-            return TEXT;
-        } else if (getItem(position) instanceof ContentLL) {
+        if (getItem(position) instanceof ContentLL) {
             return TYPE_SONG;
         } else if (getItem(position) instanceof BannerBean) {
             return BANNER;
-        } else if (getItem(position) instanceof Divider) {
-            return DIVIDER;
-        } else
+        } else {
             return RECOMMEND;
+        }
     }
 
 
@@ -115,29 +98,6 @@ public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
         }
     }
 
-    //两个Text的holder
-    public class TextViewHolder extends BaseViewHolder<TextTv> {
-        public TextView textTv;
-
-        public TextViewHolder(ViewGroup parent) {
-            super(parent, R.layout.item_combination_text);
-            textTv = $(R.id.text_tv);
-        }
-
-        @Override
-        public void setData(TextTv data) {
-            super.setData(data);
-            textTv.setText(data.getName());
-        }
-    }
-
-    //分割线
-    class DividerViewHolder extends BaseViewHolder<Divider> {
-
-        public DividerViewHolder(ViewGroup parent) {
-            super(parent, R.layout.item_conbination_divider);
-        }
-    }
 
     //广告轮播的holder
     class BannerViewHolder extends BaseViewHolder<BannerBean> {

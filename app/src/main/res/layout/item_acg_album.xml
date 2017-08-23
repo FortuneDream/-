@@ -15,13 +15,16 @@
         <ImageView
             android:id="@+id/background_iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="88dp" />
 
         <TextView
             android:id="@+id/title_tv"
+            style="@style/TwoTextMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

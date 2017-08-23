@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
+        android:layout_margin="8dp"
         android:text="@string/loading_wait"
         android:textSize="20sp" />
 </LinearLayout>

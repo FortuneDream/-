@@ -18,6 +18,19 @@
             app:expandedTitleTextAppearance="@style/transText"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/study_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_margin="8dp"
+                app:backgroundTint="@color/white"
+                app:fabSize="mini"
+                app:layout_anchor="@+id/collapsing_toolbar_layout"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_collapseMode="parallax"
+                app:srcCompat="@drawable/ic_vec_study" />
+
             <ImageView
                 android:id="@+id/top_iv"
                 android:layout_width="match_parent"
@@ -29,7 +42,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 app:layout_collapseMode="pin" />
+
         </android.support.design.widget.CollapsingToolbarLayout>
+
+
     </android.support.design.widget.AppBarLayout>
 
 
