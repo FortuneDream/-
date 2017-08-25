@@ -17,6 +17,9 @@ import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
+import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
+import com.example.q.pocketmusic.model.bean.share.SharePic;
+import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
@@ -24,6 +27,7 @@ import com.example.q.pocketmusic.view.dialog.PicDialog;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -99,8 +103,8 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
 
     //加载评论列表
     @Override
-    public void setCommentList(boolean isRefreshing,List<AskSongComment> list) {
-        if (isRefreshing){
+    public void setCommentList(boolean isRefreshing, List<AskSongComment> list) {
+        if (isRefreshing) {
             adapter.clear();
         }
         adapter.addAll(list);
@@ -159,17 +163,28 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
 
     //从本地或者相册选择曲谱
     private void alertSelectedDialog() {
-        final CharSequence[] charSequences = new CharSequence[2];
+        final CharSequence[] charSequences = new CharSequence[4];
         charSequences[0] = "--> 本地曲谱 <--";
         charSequences[1] = "--> 手机相册 <--";
+        charSequences[2] = "--> 我的收藏 <--";
+        charSequences[3] = "--> 我的分享 <--";
         new AlertDialog.Builder(getCurrentContext())
                 .setSingleChoiceItems(charSequences, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (which == 0) {//从本地曲谱中选
-                            presenter.queryLocalSongList();
-                        } else {//从手机相册中选
-                            presenter.addPicByAlbum();
+                        switch (which) {
+                            case 0:
+                                presenter.queryLocalSongList();//从本地找
+                                break;
+                            case 1:
+                                presenter.addPicByAlbum();//从相册
+                                break;
+                            case 2:
+                                presenter.queryMyCollectionList();//从我的收藏中找
+                                break;
+                            case 3:
+                                presenter.queryMyShareList();//从我的分享中找
+                                break;
                         }
                         dialog.dismiss();
                     }
@@ -183,13 +198,58 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                 .show();
     }
 
-    //弹出框，选择本地曲谱中的某一首
+
     @Override
-    public void alertLocalSongDialog(List<String> list) {
+    public void addHotIndex() {
+        headView.addHotIndex();
+    }
+
+    @Override
+    public void alertShareListDialog(final List<ShareSong> list) {
+        List<String> strList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            strList.add(list.get(i).getName());
+        }
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getCurrentContext()
                 , android.R.layout.select_dialog_item
                 , android.R.id.text1
-                , list);
+                , strList);
+        new AlertDialog.Builder(getCurrentContext())
+                .setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.addPicByMyShare(list.get(which));
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void alertCollectionListDialog(final List<CollectionSong> list) {
+        List<String> strList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            strList.add(list.get(i).getName());
+        }
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getCurrentContext()
+                , android.R.layout.select_dialog_item
+                , android.R.id.text1
+                , strList);
+        new AlertDialog.Builder(getCurrentContext())
+                .setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.addPicByMyCollection(list.get(which));
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void alertLocalListDialog(List<String> strings) {
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getCurrentContext()
+                , android.R.layout.select_dialog_item
+                , android.R.id.text1
+                , strings);
 
         new AlertDialog.Builder(getCurrentContext())
                 .setAdapter(adapter, new DialogInterface.OnClickListener() {
@@ -199,11 +259,6 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                     }
                 })
                 .show();
-    }
-
-    @Override
-    public void addHotIndex() {
-        headView.addHotIndex();
     }
 
     @Override

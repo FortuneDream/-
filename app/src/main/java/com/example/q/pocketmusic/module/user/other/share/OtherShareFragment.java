@@ -48,6 +48,7 @@ public class OtherShareFragment extends AuthFragment<OtherSharePresenter.IView, 
         onRefresh();
     }
 
+
     @Override
     protected OtherSharePresenter createPresenter() {
         return new OtherSharePresenter(this);

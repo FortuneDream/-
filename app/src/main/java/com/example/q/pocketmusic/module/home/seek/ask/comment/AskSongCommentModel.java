@@ -26,15 +26,6 @@ public class AskSongCommentModel extends BaseModel {
         picUrls = new ArrayList<>();
     }
 
-    public void getInitCommentList(AskSongPost post, ToastQueryListener<AskSongComment> listener) {
-        BmobQuery<AskSongComment> queryComment = new BmobQuery<>();
-        queryComment.order("-agreeNum," + BmobConstant.BMOB_CREATE_AT);
-        queryComment.setLimit(10);
-        queryComment.setSkip(0);
-        queryComment.addWhereEqualTo("post", new BmobPointer(post));
-        queryComment.include("user,post.user");
-        queryComment.findObjects(listener);
-    }
 
     public void getUserCommentList(AskSongPost post, int page, ToastQueryListener<AskSongComment> listener) {
         BmobQuery<AskSongComment> queryComment = new BmobQuery<>();

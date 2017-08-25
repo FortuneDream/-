@@ -56,6 +56,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         return view;
     }
 
+
     @Override
     public Context getAppContext() {
         return getContext() != null ? getContext().getApplicationContext() : null;

@@ -22,9 +22,9 @@ import cn.bmob.v3.datatype.BmobRelation;
  * Created by 鹏君 on 2017/4/22.
  */
 
-public class CollectionModel extends BaseModel {
+public class UserCollectionModel extends BaseModel {
 
-    public CollectionModel() {
+    public UserCollectionModel() {
     }
 
     public void getUserCollectionList(MyUser user, int page, ToastQueryListener<CollectionSong> listener) {
@@ -69,6 +69,15 @@ public class CollectionModel extends BaseModel {
 
             }
         });
+    }
+
+    //拉取所有的列表
+    public void getAllUserCollectionList(MyUser user, ToastQueryListener<CollectionSong> listener) {
+        BmobQuery<CollectionSong> query = new BmobQuery<>();
+        query.order(DEFAULT_INVERTED_CREATE);
+        query.addWhereRelatedTo("collections", new BmobPointer(user));
+        query.findObjects(listener);
+
     }
 
 

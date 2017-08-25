@@ -35,7 +35,6 @@ public class LoadTypeSongList extends AsyncTask<String, Void, List<Song> > {
     @Override
     protected List<Song> doInBackground(String... strings) {
         String typeUrl = strings[0];
-        LogUtils.e(typeUrl);
         List<Song> list=new ArrayList<>();
         try {
             Document doc = Jsoup.connect(typeUrl)

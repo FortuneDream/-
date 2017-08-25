@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.profile.collection;
 
 import android.content.Intent;
+import android.content.pm.ProviderInfo;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
@@ -22,20 +23,21 @@ import java.util.List;
  * Created by 鹏君 on 2016/11/14.
  */
 
-public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView> {
+public class UserCollectionPresenter extends BasePresenter<UserCollectionPresenter.IView> {
     private IView activity;
     private MyUser user;
-    private CollectionModel collectionModel;
+    private UserCollectionModel userCollectionModel;
     private int mPage;
+
 
     public void setUser(MyUser user) {
         this.user = user;
     }
 
-    public CollectionPresenter(IView activity) {
+    public UserCollectionPresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
-        collectionModel = new CollectionModel();
+        userCollectionModel = new UserCollectionModel();
     }
 
     //获得收藏曲谱列表
@@ -43,7 +45,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
         if (isRefreshing) {
             mPage = 0;//置为零0
         }
-        collectionModel.getUserCollectionList(user, mPage, new ToastQueryListener<CollectionSong>() {
+        userCollectionModel.getUserCollectionList(user, mPage, new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
                 activity.setCollectionList(isRefreshing, list);
@@ -54,7 +56,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
     //加载更多
     public void getMoreList() {
         mPage++;
-        collectionModel.getUserCollectionList(user, mPage, new ToastQueryListener<CollectionSong>() {
+        userCollectionModel.getUserCollectionList(user, mPage, new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
                 activity.setCollectionList(false, list);
@@ -65,7 +67,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
     //先查询，后进入SongActivity
     public void queryAndEnterSongActivity(final CollectionSong collectionSong) {
         activity.showLoading(true);
-        collectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>(activity) {
+        userCollectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>(activity) {
             @Override
             public void onSuccess(List<CollectionPic> list) {
                 activity.showLoading(false);
@@ -88,7 +90,7 @@ public class CollectionPresenter extends BasePresenter<CollectionPresenter.IView
 
     //删除收藏
     public void deleteCollection(final CollectionSong collectionSong) {
-        collectionModel.deleteCollection(user, collectionSong, new ToastUpdateListener() {
+        userCollectionModel.deleteCollection(user, collectionSong, new ToastUpdateListener() {
             @Override
             public void onSuccess() {
                 ToastUtil.showToast("已删除");

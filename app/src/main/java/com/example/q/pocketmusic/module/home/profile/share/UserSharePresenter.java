@@ -26,19 +26,19 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
     private IView activity;
     private MyUser user;
     private int mPage;
-    private BmobUtil bmobUtil;
+    private UserShareModel model;
 
     public UserSharePresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
-        bmobUtil = new BmobUtil();
+        model = new UserShareModel();
     }
 
     public void getUserShareList(final boolean isRefreshing) {
         if (isRefreshing) {
             mPage = 0;
         }
-        bmobUtil.getMoreListWithEqual(ShareSong.class, null, mPage, BmobConstant.BMOB_USER, new BmobPointer(user), new ToastQueryListener<ShareSong>(activity) {
+        model.getUserShareList(user, mPage, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 activity.setList(isRefreshing, list);
@@ -48,7 +48,7 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
 
     public void getMoreList() {
         mPage++;
-        bmobUtil.getMoreListWithEqual(ShareSong.class, null, mPage, BmobConstant.BMOB_USER, new BmobPointer(user), new ToastQueryListener<ShareSong>(activity) {
+        model.getUserShareList(user, mPage, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 activity.setList(false, list);

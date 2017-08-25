@@ -31,8 +31,10 @@ public class OtherCollectionFragment extends AuthFragment<OtherCollectionPresent
         return R.layout.fragment_other_collection;
     }
 
+
     @Override
     public void initView() {
+        super.initView();
         adapter = new OtherCollectionAdapter(getCurrentContext());
         initRecyclerView(collectionRecycler, adapter, 1);
         other = ((OtherProfileActivity) getActivity()).otherUser;

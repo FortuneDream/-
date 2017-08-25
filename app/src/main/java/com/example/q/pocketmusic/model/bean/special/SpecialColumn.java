@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.model.bean.acg;
+package com.example.q.pocketmusic.model.bean.special;
 
 import cn.bmob.v3.BmobObject;
 
@@ -7,7 +7,7 @@ import cn.bmob.v3.BmobObject;
  * （￣m￣）
  */
 
-public class ACGAlbum extends BmobObject {
+public class SpecialColumn extends BmobObject {
     private String backgroundUrl;//封面URL
     private String albumName;//专辑名字
     private int songNum;//含有曲谱数

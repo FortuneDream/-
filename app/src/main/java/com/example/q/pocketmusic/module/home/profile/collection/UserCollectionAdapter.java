@@ -16,8 +16,8 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
  * Created by 鹏君 on 2016/11/15.
  */
 
-public class CollectionAdapter extends RecyclerArrayAdapter<CollectionSong> {
-    public CollectionAdapter(Context context) {
+public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> {
+    public UserCollectionAdapter(Context context) {
         super(context);
     }
 

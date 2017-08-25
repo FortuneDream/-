@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.user.notify.help;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 
@@ -9,6 +10,8 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.model.bean.bmob.Help;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.module.user.notify.suggestion.LeftAndRightTagDecoration;
+import com.example.q.pocketmusic.module.user.register.RegisterPresenter;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
@@ -20,7 +23,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
 public class HelpActivity extends BaseActivity<HelpPresenter.IView, HelpPresenter>
-        implements SwipeRefreshLayout.OnRefreshListener,HelpPresenter.IView {
+        implements SwipeRefreshLayout.OnRefreshListener, HelpPresenter.IView {
 
 
     @BindView(R.id.toolbar)
@@ -42,9 +45,10 @@ public class HelpActivity extends BaseActivity<HelpPresenter.IView, HelpPresente
     public void initView() {
         adapter = new HelpAdapter(this);
         recycler.setRefreshListener(this);
-
         initToolbar(toolbar, "帮助信息");
         initRecyclerView(recycler, adapter);
+        recycler.addItemDecoration(new LeftAndRightTagDecoration(getCurrentContext()));
+        recycler.addItemDecoration(new DividerItemDecoration(getCurrentContext(), DividerItemDecoration.VERTICAL));
         onRefresh();
     }
 
@@ -60,7 +64,7 @@ public class HelpActivity extends BaseActivity<HelpPresenter.IView, HelpPresente
                     adapter.clear();
                     adapter.addAll(list);
                 } else {
-                    ToastUtil.showToast( CommonString.STR_NOT_FOUND);
+                    ToastUtil.showToast(CommonString.STR_NOT_FOUND);
                 }
             }
         });

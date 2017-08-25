@@ -9,11 +9,12 @@ import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.net.LoadRecommendList;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.net.acg.ACGActivity;
+import com.example.q.pocketmusic.module.home.net.special.SpecialColumnActivity;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
 import com.example.q.pocketmusic.module.search.SearchMainActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.module.user.notify.UserNotifyActivity;
+import com.example.q.pocketmusic.module.user.notify.help.HelpActivity;
 
 import java.util.List;
 
@@ -75,9 +76,9 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
         if (picPosition == 0) {
             joinQQGroup();
         } else if (picPosition == 1) {
-            fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ACGActivity.class));
-        } else {
-            fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ACGActivity.class));
+            fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SpecialColumnActivity.class));
+        } else if (picPosition==2){
+            fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), HelpActivity.class));
         }
     }
 

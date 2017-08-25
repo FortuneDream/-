@@ -10,6 +10,7 @@ import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.home.profile.share.UserShareModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.module.user.other.OtherProfileActivity;
 
@@ -22,18 +23,18 @@ import java.util.List;
 
 public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> {
     private IView fragment;
-    private ShareListModel model;
+    private UserShareModel model;
     private int mPage;
 
     public ShareListPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
-        model = new ShareListModel();
+        model = new UserShareModel();
     }
 
     public void getMoreShareList() {
         mPage++;
-        model.getUserShareList(mPage, new ToastQueryListener<ShareSong>(fragment) {
+        model.getAllShareList(mPage, new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 fragment.setList(false, list);
@@ -46,7 +47,7 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
         if (isRefreshing) {
             mPage = 0;
         }
-        model.getUserShareList(mPage, new ToastQueryListener<ShareSong>(fragment) {
+        model.getAllShareList(mPage, new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 fragment.setList(isRefreshing, list);

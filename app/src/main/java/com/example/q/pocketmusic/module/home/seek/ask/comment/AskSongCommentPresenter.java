@@ -18,17 +18,26 @@ import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPic;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
+import com.example.q.pocketmusic.model.bean.collection.CollectionPic;
+import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
+import com.example.q.pocketmusic.model.bean.share.SharePic;
+import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionModel;
+import com.example.q.pocketmusic.module.home.profile.share.UserShareModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.stmt.query.Between;
+
+import org.apache.http.impl.conn.tsccm.BasicPoolEntryRef;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,8 +45,10 @@ import java.util.List;
 
 import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.UploadBatchListener;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -54,10 +65,17 @@ import rx.schedulers.Schedulers;
 public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresenter.IView> {
     private IView activity;
 
-    private AskSongCommentModel model;
+    private AskSongCommentModel mAskSongCommentModel;
+    private UserShareModel mUserShareModel;
+    private UserCollectionModel mUserCollectionModel;
     private AskSongPost post;
     private MyUser user;
     private int mPage;
+
+    public static final int LOCAL = 0;
+    public static final int SHARE = 1;
+    public static final int COLLECTION = 2;
+    public int mUploadTypeFlag = -1;
 
     public void setPost(AskSongPost post) {
         this.post = post;
@@ -70,7 +88,9 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     public AskSongCommentPresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
-        model = new AskSongCommentModel();
+        mAskSongCommentModel = new AskSongCommentModel();
+        mUserShareModel = new UserShareModel();
+        mUserCollectionModel = new UserCollectionModel();
     }
 
     public void setPage(int page) {
@@ -87,7 +107,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         if (isRefreshing) {
             mPage = 0;
         }
-        model.getUserCommentList(post, mPage, new ToastQueryListener<AskSongComment>() {
+        mAskSongCommentModel.getUserCommentList(post, mPage, new ToastQueryListener<AskSongComment>() {
             @Override
             public void onSuccess(List<AskSongComment> list) {
                 activity.setCommentList(isRefreshing, list);
@@ -98,7 +118,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     //获得更多
     public void getMoreCommentList() {
         mPage++;
-        model.getUserCommentList(post, mPage, new ToastQueryListener<AskSongComment>() {
+        mAskSongCommentModel.getUserCommentList(post, mPage, new ToastQueryListener<AskSongComment>() {
             @Override
             public void onSuccess(List<AskSongComment> list) {
                 activity.setCommentList(false, list);
@@ -114,8 +134,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
             return;
         }
         Boolean hasPic;
-
-        hasPic = model.getPicUrls().size() > 0;
+        hasPic = mAskSongCommentModel.getPicUrls().size() > 0;
         final AskSongComment askSongComment = new AskSongComment(user, post, comment, hasPic);
         activity.showLoading(true);
         activity.setCommentInput("");//空
@@ -128,57 +147,117 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 post.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
-                        if (model.getPicUrls().size() <= 0) {//无图
+                        if (mAskSongCommentModel.getPicUrls().size() <= 0) {//无图
                             activity.showLoading(false);
                             activity.sendCommentResult(s, askSongComment);
                             return;
                         }
                         //批量上传图片
-                        BmobFile.uploadBatch(model.getPicUrls().toArray(new String[model.getPicUrls().size()]), new UploadBatchListener() {
-                            @Override
-                            public void onSuccess(final List<BmobFile> list, List<String> list1) {
-                                if (model.getPicUrls().size() == list1.size()) {// 全部的图片上传成功后调用
-                                    List<BmobObject> askSongPics = new ArrayList<>();
-                                    for (int i = 0; i < list.size(); i++) {
-                                        AskSongPic askSongPic = new AskSongPic(askSongComment, list1.get(i));
-                                        askSongPics.add(askSongPic);
-                                    }
-                                    //批量添加AskSongPic表
-                                    new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
-                                        @Override
-                                        public void onSuccess(List<BatchResult> list) {
-                                            user.increment("contribution", Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
-                                            user.update(new ToastUpdateListener(activity) {
-                                                @Override
-                                                public void onSuccess() {
-                                                    activity.showLoading(false);
-                                                    ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
-                                                    activity.sendCommentResult(s, askSongComment);
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            }
+                        switch (mUploadTypeFlag) {
+                            case COLLECTION:
+                                uploadCollectionPic(askSongComment, s);
+                                break;
+                            case SHARE:
+                                uploadSharePic(askSongComment, s);
+                                break;
+                            case LOCAL:
+                                uploadLocalPic(askSongComment, s);
+                                break;
+                        }
+                    }
+                });
+            }
+        });
+    }
 
-                            @Override
-                            public void onProgress(int i, int i1, int i2, int i3) {
+    private void uploadSharePic(final AskSongComment askSongComment, final String s) {
+        List<BmobObject> askSongPics = new ArrayList<>();
+        for (int i = 0; i < mAskSongCommentModel.getPicUrls().size(); i++) {
+            AskSongPic askSongPic = new AskSongPic(askSongComment, mAskSongCommentModel.getPicUrls().get(i));
+            askSongPics.add(askSongPic);
+        }
+        //批量添加AskSongPic表
+        new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
+            @Override
+            public void onSuccess(List<BatchResult> list) {
+                user.increment("contribution", Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
+                user.update(new ToastUpdateListener(activity) {
+                    @Override
+                    public void onSuccess() {
+                        activity.showLoading(false);
+                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                        activity.sendCommentResult(s, askSongComment);
+                    }
+                });
+            }
+        });
+    }
 
-                            }
-
-                            @Override
-                            public void onError(int i, String s) {
-                                //文件上传失败
-                                activity.showLoading(false);
-                                ToastUtil.showToast(CommonString.STR_ERROR_INFO + s);
-                            }
-                        });
+    private void uploadCollectionPic(final AskSongComment askSongComment, final String s) {
+        List<BmobObject> askSongPics = new ArrayList<>();
+        for (int i = 0; i < mAskSongCommentModel.getPicUrls().size(); i++) {
+            AskSongPic askSongPic = new AskSongPic(askSongComment, mAskSongCommentModel.getPicUrls().get(i));
+            askSongPics.add(askSongPic);
+        }
+        //批量添加AskSongPic表
+        new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
+            @Override
+            public void onSuccess(List<BatchResult> list) {
+                user.increment("contribution", Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
+                user.update(new ToastUpdateListener(activity) {
+                    @Override
+                    public void onSuccess() {
+                        activity.showLoading(false);
+                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                        activity.sendCommentResult(s, askSongComment);
                     }
                 });
             }
         });
 
+    }
 
+    //本地上传求谱
+    private void uploadLocalPic(final AskSongComment askSongComment, final String s) {
+        BmobFile.uploadBatch(mAskSongCommentModel.getPicUrls().toArray(new String[mAskSongCommentModel.getPicUrls().size()]), new UploadBatchListener() {
+            @Override
+            public void onSuccess(final List<BmobFile> list, List<String> list1) {
+                if (mAskSongCommentModel.getPicUrls().size() == list1.size()) {// 全部的图片上传成功后调用
+                    List<BmobObject> askSongPics = new ArrayList<>();
+                    for (int i = 0; i < list.size(); i++) {
+                        AskSongPic askSongPic = new AskSongPic(askSongComment, list1.get(i));
+                        askSongPics.add(askSongPic);
+                    }
+                    //批量添加AskSongPic表
+                    new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
+                        @Override
+                        public void onSuccess(List<BatchResult> list) {
+                            user.increment("contribution", Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
+                            user.update(new ToastUpdateListener(activity) {
+                                @Override
+                                public void onSuccess() {
+                                    activity.showLoading(false);
+                                    ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                                    activity.sendCommentResult(s, askSongComment);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onProgress(int i, int i1, int i2, int i3) {
+
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                //文件上传失败
+                activity.showLoading(false);
+                ToastUtil.showToast(CommonString.STR_ERROR_INFO + s);
+            }
+        });
     }
 
 
@@ -190,11 +269,12 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         GalleryFinal.openGalleryMuti(3, config, new GalleryFinal.OnHanlderResultCallback() {
             @Override
             public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-                model.getPicUrls().clear();
+                mAskSongCommentModel.getPicUrls().clear();
                 for (PhotoInfo photoInfo : resultList) {
-                    model.getPicUrls().add(photoInfo.getPhotoPath());
+                    mAskSongCommentModel.getPicUrls().add(photoInfo.getPhotoPath());
                 }
-                activity.addPicResult(model.getPicUrls());
+                mUploadTypeFlag = LOCAL;
+                activity.addPicResult(mAskSongCommentModel.getPicUrls());
             }
 
             @Override
@@ -209,7 +289,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         if (askSongComment.getHasPic()) {
             activity.showLoading(true);
             //查询有多少张图片
-            model.getPicList(askSongComment, new ToastQueryListener<AskSongPic>(activity) {
+            mAskSongCommentModel.getPicList(askSongComment, new ToastQueryListener<AskSongPic>(activity) {
                 @Override
                 public void onSuccess(List<AskSongPic> list) {
                     final Song song = new Song(askSongComment.getContent(), null);//将评论者的内容当做标题
@@ -237,49 +317,6 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         activity.getCurrentContext().startActivity(intent);
     }
 
-    //RxJava,先查询本地曲谱的列表
-    public void queryLocalSongList() {
-        rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
-            @Override
-            public void call(Subscriber<? super List<String>> subscriber) {
-                LocalSongDao dao = new LocalSongDao(activity.getCurrentContext());
-                List<LocalSong> list = dao.queryForAll();
-                List<String> names = new ArrayList<String>();
-                for (LocalSong localSong : list) {
-                    names.add(localSong.getName());
-                }
-                subscriber.onNext(names);
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<String>>() {
-                    @Override
-                    public void call(List<String> strings) {
-                        activity.alertLocalSongDialog(strings);
-                    }
-                });
-    }
-
-    //通过曲谱的名字找到本地图片的路径，并添加，显示已添加的图片数量
-    public void addPicByLocalSong(final String name) {
-        rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
-            @Override
-            public void call(Subscriber<? super List<String>> subscriber) {
-                subscriber.onNext(getLocalImgs(name));
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<String>>() {
-                    @Override
-                    public void call(List<String> strings) {
-                        model.getPicUrls().clear();
-                        model.getPicUrls().addAll(strings);
-                        activity.addPicResult(model.getPicUrls());
-                    }
-                });
-    }
 
     @NonNull
     private List<String> getLocalImgs(String name) {
@@ -332,6 +369,107 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
     }
 
+    //得到我的收藏列表
+    public void queryMyCollectionList() {
+        mUserCollectionModel.getAllUserCollectionList(user, new ToastQueryListener<CollectionSong>() {
+            @Override
+            public void onSuccess(List<CollectionSong> list) {
+                activity.alertCollectionListDialog(list);
+            }
+        });
+    }
+
+
+    //得到我的分享列表
+    public void queryMyShareList() {
+        mUserShareModel.getAllUserShareList(user, new ToastQueryListener<ShareSong>() {
+            @Override
+            public void onSuccess(List<ShareSong> list) {
+                activity.alertShareListDialog(list);
+            }
+        });
+    }
+
+    //得到我的收藏的某一首曲子
+    public void addPicByMyCollection(CollectionSong collection) {
+        mUserCollectionModel.getCollectionPicList(collection, new ToastQueryListener<CollectionPic>() {
+            @Override
+            public void onSuccess(List<CollectionPic> list) {
+                List<String> strList = new ArrayList<String>();
+                for (int i = 0; i < list.size(); i++) {
+                    strList.add(list.get(i).getUrl());
+                }
+                mAskSongCommentModel.getPicUrls().clear();
+                mAskSongCommentModel.getPicUrls().addAll(strList);
+                mUploadTypeFlag = COLLECTION;
+                activity.addPicResult(mAskSongCommentModel.getPicUrls());
+            }
+        });
+    }
+
+    public void addPicByMyShare(ShareSong shareSong) {
+        BmobQuery<SharePic> query = new BmobQuery<>();
+        query.addWhereEqualTo("shareSong", new BmobPointer(shareSong));
+        query.findObjects(new ToastQueryListener<SharePic>() {
+            @Override
+            public void onSuccess(List<SharePic> list) {
+                List<String> strList = new ArrayList<String>();
+                for (int i = 0; i < list.size(); i++) {
+                    strList.add(list.get(i).getUrl());
+                }
+                mAskSongCommentModel.getPicUrls().clear();
+                mAskSongCommentModel.getPicUrls().addAll(strList);
+                mUploadTypeFlag = SHARE;
+                activity.addPicResult(mAskSongCommentModel.getPicUrls());
+            }
+        });
+    }
+
+    //RxJava,先查询本地曲谱的列表
+    public void queryLocalSongList() {
+        rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
+            @Override
+            public void call(Subscriber<? super List<String>> subscriber) {
+                LocalSongDao dao = new LocalSongDao(activity.getCurrentContext());
+                List<LocalSong> list = dao.queryForAll();
+                List<String> names = new ArrayList<String>();
+                for (LocalSong localSong : list) {
+                    names.add(localSong.getName());
+                }
+                subscriber.onNext(names);
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<String>>() {
+                    @Override
+                    public void call(List<String> strings) {
+                        activity.alertLocalListDialog(strings);
+                    }
+                });
+    }
+
+    //通过曲谱的名字找到本地图片的路径，并添加，显示已添加的图片数量
+    public void addPicByLocalSong(final String name) {
+        rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
+            @Override
+            public void call(Subscriber<? super List<String>> subscriber) {
+                subscriber.onNext(getLocalImgs(name));
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<String>>() {
+                    @Override
+                    public void call(List<String> strings) {
+                        mAskSongCommentModel.getPicUrls().clear();
+                        mAskSongCommentModel.getPicUrls().addAll(strings);
+                        mUploadTypeFlag = LOCAL;
+                        activity.addPicResult(mAskSongCommentModel.getPicUrls());
+                    }
+                });
+    }
+
 
     public interface IView extends IBaseView {
 
@@ -345,8 +483,12 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
         void showPicDialog(Song song, AskSongComment askSongComment);
 
-        void alertLocalSongDialog(List<String> localSongs);
-
         void addHotIndex();
+
+        void alertShareListDialog(List<ShareSong> list);
+
+        void alertCollectionListDialog(List<CollectionSong> list);
+
+        void alertLocalListDialog(List<String> list);
     }
 }

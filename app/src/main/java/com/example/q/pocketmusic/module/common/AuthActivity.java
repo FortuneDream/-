@@ -26,14 +26,6 @@ public abstract class AuthActivity<V, T extends BasePresenter<V>> extends BaseAc
     public void initView() {
         user = CheckUserUtil.checkLocalUser(this);    //基类跳转,检测是否本地是否已经保存了，如果没有保存就跳转到登录界面，保存了就把this.user=user.之后可以直接用user来使用，每次需要使用到用户系统的时候都需要check一下
         if (user != null) {
-            BmobUser.fetchUserInfo(new FetchUserInfoListener<BmobUser>() {
-                @Override
-                public void done(BmobUser bmobUser, BmobException e) {
-                    if (e!=null){
-                        user = (MyUser) bmobUser;
-                    }
-                }
-            });
             initUserView();
         }
     }

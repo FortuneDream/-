@@ -56,7 +56,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     IcoTextItem shareItem;
     @BindView(R.id.setting_item)
     IcoTextItem settingItem;
-    Unbinder unbinder;
     private AlertDialog signInDialog;
 
 
@@ -65,10 +64,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
         return R.layout.fragment_home_profile;
     }
 
-    @Override
-    public void initView() {
-        initProfileView();
-    }
 
     @Override
     public void onResume() {
@@ -109,10 +104,11 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
         }
     }
 
+    //修改昵称
     private void alertNickNameDialog() {
         final EditText inputServer = new EditText(getCurrentContext());
         AlertDialog.Builder builder = new AlertDialog.Builder(getCurrentContext());
-        builder.setTitle("设置签名").setIcon(R.drawable.ico_signature).setView(inputServer)
+        builder.setTitle("修改昵称").setIcon(R.drawable.ico_signature).setView(inputServer)
                 .setNegativeButton("算了", null);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 

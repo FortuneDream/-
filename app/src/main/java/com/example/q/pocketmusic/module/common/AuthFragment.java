@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.common;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
@@ -24,23 +25,9 @@ public abstract class AuthFragment<V, T extends BasePresenter<V>> extends BaseFr
     public static final String RESULT_USER = "result";
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initView() {
         user = CheckUserUtil.checkLocalUser(this);
-        LogUtils.e("更新前："+String.valueOf(user.getContribution()));
-        if (user != null) {
-            MyUser.fetchUserInfo(new FetchUserInfoListener<MyUser>() {
-                @Override
-                public void done(MyUser bmobUser, BmobException e) {
-                    if (e != null) {
-                        user = (MyUser) bmobUser;
-                        LogUtils.e("更新后："+String.valueOf(user.getContribution()));
-                    }
-                }
-            });
-        }
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

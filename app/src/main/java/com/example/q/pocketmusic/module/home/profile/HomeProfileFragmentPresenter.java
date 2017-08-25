@@ -11,11 +11,10 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.profile.collection.CollectionActivity;
+import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionActivity;
 import com.example.q.pocketmusic.module.home.profile.contribution.ContributionActivity;
 import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
-import com.example.q.pocketmusic.module.user.notify.help.HelpActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
 import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
 import com.example.q.pocketmusic.util.common.IntentUtil;
@@ -23,7 +22,6 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.io.File;
 import java.text.ParseException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -107,7 +105,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //调转到收藏界面
     public void enterCollectionActivity() {
-        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), CollectionActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), UserCollectionActivity.class));
     }
 
 

@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.MoneySupport;
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -22,6 +24,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FetchUserInfoListener;
 
 public class SupportActivity extends AuthActivity<SupportPresenter.IView, SupportPresenter>
         implements SupportPresenter.IView,RecyclerArrayAdapter.OnMoreListener, SwipeRefreshLayout.OnRefreshListener {

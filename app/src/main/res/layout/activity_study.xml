@@ -8,7 +8,7 @@
     tools:context="com.example.q.pocketmusic.module.home.net.type.study.StudyActivity">
     <include layout="@layout/include_appbar_toolbar"/>
     <TextView
-        android:text="乐器学习版块建设中。"
+        android:text="乐器学习版块建设中。。。"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

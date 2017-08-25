@@ -1,7 +1,7 @@
-package com.example.q.pocketmusic.module.home.net.acg;
+package com.example.q.pocketmusic.module.home.net.special;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.model.bean.acg.ACGAlbum;
+import com.example.q.pocketmusic.model.bean.special.SpecialColumn;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 
@@ -14,25 +14,25 @@ import cn.bmob.v3.BmobQuery;
  * （￣m￣）
  */
 
-public class ACGPresenter extends BasePresenter<ACGPresenter.IView> {
+public class SpecialColumnPresenter extends BasePresenter<SpecialColumnPresenter.IView> {
     private IView activity;
 
-    public ACGPresenter(IView activity) {
+    public SpecialColumnPresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
     }
 
     public void getACGAlbumList() {
-        BmobQuery<ACGAlbum> query=new BmobQuery<>();
-        query.findObjects(new ToastQueryListener<ACGAlbum>() {
+        BmobQuery<SpecialColumn> query=new BmobQuery<>();
+        query.findObjects(new ToastQueryListener<SpecialColumn>() {
             @Override
-            public void onSuccess(List<ACGAlbum> list) {
+            public void onSuccess(List<SpecialColumn> list) {
                 activity.setAlbumList(list);
             }
         });
     }
 
     interface IView extends IBaseView {
-        void setAlbumList(List<ACGAlbum> list);
+        void setAlbumList(List<SpecialColumn> list);
     }
 }

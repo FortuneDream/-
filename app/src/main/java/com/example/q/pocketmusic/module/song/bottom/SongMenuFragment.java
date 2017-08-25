@@ -2,10 +2,12 @@ package com.example.q.pocketmusic.module.song.bottom;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -14,6 +16,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.HomeActivity;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.dialog.EditDialog;
@@ -48,6 +51,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
         super.onCreate(savedInstanceState);
         presenter.setIntent((Intent) getArguments().getParcelable(PARAM_Intent));
     }
+
 
     public static SongMenuFragment newInstance(Intent intent) {
         SongMenuFragment fragment = new SongMenuFragment();

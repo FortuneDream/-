@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/item_padding_16dp"
     android:paddingLeft="@dimen/item_padding_16dp"
     android:paddingRight="@dimen/item_padding_16dp">
 
@@ -22,5 +21,4 @@
         android:layout_height="wrap_content"
         tools:text="我来回答" />
 
-    <View style="@style/SettingDivider" />
 </LinearLayout>

@@ -22,15 +22,15 @@ import butterknife.BindView;
  * Created by 鹏君 on 2016/11/14.
  */
 
-public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, CollectionPresenter>
-        implements CollectionPresenter.IView, SwipeRefreshLayout.OnRefreshListener, CollectionAdapter.OnSelectListener, RecyclerArrayAdapter.OnMoreListener {
+public class UserCollectionActivity extends AuthActivity<UserCollectionPresenter.IView, UserCollectionPresenter>
+        implements UserCollectionPresenter.IView, SwipeRefreshLayout.OnRefreshListener, UserCollectionAdapter.OnSelectListener, RecyclerArrayAdapter.OnMoreListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
-    private CollectionAdapter adapter;
+    private UserCollectionAdapter adapter;
 
     @Override
     public int setContentResource() {
@@ -40,7 +40,7 @@ public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, 
 
     @Override
     public void initUserView() {
-        adapter = new CollectionAdapter(this);
+        adapter = new UserCollectionAdapter(this);
         adapter.setOnSelectListener(this);
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
@@ -111,7 +111,7 @@ public class CollectionActivity extends AuthActivity<CollectionPresenter.IView, 
     }
 
     @Override
-    protected CollectionPresenter createPresenter() {
-        return new CollectionPresenter(this);
+    protected UserCollectionPresenter createPresenter() {
+        return new UserCollectionPresenter(this);
     }
 }

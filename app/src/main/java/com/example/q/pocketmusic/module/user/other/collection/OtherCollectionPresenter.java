@@ -12,7 +12,7 @@ import com.example.q.pocketmusic.model.bean.collection.CollectionPic;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.profile.collection.CollectionModel;
+import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
 
 import java.util.ArrayList;
@@ -28,13 +28,13 @@ import cn.bmob.v3.datatype.BmobPointer;
 
 public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPresenter.IView> {
     private IView fragment;
-    private CollectionModel collectionModel;
+    private UserCollectionModel userCollectionModel;
     private int mPage;
 
     public OtherCollectionPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
-        collectionModel = new CollectionModel();
+        userCollectionModel = new UserCollectionModel();
     }
 
     public void getOtherCollectionList(MyUser other, final boolean isRefreshing) {
@@ -58,7 +58,7 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
 
     public void enterSongActivity(final CollectionSong collectionSong) {
         fragment.showLoading(true);
-        collectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>(fragment) {
+        userCollectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>(fragment) {
             @Override
             public void onSuccess(List<CollectionPic> list) {
                 fragment.showLoading(false);
