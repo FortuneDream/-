@@ -1,11 +1,6 @@
 package com.example.q.pocketmusic.util.common;
 
-import android.os.Environment;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 
 /**
  * Created by 鹏君 on 2016/10/2.

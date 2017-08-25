@@ -1,13 +1,11 @@
 package com.example.q.pocketmusic.module.user.other.share;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
-import com.example.q.pocketmusic.model.flag.Text;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.home.net.type.study;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 
@@ -8,7 +7,6 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class StudyActivity extends BaseActivity<StudyPresenter.IView, StudyPresenter>
         implements StudyPresenter.IView {

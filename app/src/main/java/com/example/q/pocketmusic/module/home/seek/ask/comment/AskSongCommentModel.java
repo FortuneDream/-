@@ -2,12 +2,10 @@ package com.example.q.pocketmusic.module.home.seek.ask.comment;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.BmobConstant;
-import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPic;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BaseModel;
-import com.example.q.pocketmusic.util.BmobUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -22,7 +22,6 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 
 /**
@@ -212,6 +211,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
         Random random = new Random();
         final int reward = random.nextInt(8) + 1;//随机1--8点
         View view = View.inflate(getContext(), R.layout.dialog_sign_in, null);
+        final TextView titleTv = (TextView) view.findViewById(R.id.title_tv);
         GuaGuaKa guaGuaKa = (GuaGuaKa) view.findViewById(R.id.gua_gua_ka);
         guaGuaKa.setAwardText(String.valueOf(reward) + " 枚硬币");
         final Button getRewardBtn = (Button) view.findViewById(R.id.get_reward_btn);
@@ -219,9 +219,11 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 .setCancelable(false)
                 .setView(view)
                 .create();
+
         guaGuaKa.setOnCompleteListener(new GuaGuaKa.OnCompleteListener() {
             @Override
             public void onComplete() {
+                titleTv.setText("(ฅ´ω`ฅ)");
                 getRewardBtn.setVisibility(View.VISIBLE);
             }
         });

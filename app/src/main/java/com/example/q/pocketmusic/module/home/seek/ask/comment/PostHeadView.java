@@ -3,7 +3,6 @@ package com.example.q.pocketmusic.module.home.seek.ask.comment;
 import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,8 +10,6 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
-import com.example.q.pocketmusic.util.common.LogUtils;
-import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 /**

@@ -1,20 +1,10 @@
 package com.example.q.pocketmusic.module.common;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.util.CheckUserUtil;
-import com.example.q.pocketmusic.util.common.LogUtils;
-
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FetchUserInfoListener;
-import cn.bmob.v3.listener.QueryListener;
 
 /**
  * Created by 鹏君 on 2017/1/26.

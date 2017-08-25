@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.common;
 
 import com.example.q.pocketmusic.config.BmobConstant;
-import com.example.q.pocketmusic.config.Constant;
 
 import cn.bmob.v3.BmobQuery;
 

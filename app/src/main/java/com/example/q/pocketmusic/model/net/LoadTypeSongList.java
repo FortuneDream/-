@@ -1,11 +1,9 @@
 package com.example.q.pocketmusic.model.net;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.util.common.LogUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

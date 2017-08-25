@@ -4,11 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
-
-import com.example.q.pocketmusic.util.common.IntentUtil;
 
 /**
  * Created by 鹏君 on 2017/7/8.

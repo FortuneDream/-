@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.home.net.special.list;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 
@@ -9,7 +8,6 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SpecialListActivity extends BaseActivity<SpecialListPresenter.IView, SpecialListPresenter>
         implements SpecialListPresenter.IView {

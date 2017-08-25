@@ -1,7 +1,5 @@
 package com.example.q.pocketmusic.util;
 
-import android.content.Context;
-
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 

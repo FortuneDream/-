@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.home.seek.ask;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,7 +14,6 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
-import com.example.q.pocketmusic.module.user.other.OtherProfileActivity;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

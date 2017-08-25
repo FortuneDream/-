@@ -6,7 +6,6 @@
 
     <include layout="@layout/include_appbar_toolbar" />
     <TextView
-        android:id="@+id/head_tv"
         android:padding="@dimen/item_padding_16dp"
         style="@style/TextPressAttention"
         android:layout_width="match_parent"

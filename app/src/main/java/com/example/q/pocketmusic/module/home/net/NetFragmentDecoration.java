@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.util.common.LogUtils;
 
 /**
  * Created by 鹏君 on 2017/8/23.

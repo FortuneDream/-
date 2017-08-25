@@ -11,7 +11,6 @@ import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.util.common.LogUtils;
 
 import butterknife.BindView;
 

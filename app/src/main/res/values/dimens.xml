@@ -31,4 +31,7 @@
     <dimen name="setting_divider">0.5dp</dimen>
 
     <dimen name="net_fragment_text">16sp</dimen>
+
+    <dimen name="gua_gua_ka_width">200dp</dimen>
+    <dimen name="gua_gua_ka_height">100dp</dimen>
 </resources>

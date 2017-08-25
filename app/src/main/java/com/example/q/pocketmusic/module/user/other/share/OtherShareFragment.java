@@ -1,10 +1,6 @@
 package com.example.q.pocketmusic.module.user.other.share;
 
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.MyUser;
@@ -17,8 +13,6 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by 鹏君 on 2017/7/24.

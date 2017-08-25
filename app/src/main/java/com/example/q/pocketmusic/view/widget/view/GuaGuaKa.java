@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -26,24 +25,27 @@ import com.example.q.pocketmusic.util.common.ConvertUtil;
 
 public class GuaGuaKa extends View {
     private Paint mMainPaint;//主要
-    private Paint mTextPaint;//底部文字
+    private Paint mBottomPaint;//底部文字
     private Paint mSurfaceTextPaint;//表面文字
     private Path path;
     private Bitmap bitmap;//表面
     private Canvas mCanvas;//缓冲画布
-    private String mText;//底部文字
+    private String mBottomText;//底部文字
     private int mTextSize;//文字大小
     private int mTextColor;//文字颜色
     private int mEraserSize;//橡皮擦大小
-    private Rect mTextBound = new Rect();
+    private Rect mTextRect = new Rect();//底层文字框
+    private Rect mTopContentRect = new Rect();//顶层文字框
     private PorterDuffXfermode duffXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
     private int measureWidth;
     private int measureHeight;
     private boolean isComplete;
     private final int DEFAULT_ERASER_SIZE = ConvertUtil.Dp2Px(getContext(), 16);
     private final int DEFAULT_TEXT_SIZE = ConvertUtil.Dp2Px(getContext(), 20);
-    private final int DEFAULT_TEXT_COLOR = getResources().getColor(R.color.colorAccent);
+    private final int DEFAULT_TEXT_COLOR = getResources().getColor(R.color.md_green_300);
     private OnCompleteListener onCompleteListener;
+    private String mTopContent = "~Surprise~";//顶层文字
+
 
     public void setOnCompleteListener(OnCompleteListener onCompleteListener) {
         this.onCompleteListener = onCompleteListener;
@@ -65,37 +67,81 @@ public class GuaGuaKa extends View {
     public GuaGuaKa(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
-        path = new Path();
-        initPaint();
     }
+
 
     private void init(Context context, AttributeSet attributeSet) {
         TypedArray array = context.obtainStyledAttributes(attributeSet, R.styleable.GuaGuaKa);
-        mText = array.getString(R.styleable.GuaGuaKa_Reward_Text);
-        if (mText == null) {
-            mText = "";
+        mBottomText = array.getString(R.styleable.GuaGuaKa_Reward_Text);
+        if (mBottomText == null) {
+            mBottomText = "";
         }
         mTextSize = array.getDimensionPixelSize(R.styleable.GuaGuaKa_Reward_Eraser_Size, DEFAULT_TEXT_SIZE);
         mTextColor = array.getColor(R.styleable.GuaGuaKa_Reward_Text_Color, DEFAULT_TEXT_COLOR);
         mEraserSize = array.getDimensionPixelSize(R.styleable.GuaGuaKa_Reward_Eraser_Size, DEFAULT_ERASER_SIZE);
         array.recycle();
-
-
+        initPaint();
+        path = new Path();
     }
+
+    //初始画笔
+    private void initPaint() {
+        setEraserPaint();//橡皮擦画笔
+        setBottomPaint();//底层画笔
+        setTopPaint();//顶层画笔
+    }
+
+
+    //橡皮擦
+    private void setEraserPaint() {
+        mMainPaint = new Paint();
+        mMainPaint.setStrokeWidth(mEraserSize);
+        mMainPaint.setStyle(Paint.Style.STROKE);
+        mMainPaint.setAntiAlias(true);
+        mMainPaint.setStrokeJoin(Paint.Join.ROUND);
+        mMainPaint.setStrokeCap(Paint.Cap.ROUND);
+    }
+
+    //底部文字
+    private void setBottomPaint() {
+        mBottomPaint = new Paint();
+        mBottomPaint.setStyle(Paint.Style.STROKE);
+        mBottomPaint.setTextSize(mTextSize);
+        mBottomPaint.setColor(mTextColor);
+
+        getTextRect(mBottomPaint, mBottomText, mTextRect);
+    }
+
+    private void setTopPaint() {
+        //顶层文字画笔
+        mSurfaceTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mSurfaceTextPaint.setColor(getResources().getColor(R.color.md_red_300));
+        mSurfaceTextPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.text));
+
+        getTextRect(mSurfaceTextPaint, mTopContent, mTopContentRect);
+    }
+
+    //测量文字的Rect
+    private void getTextRect(Paint paint, String text, Rect rect) {
+        paint.getTextBounds(text, 0, text.length(), rect);//测量文字大小
+    }
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        measureWidth = setDefaultMeasureSpec(200, widthMeasureSpec);
-        measureHeight = setDefaultMeasureSpec(200, heightMeasureSpec);
+        measureWidth = setDefaultMeasureSpec(getResources().getDimensionPixelSize(R.dimen.gua_gua_ka_width), widthMeasureSpec);
+        measureHeight = setDefaultMeasureSpec(getResources().getDimensionPixelSize(R.dimen.gua_gua_ka_height), heightMeasureSpec);
         setMeasuredDimension(measureWidth, measureHeight);
         //图层灰色
         //在这里创建，不会创建多次重新绘制
-        mSurfaceTextPaint = new Paint();
-        mSurfaceTextPaint.setColor(getResources().getColor(R.color.md_red_400));
-        bitmap = Bitmap.createBitmap(measureWidth, measureHeight, Bitmap.Config.ARGB_8888);
-        mCanvas = new Canvas(bitmap);
-        mCanvas.drawColor(Color.GRAY);
-        mCanvas.drawText("刮开有硬币哦~", 100, 100, mSurfaceTextPaint);
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(measureWidth, measureHeight, Bitmap.Config.ARGB_8888);
+            mCanvas = new Canvas(bitmap);
+        }
+
+        //顶层文字
+        mCanvas.drawColor(getResources().getColor(R.color.md_grey_300));
+        mCanvas.drawText(mTopContent, getResources().getDimensionPixelSize(R.dimen.gua_gua_ka_width) / 2 - mTopContentRect.width() / 2, getResources().getDimensionPixelSize(R.dimen.gua_gua_ka_height) / 2, mSurfaceTextPaint);
     }
 
     //设置图片
@@ -111,52 +157,28 @@ public class GuaGuaKa extends View {
     }
 
 
+    //测量
     private int setDefaultMeasureSpec(int defaultSize, int measureSpec) {
         int result = defaultSize;
         int specMode = MeasureSpec.getMode(measureSpec);
         int specSize = MeasureSpec.getSize(measureSpec);
         switch (specMode) {
             case MeasureSpec.EXACTLY:
-                result = specSize;//match_parent或者80dp
+                result = specSize;
                 break;
             case MeasureSpec.AT_MOST:
             case MeasureSpec.UNSPECIFIED:
-                result = defaultSize;//wrap_content默认
+                result = defaultSize;
                 break;
         }
         return result;
-    }
-
-    //初始画笔
-    private void initPaint() {
-        setMainPaint();
-        setTextPaint();
-    }
-
-    //橡皮擦
-    private void setMainPaint() {
-        mMainPaint = new Paint();
-        mMainPaint.setStrokeWidth(mEraserSize);
-        mMainPaint.setStyle(Paint.Style.STROKE);
-        mMainPaint.setAntiAlias(true);
-        mMainPaint.setStrokeJoin(Paint.Join.ROUND);
-        mMainPaint.setStrokeCap(Paint.Cap.ROUND);
-    }
-
-    //底部文字
-    private void setTextPaint() {
-        mTextPaint = new Paint();
-        mTextPaint.setStyle(Paint.Style.STROKE);
-        mTextPaint.setTextSize(mTextSize);
-        mTextPaint.setColor(mTextColor);
-        mTextPaint.getTextBounds(mText, 0, mText.length(), mTextBound);//得到文字的Rect
     }
 
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawText(mText, getWidth() / 2 - mTextBound.width() / 2, getHeight() / 2 - mTextBound.height() / 2, mTextPaint);//先绘制底部文字
+        canvas.drawText(mBottomText, getMeasuredWidth() / 2 - mTextRect.width() / 2, getMeasuredHeight() / 2, mBottomPaint);//先绘制底部文字
         if (!isComplete) {//擦除完成
             drawPath();
             canvas.drawBitmap(bitmap, 0, 0, null);//把Bitmap放入画布
@@ -189,8 +211,8 @@ public class GuaGuaKa extends View {
 
     //设置底部文字
     public void setAwardText(String mText) {
-        this.mText = mText;
-        setTextPaint();
+        this.mBottomText = mText;
+        setBottomPaint();
     }
 
 
@@ -221,8 +243,10 @@ public class GuaGuaKa extends View {
                     post(new Runnable() {
                         @Override
                         public void run() {
-                            onCompleteListener.onComplete();
-                            bitmap.recycle();//回收
+                            if (onCompleteListener != null) {
+                                onCompleteListener.onComplete();
+                                bitmap.recycle();//回收
+                            }
                         }
                     });//切换到主线程
                     postInvalidate();

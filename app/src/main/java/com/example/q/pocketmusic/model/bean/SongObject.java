@@ -1,8 +1,5 @@
 package com.example.q.pocketmusic.model.bean;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 /**

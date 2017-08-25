@@ -20,13 +20,11 @@ import cn.bmob.v3.BmobQuery;
 
 public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPresenter.IView> {
     private IView fragment;
-    private BmobUtil bmobUtil;
     private int mPage;
 
     public AskListFragmentPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
-        bmobUtil = new BmobUtil();
 
     }
 

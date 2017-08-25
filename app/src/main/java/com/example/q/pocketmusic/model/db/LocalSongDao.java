@@ -1,12 +1,10 @@
 package com.example.q.pocketmusic.model.db;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 
 import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.common.FileUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;

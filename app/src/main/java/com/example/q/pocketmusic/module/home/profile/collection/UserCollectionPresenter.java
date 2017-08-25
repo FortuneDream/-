@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.home.profile.collection;
 
 import android.content.Intent;
-import android.content.pm.ProviderInfo;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;

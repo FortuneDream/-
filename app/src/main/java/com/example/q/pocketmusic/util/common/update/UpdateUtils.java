@@ -9,8 +9,6 @@ import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.util.common.LogUtils;
 
 import java.util.List;
 

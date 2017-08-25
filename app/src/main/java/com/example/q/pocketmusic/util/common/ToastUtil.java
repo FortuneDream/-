@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.Toast;
 
 
-
 /**
  * Created by 鹏君 on 2016/8/28.
  */
@@ -20,7 +19,7 @@ public class ToastUtil {
 
     public static void showToast(String content) {
         if (toast == null) {
-           toast =Toast.makeText(context,content,Toast.LENGTH_SHORT);
+            toast = Toast.makeText(context.getApplicationContext(), content, Toast.LENGTH_SHORT);
         }
         toast.setText(content);
         toast.show();

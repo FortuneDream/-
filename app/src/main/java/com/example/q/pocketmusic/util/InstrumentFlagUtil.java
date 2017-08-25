@@ -2,9 +2,6 @@ package com.example.q.pocketmusic.util;
 
 import com.example.q.pocketmusic.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by 鹏君 on 2017/7/13.
  * （￣m￣）

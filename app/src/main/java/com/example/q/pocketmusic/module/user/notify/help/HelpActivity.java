@@ -11,7 +11,6 @@ import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.model.bean.bmob.Help;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.user.notify.suggestion.LeftAndRightTagDecoration;
-import com.example.q.pocketmusic.module.user.register.RegisterPresenter;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 

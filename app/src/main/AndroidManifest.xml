@@ -28,6 +28,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".module.common.TestModuleActivity">
+        </activity>
+
         <activity android:name=".module.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -112,7 +115,8 @@
         <activity android:name=".module.home.net.special.SpecialColumnActivity" />
         <activity android:name=".module.user.other.OtherProfileActivity" />
         <activity android:name=".module.home.net.type.study.StudyActivity" />
-        <activity android:name=".module.home.net.special.list.SpecialListActivity"></activity>
+        <activity android:name=".module.home.net.special.list.SpecialListActivity" />
+
     </application>
 
 </manifest>

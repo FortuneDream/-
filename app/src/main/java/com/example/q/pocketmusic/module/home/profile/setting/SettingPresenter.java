@@ -7,7 +7,6 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.util.common.update.UpdateUtils;
 

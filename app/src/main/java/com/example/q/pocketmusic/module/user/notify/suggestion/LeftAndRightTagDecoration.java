@@ -2,7 +2,6 @@ package com.example.q.pocketmusic.module.user.notify.suggestion;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

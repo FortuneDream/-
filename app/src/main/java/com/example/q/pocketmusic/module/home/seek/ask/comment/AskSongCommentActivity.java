@@ -18,7 +18,6 @@ import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
-import com.example.q.pocketmusic.model.bean.share.SharePic;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
@@ -55,7 +54,6 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
     @BindView(R.id.number_pic_tv)
     TextView numberPicTv;
     private AskSongCommentAdapter adapter;
-    private PicDialog picDialog;
     private PostHeadView headView;
     public static final String PARAM_POST = "param_post";
     public final static String PARAM_IS_FROM_USER = "param_is_from_user";//是否个人
@@ -134,7 +132,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
 
     @Override
     public void showPicDialog(final Song song, final AskSongComment askSongComment) {
-        picDialog = new PicDialog.Builder(context)
+        PicDialog picDialog = new PicDialog.Builder(context)
                 .setFirstPath(song.getIvUrl().get(0))
                 .setOnSelectListener(new PicDialog.Builder.OnSelectListener() {
                     @Override

@@ -3,7 +3,6 @@ package com.example.q.pocketmusic.module.home.profile.share;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -12,11 +11,8 @@ import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.BmobUtil;
 
 import java.util.List;
-
-import cn.bmob.v3.datatype.BmobPointer;
 
 /**
  * Created by 鹏君 on 2017/5/26.

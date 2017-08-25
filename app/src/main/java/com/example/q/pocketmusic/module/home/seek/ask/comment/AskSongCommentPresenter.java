@@ -35,9 +35,6 @@ import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
-import com.j256.ormlite.stmt.query.Between;
-
-import org.apache.http.impl.conn.tsccm.BasicPoolEntryRef;
 
 import java.io.IOException;
 import java.util.ArrayList;
