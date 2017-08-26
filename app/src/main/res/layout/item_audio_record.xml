@@ -7,20 +7,18 @@
     android:padding="@dimen/item_padding_16dp">
 
     <TextView
+        style="@style/TwoTextMain"
         android:id="@+id/name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/Text"
-        android:textSize="@dimen/item_two_txt_main_14sp"
         tools:text="名字" />
 
     <TextView
+        style="@style/TwoTextSecond"
         android:id="@+id/duration_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/name_tv"
-        android:textColor="@color/TextGray"
-        android:textSize="@dimen/item_two_txt_second_12sp"
         tools:text="300秒" />
 
     <ImageView

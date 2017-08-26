@@ -3,12 +3,13 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
-    <!--518400  1638400   2156800   1468-->
-    <color name="colorPrimary">#2cc17b</color>
-    <color name="colorPrimaryDark">#FBC02D</color>
-    <color name="colorAccent">#FFC107</color>
-    <color name="colorPrimaryLight">#FFF9C4</color>
-    <color name="colorTitle">@color/Text</color>
+    <color name="test">@color/md_grey_700</color>
+    <!--518400  1638400   2156800   1468  #2cc17b-->
+    <color name="colorPrimary">@color/md_green_300</color>
+    <color name="colorPrimaryDark">@color/md_amber_300</color>
+    <color name="colorAccent">@color/md_orange_300</color>
+    <color name="colorPrimaryLight">@color/md_yellow_100</color>
+    <color name="colorTitle">@color/text</color>
     <color name="textIcons">#212121</color>
     <color name="textPrimary">#212121</color>
     <color name="secondaryText">#757575</color>
@@ -17,36 +18,48 @@
     <!--透明-->
     <color name="colorTranslate">#00000000</color>
     <!--灰色背景-->
-    <color name="background">#f2f2f2</color>
+    <color name="background">@color/md_grey_100</color>
 
     <!--纸屑颜色-->
-    <color name="confetti_red">#FF5252</color>
-    <color name="confetti_orange">#FF5722</color>
-    <color name="confetti_yellow">#FFEB3B</color>
-    <color name="confetti_green">#4CAF50</color>
-    <color name="confetti_qing">#CDDC39</color>
-    <color name="confetti_blue">#03A9F4</color>
-    <color name="confetti_zi">#9C27B0</color>
+    <color name="confetti_red">@color/md_red_300</color>
+    <color name="confetti_orange">@color/md_orange_300</color>
+    <color name="confetti_yellow">@color/md_yellow_300</color>
+    <color name="confetti_green">@color/md_green_300</color>
+    <color name="confetti_qing">@color/md_cyan_300</color>
+    <color name="confetti_blue">@color/md_blue_300</color>
+    <color name="confetti_zi">@color/md_purple_300</color>
 
-    <color name="Text">#333333</color>
-    <color name="TextGray">#bebebe</color>
-    <color name="TabTextGray">#b3b3b3</color>
+    <color name="text">@color/md_grey_900</color>
 
-    <color name="upload_name">@color/md_red_300</color>
+    <!--两行文字-->
+    <color name="item_two_text_main">@color/text</color>
+    <color name="item_two_text_second">@color/md_grey_500</color>
 
+    <!--三行文字-->
+    <color name="item_three_text_main">@color/text</color>
+    <color name="item_three_text_second">@color/md_grey_700</color>
+    <color name="item_three_text_third">@color/md_grey_500</color>
 
-    <color name="item_divider">#f0f0f0</color>
-    <color name="setting_big_divider">#eeeeee</color>
-    <color name="setting_divider">#bebebe</color>
+    <!--分割线-->
+    <color name="divider_deep">@color/md_grey_300</color>
+    <color name="divider">@color/md_grey_200</color>
 
-    <color name="TabBottomText">@color/upload_name</color>
+    <!--底部tab-->
+    <color name="tab_home_normal">@color/text</color>
+    <color name="tab_home_press">@color/colorPrimary</color>
 
-    <color name="textPressAttention">@color/upload_name</color>
-
-    <color name="homeTabNormal">#FF000000</color>
-    <color name="homeTabPress">@color/colorPrimary</color>
-
-    <color name="net_fragment_text">#999999</color>
+    <!--Vector颜色-->
+    <color name="vec_black">@color/text</color>
+    <color name="vec_red">@color/md_red_300</color>
+    <color name="vec_white">@color/white</color>
+    <color name="vec_purple">@color/md_purple_300</color>
+    <color name="vec_grey">@color/md_grey_500</color>
+    <color name="vec_green">@color/md_green_300</color>
+    <color name="vec_blue">@color/md_blue_300</color>
+    <color name="vec_orange">@color/md_orange_300</color>
+    <color name="vec_pink">@color/md_pink_300</color>
+    <color name="vec_indigo">@color/md_indigo_300</color>
+    <color name="vec_lime">@color/md_lime_300</color>
 
 
     <!--Material Design颜色备选项-->

@@ -7,32 +7,30 @@
     android:padding="10dp">
 
     <LinearLayout
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:orientation="vertical">
 
         <TextView
-            android:textColor="@color/Text"
             android:id="@+id/title_tv"
+            style="@style/TwoTextMain"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text" />
+            android:layout_height="wrap_content" />
 
         <TextView
-            android:textColor="@color/TextGray"
             android:id="@+id/subtitle_tv"
+            style="@style/TwoTextSecond"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/sub_text" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <com.zcw.togglebutton.ToggleButton
         android:id="@+id/toggle_btn"
         android:layout_width="40dp"
         android:layout_height="20dp"
-        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         toggle:tbOffColor="@color/white"
         toggle:tbOnColor="@color/colorPrimary"
         toggle:tbSpotColor="@color/white" />

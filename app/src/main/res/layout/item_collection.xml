@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="曲谱名"
-            android:textSize="@dimen/item_two_txt_main_14sp" />
+            android:textSize="@dimen/item_two_txt_main" />
 
         <TextView
             android:id="@+id/content_tv"
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="曲谱描述"
-            android:textSize="@dimen/item_two_txt_second_12sp" />
+            android:textSize="@dimen/item_two_txt_second" />
     </LinearLayout>
 
     <ImageView

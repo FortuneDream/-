@@ -16,18 +16,16 @@
 
         <TextView
             android:id="@+id/name_tv"
+            style="@style/TwoTextMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/Text"
-            android:textSize="@dimen/item_two_txt_main_14sp"
             tools:text="名字" />
 
         <TextView
+            style="@style/TwoTextSecond"
             android:id="@+id/date_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/TextGray"
-            android:textSize="@dimen/item_two_txt_second_12sp"
             tools:text="2016/7/16 12:00:22" />
     </LinearLayout>
 

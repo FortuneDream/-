@@ -28,11 +28,11 @@ public class NetFragmentDecoration extends RecyclerView.ItemDecoration {
 
     public NetFragmentDecoration(Context context) {
         mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setColor(context.getResources().getColor(R.color.net_fragment_text));
+        mTextPaint.setColor(context.getResources().getColor(R.color.md_grey_500));
         mTextPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.net_fragment_text));
 
         mDividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mDividerPaint.setColor(Color.GRAY);
+        mDividerPaint.setColor(context.getResources().getColor(R.color.divider));
 
         mTextRect = new Rect();
         hotTextLength = mTextPaint.measureText(hot);

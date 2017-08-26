@@ -123,7 +123,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     public void checkAlertSupportDialog() {
         long ago = SharedPrefsUtil.getLong("support_date", 1503071043854L);
         long now = System.currentTimeMillis();
-        if (now - ago >= 1000 * 24 * 60 * 60) {
+        if (now - ago >= 36 * 1000 * 60 * 60) {
             SharedPrefsUtil.putLong("support_date", now);
             activity.alertSupportDialog();
         }

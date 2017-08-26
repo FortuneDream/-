@@ -50,9 +50,9 @@ public class BottomTabView extends LinearLayout {
     public void onSelect(Boolean isSelect) {
         if (isSelect) {
             ico.setImageResource(selectResource);
-            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.homeTabPress));
+            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.tab_home_press));
         } else {
-            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.homeTabNormal));
+            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.tab_home_normal));
             ico.setImageResource(noSelectResource);
         }
     }

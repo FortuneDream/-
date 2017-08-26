@@ -79,7 +79,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     public void initRecyclerView(EasyRecyclerView recyclerView, RecyclerArrayAdapter<?> adapter, int dp1) {
         initRecyclerView(recyclerView, adapter);
         int dp = ConvertUtil.Dp2Px(context, dp1);
-        recyclerView.addItemDecoration(new DividerDecoration(ContextCompat.getColor(context, R.color.setting_divider), 1, dp, 1));
+        recyclerView.addItemDecoration(new DividerDecoration(ContextCompat.getColor(context, R.color.divider), 1, dp, 1));
     }
 
     //无分割线

@@ -11,7 +11,7 @@
     <style name="AppTheme" parent="AppTheme.Base" />
 
     <style name="SettingDivider">
-        <item name="android:background">@color/setting_divider</item>
+        <item name="android:background">@color/divider</item>
         <item name="android:layout_height">@dimen/setting_divider</item>
         <item name="android:layout_width">match_parent</item>
     </style>
@@ -21,7 +21,7 @@
     </style>
 
     <style name="SettingBigDivider">
-        <item name="android:background">@color/setting_big_divider</item>
+        <item name="android:background">@color/divider_deep</item>
         <item name="android:layout_height">@dimen/setting_big_divider</item>
         <item name="android:layout_width">match_parent</item>
     </style>
@@ -40,14 +40,31 @@
         <!-- 左右文字样式 （和toolbar副标题样式一样，可自行修改）-->
     </style>
 
+    <!--两行文字-->
     <style name="TwoTextMain">
-        <item name="android:textSize">@dimen/item_two_txt_main_14sp</item>
-        <item name="android:textColor">@color/Text</item>
+        <item name="android:textSize">@dimen/item_two_txt_main</item>
+        <item name="android:textColor">@color/item_two_text_main</item>
     </style>
 
     <style name="TwoTextSecond">
-        <item name="android:textSize">@dimen/item_two_txt_second_12sp</item>
-        <item name="android:textColor">@color/TextGray</item>
+        <item name="android:textSize">@dimen/item_two_txt_second</item>
+        <item name="android:textColor">@color/item_two_text_second</item>
+    </style>
+
+    <!--三行文字-->
+    <style name="ThreeTextMain">
+        <item name="android:textSize">@dimen/item_three_txt_main</item>
+        <item name="android:textColor">@color/item_three_text_main</item>
+    </style>
+
+    <style name="ThreeTextSecond">
+        <item name="android:textSize">@dimen/item_three_txt_second</item>
+        <item name="android:textColor">@color/item_three_text_second</item>
+    </style>
+
+    <style name="ThreeTextThird">
+        <item name="android:textSize">@dimen/item_three_txt_third</item>
+        <item name="android:textColor">@color/item_three_text_third</item>
     </style>
 
     <style name="TwoTextLinear">
@@ -58,11 +75,6 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="TextPressAttention">
-        <item name="android:textSize">@dimen/item_two_txt_main_14sp</item>
-        <item name="android:textColor">@color/textPressAttention</item>
-        <item name="android:gravity">center</item>
-    </style>
 
 
 </resources>

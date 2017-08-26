@@ -4,10 +4,10 @@
     android:viewportHeight="1024.0"
     android:viewportWidth="1024.0">
     <path
-        android:fillColor="@color/md_red_300"
+        android:fillColor="@color/vec_red"
         android:pathData="M215.1,408.7 L51.6,408.7C17.2,408.7 17.2,443.2 17.2,443.2L51.6,989.6c0,34.4 34.4,34.4 34.4,34.4l142,0c30.1,0 30.1,-21.5 30.1,-21.5L258.2,451.8C253.8,408.7 215.1,408.7 215.1,408.7z" />
     <path
-        android:fillColor="@color/md_red_300"
+        android:fillColor="@color/vec_red"
         android:pathData="M937.9,408.7l-271.1,0C770.2,21.5 593.7,0 593.7,0c-77.4,0 -60.2,60.2 -64.5,68.8 0,189.3 -202.2,339.9 -202.2,339.9l0,542.1c0,51.6 73.1,73.1 103.3,73.1L834.7,1024c38.7,0 68.8,-99 68.8,-99 99,-344.2 99,-447.5 99,-447.5C1006.8,404.4 937.9,408.7 937.9,408.7z" />
 </vector>
 

@@ -8,8 +8,12 @@
 
     <dimen name="item_padding_16dp">16dp</dimen>
 
-    <dimen name="item_two_txt_main_14sp">14sp</dimen>
-    <dimen name="item_two_txt_second_12sp">12sp</dimen>
+    <dimen name="item_two_txt_main">14sp</dimen>
+    <dimen name="item_two_txt_second">12sp</dimen>
+
+    <dimen name="item_three_txt_main">14sp</dimen>
+    <dimen name="item_three_txt_second">13sp</dimen>
+    <dimen name="item_three_txt_third">12sp</dimen>
 
     <dimen name="item_head">48dp</dimen>
 

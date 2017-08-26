@@ -32,7 +32,7 @@
 
                 <TextView
                     android:id="@+id/post_user_date_tv"
-                    style="@style/TwoTextSecond"
+                    style="@style/ThreeTextThird"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -49,7 +49,7 @@
 
             <TextView
                 android:id="@+id/post_user_title_tv"
-                style="@style/TextAppearance.AppCompat.Body1"
+                style="@style/ThreeTextSecond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -57,7 +57,7 @@
 
             <TextView
                 android:id="@+id/post_user_content_tv"
-                style="@style/TextAppearance.AppCompat.Caption"
+                style="@style/ThreeTextSecond"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="求谱详细内容" />
@@ -74,7 +74,7 @@
 
         <TextView
             android:id="@+id/post_user_type_tv"
-            style="@style/TextAppearance.AppCompat.Caption"
+            style="@style/ThreeTextThird"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="56dp"
