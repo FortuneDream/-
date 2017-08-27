@@ -18,7 +18,7 @@ public class DownloadApkNotification {
     public final static int DOWNLOAD_COMPLETE = -2;
     public final static int DOWNLOAD_FAIL = -1;
     private Context mContext; // Activity或Service上下文
-    Notification notification; // notification
+    private Notification notification; // notification
     private NotificationManager nm;
     private PendingIntent contentIntent; // 点击通知后的动作
     private int notificationID; // 通知的唯一标示ID

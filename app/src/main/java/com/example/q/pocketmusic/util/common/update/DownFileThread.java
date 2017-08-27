@@ -28,13 +28,13 @@ public class DownFileThread implements Runnable {
     private String urlStr; // 下载URL
     private File apkFile; // 文件保存路径
     private boolean isFinished; // 下载是否完成
-    private boolean interupted = false; // 是否强制停止下载线程
+    private boolean interrupted = false; // 是否强制停止下载线程
 
-    public DownFileThread(Handler handler, String urlStr, String filePath) {
+    public DownFileThread(Handler handler, String urlStr, File file) {
         LogUtils.i(TAG, urlStr);
         this.mHandler = handler;
         this.urlStr = urlStr;
-        this.apkFile = new File(filePath);
+        this.apkFile = file;
         this.isFinished = false;
     }
 
@@ -52,8 +52,8 @@ public class DownFileThread implements Runnable {
     /**
      * 强行终止文件下载
      */
-    public void interuptThread() {
-        interupted = true;
+    public void interruptThread() {
+        interrupted = true;
     }
 
     @SuppressLint("NewApi")
@@ -92,7 +92,7 @@ public class DownFileThread implements Runnable {
             int times = 0;// 设置更新频率，频繁操作ＵＩ线程会导致系统奔溃
             double rate = (double) 100 / length; // 最大进度转化为100
             int timeLoad = length / 100 / 1024;
-            while (!interupted && ((len = bis.read(buffer)) != -1)) {
+            while (!interrupted && ((len = bis.read(buffer)) != -1)) {
                 fos.write(buffer, 0, len);
                 // 获取已经读取长度
                 total += len;

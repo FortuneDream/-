@@ -1,6 +1,9 @@
 package com.example.q.pocketmusic.util.common;
 
+import android.support.annotation.Nullable;
+
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by 鹏君 on 2016/10/2.
@@ -16,29 +19,6 @@ public class FileUtils {
                 s.renameTo(new File(newPath));
             }
         }
-//        try {
-//            int bytesum = 0;
-//            int byteread = 0;
-//            //这里会覆盖同名(先这样写吧。。。)
-//            File newfile = new File(newPath);
-//            if (newfile.exists()) {
-//                newfile.delete();
-//            }
-//            File oldfile = new File(oldPath);
-//            if (oldfile.exists()) { //文件存在时
-//                InputStream inStream = new FileInputStream(oldPath); //读入原文件
-//                FileOutputStream fs = new FileOutputStream(newPath);
-//                byte[] buffer = new byte[1444];
-//                int length;
-//                while ((byteread = inStream.read(buffer)) != -1) {
-//                    bytesum += byteread; //字节数 文件大小
-//                    fs.write(buffer, 0, byteread);
-//                }
-//                inStream.close();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     //深搜删除
@@ -51,6 +31,38 @@ public class FileUtils {
                 }
             }
             file.delete();
+        }
+    }
+
+    //根据url后缀名创建文件,返回String类型的本地地址,可能为Null
+    @Nullable
+    public static File createFileByNet(String url, String dirPath) {
+        boolean isSucceed = true;
+        if (!dirPath.endsWith("/")) {
+            dirPath = dirPath + "/";
+        }
+        File path = new File(dirPath);
+        if (!path.exists()) {
+            isSucceed = path.mkdirs();
+            if (!isSucceed) {
+                return null;
+            }
+        }
+        String[] s = url.split("/");//123.apk
+        String filePathString = dirPath + s[s.length - 1];
+        File file = new File(filePathString);
+        if (!file.exists()) {
+            try {
+                isSucceed = file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                ToastUtil.showToast(e.getMessage());
+            }
+        }
+        if (isSucceed) {
+            return file;
+        } else {
+            return null;
         }
     }
 }

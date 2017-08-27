@@ -107,7 +107,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
 
     //检查版本更新
     public void checkVersion() {
-        UpdateUtils.getInstanse().update(activity.getCurrentContext());
+        UpdateUtils.getInstance().update(activity.getCurrentContext());
     }
 
 

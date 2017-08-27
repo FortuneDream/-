@@ -44,7 +44,7 @@ public class GuaGuaKa extends View {
     private final int DEFAULT_TEXT_SIZE = ConvertUtil.Dp2Px(getContext(), 20);
     private final int DEFAULT_TEXT_COLOR = getResources().getColor(R.color.md_green_300);
     private OnCompleteListener onCompleteListener;
-    private String mTopContent = "~Surprise~";//顶层文字
+    private String mTopContent = "Surprise";//顶层文字
 
 
     public void setOnCompleteListener(OnCompleteListener onCompleteListener) {
@@ -227,6 +227,9 @@ public class GuaGuaKa extends View {
             float wipeArea = 0;
             float totalArea = w * h;
             mPixels = new int[w * h];
+            if (bitmap == null || bitmap.isRecycled()) {
+                return;
+            }
             bitmap.getPixels(mPixels, 0, w, 0, 0, w, h);
             for (int i = 0; i < w; i++) {
                 for (int j = 0; j < h; j++) {

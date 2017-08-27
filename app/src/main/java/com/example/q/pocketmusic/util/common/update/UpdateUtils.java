@@ -19,7 +19,7 @@ import cn.bmob.v3.update.AppVersion;
  * Created by 鹏君 on 2017/7/1.
  * （￣m￣）
  */
-
+//待测试
 public class UpdateUtils {
 
     public static UpdateUtils mUpdateUtils;
@@ -28,7 +28,7 @@ public class UpdateUtils {
 
     }
 
-    public static UpdateUtils getInstanse() {
+    public static UpdateUtils getInstance() {
         if (null == mUpdateUtils) {
             mUpdateUtils = new UpdateUtils();
         }
@@ -87,8 +87,8 @@ public class UpdateUtils {
     //开始下载
     public void download(Context context, String url, String dirPath) {
         Intent intent = new Intent(context, DownloadService.class);
-        intent.putExtra("url", url);
-        intent.putExtra("dir_path", dirPath);
+        intent.putExtra(DownloadService.PARAM_URL, url);
+        intent.putExtra(DownloadService.PARAM_DIR, dirPath);
         context.startService(intent);
     }
 }

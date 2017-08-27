@@ -55,7 +55,7 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
     }
 
     public void appUpdate() {
-        UpdateUtils.getInstanse().update(activity.getCurrentContext());
+        UpdateUtils.getInstance().update(activity.getCurrentContext());
     }
 
 
