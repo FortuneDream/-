@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.profile.contribution;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -24,8 +25,8 @@ public class ContributionPresenter extends BasePresenter<ContributionPresenter.I
     //贡献前十个
     public void init() {
         BmobQuery<MyUser> query = new BmobQuery<>();
-        query.setLimit(10);
-        query.order("-contribution");
+        query.setLimit(20);
+        query.order("-"+ BmobConstant.BMOB_ACTIVE_NUM);
         query.findObjects(new ToastQueryListener<MyUser>() {
             @Override
             public void onSuccess(List<MyUser> list) {

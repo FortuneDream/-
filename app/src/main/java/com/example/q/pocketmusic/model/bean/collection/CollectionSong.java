@@ -12,14 +12,8 @@ public class CollectionSong extends BmobObject {
     private String content;//收藏曲谱的描述
     private BmobRelation users;//收藏了这首曲谱的所有用户
     private Integer isFrom;//来自
-    private Boolean needGrade;
 
-    public Boolean getNeedGrade() {
-        return needGrade;
-    }
-
-    public void setNeedGrade(Boolean needGrade) {
-        this.needGrade = needGrade;
+    public CollectionSong() {
     }
 
     public Integer getIsFrom() {

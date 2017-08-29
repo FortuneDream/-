@@ -8,8 +8,8 @@ android {
         applicationId "com.example.q.pocketmusic"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 36
-        versionName "5.6"
+        versionCode 38
+        versionName "5.8"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {

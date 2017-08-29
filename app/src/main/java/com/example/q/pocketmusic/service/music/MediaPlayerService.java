@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by 鹏君 on 2016/11/1.
  */
-//疑问：Service运行在主线程，为什么没有阻塞线程?
+
 public class MediaPlayerService extends Service {
     public static final String RECEIVER_ACTION = "Receiver_action";//用不同的intent
     public static final String NOTIFY = "notify";

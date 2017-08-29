@@ -47,7 +47,7 @@ public class ContributionActivity extends AuthActivity<ContributionPresenter.IVi
         new DisplayStrategy().displayCircle(this, user.getHeadImg(), topIv);
         nickNameTv.setText(user.getNickName());
         contributionTv.setText("硬币：" + user.getContribution() + "枚");
-        initToolbar(toolbar, "硬币榜");
+        initToolbar(toolbar, "活跃榜单");
         initRecyclerView(recycler, adapter);
         presenter.init();
         adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {

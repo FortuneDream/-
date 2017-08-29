@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.model.bean.share;
 
 import com.example.q.pocketmusic.model.bean.MyUser;
+import com.jude.rollviewpager.hintview.TextHintView;
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobRelation;
@@ -17,6 +18,9 @@ public class ShareSong extends BmobObject {
     private int agreeNum;//分享数量
     private int downloadNum;//下载量
 
+    public ShareSong() {
+
+    }
 
     public ShareSong(MyUser user, String name, String content) {
         this.user = user;
@@ -40,6 +44,14 @@ public class ShareSong extends BmobObject {
 
     public void setAgreeNum(int agreeNum) {
         this.agreeNum = agreeNum;
+    }
+
+    public int getDownloadNum() {
+        return downloadNum;
+    }
+
+    public void setDownloadNum(int downloadNum) {
+        this.downloadNum = downloadNum;
     }
 
     public MyUser getUser() {
@@ -66,11 +78,5 @@ public class ShareSong extends BmobObject {
         this.content = content;
     }
 
-    public int getDownloadNum() {
-        return downloadNum;
-    }
 
-    public void setDownloadNum(int downloadNum) {
-        this.downloadNum = downloadNum;
-    }
 }

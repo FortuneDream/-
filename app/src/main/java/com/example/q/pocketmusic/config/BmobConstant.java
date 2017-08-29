@@ -13,4 +13,5 @@ public class BmobConstant {
     public static final String BMOB_AGREES = "agrees";
     public static final String BMOB_COLLECTIONS="collections";
     public static final String BMOB_DOWNLOAD_NUM="downloadNum";
+    public static final String BMOB_ACTIVE_NUM="active";
 }
