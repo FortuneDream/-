@@ -25,13 +25,4 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <com.zcw.togglebutton.ToggleButton
-        android:id="@+id/toggle_btn"
-        android:layout_width="40dp"
-        android:layout_height="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        toggle:tbOffColor="@color/white"
-        toggle:tbOnColor="@color/colorPrimary"
-        toggle:tbSpotColor="@color/white" />
 </RelativeLayout>

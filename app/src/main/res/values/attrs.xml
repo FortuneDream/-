@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="SwitchSettingItem">
-        <attr name="itemTitle" format="string" />
-        <attr name="itemSubtitleIsTrue" format="string" />
-        <attr name="itemSubtitleIsFalse" format="string" />
-        <attr name="itemCbVisible" format="boolean" />
-    </declare-styleable>
-
     <declare-styleable name="IcoTextItem">
         <attr name="itemTitleIco" format="integer" />
         <attr name="itemTitleText" format="string" />

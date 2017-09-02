@@ -1,0 +1,55 @@
+<com.google.android.flexbox.FlexboxLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:flexWrap="wrap"
+    android:layout_marginLeft="16dp"
+    android:id="@+id/flex_box_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:text="吉他谱"
+        android:id="@+id/jita_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/selector_item_tag"
+        android:padding="8dp"
+        android:textSize="13sp" />
+
+    <TextView
+        android:text="简谱"
+        android:id="@+id/jianpu_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/selector_item_tag"
+        android:padding="8dp"
+        android:textSize="13sp" />
+
+    <TextView
+        android:text="钢琴谱"
+        android:id="@+id/gangqin_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/selector_item_tag"
+        android:padding="8dp"
+        android:textSize="13sp" />
+
+    <TextView
+        android:text="其他"
+        android:id="@+id/qita_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/selector_item_tag"
+        android:padding="8dp"
+        android:textSize="13sp" />
+</com.google.android.flexbox.FlexboxLayout>
+
+

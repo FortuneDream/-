@@ -29,6 +29,7 @@
         </provider>
 
         <activity android:name=".module.common.TestModuleActivity">
+
         </activity>
 
         <activity android:name=".module.splash.SplashActivity">
@@ -44,7 +45,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="pocket.music.home.activity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

@@ -1,31 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp">
+<com.google.android.flexbox.FlexboxLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:flexWrap="wrap"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        style="@style/TwoTextMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:text="刮一刮~" />
+        <TextView
+            android:text="吉他谱"
+            android:id="@+id/jita_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/selector_item_tag"
+            android:padding="8dp"
+            android:textSize="13sp" />
 
-    <com.example.q.pocketmusic.view.widget.view.GuaGuaKa
-        android:id="@+id/gua_gua_ka"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:text="简谱"
+            android:id="@+id/jianpu_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/selector_item_tag"
+            android:padding="8dp"
+            android:textSize="13sp" />
 
-    <Button
-        android:id="@+id/get_reward_btn"
-        android:layout_width="48dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/shape_button"
-        android:text="获取"
-        android:visibility="gone" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/gangqin_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/selector_item_tag"
+            android:padding="8dp"
+            android:textSize="13sp"
+            tools:text="钢琴谱" />
+
+        <TextView
+            android:text="其他"
+            android:id="@+id/qita_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/selector_item_tag"
+            android:padding="8dp"
+            android:textSize="13sp" />
+    </com.google.android.flexbox.FlexboxLayout>
+
 

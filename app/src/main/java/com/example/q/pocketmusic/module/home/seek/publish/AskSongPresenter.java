@@ -47,13 +47,8 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
         activity.alertCoinDialog(coin, title, content, user);
     }
 
-    public void setSelectedTag(Set<Integer> selectPosSet) {
-        Iterator<Integer> iterator = selectPosSet.iterator();
-        if (iterator.hasNext()) {
-            type = iterator.next();
-        } else {
-            type = NOT_SELECT;//没有选
-        }
+    public void setSelectedTag(int type) {
+        this.type=type;
     }
 
     public void askForSong(String title, String content, final MyUser user) {
