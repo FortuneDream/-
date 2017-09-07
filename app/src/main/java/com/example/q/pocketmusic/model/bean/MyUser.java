@@ -30,6 +30,7 @@ public class MyUser extends BmobUser {
         this.lastSignInDate = lastSignInDate;
     }
 
+
     public MyUser() {
         this.signature = "这个人没有签名哦~";
         this.nickName = "匿名";

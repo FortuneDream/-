@@ -44,7 +44,7 @@ public abstract class ToastSaveListener<T> extends SaveListener<T> {
         MyUser user = BmobUser.getCurrentUser(MyUser.class);
         if (user != null) {
             user.increment(BmobConstant.BMOB_ACTIVE_NUM);
-            user.update(user.getObjectId(),new ToastUpdateListener() {
+            user.update(new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
                     LogUtils.e("活跃度+1");

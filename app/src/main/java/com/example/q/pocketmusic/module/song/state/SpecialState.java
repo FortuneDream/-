@@ -40,6 +40,7 @@ public class SpecialState extends BaseState implements IState {
                     pics.add(pic.getUrl());
                 }
                 getSong().setIvUrl(pics);
+                getSong().setContent("暂无");
                 activity.setPicResult(getSong().getIvUrl(), getLoadingWay());
             }
         });

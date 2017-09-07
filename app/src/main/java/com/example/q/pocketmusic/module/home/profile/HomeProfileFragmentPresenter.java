@@ -40,7 +40,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragmentPresenter.IView> {
     private IView fragment;
     private MyUser user;
-    private static boolean mShowSignInToast = true;
+
 
     public HomeProfileFragmentPresenter(IView fragment) {
         attachView(fragment);
@@ -131,17 +131,21 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
             try {
                 Date last = dateFormat.parse(lastSignIn);
                 Date now = new Date();
-                long remainTime = now.getTime() - last.getTime();  //11   10,10  10
-                if (remainTime > 18 * 60 * 60 * 1000) {//距离上次签到已经超过18小时
-                    return false;
+                Calendar cd = Calendar.getInstance();
+                cd.setTime(last);
+                int lastDay = cd.get(Calendar.DAY_OF_YEAR);
+                int lastYear = cd.get(Calendar.YEAR);
+                cd.setTime(now);
+                int nowDay = cd.get(Calendar.DAY_OF_YEAR);
+                int nowYear = cd.get(Calendar.YEAR);
+                if (nowYear > lastYear) {
+                    return false;//没有签到
                 } else {
-                    long hour = 18 - remainTime / 1000 / 60 / 60;
-                    if (mShowSignInToast) {
-                        ToastUtil.showToast("距离下次签到还剩:" + hour + "小时");
-                        mShowSignInToast = false;
+                    if (nowDay > lastDay) {
+                        return false;//没有签到
+                    } else {
+                        return true;//已经签到
                     }
-
-                    return true;
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
