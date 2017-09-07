@@ -7,6 +7,7 @@ import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
@@ -166,7 +167,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
                     @Override
                     public void onSuccess(List<BatchResult> list) {
-                        user.increment("contribution", Constant.ADD_CONTRIBUTION_UPLOAD);//原子操作
+                        user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_UPLOAD);//原子操作
                         user.update(new ToastUpdateListener(activity) {
                             @Override
                             public void onSuccess() {

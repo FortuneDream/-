@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
@@ -59,7 +60,7 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
         askSongPost.save(new ToastSaveListener<String>(activity) {
             @Override
             public void onSuccess(String s) {
-                user.increment("contribution", -coin);
+                user.increment(BmobConstant.BMOB_COIN, -coin);
                 user.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {

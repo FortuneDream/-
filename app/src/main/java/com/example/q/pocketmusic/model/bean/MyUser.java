@@ -19,7 +19,7 @@ public class MyUser extends BmobUser {
     private Integer contribution;//贡献值
     private BmobRelation collections;//某个用户收藏的所有曲谱
     private String versionFlag;
-    private int active;
+    private Integer active;
 
 
     public String getLastSignInDate() {

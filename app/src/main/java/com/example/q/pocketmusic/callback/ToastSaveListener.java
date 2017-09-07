@@ -33,7 +33,7 @@ public abstract class ToastSaveListener<T> extends SaveListener<T> {
     final public void done(T t, BmobException e) {
         if (e == null) {
             onSuccess(t);
-            addUserActive();
+            //addUserActive();
         } else {
             onFail(t, e);
         }

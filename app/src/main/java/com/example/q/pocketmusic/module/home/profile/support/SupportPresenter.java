@@ -136,7 +136,7 @@ public class SupportPresenter extends BasePresenter<SupportPresenter.IView> {
 //                支付成功,保险起见请调用查询方法确认结果
                 ToastUtil.showToast("感谢您的支持！");
 //                向上取整
-                user.increment("contribution", Math.ceil(Double.parseDouble(money)) * 10);
+                user.increment(BmobConstant.BMOB_COIN, Math.ceil(Double.parseDouble(money)) * 10);
                 user.update(new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {

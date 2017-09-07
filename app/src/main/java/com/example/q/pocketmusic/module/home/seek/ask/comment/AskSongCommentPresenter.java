@@ -177,7 +177,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
             @Override
             public void onSuccess(List<BatchResult> list) {
-                user.increment("contribution", Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
+                user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
                 user.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
@@ -200,7 +200,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
             @Override
             public void onSuccess(List<BatchResult> list) {
-                user.increment("contribution", Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
+                user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
                 user.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
@@ -229,7 +229,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                     new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
                         @Override
                         public void onSuccess(List<BatchResult> list) {
-                            user.increment("contribution", Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
+                            user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
                             user.update(new ToastUpdateListener(activity) {
                                 @Override
                                 public void onSuccess() {

@@ -14,7 +14,7 @@ public class AskSongPost extends BmobObject {
     private int type;//所求曲谱类型
     private String content;//帖子内容
     private Integer commentNum;//回复数量
-    private int index;//先按照指数，再创建时间逆序
+    private Integer index;//先按照指数，再创建时间逆序
 
 
     public AskSongPost() {

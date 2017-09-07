@@ -112,7 +112,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //签到
     public void addCoin(final int coin) {
-        user.increment("contribution", coin);
+        user.increment(BmobConstant.BMOB_COIN, coin);
         user.setLastSignInDate(dateFormat.format(new Date()));//设置最新签到时间
         user.update(new ToastUpdateListener() {
             @Override
@@ -159,7 +159,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         if (user.getLastSignInDate() == null) {//之前没有这个列
             final int coin = 5;
             user.setLastSignInDate(dateFormat.format(new Date()));//设置当前时间为最后时间
-            user.increment("contribution", coin);//第一次都加5
+            user.increment(BmobConstant.BMOB_COIN, coin);//第一次都加5
             user.update(new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
