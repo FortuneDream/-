@@ -1,5 +1,6 @@
 package com.example.q.pocketmusic.module.user.notify;
 
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -9,6 +10,7 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UserNotifyActivity extends BaseActivity<UserNotifyPresenter.IView, UserNotifyPresenter>
@@ -24,6 +26,8 @@ public class UserNotifyActivity extends BaseActivity<UserNotifyPresenter.IView, 
     IcoTextItem usuallyHelpItem;
     @BindView(R.id.user_suggestion_item)
     IcoTextItem userSuggestionItem;
+    @BindView(R.id.gift_item)
+    IcoTextItem giftItem;
 
     @Override
     protected UserNotifyPresenter createPresenter() {
@@ -37,10 +41,10 @@ public class UserNotifyActivity extends BaseActivity<UserNotifyPresenter.IView, 
 
     @Override
     public void initView() {
-        initToolbar(toolbar,"Tips");
+        initToolbar(toolbar, "Tips");
     }
 
-    @OnClick({R.id.preview_version_item, R.id.usually_help_item, R.id.user_suggestion_item})
+    @OnClick({R.id.preview_version_item, R.id.usually_help_item, R.id.user_suggestion_item,R.id.gift_item})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.preview_version_item:
@@ -52,6 +56,10 @@ public class UserNotifyActivity extends BaseActivity<UserNotifyPresenter.IView, 
             case R.id.user_suggestion_item:
                 presenter.enterUserSuggestionActivity();
                 break;
+            case R.id.gift_item:
+                presenter.enterGiftActivity();
+                break;
         }
     }
+
 }

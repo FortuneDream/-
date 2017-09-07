@@ -26,16 +26,20 @@ public class SpecialListAdapter extends RecyclerArrayAdapter<SpecialColumnSong> 
 
     class MyViewHolder extends BaseViewHolder<SpecialColumnSong> {
         TextView nameTv;
+        TextView contentTv;
 
         public MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_special_song);
             nameTv = $(R.id.name_tv);
+            contentTv=$(R.id.subtitle_tv);
+
         }
 
         @Override
         public void setData(SpecialColumnSong data) {
             super.setData(data);
             nameTv.setText(data.getName());
+            contentTv.setText("暂无");
         }
     }
 }

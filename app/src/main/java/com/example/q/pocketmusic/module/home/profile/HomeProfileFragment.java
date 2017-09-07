@@ -182,7 +182,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 presenter.shareApp();
                 break;
             case R.id.user_signature_tv:
-                alertSignatureDialog();
+                alertSignatureDialog();//修改签名
                 break;
         }
     }

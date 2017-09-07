@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.BmobConstant;
+import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -14,6 +18,8 @@ import com.example.q.pocketmusic.module.song.state.SongController;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
+
+import cn.bmob.v3.BmobUser;
 
 /**
  * Created by 鹏君 on 2016/8/30.
@@ -70,6 +76,19 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
     @Override
     public void release() {
 
+    }
+
+    public void punish() {
+        MyUser user = BmobUser.getCurrentUser(MyUser.class);
+        if (user != null && user.getContribution() >= Constant.REDUCE_PUNISH) {
+            user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_PUNISH);
+            user.update(new ToastUpdateListener() {
+                @Override
+                public void onSuccess() {
+                    ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_PUNISH);
+                }
+            });
+        }
     }
 
 

@@ -23,6 +23,7 @@ import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.home.profile.contribution.ContributionModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 import com.example.q.pocketmusic.util.DownloadUtil;
@@ -50,10 +51,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     private boolean isEnableAgree = true;//是否能够点赞
     private Song song;
     private int isFrom;
+    private ContributionModel contributionModel;
 
     public SongMenuPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
+        contributionModel = new ContributionModel();
     }
 
 
@@ -197,7 +200,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         BmobRelation relation = new BmobRelation();
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         relation.add(user);
-        ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
+        final ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
         shareSong.setAgrees(relation);
         shareSong.increment(BmobConstant.BMOB_AGREE_NUM);//原子操作，点赞数加一
         shareSong.update(new ToastUpdateListener() {
@@ -209,6 +212,14 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                     @Override
                     public void onSuccess() {
                         ToastUtil.showToast(CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
+
+                        //增加分享人的硬币
+                        contributionModel.addGift(shareSong.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
+                            @Override
+                            public void onSuccess(String s) {
+                                //
+                            }
+                        });
                     }
                 });
             }
@@ -220,7 +231,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         BmobRelation relation = new BmobRelation();
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         relation.add(user);
-        AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
+        final AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
         askSongComment.setAgrees(relation);
         askSongComment.increment(BmobConstant.BMOB_AGREE_NUM);//原子操作，点赞数加一
         askSongComment.update(new ToastUpdateListener() {
@@ -232,8 +243,17 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                     @Override
                     public void onSuccess() {
                         ToastUtil.showToast(CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
+                        //增加发谱人的硬币
+                        contributionModel.addGift(askSongComment.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
+                            @Override
+                            public void onSuccess(String s) {
+                                //
+                            }
+                        });
                     }
                 });
+
+
             }
         });
     }

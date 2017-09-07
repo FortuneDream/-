@@ -43,6 +43,7 @@ public class Constant {
     public final static int FROM_SHARE = 8;
     public final static int FROM_ASK = 9;
     public final static int FROM_LOCAL = 10;
+    public final static int FROM_SPECIAL=1;;
 
     //Intent Flag:显示Menu
     public final static int MENU_DOWNLOAD_COLLECTION_AGREE_SHARE = 1001;//下载，点赞，收藏
@@ -66,12 +67,14 @@ public class Constant {
     public final static int ADD_CONTRIBUTION_UPLOAD = 3;//上传
     public final static int ADD_CONTRIBUTION_COMMENT_WITH_PIC = 3;//评论加图
     public final static int ADD_CONTRIBUTION_AGREE = 1;//点赞，赞数比较多时，给予额外加成
+    public final static int ADD_CONTRIBUTION_AGREE_OTHER=2;//被点赞的额外加成
 
     //贡献度-
     public final static int REDUCE_CONTRIBUTION_ASK = 4;//求谱
     public final static int REDUCE_DOWNLOAD = 3;//下载
     public final static int REDUCE_CONTRIBUTION_COLLECTION = 2;//收藏
     public final static int REDUCE_CHANG_NICK_NAME = 10;
+    public final static int REDUCE_PUNISH = 10;//惩罚
 
 
     //求谱类型,最好用Hap映射

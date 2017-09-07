@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.user.notify.gift.GiftActivity;
 import com.example.q.pocketmusic.module.user.notify.help.HelpActivity;
 import com.example.q.pocketmusic.module.user.notify.suggestion.SuggestionActivity;
 import com.example.q.pocketmusic.module.user.notify.version.PreviewVersionActivity;
@@ -31,6 +32,10 @@ public class UserNotifyPresenter extends BasePresenter<UserNotifyPresenter.IView
 
     public void enterPreviewActivity() {
         activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), PreviewVersionActivity.class));
+    }
+
+    public void enterGiftActivity() {
+        activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), GiftActivity.class));
     }
 
     interface IView extends IBaseView {

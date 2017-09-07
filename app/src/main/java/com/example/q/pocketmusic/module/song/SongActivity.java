@@ -1,24 +1,38 @@
 package com.example.q.pocketmusic.module.song;
 
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
+import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.ScreenshotContentObserver;
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.module.home.HomeActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.net.HackyViewPager;
+import com.example.q.pocketmusic.view.widget.net.SnackBarUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
+import cn.bmob.v3.BmobUser;
 import pub.devrel.easypermissions.EasyPermissions;
 
 //查看大图界面
@@ -45,6 +59,28 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     public final static String SHARE_SONG = "SHARE_SONG";//可选传递参数，用于传递shareSong
 
+    public final static String SPECIAL_SONG="SPECIAL_SONG";//精品区
+
+    private Handler handler = new Handler(Looper.myLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            showSnack();
+            presenter.punish();
+
+        }
+    };
+
+    //显示SnackBar
+    private void showSnack() {
+        SnackBarUtil.IndefiniteSnackbar(getWindow().getDecorView(), "在干啥坏事呢！  ( ´◔ ‸◔`)", 4000, R.color.black, SnackBarUtil.green).setAction("...", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        }).setActionTextColor(ContextCompat.getColor(getCurrentContext(), R.color.white)).show();
+    }
+
 
     @Override
     public int setContentResource() {
@@ -67,7 +103,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     //加载失败
     @Override
     public void loadFail() {
-        ToastUtil.showToast( CommonString.STR_NOT_NET);
+        ToastUtil.showToast(CommonString.STR_NOT_NET);
         finish();
     }
 
@@ -115,13 +151,25 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-        ToastUtil.showToast( "成功获得权限");
+        ToastUtil.showToast("成功获得权限");
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        ToastUtil.showToast( "录音权限被拒绝,如需录音请到设置中心--权限管理中修改");
+        ToastUtil.showToast("录音权限被拒绝,如需录音请到设置中心--权限管理中修改");
         //presenter.enterSystemSetting();
     }
 
+    //截屏监听
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ScreenshotContentObserver.startObserve(handler, getAppContext());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ScreenshotContentObserver.stopObserve();
+    }
 }

@@ -28,10 +28,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".module.common.TestModuleActivity">
-
-        </activity>
-
+        <activity android:name=".module.common.TestModuleActivity"></activity>
         <activity android:name=".module.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,6 +42,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="pocket.music.home.activity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -116,7 +114,7 @@
         <activity android:name=".module.user.other.OtherProfileActivity" />
         <activity android:name=".module.home.net.type.study.StudyActivity" />
         <activity android:name=".module.home.net.special.list.SpecialListActivity" />
-
+        <activity android:name=".module.user.notify.gift.GiftActivity"></activity>
     </application>
 
 </manifest>

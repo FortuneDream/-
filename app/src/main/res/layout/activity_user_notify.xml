@@ -36,4 +36,13 @@
         app:itemTitleText="意见反馈" />
 
     <View style="@style/SettingDivider" />
+
+    <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+        android:id="@+id/gift_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemTitleIco="@drawable/ic_vec_gift"
+        app:itemTitleText="礼包中心" />
+
+    <View style="@style/SettingDivider" />
 </LinearLayout>

@@ -8,6 +8,7 @@ import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
+import com.example.q.pocketmusic.model.bean.special.SpecialColumnSong;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.module.song.SongActivityPresenter;
 
@@ -44,6 +45,9 @@ public class SongController {
                 return new SongController(new SearchState(song, activity));//搜索
             case Constant.FROM_TYPE:
                 return new SongController(new TypeState(song, activity));//类型
+            case Constant.FROM_SPECIAL:
+                SpecialColumnSong specialColumnSong= (SpecialColumnSong) intent.getSerializableExtra(SongActivity.SPECIAL_SONG);
+                return new SongController(new SpecialState(song,specialColumnSong,activity));
             default:
                 return null;
         }

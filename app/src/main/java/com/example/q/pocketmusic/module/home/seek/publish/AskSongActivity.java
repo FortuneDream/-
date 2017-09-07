@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
@@ -74,16 +75,16 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.jita_tv:
-                setTag(0);
+                setTag(Constant.ji_ta_pu);
                 break;
             case R.id.jianpu_tv:
-                setTag(1);
+                setTag(Constant.jian_pu);
                 break;
             case R.id.gangqin_tv:
-                setTag(2);
+                setTag(Constant.gang_qin_pu);
                 break;
             case R.id.qita_tv:
-                setTag(3);
+                setTag(Constant.qi_ta_pu);
                 break;
         }
     }

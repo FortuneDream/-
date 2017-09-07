@@ -1,10 +1,15 @@
 package com.example.q.pocketmusic.module.common;
 
+import android.app.Activity;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.module.home.HomeActivity;
 import com.example.q.pocketmusic.util.CheckUserUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 鹏君 on 2017/1/26.

@@ -6,6 +6,12 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.util.CheckUserUtil;
 
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FetchUserInfoListener;
+
+import static cn.bmob.v3.b.From.e;
+
 /**
  * Created by 鹏君 on 2017/1/13.
  */

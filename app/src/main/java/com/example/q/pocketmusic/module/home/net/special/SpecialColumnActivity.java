@@ -55,6 +55,6 @@ public class SpecialColumnActivity extends BaseActivity<SpecialColumnPresenter.I
 
     @Override
     public void onItemClick(int position) {
-        ToastUtil.showToast("正在开发中~~~");
+        presenter.enterSpecialListActivity(adapter.getItem(position));
     }
 }
