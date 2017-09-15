@@ -76,7 +76,6 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
         final AskSongPost post = (AskSongPost) getIntent().getSerializableExtra(PARAM_POST);
         Boolean isFromUser = getIntent().getBooleanExtra(PARAM_IS_FROM_USER, false);
         presenter.setPost(post);
-        presenter.setUser(UserUtil.user);
         initToolbar(toolbar, presenter.getPost().getTitle());
         initRecyclerView(recycler, adapter);
         adapter.setMore(R.layout.view_more, this);

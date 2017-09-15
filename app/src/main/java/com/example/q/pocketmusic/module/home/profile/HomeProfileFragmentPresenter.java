@@ -17,6 +17,7 @@ import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
 import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
@@ -39,7 +40,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragmentPresenter.IView> {
     private IView fragment;
-    private MyUser user;
+
 
 
     public HomeProfileFragmentPresenter(IView fragment) {
@@ -70,8 +71,8 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                             return;
                         }
                         //修改用户表的headIv属性
-                        user.setHeadImg(bmobFile.getFileUrl());
-                        user.update(new ToastUpdateListener(fragment) {
+                        UserUtil.user.setHeadImg(bmobFile.getFileUrl());
+                        UserUtil.user.update(new ToastUpdateListener(fragment) {
                             @Override
                             public void onSuccess() {
                                 fragment.showLoading(false);
@@ -89,13 +90,6 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                 ToastUtil.showToast(CommonString.STR_ERROR_INFO + errorMsg);
             }
         });
-
-
-    }
-
-
-    public void setUser(MyUser user) {
-        this.user = user;
     }
 
 
@@ -112,9 +106,9 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //签到
     public void addCoin(final int coin) {
-        user.increment(BmobConstant.BMOB_COIN, coin);
-        user.setLastSignInDate(dateFormat.format(new Date()));//设置最新签到时间
-        user.update(new ToastUpdateListener() {
+        UserUtil.user.increment(BmobConstant.BMOB_COIN, coin);
+        UserUtil.user.setLastSignInDate(dateFormat.format(new Date()));//设置最新签到时间
+        UserUtil.user.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
                 ToastUtil.showToast(CommonString.ADD_COIN_BASE + coin);
@@ -124,10 +118,10 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //检测是否已经签到
     public boolean isSignIn() {
-        if (user.getLastSignInDate() == null) {//之前没有这个列,可以签到
+        if (UserUtil.user.getLastSignInDate() == null) {//之前没有这个列,可以签到
             return false;
         } else {
-            String lastSignIn = user.getLastSignInDate();
+            String lastSignIn =UserUtil.user.getLastSignInDate();
             try {
                 Date last = dateFormat.parse(lastSignIn);
                 Date now = new Date();
@@ -156,11 +150,11 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //检测是否已经签到
     public void SignIn() {
-        if (user.getLastSignInDate() == null) {//之前没有这个列
+        if (UserUtil.user.getLastSignInDate() == null) {//之前没有这个列
             final int coin = 5;
-            user.setLastSignInDate(dateFormat.format(new Date()));//设置当前时间为最后时间
-            user.increment(BmobConstant.BMOB_COIN, coin);//第一次都加5
-            user.update(new ToastUpdateListener() {
+            UserUtil.user.setLastSignInDate(dateFormat.format(new Date()));//设置当前时间为最后时间
+            UserUtil.user.increment(BmobConstant.BMOB_COIN, coin);//第一次都加5
+            UserUtil.user.update(new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
                     ToastUtil.showToast("今天已签到：" + CommonString.ADD_COIN_BASE + coin);
@@ -200,8 +194,8 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
     }
 
     public void setSignature(final String signature) {
-        user.setSignature(signature);
-        user.update(new ToastUpdateListener() {
+        UserUtil.user.setSignature(signature);
+        UserUtil.user.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
                 ToastUtil.showToast("已修改签名~");
@@ -216,8 +210,8 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         try {
             PackageManager pm = fragment.getCurrentContext().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(fragment.getCurrentContext().getPackageName(), PackageManager.GET_ACTIVITIES);
-            user.setVersion(pi.versionName);
-            user.update(new ToastUpdateListener() {
+            UserUtil.user.setVersion(pi.versionName);
+            UserUtil.user.update(new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
 
@@ -230,12 +224,12 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //修改昵称
     public void setNickName(final String nickName) {
-        user.setNickName(nickName);
-        user.update(new ToastUpdateListener() {
+        UserUtil.user.setNickName(nickName);
+        UserUtil.user.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_CHANG_NICK_NAME);
-                user.update(new ToastUpdateListener() {
+                UserUtil.user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_CHANG_NICK_NAME);
+                UserUtil.user.update(new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
                         ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CHANG_NICK_NAME);

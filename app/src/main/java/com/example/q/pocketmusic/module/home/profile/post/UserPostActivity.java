@@ -37,7 +37,6 @@ public class UserPostActivity extends AuthActivity<UserPostPresenter.IView, User
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more,this);
         adapter.setOnItemClickListener(this);
-        presenter.setUser(UserUtil.user);
         initToolbar(toolbar, "我的求谱");
         initRecyclerView(recycler, adapter, 1);
         presenter.getUserPostList(false);

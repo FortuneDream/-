@@ -73,8 +73,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
 
     private void initProfileView() {
         if (UserUtil.user != null) {
-            //设置
-            presenter.setUser(UserUtil.user);
             //设置昵称
             initToolbar(toolbar, UserUtil.user.getNickName());
             //设置头像

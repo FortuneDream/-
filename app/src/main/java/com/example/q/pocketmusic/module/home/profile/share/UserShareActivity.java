@@ -38,7 +38,6 @@ public class UserShareActivity extends AuthActivity<UserSharePresenter.IView, Us
 
     @Override
     public void initUserView() {
-        presenter.setUser(UserUtil.user);
         adapter = new UserShareAdapter(getCurrentContext());
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);

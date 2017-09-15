@@ -49,7 +49,6 @@ public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, 
     @Override
     public void initUserView() {
         recycler.setRefreshListener(this);
-        presenter.setUser(UserUtil.user);
         adapter = new SuggestionAdapter(this);
         initToolbar(toolbar, "反馈意见");
         initRecyclerView(recycler, adapter);

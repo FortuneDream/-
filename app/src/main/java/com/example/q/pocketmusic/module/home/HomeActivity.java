@@ -99,8 +99,7 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
                 presenter.clickAsk();
                 break;
             case R.id.home_tab_profile_tab:
-                UserUtil.checkLocalUser(this);
-                if (UserUtil.user != null) {
+                if (UserUtil.checkLocalUser(this)) {
                     presenter.clickProfile();
                 }
                 break;

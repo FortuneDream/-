@@ -113,9 +113,8 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         if (new LocalSongDao(fragment.getCurrentContext()).isExist(song.getName())) {
             return new DownloadInfo("本地已存在", false);
         }
-        UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
         //找不到用户
-        if (UserUtil.user == null) {
+        if (!UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext())) {
             return new DownloadInfo("找不到用户", false);
         }
         //硬币不足
@@ -261,8 +260,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //添加收藏
     public void addCollection() {
-        UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
-        if (UserUtil.user == null) {
+        if (!UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext())) {
             ToastUtil.showToast("请先登录~");
             return;
         }

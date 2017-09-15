@@ -11,6 +11,7 @@ import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 
 import java.util.List;
 
@@ -20,7 +21,6 @@ import java.util.List;
 
 public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> {
     private IView activity;
-    private MyUser user;
     private int mPage;
     private UserShareModel model;
 
@@ -34,7 +34,7 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
         if (isRefreshing) {
             mPage = 0;
         }
-        model.getUserShareList(user, mPage, new ToastQueryListener<ShareSong>() {
+        model.getUserShareList(UserUtil.user, mPage, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 activity.setList(isRefreshing, list);
@@ -44,16 +44,12 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
 
     public void getMoreList() {
         mPage++;
-        model.getUserShareList(user, mPage, new ToastQueryListener<ShareSong>() {
+        model.getUserShareList(UserUtil.user, mPage, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 activity.setList(false, list);
             }
         });
-    }
-
-    public void setUser(MyUser user) {
-        this.user = user;
     }
 
     public void enterSongActivity(ShareSong shareSong) {

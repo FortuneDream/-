@@ -6,6 +6,7 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 /**
  * Created by 鹏君 on 2017/1/26.
@@ -17,9 +18,8 @@ public abstract class AuthFragment<V, T extends BasePresenter<V>> extends BaseFr
 
     @Override
     public void initView() {
-        UserUtil.checkLocalUser(this);
-        if (UserUtil.user != null) {
-            LogUtils.i("user.getContribution:" + String.valueOf(UserUtil.user.getContribution()));
+        if (!UserUtil.checkLocalUser(this)){
+            ToastUtil.showToast("请登录");
         }
     }
 

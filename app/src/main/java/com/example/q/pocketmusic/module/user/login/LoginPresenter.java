@@ -25,13 +25,13 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
 
     public LoginPresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
     }
 
     //登录
     public void login(final String account, String password) {
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
-            ToastUtil.showToast( CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
             return;
         }
         activity.showLoading(true);
@@ -42,7 +42,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
 
             @Override
             public void onSuccess(MyUser user) {
-                ToastUtil.showToast( "欢迎尊贵的VIP！ ");
+                ToastUtil.showToast("欢迎尊贵的VIP！ ");
                 activity.loginToResult(Constant.SUCCESS, user);
                 activity.finish();//关闭登录界面
             }

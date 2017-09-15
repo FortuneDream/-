@@ -26,32 +26,40 @@ import cn.bmob.v3.BmobQuery;
 public class UserUtil {
     public static MyUser user;
 
-    public static void checkLocalUser(Fragment fragment) {
+    public static boolean checkLocalUser(Fragment fragment) {
         MyUser user = MyUser.getCurrentUser(MyUser.class);
         if (user == null) {
             Intent intent = new Intent(fragment.getContext(), LoginActivity.class);
             fragment.startActivityForResult(intent, Constant.REQUEST_LOGIN);
-        }else {
-            UserUtil.user=user;
-            SharedPrefsUtil.getString("user","");
+            return false;
+        } else {
+            UserUtil.user = user;
+            SharedPrefsUtil.getString("user", "");
+            return true;
         }
     }
 
-    public static void checkLocalUser(FragmentActivity activity) {
+    public static boolean checkLocalUser(FragmentActivity activity) {
         MyUser user = MyUser.getCurrentUser(MyUser.class);
         if (user == null) {
             Intent intent = new Intent(activity, LoginActivity.class);
             activity.startActivityForResult(intent, Constant.REQUEST_LOGIN);
-        }else {
-            UserUtil.user=user;
-            LogUtils.e(SharedPrefsUtil.getString("user",""));
+            return false;
+        } else {
+            UserUtil.user = user;
+            LogUtils.e(SharedPrefsUtil.getString("user", ""));
+            return true;
         }
     }
 
 
     public static boolean checkUserContribution(FragmentActivity activity, Integer needContribution) {
-        checkLocalUser(activity);
-        return UserUtil.user.getContribution() >= needContribution;
+        if (checkLocalUser(activity)) {
+            return UserUtil.user.getContribution() >= needContribution;
+        } else {
+            return false;
+        }
+
     }
 
 }

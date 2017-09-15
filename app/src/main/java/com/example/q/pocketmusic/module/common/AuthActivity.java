@@ -19,9 +19,7 @@ public abstract class AuthActivity<V, T extends BasePresenter<V>> extends BaseAc
 
     @Override
     public void initView() {
-        UserUtil.checkLocalUser(this);
-        if (UserUtil.user != null) {
-            LogUtils.i("user.getContribution:" + String.valueOf(UserUtil.user.getContribution()));
+        if (UserUtil.checkLocalUser(this)){
             initUserView();
         }
     }

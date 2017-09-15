@@ -55,6 +55,10 @@ public class DownloadService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 //        LogUtils.e("service", "onStartCommand");
+        if (intent == null) {
+            stopSelf();
+            return super.onStartCommand(null, flags, startId);
+        }
         String url = intent.getStringExtra(PARAM_URL);
         String dirPath = intent.getStringExtra(PARAM_DIR);
         Intent updateIntent = new Intent(this, HomeActivity.class);

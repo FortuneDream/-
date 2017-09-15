@@ -66,7 +66,6 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     private UserShareModel mUserShareModel;
     private UserCollectionModel mUserCollectionModel;
     private AskSongPost post;
-    private MyUser user;
     private int mPage;
 
     public static final int LOCAL = 0;
@@ -78,9 +77,6 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         this.post = post;
     }
 
-    public void setUser(MyUser user) {
-        this.user = user;
-    }
 
     public AskSongCommentPresenter(IView activity) {
         attachView(activity);
@@ -132,7 +128,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         }
         Boolean hasPic;
         hasPic = mAskSongCommentModel.getPicUrls().size() > 0;
-        final AskSongComment askSongComment = new AskSongComment(user, post, comment, hasPic);
+        final AskSongComment askSongComment = new AskSongComment(UserUtil.user, post, comment, hasPic);
         activity.showLoading(true);
         activity.setCommentInput("");//空
         //添加评论表记录
@@ -177,8 +173,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
             @Override
             public void onSuccess(List<BatchResult> list) {
-                user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
-                user.update(new ToastUpdateListener(activity) {
+                UserUtil.user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
+                UserUtil.user.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
                         activity.showLoading(false);
@@ -200,8 +196,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
             @Override
             public void onSuccess(List<BatchResult> list) {
-                user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
-                user.update(new ToastUpdateListener(activity) {
+                UserUtil.user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
+                UserUtil.user.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
                         activity.showLoading(false);
@@ -229,8 +225,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                     new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
                         @Override
                         public void onSuccess(List<BatchResult> list) {
-                            user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
-                            user.update(new ToastUpdateListener(activity) {
+                            UserUtil.user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
+                            UserUtil.user.update(new ToastUpdateListener(activity) {
                                 @Override
                                 public void onSuccess() {
                                     activity.showLoading(false);
@@ -353,8 +349,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         post.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                user.increment(BmobConstant.BMOB_COIN, -coin);
-                user.update(new ToastUpdateListener() {
+                UserUtil.user.increment(BmobConstant.BMOB_COIN, -coin);
+                UserUtil.user.update(new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
                         ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + coin);
@@ -368,7 +364,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
     //得到我的收藏列表
     public void queryMyCollectionList() {
-        mUserCollectionModel.getAllUserCollectionList(user, new ToastQueryListener<CollectionSong>() {
+        mUserCollectionModel.getAllUserCollectionList(UserUtil.user, new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
                 activity.alertCollectionListDialog(list);
@@ -379,7 +375,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
     //得到我的分享列表
     public void queryMyShareList() {
-        mUserShareModel.getAllUserShareList(user, new ToastQueryListener<ShareSong>() {
+        mUserShareModel.getAllUserShareList(UserUtil.user, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 activity.alertShareListDialog(list);

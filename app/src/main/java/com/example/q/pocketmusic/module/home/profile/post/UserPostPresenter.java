@@ -8,6 +8,7 @@ import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.seek.ask.comment.AskSongCommentActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 
 import java.util.List;
 
@@ -17,7 +18,6 @@ import java.util.List;
 
 public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
     private IView activity;
-    private MyUser user;
     private UserPostModel model;
     private int mPage;
 
@@ -28,15 +28,11 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
         model = new UserPostModel();
     }
 
-    public void setUser(MyUser user) {
-        this.user = user;
-    }
-
     public void getUserPostList(final boolean isRefreshing) {
         if (isRefreshing) {
             mPage = 0;
         }
-        model.getUserPostList(user, mPage, new ToastQueryListener<AskSongPost>() {
+        model.getUserPostList(UserUtil.user, mPage, new ToastQueryListener<AskSongPost>() {
             @Override
             public void onSuccess(List<AskSongPost> list) {
                 activity.setUserPostList(isRefreshing, list);
@@ -54,7 +50,7 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
 
     public void getMoreList() {
         mPage++;
-        model.getUserPostList(user, mPage, new ToastQueryListener<AskSongPost>() {
+        model.getUserPostList(UserUtil.user, mPage, new ToastQueryListener<AskSongPost>() {
             @Override
             public void onSuccess(List<AskSongPost> list) {
                 activity.setUserPostList(false,list);

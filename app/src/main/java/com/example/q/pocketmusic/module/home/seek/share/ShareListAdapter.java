@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.config.pic.IDisplayStrategy;
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.config.pic.GlideStrategy;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -69,11 +70,14 @@ public class ShareListAdapter extends RecyclerArrayAdapter<ShareSong> {
             super.setData(data);
             nameTv.setText("上传曲谱：" + data.getName());
             contentTv.setText("描述：" + data.getContent());
-            displayStrategy.displayCircle(getContext(), data.getUser().getHeadImg(), headIv);
+            final MyUser user = data.getUser();
+            if (user != null) {
+                displayStrategy.displayCircle(getContext(), user.getHeadImg(), headIv);
+            }
             headIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (absOnClickItemHeadListener != null) {
+                    if (absOnClickItemHeadListener != null && user != null) {
                         absOnClickItemHeadListener.onClickHead(getContext(), data.getUser());
                     }
                 }

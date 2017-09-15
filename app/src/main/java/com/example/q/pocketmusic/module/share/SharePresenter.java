@@ -18,6 +18,7 @@ import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
@@ -45,20 +46,14 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
     private IView activity;
     private int mNumberPic;//图片数量
     private String[] filePaths;//本地图片路径
-    private MyUser user;
 
-    public MyUser getUser() {
-        return user;
-    }
+
 
     public SharePresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
     }
 
-    public void setUser(MyUser user) {
-        this.user = user;
-    }
 
     //打开图片浏览器，存储数量和本地路径
     public void openPicture() {
@@ -151,7 +146,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
     //上传/分享乐曲
     private void shareSong(String name, final String content, final List<String> list1) {
-        final ShareSong shareSong = new ShareSong(user, name, content);
+        final ShareSong shareSong = new ShareSong(UserUtil.user, name, content);
         activity.showLoading(true);
         //添加分享曲谱记录
         shareSong.save(new ToastSaveListener<String>(activity) {
@@ -167,8 +162,8 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
                     @Override
                     public void onSuccess(List<BatchResult> list) {
-                        user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_UPLOAD);//原子操作
-                        user.update(new ToastUpdateListener(activity) {
+                        UserUtil.user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_UPLOAD);//原子操作
+                        UserUtil.user.update(new ToastUpdateListener(activity) {
                             @Override
                             public void onSuccess() {
                                 ToastUtil.showToast( CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_UPLOAD));

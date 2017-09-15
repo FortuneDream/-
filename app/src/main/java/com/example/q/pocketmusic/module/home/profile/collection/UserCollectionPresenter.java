@@ -13,6 +13,7 @@ import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
@@ -24,14 +25,8 @@ import java.util.List;
 
 public class UserCollectionPresenter extends BasePresenter<UserCollectionPresenter.IView> {
     private IView activity;
-    private MyUser user;
     private UserCollectionModel userCollectionModel;
     private int mPage;
-
-
-    public void setUser(MyUser user) {
-        this.user = user;
-    }
 
     public UserCollectionPresenter(IView activity) {
         attachView(activity);
@@ -44,7 +39,7 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
         if (isRefreshing) {
             mPage = 0;//置为零0
         }
-        userCollectionModel.getUserCollectionList(user, mPage, new ToastQueryListener<CollectionSong>() {
+        userCollectionModel.getUserCollectionList(UserUtil.user, mPage, new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
                 activity.setCollectionList(isRefreshing, list);
@@ -55,7 +50,7 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
     //加载更多
     public void getMoreList() {
         mPage++;
-        userCollectionModel.getUserCollectionList(user, mPage, new ToastQueryListener<CollectionSong>() {
+        userCollectionModel.getUserCollectionList(UserUtil.user, mPage, new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
                 activity.setCollectionList(false, list);
@@ -89,7 +84,7 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
 
     //删除收藏
     public void deleteCollection(final CollectionSong collectionSong) {
-        userCollectionModel.deleteCollection(user, collectionSong, new ToastUpdateListener() {
+        userCollectionModel.deleteCollection(UserUtil.user, collectionSong, new ToastUpdateListener() {
             @Override
             public void onSuccess() {
                 ToastUtil.showToast("已删除");

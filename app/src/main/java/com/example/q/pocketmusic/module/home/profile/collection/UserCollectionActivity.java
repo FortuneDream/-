@@ -45,7 +45,6 @@ public class UserCollectionActivity extends AuthActivity<UserCollectionPresenter
         adapter.setOnSelectListener(this);
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
-        presenter.setUser(UserUtil.user);
         initToolbar(toolbar, "我的收藏");
         initRecyclerView(recycler, adapter, 1);
         onRefresh();

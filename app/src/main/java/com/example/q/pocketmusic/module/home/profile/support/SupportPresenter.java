@@ -19,6 +19,7 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.BmobUtil;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
@@ -38,7 +39,6 @@ import c.b.PListener;
 
 public class SupportPresenter extends BasePresenter<SupportPresenter.IView> {
     private IView activity;
-    private MyUser user;
     private int mPage;
     private BmobUtil util;
 
@@ -76,10 +76,6 @@ public class SupportPresenter extends BasePresenter<SupportPresenter.IView> {
         });
     }
 
-
-    public void setUser(MyUser user) {
-        this.user = user;
-    }
 
     public void pay(boolean isAlipay, final String money, final String content) {
         if (TextUtils.isEmpty(content) || TextUtils.isEmpty(money)) {
@@ -136,13 +132,13 @@ public class SupportPresenter extends BasePresenter<SupportPresenter.IView> {
 //                支付成功,保险起见请调用查询方法确认结果
                 ToastUtil.showToast("感谢您的支持！");
 //                向上取整
-                user.increment(BmobConstant.BMOB_COIN, Math.ceil(Double.parseDouble(money)) * 10);
-                user.update(new ToastUpdateListener() {
+                UserUtil.user.increment(BmobConstant.BMOB_COIN, Math.ceil(Double.parseDouble(money)) * 10);
+                UserUtil.user.update(new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
                         ToastUtil.showToast(CommonString.ADD_COIN_BASE + Math.ceil(Double.parseDouble(money)) * 10);
                         MoneySupport moneySupport = new MoneySupport();
-                        moneySupport.setUser(user);
+                        moneySupport.setUser(UserUtil.user);
                         moneySupport.setContent(content);
                         moneySupport.setMoney(Double.parseDouble(money));
                         moneySupport.save(new ToastSaveListener<String>() {

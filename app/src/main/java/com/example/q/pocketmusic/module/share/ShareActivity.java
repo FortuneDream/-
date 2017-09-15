@@ -54,7 +54,6 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePrese
     public void initUserView() {
         adapter = new SmallPicAdapter(this);
         adapter.setOnItemClickListener(this);
-        presenter.setUser(UserUtil.user);
         initToolbar(toolbar, "上传曲谱");
         LocalSong localSong = (LocalSong) getIntent().getSerializableExtra(LOCAL_SONG);
         presenter.getPicAndName(localSong);
@@ -71,7 +70,7 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePrese
                 break;
             case R.id.upload_txt:
                 String name = nameTet.getInputString();
-                String author = presenter.getUser().getNickName();
+                String author = UserUtil.user.getNickName();
                 String content = contentTet.getInputString();
                 presenter.upLoad(name, author, content);
                 break;

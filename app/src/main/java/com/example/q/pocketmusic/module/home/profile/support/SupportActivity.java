@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class SupportActivity extends AuthActivity<SupportPresenter.IView, SupportPresenter>
-        implements SupportPresenter.IView,RecyclerArrayAdapter.OnMoreListener, SwipeRefreshLayout.OnRefreshListener {
+        implements SupportPresenter.IView, RecyclerArrayAdapter.OnMoreListener, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
@@ -57,14 +57,13 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
         initToolbar(toolbar, "支持开发者");
         initRecyclerView(recycler, mMoneyAdapter, 1);
         recycler.setRefreshListener(this);
-        mMoneyAdapter.setMore(R.layout.view_more,this);
-        presenter.setUser(UserUtil.user);
+        mMoneyAdapter.setMore(R.layout.view_more, this);
         presenter.getSupportMoneyList(true);
     }
 
     @Override
-    public void setMoneyList(boolean isRefreshing,List<MoneySupport> list) {
-        if (isRefreshing){
+    public void setMoneyList(boolean isRefreshing, List<MoneySupport> list) {
+        if (isRefreshing) {
             mMoneyAdapter.clear();
         }
         mMoneyAdapter.addAll(list);
