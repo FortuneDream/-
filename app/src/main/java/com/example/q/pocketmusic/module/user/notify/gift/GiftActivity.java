@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.bmob.Gift;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -45,7 +46,6 @@ public class GiftActivity extends AuthActivity<GiftPresenter.IView, GiftPresente
         initToolbar(toolbar,"礼包中心");
         initRecyclerView(recycler, adapter,1);
         presenter.setPage(0);
-        presenter.setUser(user);
         recycler.setRefreshListener(this);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override

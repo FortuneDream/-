@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 
-import com.example.q.pocketmusic.util.CheckUserUtil;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.BottomTabView;
 
@@ -99,7 +99,8 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
                 presenter.clickAsk();
                 break;
             case R.id.home_tab_profile_tab:
-                if (CheckUserUtil.checkLocalUser(this) != null) {//检验是否登录
+                UserUtil.checkLocalUser(this);
+                if (UserUtil.user != null) {
                     presenter.clickProfile();
                 }
                 break;

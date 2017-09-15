@@ -12,11 +12,8 @@ import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.CheckUserUtil;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
-
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Created by 鹏君 on 2016/11/14.
@@ -41,7 +38,7 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
             return;
         }
         int coin = Constant.REDUCE_CONTRIBUTION_ASK + index * 2;
-        if (!CheckUserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
+        if (!UserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
             ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
             return;
         }
@@ -52,6 +49,7 @@ public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
         this.type=type;
     }
 
+    //求谱
     public void askForSong(String title, String content, final MyUser user) {
         activity.showLoading(true);
         final int coin = Constant.REDUCE_CONTRIBUTION_ASK + index * 2;

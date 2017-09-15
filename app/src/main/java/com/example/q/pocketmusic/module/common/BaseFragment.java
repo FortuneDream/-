@@ -28,7 +28,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     protected T presenter;
     public static AlertDialog mLoadingDialog;
     public Context context;
-    public final String TAG = this.getClass().getName();
+    public final String TAG =this.getClass().getName();
 
 
     protected abstract T createPresenter();

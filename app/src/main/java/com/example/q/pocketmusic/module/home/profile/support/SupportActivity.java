@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.MoneySupport;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -57,7 +58,7 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
         initRecyclerView(recycler, mMoneyAdapter, 1);
         recycler.setRefreshListener(this);
         mMoneyAdapter.setMore(R.layout.view_more,this);
-        presenter.setUser(user);
+        presenter.setUser(UserUtil.user);
         presenter.getSupportMoneyList(true);
     }
 

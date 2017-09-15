@@ -14,6 +14,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.example.q.pocketmusic.module.common.AuthFragment;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.widget.view.GuaGuaKa;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
@@ -71,18 +72,18 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     }
 
     private void initProfileView() {
-        if (user != null) {
+        if (UserUtil.user != null) {
             //设置
-            presenter.setUser(user);
+            presenter.setUser(UserUtil.user);
             //设置昵称
-            initToolbar(toolbar, user.getNickName());
+            initToolbar(toolbar, UserUtil.user.getNickName());
             //设置头像
-            new DisplayStrategy().displayCircle(context, user.getHeadImg(), headIv);
+            new DisplayStrategy().displayCircle(context, UserUtil.user.getHeadImg(), headIv);
             //设置签名
-            if (user.getSignature() == null) {
+            if (UserUtil.user.getSignature() == null) {
                 userSignatureTv.setText("这个人没有签名~");
             } else {
-                userSignatureTv.setText(user.getSignature());
+                userSignatureTv.setText(UserUtil.user.getSignature());
             }
             checkIsSign();
             //点击标题栏修改NickName
@@ -244,7 +245,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
 
     @Override
     public void setNickName(String nickName) {
-        initToolbar(toolbar, user.getNickName());
+        initToolbar(toolbar, UserUtil.user.getNickName());
     }
 
 

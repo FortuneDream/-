@@ -228,6 +228,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         }
     }
 
+    //修改昵称
     public void setNickName(final String nickName) {
         user.setNickName(nickName);
         user.update(new ToastUpdateListener() {

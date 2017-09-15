@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -36,7 +37,7 @@ public class UserPostActivity extends AuthActivity<UserPostPresenter.IView, User
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more,this);
         adapter.setOnItemClickListener(this);
-        presenter.setUser(user);
+        presenter.setUser(UserUtil.user);
         initToolbar(toolbar, "我的求谱");
         initRecyclerView(recycler, adapter, 1);
         presenter.getUserPostList(false);

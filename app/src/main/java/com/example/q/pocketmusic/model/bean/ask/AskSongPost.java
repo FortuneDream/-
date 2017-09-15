@@ -11,7 +11,7 @@ import cn.bmob.v3.BmobObject;
 public class AskSongPost extends BmobObject {
     private MyUser user;//帖子的发布者，一对一
     private String title;//帖子标题
-    private int type;//所求曲谱类型
+    private Integer type;//所求曲谱类型
     private String content;//帖子内容
     private Integer commentNum;//回复数量
     private Integer index;//先按照指数，再创建时间逆序
@@ -20,7 +20,7 @@ public class AskSongPost extends BmobObject {
     public AskSongPost() {
     }
 
-    public AskSongPost(MyUser user, String title, int type, String content) {
+    public AskSongPost(MyUser user, String title, Integer type, String content) {
         this.user = user;
         this.title = title;
         this.content = content;
@@ -33,7 +33,7 @@ public class AskSongPost extends BmobObject {
         return index;
     }
 
-    public void setIndex(int index) {
+    public void setIndex(Integer index) {
         this.index = index;
     }
 
@@ -41,7 +41,7 @@ public class AskSongPost extends BmobObject {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

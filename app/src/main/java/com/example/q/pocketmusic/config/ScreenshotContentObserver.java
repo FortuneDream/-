@@ -1,33 +1,13 @@
 package com.example.q.pocketmusic.config;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.FeatureInfo;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.provider.MediaStore;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.view.View;
 import android.view.WindowManager;
-
-import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.module.home.HomeActivity;
-import com.example.q.pocketmusic.util.CheckUserUtil;
-import com.example.q.pocketmusic.util.common.LogUtils;
-import com.example.q.pocketmusic.util.common.ToastUtil;
-import com.example.q.pocketmusic.view.widget.net.SnackBarUtil;
-
-import java.io.File;
-
-import cn.bmob.v3.BmobUser;
 
 /**
  * Created by 81256 on 2017/9/6.

@@ -41,8 +41,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/BmobPay_v3.2.0_170602.jar')
     compile files('libs/okhttp-3.8.1.jar')
-    compile 'cn.bmob.android:bmob-sdk:3.5.7'
-    compile 'cn.bmob.android:http-legacy:1.0'
+    compile 'cn.bmob.android:bmob-sdk:3.5.6'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.jakewharton:butterknife:8.5.1'

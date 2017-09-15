@@ -9,11 +9,15 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.bmob.Gift;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.util.UserUtil;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by 81256 on 2017/9/6.
@@ -23,7 +27,6 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
     private IView activity;
     private GiftModel model;
     private int mPage;
-    private MyUser user;
 
     public GiftPresenter(IView activity) {
         attachView(activity);
@@ -36,7 +39,7 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
         if (isRefreshing) {
             mPage = 0;
         }
-        model.getGiftList(user, mPage, new ToastQueryListener<Gift>() {
+        model.getGiftList(UserUtil.user, mPage, new ToastQueryListener<Gift>() {
             @Override
             public void onSuccess(List<Gift> list) {
                 activity.setGiftList(list, isRefreshing);
@@ -51,7 +54,7 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
 
     public void getMoreGiftList() {
         mPage++;
-        model.getGiftList(user, mPage, new ToastQueryListener<Gift>() {
+        model.getGiftList(UserUtil.user, mPage, new ToastQueryListener<Gift>() {
             @Override
             public void onSuccess(List<Gift> list) {
                 activity.setGiftList(list, false);
@@ -59,19 +62,18 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
         });
     }
 
-    public void setUser(MyUser user) {
-        this.user = user;
-    }
 
     public void addCoin(final Gift gift) {
         gift.setGet(true);
         gift.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                user.increment(BmobConstant.BMOB_COIN, gift.getCoin());
-                user.update(new ToastUpdateListener() {
+                LogUtils.i(TAG,"gift.getCoin:"+gift.getCoin());
+                UserUtil.user.increment(BmobConstant.BMOB_COIN, gift.getCoin());
+                UserUtil.user.update(new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
+                        LogUtils.e(TAG,"user.getContribution:"+UserUtil.user.getContribution());
                         ToastUtil.showToast(CommonString.ADD_COIN_BASE + gift.getCoin());
                     }
                 });

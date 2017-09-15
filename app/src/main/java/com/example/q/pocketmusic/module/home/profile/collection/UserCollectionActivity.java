@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetMenuDialog;
 import com.github.rubensousa.bottomsheetbuilder.adapter.BottomSheetItemClickListener;
@@ -44,7 +45,7 @@ public class UserCollectionActivity extends AuthActivity<UserCollectionPresenter
         adapter.setOnSelectListener(this);
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
-        presenter.setUser(user);
+        presenter.setUser(UserUtil.user);
         initToolbar(toolbar, "我的收藏");
         initRecyclerView(recycler, adapter, 1);
         onRefresh();

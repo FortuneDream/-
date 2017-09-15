@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -37,7 +38,7 @@ public class UserShareActivity extends AuthActivity<UserSharePresenter.IView, Us
 
     @Override
     public void initUserView() {
-        presenter.setUser(user);
+        presenter.setUser(UserUtil.user);
         adapter = new UserShareAdapter(getCurrentContext());
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);

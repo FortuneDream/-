@@ -70,7 +70,7 @@ public class ContributionAdapter extends RecyclerArrayAdapter<MyUser> {
             rankTv.setText(position + ".");
             displayStrategy.displayCircle(context, data.getHeadImg(), headIv);
             nickNameTv.setText(data.getNickName());
-            contributionTv.setText(String.valueOf(data.getActiveNum()) + " 点");
+            contributionTv.setText(String.valueOf(data.getContribution()) + " 枚");
             headIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

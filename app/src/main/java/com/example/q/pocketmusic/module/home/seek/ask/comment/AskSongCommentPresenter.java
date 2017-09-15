@@ -31,7 +31,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionModel;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.CheckUserUtil;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
@@ -344,7 +344,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     //消耗硬币，置顶
     public void reduceIndexCoin() {
         final int coin = 2;
-        if (!CheckUserUtil.checkUserContribution((BaseActivity) activity, coin)) {
+        if (!UserUtil.checkUserContribution((BaseActivity) activity, coin)) {
             ToastUtil.showToast("硬币不够哦~");
             return;
         }

@@ -15,8 +15,8 @@ public class ShareSong extends BmobObject {
     private String name;//歌曲名字
     private String content;//内容，介绍信息
     private BmobRelation agrees;//点赞的多个用户，多对多
-    private int agreeNum;//分享数量
-    private int downloadNum;//下载量
+    private Integer agreeNum;//分享数量
+    private Integer  downloadNum;//下载量
 
     public ShareSong() {
 
@@ -38,11 +38,11 @@ public class ShareSong extends BmobObject {
         this.agrees = agrees;
     }
 
-    public int getAgreeNum() {
+    public Integer getAgreeNum() {
         return agreeNum;
     }
 
-    public void setAgreeNum(int agreeNum) {
+    public void setAgreeNum(Integer agreeNum) {
         this.agreeNum = agreeNum;
     }
 

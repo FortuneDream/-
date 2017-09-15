@@ -78,10 +78,10 @@ public class Constant {
 
 
     //求谱类型,最好用Hap映射
-    public static final int ji_ta_pu = 0;
-    public static final int jian_pu = 1;
-    public static final int gang_qin_pu = 2;
-    public static final int qi_ta_pu = 3;
+    public static final int ji_ta_pu = 0;//吉他
+    public static final int jian_pu = 1;//简谱
+    public static final int gang_qin_pu = 2;//钢琴
+    public static final int qi_ta_pu = 3;//其他
 
     //bmobinfo
     private static final int change_password = 1;//改密码

@@ -25,7 +25,7 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.contribution.ContributionModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.CheckUserUtil;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.DownloadUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
@@ -113,18 +113,18 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         if (new LocalSongDao(fragment.getCurrentContext()).isExist(song.getName())) {
             return new DownloadInfo("本地已存在", false);
         }
-        MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
+        UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
         //找不到用户
-        if (user == null) {
+        if (UserUtil.user == null) {
             return new DownloadInfo("找不到用户", false);
         }
         //硬币不足
-        if (!CheckUserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_DOWNLOAD)) {
+        if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_DOWNLOAD)) {
             return new DownloadInfo(CommonString.STR_NOT_ENOUGH_COIN, false);
         }
         //扣除硬币
-        user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_DOWNLOAD);
-        user.update(new ToastUpdateListener(fragment) {
+        UserUtil.user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_DOWNLOAD);
+        UserUtil.user.update(new ToastUpdateListener(fragment) {
             @Override
             public void onSuccess() {
                 ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + (Constant.REDUCE_DOWNLOAD));
@@ -261,8 +261,8 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //添加收藏
     public void addCollection() {
-        final MyUser user = CheckUserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
-        if (user == null) {
+        UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext());
+        if (UserUtil.user == null) {
             ToastUtil.showToast("请先登录~");
             return;
         }
@@ -278,7 +278,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         //检测是否已经收藏
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         query.order("-updatedAt");
-        query.addWhereRelatedTo(BmobConstant.BMOB_COLLECTIONS, new BmobPointer(user));//在user表的Collections找user
+        query.addWhereRelatedTo(BmobConstant.BMOB_COLLECTIONS, new BmobPointer(UserUtil.user));//在user表的Collections找user
         query.findObjects(new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
@@ -295,7 +295,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                     }
                 }
                 //贡献度是否足够
-                if (!CheckUserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_CONTRIBUTION_COLLECTION)) {
+                if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_CONTRIBUTION_COLLECTION)) {
                     ToastUtil.showToast("贡献值不够~");
                     return;
                 }
@@ -327,13 +327,13 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                             public void onSuccess(List<BatchResult> list) {
                                 BmobRelation relation = new BmobRelation();
                                 relation.add(collectionSong);
-                                user.setCollections(relation);//添加用户收藏
-                                user.update(new ToastUpdateListener() {
+                                UserUtil.user.setCollections(relation);//添加用户收藏
+                                UserUtil.user.update(new ToastUpdateListener() {
                                     @Override
                                     public void onSuccess() {
                                         ToastUtil.showToast("已收藏");
-                                        user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_CONTRIBUTION_COLLECTION);//贡献值-1
-                                        user.update(new ToastUpdateListener() {
+                                        UserUtil.user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_CONTRIBUTION_COLLECTION);//贡献值-1
+                                        UserUtil.user.update(new ToastUpdateListener() {
                                             @Override
                                             public void onSuccess() {
                                                 ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_COLLECTION);

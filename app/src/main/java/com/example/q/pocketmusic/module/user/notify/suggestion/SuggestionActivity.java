@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.bmob.UserSuggestion;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, 
     @Override
     public void initUserView() {
         recycler.setRefreshListener(this);
-        presenter.setUser(user);
+        presenter.setUser(UserUtil.user);
         adapter = new SuggestionAdapter(this);
         initToolbar(toolbar, "反馈意见");
         initRecyclerView(recycler, adapter);

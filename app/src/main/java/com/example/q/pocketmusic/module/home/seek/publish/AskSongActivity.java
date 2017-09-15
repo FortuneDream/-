@@ -12,6 +12,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.google.android.flexbox.FlexboxLayout;
@@ -111,7 +112,7 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
             case R.id.ok_txt:
                 String title = titleTet.getInputString();
                 String content = contentTet.getInputString();
-                presenter.checkAsk(title, content, user);
+                presenter.checkAsk(title, content, UserUtil.user);
                 break;
             case R.id.add_index_iv:
                 presenter.addIndex();

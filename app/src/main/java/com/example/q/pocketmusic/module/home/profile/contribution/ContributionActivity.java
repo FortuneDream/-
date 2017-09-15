@@ -11,6 +11,7 @@ import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
 import java.util.List;
@@ -44,10 +45,10 @@ public class ContributionActivity extends AuthActivity<ContributionPresenter.IVi
         adapter = new ContributionAdapter(this);
         recycler.setRefreshListener(this);
         //初始化
-        new DisplayStrategy().displayCircle(this, user.getHeadImg(), topIv);
-        nickNameTv.setText(user.getNickName());
-        contributionTv.setText("硬币：" + user.getContribution() + "枚");
-        initToolbar(toolbar, "活跃榜单");
+        new DisplayStrategy().displayCircle(this, UserUtil.user.getHeadImg(), topIv);
+        nickNameTv.setText(UserUtil.user.getNickName());
+        contributionTv.setText("硬币：" + UserUtil.user.getContribution() + "枚");
+        initToolbar(toolbar, "硬币榜");
         initRecyclerView(recycler, adapter);
         presenter.init();
         adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {

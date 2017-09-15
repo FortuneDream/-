@@ -19,7 +19,7 @@ public class MyUser extends BmobUser {
     private Integer contribution;//贡献值
     private BmobRelation collections;//某个用户收藏的所有曲谱
     private String versionFlag;
-    private Integer active;
+
 
 
     public String getLastSignInDate() {
@@ -36,16 +36,8 @@ public class MyUser extends BmobUser {
         this.nickName = "匿名";
         this.headImg = Constant.COMMON_HEAD_IV_URL;
         this.contribution = Constant.ADD_CONTRIBUTION_INIT;
-        this.active=0;
     }
 
-    public int getActiveNum() {
-        return active;
-    }
-
-    public void setActiveNum(int activeNum) {
-        this.active = activeNum;
-    }
 
     public void setVersion(String version) {
         this.versionFlag = version;

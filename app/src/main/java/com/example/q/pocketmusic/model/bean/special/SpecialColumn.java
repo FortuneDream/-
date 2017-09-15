@@ -10,7 +10,7 @@ import cn.bmob.v3.BmobObject;
 public class SpecialColumn extends BmobObject {
     private String backgroundUrl;//封面URL
     private String albumName;//专辑名字
-    private int songNum;//含有曲谱数
+    private Integer songNum;//含有曲谱数
 
     public String getBackgroundUrl() {
         return backgroundUrl;
@@ -28,11 +28,11 @@ public class SpecialColumn extends BmobObject {
         this.albumName = albumName;
     }
 
-    public int getSongNum() {
+    public Integer getSongNum() {
         return songNum;
     }
 
-    public void setSongNum(int songNum) {
+    public void setSongNum(Integer songNum) {
         this.songNum = songNum;
     }
 }

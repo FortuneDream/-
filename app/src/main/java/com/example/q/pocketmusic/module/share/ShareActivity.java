@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -53,7 +54,7 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePrese
     public void initUserView() {
         adapter = new SmallPicAdapter(this);
         adapter.setOnItemClickListener(this);
-        presenter.setUser(user);
+        presenter.setUser(UserUtil.user);
         initToolbar(toolbar, "上传曲谱");
         LocalSong localSong = (LocalSong) getIntent().getSerializableExtra(LOCAL_SONG);
         presenter.getPicAndName(localSong);

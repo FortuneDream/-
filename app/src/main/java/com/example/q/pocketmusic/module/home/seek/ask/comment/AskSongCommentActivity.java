@@ -20,6 +20,7 @@ import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.dialog.PicDialog;
@@ -75,7 +76,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
         final AskSongPost post = (AskSongPost) getIntent().getSerializableExtra(PARAM_POST);
         Boolean isFromUser = getIntent().getBooleanExtra(PARAM_IS_FROM_USER, false);
         presenter.setPost(post);
-        presenter.setUser(user);
+        presenter.setUser(UserUtil.user);
         initToolbar(toolbar, presenter.getPost().getTitle());
         initRecyclerView(recycler, adapter);
         adapter.setMore(R.layout.view_more, this);
