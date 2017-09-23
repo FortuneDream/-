@@ -230,6 +230,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                                 @Override
                                 public void onSuccess() {
                                     activity.showLoading(false);
+                                    mAskSongCommentModel.getPicUrls().clear();//清空
                                     ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
                                     activity.sendCommentResult(s, askSongComment);
                                 }

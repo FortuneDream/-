@@ -10,7 +10,7 @@ public class Constant {
 
     //URL
     public final static String BASE_URL = "http://www.qupu123.com";
-    public final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/5.7.14377.702 Safari/537.36";
+  //  public final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/5.7.14377.702 Safari/537.36";
     public final static String RECOMMEND_BASE_URL = "http://www.qupu123.com";
     public final static String RECOMMEND_LIST_URL = "http://www.qupu123.com/space/work/6/";//桃李醉春风
     public static String SO_PU_SEARCH = "http://so.sooopu.com/pu/?q=";

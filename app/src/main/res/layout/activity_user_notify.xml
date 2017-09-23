@@ -41,6 +41,7 @@
         android:id="@+id/gift_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:itemTitleIco="@drawable/ic_vec_gift"
         app:itemTitleText="礼包中心" />
 

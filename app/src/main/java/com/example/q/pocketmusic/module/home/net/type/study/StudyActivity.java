@@ -8,9 +8,9 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 
 import butterknife.BindView;
 
+//包含简谱，五线谱，吉他谱学习
 public class StudyActivity extends BaseActivity<StudyPresenter.IView, StudyPresenter>
         implements StudyPresenter.IView {
-    public static final String PARAM_TYPE_ID = "param_type_id";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)

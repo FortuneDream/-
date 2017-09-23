@@ -18,6 +18,9 @@ import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FetchUserInfoListener;
 
 /**
  * Created by 鹏君 on 2017/1/26.
@@ -34,7 +37,7 @@ public class UserUtil {
             return false;
         } else {
             UserUtil.user = user;
-            SharedPrefsUtil.getString("user", "");
+            LogUtils.e(SharedPrefsUtil.getString("user", ""));
             return true;
         }
     }

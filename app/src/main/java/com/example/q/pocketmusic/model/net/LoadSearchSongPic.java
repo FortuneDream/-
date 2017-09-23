@@ -31,7 +31,7 @@ public class LoadSearchSongPic extends AsyncTask<Song, Void, Integer> {
         ArrayList<String> list = new ArrayList<>();
         String songUrl=song.getUrl();
         try {
-            Document doc = Jsoup.connect(songUrl).userAgent(Constant.USER_AGENT).timeout(6000).get();
+            Document doc = Jsoup.connect(songUrl).timeout(6000).get();
             Element box = doc.getElementById("box");
             Element content = box.select("div.content").get(0);
             Elements imgs = content.getElementsByTag("img");

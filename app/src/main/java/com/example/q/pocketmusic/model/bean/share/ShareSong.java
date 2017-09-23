@@ -47,6 +47,9 @@ public class ShareSong extends BmobObject {
     }
 
     public int getDownloadNum() {
+        if (downloadNum==null){
+            return 0;
+        }
         return downloadNum;
     }
 

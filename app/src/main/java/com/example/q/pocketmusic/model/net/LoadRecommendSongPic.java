@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
+import com.example.q.pocketmusic.util.RegExUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,19 +18,13 @@ import java.util.ArrayList;
  */
 
 public class LoadRecommendSongPic extends AsyncTask<Song,Void,Integer> {
-    private Song song;
+
     @Override
     protected Integer doInBackground(Song... params) {
-        song=params[0];
-        ArrayList<String> list=new ArrayList<>();
+        Song song=params[0];
         try {
-            Document doc =Jsoup.connect(song.getUrl()).userAgent(Constant.USER_AGENT).timeout(5000).get();
-            Elements as=doc.select("div.imageList").get(0).getElementsByTag("a");
-            for (Element a:as){
-                String href=a.attr("href");
-                list.add(Constant.RECOMMEND_BASE_URL +href);
-            }
-            song.setIvUrl(list);
+            Document doc =Jsoup.connect(song.getUrl()).timeout(5000).get();
+            RegExUtils.setTypePic(song,doc.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return Constant.FAIL;

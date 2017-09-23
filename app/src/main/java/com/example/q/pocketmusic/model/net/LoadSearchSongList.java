@@ -4,7 +4,9 @@ import android.os.AsyncTask;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
+import com.example.q.pocketmusic.util.RegExUtils;
 import com.example.q.pocketmusic.util.StringUtil;
+import com.example.q.pocketmusic.util.common.LogUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -34,7 +36,7 @@ public class LoadSearchSongList extends AsyncTask<String, Void, List<Song>> {
      */
     @Override
     protected List<Song> doInBackground(String... strings) {
-        List<Song> songs = new ArrayList<>();
+        List<Song> list;
         String query = strings[0];
         String urlCode = null;//转换为URLCode
         int number = 0;
@@ -46,10 +48,9 @@ public class LoadSearchSongList extends AsyncTask<String, Void, List<Song>> {
         try {
             Document doc = Jsoup.connect(Constant.SO_PU_SEARCH + urlCode + "&start=" + page * 10)
                     .timeout(6000)
-                    .userAgent(Constant.USER_AGENT)
                     .get();
             //得到总数量
-
+            LogUtils.e("url:"+Constant.SO_PU_SEARCH + urlCode + "&start=" + page * 10);
             String info = doc.getElementById("labelSummary").text().replace(" ", "");
             number = Integer.parseInt(info.substring(info.indexOf("约") + 1, info.indexOf("篇")));
             if (number <= page * 10) {
@@ -57,26 +58,11 @@ public class LoadSearchSongList extends AsyncTask<String, Void, List<Song>> {
             }
 //            LogUtils.e("TAG", "搜索到了" + number + "页");
             Element c_list = doc.select("div.c_list").get(0);
-            Elements uls = c_list.getElementsByTag("ul");
-            //判断数量
-            uls.remove(0);
-            for (Element ul : uls) {
-                Elements lis = ul.getElementsByTag("li");
-                //曲谱地址
-                String url = lis.get(0).getElementsByTag("a").get(0).attr("href");
-                //谱曲名字
-                String name = lis.get(0).getElementsByTag("a").get(0).text();
-                //内容,这个内容需要处理一下
-                String content = StringUtil.fixName5(lis.get(1).text());
-                Song song = new Song(name, url);
-                song.setSearchFrom(Constant.FROM_SEARCH_NET);
-                song.setContent(content);
-                songs.add(song);
-            }
+            list=RegExUtils.getSearchList(c_list.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        return songs;
+        return list;
     }
 }

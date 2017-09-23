@@ -71,9 +71,6 @@ public class SplashActivity extends BaseActivity<SplashPresenter.IView, SplashPr
         requestPermissions();
     }
 
-    private void initLabaAnimator() {
-
-    }
 
 
     //权限相关

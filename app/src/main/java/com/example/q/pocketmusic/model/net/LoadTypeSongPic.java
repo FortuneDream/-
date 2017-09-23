@@ -4,19 +4,17 @@ import android.os.AsyncTask;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
+import com.example.q.pocketmusic.util.RegExUtils;
+import com.example.q.pocketmusic.util.common.LogUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-
-import java.util.ArrayList;
 
 /**
  * Created by 鹏君 on 2016/8/30.
  */
 public class LoadTypeSongPic extends AsyncTask<Song, Void, Integer> {
-    private Song song;
-    private ArrayList<String> imgs = new ArrayList<>();
+
 
     /**
      * 得到类型列表中某一首歌的图片，存入歌曲的ivUrls中
@@ -26,13 +24,11 @@ public class LoadTypeSongPic extends AsyncTask<Song, Void, Integer> {
      */
     @Override
     protected Integer doInBackground(Song... songs) {
-        song = songs[0];
+        Song song = songs[0];
+        LogUtils.e("url:"+song.getUrl());
         try {
-            Document doc = Jsoup.connect(song.getUrl()).userAgent(Constant.USER_AGENT).timeout(6000).get();
-            Element imageList=doc.select("div.imageList").get(0);
-            String onePic= Constant.BASE_URL+imageList.getElementsByTag("a").get(0).attr("href");
-            imgs.add(onePic);
-            song.setIvUrl(imgs);
+            Document doc = Jsoup.connect(song.getUrl()).timeout(6000).get();
+            RegExUtils.setTypePic(song,doc.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return Constant.FAIL;
