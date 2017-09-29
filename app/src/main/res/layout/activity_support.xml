@@ -39,6 +39,14 @@
         android:text="@string/money_explain" />
 
     <TextView
+        android:id="@+id/copy_alipay_tv"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@drawable/shape_button"
+        android:gravity="center"
+        android:text="点击复制支付宝号" />
+
+    <TextView
         android:id="@+id/support_me_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -23,7 +23,7 @@ public class LoadRecommendSongPic extends AsyncTask<Song,Void,Integer> {
     protected Integer doInBackground(Song... params) {
         Song song=params[0];
         try {
-            Document doc =Jsoup.connect(song.getUrl()).timeout(5000).get();
+            Document doc =Jsoup.connect(song.getUrl()).userAgent(Constant.USER_AGENT).timeout(5000).get();
             RegExUtils.setTypePic(song,doc.toString());
         } catch (Exception e) {
             e.printStackTrace();

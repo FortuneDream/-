@@ -385,7 +385,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     }
 
     //得到我的收藏的某一首曲子
-    public void addPicByMyCollection(CollectionSong collection) {
+    public void addPicByMyCollection(final CollectionSong collection) {
         mUserCollectionModel.getCollectionPicList(collection, new ToastQueryListener<CollectionPic>() {
             @Override
             public void onSuccess(List<CollectionPic> list) {
@@ -397,11 +397,12 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 mAskSongCommentModel.getPicUrls().addAll(strList);
                 mUploadTypeFlag = COLLECTION;
                 activity.addPicResult(mAskSongCommentModel.getPicUrls());
+                activity.setCommentInput(collection.getName());
             }
         });
     }
 
-    public void addPicByMyShare(ShareSong shareSong) {
+    public void addPicByMyShare(final ShareSong shareSong) {
         BmobQuery<SharePic> query = new BmobQuery<>();
         query.addWhereEqualTo("shareSong", new BmobPointer(shareSong));
         query.findObjects(new ToastQueryListener<SharePic>() {
@@ -415,6 +416,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 mAskSongCommentModel.getPicUrls().addAll(strList);
                 mUploadTypeFlag = SHARE;
                 activity.addPicResult(mAskSongCommentModel.getPicUrls());
+                activity.setCommentInput(shareSong.getName());
             }
         });
     }

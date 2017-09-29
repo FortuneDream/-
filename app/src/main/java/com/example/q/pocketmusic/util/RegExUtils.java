@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.util;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
+import com.example.q.pocketmusic.util.common.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,10 @@ public class RegExUtils {
 
     //获得乐器类型的列表曲谱
     public static List<Song> getTypeSongList(int typeId, String html) {
+//        LogUtils.e("TAG",html);
         List<Song> list = new ArrayList<>();
-        String regex = "<tr" + omit + "<td class=\"f1\">" + omit + "<a href=\"" + select + "\"" + omit
-                + ">" + select + "</a>" + omit + "<td class=\"f6\">" + select + "</td>";
+        String regex = "<tr>" + omit + "<td class=\"f1\">" + omit + "<a href=\"" + select + "\"" + omit
+                + ">" + select + "</a>" + omit + "<td class=\"f6\">" + select + "</td>"+omit+"</tr>";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(html);
         while (matcher.find()) {//坑2
@@ -36,6 +38,7 @@ public class RegExUtils {
             song.setUrl(url);
             song.setDate(date);
             list.add(song);
+//            LogUtils.e("TAG",name);
         }
         return list;
     }

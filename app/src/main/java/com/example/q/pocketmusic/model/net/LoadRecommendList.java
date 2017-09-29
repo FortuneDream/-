@@ -30,7 +30,7 @@ public class LoadRecommendList extends AsyncTask<String, Void, List<Song>> {
         String url = strings[0];
         LogUtils.e("url:"+url);
         try {
-            Document doc = Jsoup.connect(url).get();
+            Document doc = Jsoup.connect(url).userAgent(Constant.USER_AGENT).get();
             Element tbody = doc.getElementsByTag("tbody").get(0);
            list= RegExUtils.getRecommendList(tbody.toString());
         } catch (Exception e) {

@@ -1,5 +1,6 @@
 package com.example.q.pocketmusic.module.home.profile.support;
 
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.MoneySupport;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -22,6 +22,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SupportActivity extends AuthActivity<SupportPresenter.IView, SupportPresenter>
@@ -36,6 +37,8 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
     TextView supportMeTv;
     @BindView(R.id.content_ll)
     LinearLayout contentLl;
+    @BindView(R.id.copy_alipay_tv)
+    TextView copyAlipayTv;
     private MoneyAdapter mMoneyAdapter;
     private boolean isAlipayPay = true;
     private AlertDialog mPayDialog;
@@ -70,10 +73,6 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
     }
 
 
-    @OnClick(R.id.support_me_tv)
-    public void onViewClicked() {
-        alertSupportMeDialog();
-    }
 
     private void alertSupportMeDialog() {
         View view = View.inflate(getCurrentContext(), R.layout.dialog_support_me, null);
@@ -81,6 +80,7 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
         final TextEdit moneyTet = (TextEdit) view.findViewById(R.id.money_tet);
         final TextEdit contentTet = (TextEdit) view.findViewById(R.id.content_tet);
         TextView okTv = (TextView) view.findViewById(R.id.ok_tv);
+        moneyTet.setInputString(String.valueOf(3));
         RadioButton weixinRb = (RadioButton) view.findViewById(R.id.weixin_rb);
         RadioButton alipayRb = (RadioButton) view.findViewById(R.id.alipay_rb);
         isAlipayPay = true;
@@ -125,5 +125,19 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
     @Override
     public void onRefresh() {
         presenter.getSupportMoneyList(true);
+    }
+
+
+
+    @OnClick({R.id.copy_alipay_tv, R.id.support_me_tv})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.copy_alipay_tv:
+                presenter.copyAlipay();
+                break;
+            case R.id.support_me_tv:
+                alertSupportMeDialog();
+                break;
+        }
     }
 }

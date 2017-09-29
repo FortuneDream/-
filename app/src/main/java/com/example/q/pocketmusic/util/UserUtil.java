@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -21,6 +22,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FetchUserInfoListener;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * Created by 鹏君 on 2017/1/26.
@@ -62,7 +64,20 @@ public class UserUtil {
         } else {
             return false;
         }
+    }
 
+    public static void increment(MyUser user, int number, ToastUpdateListener listener) {
+        int now = user.getContribution();
+        now = now + number;
+        user.setContribution(now);
+        user.update(listener);
+    }
+
+    public static void increment(int number, ToastUpdateListener listener) {
+        int now = user.getContribution();
+        now = now + number;
+        user.setContribution(now);
+        user.update(listener);
     }
 
 }

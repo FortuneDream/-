@@ -10,11 +10,13 @@ public class Constant {
 
     //URL
     public final static String BASE_URL = "http://www.qupu123.com";
-  //  public final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/5.7.14377.702 Safari/537.36";
+      public final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/5.7.14377.702 Safari/537.36";
     public final static String RECOMMEND_BASE_URL = "http://www.qupu123.com";
     public final static String RECOMMEND_LIST_URL = "http://www.qupu123.com/space/work/6/";//桃李醉春风
     public static String SO_PU_SEARCH = "http://so.sooopu.com/pu/?q=";
     public static String SO_PU_BASE = "http://www.sooopu.com";
+
+
 
     //下载文件夹名
     public final static String FILE_NAME = "YuePuDownload";
@@ -43,7 +45,8 @@ public class Constant {
     public final static int FROM_SHARE = 8;
     public final static int FROM_ASK = 9;
     public final static int FROM_LOCAL = 10;
-    public final static int FROM_SPECIAL=1;;
+    public final static int FROM_SPECIAL = 1;
+    ;
 
     //Intent Flag:显示Menu
     public final static int MENU_DOWNLOAD_COLLECTION_AGREE_SHARE = 1001;//下载，点赞，收藏
@@ -67,7 +70,7 @@ public class Constant {
     public final static int ADD_CONTRIBUTION_UPLOAD = 3;//上传
     public final static int ADD_CONTRIBUTION_COMMENT_WITH_PIC = 3;//评论加图
     public final static int ADD_CONTRIBUTION_AGREE = 1;//点赞，赞数比较多时，给予额外加成
-    public final static int ADD_CONTRIBUTION_AGREE_OTHER=2;//被点赞的额外加成
+    public final static int ADD_CONTRIBUTION_AGREE_OTHER = 2;//被点赞的额外加成
 
     //贡献度-
     public final static int REDUCE_CONTRIBUTION_ASK = 4;//求谱

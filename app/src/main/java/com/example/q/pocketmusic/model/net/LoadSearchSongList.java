@@ -48,6 +48,7 @@ public class LoadSearchSongList extends AsyncTask<String, Void, List<Song>> {
         try {
             Document doc = Jsoup.connect(Constant.SO_PU_SEARCH + urlCode + "&start=" + page * 10)
                     .timeout(6000)
+                    .userAgent(Constant.USER_AGENT)
                     .get();
             //得到总数量
             LogUtils.e("url:"+Constant.SO_PU_SEARCH + urlCode + "&start=" + page * 10);

@@ -27,7 +27,7 @@ public class LoadTypeSongPic extends AsyncTask<Song, Void, Integer> {
         Song song = songs[0];
         LogUtils.e("url:"+song.getUrl());
         try {
-            Document doc = Jsoup.connect(song.getUrl()).timeout(6000).get();
+            Document doc = Jsoup.connect(song.getUrl()).userAgent(Constant.USER_AGENT).timeout(6000).get();
             RegExUtils.setTypePic(song,doc.toString());
         } catch (Exception e) {
             e.printStackTrace();

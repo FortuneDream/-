@@ -9,22 +9,27 @@ import com.example.q.pocketmusic.R;
 
 public class InstrumentFlagUtil {
 
-    private final static Integer FLAG_QU_BU = 0;
-    private final static Integer FLAG_HU_LU = 1;
-    private final static Integer FLAG_JI_TA = 2;
-    private final static Integer FLAG_GANG_QIN = 3;
-    private final static Integer FLAG_SA_KE_SI = 4;
-    private final static Integer FLAG_ER_HU = 5;
-    private final static Integer FLAG_GU_ZHENG = 6;
-    private final static Integer FLAG_DIAN_ZI_QIN = 7;
-    private final static Integer FLAG_PI_PA = 8;
-    private final static Integer FLAG_KOU_QIN = 9;
-    private final static Integer FLAG_CHANG_DI = 10;
-    private static final Integer FLAG_DI_XIAO = 11;
-    private static final Integer FLAG_SHOU_FENG_QIN = 12;
-    private static final Integer FLAG_TI_QIN = 13;
-    private static final Integer FLAG_TONG_GUAN = 14;
-    private static final Integer FLAG_YANG_QIN = 15;
+    public final static int FLAG_QU_BU = 0;
+    public final static int FLAG_HU_LU = 1;
+    public final static int FLAG_JI_TA = 2;
+    public final static int FLAG_GANG_QIN = 3;
+    public final static int FLAG_SA_KE_SI = 4;
+    public final static int FLAG_ER_HU = 5;
+    public final static int FLAG_GU_ZHENG = 6;
+    public final static int FLAG_DIAN_ZI_QIN = 7;
+    public final static int FLAG_PI_PA = 8;
+    public final static int FLAG_KOU_QIN = 9;
+    public final static int FLAG_CHANG_DI = 10;
+    public static final int FLAG_DI_XIAO = 11;
+    public static final int FLAG_SHOU_FENG_QIN = 12;
+    public static final int FLAG_TI_QIN = 13;
+    public static final int FLAG_TONG_GUAN = 14;
+    public static final int FLAG_YANG_QIN = 15;
+
+    //学习URL
+    public final static String WU_XIAN_PU = "https://jingyan.baidu.com/article/f3e34a1266e194f5eb6535f4.html";
+    public final static String JIAN_PU = "https://jingyan.baidu.com/article/0bc808fc9f0cf61bd485b9cf.html";
+    public final static String JI_TA_PU = "https://jingyan.baidu.com/article/363872ecf72c7e6e4ba16fca.html";
 
     private final static int[] flags = {
             FLAG_QU_BU, FLAG_HU_LU, FLAG_JI_TA, FLAG_GANG_QIN,
@@ -43,6 +48,10 @@ public class InstrumentFlagUtil {
             R.drawable.iv_top_sakesi, R.drawable.iv_top_erhu, R.drawable.iv_top_guzheng, R.drawable.iv_top_dianziqin,
             R.drawable.iv_top_pipa, R.drawable.iv_top_kouqin, R.drawable.iv_top_quanbu, R.drawable.iv_top_quanbu,
             R.drawable.iv_top_quanbu, R.drawable.iv_top_quanbu, R.drawable.iv_top_quanbu, R.drawable.iv_top_quanbu};
+    private final static String[] studyUrls = {JIAN_PU, JIAN_PU, JI_TA_PU, WU_XIAN_PU,
+            WU_XIAN_PU, JIAN_PU, JIAN_PU, WU_XIAN_PU,
+            JIAN_PU, JIAN_PU, JIAN_PU, JIAN_PU,
+            WU_XIAN_PU, WU_XIAN_PU, WU_XIAN_PU, JIAN_PU};
 
     //乐器对应
     public final static String[] typeNames = {
@@ -87,4 +96,10 @@ public class InstrumentFlagUtil {
     public static String getTypeName(int flag) {
         return typeNames[flag];
     }
+
+    public static String getStudyUrl(int flag) {
+        return studyUrls[flag];
+    }
+
+    ;
 }

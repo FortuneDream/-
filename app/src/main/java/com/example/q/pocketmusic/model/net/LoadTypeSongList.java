@@ -2,12 +2,15 @@ package com.example.q.pocketmusic.model.net;
 
 import android.os.AsyncTask;
 
+import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.util.RegExUtils;
 import com.example.q.pocketmusic.util.common.LogUtils;
 
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import java.util.List;
 
@@ -35,8 +38,10 @@ public class LoadTypeSongList extends AsyncTask<String, Void, List<Song> > {
         List<Song> list;
         try {
             Document doc = Jsoup.connect(typeUrl)
+                    .userAgent(Constant.USER_AGENT)
                     .timeout(6000)
                     .get();
+//            Element tBody=doc.getElementsByTag("tbody").get(0);
             list= RegExUtils.getTypeSongList(typeId,doc.toString());
         } catch (Exception e) {
             e.printStackTrace();

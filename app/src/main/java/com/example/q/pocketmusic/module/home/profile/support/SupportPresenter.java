@@ -1,6 +1,8 @@
 package com.example.q.pocketmusic.module.home.profile.support;
 
+import android.content.ClipboardManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -50,14 +52,14 @@ public class SupportPresenter extends BasePresenter<SupportPresenter.IView> {
 
 
     public void getSupportMoneyList(final boolean isRefreshing) {
-        if (isRefreshing){
-            mPage=0;
+        if (isRefreshing) {
+            mPage = 0;
         }
 
-        util.getMoreList(MoneySupport.class,  BmobConstant.BMOB_USER, mPage, new ToastQueryListener<MoneySupport>() {
+        util.getMoreList(MoneySupport.class, BmobConstant.BMOB_USER, mPage, new ToastQueryListener<MoneySupport>() {
             @Override
             public void onSuccess(List<MoneySupport> list) {
-                activity.setMoneyList(isRefreshing,list);
+                activity.setMoneyList(isRefreshing, list);
             }
         });
     }
@@ -68,10 +70,10 @@ public class SupportPresenter extends BasePresenter<SupportPresenter.IView> {
 
     public void getMoreMoneyList() {
         mPage++;
-        util.getMoreList(MoneySupport.class,  BmobConstant.BMOB_USER, mPage, new ToastQueryListener<MoneySupport>() {
+        util.getMoreList(MoneySupport.class, BmobConstant.BMOB_USER, mPage, new ToastQueryListener<MoneySupport>() {
             @Override
             public void onSuccess(List<MoneySupport> list) {
-                activity.setMoneyList(false,list);
+                activity.setMoneyList(false, list);
             }
         });
     }
@@ -227,12 +229,16 @@ public class SupportPresenter extends BasePresenter<SupportPresenter.IView> {
         }
     }
 
-
+    public void copyAlipay() {
+       ClipboardManager cm= (ClipboardManager) activity.getAppContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        cm.setText("15123100885");
+        ToastUtil.showToast("复制成功~");
+    }
 
 
     public interface IView extends IBaseView {
 
 
-        void setMoneyList(boolean isRefreshing,List<MoneySupport> list);
+        void setMoneyList(boolean isRefreshing, List<MoneySupport> list);
     }
 }

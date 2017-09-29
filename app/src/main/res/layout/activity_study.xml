@@ -7,16 +7,8 @@
     android:orientation="vertical"
     tools:context="com.example.q.pocketmusic.module.home.net.type.study.StudyActivity">
 
-    <com.example.q.pocketmusic.view.widget.net.HackyViewPager
-        android:id="@+id/view_pager"
+    <WebView
+        android:id="@+id/web_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <TextView
-        android:id="@+id/page_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

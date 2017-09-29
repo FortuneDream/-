@@ -64,7 +64,7 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
     //进入学习版块
     public void enterStudyActivity(Integer typeId) {
         Intent intent = new Intent(activity.getCurrentContext(), StudyActivity.class);
-        intent.putExtra(StudyActivity.PARAM_TYPE_ID, typeId);
+        intent.putExtra(StudyActivity.PARAM_TYPE, typeId);
         activity.getCurrentContext().startActivity(intent);
     }
 
