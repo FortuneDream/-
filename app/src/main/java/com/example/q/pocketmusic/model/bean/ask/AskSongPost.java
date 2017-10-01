@@ -14,7 +14,7 @@ public class AskSongPost extends BmobObject {
     private Integer type;//所求曲谱类型
     private String content;//帖子内容
     private Integer commentNum;//回复数量
-    private Integer instrument;
+    private Integer instrument;//乐器类型
     private Integer index;//先按照指数，再创建时间逆序
 
 
@@ -28,6 +28,7 @@ public class AskSongPost extends BmobObject {
     public void setInstrument(Integer instrument) {
         this.instrument = instrument;
     }
+
     public AskSongPost(MyUser user, String title, Integer type, String content) {
         this.user = user;
         this.title = title;

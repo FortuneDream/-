@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/title_edt"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_edt"
+        android:gravity="center"
+        android:hint="请输入标题" />
+
+    <LinearLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/content_et"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:lineSpacingExtra="8dp"
+            android:maxLines="10"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textSize="21sp"
+            tools:text="1322156465411111111111111111111111" />
+
+        <LinearLayout
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_piano_normal"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+
+            <ImageView
+                android:id="@+id/keep_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_vec_keep" />
+
+            <ImageView
+                android:id="@+id/tab_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_vec_tab" />
+
+            <ImageView
+                android:id="@+id/enter_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_vec_enter" />
+
+            <ImageView
+                android:id="@+id/bo_lang_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_vec_bolang" />
+
+            <ImageView
+                android:id="@+id/back_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_vec_back" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/g3"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="[5]" />
+
+        <Button
+            android:id="@+id/a3"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="[6]" />
+
+        <Button
+            android:id="@+id/b3"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="[7]" />
+
+        <Button
+            android:id="@+id/c4"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/d4"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/e4"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/f4"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/g4"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/a4"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/b4"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/c5"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="(1)" />
+
+        <Button
+            android:id="@+id/d5"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="(2)" />
+
+        <Button
+            android:id="@+id/e5"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="(3)" />
+
+        <Button
+            android:id="@+id/f5"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="(4)" />
+
+        <Button
+            android:id="@+id/g5"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="(5)" />
+    </LinearLayout>
+
+</LinearLayout>
+
+

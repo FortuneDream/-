@@ -3,35 +3,39 @@ package com.example.q.pocketmusic.util;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.support.annotation.IdRes;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.model.bean.convert.Sound;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 鹏君 on 2017/4/17.
  */
 
 public class MusicUtils {
-    int[] mMusicRaws = {R.raw.di_do1, R.raw.di_re2, R.raw.di_mi3, R.raw.di_fa4, R.raw.di_sol5, R.raw.di_la6, R.raw.di_si7};
-    int[] mMusicButtonIds = {R.id.do_1, R.id.re_2, R.id.mi_3, R.id.fa_4, R.id.sol_5, R.id.la_6, R.id.xi_7};
-    String[] mMusicNoteStrs = {"1", "2", "3", "4", "5", "6", "7"};
-    private SoundPool soundPool;
-    private Map<Integer, Integer> soundPoolMap;//音效池
-    private Map<Integer, String> soundNoteMap;//对应的音符池
-    private Boolean isComplete;
     private Context context;
+    int[] mMusicRaws = {R.raw.g3, R.raw.a3, R.raw.b3, R.raw.c4, R.raw.d4, R.raw.e4, R.raw.f4, R.raw.g4, R.raw.a4, R.raw.b4, R.raw.c5, R.raw.d5, R.raw.e5, R.raw.f5, R.raw.g5};
+    int[] mMusicButtonIds = {R.id.g3, R.id.a3, R.id.b3, R.id.c4, R.id.d4, R.id.e4, R.id.f4, R.id.g4, R.id.a4, R.id.b4, R.id.c5, R.id.d5, R.id.e5, R.id.f5, R.id.g5};
+    private String[] mMusicNoteStrs = {"[5]", "[6]", "[7]", "1", "2", "3", "4", "5", "6", "7", "(1)", "(2)", "(3)", "(4)", "(5)"};
+    private List<Sound> sounds;
+    private SoundPool soundPool;
+    private Boolean isComplete;
+
 
     public MusicUtils(Context context) {
-        this.context = context;
+        sounds = new ArrayList<>();
         soundPool = new SoundPool(mMusicRaws.length, AudioManager.STREAM_MUSIC, 0);//同时支持两个键
-        soundPoolMap = new HashMap<>();
-        soundNoteMap = new HashMap<>();
         for (int i = 0; i < mMusicRaws.length; i++) {
-            soundPoolMap.put(mMusicButtonIds[i], soundPool.load(context, mMusicRaws[i], 0));
-            soundNoteMap.put(mMusicButtonIds[i], mMusicNoteStrs[i]);
+            int temp = soundPool.load(context, mMusicRaws[i], 0);
+            LogUtils.e("sound temp:"+temp);
+            LogUtils.e("sound id:"+mMusicButtonIds[i]);
+            Sound sound = new Sound(mMusicButtonIds[i], mMusicNoteStrs[i], temp);
+            sounds.add(sound);
         }
         soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
@@ -41,17 +45,38 @@ public class MusicUtils {
         });
     }
 
-    //no 从0开始  0表示di_do_1
+
+    //播放
     public void soundPlay(int no) {
         if (isComplete) {
-            soundPool.play(soundPoolMap.get(no), 1.0f, 1.0f, 1, 0, 1.0f);
+            int note = getSoundNote(no);
+            if (note == -1) {
+                return;
+            }
+            soundPool.play(getSoundNote(no), 1.0f, 1.0f, 1, 0, 1.0f);
         } else {
-            ToastUtil.showToast( "正在加载音频~请稍后");
+            ToastUtil.showToast("正在加载音频~请稍后");
         }
     }
 
-    public int soundOver() {
-        return soundPool.play(soundPoolMap.get(1), 1.0f, 1.0f, 1, 0, 1.0f);
+    //通过resId 取出音效
+    private int getSoundNote(@IdRes int id) {
+        for (int i = 0; i < sounds.size(); i++) {
+            if (sounds.get(i).getResId() == id) {
+                return sounds.get(i).getNote();
+            }
+        }
+        return -1;
+    }
+
+    //通过resId 取出字符
+    private String getSoundNumber(@IdRes int id) {
+        for (int i = 0; i < sounds.size(); i++) {
+            if (sounds.get(i).getResId() == id) {
+                return sounds.get(i).getNumber();
+            }
+        }
+        return "-1";
     }
 
     @Override
@@ -62,6 +87,6 @@ public class MusicUtils {
     }
 
     public String getNote(int id) {
-        return soundNoteMap.get(id);
+        return getSoundNumber(id);
     }
 }

@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentManager;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.home.convert.HomeConvertListFragment;
 import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
-import com.example.q.pocketmusic.module.home.seek.HomeSeekFragment;
 import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
@@ -28,11 +28,11 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     private FragmentManager fm;
     private Fragment totalFragment;
     private static int FLAG_SELECT_NET = 1001;
-    private static int FLAG_SELECT_ASK = 1002;
+    private static int FLAG_SELECT_CONVERT = 1002;
     private static int FLAG_SELECT_LOCAL = 1003;
     private static int FLAG_SELECT_PROFILE = 1004;
     private HomeNetFragment homeNetFragment;//1
-    private HomeSeekFragment homeSeekFragment;//2
+    private HomeConvertListFragment convertFragment;//2
     private HomeLocalFragment homeLocalFragment;//3
     private HomeProfileFragment homeProfileFragment;//4
     private int FLAG;//标记当前Fragment
@@ -47,11 +47,11 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     private void initFragment() {
         fragments = new ArrayList<>();
         homeNetFragment = new HomeNetFragment();
-        homeSeekFragment = new HomeSeekFragment();
+        convertFragment = new HomeConvertListFragment();
         homeLocalFragment = new HomeLocalFragment();
         homeProfileFragment = new HomeProfileFragment();
         fragments.add(homeNetFragment);
-        fragments.add(homeSeekFragment);
+        fragments.add(convertFragment);
         fragments.add(homeLocalFragment);
         fragments.add(homeProfileFragment);
     }
@@ -66,12 +66,12 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     }
 
 
-    //求谱
-    public void clickAsk() {
-        if (FLAG != FLAG_SELECT_ASK) {
-            FLAG = FLAG_SELECT_ASK;
+    //转谱
+    public void clickConvert() {
+        if (FLAG != FLAG_SELECT_CONVERT) {
+            FLAG = FLAG_SELECT_CONVERT;
             showFragment(fragments.get(1));
-            activity.onSelectAsk();
+            activity.onSelectConvert();
         }
     }
 
@@ -136,7 +136,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
 
         void onSelectNet();
 
-        void onSelectAsk();
+        void onSelectConvert();
 
         void onSelectProfile();
 

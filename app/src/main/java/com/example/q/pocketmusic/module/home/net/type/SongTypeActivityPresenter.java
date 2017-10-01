@@ -1,17 +1,21 @@
 package com.example.q.pocketmusic.module.home.net.type;
 
-import android.content.Intent;
 
-import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.SongObject;
-import com.example.q.pocketmusic.model.net.LoadTypeSongList;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
+import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
+import com.example.q.pocketmusic.module.home.net.type.community.CommunityFragment;
+import com.example.q.pocketmusic.module.home.net.type.hot.HotListFragment;
 import com.example.q.pocketmusic.module.home.net.type.study.StudyActivity;
-import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.InstrumentFlagUtil;
+import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,45 +24,18 @@ import java.util.List;
  */
 public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPresenter.IView> {
     private IView activity;
-    private int mPage;
+    private static int FLAG_SELECT_HOT_LIST = 1001;
+    private static int FLAG_SELECT_COMMUNITY = 1002;
+    private HotListFragment hotListFragment;
+    private CommunityFragment communityFragment;
+    private FragmentManager fm;
+    private Fragment totalFragment;
+    private int FLAG;//标记当前Fragment
+    private List<Fragment> fragments = new ArrayList<>();
 
     public SongTypeActivityPresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
-    }
-
-    public int getmPage() {
-        return mPage;
-    }
-
-
-    public void getList(int typeId, final boolean isRefreshing) {
-        String url = Constant.BASE_URL + "/qiyue/" + InstrumentFlagUtil.getUrl(typeId) + mPage + ".html";
-        new LoadTypeSongList(typeId) {
-            @Override
-            protected void onPostExecute(List<Song> songs) {
-                super.onPostExecute(songs);
-                if (!isRefreshing) {
-                    activity.setList(songs);
-                } else {
-                    activity.setListWithRefreshing(songs);
-                }
-
-            }
-        }.execute(url);
-    }
-
-
-    public void setPage(int page) {
-        this.mPage = page;
-    }
-
-    public void enterSongActivity(Song song) {
-        Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
-        SongObject object = new SongObject(song, Constant.FROM_TYPE, Constant.MENU_DOWNLOAD_COLLECTION_SHARE, Constant.NET);
-        intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, object);
-        activity.getCurrentContext().startActivity(intent);
     }
 
     //进入学习版块
@@ -68,10 +45,57 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
         activity.getCurrentContext().startActivity(intent);
     }
 
+    public void initFragment(int typeId) {
+        fragments = new ArrayList<>();
+        hotListFragment = HotListFragment.getInstance(typeId);
+        communityFragment = CommunityFragment.getInstance(typeId);
+        fragments.add(hotListFragment);
+        fragments.add(communityFragment);
+    }
+
+    //热门
+    public void clickHotList() {
+        if (FLAG != FLAG_SELECT_HOT_LIST) {
+            FLAG = FLAG_SELECT_HOT_LIST;
+            showFragment(fragments.get(0));
+            activity.onSelectHotList();
+        }
+    }
+
+    //圈子
+    public void clickCommunity() {
+        if (FLAG != FLAG_SELECT_COMMUNITY) {
+            FLAG = FLAG_SELECT_COMMUNITY;
+            showFragment(fragments.get(1));
+            activity.onSelectCommunity();
+        }
+    }
+
+
+    private void showFragment(Fragment fragment) {
+        if (!fragment.isAdded()) {
+            if (totalFragment == null) {
+                fm.beginTransaction().add(R.id.type_content, fragment, fragment.getClass().getName()).commit();
+            } else {
+                fm.beginTransaction().hide(totalFragment).add(R.id.type_content, fragment, fragment.getClass().getName()).commit();
+            }
+        } else {
+            fm.beginTransaction().hide(totalFragment).show(fragment).commit();
+        }
+        totalFragment = fragment;
+    }
+
+    public void setFragmentManager(FragmentManager supportFragmentManager) {
+        this.fm = supportFragmentManager;
+    }
+
+
     public interface IView extends IBaseView {
 
-        void setList(List<Song> songs);
+        void onSelectHotList();
 
-        void setListWithRefreshing(List<Song> songs);
+        void onSelectCommunity();
     }
+
+
 }

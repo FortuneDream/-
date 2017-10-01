@@ -45,17 +45,21 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
+        <com.example.q.pocketmusic.view.widget.view.TopTabView
+            android:id="@+id/type_tab_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:Left_Text="曲谱"
+            app:Right_Text="圈子" />
 
     </android.support.design.widget.AppBarLayout>
 
-
-    <com.jude.easyrecyclerview.EasyRecyclerView
-        android:id="@+id/recycler"
+    <FrameLayout
+        android:id="@+id/type_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="?android:attr/selectableItemBackground"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
 
 </android.support.design.widget.CoordinatorLayout>
 

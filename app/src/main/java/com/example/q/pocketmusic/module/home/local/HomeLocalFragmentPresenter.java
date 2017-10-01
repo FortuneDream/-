@@ -11,7 +11,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.local.localrecord.LocalRecordFragment;
 import com.example.q.pocketmusic.module.home.local.localsong.LocalSongFragment;
 import com.example.q.pocketmusic.module.lead.LeadSongActivity;
-import com.example.q.pocketmusic.module.piano.PianoActivity;
+import com.example.q.pocketmusic.module.home.convert.convert.ConvertActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +87,7 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
     }
 
     public void enterPianoActivity() {
-        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), PianoActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ConvertActivity.class));
     }
 
 

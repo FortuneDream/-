@@ -15,11 +15,20 @@ public class ShareSong extends BmobObject {
     private String name;//歌曲名字
     private String content;//内容，介绍信息
     private BmobRelation agrees;//点赞的多个用户，多对多
-    private Integer agreeNum;//分享数量
-    private Integer  downloadNum;//下载量
+    private int agreeNum;//分享数量
+    private int downloadNum;//下载量
+    private int instrument;//所属月
 
     public ShareSong() {
 
+    }
+
+    public int getInstrument() {
+        return instrument;
+    }
+
+    public void setInstrument(int instrument) {
+        this.instrument = instrument;
     }
 
     public ShareSong(MyUser user, String name, String content) {
@@ -28,6 +37,7 @@ public class ShareSong extends BmobObject {
         this.content = content;
         this.agreeNum = 0;
         this.downloadNum = 0;
+        this.instrument = 0;
     }
 
     public BmobRelation getAgrees() {
@@ -47,9 +57,6 @@ public class ShareSong extends BmobObject {
     }
 
     public int getDownloadNum() {
-        if (downloadNum==null){
-            return 0;
-        }
         return downloadNum;
     }
 

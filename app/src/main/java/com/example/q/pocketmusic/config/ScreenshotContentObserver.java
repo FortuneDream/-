@@ -23,8 +23,6 @@ public class ScreenshotContentObserver extends ContentObserver {
         super(null);//传入Null，表示onChange操作在Binder线程中，所以要自己创建handler发到自己的MessageQueue中
         this.mContext = context.getApplicationContext();
         this.handler=handler;
-
-
     }
 
     public static void startObserve(Handler handler,Context context) {

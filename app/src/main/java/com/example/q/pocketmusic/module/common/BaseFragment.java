@@ -19,6 +19,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by 鹏君 on 2017/1/16.
@@ -28,7 +29,8 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     protected T presenter;
     public static AlertDialog mLoadingDialog;
     public Context context;
-    public final String TAG =this.getClass().getName();
+    public final String TAG = this.getClass().getName();
+    Unbinder unbinder;
 
 
     protected abstract T createPresenter();
@@ -47,11 +49,12 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         }
     }
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(setContentResource(), container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         initView();
         return view;
     }
@@ -98,6 +101,13 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     @Override
     public void finish() {
         getActivity().finish();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     @Override

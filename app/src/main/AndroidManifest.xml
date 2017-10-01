@@ -28,7 +28,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".module.common.TestModuleActivity"></activity>
+        <activity android:name=".module.common.TestModuleActivity" />
         <activity android:name=".module.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -68,9 +68,9 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".module.user.login.LoginActivity" />
         <activity android:name=".module.user.register.RegisterActivity" />
-        <activity android:name=".module.home.seek.publish.AskSongActivity" />
+        <activity android:name=".module.home.net.type.community.publish.AskSongActivity" />
         <activity
-            android:name=".module.home.seek.ask.comment.AskSongCommentActivity"
+            android:name=".module.home.net.type.community.ask.comment.AskSongCommentActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".module.user.notify.suggestion.SuggestionActivity"
@@ -95,8 +95,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
-            android:name=".module.piano.PianoActivity"
-            android:screenOrientation="landscape" />
+            android:name=".module.home.convert.convert.ConvertActivity"
+            android:screenOrientation="landscape"></activity>
         <activity android:name=".module.home.profile.post.UserPostActivity" />
         <activity android:name=".module.home.profile.share.UserShareActivity" />
         <activity android:name=".module.user.notify.UserNotifyActivity" />
@@ -114,7 +114,8 @@
         <activity android:name=".module.user.other.OtherProfileActivity" />
         <activity android:name=".module.home.net.type.study.StudyActivity" />
         <activity android:name=".module.home.net.special.list.SpecialListActivity" />
-        <activity android:name=".module.user.notify.gift.GiftActivity"></activity>
+        <activity android:name=".module.user.notify.gift.GiftActivity" />
+        <activity android:name=".module.home.convert.comment.ConvertCommentActivity" />
     </application>
 
 </manifest>

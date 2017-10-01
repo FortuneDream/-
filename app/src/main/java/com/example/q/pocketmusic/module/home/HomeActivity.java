@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.BottomTabView;
@@ -22,19 +21,18 @@ import butterknife.OnClick;
 
 public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresenter>
         implements HomePresenter.IView {
-    @BindView(R.id.home_content)
-    FrameLayout homeContent;
-    @BindView(R.id.home_tab_local_tab)
-    BottomTabView homeTabLocalTab;
-    @BindView(R.id.home_tab_net_tab)
-    BottomTabView homeTabNetTab;
-    @BindView(R.id.home_tab_ask_tab)
-    BottomTabView homeTabAskTab;
-    @BindView(R.id.home_tab_profile_tab)
-    BottomTabView homeTabProfileTab;
-
     private static boolean isExit = false;  // 定义一个变量，来标识是否退出
     public static final String ACTION_RETURN_HOME = "action_return_home";
+    @BindView(R.id.home_content)
+    FrameLayout homeContent;
+    @BindView(R.id.home_tab_net_tab)
+    BottomTabView homeTabNetTab;
+    @BindView(R.id.home_tab_convert_tab)
+    BottomTabView homeTabConvertTab;
+    @BindView(R.id.home_tab_local_tab)
+    BottomTabView homeTabLocalTab;
+    @BindView(R.id.home_tab_profile_tab)
+    BottomTabView homeTabProfileTab;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -86,7 +84,7 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
         }
     }
 
-    @OnClick({R.id.home_tab_local_tab, R.id.home_tab_net_tab, R.id.home_tab_ask_tab, R.id.home_tab_profile_tab})
+    @OnClick({R.id.home_tab_local_tab, R.id.home_tab_net_tab, R.id.home_tab_convert_tab, R.id.home_tab_profile_tab})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_tab_local_tab://点击本地
@@ -95,8 +93,8 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
             case R.id.home_tab_net_tab://点击网络
                 presenter.clickNet();
                 break;
-            case R.id.home_tab_ask_tab://点击求谱
-                presenter.clickAsk();
+            case R.id.home_tab_convert_tab://点击转谱
+                presenter.clickConvert();
                 break;
             case R.id.home_tab_profile_tab:
                 if (UserUtil.checkLocalUser(this)) {
@@ -154,7 +152,7 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
     public void onSelectLocal() {
         homeTabLocalTab.onSelect(true);
         homeTabNetTab.onSelect(false);
-        homeTabAskTab.onSelect(false);
+        homeTabConvertTab.onSelect(false);
         homeTabProfileTab.onSelect(false);
     }
 
@@ -163,24 +161,25 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
     public void onSelectNet() {
         homeTabLocalTab.onSelect(false);
         homeTabNetTab.onSelect(true);
-        homeTabAskTab.onSelect(false);
+        homeTabConvertTab.onSelect(false);
         homeTabProfileTab.onSelect(false);
     }
 
     @Override
-    public void onSelectAsk() {
+    public void onSelectConvert() {
         homeTabLocalTab.onSelect(false);
         homeTabNetTab.onSelect(false);
-        homeTabAskTab.onSelect(true);
+        homeTabConvertTab.onSelect(true);
         homeTabProfileTab.onSelect(false);
     }
 
     @Override
     public void onSelectProfile() {
-
         homeTabLocalTab.onSelect(false);
         homeTabNetTab.onSelect(false);
-        homeTabAskTab.onSelect(false);
+        homeTabConvertTab.onSelect(false);
         homeTabProfileTab.onSelect(true);
     }
+
+
 }

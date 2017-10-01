@@ -34,9 +34,10 @@ public class UserShareModel extends BaseModel {
 
 
     //得到所有分享列表
-    public void getAllShareList(int mPage, ToastQueryListener<ShareSong> listener) {
+    public void getAllShareList(int typeId, int mPage, ToastQueryListener<ShareSong> listener) {
         BmobQuery<ShareSong> query = new BmobQuery<>();
         query.order(DEFAULT_INVERTED_CREATE);
+        query.addWhereEqualTo(BmobConstant.BMOB_INSTRUMENT, typeId);
         query.setLimit(DEFAULT_LIMIT);
         query.setSkip(mPage * DEFAULT_LIMIT);
         query.include(BmobConstant.BMOB_USER);

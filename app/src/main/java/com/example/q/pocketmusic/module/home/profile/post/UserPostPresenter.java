@@ -3,11 +3,10 @@ package com.example.q.pocketmusic.module.home.profile.post;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.seek.ask.comment.AskSongCommentActivity;
+import com.example.q.pocketmusic.module.home.net.type.community.ask.comment.AskSongCommentActivity;
 import com.example.q.pocketmusic.util.UserUtil;
 
 import java.util.List;

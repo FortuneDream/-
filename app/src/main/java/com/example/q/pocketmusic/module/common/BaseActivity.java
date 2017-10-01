@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
@@ -46,6 +47,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     private static final int FLAG_DISMISS_DIALOG = 2001;
     public AlertDialog mLoadingDialog;//这个dialog一般在上传，下载，的时候才会用到
     private List<Drawable> drawableList = new ArrayList<>();
+
 
     protected abstract T createPresenter();
 
@@ -81,7 +83,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setContentResource());
-        ButterKnife.bind(this);
+         ButterKnife.bind(this);
         presenter = createPresenter();
         this.context = this;
         initView();
