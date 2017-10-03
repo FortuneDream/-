@@ -10,12 +10,11 @@ public class Constant {
 
     //URL
     public final static String BASE_URL = "http://www.qupu123.com";
-      public final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/5.7.14377.702 Safari/537.36";
+    public final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/5.7.14377.702 Safari/537.36";
     public final static String RECOMMEND_BASE_URL = "http://www.qupu123.com";
     public final static String RECOMMEND_LIST_URL = "http://www.qupu123.com/space/work/6/";//桃李醉春风
     public static String SO_PU_SEARCH = "http://so.sooopu.com/pu/?q=";
     public static String SO_PU_BASE = "http://www.sooopu.com";
-
 
 
     //下载文件夹名
@@ -73,6 +72,7 @@ public class Constant {
     public final static int ADD_CONTRIBUTION_AGREE_OTHER = 2;//被点赞的额外加成
 
     //贡献度-
+    public final static int REDUCE_BASE_CONVERT = 30;//转谱基础
     public final static int REDUCE_CONTRIBUTION_ASK = 4;//求谱
     public final static int REDUCE_DOWNLOAD = 3;//下载
     public final static int REDUCE_CONTRIBUTION_COLLECTION = 2;//收藏

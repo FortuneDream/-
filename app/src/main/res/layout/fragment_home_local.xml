@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             fab:srcCompat="@drawable/ic_vec_add_local" />
 
-        <com.example.q.pocketmusic.view.widget.view.TopTabView
+        <com.example.q.pocketmusic.view.widget.view.TopTwoTabView
             android:id="@+id/top_tab_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

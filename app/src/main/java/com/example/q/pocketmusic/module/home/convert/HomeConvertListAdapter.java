@@ -3,7 +3,6 @@ package com.example.q.pocketmusic.module.home.convert;
 import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
@@ -12,9 +11,6 @@ import com.example.q.pocketmusic.config.pic.IDisplayStrategy;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public class HomeConvertListAdapter extends RecyclerArrayAdapter<ConvertPost> {
@@ -36,7 +32,7 @@ public class HomeConvertListAdapter extends RecyclerArrayAdapter<ConvertPost> {
         ImageView convertPostUserHeadIv;
         TextView convertPostUserDateTv;
         TextView convertPostUserNameTv;
-        TextView convertPostUserContentTv;
+        TextView convertPostUserTitleTv;
         TextView convertPostUserCoinTv;
         TextView convertPostUserCommentNumTv;
 
@@ -47,7 +43,7 @@ public class HomeConvertListAdapter extends RecyclerArrayAdapter<ConvertPost> {
             convertPostUserHeadIv = $(R.id.convert_post_user_head_iv);
             convertPostUserDateTv = $(R.id.convert_post_user_date_tv);
             convertPostUserNameTv = $(R.id.convert_post_user_name_tv);
-            convertPostUserContentTv = $(R.id.convert_post_user_content_tv);
+            convertPostUserTitleTv = $(R.id.convert_post_user_title_tv);
             convertPostUserCommentNumTv = $(R.id.convert_post_user_comment_num_tv);
         }
 
@@ -60,7 +56,7 @@ public class HomeConvertListAdapter extends RecyclerArrayAdapter<ConvertPost> {
             displayStrategy.displayCircle(getContext(), data.getUser().getHeadImg(), convertPostUserHeadIv);
             convertPostUserDateTv.setText(data.getCreatedAt());
             convertPostUserNameTv.setText(data.getUser().getNickName());
-            convertPostUserContentTv.setText(data.getContent());
+            convertPostUserTitleTv.setText(data.getTitle());
             convertPostUserCoinTv.setText(String.valueOf(data.getCoin()));
             convertPostUserCommentNumTv.setText(String.valueOf(data.getCommentNum()));
         }

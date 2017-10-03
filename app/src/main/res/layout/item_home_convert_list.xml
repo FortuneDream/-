@@ -48,7 +48,7 @@
 
 
             <TextView
-                android:id="@+id/convert_post_user_content_tv"
+                android:id="@+id/convert_post_user_title_tv"
                 style="@style/ThreeTextSecond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

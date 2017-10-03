@@ -2,12 +2,12 @@ package com.example.q.pocketmusic.module.home.convert;
 
 
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
@@ -19,18 +19,23 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
 public class HomeConvertListFragment extends BaseFragment<HomeConvertListFragmentPresenter.IView, HomeConvertListFragmentPresenter>
         implements HomeConvertListFragmentPresenter.IView, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener
-        ,RecyclerArrayAdapter.OnMoreListener{
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.app_bar)
-    AppBarLayout appBar;
+        , RecyclerArrayAdapter.OnMoreListener {
+
+    @BindView(R.id.publish_convert_iv)
+    ImageView publishConvertIv;
+    @BindView(R.id.title_bar)
+    TextView titleBar;
+    @BindView(R.id.search_iv)
+    ImageView searchIv;
     @BindView(R.id.convert_list_recycler)
     EasyRecyclerView convertListRecycler;
+    Unbinder unbinder;
     private HomeConvertListAdapter adapter;
 
     @Override
@@ -40,12 +45,11 @@ public class HomeConvertListFragment extends BaseFragment<HomeConvertListFragmen
 
     @Override
     public void initView() {
-        initToolbar(toolbar,"转谱");
         adapter = new HomeConvertListAdapter(getCurrentContext());
         initRecyclerView(convertListRecycler, adapter);
         adapter.setOnItemClickListener(this);
         convertListRecycler.setRefreshListener(this);
-        adapter.setMore(R.layout.item_home_convert_list,this);
+        adapter.setMore(R.layout.item_home_convert_list, this);
         presenter.setPage(0);
         presenter.getConvertPostList(true);
     }
@@ -68,7 +72,7 @@ public class HomeConvertListFragment extends BaseFragment<HomeConvertListFragmen
 
     @Override
     public void onMoreShow() {
-       presenter.getMoreConvertList();
+        presenter.getMoreConvertList();
     }
 
     @Override
@@ -78,9 +82,21 @@ public class HomeConvertListFragment extends BaseFragment<HomeConvertListFragmen
 
     @Override
     public void setConvertList(boolean isRefreshing, List<ConvertPost> list) {
-        if (isRefreshing){
+        if (isRefreshing) {
             adapter.clear();
         }
         adapter.addAll(list);
+    }
+
+    @OnClick({R.id.publish_convert_iv, R.id.search_iv})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.publish_convert_iv:
+                presenter.enterPublishConvertActivity();
+                break;
+            case R.id.search_iv:
+                presenter.enterSearchMainActivity();
+                break;
+        }
     }
 }

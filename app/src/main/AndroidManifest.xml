@@ -68,7 +68,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".module.user.login.LoginActivity" />
         <activity android:name=".module.user.register.RegisterActivity" />
-        <activity android:name=".module.home.net.type.community.publish.AskSongActivity" />
+        <activity android:name=".module.home.net.type.community.publish.PublishAskActivity" />
         <activity
             android:name=".module.home.net.type.community.ask.comment.AskSongCommentActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
@@ -87,7 +87,7 @@
         <activity android:name=".module.home.profile.contribution.ContributionActivity" />
         <activity android:name="cn.bmob.pay.v3.act.PayAct" />
         <activity
-            android:name=".module.lead.LeadSongActivity"
+            android:name=".module.home.local.lead.LeadSongActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".module.user.forget.ForgetActivity" />
         <activity
@@ -95,8 +95,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
-            android:name=".module.home.convert.convert.ConvertActivity"
-            android:screenOrientation="landscape"></activity>
+            android:name=".module.home.convert.comment.convert.ConvertActivity"
+            android:screenOrientation="landscape" />
         <activity android:name=".module.home.profile.post.UserPostActivity" />
         <activity android:name=".module.home.profile.share.UserShareActivity" />
         <activity android:name=".module.user.notify.UserNotifyActivity" />
@@ -116,6 +116,7 @@
         <activity android:name=".module.home.net.special.list.SpecialListActivity" />
         <activity android:name=".module.user.notify.gift.GiftActivity" />
         <activity android:name=".module.home.convert.comment.ConvertCommentActivity" />
+        <activity android:name=".module.home.convert.publish.PublishConvertActivity" />
     </application>
 
 </manifest>

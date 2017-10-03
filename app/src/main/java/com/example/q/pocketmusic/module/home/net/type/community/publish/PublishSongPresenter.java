@@ -19,13 +19,13 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
  * Created by 鹏君 on 2016/11/14.
  */
 
-public class AskSongPresenter extends BasePresenter<AskSongPresenter.IView> {
+public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IView> {
     private final int NOT_SELECT = -1;
     private IView activity;
     private int type;
     private int index;
 
-    public AskSongPresenter(IView activity) {
+    public PublishSongPresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
         type = NOT_SELECT;

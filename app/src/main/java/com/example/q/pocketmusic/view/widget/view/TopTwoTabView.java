@@ -14,7 +14,7 @@ import com.example.q.pocketmusic.R;
  * Created by 鹏君 on 2017/5/17.
  */
 //顶部双选View
-public class TopTabView extends LinearLayout {
+public class TopTwoTabView extends LinearLayout {
     private TextView mLeftTv;
     private TextView mRightTv;
     private TopTabListener listener;
@@ -27,20 +27,20 @@ public class TopTabView extends LinearLayout {
         void setTopTabCheck(int position);
     }
 
-    public TopTabView(Context context) {
+    public TopTwoTabView(Context context) {
         this(context, null);
     }
 
-    public TopTabView(Context context, @Nullable AttributeSet attrs) {
+    public TopTwoTabView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TopTabView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public TopTwoTabView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         inflate(getContext(), R.layout.view_top_tab, this);
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TopTabView);
-        String leftStr = array.getString(R.styleable.TopTabView_Left_Text);
-        String rightStr = array.getString(R.styleable.TopTabView_Right_Text);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TopTwoTabView);
+        String leftStr = array.getString(R.styleable.TopTwoTabView_Left_Text);
+        String rightStr = array.getString(R.styleable.TopTwoTabView_Right_Text);
         array.recycle();
         mLeftTv = getView(R.id.left_tv);
         mRightTv = getView(R.id.right_tv);

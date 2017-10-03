@@ -11,8 +11,7 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
-import com.example.q.pocketmusic.module.home.net.type.community.publish.AskSongActivity;
-import com.example.q.pocketmusic.module.home.net.type.hot.HotListFragment;
+import com.example.q.pocketmusic.module.home.net.type.community.publish.PublishAskActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -67,7 +66,7 @@ public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == AskSongActivity.REQUEST_ASK && resultCode == Constant.SUCCESS) {
+        if (requestCode == PublishAskActivity.REQUEST_ASK && resultCode == Constant.SUCCESS) {
             onRefresh();
         }
     }

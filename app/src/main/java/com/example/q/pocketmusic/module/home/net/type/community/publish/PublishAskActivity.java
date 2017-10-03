@@ -25,8 +25,8 @@ import butterknife.OnClick;
  * Created by 鹏君 on 2016/11/14.
  */
 
-public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSongPresenter>
-        implements AskSongPresenter.IView {
+public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView, PublishSongPresenter>
+        implements PublishSongPresenter.IView {
 
     public static final int REQUEST_ASK = 1001;//跳转到求谱界面
     @BindView(R.id.toolbar)
@@ -59,7 +59,7 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
 
     @Override
     public int setContentResource() {
-        return R.layout.activity_ask_song;
+        return R.layout.activity_publish_ask;
     }
 
 
@@ -153,15 +153,8 @@ public class AskSongActivity extends AuthActivity<AskSongPresenter.IView, AskSon
 
 
     @Override
-    protected AskSongPresenter createPresenter() {
-        return new AskSongPresenter(this);
+    protected PublishSongPresenter createPresenter() {
+        return new PublishSongPresenter(this);
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

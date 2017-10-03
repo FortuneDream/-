@@ -9,9 +9,8 @@ import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.type.community.ask.AskListFragment;
-import com.example.q.pocketmusic.module.home.net.type.community.publish.AskSongActivity;
+import com.example.q.pocketmusic.module.home.net.type.community.publish.PublishAskActivity;
 import com.example.q.pocketmusic.module.home.net.type.community.share.ShareListFragment;
-import com.example.q.pocketmusic.module.search.SearchMainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,10 +79,10 @@ public class CommunityPresenter extends BasePresenter<CommunityPresenter.IView> 
     }
 
     //跳转到AskSongActivity
-    public void enterAskSongActivity() {
-        Intent intent = new Intent(fragment.getCurrentContext(), AskSongActivity.class);
+    public void enterPublishAskActivity() {
+        Intent intent = new Intent(fragment.getCurrentContext(), PublishAskActivity.class);
         //注意这里使用的是Fragment的方法，而不能用Activity的方法
-        ((BaseFragment) fragment).startActivityForResult(intent, AskSongActivity.REQUEST_ASK);
+        ((BaseFragment) fragment).startActivityForResult(intent, PublishAskActivity.REQUEST_ASK);
     }
 
 

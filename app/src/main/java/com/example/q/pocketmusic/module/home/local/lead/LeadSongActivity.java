@@ -1,5 +1,6 @@
-package com.example.q.pocketmusic.module.lead;
+package com.example.q.pocketmusic.module.home.local.lead;
 
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 //本地导入
@@ -40,6 +42,7 @@ public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView, Lead
     TextView uploadTxt;
     @BindView(R.id.activity_upload)
     LinearLayout activityUpload;
+
     private SmallPicAdapter adapter;
 
     @Override
@@ -91,5 +94,12 @@ public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView, Lead
     @Override
     protected LeadSongPresenter createPresenter() {
         return new LeadSongPresenter(this);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

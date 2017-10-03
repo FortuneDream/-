@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.home.convert.convert.piano;
+package com.example.q.pocketmusic.module.home.convert.comment.convert.piano;
 
 
 import android.view.MotionEvent;
@@ -13,7 +13,6 @@ import com.example.q.pocketmusic.module.common.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class PianoFragment extends BaseFragment<PianoFragmentPresenter.IView, PianoFragmentPresenter>
         implements PianoFragmentPresenter.IView, View.OnTouchListener {

@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.module.lead.LeadSongActivity;
-import com.example.q.pocketmusic.view.widget.view.TopTabView;
+import com.example.q.pocketmusic.module.home.local.lead.LeadSongActivity;
+import com.example.q.pocketmusic.view.widget.view.TopTwoTabView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -22,12 +22,12 @@ import butterknife.Unbinder;
  * Created by 鹏君 on 2016/8/28.
  */
 public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.IView, HomeLocalFragmentPresenter>
-        implements HomeLocalFragmentPresenter.IView, TopTabView.TopTabListener {
+        implements HomeLocalFragmentPresenter.IView, TopTwoTabView.TopTabListener {
 
     @BindView(R.id.add_local_iv)
     ImageView addLocalIv;
     @BindView(R.id.top_tab_view)
-    TopTabView topTabView;
+    TopTwoTabView topTwoTabView;
     @BindView(R.id.piano_iv)
     ImageView pianoIv;
     @BindView(R.id.home_local_content)
@@ -56,8 +56,8 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     public void initView() {
         //viewpager
         presenter.setFragmentManager(getChildFragmentManager());
-        topTabView.setListener(this);
-        topTabView.setCheck(0);
+        topTwoTabView.setListener(this);
+        topTwoTabView.setCheck(0);
         presenter.clickSong();
     }
 
@@ -72,7 +72,7 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LeadSongActivity.REQUEST_LEAD && resultCode == LeadSongActivity.RESULT_OK) {
-            topTabView.setCheck(0);
+            topTwoTabView.setCheck(0);
             presenter.clickSong();
         }
     }
@@ -88,12 +88,17 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
 
     @Override
     public void onSelectRecord() {
-        topTabView.setCheck(1);
+        topTwoTabView.setCheck(1);
     }
 
     @Override
     public void onSelectSong() {
-        topTabView.setCheck(0);
+        topTwoTabView.setCheck(0);
+    }
+
+    @Override
+    public void onSelectConvert() {
+
     }
 
 

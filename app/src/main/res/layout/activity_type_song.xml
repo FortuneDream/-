@@ -45,7 +45,7 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
-        <com.example.q.pocketmusic.view.widget.view.TopTabView
+        <com.example.q.pocketmusic.view.widget.view.TopTwoTabView
             android:id="@+id/type_tab_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

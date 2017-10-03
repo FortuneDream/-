@@ -32,7 +32,7 @@
         <attr name="Reward_Resource" format="reference" />
     </declare-styleable>
 
-    <declare-styleable name="TopTabView">
+    <declare-styleable name="TopTwoTabView">
         <attr name="Left_Text" format="string"/>
         <attr name="Right_Text" format="string"/>
     </declare-styleable>

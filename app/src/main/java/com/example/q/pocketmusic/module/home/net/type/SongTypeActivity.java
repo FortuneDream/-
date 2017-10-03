@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.home.net.type;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -12,14 +11,13 @@ import android.widget.ImageView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.InstrumentFlagUtil;
-import com.example.q.pocketmusic.view.widget.view.TopTabView;
+import com.example.q.pocketmusic.view.widget.view.TopTwoTabView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IView, SongTypeActivityPresenter>
-        implements SongTypeActivityPresenter.IView, TopTabView.TopTabListener {
+        implements SongTypeActivityPresenter.IView, TopTwoTabView.TopTabListener {
 
     @BindView(R.id.top_iv)
     ImageView topIv;
@@ -35,7 +33,7 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     public Integer typeId;
     public final static String PARAM_POSITION = "position";
     @BindView(R.id.type_tab_view)
-    TopTabView typeTabView;
+    TopTwoTabView typeTabView;
     @BindView(R.id.type_content)
     FrameLayout typeContent;
 

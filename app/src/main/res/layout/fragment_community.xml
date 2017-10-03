@@ -10,12 +10,12 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/publish_iv"
+            android:id="@+id/publish_ask_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vec_publish" />
 
-        <com.example.q.pocketmusic.view.widget.view.TopTabView
+        <com.example.q.pocketmusic.view.widget.view.TopTwoTabView
             android:id="@+id/top_tab_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

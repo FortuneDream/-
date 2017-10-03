@@ -8,6 +8,8 @@ import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.convert.comment.ConvertCommentActivity;
+import com.example.q.pocketmusic.module.home.convert.publish.PublishConvertActivity;
+import com.example.q.pocketmusic.module.search.SearchMainActivity;
 
 import java.util.List;
 
@@ -48,6 +50,14 @@ public class HomeConvertListFragmentPresenter extends BasePresenter<HomeConvertL
         Intent intent = new Intent(fragment.getCurrentContext(), ConvertCommentActivity.class);
         intent.putExtra(ConvertCommentActivity.PARAM_POST, item);
         fragment.getCurrentContext().startActivity(intent);
+    }
+
+    public void enterSearchMainActivity() {
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SearchMainActivity.class));
+    }
+
+    public void enterPublishConvertActivity() {
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), PublishConvertActivity.class));
     }
 
     interface IView extends IBaseView {

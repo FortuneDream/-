@@ -108,7 +108,6 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
     //捕获back，设置按第二次退出
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exit();
             return false;
