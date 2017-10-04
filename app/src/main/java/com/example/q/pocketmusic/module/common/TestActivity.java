@@ -18,13 +18,13 @@ public  abstract class TestActivity extends BaseActivity {
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         Log.e(getClass().getSimpleName(),"onStart");
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         Log.e(getClass().getSimpleName(),"onResume");
     }
@@ -36,7 +36,7 @@ public  abstract class TestActivity extends BaseActivity {
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         Log.e(getClass().getSimpleName(),"onStop");
     }

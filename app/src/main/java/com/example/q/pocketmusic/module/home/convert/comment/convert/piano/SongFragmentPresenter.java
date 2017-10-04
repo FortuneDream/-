@@ -13,6 +13,8 @@ public class SongFragmentPresenter extends BasePresenter<SongFragmentPresenter.I
         this.fragment = getIViewRef();
     }
 
+
+
     interface IView extends IBaseView {
 
     }

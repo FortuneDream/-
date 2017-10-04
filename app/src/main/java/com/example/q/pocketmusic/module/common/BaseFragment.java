@@ -104,6 +104,8 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     }
 
 
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

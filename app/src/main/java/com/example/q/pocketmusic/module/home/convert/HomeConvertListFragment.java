@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.convert;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.module.common.BaseFragment;
+import com.example.q.pocketmusic.module.home.convert.publish.PublishConvertActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -46,12 +48,13 @@ public class HomeConvertListFragment extends BaseFragment<HomeConvertListFragmen
     @Override
     public void initView() {
         adapter = new HomeConvertListAdapter(getCurrentContext());
-        initRecyclerView(convertListRecycler, adapter);
+        initRecyclerView(convertListRecycler, adapter, 1);
         adapter.setOnItemClickListener(this);
         convertListRecycler.setRefreshListener(this);
         adapter.setMore(R.layout.item_home_convert_list, this);
         presenter.setPage(0);
         presenter.getConvertPostList(true);
+
     }
 
     @Override
@@ -97,6 +100,14 @@ public class HomeConvertListFragment extends BaseFragment<HomeConvertListFragmen
             case R.id.search_iv:
                 presenter.enterSearchMainActivity();
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == PublishConvertActivity.RESULT_OK) {
+            onRefresh();
         }
     }
 }

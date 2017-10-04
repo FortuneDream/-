@@ -22,7 +22,6 @@ import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.util.common.ConvertUtil;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
@@ -33,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 /**
@@ -83,7 +81,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setContentResource());
-         ButterKnife.bind(this);
+        ButterKnife.bind(this);
         presenter = createPresenter();
         this.context = this;
         initView();
@@ -225,6 +223,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
             }
         }
     }
+
+
 
     @Override
     protected void onDestroy() {

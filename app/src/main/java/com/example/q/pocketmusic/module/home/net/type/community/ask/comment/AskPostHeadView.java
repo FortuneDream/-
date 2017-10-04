@@ -16,7 +16,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
  * Created by 鹏君 on 2017/1/22.
  */
 
-public class PostHeadView implements RecyclerArrayAdapter.ItemView {
+public class AskPostHeadView implements RecyclerArrayAdapter.ItemView {
     private Context context;
     private TextView postUserContentTv;
     private TextView postUserNameTv;
@@ -38,7 +38,7 @@ public class PostHeadView implements RecyclerArrayAdapter.ItemView {
         void onClick();
     }
 
-    public PostHeadView(Context context, String content, String name, String title, String headUrl, String date, Boolean isFromUser, int hot) {
+    public AskPostHeadView(Context context, String content, String name, String title, String headUrl, String date, Boolean isFromUser, int hot) {
         this.context = context;
         this.content = content;
         this.name = name;
@@ -55,7 +55,7 @@ public class PostHeadView implements RecyclerArrayAdapter.ItemView {
 
     @Override
     public View onCreateView(ViewGroup parent) {
-        return View.inflate(context, R.layout.head_post_view, null);
+        return View.inflate(context, R.layout.head_ask_post_view, null);
     }
 
     @Override

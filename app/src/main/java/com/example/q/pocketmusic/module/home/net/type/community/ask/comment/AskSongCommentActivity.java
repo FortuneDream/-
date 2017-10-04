@@ -36,7 +36,7 @@ import butterknife.BindView;
  */
 
 public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter.IView, AskSongCommentPresenter>
-        implements AskSongCommentPresenter.IView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, PostHeadView.OnClickIndexListener
+        implements AskSongCommentPresenter.IView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AskPostHeadView.OnClickIndexListener
         , RecyclerArrayAdapter.OnMoreListener {
 
     @BindView(R.id.toolbar)
@@ -54,7 +54,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
     @BindView(R.id.number_pic_tv)
     TextView numberPicTv;
     private AskSongCommentAdapter adapter;
-    private PostHeadView headView;
+    private AskPostHeadView headView;
     public static final String PARAM_POST = "param_post";
     public final static String PARAM_IS_FROM_USER = "param_is_from_user";//是否个人
 
@@ -79,7 +79,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
         initRecyclerView(recycler, adapter);
         adapter.setMore(R.layout.view_more, this);
 
-        headView = new PostHeadView(context,
+        headView = new AskPostHeadView(context,
                 presenter.getPost().getContent(),
                 presenter.getPost().getUser().getNickName(),
                 presenter.getPost().getTitle(),

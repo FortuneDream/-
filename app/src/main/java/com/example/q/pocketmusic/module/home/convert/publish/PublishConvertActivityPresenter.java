@@ -1,8 +1,7 @@
 package com.example.q.pocketmusic.module.home.convert.publish;
 
-import android.content.Context;
-import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
@@ -10,28 +9,16 @@ import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.model.bean.convert.ConvertComment;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPostPic;
-import com.example.q.pocketmusic.model.bean.local.Img;
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.bean.share.SharePic;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
-import com.example.q.pocketmusic.model.db.ImgDao;
-import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.SortUtil;
 import com.example.q.pocketmusic.util.UserUtil;
-import com.example.q.pocketmusic.util.common.FileUtils;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.BmobBatch;
@@ -47,7 +34,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 public class PublishConvertActivityPresenter extends BasePresenter<PublishConvertActivityPresenter.IView> {
     private IView activity;
     private List<String> imgUrls;
-    private int coin;
+    private int coin = Constant.REDUCE_BASE_CONVERT;
 
     public PublishConvertActivityPresenter(IView activity) {
         attachView(activity);
@@ -116,18 +103,22 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
     //增加硬币
     public void addCoin() {
         coin++;
-        activity.changeIndex(coin);
+        activity.changeCoin(coin - Constant.REDUCE_BASE_CONVERT);
     }
 
     //减少硬币
     public void reduceCoin() {
+        if (coin <= Constant.REDUCE_BASE_CONVERT) {
+            return;
+        }
         coin--;
-        activity.changeIndex(coin);
+        activity.changeCoin(coin - Constant.REDUCE_BASE_CONVERT);
     }
 
     //上传图片
     public void uploadConvertPic(final String name) {
-        BmobFile.uploadBatch((String[]) imgUrls.toArray(), new UploadBatchListener() {
+//        LogUtils.e(TAG, String.valueOf(imgUrls.size()));
+        BmobFile.uploadBatch(imgUrls.toArray(new String[imgUrls.size()]), new UploadBatchListener() {
             @Override
             public void onSuccess(List<BmobFile> list, List<String> list1) {
                 //文件成功之后再添加数据
@@ -135,7 +126,6 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
                     addConvertPostPic(name, list1);
                 }
             }
-
 
             @Override
             public void onProgress(int i, int i1, int i2, int i3) {
@@ -156,7 +146,7 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
         final ConvertPost convertPost = new ConvertPost();
         convertPost.setUser(UserUtil.user);
         convertPost.setTitle(name);
-        convertPost.setCoin(Constant.REDUCE_BASE_CONVERT + coin);
+        convertPost.setCoin(coin);
         convertPost.setCommentNum(0);
         convertPost.save(new ToastSaveListener<String>() {
             @Override
@@ -171,7 +161,7 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
                 new BmobBatch().insertBatch(convertPostPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
                     @Override
                     public void onSuccess(List<BatchResult> list) {
-                        UserUtil.user.increment(BmobConstant.BMOB_COIN, -(Constant.REDUCE_BASE_CONVERT + coin));//原子操作
+                        UserUtil.user.increment(BmobConstant.BMOB_COIN, -coin);//原子操作
                         UserUtil.user.update(new ToastUpdateListener(activity) {
                             @Override
                             public void onSuccess() {
@@ -191,7 +181,7 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
 
         void returnActivity();
 
-        void changeIndex(int coin);
+        void changeCoin(int coin);
 
         void alertCoinDialog(int coin, String name);
     }

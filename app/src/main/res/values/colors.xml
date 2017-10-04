@@ -3,22 +3,18 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
-    <color name="test">@color/md_grey_700</color>
+    <color name="test">@color/ui_black_1</color>
     <!--518400  1638400   2156800   1468  #2cc17b-->
-    <color name="colorPrimary">@color/md_green_300</color>
-    <color name="colorPrimaryDark">@color/md_amber_300</color>
-    <color name="colorAccent">@color/md_orange_300</color>
-    <color name="colorPrimaryLight">@color/md_yellow_100</color>
-    <color name="colorTitle">@color/text</color>
-    <color name="textIcons">#212121</color>
-    <color name="textPrimary">#212121</color>
-    <color name="secondaryText">#757575</color>
-    <color name="dividerColor">#BDBDBD</color>
+    <color name="colorPrimary">@color/ui_green</color>
+    <color name="colorPrimaryDark">@color/ui_yellow</color>
+    <color name="colorAccent">@color/ui_orange</color>
+    <color name="colorTitle">@color/ui_black_1</color>
+    <color name="textPrimary">@color/ui_black_1</color>
 
     <!--透明-->
     <color name="colorTranslate">#00000000</color>
     <!--灰色背景-->
-    <color name="background">@color/md_grey_100</color>
+    <color name="background">@color/ui_grey_2</color>
 
     <!--纸屑颜色-->
     <color name="confetti_red">@color/md_red_300</color>
@@ -32,35 +28,53 @@
     <color name="text">@color/md_grey_900</color>
 
     <!--两行文字-->
-    <color name="item_two_text_main">@color/text</color>
-    <color name="item_two_text_second">@color/md_grey_500</color>
+    <color name="item_two_text_main">@color/ui_black_1</color>
+    <color name="item_two_text_second">@color/ui_black_2</color>
 
     <!--三行文字-->
-    <color name="item_three_text_main">@color/text</color>
-    <color name="item_three_text_second">@color/md_grey_700</color>
-    <color name="item_three_text_third">@color/md_grey_500</color>
+    <color name="item_three_text_main">@color/ui_black_1</color>
+    <color name="item_three_text_second">@color/ui_black_2</color>
+    <color name="item_three_text_third">@color/ui_black_3</color>
 
     <!--分割线-->
-    <color name="divider_deep">@color/md_grey_300</color>
-    <color name="divider">@color/md_grey_200</color>
+    <color name="divider_deep">@color/ui_grey_1</color>
+    <color name="divider">@color/ui_grey_2</color>
 
     <!--底部tab-->
-    <color name="tab_home_normal">@color/text</color>
-    <color name="tab_home_press">@color/colorPrimary</color>
+    <color name="tab_home_normal">@color/ui_black_1</color>
+    <color name="tab_home_press">@color/ui_green</color>
 
     <!--Vector颜色-->
-    <color name="vec_black">@color/text</color>
-    <color name="vec_red">@color/md_red_300</color>
-    <color name="vec_white">@color/white</color>
-    <color name="vec_purple">@color/md_purple_300</color>
-    <color name="vec_grey">@color/md_grey_500</color>
-    <color name="vec_green">@color/md_green_300</color>
-    <color name="vec_blue">@color/md_blue_300</color>
-    <color name="vec_orange">@color/md_orange_300</color>
-    <color name="vec_pink">@color/md_pink_300</color>
-    <color name="vec_indigo">@color/md_indigo_300</color>
+    <color name="vec_black">@color/ui_black_1</color>
+    <color name="vec_red">@color/ui_red</color>
+    <color name="vec_white">@color/ui_white</color>
+    <color name="vec_purple">@color/ui_purple</color>
+    <color name="vec_grey">@color/ui_grey_1</color>
+    <color name="vec_green">@color/ui_green</color>
+    <color name="vec_blue">@color/ui_blue</color>
+    <color name="vec_orange">@color/ui_orange</color>
+    <color name="vec_pink">@color/ui_pink</color>
+    <color name="vec_indigo">@color/ui_indigo</color>
     <color name="vec_lime">@color/md_lime_300</color>
 
+
+    <!--颜色备选1-->
+    <color name="ui_black_1">#181a1d</color>
+    <color name="ui_black_2">#333333</color>
+    <color name="ui_black_3">#666666</color>
+    <color name="ui_white">#ffffff</color>
+    <color name="ui_grey_1">#999999</color>
+    <color name="ui_grey_2">#c8c7c7</color>
+    <color name="ui_grey_3">#eff0f7</color>
+
+    <color name="ui_orange">#fb7255</color>
+    <color name="ui_purple">#bb68c9</color>
+    <color name="ui_green">#2cc17b</color>
+    <color name="ui_blue">#64b5f7</color>
+    <color name="ui_red">#ff5700</color>
+    <color name="ui_pink">#ff5283</color>
+    <color name="ui_indigo">#7789cd</color>
+    <color name="ui_yellow">#ffba02</color>
 
     <!--Material Design颜色备选项-->
     <!--reds-->

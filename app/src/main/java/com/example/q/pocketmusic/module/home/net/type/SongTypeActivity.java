@@ -11,13 +11,13 @@ import android.widget.ImageView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.InstrumentFlagUtil;
-import com.example.q.pocketmusic.view.widget.view.TopTwoTabView;
+import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IView, SongTypeActivityPresenter>
-        implements SongTypeActivityPresenter.IView, TopTwoTabView.TopTabListener {
+        implements SongTypeActivityPresenter.IView, TopTabView.TopTabListener {
 
     @BindView(R.id.top_iv)
     ImageView topIv;
@@ -33,7 +33,7 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     public Integer typeId;
     public final static String PARAM_POSITION = "position";
     @BindView(R.id.type_tab_view)
-    TopTwoTabView typeTabView;
+    TopTabView typeTabView;
     @BindView(R.id.type_content)
     FrameLayout typeContent;
 

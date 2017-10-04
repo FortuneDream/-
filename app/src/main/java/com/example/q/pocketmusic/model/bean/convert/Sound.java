@@ -10,7 +10,7 @@ public class Sound {
     private int note;//加载出来的音效           sol
 
 
-    public Sound(int resId, String number, int note) {
+    public Sound(int resId, int note,String number) {
         this.resId = resId;
         this.number = number;
         this.note = note;

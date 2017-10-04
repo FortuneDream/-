@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
-import com.example.q.pocketmusic.view.widget.view.TopTwoTabView;
+import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,10 +22,10 @@ import butterknife.Unbinder;
  * Created by 鹏君 on 2017/5/16.
  */
 
-public class CommunityFragment extends BaseFragment<CommunityPresenter.IView, CommunityPresenter> implements CommunityPresenter.IView, TopTwoTabView.TopTabListener {
+public class CommunityFragment extends BaseFragment<CommunityPresenter.IView, CommunityPresenter> implements CommunityPresenter.IView, TopTabView.TopTabListener {
 
     @BindView(R.id.top_tab_view)
-    TopTwoTabView topTwoTabView;
+    TopTabView topTabView;
     @BindView(R.id.seek_content)
     FrameLayout seekContent;
     @BindView(R.id.publish_ask_iv)
@@ -54,20 +54,20 @@ public class CommunityFragment extends BaseFragment<CommunityPresenter.IView, Co
     public void initView() {
         presenter.setFragmentManager(getChildFragmentManager());
         presenter.initFragment(typeId);
-        topTwoTabView.setListener(this);
-        topTwoTabView.setCheck(0);
+        topTabView.setListener(this);
+        topTabView.setCheck(0);
         presenter.clickAsk();
     }
 
     @Override
     public void onSelectAsk() {
-        topTwoTabView.setCheck(0);
+        topTabView.setCheck(0);
     }
 
 
     @Override
     public void onSelectShare() {
-        topTwoTabView.setCheck(1);
+        topTabView.setCheck(1);
     }
 
     @OnClick({R.id.publish_ask_iv})

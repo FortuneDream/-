@@ -28,7 +28,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".module.common.TestModuleActivity" />
+        <activity android:name=".module.common.TestModuleActivity">
+        </activity>
         <activity android:name=".module.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

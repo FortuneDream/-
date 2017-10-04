@@ -162,13 +162,13 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     //截屏监听
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         ScreenshotContentObserver.startObserve(handler, getAppContext());
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         ScreenshotContentObserver.stopObserve();
     }

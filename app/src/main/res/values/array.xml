@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="community_tab_names">
+        <item>求谱</item>
+        <item>分享</item>
+    </string-array>
 
+    <string-array name="type_tab_names">
+        <item>曲谱</item>
+        <item>圈子</item>
+    </string-array>
+
+    <string-array name="local_tab_names">
+        <item>曲谱</item>
+        <item>录音</item>
+        <item>转谱</item>
+    </string-array>
 </resources>

@@ -1,11 +1,9 @@
 package com.example.q.pocketmusic.module.home.convert.comment.convert.piano;
 
 
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.q.pocketmusic.R;
@@ -15,21 +13,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class PianoFragment extends BaseFragment<PianoFragmentPresenter.IView, PianoFragmentPresenter>
-        implements PianoFragmentPresenter.IView, View.OnTouchListener {
-    @BindView(R.id.title_edt)
-    EditText titleEdt;
+        implements PianoFragmentPresenter.IView {
     @BindView(R.id.content_et)
     EditText contentEt;
-    @BindView(R.id.keep_iv)
-    ImageView keepIv;
-    @BindView(R.id.tab_iv)
-    ImageView tabIv;
-    @BindView(R.id.enter_iv)
-    ImageView enterIv;
-    @BindView(R.id.bo_lang_iv)
-    ImageView boLangIv;
-    @BindView(R.id.back_iv)
-    ImageView backIv;
     @BindView(R.id.parent)
     LinearLayout parent;
     @BindView(R.id.g3)
@@ -63,6 +49,7 @@ public class PianoFragment extends BaseFragment<PianoFragmentPresenter.IView, Pi
     @BindView(R.id.g5)
     Button g5;
 
+
     @Override
     public int setContentResource() {
         return R.layout.fragment_piano;
@@ -70,7 +57,7 @@ public class PianoFragment extends BaseFragment<PianoFragmentPresenter.IView, Pi
 
     @Override
     public void initView() {
-        backIv.setOnTouchListener(this);
+
     }
 
 
@@ -80,48 +67,33 @@ public class PianoFragment extends BaseFragment<PianoFragmentPresenter.IView, Pi
     }
 
 
-    @OnClick({R.id.tab_iv, R.id.enter_iv, R.id.bo_lang_iv,  R.id.g3, R.id.a3, R.id.b3, R.id.c4, R.id.d4, R.id.e4, R.id.f4, R.id.g4, R.id.a4, R.id.b4, R.id.c5, R.id.d5, R.id.e5, R.id.f5, R.id.g5})
+    @OnClick({R.id.g3, R.id.a3, R.id.b3, R.id.c4, R.id.d4, R.id.e4, R.id.f4, R.id.g4, R.id.a4, R.id.b4, R.id.c5, R.id.d5, R.id.e5, R.id.f5, R.id.g5})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tab_iv:
-                presenter.setTab();//空行
-                break;
-            case R.id.enter_iv:
-                presenter.setEnter();//换行
-                break;
-            case R.id.bo_lang_iv:
-                presenter.setBoLang();//波浪
-                break;
-            case R.id.keep_iv:
-                presenter.keepPic("");
-                break;
             default:
                 presenter.setClickScale(view.getId());
+                setConvertContent();
                 break;
         }
     }
 
-    @Override
-    public void back() {
-        contentEt.setText(presenter.setBack());
+    public void blank() {
+        presenter.blank();
     }
 
+    public void enter() {
+        presenter.enter();
+    }
 
-    //快速删除
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        switch (v.getId()) {
-            case R.id.back_iv:
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        presenter.openQuickBack();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        presenter.closeQuickBack();
-                        break;
-                }
-                break;
-        }
-        return true;
+    public void boLang() {
+        presenter.boLang();
+    }
+
+    public void delete() {
+        presenter.delete();
+    }
+
+    public void setConvertContent() {
+        contentEt.setText(presenter.getConvertContent());
     }
 }

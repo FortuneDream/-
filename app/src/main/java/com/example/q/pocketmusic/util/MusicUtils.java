@@ -25,6 +25,14 @@ public class MusicUtils {
     private List<Sound> sounds;
     private SoundPool soundPool;
     private Boolean isComplete;
+    public static final int DELETE_ID = -1;
+    public static final int BO_LANG_ID = -2;
+    public static final int ENTER_ID = -3;
+    public static final int BLANK_ID = -4;
+
+    public static final String BO_LANG = "~";
+    public static final String ENTER = "\n";
+    public static final String BLANK = " ";
 
 
     public MusicUtils(Context context) {
@@ -32,9 +40,9 @@ public class MusicUtils {
         soundPool = new SoundPool(mMusicRaws.length, AudioManager.STREAM_MUSIC, 0);//同时支持两个键
         for (int i = 0; i < mMusicRaws.length; i++) {
             int temp = soundPool.load(context, mMusicRaws[i], 0);
-            LogUtils.e("sound temp:"+temp);
-            LogUtils.e("sound id:"+mMusicButtonIds[i]);
-            Sound sound = new Sound(mMusicButtonIds[i], mMusicNoteStrs[i], temp);
+//            LogUtils.e("sound temp:"+temp);
+//            LogUtils.e("sound id:"+mMusicButtonIds[i]);
+            Sound sound = new Sound(mMusicButtonIds[i], temp, mMusicNoteStrs[i]);
             sounds.add(sound);
         }
         soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
@@ -47,20 +55,20 @@ public class MusicUtils {
 
 
     //播放
-    public void soundPlay(int no) {
+    public void soundPlay(Sound sound) {
         if (isComplete) {
-            int note = getSoundNote(no);
+            int note = sound.getNote();
             if (note == -1) {
                 return;
             }
-            soundPool.play(getSoundNote(no), 1.0f, 1.0f, 1, 0, 1.0f);
+            soundPool.play(note, 1.0f, 1.0f, 1, 0, 1.0f);
         } else {
             ToastUtil.showToast("正在加载音频~请稍后");
         }
     }
 
-    //通过resId 取出音效
-    private int getSoundNote(@IdRes int id) {
+    //通过resId 取出音效  sol
+    public int getSoundNote(@IdRes int id) {
         for (int i = 0; i < sounds.size(); i++) {
             if (sounds.get(i).getResId() == id) {
                 return sounds.get(i).getNote();
@@ -69,8 +77,8 @@ public class MusicUtils {
         return -1;
     }
 
-    //通过resId 取出字符
-    private String getSoundNumber(@IdRes int id) {
+    //通过resId 取出字符  [5]
+    public String getSoundStr(@IdRes int id) {
         for (int i = 0; i < sounds.size(); i++) {
             if (sounds.get(i).getResId() == id) {
                 return sounds.get(i).getNumber();
@@ -86,7 +94,4 @@ public class MusicUtils {
         soundPool = null;
     }
 
-    public String getNote(int id) {
-        return getSoundNumber(id);
-    }
 }

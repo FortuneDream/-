@@ -77,7 +77,7 @@ public class PublishConvertActivity extends AuthActivity<PublishConvertActivityP
     }
 
     @Override
-    public void changeIndex(int coin) {
+    public void changeCoin(int coin) {
         extraCoinTv.setText(String.valueOf(coin));
     }
 

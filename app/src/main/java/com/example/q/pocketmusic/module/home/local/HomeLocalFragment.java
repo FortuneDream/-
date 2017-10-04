@@ -3,7 +3,9 @@ package com.example.q.pocketmusic.module.home.local;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,9 +13,10 @@ import android.widget.LinearLayout;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.local.lead.LeadSongActivity;
-import com.example.q.pocketmusic.view.widget.view.TopTwoTabView;
+import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -22,12 +25,13 @@ import butterknife.Unbinder;
  * Created by 鹏君 on 2016/8/28.
  */
 public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.IView, HomeLocalFragmentPresenter>
-        implements HomeLocalFragmentPresenter.IView, TopTwoTabView.TopTabListener {
+        implements HomeLocalFragmentPresenter.IView, TopTabView.TopTabListener {
+
 
     @BindView(R.id.add_local_iv)
     ImageView addLocalIv;
     @BindView(R.id.top_tab_view)
-    TopTwoTabView topTwoTabView;
+    TopTabView topTabView;
     @BindView(R.id.piano_iv)
     ImageView pianoIv;
     @BindView(R.id.home_local_content)
@@ -56,8 +60,8 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     public void initView() {
         //viewpager
         presenter.setFragmentManager(getChildFragmentManager());
-        topTwoTabView.setListener(this);
-        topTwoTabView.setCheck(0);
+        topTabView.setListener(this);
+        topTabView.setCheck(0);
         presenter.clickSong();
     }
 
@@ -72,33 +76,39 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LeadSongActivity.REQUEST_LEAD && resultCode == LeadSongActivity.RESULT_OK) {
-            topTwoTabView.setCheck(0);
+            topTabView.setCheck(0);
             presenter.clickSong();
         }
     }
 
     @Override
     public void setTopTabCheck(int position) {
-        if (position == 0) {
-            presenter.clickSong();
-        } else {
-            presenter.clickRecord();
+        switch (position) {
+            case 0:
+                presenter.clickSong();
+                break;
+            case 1:
+                presenter.clickRecord();
+                break;
+            case 2:
+                presenter.clickConvert();
+                break;
         }
     }
 
     @Override
     public void onSelectRecord() {
-        topTwoTabView.setCheck(1);
+        topTabView.setCheck(1);
     }
 
     @Override
     public void onSelectSong() {
-        topTwoTabView.setCheck(0);
+        topTabView.setCheck(0);
     }
 
     @Override
     public void onSelectConvert() {
-
+        topTabView.setCheck(2);
     }
 
 
@@ -113,4 +123,6 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
                 break;
         }
     }
+
+
 }

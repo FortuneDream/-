@@ -15,13 +15,12 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vec_publish" />
 
-        <com.example.q.pocketmusic.view.widget.view.TopTwoTabView
+        <com.example.q.pocketmusic.view.widget.view.TopTabView
             android:id="@+id/top_tab_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            app:Left_Text="求谱"
-            app:Right_Text="分享" />
+            app:tabs="@array/community_tab_names" />
     </RelativeLayout>
 
 

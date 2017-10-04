@@ -17,13 +17,12 @@
             android:layout_height="wrap_content"
             fab:srcCompat="@drawable/ic_vec_add_local" />
 
-        <com.example.q.pocketmusic.view.widget.view.TopTwoTabView
+        <com.example.q.pocketmusic.view.widget.view.TopTabView
             android:id="@+id/top_tab_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            fab:Left_Text="下载曲谱"
-            fab:Right_Text="我的独奏" />
+            fab:tabs="@array/local_tab_names" />
 
 
         <ImageView
