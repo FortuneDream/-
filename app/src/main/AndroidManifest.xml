@@ -28,7 +28,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".module.common.TestModuleActivity"></activity>
+        <activity android:name=".module.common.TestModuleActivity" />
         <activity android:name=".module.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -93,7 +93,6 @@
         <activity
             android:name=".module.search.SearchMainActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-
         <activity
             android:name=".module.home.convert.comment.convert.ConvertActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
@@ -117,6 +116,8 @@
         <activity android:name=".module.user.notify.gift.GiftActivity" />
         <activity android:name=".module.home.convert.comment.ConvertCommentActivity" />
         <activity android:name=".module.home.convert.publish.PublishConvertActivity" />
+        <activity android:name=".module.home.profile.convert.ProfileConvertActivity" />
+        <activity android:name=".module.home.profile.convert.post.ProfileConvertPostActivity" />
     </application>
 
 </manifest>

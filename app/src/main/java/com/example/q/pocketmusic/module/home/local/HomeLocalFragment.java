@@ -26,8 +26,6 @@ import butterknife.Unbinder;
  */
 public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.IView, HomeLocalFragmentPresenter>
         implements HomeLocalFragmentPresenter.IView, TopTabView.TopTabListener {
-
-
     @BindView(R.id.add_local_iv)
     ImageView addLocalIv;
     @BindView(R.id.top_tab_view)
@@ -90,9 +88,6 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
             case 1:
                 presenter.clickRecord();
                 break;
-            case 2:
-                presenter.clickConvert();
-                break;
         }
     }
 
@@ -104,11 +99,6 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     @Override
     public void onSelectSong() {
         topTabView.setCheck(0);
-    }
-
-    @Override
-    public void onSelectConvert() {
-        topTabView.setCheck(2);
     }
 
 

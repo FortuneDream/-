@@ -29,6 +29,14 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/g4"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="5" />
+
+        <Button
             android:id="@+id/a4"
             android:layout_width="0dp"
             android:layout_height="56dp"
@@ -91,6 +99,14 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/e3"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="[3]" />
+
+        <Button
             android:id="@+id/g3"
             android:layout_width="0dp"
             android:layout_height="56dp"
@@ -145,14 +161,6 @@
             android:layout_weight="1"
             android:background="@drawable/shape_piano"
             android:text="4" />
-
-        <Button
-            android:id="@+id/g4"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_piano"
-            android:text="5" />
 
 
     </LinearLayout>

@@ -2,33 +2,21 @@ package com.example.q.pocketmusic.module.home.net.type;
 
 
 import android.content.Intent;
-import android.database.SQLException;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.local.Img;
-import com.example.q.pocketmusic.model.bean.local.LocalConvertSong;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
-import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.net.type.community.CommunityFragment;
 import com.example.q.pocketmusic.module.home.net.type.community.publish.PublishAskActivity;
 import com.example.q.pocketmusic.module.home.net.type.hot.HotListFragment;
 import com.example.q.pocketmusic.module.home.net.type.study.StudyActivity;
-import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
 import com.example.q.pocketmusic.module.share.ShareActivity;
-import com.example.q.pocketmusic.util.common.ToastUtil;
-import com.j256.ormlite.dao.CloseableIterator;
-import com.j256.ormlite.dao.ForeignCollection;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -13,6 +13,10 @@
     <string-array name="local_tab_names">
         <item>曲谱</item>
         <item>录音</item>
-        <item>转谱</item>
+    </string-array>
+
+    <string-array name="profile_tab_names">
+        <item>转谱贴</item>
+        <item>暂存</item>
     </string-array>
 </resources>

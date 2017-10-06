@@ -40,7 +40,7 @@ public class ConvertActivity extends AuthActivity<ConvertPresenter.IView, Conver
 
     @Override
     public int setContentResource() {
-        return R.layout.activity_piano;
+        return R.layout.activity_convert;
     }
 
     @Override
@@ -74,12 +74,12 @@ public class ConvertActivity extends AuthActivity<ConvertPresenter.IView, Conver
     private void alertExitDialog() {
         new AlertDialog.Builder(getCurrentContext())
                 .setTitle("提示")
-                .setMessage("是否退出转谱界面?您所做的谱将不会保存哦~")
+                .setMessage("是否退出转谱界面?您所做的谱将自动保存")
                 .setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        finish();
+                        presenter.keepConvertSong();
                     }
                 })
                 .setNegativeButton("否", new DialogInterface.OnClickListener() {

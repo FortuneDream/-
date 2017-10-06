@@ -1,30 +1,31 @@
 package com.example.q.pocketmusic.model.bean.local;
 
+import com.example.q.pocketmusic.model.bean.MyUser;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * Created by 81256 on 2017/10/3.
  */
-@DatabaseTable(tableName = "tb_local_convert_song")
-public class LocalConvertSong implements Serializable {
-    @DatabaseField(generatedId = true)
-    private int id;
-    @DatabaseField
-    private String name;
-    @DatabaseField
-    private String content;
-    @DatabaseField
-    private String date;
 
-    public int getId() {
-        return id;
+public class ConvertSong extends BmobObject {
+    private String name;
+    private String content;
+    private MyUser user;//属于某个人
+
+    public ConvertSong() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public MyUser getUser() {
+        return user;
+    }
+
+    public void setUser(MyUser user) {
+        this.user = user;
     }
 
     public String getName() {
@@ -43,11 +44,4 @@ public class LocalConvertSong implements Serializable {
         this.content = content;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
 }

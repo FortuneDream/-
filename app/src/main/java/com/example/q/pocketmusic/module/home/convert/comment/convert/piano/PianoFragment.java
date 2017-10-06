@@ -1,17 +1,21 @@
 package com.example.q.pocketmusic.module.home.convert.comment.convert.piano;
 
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class PianoFragment extends BaseFragment<PianoFragmentPresenter.IView, PianoFragmentPresenter>
         implements PianoFragmentPresenter.IView {
@@ -47,6 +51,9 @@ public class PianoFragment extends BaseFragment<PianoFragmentPresenter.IView, Pi
     Button f5;
     @BindView(R.id.g5)
     Button g5;
+    @BindView(R.id.e3)
+    Button e3;
+    Unbinder unbinder;
 
 
     @Override
@@ -64,7 +71,7 @@ public class PianoFragment extends BaseFragment<PianoFragmentPresenter.IView, Pi
         return new PianoFragmentPresenter(this);
     }
 
-    @OnClick({R.id.g3, R.id.a3, R.id.b3, R.id.c4, R.id.d4, R.id.e4, R.id.f4, R.id.g4, R.id.a4, R.id.b4, R.id.c5, R.id.d5, R.id.e5, R.id.f5, R.id.g5})
+    @OnClick({R.id.g3, R.id.a3, R.id.b3, R.id.c4, R.id.d4, R.id.e4, R.id.f4, R.id.g4, R.id.a4, R.id.b4, R.id.c5, R.id.d5, R.id.e5, R.id.f5, R.id.g5,R.id.e3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             default:
@@ -99,7 +106,7 @@ public class PianoFragment extends BaseFragment<PianoFragmentPresenter.IView, Pi
         contentEt.setSelection(contentEt.getText().length());//光标移动到最后一行
     }
 
-    public String getConvertContent(){
+    public String getConvertContent() {
         return presenter.getConvertContent();
     }
 }

@@ -8,8 +8,7 @@ import com.example.q.pocketmusic.model.bean.ConvertObject;
 import com.example.q.pocketmusic.model.bean.convert.ConvertComment;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.model.bean.convert.Sound;
-import com.example.q.pocketmusic.model.bean.local.LocalConvertSong;
-import com.example.q.pocketmusic.model.db.LocalConvertSongDao;
+import com.example.q.pocketmusic.model.bean.local.ConvertSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.convert.comment.convert.piano.PianoFragment;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import cn.bmob.v3.datatype.BmobRelation;
+
 /**
  * Created by 鹏君 on 2017/4/22.
  */
@@ -31,14 +32,12 @@ public class ConvertPresenter extends BasePresenter<ConvertPresenter.IView> {
     private SongFragment songFragment;
     private List<Sound> list;
     private ConvertPost post;
-    private LocalConvertSongDao localConvertSongDao;
     private ConvertObject mConvertObject;
 
     public ConvertPresenter(IView item) {
         attachView(item);
         this.activity = getIViewRef();
         list = new ArrayList<>();
-        localConvertSongDao = new LocalConvertSongDao(activity.getAppContext());
     }
 
     public void initFragment(FragmentManager fm, ConvertObject object) {
@@ -72,20 +71,27 @@ public class ConvertPresenter extends BasePresenter<ConvertPresenter.IView> {
         if (post == null) {
             return;
         }
-        ConvertComment convertComment = new ConvertComment();
+        BmobRelation relation = new BmobRelation();
+        relation.add(UserUtil.user);
+        final ConvertComment convertComment = new ConvertComment();
         convertComment.setPost(post);
         convertComment.setUser(UserUtil.user);
+        convertComment.setRelation(relation);
         convertComment.setContent(pianoFragment.getConvertContent());
         convertComment.save(new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {
-                LocalConvertSong localConvertSong = new LocalConvertSong();
-                localConvertSong.setContent(pianoFragment.getConvertContent());
-                localConvertSong.setDate(dateFormat.format(new Date()));
-                localConvertSong.setName(mConvertObject.getName());
-                localConvertSongDao.add(localConvertSong);
-                ToastUtil.showToast("发表成功,并保存在本地");
-                activity.finish();
+                ConvertSong convertSong = new ConvertSong();
+                convertSong.setContent(pianoFragment.getConvertContent());
+                convertSong.setName(mConvertObject.getName());
+                convertSong.setUser(UserUtil.user);
+                convertSong.save(new ToastSaveListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        ToastUtil.showToast("发表成功,并保存");
+                        activity.finish();
+                    }
+                });
             }
         });
 
@@ -97,6 +103,19 @@ public class ConvertPresenter extends BasePresenter<ConvertPresenter.IView> {
 
     public void setConvertObject(ConvertObject object) {
         this.mConvertObject = object;
+    }
+
+    public void keepConvertSong() {
+        ConvertSong song = new ConvertSong();
+        song.setContent(pianoFragment.getConvertContent());
+        song.setUser(UserUtil.user);
+        song.setName(mConvertObject.getName() + new Date());
+        song.save(new ToastSaveListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                activity.finish();
+            }
+        });
     }
 
 

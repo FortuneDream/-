@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.home.local;
 
 import android.content.Intent;
-import android.content.pm.ProviderInfo;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -9,7 +8,6 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.local.localconvert.LocalConvertFragment;
 import com.example.q.pocketmusic.module.home.local.localrecord.LocalRecordFragment;
 import com.example.q.pocketmusic.module.home.local.localsong.LocalSongFragment;
 import com.example.q.pocketmusic.module.home.local.lead.LeadSongActivity;
@@ -27,11 +25,9 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
     private int FLAG;
     private static final int FLAG_SELECT_SONG = 1001;
     private static final int FLAG_SELECT_RECORD = 1002;
-    private static final int FLAG_SELECT_CONVERT = 1003;
     private List<Fragment> fragments;
     private LocalRecordFragment localRecordFragment;
     private LocalSongFragment localSongFragment;
-    private LocalConvertFragment localConvertFragment;
     private Fragment totalFragment;
     private FragmentManager fm;
 
@@ -49,10 +45,8 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
         fragments = new ArrayList<>();
         localRecordFragment = new LocalRecordFragment();
         localSongFragment = new LocalSongFragment();
-        localConvertFragment = new LocalConvertFragment();
         fragments.add(localSongFragment);
         fragments.add(localRecordFragment);
-        fragments.add(localConvertFragment);
     }
 
     //乐曲
@@ -74,14 +68,7 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
         }
     }
 
-    //转谱
-    public void clickConvert() {
-        if (FLAG != FLAG_SELECT_CONVERT) {
-            FLAG = FLAG_SELECT_CONVERT;
-            showFragment(fragments.get(2));
-            fragment.onSelectConvert();
-        }
-    }
+
 
     private void showFragment(Fragment fragment) {
         if (!fragment.isAdded()) {
@@ -111,7 +98,5 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
         void onSelectRecord();
 
         void onSelectSong();
-
-        void onSelectConvert();
     }
 }

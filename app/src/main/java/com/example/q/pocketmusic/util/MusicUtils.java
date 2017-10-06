@@ -19,9 +19,9 @@ import java.util.List;
 
 public class MusicUtils {
     private Context context;
-    int[] mMusicRaws = {R.raw.g3, R.raw.a3, R.raw.b3, R.raw.c4, R.raw.d4, R.raw.e4, R.raw.f4, R.raw.g4, R.raw.a4, R.raw.b4, R.raw.c5, R.raw.d5, R.raw.e5, R.raw.f5, R.raw.g5};
-    int[] mMusicButtonIds = {R.id.g3, R.id.a3, R.id.b3, R.id.c4, R.id.d4, R.id.e4, R.id.f4, R.id.g4, R.id.a4, R.id.b4, R.id.c5, R.id.d5, R.id.e5, R.id.f5, R.id.g5};
-    private String[] mMusicNoteStrs = {"[5]", "[6]", "[7]", "1", "2", "3", "4", "5", "6", "7", "(1)", "(2)", "(3)", "(4)", "(5)"};
+    int[] mMusicRaws = {R.raw.e3,R.raw.g3, R.raw.a3, R.raw.b3, R.raw.c4, R.raw.d4, R.raw.e4, R.raw.f4, R.raw.g4, R.raw.a4, R.raw.b4, R.raw.c5, R.raw.d5, R.raw.e5, R.raw.f5, R.raw.g5};
+    int[] mMusicButtonIds = {R.id.e3,R.id.g3, R.id.a3, R.id.b3, R.id.c4, R.id.d4, R.id.e4, R.id.f4, R.id.g4, R.id.a4, R.id.b4, R.id.c5, R.id.d5, R.id.e5, R.id.f5, R.id.g5};
+    private String[] mMusicNoteStrs = {"[3]","[5]", "[6]", "[7]", "1", "2", "3", "4", "5", "6", "7", "(1)", "(2)", "(3)", "(4)", "(5)"};
     private List<Sound> sounds;
     private SoundPool soundPool;
     private Boolean isComplete;

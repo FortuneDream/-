@@ -93,15 +93,6 @@ public class ConvertCommentActivityPresenter extends BasePresenter<ConvertCommen
         });
     }
 
-    public void alertCompleteConvertSongDialog(String content) {
-        BmobRelation relation = new BmobRelation();
-        relation.add(UserUtil.user);
-        new AlertDialog.Builder(activity.getCurrentContext())
-                .setTitle("完整曲谱")
-                .setMessage(content)
-                .show();
-    }
-
     public void checkUserHasConsumeCoin(final ConvertComment item) {
         BmobQuery<MyUser> query = new BmobQuery<>();
         query.addWhereRelatedTo("consume", new BmobPointer(item));
@@ -138,24 +129,13 @@ public class ConvertCommentActivityPresenter extends BasePresenter<ConvertCommen
         item.save(new ToastSaveListener<String>(activity) {
             @Override
             public void onSuccess(String s) {
-                //我的转谱
-                BmobRelation relation2 = new BmobRelation();
-                relation2.add(item);
-                UserUtil.user.setConverts(relation2);
-                UserUtil.user.save(new ToastSaveListener<String>(activity) {
+                UserUtil.increment(-coin, new ToastUpdateListener(activity) {
                     @Override
-                    public void onSuccess(String s) {
-                        //扣除硬币
-                        UserUtil.increment(-coin, new ToastUpdateListener(activity) {
-                            @Override
-                            public void onSuccess() {
-                                activity.showLoading(false);
-                                activity.alertCompleteConvertSongDialog(item);
-                            }
-                        });
+                    public void onSuccess() {
+                        activity.showLoading(false);
+                        activity.alertCompleteConvertSongDialog(item);
                     }
                 });
-
             }
         });
 

@@ -2,9 +2,12 @@ package com.example.q.pocketmusic.module.home.profile;
 
 import android.animation.ValueAnimator;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,7 +25,9 @@ import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
 import java.util.Random;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 /**
@@ -56,6 +61,9 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     IcoTextItem shareItem;
     @BindView(R.id.setting_item)
     IcoTextItem settingItem;
+    @BindView(R.id.convert_item)
+    IcoTextItem convertItem;
+    Unbinder unbinder;
     private AlertDialog signInDialog;
 
 
@@ -147,7 +155,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item,
             R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn,
             R.id.post_item, R.id.share_app_item, R.id.support_me_item, R.id.share_item,
-            R.id.user_signature_tv})
+            R.id.user_signature_tv,R.id.convert_item})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.support_me_item:
@@ -182,6 +190,9 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 break;
             case R.id.user_signature_tv:
                 alertSignatureDialog();//修改签名
+                break;
+            case R.id.convert_item:
+                presenter.enterConvertListActivity();//转谱
                 break;
         }
     }
@@ -265,4 +276,17 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     }
 
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }

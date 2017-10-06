@@ -94,15 +94,15 @@
 
         <View style="@style/SettingDivider" />
 
+        <View style="@style/SettingDivider" />
+
+
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
             android:id="@+id/post_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemTitleIco="@drawable/ic_vec_profile_post"
             app:itemTitleText="我的求谱" />
-
-        <View style="@style/SettingDivider" />
-
 
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
             android:id="@+id/collection_item"
@@ -119,6 +119,14 @@
             android:layout_height="wrap_content"
             app:itemTitleIco="@drawable/ic_vec_profile_share"
             app:itemTitleText="我的分享" />
+        <View style="@style/SettingDivider" />
+
+        <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+            android:id="@+id/convert_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemTitleIco="@drawable/ic_vec_profile_convert"
+            app:itemTitleText="我的转谱" />
 
 
         <View style="@style/SettingBigDivider" />

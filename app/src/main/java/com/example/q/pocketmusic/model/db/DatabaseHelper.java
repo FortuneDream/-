@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.q.pocketmusic.model.bean.local.Img;
-import com.example.q.pocketmusic.model.bean.local.LocalConvertSong;
+import com.example.q.pocketmusic.model.bean.local.ConvertSong;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.bean.local.Record;
 import com.example.q.pocketmusic.model.bean.local.RecordAudio;
@@ -24,7 +24,7 @@ import java.util.Map; /**
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String TABLE_NAME = "sqlite-song.db";//数据库名
-    private static final int TABLE_VERSION = 7;//增加LocalConvertSong
+    private static final int TABLE_VERSION = 7;
     private Map<String, Dao> daos = new HashMap<>();
     private static DatabaseHelper helper;
 
@@ -39,7 +39,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Img.class);
             TableUtils.createTable(connectionSource, Record.class);
             TableUtils.createTable(connectionSource, RecordAudio.class);
-            TableUtils.createTable(connectionSource, LocalConvertSong.class);
             //还可以创建其他表
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,7 +52,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Img.class, true);
             TableUtils.dropTable(connectionSource, Record.class, true);
             TableUtils.dropTable(connectionSource, RecordAudio.class, true);
-            TableUtils.dropTable(connectionSource, LocalConvertSong.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             e.printStackTrace();

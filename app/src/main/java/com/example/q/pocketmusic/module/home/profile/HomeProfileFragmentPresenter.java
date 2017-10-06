@@ -12,6 +12,7 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionActivity;
 import com.example.q.pocketmusic.module.home.profile.contribution.ContributionActivity;
+import com.example.q.pocketmusic.module.home.profile.convert.ProfileConvertActivity;
 import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
@@ -39,7 +40,6 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragmentPresenter.IView> {
     private IView fragment;
-
 
 
     public HomeProfileFragmentPresenter(IView fragment) {
@@ -120,7 +120,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         if (UserUtil.user.getLastSignInDate() == null) {//之前没有这个列,可以签到
             return false;
         } else {
-            String lastSignIn =UserUtil.user.getLastSignInDate();
+            String lastSignIn = UserUtil.user.getLastSignInDate();
             try {
                 Date last = dateFormat.parse(lastSignIn);
                 Date now = new Date();
@@ -237,6 +237,10 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                 });
             }
         });
+    }
+
+    public void enterConvertListActivity() {
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ProfileConvertActivity.class));
     }
 
 

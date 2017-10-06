@@ -99,6 +99,7 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
             @Override
             public void onClick(View v) {
                 presenter.queryLocalSongList();
+                popupWindow.dismiss();
             }
         });
 
