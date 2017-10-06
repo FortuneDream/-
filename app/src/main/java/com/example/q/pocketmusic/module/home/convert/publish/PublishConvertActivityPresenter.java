@@ -118,6 +118,7 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
     //上传图片
     public void uploadConvertPic(final String name) {
 //        LogUtils.e(TAG, String.valueOf(imgUrls.size()));
+        activity.showLoading(true);
         BmobFile.uploadBatch(imgUrls.toArray(new String[imgUrls.size()]), new UploadBatchListener() {
             @Override
             public void onSuccess(List<BmobFile> list, List<String> list1) {
@@ -142,7 +143,6 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
 
     //
     private void addConvertPostPic(String name, final List<String> list1) {
-        activity.showLoading(true);
         final ConvertPost convertPost = new ConvertPost();
         convertPost.setUser(UserUtil.user);
         convertPost.setTitle(name);

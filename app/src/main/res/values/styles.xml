@@ -11,7 +11,7 @@
     <style name="AppTheme" parent="AppTheme.Base" />
 
     <style name="SettingDivider">
-        <item name="android:background">@color/divider</item>
+        <item name="android:background">@color/divider_deep</item>
         <item name="android:layout_height">@dimen/setting_divider</item>
         <item name="android:layout_width">match_parent</item>
     </style>
@@ -21,7 +21,7 @@
     </style>
 
     <style name="SettingBigDivider">
-        <item name="android:background">@color/divider_deep</item>
+        <item name="android:background">@color/divider</item>
         <item name="android:layout_height">@dimen/setting_big_divider</item>
         <item name="android:layout_width">match_parent</item>
     </style>

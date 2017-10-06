@@ -28,24 +28,24 @@
     <color name="text">@color/md_grey_900</color>
 
     <!--两行文字-->
-    <color name="item_two_text_main">@color/ui_black_1</color>
-    <color name="item_two_text_second">@color/ui_black_2</color>
+    <color name="item_two_text_main">@color/ui_black_2</color>
+    <color name="item_two_text_second">@color/ui_black_3</color>
 
     <!--三行文字-->
-    <color name="item_three_text_main">@color/ui_black_1</color>
-    <color name="item_three_text_second">@color/ui_black_2</color>
-    <color name="item_three_text_third">@color/ui_black_3</color>
+    <color name="item_three_text_main">@color/ui_black_2</color>
+    <color name="item_three_text_second">@color/ui_black_3</color>
+    <color name="item_three_text_third">@color/ui_grey_2</color>
 
-    <!--分割线-->
-    <color name="divider_deep">@color/ui_grey_1</color>
-    <color name="divider">@color/ui_grey_2</color>
+    <!--分割线,大分割线用浅，小分割线用身-->
+    <color name="divider_deep">@color/ui_grey_2</color>
+    <color name="divider">@color/ui_grey_3</color>
 
     <!--底部tab-->
     <color name="tab_home_normal">@color/ui_black_1</color>
     <color name="tab_home_press">@color/ui_green</color>
 
     <!--Vector颜色-->
-    <color name="vec_black">@color/ui_black_1</color>
+    <color name="vec_black">@color/ui_black_2</color>
     <color name="vec_red">@color/ui_red</color>
     <color name="vec_white">@color/ui_white</color>
     <color name="vec_purple">@color/ui_purple</color>
@@ -59,12 +59,19 @@
 
 
     <!--颜色备选1-->
+    <!--大标题-->
     <color name="ui_black_1">#181a1d</color>
+    <!--小标题-->
     <color name="ui_black_2">#333333</color>
+    <!--正文-->
     <color name="ui_black_3">#666666</color>
     <color name="ui_white">#ffffff</color>
+    <!--图标-->
     <color name="ui_grey_1">#999999</color>
+
+    <!--次要文字,小分割线-->
     <color name="ui_grey_2">#c8c7c7</color>
+    <!--大分割线-->
     <color name="ui_grey_3">#eff0f7</color>
 
     <color name="ui_orange">#fb7255</color>

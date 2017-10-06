@@ -39,7 +39,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="24dp"
                 android:text="签名"
-                android:textColor="@color/background"
+                android:textColor="@color/ui_black_2"
                 android:textSize="18sp" />
 
             <Button

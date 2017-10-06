@@ -1,59 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:contentScrim="@color/colorPrimary"
-            app:expandedTitleTextAppearance="@style/transText"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/study_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom"
-                android:layout_margin="8dp"
-                app:backgroundTint="@color/white"
-                app:fabSize="mini"
-                app:layout_anchor="@+id/collapsing_toolbar_layout"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_collapseMode="parallax"
-                app:srcCompat="@drawable/ic_vec_study" />
-
-            <ImageView
-                android:id="@+id/top_iv"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:layout_collapseMode="parallax" />
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                app:layout_collapseMode="pin" />
-
-        </android.support.design.widget.CollapsingToolbarLayout>
+        android:background="@color/colorPrimary">
 
         <com.example.q.pocketmusic.view.widget.view.TopTabView
             android:id="@+id/type_tab_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:tabs="@array/type_tab_names"
-           />
+            app:tabs="@array/type_tab_names" />
 
-    </android.support.design.widget.AppBarLayout>
+        <ImageView
+            android:id="@+id/study_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            app:backgroundTint="@color/white"
+            app:srcCompat="@drawable/ic_vec_more" />
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/top_iv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_collapseMode="parallax" />
+
 
     <FrameLayout
         android:id="@+id/type_content"
@@ -61,5 +40,5 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
 

@@ -16,7 +16,7 @@
             app:srcCompat="@drawable/ic_vec_convert_back" />
 
         <ImageView
-            android:id="@+id/keep_iv"
+            android:id="@+id/ok_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
@@ -56,17 +56,21 @@
             app:srcCompat="@drawable/ic_vec_convert_delete" />
     </android.support.v7.widget.Toolbar>
 
+    <View style="@style/SettingBigDivider" />
+
     <FrameLayout
         android:id="@+id/content_top"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="3" />
+
+    <View style="@style/SettingBigDivider" />
 
     <FrameLayout
         android:id="@+id/content_bottom"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="2" />
 </LinearLayout>
 
 

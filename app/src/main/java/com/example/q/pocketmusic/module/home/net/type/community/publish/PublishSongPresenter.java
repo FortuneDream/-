@@ -22,18 +22,17 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
 public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IView> {
     private final int NOT_SELECT = -1;
     private IView activity;
-    private int type;
     private int index;
+    private int typeId;
 
     public PublishSongPresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
-        type = NOT_SELECT;
     }
 
     //指数*2+基础求谱硬币
     public void checkAsk(String title, final String content, final MyUser user) {
-        if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title) || type == NOT_SELECT) {
+        if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title)) {
             ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
             return;
         }
@@ -45,15 +44,12 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
         activity.alertCoinDialog(coin, title, content, user);
     }
 
-    public void setSelectedTag(int type) {
-        this.type=type;
-    }
 
     //求谱
     public void askForSong(String title, String content, final MyUser user) {
         activity.showLoading(true);
         final int coin = Constant.REDUCE_CONTRIBUTION_ASK + index * 2;
-        AskSongPost askSongPost = new AskSongPost(user, title, type, content);
+        AskSongPost askSongPost = new AskSongPost(user, title, typeId, content);
         askSongPost.setIndex(index);
         askSongPost.save(new ToastSaveListener<String>(activity) {
             @Override
@@ -83,8 +79,15 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
     }
 
     public void reduceIndex() {
+        if (index >= 0) {
+            return;
+        }
         index--;
         activity.changeIndex(index);
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId=typeId;
     }
 
     public interface IView extends IBaseView {

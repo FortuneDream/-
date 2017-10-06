@@ -2,21 +2,40 @@ package com.example.q.pocketmusic.module.home.net.type;
 
 
 import android.content.Intent;
+import android.database.SQLException;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.model.bean.local.Img;
+import com.example.q.pocketmusic.model.bean.local.LocalConvertSong;
+import com.example.q.pocketmusic.model.bean.local.LocalSong;
+import com.example.q.pocketmusic.model.db.LocalSongDao;
+import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.net.type.community.CommunityFragment;
+import com.example.q.pocketmusic.module.home.net.type.community.publish.PublishAskActivity;
 import com.example.q.pocketmusic.module.home.net.type.hot.HotListFragment;
 import com.example.q.pocketmusic.module.home.net.type.study.StudyActivity;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
+import com.example.q.pocketmusic.module.share.ShareActivity;
+import com.example.q.pocketmusic.util.common.ToastUtil;
+import com.j256.ormlite.dao.CloseableIterator;
+import com.j256.ormlite.dao.ForeignCollection;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 
 /**
@@ -89,12 +108,53 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
         this.fm = supportFragmentManager;
     }
 
+    //跳转到AskSongActivity
+    public void enterPublishAskActivity(int typeId) {
+        Intent intent = new Intent(activity.getCurrentContext(), PublishAskActivity.class);
+        //注意这里使用的是Fragment的方法，而不能用Activity的方法
+        intent.putExtra(PublishAskActivity.PARAM_TYPE_ID, typeId);
+        ((BaseActivity) activity).startActivityForResult(intent, PublishAskActivity.REQUEST_ASK);
+    }
+
+    //查找本地
+    public void queryLocalSongList() {
+        rx.Observable.create(new rx.Observable.OnSubscribe<List<LocalSong>>() {
+            @Override
+            public void call(Subscriber<? super List<LocalSong>> subscriber) {
+                LocalSongDao dao = new LocalSongDao(activity.getCurrentContext());
+                List<LocalSong> list = dao.queryForAll();
+                subscriber.onNext(list);
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<LocalSong>>() {
+                    @Override
+                    public void call(List<LocalSong> localSongs) {
+                        List<String> strings = new ArrayList<String>();
+                        for (int i = 0; i < localSongs.size(); i++) {
+                            strings.add(localSongs.get(i).getName());
+                        }
+                        activity.alertLocalListDialog(localSongs, strings);
+                    }
+                });
+    }
+
+    //进入分享
+    public void enterShareActivity(LocalSong localSong) {
+        Intent intent = new Intent(activity.getCurrentContext(), ShareActivity.class);
+        intent.putExtra(ShareActivity.LOCAL_SONG, localSong);
+        activity.getCurrentContext().startActivity(intent);
+    }
+
 
     public interface IView extends IBaseView {
 
         void onSelectHotList();
 
         void onSelectCommunity();
+
+        void alertLocalListDialog(List<LocalSong> localSongs, List<String> strings);
     }
 
 

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="转谱"
-            android:textColor="@color/textPrimary"
+            android:textColor="@color/white"
             android:textSize="22sp" />
 
         <ImageView

@@ -11,7 +11,6 @@ import cn.bmob.v3.BmobObject;
 public class AskSongPost extends BmobObject {
     private MyUser user;//帖子的发布者，一对一
     private String title;//帖子标题
-    private Integer type;//所求曲谱类型
     private String content;//帖子内容
     private Integer commentNum;//回复数量
     private Integer instrument;//乐器类型
@@ -29,14 +28,13 @@ public class AskSongPost extends BmobObject {
         this.instrument = instrument;
     }
 
-    public AskSongPost(MyUser user, String title, Integer type, String content) {
+    public AskSongPost(MyUser user, String title, int typeId, String content) {
         this.user = user;
         this.title = title;
         this.content = content;
-        this.type = type;
         this.commentNum = 0;
         this.index = 0;
-        this.instrument = 0;
+        this.instrument = typeId;
     }
 
     public int getIndex() {
@@ -45,14 +43,6 @@ public class AskSongPost extends BmobObject {
 
     public void setIndex(Integer index) {
         this.index = index;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     public String getTitle() {

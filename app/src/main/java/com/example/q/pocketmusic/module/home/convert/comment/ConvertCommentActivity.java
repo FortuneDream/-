@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.model.bean.convert.ConvertComment;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.module.common.AuthActivity;
@@ -48,19 +49,41 @@ public class ConvertCommentActivity extends AuthActivity<ConvertCommentActivityP
     public void initUserView() {
         initToolbar(toolbar, "转谱评论");
         adapter = new ConvertCommentAdapter(getCurrentContext());
+        initRecyclerView(recycler, adapter);
         presenter.setPost((ConvertPost) getIntent().getSerializableExtra(PARAM_POST));
         headView = new ConvertPostHeadView(presenter.getPost().getCreatedAt(),
                 "赞一个位置",
                 presenter.getPost().getUser().getNickName(),
                 presenter.getPost().getTitle(),
-                presenter.getPost().getUser().getHeadImg());
+                presenter.getPost().getUser().getHeadImg(),
+                presenter.getPost().getCoin());
         adapter.addHeader(headView);
+        adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {
+            @Override
+            public void onClickItem(int position) {
+                checkPartConvertSong(position);
+            }
+        });
         headView.setOnClickIndexListener(this);
-        initRecyclerView(recycler, adapter);
-        adapter.setOnItemClickListener(this);
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
         presenter.getCommentList(true);
+    }
+
+
+    //查看部分转谱
+    private void checkPartConvertSong(final int position) {
+        final String content = adapter.getItem(position).getContent();
+        String partContent = content.substring(0, content.length() / 3);
+        new AlertDialog.Builder(getCurrentContext())
+                .setMessage(partContent + "...")
+                .setPositiveButton("查看完整", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.checkUserHasConsumeCoin(adapter.getItem(position));//检查是否已经购买
+                    }
+                })
+                .show();
     }
 
 
@@ -72,28 +95,10 @@ public class ConvertCommentActivity extends AuthActivity<ConvertCommentActivityP
 
     @Override
     public void onItemClick(final int position) {
-        //查看部分
-        final String content = adapter.getItem(position).getContent();
-        String partContent = content.substring(0, content.length() / 3);
-        new AlertDialog.Builder(getCurrentContext())
-                .setMessage(partContent)
-                .setPositiveButton("查看完整", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        alertCoinDialog(content, adapter.getItem(position).getPost().getCoin());
-                    }
-                })
-                .show();
+
 
     }
 
-
-    //应该是先给钱
-    private void alertCoinDialog(String content, int coin) {
-        new AlertDialog.Builder(getCurrentContext())
-                .setMessage(content)
-                .show();
-    }
 
     @Override
     public void onRefresh() {
@@ -116,6 +121,30 @@ public class ConvertCommentActivity extends AuthActivity<ConvertCommentActivityP
             adapter.clear();
         }
         adapter.addAll(list);
+    }
+
+
+    //弹出完整转谱
+    @Override
+    public void alertCompleteConvertSongDialog(ConvertComment item) {
+        new AlertDialog.Builder(getCurrentContext())
+                .setTitle(item.getPost().getTitle())
+                .setMessage(item.getContent())
+                .show();
+    }
+
+
+    //弹出消费
+    @Override
+    public void alertCoinDialog(final ConvertComment item, final int coin) {
+        new CoinDialogBuilder(getCurrentContext(), coin)
+                .setPositiveButton(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.performConsume(item, coin);//消费硬币
+                    }
+                })
+                .show();
     }
 
 

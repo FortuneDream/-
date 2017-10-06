@@ -28,8 +28,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".module.common.TestModuleActivity">
-        </activity>
+        <activity android:name=".module.common.TestModuleActivity"></activity>
         <activity android:name=".module.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -93,11 +92,11 @@
         <activity android:name=".module.user.forget.ForgetActivity" />
         <activity
             android:name=".module.search.SearchMainActivity"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
         <activity
             android:name=".module.home.convert.comment.convert.ConvertActivity"
-            android:screenOrientation="landscape" />
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity android:name=".module.home.profile.post.UserPostActivity" />
         <activity android:name=".module.home.profile.share.UserShareActivity" />
         <activity android:name=".module.user.notify.UserNotifyActivity" />

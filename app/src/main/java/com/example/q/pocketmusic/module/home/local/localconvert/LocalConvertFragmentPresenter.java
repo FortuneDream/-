@@ -24,7 +24,7 @@ public class LocalConvertFragmentPresenter extends BasePresenter<LocalConvertFra
     }
 
     public void getConvertContent(LocalConvertSong item) {
-        LocalConvertSong localConvertSong=localConvertSongDao.findByName(item.getName());
+        LocalConvertSong localConvertSong = localConvertSongDao.findByName(item.getName());
         fragment.alertContentDialog(localConvertSong);
     }
 
@@ -41,7 +41,7 @@ public class LocalConvertFragmentPresenter extends BasePresenter<LocalConvertFra
                 .subscribe(new Action1<List<LocalConvertSong>>() {
                     @Override
                     public void call(List<LocalConvertSong> localConvertSongs) {
-
+                        fragment.setList(localConvertSongs);
                     }
                 });
     }
@@ -50,8 +50,14 @@ public class LocalConvertFragmentPresenter extends BasePresenter<LocalConvertFra
         return localConvertSongDao.queryForAll();
     }
 
+    public void deleteLocalConvertSong(LocalConvertSong localConvertSong) {
+        localConvertSongDao.delete(localConvertSong);
+    }
+
     interface IView extends IBaseView {
 
         void alertContentDialog(LocalConvertSong localConvertSong);
+
+        void setList(List<LocalConvertSong> localConvertSongs);
     }
 }

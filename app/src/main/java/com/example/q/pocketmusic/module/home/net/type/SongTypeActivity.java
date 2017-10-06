@@ -1,39 +1,40 @@
 package com.example.q.pocketmusic.module.home.net.type;
 
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.widget.PopupWindowCompat;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.InstrumentFlagUtil;
 import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IView, SongTypeActivityPresenter>
         implements SongTypeActivityPresenter.IView, TopTabView.TopTabListener {
-
-    @BindView(R.id.top_iv)
-    ImageView topIv;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.collapsing_toolbar_layout)
-    CollapsingToolbarLayout collapsingToolbarLayout;
-    @BindView(R.id.app_bar)
-    AppBarLayout appBar;
-    @BindView(R.id.study_fab)
-    FloatingActionButton studyFab;
     //500*300
     public Integer typeId;
     public final static String PARAM_POSITION = "position";
     @BindView(R.id.type_tab_view)
     TopTabView typeTabView;
+    @BindView(R.id.study_fab)
+    ImageView studyFab;
+    @BindView(R.id.top_iv)
+    ImageView topIv;
     @BindView(R.id.type_content)
     FrameLayout typeContent;
 
@@ -48,17 +49,6 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
         //初始化
         //获取乐器类型
         typeId = getIntent().getIntExtra(PARAM_POSITION, 0);
-        //设置toolbar
-        toolbar.setTitle(InstrumentFlagUtil.getTypeName(typeId));
-        toolbar.setTitleTextColor(ContextCompat.getColor(context, R.color.colorTitle));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //只能通过这样才可以设置标题的颜色
-        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorTitle));
-        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.colorTranslate));
-        collapsingToolbarLayout.setTitle(InstrumentFlagUtil.getTypeName(typeId));
-
         //设置顶部图片
         topIv.setBackgroundResource(InstrumentFlagUtil.getTopDrawableResource(typeId));
 
@@ -80,8 +70,40 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
 
     @OnClick(R.id.study_fab)
     public void onViewClicked() {
-        presenter.enterStudyActivity(typeId);
+        //弹出popwindow
+        final PopupWindow popupWindow = new PopupWindow();
+        popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        final View popupView = View.inflate(getCurrentContext(), R.layout.popup_type_more, null);
+        popupWindow.setContentView(popupView);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAsDropDown(studyFab);
+        LinearLayout studyLl = (LinearLayout) popupView.findViewById(R.id.study_ll);
+        LinearLayout askLl = (LinearLayout) popupView.findViewById(R.id.ask_ll);
+        LinearLayout shareLl = (LinearLayout) popupView.findViewById(R.id.share_ll);
+        studyLl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.enterStudyActivity(typeId);
+                popupWindow.dismiss();
+            }
+        });
+        askLl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.enterPublishAskActivity(typeId);
+                popupWindow.dismiss();
+            }
+        });
+        shareLl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.queryLocalSongList();
+            }
+        });
+
     }
+
 
     @Override
     public void onSelectHotList() {
@@ -91,6 +113,23 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     @Override
     public void onSelectCommunity() {
         typeTabView.setCheck(1);
+    }
+
+    @Override
+    public void alertLocalListDialog(final List<LocalSong> localSongs, List<String> strings) {
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getCurrentContext()
+                , android.R.layout.select_dialog_item
+                , android.R.id.text1
+                , strings);
+
+        new AlertDialog.Builder(getCurrentContext())
+                .setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.enterShareActivity(localSongs.get(which));
+                    }
+                })
+                .show();
     }
 
 

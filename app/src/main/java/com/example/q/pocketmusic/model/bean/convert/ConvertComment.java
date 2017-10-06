@@ -12,6 +12,7 @@ import cn.bmob.v3.datatype.BmobRelation;
 
 public class ConvertComment extends BmobObject {
     private MyUser user;//评论的用户，Pointer类型，一对一
+    private BmobRelation consume;//购买了此转谱贴的用户
     private ConvertPost post;//一个评论属于一个帖子,一对多
     private String content;//谱子
 
@@ -40,5 +41,13 @@ public class ConvertComment extends BmobObject {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public BmobRelation getRelation() {
+        return consume;
+    }
+
+    public void setRelation(BmobRelation relation) {
+        this.consume = relation;
     }
 }

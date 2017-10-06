@@ -21,12 +21,14 @@ public class ConvertPostHeadView implements RecyclerArrayAdapter.ItemView {
     private ImageView convertPostUserHeadIv;
     private TextView convertPostUserDateTv;
     private ImageView convertPostCheckPic;
+    private TextView convertCoinTv;
 
     private String date;
     private String content;
     private String name;
     private String title;
     private String headUrl;
+    private int coin;
 
     private AskPostHeadView.OnClickIndexListener onClickIndexListener;
 
@@ -38,12 +40,13 @@ public class ConvertPostHeadView implements RecyclerArrayAdapter.ItemView {
         this.onClickIndexListener = onClickIndexListener;
     }
 
-    public ConvertPostHeadView(String date, String content, String name, String title, String headUrl) {
+    public ConvertPostHeadView(String date, String content, String name, String title, String headUrl, int coin) {
         this.date = date;
         this.content = content;
         this.name = name;
         this.title = title;
         this.headUrl = headUrl;
+        this.coin = coin;
     }
 
     @Override
@@ -59,10 +62,12 @@ public class ConvertPostHeadView implements RecyclerArrayAdapter.ItemView {
         convertPostUserHeadIv = (ImageView) headerView.findViewById(R.id.convert_post_user_head_iv);
         convertPostUserDateTv = (TextView) headerView.findViewById(R.id.convert_post_user_date_tv);
         convertPostCheckPic = (ImageView) headerView.findViewById(R.id.convert_post_check_pic);
+        convertCoinTv = (TextView) headerView.findViewById(R.id.convert_coin_tv);
 
         convertPostUserContentTv.setText(content);
         convertPostUserNameTv.setText(name);
         convertPostUserTitleTv.setText(title);
+        convertCoinTv.setText(String.valueOf(String.valueOf(coin)));
         new DisplayStrategy().displayCircle(headerView.getContext(), headUrl, convertPostUserHeadIv);
         convertPostUserDateTv.setText(date);
         convertPostCheckPic.setOnClickListener(new View.OnClickListener() {

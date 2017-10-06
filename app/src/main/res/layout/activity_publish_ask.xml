@@ -46,7 +46,7 @@
         app:itemIcoResource="@drawable/ic_vec_content"
         app:itemInputHint="请输入描述" />
 
-   <include layout="@layout/include_flexbox" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

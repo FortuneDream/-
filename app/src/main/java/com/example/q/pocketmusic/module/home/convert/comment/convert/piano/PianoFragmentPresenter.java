@@ -51,6 +51,9 @@ public class PianoFragmentPresenter extends BasePresenter<PianoFragmentPresenter
     }
 
     public void delete() {
+        if (sounds.size() <= 0) {
+            return;
+        }
         sounds.remove(sounds.size() - 1);
     }
 

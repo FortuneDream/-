@@ -68,6 +68,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
     public void initUserView() {
         //各种监听
         adapter = new AskSongCommentAdapter(this);
+        initRecyclerView(recycler, adapter);
         recycler.setRefreshListener(this);
         sendCommentBtn.setOnClickListener(this);
         addPic.setOnClickListener(this);
@@ -76,9 +77,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
         Boolean isFromUser = getIntent().getBooleanExtra(PARAM_IS_FROM_USER, false);
         presenter.setPost(post);
         initToolbar(toolbar, presenter.getPost().getTitle());
-        initRecyclerView(recycler, adapter);
         adapter.setMore(R.layout.view_more, this);
-
         headView = new AskPostHeadView(context,
                 presenter.getPost().getContent(),
                 presenter.getPost().getUser().getNickName(),

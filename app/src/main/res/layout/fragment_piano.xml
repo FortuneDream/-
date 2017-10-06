@@ -1,32 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/parent"
+
+    <EditText
+        android:id="@+id/content_et"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:background="@null"
+        android:inputType="none"
+        android:lineSpacingExtra="4dp"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textSize="21sp" />
 
 
-        <EditText
-            android:id="@+id/content_et"
+    <View
+        style="@style/SettingDivider"
+        android:layout_marginBottom="8dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/a4"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_height="56dp"
             android:layout_weight="1"
-            android:background="@null"
-            android:focusable="false"
-            android:lineSpacingExtra="8dp"
-            android:maxLines="10"
-            android:padding="8dp"
-            android:textColor="@color/black"
-            android:textSize="21sp" />
+            android:background="@drawable/shape_piano"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/b4"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/c5"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="(1)" />
+
+        <Button
+            android:id="@+id/d5"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="(2)" />
+
+        <Button
+            android:id="@+id/e5"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="(3)" />
+
+        <Button
+            android:id="@+id/f5"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="(4)" />
+
+        <Button
+            android:id="@+id/g5"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_piano"
+            android:text="(5)" />
     </LinearLayout>
 
     <LinearLayout
@@ -98,61 +154,7 @@
             android:background="@drawable/shape_piano"
             android:text="5" />
 
-        <Button
-            android:id="@+id/a4"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_piano"
-            android:text="6" />
 
-        <Button
-            android:id="@+id/b4"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_piano"
-            android:text="7" />
-
-        <Button
-            android:id="@+id/c5"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_piano"
-            android:text="(1)" />
-
-        <Button
-            android:id="@+id/d5"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_piano"
-            android:text="(2)" />
-
-        <Button
-            android:id="@+id/e5"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_piano"
-            android:text="(3)" />
-
-        <Button
-            android:id="@+id/f5"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_piano"
-            android:text="(4)" />
-
-        <Button
-            android:id="@+id/g5"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_piano"
-            android:text="(5)" />
     </LinearLayout>
 
 </LinearLayout>

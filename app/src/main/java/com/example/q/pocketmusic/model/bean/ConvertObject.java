@@ -1,5 +1,7 @@
 package com.example.q.pocketmusic.model.bean;
 
+import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
+
 import java.io.Serializable;
 import java.util.List;
 

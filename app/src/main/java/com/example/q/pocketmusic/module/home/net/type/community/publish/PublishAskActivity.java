@@ -15,7 +15,6 @@ import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
-import com.google.android.flexbox.FlexboxLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +26,7 @@ import butterknife.OnClick;
 
 public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView, PublishSongPresenter>
         implements PublishSongPresenter.IView {
-
+    public static final String PARAM_TYPE_ID = "param_1";
     public static final int REQUEST_ASK = 1001;//跳转到求谱界面
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -37,16 +36,6 @@ public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView,
     TextEdit titleTet;
     @BindView(R.id.content_tet)
     TextEdit contentTet;
-    @BindView(R.id.jita_tv)
-    TextView jitaTv;
-    @BindView(R.id.jianpu_tv)
-    TextView jianpuTv;
-    @BindView(R.id.gangqin_tv)
-    TextView gangqinTv;
-    @BindView(R.id.qita_tv)
-    TextView qitaTv;
-    @BindView(R.id.flex_box_layout)
-    FlexboxLayout flexBoxLayout;
     @BindView(R.id.add_index_iv)
     ImageView addIndexIv;
     @BindView(R.id.index_tv)
@@ -67,40 +56,7 @@ public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView,
     public void initUserView() {
         initToolbar(toolbar, "发布求谱信息");
         presenter.setIndex(0);
-
-    }
-
-    @OnClick({R.id.jita_tv, R.id.jianpu_tv, R.id.gangqin_tv, R.id.qita_tv})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.jita_tv:
-                setTag(Constant.ji_ta_pu);
-                break;
-            case R.id.jianpu_tv:
-                setTag(Constant.jian_pu);
-                break;
-            case R.id.gangqin_tv:
-                setTag(Constant.gang_qin_pu);
-                break;
-            case R.id.qita_tv:
-                setTag(Constant.qi_ta_pu);
-                break;
-        }
-    }
-
-    private void setTag(int tagIndex) {
-        for (int i = 0; i < flexBoxLayout.getFlexItemCount(); i++) {
-            if (i == tagIndex) {
-                TextView view = (TextView) (flexBoxLayout.getFlexItemAt(i));
-                view.setTextColor(getResources().getColor(R.color.white));
-                view.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            } else {
-                TextView view = (TextView) (flexBoxLayout.getFlexItemAt(i));
-                view.setTextColor(getResources().getColor(R.color.text));
-                view.setBackgroundColor(getResources().getColor(R.color.white));
-            }
-        }
-        presenter.setSelectedTag(tagIndex);
+        presenter.setTypeId(getIntent().getIntExtra(PARAM_TYPE_ID,0));
     }
 
 
@@ -156,5 +112,6 @@ public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView,
     protected PublishSongPresenter createPresenter() {
         return new PublishSongPresenter(this);
     }
+
 
 }

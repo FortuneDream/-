@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.convert.comment;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.model.bean.convert.ConvertComment;
 import com.example.q.pocketmusic.module.common.BaseModel;
 
@@ -18,6 +19,7 @@ public class ConvertCommentModel extends BaseModel<ConvertComment> {
         BmobQuery<ConvertComment> query = new BmobQuery<>();
         initDefaultListQuery(query, page);
         query.addWhereEqualTo("post", new BmobPointer(equalsObject));
+        query.include(BmobConstant.BMOB_USER);
         query.findObjects(listener);
     }
 }

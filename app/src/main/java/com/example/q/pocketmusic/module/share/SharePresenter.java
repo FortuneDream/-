@@ -47,7 +47,6 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
     private String[] filePaths;//本地图片路径
 
 
-
     public SharePresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
@@ -92,7 +91,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
             //先检查是否已经存在相同的曲谱
             checkHasSong(name, content);
         } else {
-            ToastUtil.showToast( CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
         }
     }
 
@@ -109,7 +108,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
                 }
                 if (flag) {
                     activity.showLoading(false);
-                    ToastUtil.showToast( "已经存在相同曲谱~");
+                    ToastUtil.showToast("已经存在相同曲谱~");
                 } else {
                     LogUtils.e(TAG, "开始批量上传");
                     //批量上传文件
@@ -138,7 +137,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
             @Override
             public void onError(int i, String s) {
                 activity.showLoading(false);
-                ToastUtil.showToast( CommonString.STR_ERROR_INFO + "第" + i + "张：" + s);
+                ToastUtil.showToast(CommonString.STR_ERROR_INFO + "第" + i + "张：" + s);
             }
         });
     }
@@ -165,7 +164,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
                         UserUtil.user.update(new ToastUpdateListener(activity) {
                             @Override
                             public void onSuccess() {
-                                ToastUtil.showToast( CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_UPLOAD));
+                                ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_UPLOAD));
                                 activity.showLoading(false);
                                 activity.finish();
                             }

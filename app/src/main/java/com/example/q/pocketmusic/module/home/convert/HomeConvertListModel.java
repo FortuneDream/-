@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.convert;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.module.common.BaseModel;
 
@@ -17,6 +18,7 @@ public class HomeConvertListModel extends BaseModel<ConvertPost> {
         super.getList(page, listener);
         BmobQuery<ConvertPost> query = new BmobQuery<>();
         initDefaultListQuery(query, page);
+        query.include(BmobConstant.BMOB_USER);
         query.findObjects(listener);
     }
 }
