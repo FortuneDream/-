@@ -21,7 +21,7 @@ public class ProfileConvertPostModel extends BaseModel<ConvertComment> {
         BmobQuery<ConvertComment> query=new BmobQuery<>();
         initDefaultListQuery(query,page);
         query.include("user,post");
-        query.addWhereRelatedTo("consume", new BmobPointer(UserUtil.user));
+        query.addWhereRelatedTo(BmobConstant.BMOB_CONVERTS, new BmobPointer(UserUtil.user));
         query.findObjects(listener);
     }
 }

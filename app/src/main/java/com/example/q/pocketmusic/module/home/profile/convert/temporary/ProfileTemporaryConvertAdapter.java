@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.local.ConvertSong;
+import com.example.q.pocketmusic.model.bean.convert.ConvertSong;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

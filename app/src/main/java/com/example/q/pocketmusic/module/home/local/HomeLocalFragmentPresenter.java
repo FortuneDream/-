@@ -88,9 +88,6 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
         ((BaseActivity) fragment.getCurrentContext()).startActivityForResult(intent, LeadSongActivity.REQUEST_LEAD);
     }
 
-    public void enterPianoActivity() {
-        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ConvertActivity.class));
-    }
 
 
     public interface IView extends IBaseView {

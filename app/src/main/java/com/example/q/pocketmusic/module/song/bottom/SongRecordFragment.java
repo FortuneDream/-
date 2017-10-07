@@ -126,10 +126,15 @@ public class SongRecordFragment extends BaseFragment<SongRecordPresenter.IView, 
 
     }
 
+    @Override
+    public void onDestroyView() {
+        presenter.release();
+        super.onDestroyView();
+    }
+
     //一定要放在onDestroy之前
     @Override
     public void onDestroy() {
-        presenter.release();
         super.onDestroy();
     }
 }

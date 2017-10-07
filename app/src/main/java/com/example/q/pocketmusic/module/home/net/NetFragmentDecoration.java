@@ -20,15 +20,13 @@ public class NetFragmentDecoration extends RecyclerView.ItemDecoration {
     private Paint mDividerPaint;
     private int mDividerHeight = 1;
     private String hot = " - 热门谱单 - ";
-    private String instrument = " - 我的乐器 - ";
     private float hotTextLength;
-    private float instrumentTextLength;
     private Rect mTextRect;
 
 
     public NetFragmentDecoration(Context context) {
         mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setColor(context.getResources().getColor(R.color.md_grey_500));
+        mTextPaint.setColor(context.getResources().getColor(R.color.ui_grey_2));
         mTextPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.net_fragment_text));
 
         mDividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -36,7 +34,6 @@ public class NetFragmentDecoration extends RecyclerView.ItemDecoration {
 
         mTextRect = new Rect();
         hotTextLength = mTextPaint.measureText(hot);
-        instrumentTextLength = mTextPaint.measureText(instrument);
         mTextPaint.getTextBounds(hot, 0, hot.length(), mTextRect);
     }
 
@@ -47,7 +44,7 @@ public class NetFragmentDecoration extends RecyclerView.ItemDecoration {
         for (int i = 0; i < count; i++) {
             View childView = parent.getChildAt(i);
             int type = parent.getAdapter().getItemViewType(parent.getChildAdapterPosition(childView));//重点，这样可以得到整个列表，而不是可见区域
-            if (type == NetFragmentAdapter.BANNER || type == NetFragmentAdapter.TYPE_SONG) {
+            if (type == NetFragmentAdapter.TYPE_SONG) {
                 outRect.bottom = mTextRect.height();
             } else {
                 outRect.bottom = mDividerHeight;
@@ -62,11 +59,7 @@ public class NetFragmentDecoration extends RecyclerView.ItemDecoration {
         for (int i = 0; i < childCount - 1; i++) {
             View childView = parent.getChildAt(i);
             int type = parent.getAdapter().getItemViewType(parent.getChildAdapterPosition(childView));
-            if (type == NetFragmentAdapter.BANNER) {//在Banner下
-                int left = (int) (childView.getWidth() / 2 - instrumentTextLength / 2);
-                int bottom = childView.getBottom() + mTextRect.height();
-                c.drawText(instrument, left, bottom, mTextPaint);
-            } else if (type == NetFragmentAdapter.TYPE_SONG) {//在乐器下
+            if (type == NetFragmentAdapter.TYPE_SONG) {//在乐器下
                 int left = (int) (childView.getWidth() / 2 - hotTextLength / 2);
                 int bottom = childView.getBottom() + mTextRect.height();
                 c.drawText(hot, left, bottom, mTextPaint);

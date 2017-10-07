@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.q.pocketmusic.model.bean.local.Img;
-import com.example.q.pocketmusic.model.bean.local.ConvertSong;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.bean.local.Record;
 import com.example.q.pocketmusic.model.bean.local.RecordAudio;

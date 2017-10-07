@@ -8,7 +8,7 @@ import com.example.q.pocketmusic.model.bean.ConvertObject;
 import com.example.q.pocketmusic.model.bean.convert.ConvertComment;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.model.bean.convert.Sound;
-import com.example.q.pocketmusic.model.bean.local.ConvertSong;
+import com.example.q.pocketmusic.model.bean.convert.ConvertSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.convert.comment.convert.piano.PianoFragment;
@@ -71,16 +71,23 @@ public class ConvertPresenter extends BasePresenter<ConvertPresenter.IView> {
         if (post == null) {
             return;
         }
-        BmobRelation relation = new BmobRelation();
-        relation.add(UserUtil.user);
+
         final ConvertComment convertComment = new ConvertComment();
         convertComment.setPost(post);
         convertComment.setUser(UserUtil.user);
-        convertComment.setRelation(relation);
         convertComment.setContent(pianoFragment.getConvertContent());
         convertComment.save(new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {
+                BmobRelation relation = new BmobRelation();
+                relation.add(convertComment);
+                UserUtil.user.setConverts(relation);
+                UserUtil.user.save(new ToastSaveListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+
+                    }
+                });
                 ConvertSong convertSong = new ConvertSong();
                 convertSong.setContent(pianoFragment.getConvertContent());
                 convertSong.setName(mConvertObject.getName());

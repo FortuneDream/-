@@ -10,7 +10,6 @@ import cn.bmob.v3.datatype.BmobRelation;
 public class CollectionSong extends BmobObject {
     private String name;//收藏曲谱的名字
     private String content;//收藏曲谱的描述
-    private BmobRelation users;//收藏了这首曲谱的所有用户
     private Integer isFrom;//来自
 
     public CollectionSong() {
@@ -38,13 +37,5 @@ public class CollectionSong extends BmobObject {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public BmobRelation getUsers() {
-        return users;
-    }
-
-    public void setUsers(BmobRelation users) {
-        this.users = users;
     }
 }

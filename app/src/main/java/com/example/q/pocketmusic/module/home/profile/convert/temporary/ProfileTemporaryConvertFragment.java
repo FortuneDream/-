@@ -3,14 +3,10 @@ package com.example.q.pocketmusic.module.home.profile.convert.temporary;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.view.MenuItem;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.local.ConvertSong;
+import com.example.q.pocketmusic.model.bean.convert.ConvertSong;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetMenuDialog;
-import com.github.rubensousa.bottomsheetbuilder.adapter.BottomSheetItemClickListener;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

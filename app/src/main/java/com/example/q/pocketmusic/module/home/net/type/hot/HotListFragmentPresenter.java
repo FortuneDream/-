@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.home.net.type.hot;
 
-import android.content.Context;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.config.Constant;
@@ -9,7 +8,6 @@ import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.net.LoadTypeSongList;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.net.type.study.StudyActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.InstrumentFlagUtil;
 
@@ -54,7 +52,7 @@ public class HotListFragmentPresenter extends BasePresenter<HotListFragmentPrese
         Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, Constant.FROM_TYPE, Constant.MENU_DOWNLOAD_COLLECTION_SHARE, Constant.NET);
         intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, object);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, object);
         activity.getCurrentContext().startActivity(intent);
     }
 

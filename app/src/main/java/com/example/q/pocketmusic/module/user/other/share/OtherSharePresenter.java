@@ -39,7 +39,7 @@ public class OtherSharePresenter extends BasePresenter<OtherSharePresenter.IView
         song.setName(shareSong.getName());
         Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         SongObject songObject = new SongObject(song, Constant.FROM_SHARE, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, songObject);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
         intent.putExtra(SongActivity.SHARE_SONG, shareSong);
         fragment.getCurrentContext().startActivity(intent);
     }

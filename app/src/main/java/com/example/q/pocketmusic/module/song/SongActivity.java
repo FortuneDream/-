@@ -1,6 +1,6 @@
 package com.example.q.pocketmusic.module.song;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -15,29 +15,25 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
-import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.config.ScreenshotContentObserver;
-import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.module.home.HomeActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.net.HackyViewPager;
 import com.example.q.pocketmusic.view.widget.net.SnackBarUtil;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
-import cn.bmob.v3.BmobUser;
+import butterknife.ButterKnife;
 import pub.devrel.easypermissions.EasyPermissions;
 
 //查看大图界面
 public class SongActivity extends BaseActivity<SongActivityPresenter.IView, SongActivityPresenter>
-        implements SongActivityPresenter.IView, EasyPermissions.PermissionCallbacks {
+        implements SongActivityPresenter.IView, EasyPermissions.PermissionCallbacks, Serializable {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
@@ -51,7 +47,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     private SongActivityAdapter adapter;
 
 
-    public final static String PARAM_SONG_OBJECT_SERIALIZEABLE = "PARAM_SONG_OBJECT_SERIALIZEABLE";//Serializeable
+    public final static String PARAM_SONG_OBJECT_SERIALIZABLE = "PARAM_SONG_OBJECT_SERIALIZABLE";//Serializeable
 
     public final static String LOCAL_SONG = "LOCAL_SONG";//可选的传递参数，用于传递本地的localSong
 
@@ -59,7 +55,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     public final static String SHARE_SONG = "SHARE_SONG";//可选传递参数，用于传递shareSong
 
-    public final static String SPECIAL_SONG="SPECIAL_SONG";//精品区
+    public final static String SPECIAL_SONG = "SPECIAL_SONG";//精品区
 
     private Handler handler = new Handler(Looper.myLooper()) {
         @Override
@@ -93,7 +89,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         presenter.setIntent(getIntent());//设置intent
         presenter.init(getSupportFragmentManager());//初始化
-        SongObject songObject = (SongObject) getIntent().getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE);
+        SongObject songObject = (SongObject) getIntent().getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
         Song song = songObject.getSong();
         initToolbar(toolbar, song.getName());//toolbar
         presenter.loadPic();  //查找图片
@@ -171,5 +167,12 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     public void onStop() {
         super.onStop();
         ScreenshotContentObserver.stopObserve();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

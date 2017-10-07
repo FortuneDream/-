@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.model.bean.local;
+package com.example.q.pocketmusic.model.bean.convert;
 
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.j256.ormlite.field.DatabaseField;
@@ -11,7 +11,7 @@ import cn.bmob.v3.BmobObject;
 /**
  * Created by 81256 on 2017/10/3.
  */
-
+//暂存
 public class ConvertSong extends BmobObject {
     private String name;
     private String content;

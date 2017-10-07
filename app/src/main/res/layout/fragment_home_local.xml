@@ -24,14 +24,6 @@
             android:layout_gravity="center"
             fab:tabs="@array/local_tab_names" />
 
-
-        <ImageView
-            android:id="@+id/piano_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="16dp"
-            fab:srcCompat="@drawable/ic_vec_piano" />
     </android.support.v7.widget.Toolbar>
 
 

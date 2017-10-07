@@ -16,6 +16,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.InstrumentFlagUtil;
+import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import java.util.List;
@@ -71,38 +72,27 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     @OnClick(R.id.study_fab)
     public void onViewClicked() {
         //弹出popwindow
-        final PopupWindow popupWindow = new PopupWindow();
-        popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
-        popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-        final View popupView = View.inflate(getCurrentContext(), R.layout.popup_type_more, null);
-        popupWindow.setContentView(popupView);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.showAsDropDown(studyFab);
-        LinearLayout studyLl = (LinearLayout) popupView.findViewById(R.id.study_ll);
-        LinearLayout askLl = (LinearLayout) popupView.findViewById(R.id.ask_ll);
-        LinearLayout shareLl = (LinearLayout) popupView.findViewById(R.id.share_ll);
-        studyLl.setOnClickListener(new View.OnClickListener() {
+        MorePopupWindow popupWindow=new MorePopupWindow(getCurrentContext());
+        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_study,"学习"));
+        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_ask,"求谱"));
+        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_share,"分享"));
+        popupWindow.setListener(new MorePopupWindow.OnSelectedListener() {
             @Override
-            public void onClick(View v) {
-                presenter.enterStudyActivity(typeId);
-                popupWindow.dismiss();
+            public void onSelected(int position) {
+                switch (position){
+                    case 0:
+                        presenter.enterStudyActivity(typeId);
+                        break;
+                    case 1:
+                        presenter.enterPublishAskActivity(typeId);
+                        break;
+                    case 2:
+                        presenter.queryLocalSongList();
+                        break;
+                }
             }
         });
-        askLl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.enterPublishAskActivity(typeId);
-                popupWindow.dismiss();
-            }
-        });
-        shareLl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.queryLocalSongList();
-                popupWindow.dismiss();
-            }
-        });
-
+        popupWindow.show(studyFab);
     }
 
 

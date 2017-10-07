@@ -64,7 +64,7 @@ public class SpecialListPresenter extends BasePresenter<SpecialListPresenter.IVi
         Song song = new Song();
         song.setName(item.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_SPECIAL, Constant.MENU_DOWNLOAD_COLLECTION_SHARE, Constant.NET);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, songObject);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
         intent.putExtra(SongActivity.SPECIAL_SONG, item);
         activity.getCurrentContext().startActivity(intent);
     }

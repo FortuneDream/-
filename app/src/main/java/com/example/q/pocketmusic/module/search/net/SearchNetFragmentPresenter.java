@@ -49,7 +49,7 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
         Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, song.getSearchFrom(), Constant.MENU_DOWNLOAD_COLLECTION_SHARE, Constant.NET);
         intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, object);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, object);
         fragment.getCurrentContext().startActivity(intent);
     }
 

@@ -2,11 +2,10 @@ package com.example.q.pocketmusic.module.home.profile.convert.temporary;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.BmobConstant;
-import com.example.q.pocketmusic.model.bean.local.ConvertSong;
+import com.example.q.pocketmusic.model.bean.convert.ConvertSong;
 import com.example.q.pocketmusic.module.common.BaseModel;
 import com.example.q.pocketmusic.util.UserUtil;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
 

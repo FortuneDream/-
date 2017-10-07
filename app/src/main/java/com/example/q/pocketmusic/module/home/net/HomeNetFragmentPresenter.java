@@ -59,7 +59,7 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
     public void enterSongActivity(Song song) {
         Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, Constant.FROM_RECOMMEND, Constant.MENU_DOWNLOAD_COLLECTION_SHARE, Constant.NET);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, object);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, object);
         fragment.getCurrentContext().startActivity(intent);
     }
 

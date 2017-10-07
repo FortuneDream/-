@@ -84,7 +84,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
         song.setName(localSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_LOCAL, Constant.SHOW_NO_MENU, Constant.LOCAL);
         intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE,songObject);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE,songObject);
         intent.putExtra(SongActivity.LOCAL_SONG,localSong);
         fragment.getCurrentContext().startActivity(intent);
     }

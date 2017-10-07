@@ -300,7 +300,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                 //添加收藏记录
                 final CollectionSong collectionSong = new CollectionSong();
                 collectionSong.setName(song.getName());
-                collectionSong.setIsFrom(((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE)).getFrom());
+                collectionSong.setIsFrom(((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE)).getFrom());
                 collectionSong.setContent(song.getContent());
                 collectionSong.save(new ToastSaveListener<String>() {
 
@@ -351,7 +351,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     //分享乐谱,本地和网络
     public void share() {
         List<String> list = null;
-        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE);
+        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
         int loadingWay = songObject.getLoadingWay();
         switch (loadingWay) {
             case Constant.NET:
@@ -387,7 +387,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     }
 
     public void init() {
-        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE);
+        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
         isFrom = songObject.getFrom();
         song = songObject.getSong();
 
@@ -404,7 +404,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
 
     public int getShowMenuFlag() {
-        return ((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE)).getShowMenu();
+        return ((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE)).getShowMenu();
     }
 
 

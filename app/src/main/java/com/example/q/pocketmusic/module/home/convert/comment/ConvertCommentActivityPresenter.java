@@ -94,14 +94,14 @@ public class ConvertCommentActivityPresenter extends BasePresenter<ConvertCommen
     }
 
     public void checkUserHasConsumeCoin(final ConvertComment item) {
-        BmobQuery<MyUser> query = new BmobQuery<>();
-        query.addWhereRelatedTo("consume", new BmobPointer(item));
-        query.findObjects(new ToastQueryListener<MyUser>() {
+        BmobQuery<ConvertComment> query = new BmobQuery<>();
+        query.addWhereRelatedTo("converts", new BmobPointer(UserUtil.user));//在user表的converts找user
+        query.findObjects(new ToastQueryListener<ConvertComment>() {
             @Override
-            public void onSuccess(List<MyUser> list) {
+            public void onSuccess(List<ConvertComment> list) {
                 boolean isConsume = false;
-                for (MyUser other : list) {
-                    if (other.getObjectId().equals(UserUtil.user.getObjectId())) {
+                for (ConvertComment other : list) {
+                    if (other.getObjectId().equals(item.getObjectId())) {
                         //已经点赞
                         isConsume = true;
                         break;
@@ -124,11 +124,11 @@ public class ConvertCommentActivityPresenter extends BasePresenter<ConvertCommen
         ToastUtil.showToast("稍等片刻");
         //已经购买的用户
         BmobRelation relation1 = new BmobRelation();
-        relation1.add(UserUtil.user);
-        item.setRelation(relation1);
-        item.save(new ToastSaveListener<String>(activity) {
+        relation1.add(item);
+        UserUtil.user.setConverts(relation1);
+        UserUtil.user.update(new ToastUpdateListener() {
             @Override
-            public void onSuccess(String s) {
+            public void onSuccess() {
                 UserUtil.increment(-coin, new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
@@ -138,7 +138,6 @@ public class ConvertCommentActivityPresenter extends BasePresenter<ConvertCommen
                 });
             }
         });
-
     }
 
 

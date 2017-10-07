@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
+import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter; /**
  * Created by 鹏君 on 2016/8/28.
@@ -21,7 +22,7 @@ public class LocalSongFragmentAdapter extends RecyclerArrayAdapter<LocalSong> {
     private OnItemSelectListener onUploadListener;
 
     public interface OnItemSelectListener {
-        void onSelectedMore(int position);
+        void onSelectedDelete(int position);
 
         void onSelectedShare(int position);
 
@@ -47,7 +48,7 @@ public class LocalSongFragmentAdapter extends RecyclerArrayAdapter<LocalSong> {
         TextView dateTv;
         ImageView moreIv;
         ImageView topIv;
-        ImageView shareSongIv;
+
 
         MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_local_song);
@@ -55,7 +56,6 @@ public class LocalSongFragmentAdapter extends RecyclerArrayAdapter<LocalSong> {
             dateTv = $(R.id.date_tv);
             moreIv = $(R.id.more_iv);
             topIv = $(R.id.top_iv);
-            shareSongIv = $(R.id.share_song_iv);
         }
 
         @Override
@@ -63,19 +63,28 @@ public class LocalSongFragmentAdapter extends RecyclerArrayAdapter<LocalSong> {
             super.setData(data);
             nameTv.setText(data.getName());
             dateTv.setText(data.getDate());
-            shareSongIv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onUploadListener != null) {
-                        onUploadListener.onSelectedShare(getAdapterPosition());
-                    }
-                }
-            });
+
             moreIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onUploadListener != null) {
-                        onUploadListener.onSelectedMore(getAdapterPosition());
+                        MorePopupWindow popupWindow = new MorePopupWindow(getContext());
+                        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_delete, "删除曲谱"));
+                        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_upload, "分享曲谱"));
+                        popupWindow.setListener(new MorePopupWindow.OnSelectedListener() {
+                            @Override
+                            public void onSelected(int position) {
+                                switch (position){
+                                    case 0:
+                                        onUploadListener.onSelectedDelete(getAdapterPosition());
+                                        break;
+                                    case 1:
+                                        onUploadListener.onSelectedShare(getAdapterPosition());
+                                        break;
+                                }
+                            }
+                        });
+                        popupWindow.show(moreIv);
                     }
                 }
             });

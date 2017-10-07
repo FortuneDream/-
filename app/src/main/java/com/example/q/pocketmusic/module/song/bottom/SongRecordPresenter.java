@@ -51,7 +51,7 @@ public class SongRecordPresenter extends BasePresenter<SongRecordPresenter.IView
 
     public void init() {
         //初始化song
-        song = ((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE)).getSong();
+        song = ((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE)).getSong();
     }
 
     public enum RECORD_STATUS {

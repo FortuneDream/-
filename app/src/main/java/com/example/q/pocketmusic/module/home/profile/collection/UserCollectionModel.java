@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.home.profile.collection;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.collection.CollectionPic;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
@@ -30,7 +31,7 @@ public class UserCollectionModel extends BaseModel {
     public void getUserCollectionList(MyUser user, int page, ToastQueryListener<CollectionSong> listener) {
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         initDefaultListQuery(query, page);
-        query.addWhereRelatedTo("collections", new BmobPointer(user));
+        query.addWhereRelatedTo(BmobConstant.BMOB_COLLECTIONS, new BmobPointer(user));
         query.findObjects(listener);
     }
 

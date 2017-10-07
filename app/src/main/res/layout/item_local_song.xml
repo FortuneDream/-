@@ -36,12 +36,7 @@
         android:layout_marginRight="8dp"
         app:srcCompat="@drawable/ic_vec_top" />
 
-    <ImageView
-        android:id="@+id/share_song_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        app:srcCompat="@drawable/ic_vec_upload" />
+
 
 
     <ImageView

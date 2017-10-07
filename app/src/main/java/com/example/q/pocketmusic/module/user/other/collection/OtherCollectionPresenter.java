@@ -72,7 +72,7 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
                 song.setIvUrl(urls);
                 Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
                 SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.MENU_DOWNLOAD_SHARE, Constant.NET);
-                intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, songObject);
+                intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
                 fragment.getCurrentContext().startActivity(intent);
             }
         });

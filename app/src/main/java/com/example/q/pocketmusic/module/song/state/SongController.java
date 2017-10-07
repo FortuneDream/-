@@ -24,7 +24,7 @@ public class SongController {
     }
 
     public static SongController getInstance(Intent intent, SongActivityPresenter.IView activity) {
-        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE);
+        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
         Song song = songObject.getSong();
         int isFrom = songObject.getFrom();
         switch (isFrom) {

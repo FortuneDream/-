@@ -6,12 +6,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupWindow;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseFragment;
+import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetMenuDialog;
 import com.github.rubensousa.bottomsheetbuilder.adapter.BottomSheetItemClickListener;
@@ -29,7 +32,7 @@ import butterknife.BindView;
  * Created by 鹏君 on 2016/11/17.
  */
 
-public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.IView,LocalSongFragmentPresenter>
+public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.IView, LocalSongFragmentPresenter>
         implements LocalSongFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener,
         LocalSongFragmentAdapter.OnItemSelectListener {
     @BindView(R.id.recycler)
@@ -61,25 +64,6 @@ public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.I
         if (adapter.getCount() == 0) {
             recycler.showEmpty();
         }
-    }
-
-    private void alertBottomDialog(final int position) {
-        BottomSheetMenuDialog dialog = new BottomSheetBuilder(getContext())
-                .setMode(BottomSheetBuilder.MODE_LIST)
-                .setMenu(R.menu.menu_home_local)
-                .setItemClickListener(new BottomSheetItemClickListener() {
-                    @Override
-                    public void onBottomSheetItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.delete://删除
-                                showDeleteDialog(position);
-                                break;
-                        }
-                    }
-                })
-                .createDialog();
-        dialog.show();
-
     }
 
 
@@ -162,10 +146,9 @@ public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.I
         presenter.enterPictureActivity(localSong);
     }
 
-    //选择更多
     @Override
-    public void onSelectedMore(int position) {
-        alertBottomDialog(position);
+    public void onSelectedDelete(int position) {
+        showDeleteDialog(position);
     }
 
     @Override

@@ -305,7 +305,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject songObject = new SongObject(song, Constant.FROM_ASK, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
         intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZEABLE, songObject);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
         intent.putExtra(SongActivity.ASK_COMMENT, askSongComment);
         activity.getCurrentContext().startActivity(intent);
     }

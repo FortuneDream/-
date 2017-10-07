@@ -30,8 +30,6 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     ImageView addLocalIv;
     @BindView(R.id.top_tab_view)
     TopTabView topTabView;
-    @BindView(R.id.piano_iv)
-    ImageView pianoIv;
     @BindView(R.id.home_local_content)
     FrameLayout homeLocalContent;
     @BindView(R.id.activity_audio_record)
@@ -102,14 +100,11 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     }
 
 
-    @OnClick({R.id.add_local_iv, R.id.piano_iv})
+    @OnClick({R.id.add_local_iv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_local_iv:
                 presenter.enterLeadActivity();
-                break;
-            case R.id.piano_iv:
-                presenter.enterPianoActivity();
                 break;
         }
     }

@@ -1,17 +1,11 @@
 package com.example.q.pocketmusic.module.home.profile.convert.temporary;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.model.bean.local.ConvertSong;
+import com.example.q.pocketmusic.model.bean.convert.ConvertSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 
 import java.util.List;
-
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 public class ProfileTemporaryConvertFragmentPresenter extends BasePresenter<ProfileTemporaryConvertFragmentPresenter.IView> {
     private IView fragment;
