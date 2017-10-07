@@ -126,5 +126,24 @@ public class MorePopupWindow {
         }
     }
 
+    public void showUp(View view) {
+        popupWindow.setContentView(popupView);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAsDropDown(view);
+        popupWindow.showAsDropDown(view, 200, -300);
+        for (int i = 0; i < list.size(); i++) {
+            final int finalI = i;
+            list.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onSelected(finalI);
+                        popupWindow.dismiss();
+                    }
+                }
+            });
+        }
+    }
+
 
 }

@@ -62,13 +62,6 @@
         </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/convert_post_check_pic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_vec_check_convert_song" />
-
     </LinearLayout>
 
     <TextView
@@ -92,5 +85,5 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="谱友这么说" />
+        android:text="转谱回复" />
 </LinearLayout>

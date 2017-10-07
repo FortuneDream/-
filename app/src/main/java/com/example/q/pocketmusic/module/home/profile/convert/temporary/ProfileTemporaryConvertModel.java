@@ -40,4 +40,10 @@ public class ProfileTemporaryConvertModel extends BaseModel<ConvertSong> {
         //删除收藏
         convertSong.delete(listener);
     }
+
+    public void getAllList(ToastQueryListener<ConvertSong> listener) {
+        BmobQuery<ConvertSong> query = new BmobQuery<>();
+        query.addWhereEqualTo(BmobConstant.BMOB_USER, new BmobPointer(UserUtil.user));
+        query.findObjects(listener);
+    }
 }

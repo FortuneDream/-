@@ -51,7 +51,7 @@ public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.I
         recycler.setRefreshListener(this);
         //初始化
         initRecyclerView(recycler, adapter, 1);
-        recycler.setEmptyView(R.layout.view_local_empty);
+        recycler.setEmptyView(R.layout.view_empty);
         if (adapter.getCount() == 0) {
             recycler.showEmpty();
         }

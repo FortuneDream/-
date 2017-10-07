@@ -118,6 +118,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     public void initRecyclerView(EasyRecyclerView recyclerView, RecyclerArrayAdapter<?> adapter) {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setRefreshingColorResources(R.color.colorAccent);
+        recyclerView.setEmptyView(R.layout.view_empty);
         recyclerView.setAdapter(adapter);
     }
 
@@ -223,7 +224,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
             }
         }
     }
-
 
 
     @Override

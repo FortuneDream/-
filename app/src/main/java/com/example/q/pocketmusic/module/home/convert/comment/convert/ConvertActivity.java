@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.convert.comment.convert;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,6 +24,8 @@ public class ConvertActivity extends AuthActivity<ConvertPresenter.IView, Conver
         implements ConvertPresenter.IView {
     public static final String PARAM_CONVERT_OBJECT = "param_1";
     public static final String PARAM_CONVERT_POST = "param_2";//如果来自网络，则属于某个转谱贴
+    public static final String RESULT_PARAM_TITLE="result_1";
+    public static final String RESULT_PARAM_CONTENT="result_2";
     @BindView(R.id.exit_iv)
     ImageView exitIv;
     @BindView(R.id.ok_iv)
@@ -130,8 +133,10 @@ public class ConvertActivity extends AuthActivity<ConvertPresenter.IView, Conver
                 .setListener(new EditDialog.Builder.OnSelectedListener() {
                     @Override
                     public void onSelectedOk(String str) {
-                        presenter.sendConvertComment(str);
+                        setActivityResult(str,presenter.getConvertContent());
                     }
+
+
 
                     @Override
                     public void onSelectedCancel() {
@@ -140,6 +145,14 @@ public class ConvertActivity extends AuthActivity<ConvertPresenter.IView, Conver
                 }).create().show();
 
 
+    }
+
+    private void setActivityResult(String str, String convertContent) {
+        Intent intent=new Intent();
+        intent.putExtra(RESULT_PARAM_CONTENT,convertContent);
+        intent.putExtra(RESULT_PARAM_TITLE,str);
+        setResult(RESULT_OK,intent);
+        finish();
     }
 
 
