@@ -30,14 +30,12 @@ public class ConvertPresenter extends BasePresenter<ConvertPresenter.IView> {
     private IView activity;
     private PianoFragment pianoFragment;
     private SongFragment songFragment;
-    private List<Sound> list;
     private ConvertPost post;
     private ConvertObject mConvertObject;
 
     public ConvertPresenter(IView item) {
         attachView(item);
         this.activity = getIViewRef();
-        list = new ArrayList<>();
     }
 
     public void initFragment(FragmentManager fm, ConvertObject object) {
@@ -67,13 +65,15 @@ public class ConvertPresenter extends BasePresenter<ConvertPresenter.IView> {
         pianoFragment.setConvertContent();
     }
 
-    public void sendConvertComment() {
+    //发送
+    public void sendConvertComment(final String title) {
         if (post == null) {
             return;
         }
 
         final ConvertComment convertComment = new ConvertComment();
         convertComment.setPost(post);
+        convertComment.setTitle(title);
         convertComment.setUser(UserUtil.user);
         convertComment.setContent(pianoFragment.getConvertContent());
         convertComment.save(new ToastSaveListener<String>() {
@@ -90,7 +90,7 @@ public class ConvertPresenter extends BasePresenter<ConvertPresenter.IView> {
                 });
                 ConvertSong convertSong = new ConvertSong();
                 convertSong.setContent(pianoFragment.getConvertContent());
-                convertSong.setName(mConvertObject.getName());
+                convertSong.setName(title);
                 convertSong.setUser(UserUtil.user);
                 convertSong.save(new ToastSaveListener<String>() {
                     @Override
@@ -112,11 +112,17 @@ public class ConvertPresenter extends BasePresenter<ConvertPresenter.IView> {
         this.mConvertObject = object;
     }
 
+    //保存
     public void keepConvertSong() {
         ConvertSong song = new ConvertSong();
-        song.setContent(pianoFragment.getConvertContent());
+        String content = pianoFragment.getConvertContent();
+        if (content.length() <= 0) {
+            activity.finish();
+            return;
+        }
+        song.setContent(content);
         song.setUser(UserUtil.user);
-        song.setName(mConvertObject.getName() + new Date());
+        song.setName(mConvertObject.getTitle() + new Date());
         song.save(new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {

@@ -24,7 +24,7 @@ import butterknife.Unbinder;
 
 public class ProfileConvertPostFragment extends BaseFragment<ProfileConvertPostFragmentPresenter.IView, ProfileConvertPostFragmentPresenter>
         implements ProfileConvertPostFragmentPresenter.IView, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener,
-        RecyclerArrayAdapter.OnMoreListener{
+        RecyclerArrayAdapter.OnMoreListener, ProfileConvertPostAdapter.OnSelectedListener {
     @BindView(R.id.post_list_recycler)
     EasyRecyclerView postListRecycler;
     private ProfileConvertPostAdapter adapter;
@@ -38,10 +38,10 @@ public class ProfileConvertPostFragment extends BaseFragment<ProfileConvertPostF
     public void initView() {
         adapter = new ProfileConvertPostAdapter(getCurrentContext());
         initRecyclerView(postListRecycler, adapter, 1);
+        adapter.setOnSelectedListener(this);
         adapter.setOnItemClickListener(this);
         adapter.setMore(R.layout.view_more,this);
         postListRecycler.setRefreshListener(this);
-        LogUtils.e(TAG, String.valueOf(1234564));
         presenter.getInitCommentList(true);
     }
 
@@ -76,5 +76,10 @@ public class ProfileConvertPostFragment extends BaseFragment<ProfileConvertPostF
     @Override
     public void onMoreClick() {
 
+    }
+
+    @Override
+    public void onSelectedDelete(int position) {
+        presenter.deleteConvertPost(adapter.getItem(position));
     }
 }

@@ -68,7 +68,6 @@ public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
     //乐器list的holder
     class TypeViewHolder extends BaseViewHolder<ContentLL> implements View.OnClickListener {
 
-
         public TypeViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_combination_type_ll);
             ($(R.id.type_quanbu_tv)).setOnClickListener(this);

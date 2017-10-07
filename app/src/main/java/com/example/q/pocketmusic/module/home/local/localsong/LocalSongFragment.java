@@ -1,23 +1,14 @@
 package com.example.q.pocketmusic.module.home.local.localsong;
 
-import android.content.DialogInterface;
 import android.database.SQLException;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.PopupWindow;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.Img;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
 import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetMenuDialog;
-import com.github.rubensousa.bottomsheetbuilder.adapter.BottomSheetItemClickListener;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -109,31 +100,6 @@ public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.I
         }
     }
 
-    //删除乐谱的dialog
-    private void showDeleteDialog(final int position) {
-        new AlertDialog.Builder(getContext())
-                .setTitle("删除乐谱")
-                .setMessage("是否删除:\n" + adapter.getItem(position).getName())
-                .setIcon(R.drawable.ico_setting_error)
-                .setPositiveButton("是", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        presenter.deleteSong(adapter.getItem(position));
-                        onRefresh();
-                        if (adapter.getCount() == 0) {
-                            recycler.showEmpty();
-                        }
-                    }
-                })
-                .setNegativeButton("否", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .show();
-    }
-
 
     @Override
     public void onRefresh() {
@@ -148,7 +114,11 @@ public class LocalSongFragment extends BaseFragment<LocalSongFragmentPresenter.I
 
     @Override
     public void onSelectedDelete(int position) {
-        showDeleteDialog(position);
+        presenter.deleteSong(adapter.getItem(position));
+        onRefresh();
+        if (adapter.getCount() == 0) {
+            recycler.showEmpty();
+        }
     }
 
     @Override

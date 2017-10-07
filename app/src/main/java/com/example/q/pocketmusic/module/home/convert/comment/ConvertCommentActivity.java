@@ -28,7 +28,6 @@ import butterknife.ButterKnife;
 public class ConvertCommentActivity extends AuthActivity<ConvertCommentActivityPresenter.IView, ConvertCommentActivityPresenter>
         implements ConvertCommentActivityPresenter.IView, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener
         , RecyclerArrayAdapter.OnMoreListener, AskPostHeadView.OnClickIndexListener {
-
     public static final String PARAM_POST = "param_post";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -49,7 +48,7 @@ public class ConvertCommentActivity extends AuthActivity<ConvertCommentActivityP
     public void initUserView() {
         initToolbar(toolbar, "转谱评论");
         adapter = new ConvertCommentAdapter(getCurrentContext());
-        initRecyclerView(recycler, adapter);
+        initRecyclerView(recycler, adapter,1);
         presenter.setPost((ConvertPost) getIntent().getSerializableExtra(PARAM_POST));
         headView = new ConvertPostHeadView(presenter.getPost().getCreatedAt(),
                 "赞一个位置",

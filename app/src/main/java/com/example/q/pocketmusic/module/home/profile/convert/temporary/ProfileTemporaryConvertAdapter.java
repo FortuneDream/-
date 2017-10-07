@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.convert.ConvertSong;
+import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -16,7 +17,7 @@ public class ProfileTemporaryConvertAdapter extends RecyclerArrayAdapter<Convert
     private OnSelectListener onSelectListener;
 
     public interface OnSelectListener {
-        void onSelectMore(int position);
+        void onSelectDelete(int position);
     }
 
     public OnSelectListener getOnSelectListener() {
@@ -38,25 +39,39 @@ public class ProfileTemporaryConvertAdapter extends RecyclerArrayAdapter<Convert
     }
 
     class MyViewHolder extends BaseViewHolder<ConvertSong> {
-        private TextView nameTv;
+        private TextView titleTv;
         private AppCompatImageView moreIv;
 
-        public MyViewHolder(ViewGroup parent) {
+        public MyViewHolder(final ViewGroup parent) {
             super(parent, R.layout.item_convert_adapter);
-            nameTv = $(R.id.name_tv);
+            titleTv = $(R.id.title_tv);
             moreIv = $(R.id.more_iv);
+
         }
 
         @Override
         public void setData(ConvertSong data) {
             super.setData(data);
-            nameTv.setText(data.getName());
+            titleTv.setText(data.getName());
             moreIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onSelectListener != null) {
-                        onSelectListener.onSelectMore(getAdapterPosition());
-                    }
+                    MorePopupWindow popupWindow = new MorePopupWindow(getContext());
+                    popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_delete, "删除转谱"));
+                    popupWindow.setListener(new MorePopupWindow.OnSelectedListener() {
+                        @Override
+                        public void onSelected(int position) {
+                            switch (position) {
+                                case 0:
+                                    if (onSelectListener != null) {
+                                        onSelectListener.onSelectDelete(getAdapterPosition());
+                                    }
+                                    break;
+                            }
+
+                        }
+                    });
+                    popupWindow.show(moreIv);
                 }
             });
         }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.RecordAudio;
+import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -27,7 +28,7 @@ public class LocalRecordFragmentAdapter extends RecyclerArrayAdapter<RecordAudio
 
 
     public interface OnSelectListener {
-        void onSelectMore(int position);
+        void onSelectDelete(int position);
     }
 
     public void setListener(OnSelectListener listener) {
@@ -65,7 +66,20 @@ public class LocalRecordFragmentAdapter extends RecyclerArrayAdapter<RecordAudio
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.onSelectMore(getAdapterPosition());
+                        MorePopupWindow popupWindow=new MorePopupWindow(getContext());
+                        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_delete,"删除录音"));
+                        popupWindow.setListener(new MorePopupWindow.OnSelectedListener() {
+                            @Override
+                            public void onSelected(int position) {
+                                switch (position){
+                                    case 0:
+                                        listener.onSelectDelete(getAdapterPosition());
+                                        break;
+                                }
+
+                            }
+                        });
+                        popupWindow.show(moreIv);
                     }
 
                 }

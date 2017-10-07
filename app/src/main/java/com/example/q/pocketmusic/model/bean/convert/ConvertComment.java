@@ -14,6 +14,15 @@ public class ConvertComment extends BmobObject {
     private MyUser user;//评论的用户，Pointer类型，一对一
     private ConvertPost post;//一个评论属于一个帖子,一对多
     private String content;//谱子
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public ConvertComment() {
     }

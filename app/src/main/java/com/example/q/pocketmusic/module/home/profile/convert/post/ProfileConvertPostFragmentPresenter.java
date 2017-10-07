@@ -11,6 +11,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.convert.comment.ConvertCommentActivity;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
 
@@ -55,6 +56,10 @@ public class ProfileConvertPostFragmentPresenter extends BasePresenter<ProfileCo
         Intent intent = new Intent(fragment.getCurrentContext(), ConvertCommentActivity.class);
         intent.putExtra(ConvertCommentActivity.PARAM_POST, item.getPost());
         fragment.getCurrentContext().startActivity(intent);
+    }
+
+    public void deleteConvertPost(ConvertComment item) {
+        ToastUtil.showToast("目前暂不支持删除~");
     }
 
     interface IView extends IBaseView {

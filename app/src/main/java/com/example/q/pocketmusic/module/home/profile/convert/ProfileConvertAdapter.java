@@ -56,7 +56,7 @@ public class ProfileConvertAdapter extends RecyclerArrayAdapter<String> {
                 @Override
                 public void onClick(View v) {
                     if (onSelectListener != null) {
-                        onSelectListener.onSelectMore(getAdapterPosition());
+                        onSelectListener.onSelectDelete(getAdapterPosition());
                     }
                 }
             });

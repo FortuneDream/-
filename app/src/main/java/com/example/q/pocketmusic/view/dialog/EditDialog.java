@@ -72,6 +72,7 @@ public class EditDialog {
                 if (listener != null) {
                     listener.onSelectedCancel();
                 }
+                dismiss();
             }
         });
 

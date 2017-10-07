@@ -12,9 +12,17 @@ import cn.bmob.v3.BmobObject;
 public class ConvertPost extends BmobObject {
     private MyUser user;//帖子的发布者，一对一
     private String title;//帖子标题
+    private String content;//帖子内容
     private int commentNum;//回复数量
     private int coin;//赏金
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public ConvertPost() {
         this.commentNum = 0;

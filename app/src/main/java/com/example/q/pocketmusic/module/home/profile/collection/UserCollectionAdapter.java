@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
+import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -28,7 +29,7 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
     }
 
     public interface OnSelectListener {
-        void onSelectMore(int position);
+        void onSelectDelete(int position);
 
         void onSelectItem(int position);
     }
@@ -69,7 +70,19 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.onSelectMore(getAdapterPosition());
+                        MorePopupWindow popupWindow=new MorePopupWindow(getContext());
+                        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_delete,"删除曲谱"));
+                        popupWindow.setListener(new MorePopupWindow.OnSelectedListener() {
+                            @Override
+                            public void onSelected(int position) {
+                                switch (position){
+                                    case 0:
+                                        listener.onSelectDelete(getAdapterPosition());
+                                        break;
+                                }
+                            }
+                        });
+                        popupWindow.show(moreIv);
                     }
                 }
             });

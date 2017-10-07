@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.ConvertObject;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.view.dialog.EditDialog;
 
 
 import butterknife.BindView;
@@ -122,22 +124,22 @@ public class ConvertActivity extends AuthActivity<ConvertPresenter.IView, Conver
 
     //弹出发送评论dialog
     private void alertSendCommentDialog() {
-        new AlertDialog.Builder(getCurrentContext())
-                .setTitle("提示")
-                .setMessage("是否发布转谱？")
-                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+        new EditDialog.Builder(getCurrentContext())
+                .setHint("请输入保存曲谱名")
+                .setTitle("保存")
+                .setListener(new EditDialog.Builder.OnSelectedListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        presenter.sendConvertComment();
+                    public void onSelectedOk(String str) {
+                        presenter.sendConvertComment(str);
                     }
-                })
-                .setNegativeButton("否", new DialogInterface.OnClickListener() {
+
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onSelectedCancel() {
+
                     }
-                })
-                .show();
+                }).create().show();
+
+
     }
 
 

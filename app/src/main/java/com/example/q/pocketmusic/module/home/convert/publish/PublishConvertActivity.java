@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.convert.publish;
 
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -46,6 +48,8 @@ public class PublishConvertActivity extends AuthActivity<PublishConvertActivityP
     EasyRecyclerView recycler;
     @BindView(R.id.ok_txt)
     TextView okTxt;
+    @BindView(R.id.content_tet)
+    TextEdit contentTet;
     private SmallPicAdapter adapter;
 
 
@@ -82,12 +86,12 @@ public class PublishConvertActivity extends AuthActivity<PublishConvertActivityP
     }
 
     @Override
-    public void alertCoinDialog(int coin, final String name) {
+    public void alertCoinDialog(int coin, final String title, final String content) {
         new CoinDialogBuilder(getCurrentContext(), coin)
                 .setPositiveButton(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        presenter.uploadConvertPic(name);//上传
+                        presenter.uploadConvertPic(title,content);//上传
                     }
                 })
                 .show();
@@ -106,11 +110,13 @@ public class PublishConvertActivity extends AuthActivity<PublishConvertActivityP
                 presenter.openPicture();
                 break;
             case R.id.ok_txt:
-                String name = titleTet.getInputString();
-                presenter.checkPublishConvert(name);
+                String title = titleTet.getInputString();
+                String content=contentTet.getInputString();
+                presenter.checkPublishConvert(title,content);
                 break;
         }
     }
+
     @Override
     public void onItemClick(int position) {
         presenter.checkPic(adapter.getItem(position));
@@ -120,5 +126,12 @@ public class PublishConvertActivity extends AuthActivity<PublishConvertActivityP
     @Override
     protected PublishConvertActivityPresenter createPresenter() {
         return new PublishConvertActivityPresenter(this);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

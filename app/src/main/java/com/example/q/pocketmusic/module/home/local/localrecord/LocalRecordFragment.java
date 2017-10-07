@@ -3,7 +3,6 @@ package com.example.q.pocketmusic.module.home.local.localrecord;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,9 +14,6 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.RecordAudio;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.util.common.LogUtils;
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetMenuDialog;
-import com.github.rubensousa.bottomsheetbuilder.adapter.BottomSheetItemClickListener;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -79,8 +75,13 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
     }
 
     @Override
-    public void onSelectMore(int position) {
-        alertDeleteDialog(adapter.getItem(position));
+    public void onSelectDelete(int position) {
+        RecordAudio recordAudio=adapter.getItem(position);
+        presenter.deleteRecord(recordAudio);
+        adapter.remove(recordAudio);
+        if (adapter.getCount() == 0) {
+            recycler.showEmpty();
+        }
     }
 
 
@@ -102,28 +103,7 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
         }
     }
 
-    //删除dialog
-    private void alertDeleteDialog(final RecordAudio recordAudio) {
-        BottomSheetMenuDialog dialog = new BottomSheetBuilder(getContext())
-                .setMode(BottomSheetBuilder.MODE_LIST)
-                .setMenu(R.menu.menu_home_local)
-                .setItemClickListener(new BottomSheetItemClickListener() {
-                    @Override
-                    public void onBottomSheetItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.delete://删除
-                                presenter.deleteRecord(recordAudio);
-                                adapter.remove(recordAudio);
-                                if (adapter.getCount() == 0) {
-                                    recycler.showEmpty();
-                                }
-                                break;
-                        }
-                    }
-                })
-                .createDialog();
-        dialog.show();
-    }
+
 
     //刷新
     @Override

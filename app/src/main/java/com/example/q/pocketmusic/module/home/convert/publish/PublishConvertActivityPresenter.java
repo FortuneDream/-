@@ -68,9 +68,9 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
     }
 
 
-    public void checkPublishConvert(String name) {
-        if (TextUtils.isEmpty(name)) {
-            ToastUtil.showToast("标题不能为空");
+    public void checkPublishConvert(String title, String content) {
+        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(content)) {
+            ToastUtil.showToast("标题或描述不能为空");
             return;
         } else if (imgUrls.size() <= 0) {
             ToastUtil.showToast("请添加图片");
@@ -80,7 +80,7 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
             ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
             return;
         }
-        activity.alertCoinDialog(coin, name);
+        activity.alertCoinDialog(coin, title, content);
 
     }
 
@@ -116,7 +116,7 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
     }
 
     //上传图片
-    public void uploadConvertPic(final String name) {
+    public void uploadConvertPic(final String title, final String content) {
 //        LogUtils.e(TAG, String.valueOf(imgUrls.size()));
         activity.showLoading(true);
         BmobFile.uploadBatch(imgUrls.toArray(new String[imgUrls.size()]), new UploadBatchListener() {
@@ -124,7 +124,7 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
             public void onSuccess(List<BmobFile> list, List<String> list1) {
                 //文件成功之后再添加数据
                 if (imgUrls.size() == list1.size()) {
-                    addConvertPostPic(name, list1);
+                    addConvertPostPic(title, content, list1);
                 }
             }
 
@@ -142,12 +142,13 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
     }
 
     //
-    private void addConvertPostPic(String name, final List<String> list1) {
+    private void addConvertPostPic(String title, String content, final List<String> list1) {
         final ConvertPost convertPost = new ConvertPost();
         convertPost.setUser(UserUtil.user);
-        convertPost.setTitle(name);
+        convertPost.setTitle(title);
         convertPost.setCoin(coin);
         convertPost.setCommentNum(0);
+        convertPost.setContent(content);
         convertPost.save(new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {
@@ -161,11 +162,10 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
                 new BmobBatch().insertBatch(convertPostPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
                     @Override
                     public void onSuccess(List<BatchResult> list) {
-                        UserUtil.user.increment(BmobConstant.BMOB_COIN, -coin);//原子操作
-                        UserUtil.user.update(new ToastUpdateListener(activity) {
+                        UserUtil.increment(-coin, new ToastUpdateListener() {
                             @Override
                             public void onSuccess() {
-                                ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_UPLOAD));
+                                ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + (coin));
                                 activity.showLoading(false);
                                 activity.returnActivity();
                             }
@@ -183,6 +183,6 @@ public class PublishConvertActivityPresenter extends BasePresenter<PublishConver
 
         void changeCoin(int coin);
 
-        void alertCoinDialog(int coin, String name);
+        void alertCoinDialog(int coin, String title, String content);
     }
 }

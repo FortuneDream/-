@@ -66,8 +66,8 @@ public class ProfileTemporaryConvertFragment extends BaseFragment<ProfileTempora
     }
 
     @Override
-    public void onSelectMore(int position) {
-
+    public void onSelectDelete(int position) {
+        presenter.deleteConvertSong(adapter.getItem(position));
     }
 
 

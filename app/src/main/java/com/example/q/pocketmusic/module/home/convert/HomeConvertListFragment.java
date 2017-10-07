@@ -2,15 +2,13 @@ package com.example.q.pocketmusic.module.home.convert;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.convert.publish.PublishConvertActivity;
@@ -20,15 +18,13 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
 public class HomeConvertListFragment extends BaseFragment<HomeConvertListFragmentPresenter.IView, HomeConvertListFragmentPresenter>
-        implements HomeConvertListFragmentPresenter.IView, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener
+        implements HomeConvertListFragmentPresenter.IView, SwipeRefreshLayout.OnRefreshListener
         , RecyclerArrayAdapter.OnMoreListener {
-
     @BindView(R.id.publish_convert_iv)
     ImageView publishConvertIv;
     @BindView(R.id.title_bar)
@@ -49,23 +45,22 @@ public class HomeConvertListFragment extends BaseFragment<HomeConvertListFragmen
     public void initView() {
         adapter = new HomeConvertListAdapter(getCurrentContext());
         initRecyclerView(convertListRecycler, adapter, 1);
-        adapter.setOnItemClickListener(this);
+
+        adapter.setOnClickItemHeadListener(new AbsOnClickItemHeadListener() {
+            @Override
+            public void onClickItem(int position) {
+                presenter.enterConvertComment(adapter.getItem(position));
+            }
+        });
         convertListRecycler.setRefreshListener(this);
-        adapter.setMore(R.layout.item_home_convert_list, this);
+        adapter.setMore(R.layout.view_more, this);
         presenter.setPage(0);
         presenter.getConvertPostList(true);
-
     }
 
     @Override
     protected HomeConvertListFragmentPresenter createPresenter() {
         return new HomeConvertListFragmentPresenter(this);
-    }
-
-
-    @Override
-    public void onItemClick(int position) {
-        presenter.enterConvertComment(adapter.getItem(position));
     }
 
     @Override

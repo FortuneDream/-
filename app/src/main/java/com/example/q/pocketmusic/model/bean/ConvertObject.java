@@ -1,7 +1,5 @@
 package com.example.q.pocketmusic.model.bean;
 
-import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,22 +8,22 @@ import java.util.List;
  */
 
 public class ConvertObject implements Serializable {
-    private String name;//求谱名字
+    private String title;//求谱名字
     private List<String> ivUrl;//曲谱集合
     private int loadingWay;//本地，网络
 
-    public ConvertObject(String name, List<String> ivUrl, int loadingWay) {
-        this.name = name;
+    public ConvertObject(String title, List<String> ivUrl, int loadingWay) {
+        this.title = title;
         this.ivUrl = ivUrl;
         this.loadingWay = loadingWay;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<String> getIvUrl() {
