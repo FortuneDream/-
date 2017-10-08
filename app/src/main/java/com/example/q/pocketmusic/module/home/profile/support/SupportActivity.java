@@ -1,21 +1,17 @@
 package com.example.q.pocketmusic.module.home.profile.support;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.MoneySupport;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -31,14 +27,12 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
     Toolbar toolbar;
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
-    @BindView(R.id.recycler)
-    EasyRecyclerView recycler;
-    @BindView(R.id.support_me_tv)
-    TextView supportMeTv;
-    @BindView(R.id.content_ll)
-    LinearLayout contentLl;
     @BindView(R.id.copy_alipay_tv)
     TextView copyAlipayTv;
+    @BindView(R.id.recycler)
+    EasyRecyclerView recycler;
+    @BindView(R.id.content_ll)
+    LinearLayout contentLl;
     private MoneyAdapter mMoneyAdapter;
     private boolean isAlipayPay = true;
     private AlertDialog mPayDialog;
@@ -73,43 +67,42 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
     }
 
 
-
-    private void alertSupportMeDialog() {
-        View view = View.inflate(getCurrentContext(), R.layout.dialog_support_me, null);
-        RadioGroup payWayRg = (RadioGroup) view.findViewById(R.id.pay_way_rg);
-        final TextEdit moneyTet = (TextEdit) view.findViewById(R.id.money_tet);
-        final TextEdit contentTet = (TextEdit) view.findViewById(R.id.content_tet);
-        TextView okTv = (TextView) view.findViewById(R.id.ok_tv);
-        moneyTet.setInputString(String.valueOf(3));
-        RadioButton weixinRb = (RadioButton) view.findViewById(R.id.weixin_rb);
-        RadioButton alipayRb = (RadioButton) view.findViewById(R.id.alipay_rb);
-        isAlipayPay = true;
-        alipayRb.setChecked(true);
-        contentTet.setInputString("支持口袋乐谱");
-        payWayRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                int checkButtonId = group.getCheckedRadioButtonId();
-                if (checkButtonId == R.id.alipay_rb) {
-                    isAlipayPay = true;
-                } else {
-                    isAlipayPay = false;
-                }
-            }
-        });
-
-        okTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.pay(isAlipayPay, moneyTet.getInputString(), contentTet.getInputString());
-                mPayDialog.dismiss();
-            }
-        });
-
-        mPayDialog = new AlertDialog.Builder(this)
-                .setView(view)
-                .show();
-    }
+//    private void alertSupportMeDialog() {
+//        View view = View.inflate(getCurrentContext(), R.layout.dialog_support_me, null);
+//        RadioGroup payWayRg = (RadioGroup) view.findViewById(R.id.pay_way_rg);
+//        final TextEdit moneyTet = (TextEdit) view.findViewById(R.id.money_tet);
+//        final TextEdit contentTet = (TextEdit) view.findViewById(R.id.content_tet);
+//        TextView okTv = (TextView) view.findViewById(R.id.ok_tv);
+//        moneyTet.setInputString(String.valueOf(3));
+//        RadioButton weixinRb = (RadioButton) view.findViewById(R.id.weixin_rb);
+//        RadioButton alipayRb = (RadioButton) view.findViewById(R.id.alipay_rb);
+//        isAlipayPay = true;
+//        alipayRb.setChecked(true);
+//        contentTet.setInputString("支持口袋乐谱");
+//        payWayRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+//                int checkButtonId = group.getCheckedRadioButtonId();
+//                if (checkButtonId == R.id.alipay_rb) {
+//                    isAlipayPay = true;
+//                } else {
+//                    isAlipayPay = false;
+//                }
+//            }
+//        });
+//
+//        okTv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                presenter.pay(isAlipayPay, moneyTet.getInputString(), contentTet.getInputString());
+//                mPayDialog.dismiss();
+//            }
+//        });
+//
+//        mPayDialog = new AlertDialog.Builder(this)
+//                .setView(view)
+//                .show();
+//    }
 
 
     @Override
@@ -128,16 +121,19 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
     }
 
 
-
-    @OnClick({R.id.copy_alipay_tv, R.id.support_me_tv})
+    @OnClick({R.id.copy_alipay_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.copy_alipay_tv:
                 presenter.copyAlipay();
                 break;
-            case R.id.support_me_tv:
-                alertSupportMeDialog();
-                break;
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

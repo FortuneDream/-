@@ -12,9 +12,9 @@ public class AskSongPost extends BmobObject {
     private MyUser user;//帖子的发布者，一对一
     private String title;//帖子标题
     private String content;//帖子内容
-    private Integer commentNum;//回复数量
-    private Integer instrument;//乐器类型
-    private Integer index;//先按照指数，再创建时间逆序
+    private int commentNum;//回复数量
+    private int instrument;//乐器类型
+    private int index;//先按照指数，再创建时间逆序
 
 
     public AskSongPost() {
@@ -28,13 +28,13 @@ public class AskSongPost extends BmobObject {
         this.instrument = instrument;
     }
 
-    public AskSongPost(MyUser user, String title, int typeId, String content) {
+    public AskSongPost(MyUser user, String title, int instrument, String content) {
         this.user = user;
         this.title = title;
         this.content = content;
         this.commentNum = 0;
         this.index = 0;
-        this.instrument = typeId;
+        this.instrument = instrument;
     }
 
     public int getIndex() {

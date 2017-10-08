@@ -62,17 +62,18 @@
         <TextView
             android:id="@+id/convert_comment_user_date_tv"
             style="@style/ThreeTextThird"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
+            android:layout_weight="1"
             android:maxLines="1"
             tools:text="日期" />
 
         <TextView
             android:id="@+id/check_part_convert_song_tv"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
+
             android:gravity="right"
             android:text="查看部分曲谱>>"
             android:textColor="@color/confetti_red" />

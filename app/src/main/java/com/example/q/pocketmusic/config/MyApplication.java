@@ -9,7 +9,6 @@ import com.example.q.pocketmusic.util.InstrumentFlagUtil;
 import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
-import c.b.BP;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.statistics.AppStat;
 import cn.finalteam.galleryfinal.CoreConfig;
@@ -31,7 +30,6 @@ public class MyApplication extends Application {
         SharedPrefsUtil.init(getApplicationContext());
         Bmob.initialize(this, Constant.APP_ID, "Bmob");
         //官网SDK
-        BP.init(Constant.APP_ID);
         AppStat.i(Constant.APP_ID, "Bmob");
         //发布时，开启异常捕获器
         CrashHandler crashHandler = CrashHandler.getInstance();

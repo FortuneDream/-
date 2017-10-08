@@ -137,7 +137,7 @@ public class ConvertCommentActivityPresenter extends BasePresenter<ConvertCommen
                                         Gift gift = new Gift();
                                         gift.setGet(false);
                                         gift.setContent("有小伙伴看了你的转谱");//发礼物
-                                        gift.setCoin(post.getCoin());
+                                        gift.setCoin(post.getCoin() / 3);//三分之一
                                         gift.setUser(post.getUser());
                                         gift.save(new ToastSaveListener<String>() {
                                             @Override

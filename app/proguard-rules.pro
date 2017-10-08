@@ -26,12 +26,12 @@
 
 #---------------------------------2.第三方包-------------------------------
 
-# 移动支付
--keepclasseswithmembers class c.b.** { *; }
--keep interface c.b.PListener{ *; }
--keep interface c.b.QListener{ *; }
-
-
+## 移动支付
+#-keepclasseswithmembers class c.b.** { *; }
+#-keep interface c.b.PListener{ *; }
+#-keep interface c.b.QListener{ *; }
+#
+#
 -ignorewarnings
 
 -keepattributes Signature,*Annotation*
