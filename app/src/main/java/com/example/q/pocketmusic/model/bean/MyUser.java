@@ -19,8 +19,17 @@ public class MyUser extends BmobUser {
     private Integer contribution;//贡献值
     private BmobRelation collections;//某个用户收藏的所有曲谱
     private BmobRelation converts;
+    private BmobRelation interests;//关注
     private String versionFlag;
 
+
+    public BmobRelation getInterests() {
+        return interests;
+    }
+
+    public void setInterests(BmobRelation interests) {
+        this.interests = interests;
+    }
 
     public BmobRelation getConverts() {
         return converts;

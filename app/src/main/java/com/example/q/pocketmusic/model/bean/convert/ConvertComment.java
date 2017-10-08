@@ -15,6 +15,15 @@ public class ConvertComment extends BmobObject {
     private ConvertPost post;//一个评论属于一个帖子,一对多
     private String content;//谱子
     private String title;
+    private int checkNum;//查看此乐谱的用户的数量;
+
+    public int getCheckNum() {
+        return checkNum;
+    }
+
+    public void setCheckNum(int checkNum) {
+        this.checkNum = checkNum;
+    }
 
     public String getTitle() {
         return title;
@@ -25,6 +34,7 @@ public class ConvertComment extends BmobObject {
     }
 
     public ConvertComment() {
+        this.checkNum = 0;
     }
 
     public MyUser getUser() {

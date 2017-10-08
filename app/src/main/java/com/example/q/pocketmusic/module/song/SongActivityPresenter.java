@@ -15,6 +15,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.bottom.SongMenuFragment;
 import com.example.q.pocketmusic.module.song.bottom.SongRecordFragment;
 import com.example.q.pocketmusic.module.song.state.SongController;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
         this.intent = intent;
         controller = SongController.getInstance(intent, activity);
         if (controller == null) {
-            ToastUtil.showToast( "无法进入页面");
+            ToastUtil.showToast("无法进入页面");
             activity.finish();
         }
     }

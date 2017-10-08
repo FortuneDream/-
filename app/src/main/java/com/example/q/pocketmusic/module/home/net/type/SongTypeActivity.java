@@ -72,14 +72,14 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     @OnClick(R.id.study_fab)
     public void onViewClicked() {
         //弹出popwindow
-        MorePopupWindow popupWindow=new MorePopupWindow(getCurrentContext());
-        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_study,"学习"));
-        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_ask,"求谱"));
-        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_share,"分享"));
+        MorePopupWindow popupWindow = new MorePopupWindow(getCurrentContext());
+        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_study, "学习"));
+        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_ask, "求谱"));
+        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_share, "分享"));
         popupWindow.setListener(new MorePopupWindow.OnSelectedListener() {
             @Override
             public void onSelected(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
                         presenter.enterStudyActivity(typeId);
                         break;
@@ -114,10 +114,11 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
                 , strings);
 
         new AlertDialog.Builder(getCurrentContext())
+                .setTitle("本地乐谱")
                 .setAdapter(adapter, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        presenter.enterShareActivity(localSongs.get(which));
+                        presenter.enterShareActivity(localSongs.get(which), typeId);
                     }
                 })
                 .show();

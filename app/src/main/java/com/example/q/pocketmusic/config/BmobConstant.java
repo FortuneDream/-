@@ -15,4 +15,5 @@ public class BmobConstant {
     public static final String BMOB_DOWNLOAD_NUM = "downloadNum";
     public static final String BMOB_INSTRUMENT = "instrument";
     public static final String BMOB_CONVERTS = "converts";
+    public static final String BMOB_COMMENT_NUM="commentNum";
 }

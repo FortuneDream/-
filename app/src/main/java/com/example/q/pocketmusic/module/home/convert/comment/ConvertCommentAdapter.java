@@ -43,6 +43,7 @@ public class ConvertCommentAdapter extends RecyclerArrayAdapter<ConvertComment> 
         TextView convertCommentUserTitleTv;
         TextView convertCommentUserDateTv;
         TextView checkPartConvertSongTv;
+        TextView checkNumberTv;
         LinearLayout contentLl;
 
         public MyViewHolder(ViewGroup parent) {
@@ -52,24 +53,19 @@ public class ConvertCommentAdapter extends RecyclerArrayAdapter<ConvertComment> 
             convertCommentUserTitleTv = $(R.id.convert_comment_user_title_tv);
             convertCommentUserDateTv = $(R.id.convert_comment_user_date_tv);
             checkPartConvertSongTv = $(R.id.check_part_convert_song_tv);
+            checkNumberTv = $(R.id.check_number_tv);
             contentLl = $(R.id.content_ll);
-            contentLl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (absOnClickItemHeadListener != null) {
-                        absOnClickItemHeadListener.onClickItem(getAdapterPosition() - 1);
-                    }
-                }
-            });
         }
 
         @Override
         public void setData(final ConvertComment data) {
             super.setData(data);
+            checkPartConvertSongTv.setVisibility(View.VISIBLE);
             displayStrategy.displayCircle(getContext(), data.getUser().getHeadImg(), convertCommentUserHeadIv);
             convertCommentUserNameTv.setText(data.getUser().getNickName());
             convertCommentUserDateTv.setText(data.getCreatedAt());
             convertCommentUserTitleTv.setText(data.getTitle());
+            checkNumberTv.setText("购买数：" + data.getCheckNum());
             convertCommentUserHeadIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,7 +74,14 @@ public class ConvertCommentAdapter extends RecyclerArrayAdapter<ConvertComment> 
                     }
                 }
             });
-
+            contentLl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (absOnClickItemHeadListener != null) {
+                        absOnClickItemHeadListener.onClickItem(getAdapterPosition() - 1);
+                    }
+                }
+            });
         }
     }
 }

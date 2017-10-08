@@ -14,6 +14,7 @@ import com.example.q.pocketmusic.module.common.AuthActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class OtherProfileActivity extends AuthActivity<OtherProfilePresenter.IView, OtherProfilePresenter>
         implements OtherProfilePresenter.IView {
@@ -27,6 +28,8 @@ public class OtherProfileActivity extends AuthActivity<OtherProfilePresenter.IVi
     TextView userSignatureTv;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.interest_tv)
+    TextView interestTv;
     private OtherAdapter adapter;
     public MyUser otherUser;
     public final static String PARAM_USER = "other_user";
@@ -53,10 +56,9 @@ public class OtherProfileActivity extends AuthActivity<OtherProfilePresenter.IVi
         new DisplayStrategy().displayCircle(getCurrentContext(), otherUser.getHeadImg(), headIv);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+
+    @OnClick(R.id.interest_tv)
+    public void onViewClicked() {
+        presenter.interestOther(otherUser);
     }
 }

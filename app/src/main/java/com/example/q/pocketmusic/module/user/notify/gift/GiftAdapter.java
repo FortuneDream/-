@@ -29,14 +29,13 @@ public class GiftAdapter extends RecyclerArrayAdapter<Gift> {
     class MyViewHolder extends BaseViewHolder<Gift> {
         TextView contentTv;
         TextView coinTv;
-        TextView isGetTv;
         TextView dateTv;
 
         public MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_gift);
             contentTv = $(R.id.content_tv);
             coinTv = $(R.id.coin_tv);
-            isGetTv = $(R.id.is_get_tv);
+
             dateTv = $(R.id.date_tv);
         }
 
@@ -45,13 +44,7 @@ public class GiftAdapter extends RecyclerArrayAdapter<Gift> {
             super.setData(data);
             contentTv.setText(data.getContent());
             coinTv.setText(data.getCoin() + "枚");
-            if (data.isGet()) {
-                isGetTv.setVisibility(View.GONE);
-                isGetTv.setText("已经获取");
-            } else {
-                isGetTv.setVisibility(View.VISIBLE);
-                isGetTv.setText("点击获取");
-            }
+
             dateTv.setText(data.getCreatedAt());
         }
     }

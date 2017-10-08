@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.home.net.type.community.publish;
+package com.example.q.pocketmusic.module.home.net.type.community.ask.publish;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.util.UserUtil;
@@ -56,7 +55,7 @@ public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView,
     public void initUserView() {
         initToolbar(toolbar, "发布求谱信息");
         presenter.setIndex(0);
-        presenter.setTypeId(getIntent().getIntExtra(PARAM_TYPE_ID,0));
+        presenter.setTypeId(getIntent().getIntExtra(PARAM_TYPE_ID, 0));
     }
 
 
@@ -114,4 +113,10 @@ public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView,
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

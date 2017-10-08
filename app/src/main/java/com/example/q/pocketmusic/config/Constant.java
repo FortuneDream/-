@@ -68,15 +68,14 @@ public class Constant {
     public final static int ADD_CONTRIBUTION_INIT = 15;//初始
     public final static int ADD_CONTRIBUTION_UPLOAD = 3;//上传
     public final static int ADD_CONTRIBUTION_COMMENT_WITH_PIC = 3;//评论加图
-    public final static int ADD_CONTRIBUTION_AGREE = 1;//点赞，赞数比较多时，给予额外加成
     public final static int ADD_CONTRIBUTION_AGREE_OTHER = 2;//被点赞的额外加成
 
     //贡献度-
     public final static int REDUCE_BASE_CONVERT = 30;//转谱基础
-    public final static int REDUCE_CONTRIBUTION_ASK = 4;//求谱
+    public final static int REDUCE_ASK = 4;//求谱
     public final static int REDUCE_DOWNLOAD = 3;//下载
-    public final static int REDUCE_CONTRIBUTION_COLLECTION = 2;//收藏
-    public final static int REDUCE_CHANG_NICK_NAME = 10;
+    public final static int REDUCE_COLLECTION = 2;//收藏
+    public final static int REDUCE_CHANG_NICK_NAME = 10;//修改昵称
     public final static int REDUCE_PUNISH = 10;//惩罚
 
 

@@ -3,18 +3,22 @@ package com.example.q.pocketmusic.module.home.convert.comment;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.ConvertObject;
 import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.model.bean.bmob.Gift;
 import com.example.q.pocketmusic.model.bean.convert.ConvertComment;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPostPic;
 import com.example.q.pocketmusic.model.bean.convert.ConvertSong;
+import com.example.q.pocketmusic.model.flag.Text;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -93,41 +97,64 @@ public class ConvertCommentActivityPresenter extends BasePresenter<ConvertCommen
 
     //发送
     public void sendConvertComment(final String title, final String content) {
-        if (post == null || content == null) {
+        if (post == null) {
             return;
         }
-
-        final ConvertComment convertComment = new ConvertComment();
-        convertComment.setPost(post);
-        convertComment.setTitle(title);
-        convertComment.setUser(UserUtil.user);
-        convertComment.setContent(content);
-        convertComment.save(new ToastSaveListener<String>() {
+        if (TextUtils.isEmpty(title)) {
+            ToastUtil.showToast("请输入标题");
+            return;
+        }
+        if (content == null) {
+            ToastUtil.showToast("你还没有编写转谱哦~");
+            return;
+        }
+        activity.showLoading(true);
+        post.increment(BmobConstant.BMOB_COMMENT_NUM, 1);//增加回复量
+        post.update(new ToastUpdateListener(activity) {
             @Override
-            public void onSuccess(String s) {
-                BmobRelation relation = new BmobRelation();
-                relation.add(convertComment);
-                UserUtil.user.setConverts(relation);
-                UserUtil.user.update(new UpdateListener() {
+            public void onSuccess() {
+                final ConvertComment convertComment = new ConvertComment();//保存评论
+                convertComment.setPost(post);
+                convertComment.setTitle(title);
+                convertComment.setUser(UserUtil.user);
+                convertComment.setContent(content);
+                convertComment.save(new ToastSaveListener<String>(activity) {
                     @Override
-                    public void done(BmobException e) {
-                        ConvertSong convertSong = new ConvertSong();
-                        convertSong.setContent(content);
-                        convertSong.setName(title);
-                        convertSong.setUser(UserUtil.user);
-                        convertSong.save(new ToastSaveListener<String>() {
+                    public void onSuccess(String s) {
+                        BmobRelation relation = new BmobRelation();
+                        relation.add(convertComment);
+                        UserUtil.user.setConverts(relation);//加入我的转谱
+                        UserUtil.user.update(new ToastUpdateListener(activity) {
                             @Override
-                            public void onSuccess(String s) {
-                                ToastUtil.showToast("发表成功");
-                                activity.onRefresh();
+                            public void onSuccess() {
+                                ConvertSong convertSong = new ConvertSong();
+                                convertSong.setContent(content);
+                                convertSong.setName(title);
+                                convertSong.setUser(UserUtil.user);//我的临时转谱
+                                convertSong.save(new ToastSaveListener<String>(activity) {
+                                    @Override
+                                    public void onSuccess(String s) {
+                                        Gift gift = new Gift();
+                                        gift.setGet(false);
+                                        gift.setContent("有小伙伴看了你的转谱");//发礼物
+                                        gift.setCoin(post.getCoin());
+                                        gift.setUser(post.getUser());
+                                        gift.save(new ToastSaveListener<String>() {
+                                            @Override
+                                            public void onSuccess(String s) {
+                                                ToastUtil.showToast("发表成功");
+                                                activity.showLoading(false);
+                                                activity.sendCommentResult();
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         });
                     }
                 });
-
             }
         });
-
     }
 
     public void getConvertObject() {
@@ -181,14 +208,20 @@ public class ConvertCommentActivityPresenter extends BasePresenter<ConvertCommen
         BmobRelation relation1 = new BmobRelation();
         relation1.add(item);
         UserUtil.user.setConverts(relation1);
-        UserUtil.user.update(new ToastUpdateListener() {
+        UserUtil.user.update(new ToastUpdateListener(activity) {
             @Override
             public void onSuccess() {
-                UserUtil.increment(-coin, new ToastUpdateListener(activity) {
+                item.increment("checkNum", 1);//查看数+1
+                item.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {
-                        activity.showLoading(false);
-                        activity.alertCompleteConvertSongDialog(item);
+                        UserUtil.increment(-coin, new ToastUpdateListener(activity) {
+                            @Override
+                            public void onSuccess() {
+                                activity.showLoading(false);
+                                activity.alertCompleteConvertSongDialog(item);
+                            }
+                        });
                     }
                 });
             }
@@ -214,8 +247,8 @@ public class ConvertCommentActivityPresenter extends BasePresenter<ConvertCommen
 
         void alertCoinDialog(ConvertComment item, int coin);
 
-        void onRefresh();
-
         void showListDialog(List<ConvertSong> list);
+
+        void sendCommentResult();
     }
 }

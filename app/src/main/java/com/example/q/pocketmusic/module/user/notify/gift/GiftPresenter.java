@@ -4,6 +4,7 @@ import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
+import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.bmob.Gift;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -11,7 +12,14 @@ import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.BmobBatch;
+import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BatchResult;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListListener;
 
 /**
  * Created by 81256 on 2017/9/6.
@@ -56,28 +64,41 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
         });
     }
 
-
-    public void addCoin(final Gift gift) {
-        gift.setGet(true);
-        gift.update(new ToastUpdateListener() {
+    //收礼物，批量更新
+    public void receivedAllCoin(List<Gift> allData) {
+        activity.showLoading(true);
+        int sum = 0;
+        List<BmobObject> gifts = new ArrayList<>();
+        for (Gift gift : allData) {
+            sum += gift.getCoin();
+            gift.setGet(true);
+            gifts.add(gift);
+        }
+        final int finalSum = sum;
+        final int finalSum1 = sum;
+        new BmobBatch().updateBatch(gifts).doBatch(new QueryListListener<BatchResult>() {
             @Override
-            public void onSuccess() {
-                LogUtils.i(TAG,"gift.getCoin:"+gift.getCoin());
-                UserUtil.user.increment(BmobConstant.BMOB_COIN, gift.getCoin());
-                UserUtil.user.update(new ToastUpdateListener() {
-                    @Override
-                    public void onSuccess() {
-                        LogUtils.e(TAG,"user.getContribution:"+UserUtil.user.getContribution());
-                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + gift.getCoin());
-                    }
-                });
+            public void done(List<BatchResult> list, BmobException e) {
+                activity.showLoading(false);
+                if (e == null) {
+                    UserUtil.increment(finalSum1, new ToastUpdateListener() {
+                        @Override
+                        public void onSuccess() {
+                            ToastUtil.showToast(CommonString.ADD_COIN_BASE + finalSum);
+                            activity.onRefresh();
+                        }
+                    });
+                }
             }
         });
+
     }
 
 
     public interface IView extends IBaseView {
 
         void setGiftList(List<Gift> list, boolean isRefreshing);
+
+        void onRefresh();
     }
 }

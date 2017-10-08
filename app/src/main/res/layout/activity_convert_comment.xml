@@ -36,9 +36,8 @@
             android:id="@+id/state_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:text="未添加" />
+            android:text="无" />
 
         <EditText
             android:id="@+id/user_input_edt"

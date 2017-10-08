@@ -60,7 +60,7 @@
         <service android:name=".service.music.MediaPlayerService" />
 
         <activity
-            android:name=".module.share.ShareActivity"
+            android:name=".module.home.net.type.community.share.publish.ShareActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
@@ -68,7 +68,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".module.user.login.LoginActivity" />
         <activity android:name=".module.user.register.RegisterActivity" />
-        <activity android:name=".module.home.net.type.community.publish.PublishAskActivity" />
+        <activity android:name=".module.home.net.type.community.ask.publish.PublishAskActivity" />
         <activity
             android:name=".module.home.net.type.community.ask.comment.AskSongCommentActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />

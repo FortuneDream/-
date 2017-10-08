@@ -12,10 +12,10 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.type.community.CommunityFragment;
-import com.example.q.pocketmusic.module.home.net.type.community.publish.PublishAskActivity;
+import com.example.q.pocketmusic.module.home.net.type.community.ask.publish.PublishAskActivity;
 import com.example.q.pocketmusic.module.home.net.type.hot.HotListFragment;
 import com.example.q.pocketmusic.module.home.net.type.study.StudyActivity;
-import com.example.q.pocketmusic.module.share.ShareActivity;
+import com.example.q.pocketmusic.module.home.net.type.community.share.publish.ShareActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,9 +129,10 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
     }
 
     //进入分享
-    public void enterShareActivity(LocalSong localSong) {
+    public void enterShareActivity(LocalSong localSong,int typeId) {
         Intent intent = new Intent(activity.getCurrentContext(), ShareActivity.class);
-        intent.putExtra(ShareActivity.LOCAL_SONG, localSong);
+        intent.putExtra(ShareActivity.PARAM_LOCAL_SONG, localSong);
+        intent.putExtra(ShareActivity.PARAM_TYPE_ID,typeId);
         activity.getCurrentContext().startActivity(intent);
     }
 

@@ -12,7 +12,7 @@ import com.example.q.pocketmusic.model.net.LoadLocalSongList;
 import com.example.q.pocketmusic.model.net.SynchronizeLocalSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.share.ShareActivity;
+import com.example.q.pocketmusic.module.home.net.type.community.share.publish.ShareActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.SortUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
@@ -56,7 +56,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
 
     //删除乐谱要删除数据库和list.position,还有本地的文件！
     public void deleteSong(LocalSong localSong) {
-        localSongDao.deleteLocalRelation(fragment.getCurrentContext(),localSong);
+        localSongDao.deleteLocalRelation(fragment.getCurrentContext(), localSong);
     }
 
     //同步乐谱
@@ -74,7 +74,8 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
 
     public void enterShareActivity(LocalSong localSong) {
         Intent intent = new Intent(fragment.getCurrentContext(), ShareActivity.class);
-        intent.putExtra(ShareActivity.LOCAL_SONG, localSong);
+        intent.putExtra(ShareActivity.PARAM_LOCAL_SONG, localSong);
+        intent.putExtra(ShareActivity.PARAM_TYPE_ID, 0);
         fragment.getCurrentContext().startActivity(intent);
     }
 
@@ -84,8 +85,8 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
         song.setName(localSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_LOCAL, Constant.SHOW_NO_MENU, Constant.LOCAL);
         intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE,songObject);
-        intent.putExtra(SongActivity.LOCAL_SONG,localSong);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+        intent.putExtra(SongActivity.LOCAL_SONG, localSong);
         fragment.getCurrentContext().startActivity(intent);
     }
 
@@ -95,7 +96,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
         item.setSort(top_value);
         SharedPrefsUtil.putInt(SortUtil.sort_key, top_value);//修改最高值
         localSongDao.update(item);
-        ToastUtil.showToast( "已置顶");
+        ToastUtil.showToast("已置顶");
         fragment.onRefresh();
     }
 

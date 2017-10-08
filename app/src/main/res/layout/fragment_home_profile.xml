@@ -75,7 +75,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/contribution_item"
+                android:id="@+id/interest_item"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -87,12 +87,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_vec_profile_coin" />
+                    app:srcCompat="@drawable/ic_vec_profile_interest" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="硬币" />
+                    android:text="关注" />
             </LinearLayout>
 
             <LinearLayout
@@ -185,6 +185,24 @@
         <View style="@style/SettingBigDivider" />
 
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+            android:id="@+id/coin_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemTitleIco="@drawable/ic_vec_profile_coin"
+            app:itemTitleText="我的硬币" />
+
+        <View style="@style/SettingDivider" />
+
+        <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+            android:id="@+id/gift_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemTitleIco="@drawable/ic_vec_gift"
+            app:itemTitleText="礼包中心" />
+
+        <View style="@style/SettingDivider" />
+
+        <com.example.q.pocketmusic.view.widget.view.IcoTextItem
             android:id="@+id/support_me_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -208,6 +226,7 @@
             android:layout_height="wrap_content"
             app:itemTitleIco="@drawable/ic_vec_setting_share"
             app:itemTitleText="分享小口袋" />
+
 
         <View style="@style/SettingBigDivider" />
 

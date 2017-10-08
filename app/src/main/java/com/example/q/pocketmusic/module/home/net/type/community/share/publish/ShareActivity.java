@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.share;
+package com.example.q.pocketmusic.module.home.net.type.community.share.publish;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,8 +22,12 @@ import butterknife.OnClick;
 //分享具体曲谱
 public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePresenter>
         implements SharePresenter.IView, RecyclerArrayAdapter.OnItemClickListener {
-
-    public static final String LOCAL_SONG = "LOCAL_SONG";
+    public static final String PARAM_LOCAL_SONG = "param_1";
+    public static final String PARAM_TYPE_ID="param_2";
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.app_bar)
+    AppBarLayout appBar;
     @BindView(R.id.name_tet)
     TextEdit nameTet;
     @BindView(R.id.content_tet)
@@ -38,10 +42,7 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePrese
     TextView uploadTxt;
     @BindView(R.id.activity_upload)
     LinearLayout activityUpload;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.app_bar)
-    AppBarLayout appBar;
+
     private SmallPicAdapter adapter;
 
     @Override
@@ -55,7 +56,9 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePrese
         adapter = new SmallPicAdapter(this);
         adapter.setOnItemClickListener(this);
         initToolbar(toolbar, "上传曲谱");
-        LocalSong localSong = (LocalSong) getIntent().getSerializableExtra(LOCAL_SONG);
+        LocalSong localSong = (LocalSong) getIntent().getSerializableExtra(PARAM_LOCAL_SONG);
+        int typeId=getIntent().getIntExtra(PARAM_TYPE_ID,0);
+        presenter.setTypeId(typeId);
         presenter.getPicAndName(localSong);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recycler.setAdapter(adapter);
@@ -100,4 +103,5 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePrese
     protected SharePresenter createPresenter() {
         return new SharePresenter(this);
     }
+
 }

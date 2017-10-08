@@ -21,7 +21,6 @@
             tools:text="您有一个礼包" />
 
         <ImageView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vec_profile_coin" />
@@ -34,19 +33,11 @@
             android:layout_marginLeft="8dp"
             tools:text="1枚" />
 
-        <TextView
-            android:id="@+id/is_get_tv"
-            style="@style/ThreeTextSecond"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/shape_text_press"
-            android:gravity="center"
-            android:text="点击获取" />
     </LinearLayout>
 
 
     <TextView
+        tools:text="2014 1 1"
         android:id="@+id/date_tv"
         style="@style/ThreeTextThird"
         android:layout_width="wrap_content"

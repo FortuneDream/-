@@ -49,7 +49,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     public final static String PARAM_SONG_OBJECT_SERIALIZABLE = "PARAM_SONG_OBJECT_SERIALIZABLE";//Serializeable
 
-    public final static String LOCAL_SONG = "LOCAL_SONG";//可选的传递参数，用于传递本地的localSong
+    public final static String LOCAL_SONG = "PARAM_LOCAL_SONG";//可选的传递参数，用于传递本地的localSong
 
     public final static String ASK_COMMENT = "ASK_COMMENT";//可选的传递参数，用于传递某条有图的Comment
 

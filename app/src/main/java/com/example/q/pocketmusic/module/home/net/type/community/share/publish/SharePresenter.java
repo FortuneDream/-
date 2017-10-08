@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.share;
+package com.example.q.pocketmusic.module.home.net.type.community.share.publish;
 
 import android.database.SQLException;
 import android.text.TextUtils;
@@ -45,6 +45,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
     private IView activity;
     private int mNumberPic;//图片数量
     private String[] filePaths;//本地图片路径
+    private int typeId;
 
 
     public SharePresenter(IView activity) {
@@ -145,6 +146,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
     //上传/分享乐曲
     private void shareSong(String name, final String content, final List<String> list1) {
         final ShareSong shareSong = new ShareSong(UserUtil.user, name, content);
+        shareSong.setInstrument(typeId);
         activity.showLoading(true);
         //添加分享曲谱记录
         shareSong.save(new ToastSaveListener<String>(activity) {
@@ -212,6 +214,14 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
             }
         });
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
+    public int getTypeId() {
+        return typeId;
     }
 
 

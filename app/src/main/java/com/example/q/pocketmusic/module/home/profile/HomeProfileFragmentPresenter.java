@@ -8,6 +8,8 @@ import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionActivity;
@@ -17,6 +19,7 @@ import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
 import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
+import com.example.q.pocketmusic.module.user.notify.gift.GiftActivity;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
@@ -223,24 +226,38 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //修改昵称
     public void setNickName(final String nickName) {
-        UserUtil.user.setNickName(nickName);
-        UserUtil.user.update(new ToastUpdateListener() {
-            @Override
-            public void onSuccess() {
-                UserUtil.user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_CHANG_NICK_NAME);
-                UserUtil.user.update(new ToastUpdateListener() {
-                    @Override
-                    public void onSuccess() {
-                        ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CHANG_NICK_NAME);
-                        fragment.setNickName(nickName);
-                    }
-                });
-            }
-        });
+        boolean isEnough = UserUtil.checkUserContribution((BaseActivity) fragment.getCurrentContext(), Constant.REDUCE_CHANG_NICK_NAME);
+        if (isEnough) {
+            UserUtil.user.setNickName(nickName);
+            UserUtil.user.update(new ToastUpdateListener() {
+                @Override
+                public void onSuccess() {
+                    UserUtil.user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_CHANG_NICK_NAME);
+                    UserUtil.user.update(new ToastUpdateListener() {
+                        @Override
+                        public void onSuccess() {
+                            ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CHANG_NICK_NAME);
+                            fragment.setNickName(nickName);
+                        }
+                    });
+                }
+            });
+        } else {
+            ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
+        }
+
     }
 
     public void enterConvertListActivity() {
         fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ProfileConvertActivity.class));
+    }
+
+    public void enterGiftActivity() {
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), GiftActivity.class));
+    }
+
+    public void enterInterestActivity() {
+        ToastUtil.showToast("前方正在施工");
     }
 
 

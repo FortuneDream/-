@@ -1,15 +1,10 @@
 package com.example.q.pocketmusic.module.home.net.type.community;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 
-import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.type.community.ask.AskListFragment;
-import com.example.q.pocketmusic.module.home.net.type.community.publish.PublishAskActivity;
 import com.example.q.pocketmusic.module.home.net.type.community.share.ShareListFragment;
 
 import java.util.ArrayList;

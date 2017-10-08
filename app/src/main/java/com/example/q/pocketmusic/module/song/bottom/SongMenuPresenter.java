@@ -205,20 +205,11 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         shareSong.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                ToastUtil.showToast("已点赞");
-                user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_AGREE);
-                user.update(new ToastUpdateListener() {
+                //增加分享人的硬币
+                contributionModel.addGift(shareSong.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
                     @Override
-                    public void onSuccess() {
-                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
-
-                        //增加分享人的硬币
-                        contributionModel.addGift(shareSong.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
-                            @Override
-                            public void onSuccess(String s) {
-                                //
-                            }
-                        });
+                    public void onSuccess(String s) {
+                        ToastUtil.showToast("已点赞");
                     }
                 });
             }
@@ -236,23 +227,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         askSongComment.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                ToastUtil.showToast("已点赞");
-                user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_AGREE);
-                user.update(new ToastUpdateListener() {
+                contributionModel.addGift(askSongComment.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
                     @Override
-                    public void onSuccess() {
-                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + Constant.ADD_CONTRIBUTION_AGREE);
-                        //增加发谱人的硬币
-                        contributionModel.addGift(askSongComment.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
-                            @Override
-                            public void onSuccess(String s) {
-                                //
-                            }
-                        });
+                    public void onSuccess(String s) {
+                        ToastUtil.showToast("已点赞");
                     }
                 });
-
-
             }
         });
     }
@@ -293,8 +273,8 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                     }
                 }
                 //贡献度是否足够
-                if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_CONTRIBUTION_COLLECTION)) {
-                    ToastUtil.showToast("贡献值不够~");
+                if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_COLLECTION)) {
+                    ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
                     return;
                 }
                 //添加收藏记录
@@ -330,11 +310,11 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                                     @Override
                                     public void onSuccess() {
                                         ToastUtil.showToast("已收藏");
-                                        UserUtil.user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_CONTRIBUTION_COLLECTION);//贡献值-1
+                                        UserUtil.user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_COLLECTION);//贡献值-1
                                         UserUtil.user.update(new ToastUpdateListener() {
                                             @Override
                                             public void onSuccess() {
-                                                ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CONTRIBUTION_COLLECTION);
+                                                ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_COLLECTION);
                                             }
                                         });
                                     }

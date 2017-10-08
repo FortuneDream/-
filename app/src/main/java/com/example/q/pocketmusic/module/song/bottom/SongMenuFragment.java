@@ -100,7 +100,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                 presenter.agree();
                 break;
             case R.id.collection_iv:
-                alertCheckCollectionDialog(view, Constant.REDUCE_CONTRIBUTION_COLLECTION);
+                alertCheckCollectionDialog(view, Constant.REDUCE_COLLECTION);
                 break;
             case R.id.share_iv:
                 presenter.share();

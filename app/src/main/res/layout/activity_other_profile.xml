@@ -10,7 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="?attr/actionBarSize" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,8 +35,18 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="24dp"
             android:text="签名"
-            android:textColor="@color/background"
+            android:textColor="@color/ui_black_2"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/interest_tv"
+            style="@style/TwoTextSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_signature_tv"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_interest_bg"
+            android:text="关注" />
     </RelativeLayout>
 
     <android.support.design.widget.TabLayout

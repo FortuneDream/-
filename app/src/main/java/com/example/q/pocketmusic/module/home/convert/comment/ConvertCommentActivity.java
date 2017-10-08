@@ -3,7 +3,6 @@ package com.example.q.pocketmusic.module.home.convert.comment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,18 +21,15 @@ import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.model.bean.convert.ConvertSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.module.home.convert.comment.convert.ConvertActivity;
-import com.example.q.pocketmusic.module.home.net.type.community.ask.comment.AskPostHeadView;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -152,6 +148,13 @@ public class ConvertCommentActivity extends AuthActivity<ConvertCommentActivityP
     @Override
     public void showListDialog(List<ConvertSong> list) {
 
+    }
+
+    @Override
+    public void sendCommentResult() {
+        presenter.setContent(null);
+        userInputEdt.setText("");
+        onRefresh();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.home.net.type.community.publish;
+package com.example.q.pocketmusic.module.home.net.type.community.ask.publish;
 
 import android.text.TextUtils;
 
@@ -36,7 +36,7 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
             ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
             return;
         }
-        int coin = Constant.REDUCE_CONTRIBUTION_ASK + index * 2;
+        int coin = Constant.REDUCE_ASK + index * 2;
         if (!UserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
             ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
             return;
@@ -47,8 +47,12 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
 
     //求谱
     public void askForSong(String title, String content, final MyUser user) {
+        final int coin = Constant.REDUCE_ASK + index * 2;
+        if (!UserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
+            ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
+            return;
+        }
         activity.showLoading(true);
-        final int coin = Constant.REDUCE_CONTRIBUTION_ASK + index * 2;
         AskSongPost askSongPost = new AskSongPost(user, title, typeId, content);
         askSongPost.setIndex(index);
         askSongPost.save(new ToastSaveListener<String>(activity) {
@@ -79,7 +83,7 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
     }
 
     public void reduceIndex() {
-        if (index >= 0) {
+        if (index <= 0) {
             return;
         }
         index--;
@@ -87,7 +91,7 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
     }
 
     public void setTypeId(int typeId) {
-        this.typeId=typeId;
+        this.typeId = typeId;
     }
 
     public interface IView extends IBaseView {

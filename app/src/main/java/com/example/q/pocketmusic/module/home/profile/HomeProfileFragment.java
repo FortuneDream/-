@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.example.q.pocketmusic.module.common.AuthFragment;
 import com.example.q.pocketmusic.util.UserUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.widget.view.GuaGuaKa;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
@@ -37,6 +39,7 @@ import butterknife.Unbinder;
 
 public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresenter.IView, HomeProfileFragmentPresenter>
         implements HomeProfileFragmentPresenter.IView {
+
     @BindView(R.id.setting_item)
     ImageView settingItem;
     @BindView(R.id.toolbar)
@@ -47,8 +50,8 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     TextView userSignatureTv;
     @BindView(R.id.sign_in_btn)
     Button signInBtn;
-    @BindView(R.id.contribution_item)
-    LinearLayout contributionItem;
+    @BindView(R.id.interest_item)
+    LinearLayout interestItem;
     @BindView(R.id.post_item)
     LinearLayout postItem;
     @BindView(R.id.collection_item)
@@ -57,6 +60,10 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     LinearLayout shareItem;
     @BindView(R.id.convert_item)
     LinearLayout convertItem;
+    @BindView(R.id.coin_item)
+    IcoTextItem coinItem;
+    @BindView(R.id.gift_item)
+    IcoTextItem giftItem;
     @BindView(R.id.support_me_item)
     IcoTextItem supportMeItem;
     @BindView(R.id.grade_item)
@@ -98,14 +105,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
             toolbar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new CoinDialogBuilder(getCurrentContext(), Constant.REDUCE_CHANG_NICK_NAME)
-                            .setPositiveButton(new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    alertNickNameDialog();
-                                }
-                            })
-                            .show();
+                    alertNickNameDialog();
                 }
             });
             presenter.setUserBelongToVersion();//用户属于哪个版本
@@ -121,8 +121,25 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-                String text = inputServer.getText().toString();
-                presenter.setNickName(text);
+                if (TextUtils.isEmpty(inputServer.getText().toString())) {
+                    ToastUtil.showToast("不能为空");
+                    return;
+                }
+                new CoinDialogBuilder(getCurrentContext(), Constant.REDUCE_CHANG_NICK_NAME)
+                        .setPositiveButton(new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String text = inputServer.getText().toString();
+                                presenter.setNickName(text);
+                            }
+                        })
+                        .setNegativeButton(new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
         builder.show();
@@ -155,9 +172,9 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
 
 
     @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item,
-            R.id.collection_item, R.id.contribution_item, R.id.sign_in_btn,
+            R.id.collection_item, R.id.coin_item, R.id.sign_in_btn,
             R.id.post_item, R.id.share_app_item, R.id.support_me_item, R.id.share_item,
-            R.id.user_signature_tv, R.id.convert_item})
+            R.id.user_signature_tv, R.id.convert_item, R.id.gift_item})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.support_me_item:
@@ -181,7 +198,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
             case R.id.collection_item://进入收藏列表界面
                 presenter.enterCollectionActivity();
                 break;
-            case R.id.contribution_item://进入ContributionActivity
+            case R.id.coin_item://进入ContributionActivity
                 presenter.enterContributionActivity();
                 break;
             case R.id.sign_in_btn://签到
@@ -195,6 +212,12 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 break;
             case R.id.convert_item:
                 presenter.enterConvertListActivity();//转谱
+                break;
+            case R.id.gift_item:
+                presenter.enterGiftActivity();//进入礼包中心
+                break;
+            case R.id.interest_item://进入关注列表
+                presenter.enterInterestActivity();
                 break;
         }
     }
@@ -276,4 +299,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     protected HomeProfileFragmentPresenter createPresenter() {
         return new HomeProfileFragmentPresenter(this);
     }
+
+
 }
