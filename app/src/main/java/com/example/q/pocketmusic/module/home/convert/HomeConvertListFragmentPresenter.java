@@ -3,13 +3,11 @@ package com.example.q.pocketmusic.module.home.convert;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.model.bean.convert.ConvertPost;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.convert.comment.ConvertCommentActivity;
 import com.example.q.pocketmusic.module.home.convert.publish.PublishConvertActivity;
-import com.example.q.pocketmusic.module.search.SearchMainActivity;
 
 import java.util.List;
 

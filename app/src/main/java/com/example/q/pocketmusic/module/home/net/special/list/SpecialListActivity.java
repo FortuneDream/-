@@ -8,7 +8,6 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.special.SpecialColumn;
 import com.example.q.pocketmusic.model.bean.special.SpecialColumnSong;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.module.search.SearchMainAdapter;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

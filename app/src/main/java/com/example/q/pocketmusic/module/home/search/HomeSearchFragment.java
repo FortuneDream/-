@@ -1,35 +1,41 @@
-package com.example.q.pocketmusic.module.search;
+package com.example.q.pocketmusic.module.home.search;
+
 
 import android.graphics.drawable.Animatable;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.module.common.BaseFragment;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-public class SearchMainActivity extends BaseActivity<SearchMainPresenter.IView, SearchMainPresenter>
-        implements ISearchActivity, View.OnKeyListener, View.OnClickListener, SearchMainPresenter.IView, ViewPager.OnPageChangeListener {
+public class HomeSearchFragment extends BaseFragment<HomeSearchFragmentPresenter.IView, HomeSearchFragmentPresenter>
+        implements HomeSearchFragmentPresenter.IView, View.OnKeyListener, View.OnClickListener, ViewPager.OnPageChangeListener,
+        ISearchActivity {
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
     @BindView(R.id.search_edt)
     EditText searchEdt;
     @BindView(R.id.search_iv)
     ImageView searchIv;
-    @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
-    private SearchMainAdapter adapter;
-
+    private HomeSearchAdapter adapter;
 
     @Override
     public int setContentResource() {
-        return R.layout.activity_search_main;
+        return R.layout.fragment_home_search;
     }
 
     @Override
@@ -37,11 +43,11 @@ public class SearchMainActivity extends BaseActivity<SearchMainPresenter.IView, 
         searchEdt.setOnKeyListener(this);
         searchIv.setOnClickListener(this);
         viewPager.addOnPageChangeListener(this);
-        adapter = new SearchMainAdapter(this, getSupportFragmentManager(), presenter.getTabsTxt(), presenter.getFragments());
+        adapter = new HomeSearchAdapter(getCurrentContext(), getChildFragmentManager(), presenter.getTabsTxt(), presenter.getFragments());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.colorTitle), ContextCompat.getColor(this, R.color.colorTitle));
-        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.colorTitle));
+        tabLayout.setTabTextColors(ContextCompat.getColor(getCurrentContext(), R.color.colorTitle), ContextCompat.getColor(getCurrentContext(), R.color.colorTitle));
+        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getCurrentContext(), R.color.colorTitle));
     }
 
     //Enter键
@@ -84,16 +90,16 @@ public class SearchMainActivity extends BaseActivity<SearchMainPresenter.IView, 
 
     @Override
     public void onPageSelected(int position) {
-        SearchMainPresenter.FLAG_NOW_FRAGMENT = position;
+        HomeSearchFragmentPresenter.FLAG_NOW_FRAGMENT = position;
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
 
     }
-
     @Override
-    protected SearchMainPresenter createPresenter() {
-        return new SearchMainPresenter(this);
+    protected HomeSearchFragmentPresenter createPresenter() {
+        return new HomeSearchFragmentPresenter(this);
     }
+
 }

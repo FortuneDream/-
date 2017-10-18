@@ -1,10 +1,10 @@
-package com.example.q.pocketmusic.module.search.net;
+package com.example.q.pocketmusic.module.home.search.net;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.Song;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.module.search.ISearchActivity;
-import com.example.q.pocketmusic.module.search.ISearchFragment;
+import com.example.q.pocketmusic.module.home.search.ISearchActivity;
+import com.example.q.pocketmusic.module.home.search.ISearchFragment;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;

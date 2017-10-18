@@ -11,7 +11,6 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.special.SpecialColumnActivity;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
-import com.example.q.pocketmusic.module.search.SearchMainActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.module.user.notify.UserNotifyActivity;
 import com.example.q.pocketmusic.module.user.notify.help.HelpActivity;

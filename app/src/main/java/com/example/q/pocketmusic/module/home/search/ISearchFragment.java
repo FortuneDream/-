@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.search;
+package com.example.q.pocketmusic.module.home.search;
 
 /**
  * Created by 鹏君 on 2017/5/30.

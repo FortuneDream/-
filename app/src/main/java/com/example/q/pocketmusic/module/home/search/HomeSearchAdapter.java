@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.search;
+package com.example.q.pocketmusic.module.home.search;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -11,13 +11,13 @@ import java.util.List;
  * Created by 鹏君 on 2017/4/14.
  */
 //ViewPager Adapter
-public class SearchMainAdapter  extends FragmentPagerAdapter {
+public class HomeSearchAdapter extends FragmentPagerAdapter {
     private List<String> tabAttrList;
     private List<Fragment> fragments;
     private Context context;
 
 
-    public SearchMainAdapter(Context context, FragmentManager fm, List<String> toolbarAttrList, List<Fragment> fragments) {
+    public HomeSearchAdapter(Context context, FragmentManager fm, List<String> toolbarAttrList, List<Fragment> fragments) {
         super(fm);
         this.tabAttrList = toolbarAttrList;
         this.fragments = fragments;

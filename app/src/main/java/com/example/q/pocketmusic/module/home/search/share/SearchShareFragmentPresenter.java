@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.search.share;
+package com.example.q.pocketmusic.module.home.search.share;
 
 import android.content.Intent;
 

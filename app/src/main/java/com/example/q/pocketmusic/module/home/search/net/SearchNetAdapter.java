@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.search.net;
+package com.example.q.pocketmusic.module.home.search.net;
 
 import android.content.Context;
 import android.view.ViewGroup;

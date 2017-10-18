@@ -88,9 +88,6 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".module.user.forget.ForgetActivity" />
         <activity
-            android:name=".module.search.SearchMainActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity
             android:name=".module.home.convert.comment.convert.ConvertActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity android:name=".module.home.profile.post.UserPostActivity" />

@@ -1,24 +1,21 @@
-package com.example.q.pocketmusic.module.search;
+package com.example.q.pocketmusic.module.home.search;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
+import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.config.CommonString;
-import com.example.q.pocketmusic.module.search.net.SearchNetFragment;
-import com.example.q.pocketmusic.module.search.share.SearchShareFragment;
+import com.example.q.pocketmusic.module.home.search.net.SearchNetFragment;
+import com.example.q.pocketmusic.module.home.search.share.SearchShareFragment;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by 鹏君 on 2017/4/14.
- */
-
-public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView> {
-    private IView activity;
+public class HomeSearchFragmentPresenter extends BasePresenter<HomeSearchFragmentPresenter.IView> {
+    private IView fragment;
     private SearchNetFragment netFragment;
     private SearchShareFragment shareFragment;
     public static final int POSITION_NET_FRAGMENT = 0;//第一个位置
@@ -30,9 +27,10 @@ public class SearchMainPresenter extends BasePresenter<SearchMainPresenter.IView
         this.inputStr = inputStr;
     }
 
-    public SearchMainPresenter(IView activity) {
-        attachView(activity);
-        this.activity=getIViewRef();
+
+    public HomeSearchFragmentPresenter(IView fragment) {
+        attachView(fragment);
+        this.fragment = getIViewRef();
         getFragments();
         getTabsTxt();
     }
