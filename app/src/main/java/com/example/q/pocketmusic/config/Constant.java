@@ -8,6 +8,8 @@ public class Constant {
     public final static String APP_ID = "236163bbf4c3be6f2cc44de4405da6eb";
     public final static String PATCH_VERSION = "1";//补丁版本
 
+
+
     //URL
     public final static String BASE_URL = "http://www.qupu123.com";
     public final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/5.7.14377.702 Safari/537.36";
