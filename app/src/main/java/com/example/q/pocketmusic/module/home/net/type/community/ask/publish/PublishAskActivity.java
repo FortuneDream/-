@@ -65,7 +65,7 @@ public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView,
             case R.id.ok_txt:
                 String title = titleTet.getInputString();
                 String content = contentTet.getInputString();
-                presenter.checkAsk(title, content, UserUtil.user);
+                presenter.checkAsk(title, content);
                 break;
             case R.id.add_index_iv:
                 presenter.addIndex();
@@ -78,12 +78,12 @@ public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView,
 
     //消耗硬币确认
     @Override
-    public void alertCoinDialog(int coin, final String title, final String content, final MyUser user) {
+    public void alertCoinDialog(int coin, final String title, final String content) {
         new CoinDialogBuilder(this, coin)
                 .setPositiveButton(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        presenter.askForSong(title, content, user);
+                        presenter.askForSong(title, content);
                         dialog.dismiss();
                     }
                 })

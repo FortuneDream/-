@@ -11,47 +11,27 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
 
-        <ImageView
-            android:layout_marginLeft="16dp"
-            android:id="@+id/email_iv"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_vec_profile_email" />
+            android:layout_gravity="center"
+            android:text="首页"
+            android:textColor="@color/ui_black_1"
+            android:textSize="22sp" />
 
-        <LinearLayout
-            android:id="@+id/search_rl"
+        <ImageView
+            android:id="@+id/help_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginRight="16dp"
-            android:background="@drawable/shape_toolbar_search_view"
-            android:orientation="horizontal"
-            android:paddingBottom="4dp"
-            android:paddingRight="4dp"
-            android:paddingTop="4dp">
+            app:srcCompat="@drawable/ic_vec_help" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="48dp"
-                android:paddingRight="48dp"
-                android:text="点击搜索"
-                android:gravity="center"
-                android:textColor="#50ffffff"
-                android:textSize="16sp" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/white" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-               android:paddingLeft="8dp"
-                app:srcCompat="@drawable/ic_vec_search" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/suggestion_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_suggestion" />
     </android.support.v7.widget.Toolbar>
 
     <com.jude.easyrecyclerview.EasyRecyclerView

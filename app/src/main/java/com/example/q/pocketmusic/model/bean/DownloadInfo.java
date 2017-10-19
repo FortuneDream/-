@@ -10,16 +10,16 @@ public class DownloadInfo {
 
 
 
-    public String getInfo() {
-        return info;
-    }
-
     public DownloadInfo(String info, boolean isStart) {
         this.info = info;
         this.isStart = isStart;
     }
 
     public DownloadInfo() {
+    }
+
+    public String getInfo() {
+        return info;
     }
 
     public void setInfo(String info) {

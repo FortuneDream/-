@@ -20,7 +20,6 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
  */
 
 public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IView> {
-    private final int NOT_SELECT = -1;
     private IView activity;
     private int index;
     private int typeId;
@@ -31,7 +30,7 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
     }
 
     //指数*2+基础求谱硬币
-    public void checkAsk(String title, final String content, final MyUser user) {
+    public void checkAsk(String title, final String content) {
         if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title)) {
             ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
             return;
@@ -41,25 +40,24 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
             ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
             return;
         }
-        activity.alertCoinDialog(coin, title, content, user);
+        activity.alertCoinDialog(coin, title, content);
     }
 
 
     //求谱
-    public void askForSong(String title, String content, final MyUser user) {
+    public void askForSong(String title, String content) {
         final int coin = Constant.REDUCE_ASK + index * 2;
         if (!UserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
             ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
             return;
         }
         activity.showLoading(true);
-        AskSongPost askSongPost = new AskSongPost(user, title, typeId, content);
+        AskSongPost askSongPost = new AskSongPost(UserUtil.user, title, typeId, content);
         askSongPost.setIndex(index);
         askSongPost.save(new ToastSaveListener<String>(activity) {
             @Override
             public void onSuccess(String s) {
-                user.increment(BmobConstant.BMOB_COIN, -coin);
-                user.update(new ToastUpdateListener(activity) {
+                UserUtil.increment(-coin, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
                         ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + coin);
@@ -99,7 +97,7 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
 
         void setAskResult(Integer success);
 
-        void alertCoinDialog(int coin, String title, String content, MyUser user);
+        void alertCoinDialog(int coin, String title, String content);
 
         void changeIndex(int index);
     }

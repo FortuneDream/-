@@ -17,6 +17,8 @@ import java.util.List;
 public class HotListFragmentPresenter extends BasePresenter<HotListFragmentPresenter.IView> {
     private IView activity;
     private int mPage;
+    private int typeId;
+
     public HotListFragmentPresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
@@ -51,11 +53,14 @@ public class HotListFragmentPresenter extends BasePresenter<HotListFragmentPrese
     public void enterSongActivity(Song song) {
         Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, Constant.FROM_TYPE, Constant.MENU_DOWNLOAD_COLLECTION_SHARE, Constant.NET);
-        intent.setExtrasClassLoader(getClass().getClassLoader());
+        object.setCommunity(typeId);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, object);
         activity.getCurrentContext().startActivity(intent);
     }
 
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
 
 
     public interface IView extends IBaseView {

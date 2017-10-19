@@ -26,16 +26,15 @@ public class LoadRecommendList extends AsyncTask<String, Void, List<Song>> {
      */
     @Override
     protected List<Song> doInBackground(String... strings) {
-        List<Song> list ;
+        List<Song> list = new ArrayList<>();
         String url = strings[0];
-        LogUtils.e("url:"+url);
+        LogUtils.e("url:" + url);
         try {
             Document doc = Jsoup.connect(url).userAgent(Constant.USER_AGENT).get();
             Element tbody = doc.getElementsByTag("tbody").get(0);
-           list= RegExUtils.getRecommendList(tbody.toString());
+            list.addAll(RegExUtils.getRecommendList(tbody.toString()));
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
         return list;
     }

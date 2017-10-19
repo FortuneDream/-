@@ -71,7 +71,6 @@ public class Constant {
     public final static int ADD_CONTRIBUTION_AGREE_OTHER = 2;//被点赞的额外加成
 
     //贡献度-
-    public final static int REDUCE_BASE_CONVERT = 30;//转谱基础
     public final static int REDUCE_ASK = 4;//求谱
     public final static int REDUCE_DOWNLOAD = 3;//下载
     public final static int REDUCE_COLLECTION = 2;//收藏
@@ -90,4 +89,10 @@ public class Constant {
     private static final int splash_flag = 2;//闪屏页问题
     private static final int update_version_info = 3; //版本更新
     private static final int report_content = 4;//
+
+
+    //动态
+    public static final int COMMUNITY_STATE_COLLECTION=1;//收藏
+    public static final int COMMUNITY_STATE_DOWNLOAD=2;//下载
+    public static final int COMMUNITY_STATE_AGREE=3;//点赞
 }

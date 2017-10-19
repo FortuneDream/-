@@ -17,8 +17,6 @@ import butterknife.BindView;
 
 public class SpecialColumnActivity extends BaseActivity<SpecialColumnPresenter.IView, SpecialColumnPresenter>
         implements SpecialColumnPresenter.IView, RecyclerArrayAdapter.OnItemClickListener {
-
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)

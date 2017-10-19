@@ -9,11 +9,11 @@ import com.example.q.pocketmusic.model.bean.SongObject;
 import com.example.q.pocketmusic.model.net.LoadRecommendList;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.home.net.help.HelpActivity;
 import com.example.q.pocketmusic.module.home.net.special.SpecialColumnActivity;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
+import com.example.q.pocketmusic.module.home.profile.suggestion.SuggestionActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.module.user.notify.UserNotifyActivity;
-import com.example.q.pocketmusic.module.user.notify.help.HelpActivity;
 
 import java.util.List;
 
@@ -27,32 +27,24 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
     public HomeNetFragmentPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
+        mPage = 0;
     }
 
     //可以得到推荐列表
     public void getList(final boolean isRefreshing) {
+        mPage++;
+        if (isRefreshing) {
+            mPage = 1;
+        }
         String url = Constant.RECOMMEND_LIST_URL + mPage + ".html";
         new LoadRecommendList() {
             @Override
             protected void onPostExecute(List<Song> songs) {
                 super.onPostExecute(songs);
-                if (!isRefreshing) {
-                    fragment.setList(songs);
-                } else {
-                    fragment.setInitListWithRefreshing(songs);
-                }
+                fragment.setList(isRefreshing, songs);
 
             }
         }.execute(url);
-    }
-
-    public int getmPage() {
-        return mPage;
-    }
-
-
-    public void setPage(int page) {
-        this.mPage = page;
     }
 
     public void enterSongActivity(Song song) {
@@ -76,7 +68,7 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
             joinQQGroup();
         } else if (picPosition == 1) {
             fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SpecialColumnActivity.class));
-        } else if (picPosition==2){
+        } else if (picPosition == 2) {
             fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), HelpActivity.class));
         }
     }
@@ -95,19 +87,16 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
         }
     }
 
-
-    public void enterSearchMainActivity() {
-        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SearchMainActivity.class));
+    public void enterHelpActivity() {
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), HelpActivity.class));
     }
 
-    public void enterUserNotifyActivity() {
-        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), UserNotifyActivity.class));
+    public void enterSuggestionActivity() {
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SuggestionActivity.class));
     }
 
     public interface IView extends IBaseView {
-        void setList(List<Song> list);
-
-        void setInitListWithRefreshing(List<Song> songs);
+        void setList(boolean isRefreshing, List<Song> list);
     }
 
 }

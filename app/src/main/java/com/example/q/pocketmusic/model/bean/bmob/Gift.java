@@ -11,7 +11,7 @@ import cn.bmob.v3.BmobObject;
 public class Gift extends BmobObject {
     private MyUser user;
     private String content;
-    private Integer coin;
+    private int coin;
     private boolean isGet;
 
     public Gift() {
@@ -34,11 +34,11 @@ public class Gift extends BmobObject {
         this.content = content;
     }
 
-    public Integer getCoin() {
+    public int getCoin() {
         return coin;
     }
 
-    public void setCoin(Integer coin) {
+    public void setCoin(int coin) {
         this.coin = coin;
     }
 

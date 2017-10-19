@@ -51,7 +51,7 @@ public class ShareListFragment extends BaseFragment<ShareListPresenter.IView, Sh
         presenter.setSharePage(0);
         presenter.setType(typeId);
         initRecyclerView(recycler, adapter);
-        recycler.setEmptyView(R.layout.view_not_found);
+        recycler.setEmptyView(R.layout.view_empty);
         presenter.getShareList(true);
         adapter.setAbsOnClickItemHeadListener(new AbsOnClickItemHeadListener() {
             @Override

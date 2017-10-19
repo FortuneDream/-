@@ -16,12 +16,11 @@ public class MyUser extends BmobUser {
     private String nickName;//昵称
     private String headImg;//头像
     private String lastSignInDate;//最后一次签到时间
-    private Integer contribution;//贡献值
+    private int contribution;//贡献值
     private BmobRelation collections;//某个用户收藏的所有曲谱
     private BmobRelation converts;
     private BmobRelation interests;//关注
-    private String versionFlag;
-
+    private String versionFlag;//版本
 
     public BmobRelation getInterests() {
         return interests;

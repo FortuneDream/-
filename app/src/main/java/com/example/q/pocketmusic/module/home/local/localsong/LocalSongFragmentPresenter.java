@@ -51,7 +51,6 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
                 LogUtils.e(TAG, "本地乐谱数量：" + localSongs.size());
             }
         }.execute();
-
     }
 
     //删除乐谱要删除数据库和list.position,还有本地的文件！

@@ -95,7 +95,7 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
                 presenter.clickNet();
                 break;
             case R.id.home_tab_convert_tab://点击转谱
-                presenter.clickConvert();
+                presenter.clickSearch();
                 break;
             case R.id.home_tab_profile_tab:
                 if (UserUtil.checkLocalUser(this)) {
@@ -182,10 +182,4 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

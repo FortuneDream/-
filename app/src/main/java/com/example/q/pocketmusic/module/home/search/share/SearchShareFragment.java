@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.home.search.share;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BaseFragment;
+import com.example.q.pocketmusic.module.home.search.HomeSearchFragment;
 import com.example.q.pocketmusic.module.home.search.ISearchActivity;
 import com.example.q.pocketmusic.module.home.search.ISearchFragment;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -41,7 +42,8 @@ public class SearchShareFragment extends BaseFragment<SearchShareFragmentPresent
 
     @Override
     public void getInitSearchList() {
-        String query = ((ISearchActivity) getActivity()).getQueryStr();
+        HomeSearchFragment homeSearchFragment = (HomeSearchFragment) getActivity().getSupportFragmentManager().findFragmentByTag(HomeSearchFragment.class.getName());
+        String query = homeSearchFragment.getQueryStr();
         if (query == null) {
             return;
         }

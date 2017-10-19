@@ -40,7 +40,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     @BindView(R.id.share_iv)
     AppCompatImageView shareIv;
     private EditDialog editDialog;//编辑框
-    private static final String PARAM_Intent = "intent";
+    private static final String PARAM_Intent = "param_1";
 
 
     @Override
