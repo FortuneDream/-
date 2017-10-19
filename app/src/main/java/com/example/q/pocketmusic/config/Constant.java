@@ -92,4 +92,6 @@ public class Constant {
     private static final int splash_flag = 2;//闪屏页问题
     private static final int update_version_info = 3; //版本更新
     private static final int report_content = 4;//
+
+
 }
