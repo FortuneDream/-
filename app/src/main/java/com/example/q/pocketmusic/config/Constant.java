@@ -92,19 +92,10 @@ public class Constant {
     private static final int update_version_info = 3; //版本更新
     private static final int report_content = 4;//
 
-
-
-
-
-
-
     //动态
     public static final int COMMUNITY_STATE_COLLECTION=1;//收藏
     public static final int COMMUNITY_STATE_DOWNLOAD=2;//下载
     public static final int COMMUNITY_STATE_AGREE=3;//点赞
-
-
-
 
 
 
