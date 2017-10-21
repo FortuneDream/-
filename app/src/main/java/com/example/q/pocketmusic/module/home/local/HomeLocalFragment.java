@@ -54,7 +54,6 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
 
     @Override
     public void initView() {
-        //viewpager
         presenter.setFragmentManager(getChildFragmentManager());
         topTabView.setListener(this);
         topTabView.setCheck(0);

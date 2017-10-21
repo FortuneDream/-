@@ -71,11 +71,11 @@
             android:name=".module.home.net.type.community.ask.comment.AskSongCommentActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
-            android:name=".module.user.notify.suggestion.SuggestionActivity"
+            android:name=".module.home.profile.suggestion.SuggestionActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".module.home.profile.setting.SettingActivity" />
         <activity android:name=".module.home.profile.collection.UserCollectionActivity" />
-        <activity android:name=".module.user.notify.help.HelpActivity">
+        <activity android:name=".module.home.net.help.HelpActivity">
             <intent-filter>
                 <action android:name="help_activity" />
 
@@ -87,9 +87,6 @@
             android:name=".module.home.local.lead.LeadSongActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".module.user.forget.ForgetActivity" />
-        <activity
-            android:name=".module.home.convert.comment.convert.ConvertActivity"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity android:name=".module.home.profile.post.UserPostActivity" />
         <activity android:name=".module.home.profile.share.UserShareActivity" />
         <activity android:name=".module.user.notify.UserNotifyActivity" />
@@ -107,11 +104,7 @@
         <activity android:name=".module.user.other.OtherProfileActivity" />
         <activity android:name=".module.home.net.type.study.StudyActivity" />
         <activity android:name=".module.home.net.special.list.SpecialListActivity" />
-        <activity android:name=".module.user.notify.gift.GiftActivity" />
-        <activity android:name=".module.home.convert.comment.ConvertCommentActivity" />
-        <activity android:name=".module.home.convert.publish.PublishConvertActivity" />
-        <activity android:name=".module.home.profile.convert.ProfileConvertActivity" />
-        <activity android:name=".module.home.profile.convert.post.ProfileConvertPostActivity" />
+        <activity android:name=".module.home.profile.gift.GiftActivity" />
     </application>
 
 </manifest>

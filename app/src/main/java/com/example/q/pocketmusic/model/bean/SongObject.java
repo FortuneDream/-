@@ -11,14 +11,23 @@ public class SongObject implements Serializable {
     private int from;
     private int showMenu;
     private int loadingWay;
+    private int community;//来自某个圈子
 
     public SongObject(Song song, int from, int showMenu, int loadingWay) {
         this.song = song;
         this.from = from;
         this.showMenu = showMenu;
         this.loadingWay = loadingWay;
+        this.community=0;
     }
 
+    public int getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(int community) {
+        this.community = community;
+    }
 
     public Song getSong() {
         return song;

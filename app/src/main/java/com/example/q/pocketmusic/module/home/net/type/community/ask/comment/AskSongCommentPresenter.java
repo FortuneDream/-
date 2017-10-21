@@ -60,7 +60,6 @@ import rx.schedulers.Schedulers;
 
 public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresenter.IView> {
     private IView activity;
-
     private AskSongCommentModel mAskSongCommentModel;
     private UserShareModel mUserShareModel;
     private UserCollectionModel mUserCollectionModel;
@@ -172,15 +171,14 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
             @Override
             public void onSuccess(List<BatchResult> list) {
-                UserUtil.user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
-                UserUtil.user.update(new ToastUpdateListener(activity) {
+                UserUtil.increment(Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
                         activity.showLoading(false);
                         ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
                         activity.sendCommentResult(s, askSongComment);
                     }
-                });
+                }); //原子操作
             }
         });
     }
@@ -195,15 +193,14 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
             @Override
             public void onSuccess(List<BatchResult> list) {
-                UserUtil.user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
-                UserUtil.user.update(new ToastUpdateListener(activity) {
+                UserUtil.increment(Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
                         activity.showLoading(false);
                         ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
                         activity.sendCommentResult(s, askSongComment);
                     }
-                });
+                }); //原子操作
             }
         });
 
@@ -224,8 +221,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                     new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
                         @Override
                         public void onSuccess(List<BatchResult> list) {
-                            UserUtil.user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC); //原子操作
-                            UserUtil.user.update(new ToastUpdateListener(activity) {
+                            UserUtil.increment(Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC, new ToastUpdateListener() {
                                 @Override
                                 public void onSuccess() {
                                     activity.showLoading(false);
@@ -233,7 +229,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                                     ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
                                     activity.sendCommentResult(s, askSongComment);
                                 }
-                            });
+                            }); //原子操作
                         }
                     });
                 }
@@ -304,7 +300,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     public void enterSongActivity(Song song, AskSongComment askSongComment) {
         Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject songObject = new SongObject(song, Constant.FROM_ASK, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
-        intent.setExtrasClassLoader(getClass().getClassLoader());
+        songObject.setCommunity(post.getInstrument());
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
         intent.putExtra(SongActivity.ASK_COMMENT, askSongComment);
         activity.getCurrentContext().startActivity(intent);
@@ -349,8 +345,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         post.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                UserUtil.user.increment(BmobConstant.BMOB_COIN, -coin);
-                UserUtil.user.update(new ToastUpdateListener() {
+                UserUtil.increment(-coin, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
                         ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + coin);

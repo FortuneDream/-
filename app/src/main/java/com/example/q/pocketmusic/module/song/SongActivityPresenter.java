@@ -82,8 +82,7 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
     public void punish() {
         MyUser user = BmobUser.getCurrentUser(MyUser.class);
         if (user != null && user.getContribution() >= Constant.REDUCE_PUNISH) {
-            user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_PUNISH);
-            user.update(new ToastUpdateListener() {
+            UserUtil.increment(-Constant.REDUCE_PUNISH, new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
                     ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_PUNISH);

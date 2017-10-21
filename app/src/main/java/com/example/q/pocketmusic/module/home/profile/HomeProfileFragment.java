@@ -39,7 +39,6 @@ import butterknife.Unbinder;
 
 public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresenter.IView, HomeProfileFragmentPresenter>
         implements HomeProfileFragmentPresenter.IView {
-
     @BindView(R.id.setting_item)
     ImageView settingItem;
     @BindView(R.id.toolbar)
@@ -58,8 +57,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     LinearLayout collectionItem;
     @BindView(R.id.share_item)
     LinearLayout shareItem;
-    @BindView(R.id.convert_item)
-    LinearLayout convertItem;
     @BindView(R.id.coin_item)
     IcoTextItem coinItem;
     @BindView(R.id.gift_item)
@@ -72,7 +69,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     IcoTextItem shareAppItem;
     @BindView(R.id.content_ll)
     LinearLayout contentLl;
-    Unbinder unbinder;
     private AlertDialog signInDialog;
 
 
@@ -172,9 +168,9 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
 
 
     @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item,
-            R.id.collection_item, R.id.coin_item, R.id.sign_in_btn,
+            R.id.collection_item, R.id.coin_item, R.id.sign_in_btn, R.id.interest_item,
             R.id.post_item, R.id.share_app_item, R.id.support_me_item, R.id.share_item,
-            R.id.user_signature_tv, R.id.convert_item, R.id.gift_item})
+            R.id.user_signature_tv, R.id.gift_item})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.support_me_item:
@@ -209,9 +205,6 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 break;
             case R.id.user_signature_tv:
                 alertSignatureDialog();//修改签名
-                break;
-            case R.id.convert_item:
-                presenter.enterConvertListActivity();//转谱
                 break;
             case R.id.gift_item:
                 presenter.enterGiftActivity();//进入礼包中心
@@ -299,6 +292,5 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     protected HomeProfileFragmentPresenter createPresenter() {
         return new HomeProfileFragmentPresenter(this);
     }
-
 
 }

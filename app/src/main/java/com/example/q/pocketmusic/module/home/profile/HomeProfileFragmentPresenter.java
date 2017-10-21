@@ -9,17 +9,16 @@ import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionActivity;
 import com.example.q.pocketmusic.module.home.profile.contribution.ContributionActivity;
-import com.example.q.pocketmusic.module.home.profile.convert.ProfileConvertActivity;
+
 import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
 import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
-import com.example.q.pocketmusic.module.user.notify.gift.GiftActivity;
+import com.example.q.pocketmusic.module.home.profile.gift.GiftActivity;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
@@ -108,12 +107,16 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //签到
     public void addCoin(final int coin) {
-        UserUtil.user.increment(BmobConstant.BMOB_COIN, coin);
-        UserUtil.user.setLastSignInDate(dateFormat.format(new Date()));//设置最新签到时间
-        UserUtil.user.update(new ToastUpdateListener() {
+        UserUtil.increment(coin, new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                ToastUtil.showToast(CommonString.ADD_COIN_BASE + coin);
+                UserUtil.user.setLastSignInDate(dateFormat.format(new Date()));//设置最新签到时间
+                UserUtil.user.update(new ToastUpdateListener() {
+                    @Override
+                    public void onSuccess() {
+                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + coin);
+                    }
+                });
             }
         });
     }
@@ -155,13 +158,12 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         if (UserUtil.user.getLastSignInDate() == null) {//之前没有这个列
             final int coin = 5;
             UserUtil.user.setLastSignInDate(dateFormat.format(new Date()));//设置当前时间为最后时间
-            UserUtil.user.increment(BmobConstant.BMOB_COIN, coin);//第一次都加5
-            UserUtil.user.update(new ToastUpdateListener() {
+            UserUtil.increment(coin, new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
                     ToastUtil.showToast("今天已签到：" + CommonString.ADD_COIN_BASE + coin);
                 }
-            });
+            });//第一次都加5
         } else {
             fragment.alertSignInDialog();
         }
@@ -232,8 +234,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
             UserUtil.user.update(new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
-                    UserUtil.user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_CHANG_NICK_NAME);
-                    UserUtil.user.update(new ToastUpdateListener() {
+                    UserUtil.increment(-Constant.REDUCE_CHANG_NICK_NAME, new ToastUpdateListener() {
                         @Override
                         public void onSuccess() {
                             ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CHANG_NICK_NAME);
@@ -248,9 +249,6 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     }
 
-    public void enterConvertListActivity() {
-        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ProfileConvertActivity.class));
-    }
 
     public void enterGiftActivity() {
         fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), GiftActivity.class));

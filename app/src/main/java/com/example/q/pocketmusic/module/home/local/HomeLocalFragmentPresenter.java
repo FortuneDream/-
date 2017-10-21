@@ -8,10 +8,9 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.home.local.lead.LeadSongActivity;
 import com.example.q.pocketmusic.module.home.local.localrecord.LocalRecordFragment;
 import com.example.q.pocketmusic.module.home.local.localsong.LocalSongFragment;
-import com.example.q.pocketmusic.module.home.local.lead.LeadSongActivity;
-import com.example.q.pocketmusic.module.home.convert.comment.convert.ConvertActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +22,8 @@ import java.util.List;
 public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentPresenter.IView> {
     private IView fragment;
     private int FLAG;
-    private static final int FLAG_SELECT_SONG = 1001;
-    private static final int FLAG_SELECT_RECORD = 1002;
+    public static final int FLAG_SELECT_SONG = 1001;
+    public static final int FLAG_SELECT_RECORD = 1002;
     private List<Fragment> fragments;
     private LocalRecordFragment localRecordFragment;
     private LocalSongFragment localSongFragment;
@@ -69,7 +68,6 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
     }
 
 
-
     private void showFragment(Fragment fragment) {
         if (!fragment.isAdded()) {
             if (totalFragment == null) {
@@ -87,7 +85,6 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
         Intent intent = new Intent(fragment.getCurrentContext(), LeadSongActivity.class);
         ((BaseActivity) fragment.getCurrentContext()).startActivityForResult(intent, LeadSongActivity.REQUEST_LEAD);
     }
-
 
 
     public interface IView extends IBaseView {

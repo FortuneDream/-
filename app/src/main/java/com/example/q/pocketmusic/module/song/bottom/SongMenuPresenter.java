@@ -23,6 +23,7 @@ import com.example.q.pocketmusic.model.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
+import com.example.q.pocketmusic.module.home.net.type.community.state.CommunityStateModel;
 import com.example.q.pocketmusic.module.home.profile.contribution.ContributionModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.UserUtil;
@@ -77,9 +78,8 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
                                                @Override
                                                public void onSuccess() {
-                                                   if (isFrom == Constant.FROM_SHARE) {
-                                                       addDownLoadNum();//增加下载量
-                                                   }
+                                                   addDownLoadNum();//增加下载量
+                                                   addCommunityState(Constant.COMMUNITY_STATE_DOWNLOAD);//添加动态
                                                    fragment.downloadResult(Constant.SUCCESS, "下载成功");
                                                }
 
@@ -91,16 +91,19 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         ).downloadBatchPic(name, song.getIvUrl(), song.getTypeId());
     }
 
+
     //添加下载量
     private void addDownLoadNum() {
-        ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
-        shareSong.increment(BmobConstant.BMOB_DOWNLOAD_NUM);
-        shareSong.update(new ToastUpdateListener() {
-            @Override
-            public void onSuccess() {
-                LogUtils.e("下载量+1");
-            }
-        });
+        if (isFrom == Constant.FROM_SHARE) {
+            ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
+            shareSong.increment(BmobConstant.BMOB_DOWNLOAD_NUM);
+            shareSong.update(new ToastUpdateListener() {
+                @Override
+                public void onSuccess() {
+                    LogUtils.e("下载量+1");
+                }
+            });
+        }
     }
 
     //下载检测
@@ -122,8 +125,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             return new DownloadInfo(CommonString.STR_NOT_ENOUGH_COIN, false);
         }
         //扣除硬币
-        UserUtil.user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_DOWNLOAD);
-        UserUtil.user.update(new ToastUpdateListener(fragment) {
+        UserUtil.increment(-Constant.REDUCE_DOWNLOAD, new ToastUpdateListener() {
             @Override
             public void onSuccess() {
                 ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + (Constant.REDUCE_DOWNLOAD));
@@ -210,8 +212,10 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                     @Override
                     public void onSuccess(String s) {
                         ToastUtil.showToast("已点赞");
+                        addCommunityState(Constant.COMMUNITY_STATE_AGREE);
                     }
                 });
+
             }
         });
     }
@@ -233,6 +237,16 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                         ToastUtil.showToast("已点赞");
                     }
                 });
+            }
+        });
+    }
+
+    private void addCommunityState(int state) {
+        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
+        new CommunityStateModel().addCommunityState(songObject.getCommunity(), state,songObject.getSong().getName(), new ToastSaveListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+
             }
         });
     }
@@ -310,13 +324,13 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                                     @Override
                                     public void onSuccess() {
                                         ToastUtil.showToast("已收藏");
-                                        UserUtil.user.increment(BmobConstant.BMOB_COIN, -Constant.REDUCE_COLLECTION);//贡献值-1
-                                        UserUtil.user.update(new ToastUpdateListener() {
+                                        UserUtil.increment(-Constant.REDUCE_COLLECTION, new ToastUpdateListener() {
                                             @Override
                                             public void onSuccess() {
                                                 ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_COLLECTION);
                                             }
                                         });
+                                        addCommunityState(Constant.COMMUNITY_STATE_COLLECTION);
                                     }
                                 });
                             }

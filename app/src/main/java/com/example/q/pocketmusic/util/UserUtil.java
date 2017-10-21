@@ -46,11 +46,7 @@ public class UserUtil {
 
 
     public static boolean checkUserContribution(FragmentActivity activity, Integer needContribution) {
-        if (checkLocalUser(activity)) {
-            return UserUtil.user.getContribution() >= needContribution;
-        } else {
-            return false;
-        }
+        return checkLocalUser(activity) && UserUtil.user.getContribution() >= needContribution;
     }
 
     public static void increment(MyUser user, int number, ToastUpdateListener listener) {

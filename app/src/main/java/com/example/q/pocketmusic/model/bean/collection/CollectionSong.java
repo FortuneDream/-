@@ -10,16 +10,16 @@ import cn.bmob.v3.datatype.BmobRelation;
 public class CollectionSong extends BmobObject {
     private String name;//收藏曲谱的名字
     private String content;//收藏曲谱的描述
-    private Integer isFrom;//来自
+    private int isFrom;//来自
 
     public CollectionSong() {
     }
 
-    public Integer getIsFrom() {
+    public int  getIsFrom() {
         return isFrom;
     }
 
-    public void setIsFrom(Integer isFrom) {
+    public void setIsFrom(int isFrom) {
         this.isFrom = isFrom;
     }
 

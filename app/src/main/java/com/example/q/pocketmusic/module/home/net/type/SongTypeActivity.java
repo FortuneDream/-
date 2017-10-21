@@ -2,15 +2,11 @@ package com.example.q.pocketmusic.module.home.net.type;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.PopupWindowCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.local.LocalSong;
@@ -32,8 +28,12 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     public final static String PARAM_POSITION = "position";
     @BindView(R.id.type_tab_view)
     TopTabView typeTabView;
-    @BindView(R.id.study_fab)
-    ImageView studyFab;
+    @BindView(R.id.study_iv)
+    ImageView studyIv;
+    @BindView(R.id.share_iv)
+    ImageView shareIv;
+    @BindView(R.id.ask_iv)
+    ImageView askIv;
     @BindView(R.id.top_iv)
     ImageView topIv;
     @BindView(R.id.type_content)
@@ -69,31 +69,6 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
         return new SongTypeActivityPresenter(this);
     }
 
-    @OnClick(R.id.study_fab)
-    public void onViewClicked() {
-        //弹出popwindow
-        MorePopupWindow popupWindow = new MorePopupWindow(getCurrentContext());
-        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_study, "学习"));
-        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_ask, "求谱"));
-        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_type_share, "分享"));
-        popupWindow.setListener(new MorePopupWindow.OnSelectedListener() {
-            @Override
-            public void onSelected(int position) {
-                switch (position) {
-                    case 0:
-                        presenter.enterStudyActivity(typeId);
-                        break;
-                    case 1:
-                        presenter.enterPublishAskActivity(typeId);
-                        break;
-                    case 2:
-                        presenter.queryLocalSongList();
-                        break;
-                }
-            }
-        });
-        popupWindow.show(studyFab);
-    }
 
 
     @Override
@@ -131,6 +106,21 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
             presenter.clickHotList();
         } else {
             presenter.clickCommunity();
+        }
+    }
+
+    @OnClick({R.id.study_iv, R.id.share_iv, R.id.ask_iv})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.study_iv:
+                presenter.enterStudyActivity(typeId);
+                break;
+            case R.id.share_iv:
+                presenter.queryLocalSongList();
+                break;
+            case R.id.ask_iv:
+                presenter.enterPublishAskActivity(typeId);
+                break;
         }
     }
 }

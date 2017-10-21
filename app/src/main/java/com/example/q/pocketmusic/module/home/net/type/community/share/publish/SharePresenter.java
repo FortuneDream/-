@@ -162,8 +162,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
                     @Override
                     public void onSuccess(List<BatchResult> list) {
-                        UserUtil.user.increment(BmobConstant.BMOB_COIN, Constant.ADD_CONTRIBUTION_UPLOAD);//原子操作
-                        UserUtil.user.update(new ToastUpdateListener(activity) {
+                        UserUtil.increment(Constant.ADD_CONTRIBUTION_UPLOAD, new ToastUpdateListener() {
                             @Override
                             public void onSuccess() {
                                 ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_UPLOAD));

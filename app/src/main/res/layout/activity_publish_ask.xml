@@ -6,31 +6,8 @@
     android:orientation="vertical">
 
     <include layout="@layout/include_appbar_toolbar" />
+    <include layout="@layout/include_top_flag"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="48dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="@dimen/ico_launcher_72dp"
-            android:layout_height="@dimen/ico_launcher_72dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ico_tag" />
-
-        <TextView
-            style="@style/TwoTextMain"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="把音乐装进口袋" />
-    </LinearLayout>
 
     <com.example.q.pocketmusic.view.widget.view.TextEdit
         android:id="@+id/title_tet"

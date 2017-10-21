@@ -8,30 +8,7 @@
 
     <include layout="@layout/include_appbar_toolbar" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="48dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="@dimen/ico_launcher_72dp"
-            android:layout_height="@dimen/ico_launcher_72dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ico_tag" />
-
-        <TextView
-            style="@style/TwoTextMain"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="把音乐装进口袋" />
-    </LinearLayout>
+    <include layout="@layout/include_top_flag" />
 
     <com.example.q.pocketmusic.view.widget.view.TextEdit
         android:id="@+id/name_tet"
@@ -47,11 +24,12 @@
         app:itemIcoResource="@drawable/ic_vec_content"
         app:itemInputHint="描述" />
 
+
     <TextView
         android:id="@+id/pic_number_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="32dp"
         android:text="目前已添加 0 张" />
 
@@ -59,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="32dp"
         android:layout_marginTop="16dp"
         android:orientation="horizontal">
@@ -69,7 +47,6 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/shape_edt"
             app:srcCompat="@drawable/ic_vec_ico_add" />
 
         <com.jude.easyrecyclerview.EasyRecyclerView
@@ -84,8 +61,8 @@
         style="@style/TextPress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:background="@drawable/shape_text_press"
         android:text="上传" />
 </LinearLayout>

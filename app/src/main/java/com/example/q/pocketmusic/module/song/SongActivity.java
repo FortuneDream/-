@@ -57,6 +57,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     public final static String SPECIAL_SONG = "SPECIAL_SONG";//精品区
 
+
     private Handler handler = new Handler(Looper.myLooper()) {
         @Override
         public void handleMessage(Message msg) {

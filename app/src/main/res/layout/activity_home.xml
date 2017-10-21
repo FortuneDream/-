@@ -33,9 +33,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:itemTabName="转谱"
-            app:itemTabNoSelectIco="@drawable/ic_vec_tab_home_convert_normal"
-            app:itemTabSelectIco="@drawable/ic_vec_tab_home_convert_press" />
+            app:itemTabName="搜索"
+            app:itemTabNoSelectIco="@drawable/ic_vec_tab_home_search_normal"
+            app:itemTabSelectIco="@drawable/ic_vec_tab_home_search_press" />
 
         <com.example.q.pocketmusic.view.widget.view.BottomTabView
             android:id="@+id/home_tab_local_tab"

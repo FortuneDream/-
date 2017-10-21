@@ -53,8 +53,9 @@ public class CommunityFragment extends BaseFragment<CommunityPresenter.IView, Co
     @Override
     public void initView() {
         List<CharSequence> list = new ArrayList<>();
-        list.add("求谱");
+        list.add("动态");
         list.add("分享");
+        list.add("求谱");
         adapter = new CommunityPagerAdapter(getChildFragmentManager(), presenter.initFragment(typeId), list);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

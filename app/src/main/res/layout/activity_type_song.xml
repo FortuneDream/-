@@ -18,13 +18,27 @@
             app:tabs="@array/type_tab_names" />
 
         <ImageView
-            android:id="@+id/study_fab"
+            android:id="@+id/study_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_type_study" />
+
+        <ImageView
+            android:id="@+id/share_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginRight="16dp"
-            app:backgroundTint="@color/white"
-            app:srcCompat="@drawable/ic_vec_more" />
+            app:srcCompat="@drawable/ic_vec_type_share" />
+
+        <ImageView
+            android:id="@+id/ask_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            app:srcCompat="@drawable/ic_vec_type_ask" />
+
     </android.support.v7.widget.Toolbar>
 
     <ImageView

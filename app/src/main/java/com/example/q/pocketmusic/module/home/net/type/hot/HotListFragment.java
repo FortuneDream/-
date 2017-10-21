@@ -43,6 +43,7 @@ public class HotListFragment extends BaseFragment<HotListFragmentPresenter.IView
         hotListRecycler.setRefreshListener(this);
         initRecyclerView(hotListRecycler, adapter, 1);
         presenter.setPage(1);
+        presenter.setTypeId(typeId);
         presenter.getList(typeId, false);
     }
 

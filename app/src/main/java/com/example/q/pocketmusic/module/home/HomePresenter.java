@@ -7,11 +7,11 @@ import android.support.v4.app.FragmentManager;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.convert.HomeConvertListFragment;
-import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
 import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
+import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
+import com.example.q.pocketmusic.module.home.search.HomeSearchFragment;
 import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 import com.example.q.pocketmusic.util.common.update.UpdateUtils;
 
@@ -27,12 +27,12 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     private List<Fragment> fragments;
     private FragmentManager fm;
     private Fragment totalFragment;
-    private static int FLAG_SELECT_NET = 1001;
-    private static int FLAG_SELECT_CONVERT = 1002;
-    private static int FLAG_SELECT_LOCAL = 1003;
-    private static int FLAG_SELECT_PROFILE = 1004;
+    public static final int FLAG_SELECT_NET = 1001;
+    public static final int FLAG_SELECT_SEARCH = 1002;
+    public static final int FLAG_SELECT_LOCAL = 1003;
+    public static final int FLAG_SELECT_PROFILE = 1004;
     private HomeNetFragment homeNetFragment;//1
-    private HomeConvertListFragment convertFragment;//2
+    private HomeSearchFragment homeSearchFragment;//2
     private HomeLocalFragment homeLocalFragment;//3
     private HomeProfileFragment homeProfileFragment;//4
     private int FLAG;//标记当前Fragment
@@ -47,11 +47,11 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     private void initFragment() {
         fragments = new ArrayList<>();
         homeNetFragment = new HomeNetFragment();
-        convertFragment = new HomeConvertListFragment();
+        homeSearchFragment = new HomeSearchFragment();
         homeLocalFragment = new HomeLocalFragment();
         homeProfileFragment = new HomeProfileFragment();
         fragments.add(homeNetFragment);
-        fragments.add(convertFragment);
+        fragments.add(homeSearchFragment);
         fragments.add(homeLocalFragment);
         fragments.add(homeProfileFragment);
     }
@@ -66,10 +66,10 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     }
 
 
-    //转谱
-    public void clickConvert() {
-        if (FLAG != FLAG_SELECT_CONVERT) {
-            FLAG = FLAG_SELECT_CONVERT;
+    //搜索
+    public void clickSearch() {
+        if (FLAG != FLAG_SELECT_SEARCH) {
+            FLAG = FLAG_SELECT_SEARCH;
             showFragment(fragments.get(1));
             activity.onSelectConvert();
         }
