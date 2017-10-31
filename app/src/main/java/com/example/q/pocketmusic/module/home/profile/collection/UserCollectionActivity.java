@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.view.dialog.EditDialog;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -74,10 +75,28 @@ public class UserCollectionActivity extends AuthActivity<UserCollectionPresenter
         presenter.queryAndEnterSongActivity(adapter.getItem(position));
     }
 
+    @Override
+    public void onSelectModify(final int position) {
+        new EditDialog.Builder(getCurrentContext())
+                .setTitle("修改名字")
+                .setListener(new EditDialog.Builder.OnSelectedListener() {
+                    @Override
+                    public void onSelectedOk(String str) {
+                        presenter.updateConnectionName(adapter.getItem(position), str);
+                    }
+
+                    @Override
+                    public void onSelectedCancel() {
+
+                    }
+                })
+                .create().show();
+    }
+
     //加载更多
     @Override
     public void onMoreShow() {
-        presenter.getMoreList();
+        presenter.getCollectionList(false);
     }
 
     @Override

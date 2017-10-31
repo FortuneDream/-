@@ -8,6 +8,7 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.collection.CollectionPic;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.module.common.BaseModel;
+import com.example.q.pocketmusic.util.UserUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ public class UserCollectionModel extends BaseModel {
     public UserCollectionModel() {
     }
 
+
+    //获得某个用户的收藏
     public void getUserCollectionList(MyUser user, int page, ToastQueryListener<CollectionSong> listener) {
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         initDefaultListQuery(query, page);
@@ -36,6 +39,7 @@ public class UserCollectionModel extends BaseModel {
     }
 
 
+    //获取所有列表
     public void getCollectionPicList(CollectionSong collectionSong, ToastQueryListener<CollectionPic> listener) {
         BmobQuery<CollectionPic> queryComment = new BmobQuery<>();
         queryComment.addWhereEqualTo("collectionSong", new BmobPointer(collectionSong));
@@ -43,11 +47,11 @@ public class UserCollectionModel extends BaseModel {
     }
 
     //删除收藏
-    public void deleteCollection(MyUser user, final CollectionSong collectionSong, final ToastUpdateListener listener) {
+    public void deleteCollection(final CollectionSong collectionSong, final ToastUpdateListener listener) {
         BmobRelation relation = new BmobRelation();
         relation.remove(collectionSong);
-        user.setCollections(relation);
-        user.update(new ToastUpdateListener() {
+        UserUtil.user.setCollections(relation);
+        UserUtil.user.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
                 //删除收藏多个图片表,
@@ -82,4 +86,9 @@ public class UserCollectionModel extends BaseModel {
     }
 
 
+    //修改收藏名字
+    public void updateConnectionName(CollectionSong item, String str, ToastUpdateListener listener) {
+        item.setName(str);
+        item.update(listener);
+    }
 }

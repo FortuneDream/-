@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.module.user.other.OtherProfileActivity;
+import com.example.q.pocketmusic.module.home.profile.user.other.OtherProfileActivity;
 
 /**
  * Created by 鹏君 on 2017/7/25.

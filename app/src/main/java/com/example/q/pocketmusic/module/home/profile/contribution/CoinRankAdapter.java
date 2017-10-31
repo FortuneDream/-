@@ -1,11 +1,12 @@
 package com.example.q.pocketmusic.module.home.profile.contribution;
 
 import android.content.Context;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
@@ -19,8 +20,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
  * Created by 鹏君 on 2017/3/12.
  */
 
-public class ContributionAdapter extends RecyclerArrayAdapter<MyUser> {
-    private Context context;
+public class CoinRankAdapter extends RecyclerArrayAdapter<MyUser> {
     private IDisplayStrategy displayStrategy;
     private AbsOnClickItemHeadListener absOnClickItemHeadListener;
 
@@ -28,9 +28,8 @@ public class ContributionAdapter extends RecyclerArrayAdapter<MyUser> {
         this.absOnClickItemHeadListener = absOnClickItemHeadListener;
     }
 
-    public ContributionAdapter(Context context) {
+    public CoinRankAdapter(Context context) {
         super(context);
-        this.context = context;
         displayStrategy = new GlideStrategy();
     }
 
@@ -43,17 +42,20 @@ public class ContributionAdapter extends RecyclerArrayAdapter<MyUser> {
         ImageView headIv;
         TextView nickNameTv;
         TextView rankTv;
-        TextView contributionTv;
-        RelativeLayout contentRl;
+        TextView coinTv;
+        TextView createdAtTv;
+        Toolbar contentToolbar;
+
 
         public ViewHolder(ViewGroup parent) {
-            super(parent, R.layout.item_contribution);
+            super(parent, R.layout.item_coin_rank);
             headIv = $(R.id.head_iv);
             rankTv = $(R.id.rank_tv);
+            createdAtTv = $(R.id.created_at_tv);
             nickNameTv = $(R.id.nick_name_tv);
-            contributionTv = $(R.id.contribution_tv);
-            contentRl = $(R.id.content_rl);
-            contentRl.setOnClickListener(new View.OnClickListener() {
+            coinTv = $(R.id.coin_tv);
+            contentToolbar = $(R.id.content_toolbar);
+            contentToolbar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (absOnClickItemHeadListener != null) {
@@ -68,9 +70,10 @@ public class ContributionAdapter extends RecyclerArrayAdapter<MyUser> {
             super.setData(data);
             int position = getAdapterPosition() + 1;
             rankTv.setText(position + ".");
-            displayStrategy.displayCircle(context, data.getHeadImg(), headIv);
+            displayStrategy.displayCircle(getContext(), data.getHeadImg(), headIv);
             nickNameTv.setText(data.getNickName());
-            contributionTv.setText(String.valueOf(data.getContribution()) + " 枚");
+            createdAtTv.setText("注册时间：" + data.getCreatedAt());
+            coinTv.setText(String.valueOf(data.getContribution()) + " 枚");
             headIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

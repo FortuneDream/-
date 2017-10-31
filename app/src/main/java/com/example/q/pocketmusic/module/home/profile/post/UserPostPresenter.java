@@ -28,10 +28,11 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
     }
 
     public void getUserPostList(final boolean isRefreshing) {
+        mPage++;
         if (isRefreshing) {
             mPage = 0;
         }
-        model.getUserPostList(UserUtil.user, mPage, new ToastQueryListener<AskSongPost>() {
+        model.getUserPostList(mPage, new ToastQueryListener<AskSongPost>() {
             @Override
             public void onSuccess(List<AskSongPost> list) {
                 activity.setUserPostList(isRefreshing, list);
@@ -45,16 +46,6 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
         intent.putExtra(AskSongCommentActivity.PARAM_POST, item);
         intent.putExtra(AskSongCommentActivity.PARAM_IS_FROM_USER, true);
         activity.getCurrentContext().startActivity(intent);
-    }
-
-    public void getMoreList() {
-        mPage++;
-        model.getUserPostList(UserUtil.user, mPage, new ToastQueryListener<AskSongPost>() {
-            @Override
-            public void onSuccess(List<AskSongPost> list) {
-                activity.setUserPostList(false,list);
-            }
-        });
     }
 
     public interface IView extends IBaseView {

@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.user.register;
+package com.example.q.pocketmusic.module.home.profile.user.register;
 
 import android.support.v7.widget.Toolbar;
 import android.view.View;

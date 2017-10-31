@@ -40,7 +40,7 @@
                     tools:text="鹏君" />
 
                 <TextView
-                    android:id="@+id/contribution_tv"
+                    android:id="@+id/my_coin_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/nick_name_tv"

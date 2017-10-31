@@ -18,7 +18,7 @@ public class GlideStrategy implements IDisplayStrategy {
     @Override
     public void display(Context context,String url, ImageView imageView) {
         Glide
-                .with(context)
+                .with(context.getApplicationContext())
                 .load(url)
                 .placeholder(R.drawable.loading_bg)
                 .crossFade()
@@ -28,7 +28,7 @@ public class GlideStrategy implements IDisplayStrategy {
 
     @Override
     public void displayCircle(final Context context, String url, final ImageView imageView) {
-        Glide.with(context)
+        Glide.with(context.getApplicationContext())
                 .load(url)
                 .placeholder(R.mipmap.ico_launcher)
                 .bitmapTransform(new CropCircleTransformation(context))
@@ -37,7 +37,7 @@ public class GlideStrategy implements IDisplayStrategy {
 
     @Override
     public void displayCorner(Context context, String url, ImageView imageView) {
-        Glide.with(context)
+        Glide.with(context.getApplicationContext())
                 .load(url)
                 .placeholder(R.mipmap.ico_launcher)
                 .bitmapTransform(new RoundedCornersTransformation(context,5,5))

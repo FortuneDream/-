@@ -1,11 +1,18 @@
 package com.example.q.pocketmusic.util;
 
+import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.common.BaseModel;
 import com.example.q.pocketmusic.util.common.LogUtils;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UploadFileListener;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
@@ -24,6 +31,8 @@ public class LocalPhotoAlbumUtil extends BaseModel {
     public interface OnLoadLocalResult{
         void onPathList(List<String> list);
     }
+
+
     //打开图片管理器
     public void getLocalPicPaths(final OnLoadLocalResult onLoadLocalResult) {
         FunctionConfig config = new FunctionConfig.Builder()
@@ -66,4 +75,6 @@ public class LocalPhotoAlbumUtil extends BaseModel {
             }
         });
     }
+
+
 }

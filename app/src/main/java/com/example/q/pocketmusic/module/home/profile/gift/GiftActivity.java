@@ -45,7 +45,6 @@ public class GiftActivity extends AuthActivity<GiftPresenter.IView, GiftPresente
         adapter = new GiftAdapter(getCurrentContext());
         initToolbar(toolbar, "礼包中心");
         initRecyclerView(recycler, adapter, 1);
-        presenter.setPage(0);
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
         onRefresh();
@@ -67,7 +66,7 @@ public class GiftActivity extends AuthActivity<GiftPresenter.IView, GiftPresente
 
     @Override
     public void onMoreShow() {
-        presenter.getMoreGiftList();
+        presenter.getGiftList(false);
     }
 
     @Override

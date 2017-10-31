@@ -68,7 +68,7 @@ public class UserShareActivity extends AuthActivity<UserSharePresenter.IView, Us
 
     @Override
     public void onMoreShow() {
-        presenter.getMoreList();
+        presenter.getUserShareList(false);
     }
 
     @Override

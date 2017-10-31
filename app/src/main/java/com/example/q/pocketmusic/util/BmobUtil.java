@@ -10,8 +10,8 @@ import cn.bmob.v3.datatype.BmobPointer;
  */
 
 public class BmobUtil {
-    private final int DEFAULT_LIST_NUM = 10;//10个
-    private final String DEFAULT_SORT = "-createdAt";//逆序
+    private int DEFAULT_LIST_NUM = 10;//10个
+    private String DEFAULT_SORT = "-createdAt";//逆序
 
     //得到帖子列表
     public <T> void getInitList(Class<T> t, String include, ToastQueryListener<T> listener) {

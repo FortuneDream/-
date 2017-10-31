@@ -13,21 +13,21 @@ import cn.bmob.v3.datatype.BmobPointer;
  */
 
 public class BaseModel<T> {
-    public static final String DEFAULT_INVERTED_CREATE = BmobConstant.BMOB_CREATE_AT;//默认逆序
-    public static final int DEFAULT_LIMIT = 10;
+    public String DEFAULT_INVERTED_CREATE = BmobConstant.BMOB_CREATE_AT;//默认逆序
+    public int DEFAULT_LIMIT = 10;
 
-    public void initDefaultListQuery(BmobQuery<T> query) {
+    public void initDefaultListQuery(BmobQuery<?> query) {
         query.order(DEFAULT_INVERTED_CREATE);
     }
 
-    public void initDefaultListQuery(BmobQuery<T> query, int mPage) {
+    public void initDefaultListQuery(BmobQuery<?> query, int mPage) {
         initDefaultListQuery(query);
         query.setLimit(DEFAULT_LIMIT);
         query.setSkip(mPage * DEFAULT_LIMIT);
     }
 
 
-    public void getList(int page,ToastQueryListener<T> listener) {
+    public void getList(int page, ToastQueryListener<T> listener) {
         //可选
     }
 

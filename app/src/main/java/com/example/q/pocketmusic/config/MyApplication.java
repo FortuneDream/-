@@ -33,7 +33,7 @@ public class MyApplication extends Application {
         AppStat.i(Constant.APP_ID, "Bmob");
         //发布时，开启异常捕获器
 //        CrashHandler crashHandler = CrashHandler.getInstance();
-//        crashHandler.init(this);
+//        crashHandler.getCoinRankList(this);
         initGalleryFinal();
     }
 

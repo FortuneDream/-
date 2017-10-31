@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.profile.collection;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
@@ -31,10 +32,12 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
         attachView(activity);
         this.activity = getIViewRef();
         userCollectionModel = new UserCollectionModel();
+        this.mPage = 0;
     }
 
     //获得收藏曲谱列表
     public void getCollectionList(final boolean isRefreshing) {
+        mPage++;
         if (isRefreshing) {
             mPage = 0;//置为零0
         }
@@ -46,16 +49,6 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
         });
     }
 
-    //加载更多
-    public void getMoreList() {
-        mPage++;
-        userCollectionModel.getUserCollectionList(UserUtil.user, mPage, new ToastQueryListener<CollectionSong>() {
-            @Override
-            public void onSuccess(List<CollectionSong> list) {
-                activity.setCollectionList(false, list);
-            }
-        });
-    }
 
     //先查询，后进入SongActivity
     public void queryAndEnterSongActivity(final CollectionSong collectionSong) {
@@ -64,6 +57,21 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
             @Override
             public void onSuccess(List<CollectionPic> list) {
                 activity.showLoading(false);
+                Song song = getSong(list);
+                enterSongActivity(song);
+            }
+
+            //进入SongActivity
+            private void enterSongActivity(Song song) {
+                Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
+                SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.MENU_DOWNLOAD_SHARE, Constant.NET);
+                intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+                activity.getCurrentContext().startActivity(intent);
+            }
+
+            //CollectionPic--->Song
+            @NonNull
+            private Song getSong(List<CollectionPic> list) {
                 Song song = new Song();
                 song.setName(collectionSong.getName());
                 song.setContent(collectionSong.getContent());
@@ -72,17 +80,14 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
                     urls.add(pic.getUrl());
                 }
                 song.setIvUrl(urls);
-                Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
-                SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.MENU_DOWNLOAD_SHARE, Constant.NET);
-                intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
-                activity.getCurrentContext().startActivity(intent);
+                return song;
             }
         });
     }
 
     //删除收藏
     public void deleteCollection(final CollectionSong collectionSong) {
-        userCollectionModel.deleteCollection(UserUtil.user, collectionSong, new ToastUpdateListener() {
+        userCollectionModel.deleteCollection(collectionSong, new ToastUpdateListener() {
             @Override
             public void onSuccess() {
                 ToastUtil.showToast("已删除");
@@ -90,8 +95,15 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
         });
     }
 
-    public void setPage(int page) {
-        this.mPage = page;
+
+    //更新收藏曲谱名字
+    public void updateConnectionName(CollectionSong item, String str) {
+        userCollectionModel.updateConnectionName(item, str, new ToastUpdateListener() {
+            @Override
+            public void onSuccess() {
+                activity.setCollectionList(true, null);
+            }
+        });
     }
 
 

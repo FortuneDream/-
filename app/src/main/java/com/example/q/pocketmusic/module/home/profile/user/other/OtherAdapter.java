@@ -1,12 +1,12 @@
-package com.example.q.pocketmusic.module.user.other;
+package com.example.q.pocketmusic.module.home.profile.user.other;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.q.pocketmusic.module.user.other.collection.OtherCollectionFragment;
-import com.example.q.pocketmusic.module.user.other.share.OtherShareFragment;
+import com.example.q.pocketmusic.module.home.profile.user.other.collection.OtherCollectionFragment;
+import com.example.q.pocketmusic.module.home.profile.user.other.share.OtherShareFragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.user.login;
+package com.example.q.pocketmusic.module.home.profile.user.login;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.user.forget.ForgetActivity;
-import com.example.q.pocketmusic.module.user.register.RegisterActivity;
+import com.example.q.pocketmusic.module.home.profile.user.forget.ForgetActivity;
+import com.example.q.pocketmusic.module.home.profile.user.register.RegisterActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import cn.bmob.v3.exception.BmobException;

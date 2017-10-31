@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.user.other;
+package com.example.q.pocketmusic.module.home.profile.user.other;
 
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.model.bean.MyUser;

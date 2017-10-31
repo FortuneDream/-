@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.user.other.collection;
+package com.example.q.pocketmusic.module.home.profile.user.other.collection;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
@@ -6,7 +6,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.module.common.AuthFragment;
-import com.example.q.pocketmusic.module.user.other.OtherProfileActivity;
+import com.example.q.pocketmusic.module.home.profile.user.other.OtherProfileActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

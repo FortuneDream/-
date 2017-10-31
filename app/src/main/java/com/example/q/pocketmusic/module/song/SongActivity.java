@@ -169,11 +169,4 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         super.onStop();
         ScreenshotContentObserver.stopObserve();
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

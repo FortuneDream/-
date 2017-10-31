@@ -12,7 +12,7 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.module.user.other.OtherProfileActivity;
+import com.example.q.pocketmusic.module.home.profile.user.other.OtherProfileActivity;
 
 
 import java.util.List;

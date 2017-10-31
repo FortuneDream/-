@@ -32,6 +32,8 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
         void onSelectDelete(int position);
 
         void onSelectItem(int position);
+
+        void onSelectModify(int position);
     }
 
     @Override
@@ -70,13 +72,17 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        MorePopupWindow popupWindow=new MorePopupWindow(getContext());
-                        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_delete,"删除曲谱"));
+                        MorePopupWindow popupWindow = new MorePopupWindow(getContext());
+                        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_delete, "删除曲谱"));
+                        popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_modify, "修改名字"));
                         popupWindow.setListener(new MorePopupWindow.OnSelectedListener() {
                             @Override
                             public void onSelected(int position) {
-                                switch (position){
+                                switch (position) {
                                     case 0:
+                                        listener.onSelectModify(getAdapterPosition());
+                                        break;
+                                    case 1:
                                         listener.onSelectDelete(getAdapterPosition());
                                         break;
                                 }

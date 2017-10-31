@@ -107,7 +107,7 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
 
     @Override
     public void onMoreShow() {
-        presenter.getMoreMoneyList();
+        presenter.getSupportMoneyList(false);
     }
 
     @Override
@@ -128,12 +128,5 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
                 presenter.copyAlipay();
                 break;
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

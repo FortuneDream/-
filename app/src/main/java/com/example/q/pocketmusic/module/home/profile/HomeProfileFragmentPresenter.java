@@ -5,14 +5,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionActivity;
-import com.example.q.pocketmusic.module.home.profile.contribution.ContributionActivity;
+import com.example.q.pocketmusic.module.home.profile.contribution.CoinRankActivity;
 
 import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
@@ -176,7 +175,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //进入硬币榜
     public void enterContributionActivity() {
-        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), ContributionActivity.class));
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), CoinRankActivity.class));
     }
 
 

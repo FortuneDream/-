@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.user.forget;
+package com.example.q.pocketmusic.module.home.profile.user.forget;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;

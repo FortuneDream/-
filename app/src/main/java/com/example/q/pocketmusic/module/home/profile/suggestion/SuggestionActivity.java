@@ -53,7 +53,7 @@ public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, 
         initRecyclerView(recycler, adapter);
         recycler.addItemDecoration(new LeftAndRightTagDecoration(getCurrentContext()));
         recycler.addItemDecoration(new DividerItemDecoration(getCurrentContext(), DividerItemDecoration.VERTICAL));
-        presenter.getSuggestionList(false);
+        presenter.getSuggestionList(true);
     }
 
 
@@ -64,21 +64,6 @@ public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, 
         presenter.sendSuggestion(suggestion);
     }
 
-    @Override
-    public void sendSuggestionResult(UserSuggestion userSuggestion) {
-        adapter.add(userSuggestion);
-    }
-
-    @Override
-    public void getSuggestionListResult(List<UserSuggestion> list) {
-        adapter.addAll(list);
-    }
-
-    @Override
-    public void getSuggestionListResultWithRefreshing(List<UserSuggestion> list) {
-        adapter.clear();
-        adapter.addAll(list);
-    }
 
     @Override
     public void onRefresh() {
@@ -89,5 +74,13 @@ public class SuggestionActivity extends AuthActivity<SuggestionPresenter.IView, 
     @Override
     protected SuggestionPresenter createPresenter() {
         return new SuggestionPresenter(this);
+    }
+
+    @Override
+    public void setSuggestionList(boolean isRefreshing, List<UserSuggestion> list) {
+        if (isRefreshing) {
+            adapter.clear();
+        }
+        adapter.addAll(list);
     }
 }

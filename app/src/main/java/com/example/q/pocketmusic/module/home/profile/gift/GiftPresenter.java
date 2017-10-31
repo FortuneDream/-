@@ -31,10 +31,12 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
         attachView(activity);
         this.activity = getIViewRef();
         model = new GiftModel();
+        this.mPage=0;
     }
 
 
     public void getGiftList(final boolean isRefreshing) {
+        mPage++;
         if (isRefreshing) {
             mPage = 0;
         }
@@ -47,19 +49,7 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
 
     }
 
-    public void setPage(int page) {
-        this.mPage = page;
-    }
 
-    public void getMoreGiftList() {
-        mPage++;
-        model.getGiftList(UserUtil.user, mPage, new ToastQueryListener<Gift>() {
-            @Override
-            public void onSuccess(List<Gift> list) {
-                activity.setGiftList(list, false);
-            }
-        });
-    }
 
     //收礼物，批量更新
     public void receivedAllCoin(List<Gift> allData) {
@@ -72,13 +62,12 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
             gifts.add(gift);
         }
         final int finalSum = sum;
-        final int finalSum1 = sum;
         new BmobBatch().updateBatch(gifts).doBatch(new QueryListListener<BatchResult>() {
             @Override
             public void done(List<BatchResult> list, BmobException e) {
                 activity.showLoading(false);
                 if (e == null) {
-                    UserUtil.increment(finalSum1, new ToastUpdateListener() {
+                    UserUtil.increment(finalSum, new ToastUpdateListener() {
                         @Override
                         public void onSuccess() {
                             ToastUtil.showToast(CommonString.ADD_COIN_BASE + finalSum);

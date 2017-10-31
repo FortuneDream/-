@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.user.login;
+package com.example.q.pocketmusic.module.home.profile.user.login;
 
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;

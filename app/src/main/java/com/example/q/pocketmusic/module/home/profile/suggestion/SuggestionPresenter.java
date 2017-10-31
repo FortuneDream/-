@@ -8,6 +8,7 @@ import com.example.q.pocketmusic.model.bean.bmob.UserSuggestion;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.UserUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
 
@@ -20,51 +21,45 @@ import cn.bmob.v3.datatype.BmobPointer;
 
 public class SuggestionPresenter extends BasePresenter<SuggestionPresenter.IView> {
     private IView activity;
+    private SuggestionModel model;
+    private int mPage;
 
 
     public SuggestionPresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
+        model = new SuggestionModel();
+        this.mPage = 0;
     }
 
     public void sendSuggestion(String suggestion) {
         if (TextUtils.isEmpty(suggestion)) {
+            ToastUtil.showToast("不能为空哦~");
             return;
         }
-
-        final UserSuggestion userSuggestion = new UserSuggestion(UserUtil.user);
-        userSuggestion.setSuggestion(suggestion);
-        userSuggestion.save(new ToastSaveListener<String>(activity) {
+        model.sendSuggestion(suggestion, new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {
-                activity.sendSuggestionResult(userSuggestion);
+                activity.setSuggestionList(true, null);
             }
         });
     }
 
     public void getSuggestionList(final boolean isRefreshing) {
-        BmobQuery<UserSuggestion> query = new BmobQuery<>();
-        query.addWhereEqualTo("user", new BmobPointer(UserUtil.user));
-        query.findObjects(new ToastQueryListener<UserSuggestion>(activity) {
+        mPage++;
+        if (isRefreshing) {
+            mPage = 0;
+        }
+        model.getList(mPage, new ToastQueryListener<UserSuggestion>() {
             @Override
-            public void onSuccess(final List<UserSuggestion> list) {
-                if (!isRefreshing){
-                    activity.getSuggestionListResult(list);
-                }else {
-                    activity.getSuggestionListResultWithRefreshing(list);
-                }
-
+            public void onSuccess(List<UserSuggestion> list) {
+                activity.setSuggestionList(isRefreshing, list);
             }
         });
     }
 
 
     public interface IView extends IBaseView {
-
-        void sendSuggestionResult(UserSuggestion userSuggestion);
-
-        void getSuggestionListResult(List<UserSuggestion> list);
-
-        void getSuggestionListResultWithRefreshing(List<UserSuggestion> list);
+        void setSuggestionList(boolean isRefreshing, List<UserSuggestion> list);
     }
 }

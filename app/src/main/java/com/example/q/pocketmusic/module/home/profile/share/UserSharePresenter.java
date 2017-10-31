@@ -27,9 +27,11 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
         attachView(activity);
         this.activity = getIViewRef();
         model = new UserShareModel();
+        this.mPage=0;
     }
 
     public void getUserShareList(final boolean isRefreshing) {
+        mPage++;
         if (isRefreshing) {
             mPage = 0;
         }
@@ -41,15 +43,7 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
         });
     }
 
-    public void getMoreList() {
-        mPage++;
-        model.getUserShareList(UserUtil.user, mPage, new ToastQueryListener<ShareSong>() {
-            @Override
-            public void onSuccess(List<ShareSong> list) {
-                activity.setList(false, list);
-            }
-        });
-    }
+
 
     public void enterSongActivity(ShareSong shareSong) {
         Song song = new Song();
@@ -63,9 +57,7 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
         activity.getCurrentContext().startActivity(intent);
     }
 
-    public void setPage(int page) {
-        this.mPage = page;
-    }
+
 
     interface IView extends IBaseView {
         void setList(boolean isRefreshing, List<ShareSong> list);

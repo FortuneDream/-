@@ -64,8 +64,8 @@
         <activity
             android:name="cn.bmob.v3.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".module.user.login.LoginActivity" />
-        <activity android:name=".module.user.register.RegisterActivity" />
+        <activity android:name=".module.home.profile.user.login.LoginActivity" />
+        <activity android:name=".module.home.profile.user.register.RegisterActivity" />
         <activity android:name=".module.home.net.type.community.ask.publish.PublishAskActivity" />
         <activity
             android:name=".module.home.net.type.community.ask.comment.AskSongCommentActivity"
@@ -82,14 +82,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.home.profile.contribution.ContributionActivity" />
+        <activity android:name=".module.home.profile.contribution.CoinRankActivity" />
         <activity
             android:name=".module.home.local.lead.LeadSongActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".module.user.forget.ForgetActivity" />
+        <activity android:name=".module.home.profile.user.forget.ForgetActivity" />
         <activity android:name=".module.home.profile.post.UserPostActivity" />
         <activity android:name=".module.home.profile.share.UserShareActivity" />
-        <activity android:name=".module.user.notify.UserNotifyActivity" />
+        <activity android:name=".module.home.profile.user.notify.UserNotifyActivity" />
 
         <service
             android:name=".util.common.update.DownloadService"
@@ -99,9 +99,9 @@
         <activity
             android:name=".module.home.profile.support.SupportActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".module.user.notify.version.PreviewVersionActivity" />
+        <activity android:name=".module.home.profile.user.notify.version.PreviewVersionActivity" />
         <activity android:name=".module.home.net.special.SpecialColumnActivity" />
-        <activity android:name=".module.user.other.OtherProfileActivity" />
+        <activity android:name=".module.home.profile.user.other.OtherProfileActivity" />
         <activity android:name=".module.home.net.type.study.StudyActivity" />
         <activity android:name=".module.home.net.special.list.SpecialListActivity" />
         <activity android:name=".module.home.profile.gift.GiftActivity" />

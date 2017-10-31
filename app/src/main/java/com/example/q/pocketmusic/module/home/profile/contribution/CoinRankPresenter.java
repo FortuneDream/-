@@ -14,29 +14,28 @@ import cn.bmob.v3.BmobQuery;
  * Created by 鹏君 on 2017/3/13.
  */
 
-public class ContributionPresenter extends BasePresenter<ContributionPresenter.IView> {
+public class CoinRankPresenter extends BasePresenter<CoinRankPresenter.IView> {
     private IView activity;
+    private CoinRankModel coinRankModel;
 
-    public ContributionPresenter(IView activity) {
+    public CoinRankPresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
+        coinRankModel = new CoinRankModel();
     }
 
-    //贡献前十个
-    public void init() {
-        BmobQuery<MyUser> query = new BmobQuery<>();
-        query.setLimit(20);
-        query.order("-"+ BmobConstant.BMOB_COIN);
-        query.findObjects(new ToastQueryListener<MyUser>() {
+    //贡献前20个
+    public void getCoinRankList() {
+        coinRankModel.getCoinRankList(new ToastQueryListener<MyUser>() {
             @Override
             public void onSuccess(List<MyUser> list) {
-                activity.setListResult(list);
+                activity.setCoinRankList(list);
             }
         });
     }
 
     interface IView extends IBaseView {
 
-        void setListResult(List<MyUser> list);
+        void setCoinRankList(List<MyUser> list);
     }
 }

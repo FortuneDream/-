@@ -24,7 +24,8 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.type.community.state.CommunityStateModel;
-import com.example.q.pocketmusic.module.home.profile.contribution.ContributionModel;
+import com.example.q.pocketmusic.module.home.profile.contribution.CoinRankModel;
+import com.example.q.pocketmusic.module.home.profile.gift.GiftModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.DownloadUtil;
@@ -52,12 +53,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     private boolean isEnableAgree = true;//是否能够点赞
     private Song song;
     private int isFrom;
-    private ContributionModel contributionModel;
+    private CoinRankModel coinRankModel;
 
     public SongMenuPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
-        contributionModel = new ContributionModel();
+        coinRankModel = new CoinRankModel();
     }
 
 
@@ -208,7 +209,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             @Override
             public void onSuccess() {
                 //增加分享人的硬币
-                contributionModel.addGift(shareSong.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
+                new GiftModel().addGift(shareSong.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         ToastUtil.showToast("已点赞");
@@ -231,7 +232,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         askSongComment.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                contributionModel.addGift(askSongComment.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
+                new GiftModel().addGift(askSongComment.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         ToastUtil.showToast("已点赞");
@@ -243,7 +244,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     private void addCommunityState(int state) {
         SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
-        new CommunityStateModel().addCommunityState(songObject.getCommunity(), state,songObject.getSong().getName(), new ToastSaveListener<String>() {
+        new CommunityStateModel().addCommunityState(songObject.getCommunity(), state, songObject.getSong().getName(), new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {
 

@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.user.other.share;
+package com.example.q.pocketmusic.module.home.profile.user.other.share;
 
 import android.content.Context;
 import android.view.ViewGroup;

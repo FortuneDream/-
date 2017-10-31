@@ -1,6 +1,5 @@
-package com.example.q.pocketmusic.module.user.other;
+package com.example.q.pocketmusic.module.home.profile.user.other;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +12,6 @@ import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class OtherProfileActivity extends AuthActivity<OtherProfilePresenter.IView, OtherProfilePresenter>

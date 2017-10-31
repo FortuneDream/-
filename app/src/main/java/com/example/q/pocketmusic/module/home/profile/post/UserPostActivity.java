@@ -17,7 +17,7 @@ import butterknife.BindView;
 
 public class UserPostActivity extends AuthActivity<UserPostPresenter.IView, UserPostPresenter>
         implements UserPostPresenter.IView, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnItemClickListener,
-        RecyclerArrayAdapter.OnMoreListener{
+        RecyclerArrayAdapter.OnMoreListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
@@ -35,11 +35,11 @@ public class UserPostActivity extends AuthActivity<UserPostPresenter.IView, User
     public void initUserView() {
         adapter = new UserPostAdapter(this);
         recycler.setRefreshListener(this);
-        adapter.setMore(R.layout.view_more,this);
+        adapter.setMore(R.layout.view_more, this);
         adapter.setOnItemClickListener(this);
         initToolbar(toolbar, "我的求谱");
         initRecyclerView(recycler, adapter, 1);
-        presenter.getUserPostList(false);
+        onRefresh();
     }
 
 
@@ -56,7 +56,7 @@ public class UserPostActivity extends AuthActivity<UserPostPresenter.IView, User
 
     @Override
     public void setUserPostList(boolean isRefreshing, List<AskSongPost> list) {
-        if (isRefreshing){
+        if (isRefreshing) {
             adapter.clear();
         }
         adapter.addAll(list);
@@ -70,7 +70,7 @@ public class UserPostActivity extends AuthActivity<UserPostPresenter.IView, User
 
     @Override
     public void onMoreShow() {
-        presenter.getMoreList();
+        presenter.getUserPostList(false);
     }
 
     @Override
