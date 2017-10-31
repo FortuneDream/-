@@ -14,8 +14,7 @@ import com.jude.rollviewpager.adapter.LoopPagerAdapter;
 
 //最好能设定成后台自定义图片
 public class RollPagerAdapter extends LoopPagerAdapter {
-    private static int[] picList = new int[]{R.drawable.banner_1,
-            R.drawable.banner_2, R.drawable.banner_3};
+    private static int[] picList = new int[]{R.drawable.banner_1, R.drawable.banner_2};
 
 
     public RollPagerAdapter(RollPagerView viewPager) {

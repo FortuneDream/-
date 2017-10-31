@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.bmob.Help;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -13,7 +14,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
  * Created by 鹏君 on 2017/2/15.
  */
 
-public class HelpAdapter extends RecyclerArrayAdapter<Help> {
+public class HelpAdapter extends RecyclerArrayAdapter<String> {
     public HelpAdapter(Context context) {
         super(context);
     }
@@ -23,7 +24,7 @@ public class HelpAdapter extends RecyclerArrayAdapter<Help> {
         return new MyViewHolder(parent);
     }
 
-    class MyViewHolder extends BaseViewHolder<Help> {
+    class MyViewHolder extends BaseViewHolder<String> {
         TextView questionTv;
         TextView answerTv;
 
@@ -34,10 +35,12 @@ public class HelpAdapter extends RecyclerArrayAdapter<Help> {
         }
 
         @Override
-        public void setData(Help data) {
+        public void setData(String data) {
             super.setData(data);
-            questionTv.setText(data.getQuestion());
-            answerTv.setText(data.getAnswer());
+            LogUtils.e(data);
+            String[] s = data.split("_");
+            questionTv.setText(s[0]);
+            answerTv.setText(s[1]);
         }
     }
 }

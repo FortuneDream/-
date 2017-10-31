@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -59,7 +60,12 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
         public void setData(CollectionSong data) {
             super.setData(data);
             nameTv.setText("曲谱名：" + data.getName());
-            contentTv.setText("描述：" + data.getContent());
+            if (data.getContent() == null) {
+                contentTv.setText("描述：无");
+            } else {
+                contentTv.setText("描述：" + data.getContent());
+            }
+
             contentRl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,7 +78,7 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        MorePopupWindow popupWindow = new MorePopupWindow(getContext());
+                        final MorePopupWindow popupWindow = new MorePopupWindow(getContext());
                         popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_delete, "删除曲谱"));
                         popupWindow.addView(popupWindow.getContentLl(R.drawable.ic_vec_modify, "修改名字"));
                         popupWindow.setListener(new MorePopupWindow.OnSelectedListener() {
@@ -80,10 +86,10 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
                             public void onSelected(int position) {
                                 switch (position) {
                                     case 0:
-                                        listener.onSelectModify(getAdapterPosition());
+                                        listener.onSelectDelete(getAdapterPosition());
                                         break;
                                     case 1:
-                                        listener.onSelectDelete(getAdapterPosition());
+                                        listener.onSelectModify(getAdapterPosition());
                                         break;
                                 }
                             }

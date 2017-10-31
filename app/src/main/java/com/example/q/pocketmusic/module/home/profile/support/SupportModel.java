@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.profile.support;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.model.bean.MoneySupport;
 import com.example.q.pocketmusic.module.common.BaseModel;
 
@@ -17,6 +18,7 @@ public class SupportModel extends BaseModel<MoneySupport> {
         super.getList(page, listener);
         BmobQuery<MoneySupport> query = new BmobQuery<>();
         initDefaultListQuery(query, page);
+        query.include(BmobConstant.BMOB_USER);
         query.findObjects(listener);
     }
 

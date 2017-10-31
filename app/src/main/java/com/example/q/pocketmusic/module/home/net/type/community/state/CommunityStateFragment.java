@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.model.bean.CommunityState;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
@@ -41,6 +42,12 @@ public class CommunityStateFragment extends BaseFragment<CommunityStateFragmentP
         initRecyclerView(communityStateRecycler, adapter, 1);
         adapter.setMore(R.layout.view_more, this);
         communityStateRecycler.setRefreshListener(this);
+        adapter.setListener(new AbsOnClickItemHeadListener() {
+            @Override
+            public void onClickItem(int position) {
+                //什么都不做
+            }
+        });
         presenter.getList(true);
     }
 

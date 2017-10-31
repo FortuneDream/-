@@ -7,11 +7,13 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.example.q.pocketmusic.model.bean.CommunityState;
@@ -21,6 +23,11 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 public class CommunityStateAdapter extends RecyclerArrayAdapter<CommunityState> {
     private DisplayStrategy displayStrategy;
+    private AbsOnClickItemHeadListener listener;
+
+    public void setListener(AbsOnClickItemHeadListener listener) {
+        this.listener = listener;
+    }
 
     public CommunityStateAdapter(Context context) {
         super(context);
@@ -46,11 +53,19 @@ public class CommunityStateAdapter extends RecyclerArrayAdapter<CommunityState> 
         }
 
         @Override
-        public void setData(CommunityState data) {
+        public void setData(final CommunityState data) {
             super.setData(data);
-            if (data.getUser()==null){
+            if (data.getUser() == null) {
                 return;
             }
+            communityStateUserHeadIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onClickHead(getContext(), data.getUser());
+                    }
+                }
+            });
             displayStrategy.displayCircle(getContext(), data.getUser().getHeadImg(), communityStateUserHeadIv);
             communityStateUserNameTv.setText(data.getUser().getNickName());
             setContent(data);

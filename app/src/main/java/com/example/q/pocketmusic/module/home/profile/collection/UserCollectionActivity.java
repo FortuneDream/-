@@ -52,7 +52,11 @@ public class UserCollectionActivity extends AuthActivity<UserCollectionPresenter
         if (isRefreshing) {
             adapter.clear();
         }
-        adapter.addAll(list);
+        if (list == null) {
+            onRefresh();
+        } else {
+            adapter.addAll(list);
+        }
     }
 
 

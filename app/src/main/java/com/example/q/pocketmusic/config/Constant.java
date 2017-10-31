@@ -9,7 +9,6 @@ public class Constant {
     public final static String PATCH_VERSION = "1";//补丁版本
 
 
-
     //URL
     public final static String BASE_URL = "http://www.qupu123.com";
     public final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/5.7.14377.702 Safari/537.36";
@@ -29,9 +28,9 @@ public class Constant {
 
 
     //BmobInfo
-    public final static Integer BMOB_INFO_RESET_PASSWORD = 1;//请求重置密码
-    public final static Integer BMOB_INFO_LABA = 2;//小喇叭
-    public final static Integer BMOB_INFO_PLAN = 3;//开发计划
+    public static final int BMOB_INFO_RESET_PASSWORD = 1;//请求重置密码
+    public static final int BMOB_INFO_LABA = 2;//小喇叭
+    public static final int Bmob_INFO_HELP = 3;//帮助信息
 
 
     //Intent Flag:本地/网络
@@ -46,7 +45,6 @@ public class Constant {
     public final static int FROM_SHARE = 8;
     public final static int FROM_ASK = 9;
     public final static int FROM_LOCAL = 10;
-    public final static int FROM_SPECIAL = 1;
     ;
 
     //Intent Flag:显示Menu
@@ -86,17 +84,11 @@ public class Constant {
     public static final int gang_qin_pu = 2;//钢琴
     public static final int qi_ta_pu = 3;//其他
 
-    //bmobinfo
-    private static final int change_password = 1;//改密码
-    private static final int splash_flag = 2;//闪屏页问题
-    private static final int update_version_info = 3; //版本更新
-    private static final int report_content = 4;//
 
     //动态
-    public static final int COMMUNITY_STATE_COLLECTION=1;//收藏
-    public static final int COMMUNITY_STATE_DOWNLOAD=2;//下载
-    public static final int COMMUNITY_STATE_AGREE=3;//点赞
-
+    public static final int COMMUNITY_STATE_COLLECTION = 1;//收藏
+    public static final int COMMUNITY_STATE_DOWNLOAD = 2;//下载
+    public static final int COMMUNITY_STATE_AGREE = 3;//点赞
 
 
 }

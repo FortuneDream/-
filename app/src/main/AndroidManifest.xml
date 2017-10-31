@@ -28,10 +28,15 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".module.common.TestModuleActivity" />
-        <activity android:name=".module.splash.SplashActivity">
+        <activity
+            android:name=".module.common.TestModuleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.splash.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -41,6 +46,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="pocket.music.home.activity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -61,35 +67,51 @@
             android:name=".module.home.net.type.community.share.publish.ShareActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
         <activity
-            android:name="cn.bmob.v3.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".module.home.profile.user.login.LoginActivity" />
-        <activity android:name=".module.home.profile.user.register.RegisterActivity" />
-        <activity android:name=".module.home.net.type.community.ask.publish.PublishAskActivity" />
+            android:name=".module.home.profile.user.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".module.home.profile.user.register.RegisterActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".module.home.net.type.community.ask.publish.PublishAskActivity"  android:screenOrientation="portrait"/>
         <activity
             android:name=".module.home.net.type.community.ask.comment.AskSongCommentActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".module.home.profile.suggestion.SuggestionActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".module.home.profile.setting.SettingActivity" />
-        <activity android:name=".module.home.profile.collection.UserCollectionActivity" />
-        <activity android:name=".module.home.net.help.HelpActivity">
+        <activity
+            android:name=".module.home.profile.setting.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.home.profile.collection.UserCollectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.home.net.help.HelpActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="help_activity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.home.profile.contribution.CoinRankActivity" />
+        <activity
+            android:name=".module.home.profile.contribution.CoinRankActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.home.local.lead.LeadSongActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".module.home.profile.user.forget.ForgetActivity" />
-        <activity android:name=".module.home.profile.post.UserPostActivity" />
-        <activity android:name=".module.home.profile.share.UserShareActivity" />
-        <activity android:name=".module.home.profile.user.notify.UserNotifyActivity" />
+        <activity
+            android:name=".module.home.profile.user.forget.ForgetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.home.profile.post.UserPostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.home.profile.share.UserShareActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".util.common.update.DownloadService"
@@ -99,12 +121,10 @@
         <activity
             android:name=".module.home.profile.support.SupportActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".module.home.profile.user.notify.version.PreviewVersionActivity" />
-        <activity android:name=".module.home.net.special.SpecialColumnActivity" />
-        <activity android:name=".module.home.profile.user.other.OtherProfileActivity" />
-        <activity android:name=".module.home.net.type.study.StudyActivity" />
-        <activity android:name=".module.home.net.special.list.SpecialListActivity" />
-        <activity android:name=".module.home.profile.gift.GiftActivity" />
+        <activity android:name=".module.home.profile.user.other.OtherProfileActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".module.home.net.type.study.StudyActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".module.home.profile.gift.GiftActivity" android:screenOrientation="portrait" />
+        <activity android:name=".module.home.profile.interest.UserInterestActivity"  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

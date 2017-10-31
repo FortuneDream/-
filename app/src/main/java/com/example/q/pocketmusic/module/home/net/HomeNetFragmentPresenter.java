@@ -10,7 +10,7 @@ import com.example.q.pocketmusic.model.net.LoadRecommendList;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.help.HelpActivity;
-import com.example.q.pocketmusic.module.home.net.special.SpecialColumnActivity;
+
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
 import com.example.q.pocketmusic.module.home.profile.suggestion.SuggestionActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
@@ -67,8 +67,6 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
         if (picPosition == 0) {
             joinQQGroup();
         } else if (picPosition == 1) {
-            fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), SpecialColumnActivity.class));
-        } else if (picPosition == 2) {
             fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), HelpActivity.class));
         }
     }

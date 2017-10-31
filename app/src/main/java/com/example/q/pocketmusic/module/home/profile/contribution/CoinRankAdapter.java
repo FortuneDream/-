@@ -2,6 +2,10 @@ package com.example.q.pocketmusic.module.home.profile.contribution;
 
 import android.content.Context;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,7 +14,9 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
+import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.config.pic.IDisplayStrategy;
+import com.example.q.pocketmusic.model.bean.CommunityState;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.config.pic.GlideStrategy;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -46,7 +52,6 @@ public class CoinRankAdapter extends RecyclerArrayAdapter<MyUser> {
         TextView createdAtTv;
         Toolbar contentToolbar;
 
-
         public ViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_coin_rank);
             headIv = $(R.id.head_iv);
@@ -73,7 +78,6 @@ public class CoinRankAdapter extends RecyclerArrayAdapter<MyUser> {
             displayStrategy.displayCircle(getContext(), data.getHeadImg(), headIv);
             nickNameTv.setText(data.getNickName());
             createdAtTv.setText("注册时间：" + data.getCreatedAt());
-            coinTv.setText(String.valueOf(data.getContribution()) + " 枚");
             headIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -82,7 +86,17 @@ public class CoinRankAdapter extends RecyclerArrayAdapter<MyUser> {
                     }
                 }
             });
+            setCoin(data);
+        }
 
+        //设置硬币
+        private void setCoin(MyUser data) {
+            Spannable spn;
+            ForegroundColorSpan colorSpan;
+            spn = new SpannableString(String.valueOf(data.getContribution()));
+            colorSpan = new ForegroundColorSpan(getContext().getResources().getColor(R.color.vec_red));
+            spn.setSpan(colorSpan, 0, spn.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+            coinTv.setText(spn + "枚");
         }
     }
 }

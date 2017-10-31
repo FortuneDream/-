@@ -60,8 +60,8 @@ public class EditDialog {
                         ToastUtil.showToast( "不能为空哦~");
                     } else {
                         listener.onSelectedOk(str);
+                        dismiss();
                     }
-
                 }
             }
         });

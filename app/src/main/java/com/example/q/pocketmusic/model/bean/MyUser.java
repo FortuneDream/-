@@ -75,7 +75,7 @@ public class MyUser extends BmobUser {
         this.headImg = headImg;
     }
 
-    public Integer getContribution() {
+    public int getContribution() {
         return contribution;
     }
 

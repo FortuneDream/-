@@ -13,6 +13,7 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionActivity;
 import com.example.q.pocketmusic.module.home.profile.contribution.CoinRankActivity;
 
+import com.example.q.pocketmusic.module.home.profile.interest.UserInterestActivity;
 import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
@@ -245,7 +246,6 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         } else {
             ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
         }
-
     }
 
 
@@ -254,7 +254,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
     }
 
     public void enterInterestActivity() {
-        ToastUtil.showToast("前方正在施工");
+        fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), UserInterestActivity.class));
     }
 
 
