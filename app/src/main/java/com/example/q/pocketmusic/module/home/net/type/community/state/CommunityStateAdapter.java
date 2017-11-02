@@ -56,7 +56,7 @@ public class CommunityStateAdapter extends RecyclerArrayAdapter<CommunityState> 
         public void setData(final CommunityState data) {
             super.setData(data);
             if (data.getUser() == null) {
-                return;
+                return ;
             }
             communityStateUserHeadIv.setOnClickListener(new View.OnClickListener() {
                 @Override

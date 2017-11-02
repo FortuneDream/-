@@ -12,6 +12,7 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 
 import butterknife.BindView;
@@ -72,7 +73,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter.IView,LoginPresen
                 presenter.enterRegisterActivity();//请求码REQUEST_REGISTER
                 break;
             case R.id.forget_password_iv:
-                presenter.enterForgetActivity();
+                ToastUtil.showToast("忘记密码-->请在粉丝群内@鹏君");
+                break;
         }
     }
 

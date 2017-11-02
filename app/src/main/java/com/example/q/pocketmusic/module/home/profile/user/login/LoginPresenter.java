@@ -10,7 +10,6 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.profile.user.forget.ForgetActivity;
 import com.example.q.pocketmusic.module.home.profile.user.register.RegisterActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
@@ -62,10 +61,8 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
         ((Activity) activity.getCurrentContext()).startActivityForResult(intent, Constant.REQUEST_REGISTER);
     }
 
-    public void enterForgetActivity() {
-        activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), ForgetActivity.class));
 
-    }
+
 
     public interface IView extends IBaseView {
         void finish();

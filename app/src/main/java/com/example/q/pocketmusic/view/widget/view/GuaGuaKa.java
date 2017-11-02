@@ -44,7 +44,7 @@ public class GuaGuaKa extends View {
     private final int DEFAULT_TEXT_SIZE = ConvertUtil.Dp2Px(getContext(), 20);
     private final int DEFAULT_TEXT_COLOR = getResources().getColor(R.color.md_green_300);
     private OnCompleteListener onCompleteListener;
-    private String mTopContent = "Surprise";//顶层文字
+    private String mTopContent = "刮开有奖";//顶层文字
 
 
     public void setOnCompleteListener(OnCompleteListener onCompleteListener) {
