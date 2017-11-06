@@ -67,7 +67,6 @@
             android:name=".module.home.net.type.community.share.publish.ShareActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-
         <activity
             android:name=".module.home.profile.user.login.LoginActivity"
             android:screenOrientation="portrait" />
@@ -134,6 +133,7 @@
         <activity
             android:name=".module.home.profile.interest.UserInterestActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".module.home.profile.support.DimensionActivity"></activity>
     </application>
 
 </manifest>

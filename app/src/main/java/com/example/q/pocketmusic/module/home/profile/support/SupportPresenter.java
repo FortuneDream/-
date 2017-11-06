@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.profile.support;
 
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.model.bean.MoneySupport;
@@ -199,6 +200,12 @@ public class SupportPresenter extends BasePresenter<SupportPresenter.IView> {
        ClipboardManager cm= (ClipboardManager) activity.getAppContext().getSystemService(Context.CLIPBOARD_SERVICE);
         cm.setText("15123100885");
         ToastUtil.showToast("复制成功~");
+    }
+
+    public void enterDimensionActivity(int which) {
+        Intent intent=new Intent(activity.getCurrentContext(),DimensionActivity.class);
+        intent.putExtra(DimensionActivity.PARAM_TYPE,which);
+        activity.getCurrentContext().startActivity(intent);
     }
 
 

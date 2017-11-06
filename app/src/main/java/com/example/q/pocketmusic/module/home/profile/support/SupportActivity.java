@@ -1,6 +1,6 @@
 package com.example.q.pocketmusic.module.home.profile.support;
 
-import android.os.Bundle;
+import android.content.DialogInterface;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -18,7 +18,6 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SupportActivity extends AuthActivity<SupportPresenter.IView, SupportPresenter>
@@ -33,6 +32,8 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
     EasyRecyclerView recycler;
     @BindView(R.id.content_ll)
     LinearLayout contentLl;
+    @BindView(R.id.get_dimension_tv)
+    TextView getDimensionTv;
     private MoneyAdapter mMoneyAdapter;
     private boolean isAlipayPay = true;
     private AlertDialog mPayDialog;
@@ -121,11 +122,25 @@ public class SupportActivity extends AuthActivity<SupportPresenter.IView, Suppor
     }
 
 
-    @OnClick({R.id.copy_alipay_tv})
+    @OnClick({R.id.copy_alipay_tv,R.id.get_dimension_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.copy_alipay_tv:
                 presenter.copyAlipay();
+                break;
+            case R.id.get_dimension_tv:
+                CharSequence[] list=new CharSequence[2];
+                list[0]="支付宝";
+                list[1]="微信";
+                new AlertDialog.Builder(this)
+                        .setTitle("选择类型")
+                        .setSingleChoiceItems(list, 0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                presenter.enterDimensionActivity(which);
+                            }
+                        })
+                        .show();
                 break;
         }
     }

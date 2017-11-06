@@ -10,6 +10,7 @@ import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.model.BmobInfo;
 import com.example.q.pocketmusic.model.bean.DownloadInfo;
 import com.example.q.pocketmusic.model.bean.MyUser;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -402,11 +403,36 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         return ((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE)).getShowMenu();
     }
 
+    //纠错
+    public void recovery() {
+        ToastUtil.showToast("正在开发纠错系统");
+        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
+        int isFrom = songObject.getFrom();
+        String name = songObject.getSong().getName();
+        fragment.alertRecoveryDialog(name, isFrom);
+    }
+
+    //发送纠错信息
+    public void sendRecovery(String name, int isFrom, String info) {
+        if (UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext())) {
+            String content = "用户：" + UserUtil.user.getObjectId() + "  " + "来自：" + Constant.getFromType(isFrom) + "  " + "曲谱名：" + name + "  " + "错误描述：" + info;
+            BmobInfo bmobInfo = new BmobInfo(Constant.BMOB_INFO_RECOVERY, content);
+            bmobInfo.save(new ToastSaveListener<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    ToastUtil.showToast("已反馈，若属实将获得硬币奖励");
+                }
+            });
+        }
+    }
+
 
     interface IView extends IBaseView {
 
         void dismissEditDialog();
 
         void downloadResult(Integer success, String str);
+
+        void alertRecoveryDialog(String name, int isFrom);
     }
 }

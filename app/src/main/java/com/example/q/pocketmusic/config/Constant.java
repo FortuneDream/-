@@ -30,7 +30,8 @@ public class Constant {
     //BmobInfo
     public static final int BMOB_INFO_RESET_PASSWORD = 1;//请求重置密码
     public static final int BMOB_INFO_LABA = 2;//小喇叭
-    public static final int Bmob_INFO_HELP = 3;//帮助信息
+    public static final int BMOB_INFO_HELP = 3;//帮助信息
+    public static final int BMOB_INFO_RECOVERY = 4;//纠错
 
 
     //Intent Flag:本地/网络
@@ -45,7 +46,28 @@ public class Constant {
     public final static int FROM_SHARE = 8;
     public final static int FROM_ASK = 9;
     public final static int FROM_LOCAL = 10;
-    ;
+
+    public static String getFromType(int type){
+        switch (type){
+            case FROM_TYPE:
+                return "乐器";
+            case FROM_SEARCH_NET:
+                return "搜索";
+            case FROM_COLLECTION:
+                return "收藏";
+            case FROM_RECOMMEND:
+                return "推荐";
+            case FROM_SHARE:
+                return "分享";
+            case FROM_ASK:
+                return "求谱";
+            case FROM_LOCAL:
+                return "本地";
+            default:
+                return "未知";
+        }
+    }
+
 
     //Intent Flag:显示Menu
     public final static int MENU_DOWNLOAD_COLLECTION_AGREE_SHARE = 1001;//下载，点赞，收藏
@@ -65,15 +87,15 @@ public class Constant {
 
 
     //贡献度+
-    public final static int ADD_CONTRIBUTION_INIT = 15;//初始
+    public final static int ADD_CONTRIBUTION_INIT = 20;//初始
     public final static int ADD_CONTRIBUTION_UPLOAD = 3;//上传
-    public final static int ADD_CONTRIBUTION_COMMENT_WITH_PIC = 3;//评论加图
+    public final static int ADD_CONTRIBUTION_COMMENT_WITH_PIC = 5;//评论加图
     public final static int ADD_CONTRIBUTION_AGREE_OTHER = 2;//被点赞的额外加成
 
     //贡献度-
-    public final static int REDUCE_ASK = 4;//求谱
-    public final static int REDUCE_DOWNLOAD = 3;//下载
-    public final static int REDUCE_COLLECTION = 2;//收藏
+    public final static int REDUCE_ASK = 8;//求谱
+    public final static int REDUCE_DOWNLOAD = 4;//下载
+    public final static int REDUCE_COLLECTION = 5;//收藏
     public final static int REDUCE_CHANG_NICK_NAME = 10;//修改昵称
     public final static int REDUCE_PUNISH = 10;//惩罚
 

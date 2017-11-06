@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -21,7 +22,9 @@ import com.example.q.pocketmusic.view.widget.net.ConfettiUtil;
 import com.example.q.pocketmusic.view.widget.net.SnackBarUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by 鹏君 on 2017/5/31.
@@ -39,6 +42,9 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     AppCompatImageView collectionIv;
     @BindView(R.id.share_iv)
     AppCompatImageView shareIv;
+    @BindView(R.id.recovery_iv)
+    AppCompatImageView recoveryIv;
+    Unbinder unbinder;
     private EditDialog editDialog;//编辑框
     private static final String PARAM_Intent = "param_1";
 
@@ -88,7 +94,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
         return new SongMenuPresenter(this);
     }
 
-    @OnClick({R.id.download_iv, R.id.agree_iv, R.id.collection_iv, R.id.share_iv})
+    @OnClick({R.id.download_iv, R.id.agree_iv, R.id.collection_iv, R.id.share_iv,R.id.recovery_iv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.download_iv:
@@ -104,6 +110,9 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                 break;
             case R.id.share_iv:
                 presenter.share();
+                break;
+            case R.id.recovery_iv:
+                presenter.recovery();
                 break;
         }
     }
@@ -151,6 +160,25 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                 }
             }).setActionTextColor(ContextCompat.getColor(getCurrentContext(), R.color.white)).show();
         }
+    }
+
+    @Override
+    public void alertRecoveryDialog(final String name, final int isFrom) {
+      new EditDialog.Builder(getCurrentContext())
+                .setTitle("错误曲谱名："+name)
+                .setHint("描述")
+                .setListener(new EditDialog.Builder.OnSelectedListener() {
+                    @Override
+                    public void onSelectedOk(String str) {
+                        presenter.sendRecovery(name,isFrom,str);
+                    }
+
+                    @Override
+                    public void onSelectedCancel() {
+
+                    }
+                })
+                .create().show();
     }
 
     public void alertCheckDownloadDialog(final View view, int coin) {

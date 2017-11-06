@@ -7,32 +7,107 @@
     android:orientation="horizontal"
     android:padding="@dimen/item_padding_16dp">
 
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/download_iv"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:srcCompat="@drawable/ic_vec_song_bottom_download_normal" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/agree_iv"
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/download_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_song_bottom_download_normal" />
+
+        <TextView
+            style="@style/TwoTextMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下载" />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:srcCompat="@drawable/ic_vec_song_bottom_agree_normal" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/collection_iv"
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/agree_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_song_bottom_agree_normal" />
+
+        <TextView
+            style="@style/TwoTextMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点赞" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:srcCompat="@drawable/ic_vec_song_bottom_collection_normal" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/share_iv"
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/collection_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_song_bottom_collection_normal" />
+
+        <TextView
+            style="@style/TwoTextMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收藏" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:srcCompat="@drawable/ic_vec_song_bottom_share_normal" />
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/share_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_song_bottom_share_normal" />
+
+        <TextView
+            style="@style/TwoTextMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/recovery_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vec_song_bottom_recovery" />
+
+        <TextView
+            style="@style/TwoTextMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="纠错" />
+
+    </LinearLayout>
+
+
 </LinearLayout>

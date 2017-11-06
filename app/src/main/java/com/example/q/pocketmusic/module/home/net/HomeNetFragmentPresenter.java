@@ -1,7 +1,9 @@
 package com.example.q.pocketmusic.module.home.net;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.model.bean.Song;
@@ -65,7 +67,16 @@ public class HomeNetFragmentPresenter extends BasePresenter<HomeNetFragmentPrese
     //Banner
     public void enterBannerActivity(int picPosition) {
         if (picPosition == 0) {
-            joinQQGroup();
+            new AlertDialog.Builder(fragment.getCurrentContext())
+                    .setTitle("加入粉丝群")
+                    .setMessage("是否跳转到加群界面？")
+                    .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            joinQQGroup();//加群
+                        }
+                    })
+                    .show();
         } else if (picPosition == 1) {
             fragment.getCurrentContext().startActivity(new Intent(fragment.getCurrentContext(), HelpActivity.class));
         }

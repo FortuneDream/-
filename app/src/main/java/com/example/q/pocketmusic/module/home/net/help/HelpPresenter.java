@@ -25,7 +25,7 @@ public class HelpPresenter extends BasePresenter<HelpPresenter.IView> {
     public void getList() {
         BmobQuery<BmobInfo> query = new BmobQuery<>();
         query.order("-createdAt");//逆序
-        query.addWhereEqualTo("type", Constant.Bmob_INFO_HELP);
+        query.addWhereEqualTo("type", Constant.BMOB_INFO_HELP);
         query.findObjects(new ToastQueryListener<BmobInfo>() {
             @Override
             public void onSuccess(List<BmobInfo> list) {

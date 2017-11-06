@@ -165,6 +165,24 @@
         <View style="@style/SettingBigDivider" />
 
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
+            android:id="@+id/support_me_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemTitleIco="@drawable/ic_vec_profile_support"
+            app:itemTitleText="支持开发者">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="48dp"
+                android:layout_marginRight="16dp"
+                android:text="可以拿硬币哦~" />
+        </com.example.q.pocketmusic.view.widget.view.IcoTextItem>
+
+        <View style="@style/SettingDivider" />
+
+        <com.example.q.pocketmusic.view.widget.view.IcoTextItem
             android:id="@+id/coin_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -182,14 +200,6 @@
 
         <View style="@style/SettingDivider" />
 
-        <com.example.q.pocketmusic.view.widget.view.IcoTextItem
-            android:id="@+id/support_me_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemTitleIco="@drawable/ic_vec_profile_support"
-            app:itemTitleText="支持开发者" />
-
-        <View style="@style/SettingDivider" />
 
         <com.example.q.pocketmusic.view.widget.view.IcoTextItem
             android:id="@+id/grade_item"
