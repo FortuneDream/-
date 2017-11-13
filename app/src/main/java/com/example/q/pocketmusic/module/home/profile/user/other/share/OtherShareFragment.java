@@ -3,8 +3,8 @@ package com.example.q.pocketmusic.module.home.profile.user.other.share;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
+import com.example.q.pocketmusic.data.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.AuthFragment;
 import com.example.q.pocketmusic.module.home.profile.user.other.OtherProfileActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;

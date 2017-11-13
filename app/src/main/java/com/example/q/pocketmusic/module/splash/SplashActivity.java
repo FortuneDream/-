@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.BmobInfo;
+import com.example.q.pocketmusic.data.BmobInfo;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 

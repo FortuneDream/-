@@ -6,10 +6,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
+import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
-import com.example.q.pocketmusic.module.home.net.type.community.ask.AskListFragment;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

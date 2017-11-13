@@ -14,11 +14,11 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
-import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
-import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
+import com.example.q.pocketmusic.data.bean.ask.AskSongPost;
+import com.example.q.pocketmusic.data.bean.collection.CollectionSong;
+import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;

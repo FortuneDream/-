@@ -4,13 +4,10 @@ package com.example.q.pocketmusic.module.home.net.type.community.state;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
-import com.example.q.pocketmusic.model.bean.CommunityState;
+import com.example.q.pocketmusic.data.bean.CommunityState;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.net.type.SongTypeActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -19,7 +16,6 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class CommunityStateFragment extends BaseFragment<CommunityStateFragmentPresenter.IView, CommunityStateFragmentPresenter>

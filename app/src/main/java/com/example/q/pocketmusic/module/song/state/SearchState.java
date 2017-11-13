@@ -1,8 +1,8 @@
 package com.example.q.pocketmusic.module.song.state;
 
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.net.LoadSearchSongPic;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.net.LoadSearchSongPic;
 import com.example.q.pocketmusic.module.song.SongActivityPresenter;
 
 /**

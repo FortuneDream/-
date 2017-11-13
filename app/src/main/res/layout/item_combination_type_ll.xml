@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/vec_white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -36,7 +37,7 @@
             android:layout_weight="1"
             android:gravity="center"
             app:itemIco="@drawable/ico_yueqi_jita"
-            app:itemName="吉他" />
+            app:itemName="吉他/尤克里里" />
 
         <com.example.q.pocketmusic.view.widget.view.TypeView
             android:id="@+id/type_gangqin_tv"
@@ -82,7 +83,7 @@
             android:layout_weight="1"
             android:gravity="center"
             app:itemIco="@drawable/ico_yueqi_guzheng"
-            app:itemName="古筝" />
+            app:itemName="古筝/古琴" />
 
         <com.example.q.pocketmusic.view.widget.view.TypeView
             android:id="@+id/type_dianziqin_tv"

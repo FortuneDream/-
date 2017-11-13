@@ -1,15 +1,11 @@
 package com.example.q.pocketmusic.module.home.net.type.community.state;
 
-import android.content.Context;
-
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.model.bean.CommunityState;
+import com.example.q.pocketmusic.data.bean.CommunityState;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 
 import java.util.List;
-
-import cn.bmob.v3.BmobQuery;
 
 public class CommunityStateFragmentPresenter extends BasePresenter<CommunityStateFragmentPresenter.IView> {
     private IView fragment;

@@ -5,9 +5,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.local.Img;
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.db.LocalSongDao;
+import com.example.q.pocketmusic.data.bean.local.Img;
+import com.example.q.pocketmusic.data.bean.local.LocalSong;
+import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;

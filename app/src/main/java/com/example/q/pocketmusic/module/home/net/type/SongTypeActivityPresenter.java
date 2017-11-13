@@ -6,8 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.db.LocalSongDao;
+import com.example.q.pocketmusic.data.bean.local.LocalSong;
+import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;

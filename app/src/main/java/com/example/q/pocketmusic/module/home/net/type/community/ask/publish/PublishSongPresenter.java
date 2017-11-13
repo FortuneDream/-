@@ -4,11 +4,9 @@ import android.text.TextUtils;
 
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.model.bean.ask.AskSongPost;
+import com.example.q.pocketmusic.data.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;

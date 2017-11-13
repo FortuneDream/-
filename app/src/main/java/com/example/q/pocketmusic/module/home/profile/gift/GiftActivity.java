@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.bmob.Gift;
+import com.example.q.pocketmusic.data.bean.bmob.Gift;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;

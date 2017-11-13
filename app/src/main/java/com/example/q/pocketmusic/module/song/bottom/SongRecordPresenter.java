@@ -11,10 +11,10 @@ import android.os.Message;
 import android.provider.Settings;
 
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.SongObject;
-import com.example.q.pocketmusic.model.bean.local.RecordAudio;
-import com.example.q.pocketmusic.model.db.RecordAudioDao;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.bean.SongObject;
+import com.example.q.pocketmusic.data.bean.local.RecordAudio;
+import com.example.q.pocketmusic.data.db.RecordAudioDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;

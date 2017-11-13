@@ -1,16 +1,11 @@
 package com.example.q.pocketmusic.module.home.net.type.community.state;
 
-import android.widget.LinearLayout;
-
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.config.BmobConstant;
-import com.example.q.pocketmusic.model.bean.CommunityState;
+import com.example.q.pocketmusic.data.bean.CommunityState;
 import com.example.q.pocketmusic.module.common.BaseModel;
 import com.example.q.pocketmusic.util.UserUtil;
-import com.example.q.pocketmusic.util.common.LogUtils;
-
-import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 
@@ -31,7 +26,10 @@ public class CommunityStateModel extends BaseModel<CommunityState> {
         query.findObjects(listener);
     }
 
-    public void addCommunityState(int community, int state,String content, ToastSaveListener<String> listener) {
+    public void addCommunityState(int community, int state, String content, ToastSaveListener<String> listener) {
+        if (UserUtil.user == null) {
+            return;
+        }
         CommunityState communityState = new CommunityState();
         communityState.setUser(UserUtil.user);
         communityState.setHide(false);

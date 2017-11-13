@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.song;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -17,8 +16,8 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.ScreenshotContentObserver;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.SongObject;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.net.HackyViewPager;
@@ -28,7 +27,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import pub.devrel.easypermissions.EasyPermissions;
 
 //查看大图界面

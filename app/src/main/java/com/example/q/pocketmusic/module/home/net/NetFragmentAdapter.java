@@ -7,9 +7,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.flag.BannerBean;
-import com.example.q.pocketmusic.model.flag.ContentLL;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.flag.BannerBean;
+import com.example.q.pocketmusic.data.flag.ContentLL;
 import com.example.q.pocketmusic.util.InstrumentFlagUtil;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;

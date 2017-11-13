@@ -8,8 +8,8 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
 import com.example.q.pocketmusic.IAudioPlayerService;
-import com.example.q.pocketmusic.model.bean.local.RecordAudio;
-import com.example.q.pocketmusic.model.db.RecordAudioDao;
+import com.example.q.pocketmusic.data.bean.local.RecordAudio;
+import com.example.q.pocketmusic.data.db.RecordAudioDao;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.io.IOException;

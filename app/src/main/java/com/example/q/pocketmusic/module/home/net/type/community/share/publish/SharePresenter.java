@@ -7,14 +7,14 @@ import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.local.Img;
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.bean.share.SharePic;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
-import com.example.q.pocketmusic.model.db.LocalSongDao;
+import com.example.q.pocketmusic.data.bean.local.Img;
+import com.example.q.pocketmusic.data.bean.local.LocalSong;
+import com.example.q.pocketmusic.data.bean.share.SharePic;
+import com.example.q.pocketmusic.data.bean.share.ShareSong;
+import com.example.q.pocketmusic.data.db.LocalSongDao;
+import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.UserUtil;
@@ -85,19 +85,20 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
         });
     }
 
-    public void upLoad(final String name, final String author, final String content) {
-        if ((!TextUtils.isEmpty(name)) && (!TextUtils.isEmpty(author)) && (!TextUtils.isEmpty(content)) && (mNumberPic > 0)) {
+    public void upLoad(final String name, final String content) {
+
+        if ((!TextUtils.isEmpty(name)) && (!TextUtils.isEmpty(content)) && (mNumberPic > 0) && UserUtil.checkLocalUser((BaseActivity) activity.getCurrentContext())) {
             //上传服务器,弹出Dialog，成功后finish，弹出Toast;
-            activity.showLoading(true);
+            activity.alertSelectCommunityDialog(name, content);
             //先检查是否已经存在相同的曲谱
-            checkHasSong(name, content);
         } else {
             ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
         }
     }
 
     //检查是否已经存在
-    private void checkHasSong(final String name, final String content) {
+    public void checkHasSong(final String name, final String content, final int community) {
+        activity.showLoading(true);
         BmobQuery<ShareSong> query = new BmobQuery<>();
         query.addWhereEqualTo("name", name);
         query.findObjects(new ToastQueryListener<ShareSong>(activity) {
@@ -113,20 +114,20 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
                 } else {
                     LogUtils.e(TAG, "开始批量上传");
                     //批量上传文件
-                    uploadBatch(name, content);
+                    uploadBatch(name, content, community);
                 }
             }
         });
     }
 
     //批量上传文件
-    private void uploadBatch(final String name, final String content) {
+    private void uploadBatch(final String name, final String content, final int community) {
         BmobFile.uploadBatch(filePaths, new UploadBatchListener() {
             @Override
             public void onSuccess(List<BmobFile> list, List<String> list1) {
                 //文件成功之后再添加数据
                 if (filePaths.length == list1.size()) {
-                    shareSong(name, content, list1);
+                    shareSong(name, content, list1, community);
                 }
             }
 
@@ -144,10 +145,9 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
     }
 
     //上传/分享乐曲
-    private void shareSong(String name, final String content, final List<String> list1) {
+    private void shareSong(String name, final String content, final List<String> list1, int community) {
         final ShareSong shareSong = new ShareSong(UserUtil.user, name, content);
-        shareSong.setInstrument(typeId);
-        activity.showLoading(true);
+        shareSong.setInstrument(community);
         //添加分享曲谱记录
         shareSong.save(new ToastSaveListener<String>(activity) {
             @Override
@@ -201,7 +201,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
     //查看图片
     public void checkPic(String path) {
-        LogUtils.e(TAG, path);
+        LogUtils.e(TAG, path);//22  15  1500  1.5  1.2  3-4  16 6
         GalleryFinal.openEdit(2, path, new GalleryFinal.OnHanlderResultCallback() {
             @Override
             public void onHanlderSuccess(int requestCode, List<PhotoInfo> resultList) {
@@ -231,5 +231,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
         void setSelectPicResult(int mNumberPic, String[] filePaths, String name);
 
         void showLoading(boolean isShow);
+
+        void alertSelectCommunityDialog(String name, String content);
     }
 }

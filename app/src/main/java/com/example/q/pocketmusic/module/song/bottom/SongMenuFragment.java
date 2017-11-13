@@ -32,18 +32,19 @@ import butterknife.Unbinder;
 
 public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, SongMenuPresenter>
         implements SongMenuPresenter.IView {
+
+    @BindView(R.id.agree_ll)
+    LinearLayout agreeLl;
+    @BindView(R.id.download_ll)
+    LinearLayout downloadLl;
+    @BindView(R.id.collection_ll)
+    LinearLayout collectionLl;
+    @BindView(R.id.share_ll)
+    LinearLayout shareLl;
+    @BindView(R.id.recovery_ll)
+    LinearLayout recoveryLl;
     @BindView(R.id.content_ll)
     LinearLayout contentLl;
-    @BindView(R.id.download_iv)
-    AppCompatImageView downloadIv;
-    @BindView(R.id.agree_iv)
-    AppCompatImageView agreeIv;
-    @BindView(R.id.collection_iv)
-    AppCompatImageView collectionIv;
-    @BindView(R.id.share_iv)
-    AppCompatImageView shareIv;
-    @BindView(R.id.recovery_iv)
-    AppCompatImageView recoveryIv;
     Unbinder unbinder;
     private EditDialog editDialog;//编辑框
     private static final String PARAM_Intent = "param_1";
@@ -80,11 +81,11 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
             case Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE://下载，收藏，点赞，分享
                 break;
             case Constant.MENU_DOWNLOAD_COLLECTION_SHARE://下载和收藏，分享
-                agreeIv.setVisibility(View.GONE);
+                agreeLl.setVisibility(View.GONE);
                 break;
             case Constant.MENU_DOWNLOAD_SHARE://下载，分享
-                agreeIv.setVisibility(View.GONE);
-                collectionIv.setVisibility(View.GONE);
+                agreeLl.setVisibility(View.GONE);
+                collectionLl.setVisibility(View.GONE);
                 break;
         }
     }
@@ -94,24 +95,24 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
         return new SongMenuPresenter(this);
     }
 
-    @OnClick({R.id.download_iv, R.id.agree_iv, R.id.collection_iv, R.id.share_iv,R.id.recovery_iv})
+    @OnClick({R.id.download_ll, R.id.agree_ll, R.id.collection_ll, R.id.share_ll, R.id.recovery_ll})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.download_iv:
+            case R.id.download_ll:
                 alertCheckDownloadDialog(view, Constant.REDUCE_DOWNLOAD);
                 break;
-            case R.id.agree_iv:
+            case R.id.agree_ll:
                 view.setEnabled(false);//点赞之后就不可再次点击
                 ((AppCompatImageView) view).setImageResource(R.drawable.ic_vec_song_bottom_agree_press);
                 presenter.agree();
                 break;
-            case R.id.collection_iv:
+            case R.id.collection_ll:
                 alertCheckCollectionDialog(view, Constant.REDUCE_COLLECTION);
                 break;
-            case R.id.share_iv:
+            case R.id.share_ll:
                 presenter.share();
                 break;
-            case R.id.recovery_iv:
+            case R.id.recovery_ll:
                 presenter.recovery();
                 break;
         }
@@ -164,13 +165,13 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
 
     @Override
     public void alertRecoveryDialog(final String name, final int isFrom) {
-      new EditDialog.Builder(getCurrentContext())
-                .setTitle("错误曲谱名："+name)
+        new EditDialog.Builder(getCurrentContext())
+                .setTitle("错误曲谱名：" + name)
                 .setHint("描述")
                 .setListener(new EditDialog.Builder.OnSelectedListener() {
                     @Override
                     public void onSelectedOk(String str) {
-                        presenter.sendRecovery(name,isFrom,str);
+                        presenter.sendRecovery(name, isFrom, str);
                     }
 
                     @Override
@@ -224,4 +225,17 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
         editDialog.dismiss();
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }

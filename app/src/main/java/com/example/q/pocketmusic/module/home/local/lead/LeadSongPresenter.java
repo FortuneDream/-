@@ -2,8 +2,7 @@ package com.example.q.pocketmusic.module.home.local.lead;
 
 import android.text.TextUtils;
 
-import com.example.q.pocketmusic.model.db.ImgDao;
-import com.example.q.pocketmusic.model.db.LocalSongDao;
+import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.LocalPhotoAlbumUtil;

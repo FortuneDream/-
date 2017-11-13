@@ -4,10 +4,10 @@ import android.database.SQLException;
 import android.support.annotation.NonNull;
 
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.local.Img;
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.db.LocalSongDao;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.bean.local.Img;
+import com.example.q.pocketmusic.data.bean.local.LocalSong;
+import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.song.SongActivityPresenter;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;

@@ -12,10 +12,10 @@ import android.os.Message;
 import android.os.RemoteException;
 
 import com.example.q.pocketmusic.IAudioPlayerService;
-import com.example.q.pocketmusic.model.bean.local.RecordAudio;
-import com.example.q.pocketmusic.model.db.RecordAudioDao;
-import com.example.q.pocketmusic.model.net.LoadLocalRecordList;
-import com.example.q.pocketmusic.model.net.SynchronizeRecordAudio;
+import com.example.q.pocketmusic.data.bean.local.RecordAudio;
+import com.example.q.pocketmusic.data.db.RecordAudioDao;
+import com.example.q.pocketmusic.data.net.LoadLocalRecordList;
+import com.example.q.pocketmusic.data.net.SynchronizeRecordAudio;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.service.music.MediaPlayerService;
@@ -26,8 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import rx.Observable;
 
 /**
  * Created by 鹏君 on 2016/10/23.

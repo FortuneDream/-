@@ -1,8 +1,6 @@
 package com.example.q.pocketmusic.module.home.profile.interest;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatImageView;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,7 +9,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.config.pic.GlideStrategy;
 import com.example.q.pocketmusic.config.pic.IDisplayStrategy;
-import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.MyUser;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

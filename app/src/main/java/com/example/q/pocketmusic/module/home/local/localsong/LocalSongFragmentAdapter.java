@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
+import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter; /**

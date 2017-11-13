@@ -52,16 +52,15 @@
                 android:textColor="@color/ui_black_2"
                 android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/sign_in_btn"
-                android:layout_width="@dimen/button_sign_width"
-                android:layout_height="@dimen/button_sign_height"
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/sign_in_iv"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center"
-                android:background="@drawable/shape_sign_in"
-                android:text="签到"
-                android:textColor="@color/md_red_300" />
+                app:srcCompat="@drawable/anim_ic_vec_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
@@ -174,7 +173,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="48dp"
                 android:layout_marginRight="16dp"
                 android:text="可以拿硬币哦~" />

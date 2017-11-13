@@ -4,16 +4,13 @@ import android.text.TextUtils;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
-import com.example.q.pocketmusic.model.bean.bmob.UserSuggestion;
+import com.example.q.pocketmusic.data.bean.bmob.UserSuggestion;
+import com.example.q.pocketmusic.data.model.UserSuggestionModel;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
-
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobPointer;
 
 /**
  * Created by 鹏君 on 2016/11/14.
@@ -21,14 +18,14 @@ import cn.bmob.v3.datatype.BmobPointer;
 
 public class SuggestionPresenter extends BasePresenter<SuggestionPresenter.IView> {
     private IView activity;
-    private SuggestionModel model;
+    private UserSuggestionModel model;
     private int mPage;
 
 
     public SuggestionPresenter(IView activity) {
         attachView(activity);
         this.activity = getIViewRef();
-        model = new SuggestionModel();
+        model = new UserSuggestionModel();
         this.mPage = 0;
     }
 

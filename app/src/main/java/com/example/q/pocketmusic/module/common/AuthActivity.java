@@ -3,9 +3,8 @@ package com.example.q.pocketmusic.module.common;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.util.UserUtil;
-import com.example.q.pocketmusic.util.common.LogUtils;
 
 /**
  * Created by 鹏君 on 2017/1/13.

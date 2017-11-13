@@ -8,7 +8,7 @@ import android.os.Environment;
 import android.os.Process;
 import android.util.Log;
 
-import com.example.q.pocketmusic.model.bean.bmob.ExceptionBean;
+import com.example.q.pocketmusic.data.bean.bmob.ExceptionBean;
 
 import java.io.BufferedWriter;
 import java.io.File;

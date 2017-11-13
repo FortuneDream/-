@@ -10,17 +10,17 @@ import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.BmobConstant;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.BmobInfo;
-import com.example.q.pocketmusic.model.bean.DownloadInfo;
-import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.SongObject;
-import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
-import com.example.q.pocketmusic.model.bean.collection.CollectionPic;
-import com.example.q.pocketmusic.model.bean.collection.CollectionSong;
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
-import com.example.q.pocketmusic.model.db.LocalSongDao;
+import com.example.q.pocketmusic.data.BmobInfo;
+import com.example.q.pocketmusic.data.bean.DownloadInfo;
+import com.example.q.pocketmusic.data.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.bean.SongObject;
+import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
+import com.example.q.pocketmusic.data.bean.collection.CollectionPic;
+import com.example.q.pocketmusic.data.bean.collection.CollectionSong;
+import com.example.q.pocketmusic.data.bean.local.LocalSong;
+import com.example.q.pocketmusic.data.bean.share.ShareSong;
+import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -405,7 +405,6 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //纠错
     public void recovery() {
-        ToastUtil.showToast("正在开发纠错系统");
         SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
         int isFrom = songObject.getFrom();
         String name = songObject.getSong().getName();

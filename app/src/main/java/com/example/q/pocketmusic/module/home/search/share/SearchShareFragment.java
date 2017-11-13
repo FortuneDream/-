@@ -1,10 +1,9 @@
 package com.example.q.pocketmusic.module.home.search.share;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
+import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.search.HomeSearchFragment;
-import com.example.q.pocketmusic.module.home.search.ISearchActivity;
 import com.example.q.pocketmusic.module.home.search.ISearchFragment;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;

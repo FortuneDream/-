@@ -11,7 +11,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.local.RecordAudio;
+import com.example.q.pocketmusic.data.bean.local.RecordAudio;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.jude.easyrecyclerview.EasyRecyclerView;

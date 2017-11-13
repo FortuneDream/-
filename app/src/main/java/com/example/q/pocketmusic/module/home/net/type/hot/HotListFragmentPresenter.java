@@ -3,9 +3,9 @@ package com.example.q.pocketmusic.module.home.net.type.hot;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.SongObject;
-import com.example.q.pocketmusic.model.net.LoadTypeSongList;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.bean.SongObject;
+import com.example.q.pocketmusic.data.net.LoadTypeSongList;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;

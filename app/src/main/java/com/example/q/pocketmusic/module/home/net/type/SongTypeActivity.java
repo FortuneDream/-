@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.home.net.type;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -9,16 +8,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
+import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.InstrumentFlagUtil;
-import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IView, SongTypeActivityPresenter>

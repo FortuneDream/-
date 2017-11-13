@@ -2,24 +2,12 @@ package com.example.q.pocketmusic.module.home.profile.gift;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
-import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.CommonString;
-import com.example.q.pocketmusic.model.bean.MyUser;
-import com.example.q.pocketmusic.model.bean.bmob.Gift;
+import com.example.q.pocketmusic.data.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.bmob.Gift;
 import com.example.q.pocketmusic.module.common.BaseModel;
-import com.example.q.pocketmusic.util.UserUtil;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import cn.bmob.v3.BmobBatch;
-import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.datatype.BmobPointer;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.QueryListListener;
 
 /**
  * Created by 81256 on 2017/9/6.

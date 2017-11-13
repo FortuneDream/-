@@ -4,6 +4,7 @@
     android:id="@+id/recommend_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"

@@ -5,7 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;

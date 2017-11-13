@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.module.home.profile.gift;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
-import com.example.q.pocketmusic.model.bean.bmob.Gift;
+import com.example.q.pocketmusic.data.bean.bmob.Gift;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.UserUtil;

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
-import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 
 import butterknife.BindView;

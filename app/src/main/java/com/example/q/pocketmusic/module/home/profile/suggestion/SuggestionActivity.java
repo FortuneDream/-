@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.bmob.UserSuggestion;
+import com.example.q.pocketmusic.data.bean.bmob.UserSuggestion;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 

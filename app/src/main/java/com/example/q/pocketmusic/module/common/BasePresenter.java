@@ -1,7 +1,5 @@
 package com.example.q.pocketmusic.module.common;
 
-import com.example.q.pocketmusic.model.bean.MyUser;
-
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;

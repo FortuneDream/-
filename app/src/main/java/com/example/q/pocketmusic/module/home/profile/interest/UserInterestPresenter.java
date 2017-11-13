@@ -1,10 +1,10 @@
 package com.example.q.pocketmusic.module.home.profile.interest;
 
 import android.content.Intent;
-import android.content.pm.ProviderInfo;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.MyUser;
+import com.example.q.pocketmusic.data.model.UserInterestModel;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.user.other.OtherProfileActivity;

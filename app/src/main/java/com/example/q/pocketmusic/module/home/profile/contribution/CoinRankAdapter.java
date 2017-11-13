@@ -14,10 +14,8 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
-import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.config.pic.IDisplayStrategy;
-import com.example.q.pocketmusic.model.bean.CommunityState;
-import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.config.pic.GlideStrategy;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;

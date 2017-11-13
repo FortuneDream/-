@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
-import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
+import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;

@@ -1,17 +1,14 @@
 package com.example.q.pocketmusic.module.home.net;
 
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.flag.BannerBean;
-import com.example.q.pocketmusic.model.flag.ContentLL;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.flag.BannerBean;
+import com.example.q.pocketmusic.data.flag.ContentLL;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -19,7 +16,6 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 

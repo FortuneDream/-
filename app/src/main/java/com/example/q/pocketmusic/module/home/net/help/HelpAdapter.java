@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.model.bean.bmob.Help;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;

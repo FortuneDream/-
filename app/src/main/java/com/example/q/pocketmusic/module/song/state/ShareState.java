@@ -2,9 +2,9 @@ package com.example.q.pocketmusic.module.song.state;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.share.SharePic;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.bean.share.SharePic;
+import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.song.SongActivityPresenter;
 
 import java.util.ArrayList;

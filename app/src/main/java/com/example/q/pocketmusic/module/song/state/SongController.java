@@ -3,11 +3,11 @@ package com.example.q.pocketmusic.module.song.state;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.SongObject;
-import com.example.q.pocketmusic.model.bean.ask.AskSongComment;
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.bean.share.ShareSong;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.bean.SongObject;
+import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
+import com.example.q.pocketmusic.data.bean.local.LocalSong;
+import com.example.q.pocketmusic.data.bean.share.ShareSong;
 
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.module.song.SongActivityPresenter;

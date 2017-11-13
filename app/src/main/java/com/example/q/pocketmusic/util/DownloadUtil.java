@@ -4,11 +4,11 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.DownloadInfo;
-import com.example.q.pocketmusic.model.bean.local.Img;
-import com.example.q.pocketmusic.model.bean.local.LocalSong;
-import com.example.q.pocketmusic.model.db.ImgDao;
-import com.example.q.pocketmusic.model.db.LocalSongDao;
+import com.example.q.pocketmusic.data.bean.DownloadInfo;
+import com.example.q.pocketmusic.data.bean.local.Img;
+import com.example.q.pocketmusic.data.bean.local.LocalSong;
+import com.example.q.pocketmusic.data.db.ImgDao;
+import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 
 

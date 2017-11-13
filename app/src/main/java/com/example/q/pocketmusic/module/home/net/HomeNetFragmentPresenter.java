@@ -6,9 +6,9 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.model.bean.SongObject;
-import com.example.q.pocketmusic.model.net.LoadRecommendList;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.bean.SongObject;
+import com.example.q.pocketmusic.data.net.LoadRecommendList;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.help.HelpActivity;

@@ -1,9 +1,11 @@
 package com.example.q.pocketmusic.module.home.profile;
 
-import android.animation.ValueAnimator;
 import android.content.DialogInterface;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -39,6 +41,7 @@ import butterknife.Unbinder;
 
 public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresenter.IView, HomeProfileFragmentPresenter>
         implements HomeProfileFragmentPresenter.IView {
+
     @BindView(R.id.setting_item)
     ImageView settingItem;
     @BindView(R.id.toolbar)
@@ -47,8 +50,8 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     ImageView headIv;
     @BindView(R.id.user_signature_tv)
     TextView userSignatureTv;
-    @BindView(R.id.sign_in_btn)
-    Button signInBtn;
+    @BindView(R.id.sign_in_iv)
+    AppCompatImageView signInIv;
     @BindView(R.id.interest_item)
     LinearLayout interestItem;
     @BindView(R.id.post_item)
@@ -57,18 +60,19 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     LinearLayout collectionItem;
     @BindView(R.id.share_item)
     LinearLayout shareItem;
+    @BindView(R.id.support_me_item)
+    IcoTextItem supportMeItem;
     @BindView(R.id.coin_item)
     IcoTextItem coinItem;
     @BindView(R.id.gift_item)
     IcoTextItem giftItem;
-    @BindView(R.id.support_me_item)
-    IcoTextItem supportMeItem;
     @BindView(R.id.grade_item)
     IcoTextItem gradeItem;
     @BindView(R.id.share_app_item)
     IcoTextItem shareAppItem;
     @BindView(R.id.content_ll)
     LinearLayout contentLl;
+    Unbinder unbinder;
     private AlertDialog signInDialog;
 
 
@@ -145,30 +149,24 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     private void checkIsSign() {
         boolean isSignIn = presenter.isSignIn();
         if (isSignIn) {
-            signInBtn.setVisibility(View.GONE);
+            signInIv.setVisibility(View.GONE);
         } else {
-            signInBtn.setVisibility(View.VISIBLE);
+            signInIv.setVisibility(View.VISIBLE);
             startSignInAnimator();
         }
     }
 
     //执行可签到的动画,横向滑动
     private void startSignInAnimator() {
-        ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
-        animator.setDuration(1500);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float percent = (float) animation.getAnimatedValue();
-                signInBtn.setTranslationX(-100 * percent);
-            }
-        });
-        animator.start();
+        Drawable drawable = signInIv.getDrawable();
+        if (drawable instanceof Animatable) {
+            ((Animatable) drawable).start();
+        }
     }
 
 
     @OnClick({R.id.head_iv, R.id.setting_item, R.id.grade_item,
-            R.id.collection_item, R.id.coin_item, R.id.sign_in_btn, R.id.interest_item,
+            R.id.collection_item, R.id.coin_item, R.id.sign_in_iv, R.id.interest_item,
             R.id.post_item, R.id.share_app_item, R.id.support_me_item, R.id.share_item,
             R.id.user_signature_tv, R.id.gift_item})
     public void onClick(View view) {
@@ -197,7 +195,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
             case R.id.coin_item://进入ContributionActivity
                 presenter.enterContributionActivity();
                 break;
-            case R.id.sign_in_btn://签到
+            case R.id.sign_in_iv://签到
                 presenter.SignIn();
                 break;
             case R.id.share_app_item://分享app
@@ -234,7 +232,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     //签到Dialog
     public void alertSignInDialog() {
         //签到Btn消失
-        signInBtn.setVisibility(View.GONE);
+        signInIv.setVisibility(View.GONE);
         //随机签到
         Random random = new Random();
         final int reward = random.nextInt(8) + 1;//随机1--8点

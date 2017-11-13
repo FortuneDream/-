@@ -1,8 +1,7 @@
 package com.example.q.pocketmusic.util;
 
 import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.model.bean.Song;
-import com.example.q.pocketmusic.util.common.LogUtils;
+import com.example.q.pocketmusic.data.bean.Song;
 
 import java.util.ArrayList;
 import java.util.List;

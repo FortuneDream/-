@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.callback;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.q.pocketmusic.model.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.home.profile.user.other.OtherProfileActivity;
 
 /**
