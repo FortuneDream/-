@@ -1,18 +1,13 @@
 package com.example.q.pocketmusic.util;
 
-import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.common.BaseModel;
-import com.example.q.pocketmusic.util.common.LogUtils;
+import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.UploadFileListener;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
@@ -25,16 +20,20 @@ public class LocalPhotoAlbumUtil extends BaseModel {
     private List<String> imgUrls;
 
     public LocalPhotoAlbumUtil() {
-        this.imgUrls =new ArrayList<>();
+        this.imgUrls = new ArrayList<>();
     }
 
-    public interface OnLoadLocalResult{
+    public interface OnLoadMutiLocalResult {
         void onPathList(List<String> list);
+    }
+
+    public interface OnLoadSingleResult {
+        void onSinglePath(String path);
     }
 
 
     //打开图片管理器
-    public void getLocalPicPaths(final OnLoadLocalResult onLoadLocalResult) {
+    public void getLocalPicPaths(final OnLoadMutiLocalResult onLoadLocalResult) {
         FunctionConfig config = new FunctionConfig.Builder()
                 .setMutiSelectMaxSize(8)
                 .build();
@@ -76,5 +75,26 @@ public class LocalPhotoAlbumUtil extends BaseModel {
         });
     }
 
+    //得到单一图片
+    public void getSingleLocalPhoto(final IBaseView iView, final OnLoadSingleResult onLoadSingleResult) {
+        final FunctionConfig config = new FunctionConfig.Builder()
+                .setMutiSelectMaxSize(1)
+                .build();
+        GalleryFinal.openGallerySingle(1, config, new GalleryFinal.OnHanlderResultCallback() {
+            @Override
+            public void onHanlderSuccess(int requestCode, List<PhotoInfo> resultList) {
+                PhotoInfo photoInfo = resultList.get(0);
+                //图片上传至Bmob
+                final String picPath = photoInfo.getPhotoPath();
+                onLoadSingleResult.onSinglePath(picPath);
+            }
+
+            @Override
+            public void onHanlderFailure(int requestCode, String errorMsg) {
+                iView.showLoading(false);
+                ToastUtil.showToast(CommonString.STR_ERROR_INFO + errorMsg);
+            }
+        });
+    }
 
 }

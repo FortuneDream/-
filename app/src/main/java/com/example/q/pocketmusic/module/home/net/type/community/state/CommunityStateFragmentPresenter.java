@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.net.type.community.state;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.data.bean.CommunityState;
+import com.example.q.pocketmusic.data.model.UserCommunityStateModel;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 
@@ -11,13 +12,13 @@ public class CommunityStateFragmentPresenter extends BasePresenter<CommunityStat
     private IView fragment;
     private int mPage;
     private int type;
-    private CommunityStateModel model;
+    private UserCommunityStateModel model;
 
     public CommunityStateFragmentPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
         this.mPage = 0;
-        model=new CommunityStateModel();
+        model=new UserCommunityStateModel();
     }
 
     public void getList(final boolean isRefreshing) {

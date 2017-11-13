@@ -12,13 +12,13 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionActivity;
 import com.example.q.pocketmusic.module.home.profile.contribution.CoinRankActivity;
-
+import com.example.q.pocketmusic.module.home.profile.gift.GiftActivity;
 import com.example.q.pocketmusic.module.home.profile.interest.UserInterestActivity;
 import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
 import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
 import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
 import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
-import com.example.q.pocketmusic.module.home.profile.gift.GiftActivity;
+import com.example.q.pocketmusic.util.LocalPhotoAlbumUtil;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
@@ -27,14 +27,10 @@ import java.io.File;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UploadFileListener;
-import cn.finalteam.galleryfinal.FunctionConfig;
-import cn.finalteam.galleryfinal.GalleryFinal;
-import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 /**
  * Created by 鹏君 on 2017/1/26.
@@ -52,16 +48,11 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //选择头像
     public void setHeadIv() {
-        final FunctionConfig config = new FunctionConfig.Builder()
-                .setMutiSelectMaxSize(1)
-                .build();
-        GalleryFinal.openGallerySingle(2, config, new GalleryFinal.OnHanlderResultCallback() {
+
+        new LocalPhotoAlbumUtil().getSingleLocalPhoto(fragment, new LocalPhotoAlbumUtil.OnLoadSingleResult() {
             @Override
-            public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-                fragment.showLoading(true);
-                PhotoInfo photoInfo = resultList.get(0);
+            public void onSinglePath(final String picPath) {
                 //图片上传至Bmob
-                final String picPath = photoInfo.getPhotoPath();
                 final BmobFile bmobFile = new BmobFile(new File(picPath));
                 bmobFile.upload(new UploadFileListener() {
                     @Override
@@ -83,12 +74,6 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
                     }
                 });
-            }
-
-            @Override
-            public void onHanlderFailure(int requestCode, String errorMsg) {
-                fragment.showLoading(false);
-                ToastUtil.showToast(CommonString.STR_ERROR_INFO + errorMsg);
             }
         });
     }
@@ -263,7 +248,6 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
         void setHeadIvResult(String photoPath);
 
         void alertSignInDialog();
-
 
         void setSignature(String signature);
 

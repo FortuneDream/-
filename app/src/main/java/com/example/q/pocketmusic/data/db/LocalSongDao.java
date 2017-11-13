@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.data.db;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 
 
 import com.example.q.pocketmusic.config.Constant;
@@ -33,7 +34,7 @@ public class LocalSongDao {
     private Context context;
 
     public LocalSongDao(Context context) {
-        this.context=context.getApplicationContext();
+        this.context = context.getApplicationContext();
         try {
             helper = DatabaseHelper.getHelper(context.getApplicationContext());
             localSongOpe = helper.getDao(LocalSong.class);
@@ -183,7 +184,7 @@ public class LocalSongDao {
     //移动，并加入数据库
     public void saveLocalSong(String name, List<String> list) {
         //建立目标文件
-         String FILE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Constant.FILE_NAME + "/";
+        String FILE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Constant.FILE_NAME + "/";
         File dir = new File(FILE_DIR + name);
         if (!dir.exists()) {
             dir.mkdirs();
@@ -193,7 +194,7 @@ public class LocalSongDao {
         localSong.setDate(BasePresenter.dateFormat.format(new Date()));
         localSong.setSort(SortUtil.getSort());
         add(localSong);
-        ImgDao imgDao=new ImgDao(context);
+        ImgDao imgDao = new ImgDao(context);
         for (int i = 0; i < list.size(); i++) {
             File file = new File(list.get(i));//只需要得到名字
             //这里先转移，再加入数据库
@@ -202,6 +203,33 @@ public class LocalSongDao {
             img.setUrl(dir + "/" + file.getName());
             img.setLocalSong(localSong);
             imgDao.add(img);
+        }
+    }
+
+
+    //获取本地曲谱的所有信息
+    private void testLocalSongInfo() {
+        LocalSongDao localSongDao = new LocalSongDao(getContext());
+        List<LocalSong> list = localSongDao.queryForAll();
+        Log.e("ttt", "乐谱数量" + list.size());
+        for (int i = 0; i < list.size(); i++) {
+            LocalSong localSong = localSongDao.findBySongId(list.get(i).getId());
+            Log.e("TAG", "Top:" + localSong.getSort());
+            ForeignCollection<Img> imgs = localSong.getImgs();
+            Log.e("ttt", "每一首的图片数量" + imgs.size());
+            CloseableIterator<Img> iterator = imgs.closeableIterator();
+            try {
+                while (iterator.hasNext()) {
+                    Img img1 = iterator.next();
+                    Log.e("ttt", img1.toString());
+                }
+            } finally {
+                try {
+                    iterator.close();
+                } catch (android.database.SQLException | IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

@@ -55,8 +55,8 @@ public class InstrumentFlagUtil {
 
     //乐器对应
     public final static String[] typeNames = {
-            "全部", "葫芦丝", "吉他", "钢琴",
-            "萨克斯", "二胡", "古筝", "电子琴",
+            "全部", "葫芦丝", "吉他/尤克里里", "钢琴",
+            "萨克斯", "二胡", "古筝/古琴", "电子琴",
             "琵琶", "口琴", "长笛", "笛萧",
             "手风琴", "提琴", "铜管", "扬琴"};
     public final static String[] namesUrl = {

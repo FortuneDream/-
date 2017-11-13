@@ -58,6 +58,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center"
+                android:layout_marginRight="16dp"
                 app:srcCompat="@drawable/anim_ic_vec_sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

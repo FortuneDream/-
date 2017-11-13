@@ -22,7 +22,6 @@ public class CommunityStateFragment extends BaseFragment<CommunityStateFragmentP
         implements CommunityStateFragmentPresenter.IView, RecyclerArrayAdapter.OnMoreListener, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.community_state_recycler)
     EasyRecyclerView communityStateRecycler;
-    Unbinder unbinder;
     private int typeId;
     private CommunityStateAdapter adapter;
 

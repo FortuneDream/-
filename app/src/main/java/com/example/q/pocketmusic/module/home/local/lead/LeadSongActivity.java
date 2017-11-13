@@ -5,7 +5,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,10 +31,8 @@ public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView, Lead
     AppBarLayout appBar;
     @BindView(R.id.name_tet)
     TextEdit nameTet;
-    @BindView(R.id.pic_number_tv)
-    TextView picNumberTv;
-    @BindView(R.id.add_pic_iv)
-    ImageView addPicIv;
+    @BindView(R.id.add_pic_tv)
+    TextView addPicTv;
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
     @BindView(R.id.upload_txt)
@@ -54,7 +51,6 @@ public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView, Lead
     public void initView() {
         adapter = new SmallPicAdapter(this);
         adapter.setOnItemClickListener(this);
-
         initToolbar(toolbar, "本地导入");
         recycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         recycler.setAdapter(adapter);
@@ -64,7 +60,7 @@ public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView, Lead
     public void showSmallPic(List<String> imgUrls) {
         adapter.clear();
         adapter.addAll(imgUrls);
-        picNumberTv.setText("目前已添加 " + imgUrls.size() + " 张");
+        addPicTv.setText("目前已添加 " + imgUrls.size() + " 张");
     }
 
     @Override
@@ -73,10 +69,10 @@ public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView, Lead
         finish();
     }
 
-    @OnClick({R.id.add_pic_iv, R.id.upload_txt})
+    @OnClick({R.id.add_pic_tv, R.id.upload_txt})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.add_pic_iv:
+            case R.id.add_pic_tv:
                 presenter.openPicture();
                 break;
             case R.id.upload_txt:
@@ -95,5 +91,4 @@ public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView, Lead
     protected LeadSongPresenter createPresenter() {
         return new LeadSongPresenter(this);
     }
-
 }

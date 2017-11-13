@@ -14,8 +14,7 @@ import android.os.RemoteException;
 import com.example.q.pocketmusic.IAudioPlayerService;
 import com.example.q.pocketmusic.data.bean.local.RecordAudio;
 import com.example.q.pocketmusic.data.db.RecordAudioDao;
-import com.example.q.pocketmusic.data.net.LoadLocalRecordList;
-import com.example.q.pocketmusic.data.net.SynchronizeRecordAudio;
+import com.example.q.pocketmusic.data.model.LocalModel;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.service.music.MediaPlayerService;
@@ -27,6 +26,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import rx.functions.Action1;
+
 /**
  * Created by 鹏君 on 2016/10/23.
  */
@@ -35,36 +36,33 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
     private static final int PROGRESS = 0;
     private IView fragment;
     private RecordAudioDao recordAudioDao;
+    private LocalModel localModel;
 
     public LocalRecordFragmentPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
         recordAudioDao = new RecordAudioDao(fragment.getAppContext());
-    }
-
-    private void loadRecordList() {
-        if (fragment.getAppContext()==null){
-            return;
-        }
-        new LoadLocalRecordList(fragment.getAppContext()) {
-            @Override
-            protected void onPostExecute(List<RecordAudio> recordAudios) {
-                super.onPostExecute(recordAudios);
-                fragment.setList(recordAudios);
-            }
-        }.execute();
+        localModel = new LocalModel(fragment.getAppContext());
     }
 
     //同步录音
     public void synchronizedRecord() {
         //先遍历文件夹的录音，添加到数据库（不重复添加），然后再从数据库取出来
-        new SynchronizeRecordAudio(fragment.getAppContext()) {
+        localModel.synchronizeRecordAudio(new Action1<Boolean>() {
             @Override
-            protected void onPostExecute(Boolean isSucceed) {
-                super.onPostExecute(isSucceed);
-                loadRecordList();
+            public void call(Boolean aBoolean) {
+                if (fragment.getAppContext() == null) {
+                    return;
+                }
+                //读取列表
+                localModel.getLocalRecordList(new Action1<List<RecordAudio>>() {
+                    @Override
+                    public void call(List<RecordAudio> recordAudios) {
+                        fragment.setList(recordAudios);
+                    }
+                });
             }
-        }.execute();
+        });
     }
 
     //长按删除记录

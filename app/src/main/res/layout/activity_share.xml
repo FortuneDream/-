@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:background="@drawable/shape_add_pic"
-            android:text="0"
+            android:text="点击添加图片"
             android:textColor="@color/vec_red"
             android:textSize="17sp" />
 

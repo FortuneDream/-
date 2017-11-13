@@ -79,9 +79,6 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
         RecordAudio recordAudio=adapter.getItem(position);
         presenter.deleteRecord(recordAudio);
         adapter.remove(recordAudio);
-        if (adapter.getCount() == 0) {
-            recycler.showEmpty();
-        }
     }
 
 

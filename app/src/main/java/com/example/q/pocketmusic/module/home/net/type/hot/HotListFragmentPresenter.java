@@ -40,7 +40,6 @@ public class HotListFragmentPresenter extends BasePresenter<HotListFragmentPrese
                 } else {
                     activity.setListWithRefreshing(songs);
                 }
-
             }
         }.execute(url);
     }

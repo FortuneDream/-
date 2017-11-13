@@ -55,6 +55,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".module.song.SongActivity"
+            android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <meta-data

@@ -24,7 +24,7 @@ import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.net.type.community.state.CommunityStateModel;
+import com.example.q.pocketmusic.data.model.UserCommunityStateModel;
 import com.example.q.pocketmusic.module.home.profile.contribution.CoinRankModel;
 import com.example.q.pocketmusic.module.home.profile.gift.GiftModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
@@ -245,7 +245,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     private void addCommunityState(int state) {
         SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
-        new CommunityStateModel().addCommunityState(songObject.getCommunity(), state, songObject.getSong().getName(), new ToastSaveListener<String>() {
+        new UserCommunityStateModel().addCommunityState(songObject.getCommunity(), state, songObject.getSong().getName(), new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {
 

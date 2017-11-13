@@ -7,7 +7,7 @@
 
     <include layout="@layout/include_appbar_toolbar" />
 
-    <include layout="@layout/include_top_logo" />
+    <include layout="@layout/include_top_flag" />
 
     <LinearLayout
         android:layout_width="match_parent"

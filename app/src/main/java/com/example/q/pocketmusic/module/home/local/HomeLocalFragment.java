@@ -34,7 +34,6 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     FrameLayout homeLocalContent;
     @BindView(R.id.activity_audio_record)
     LinearLayout activityAudioRecord;
-    Unbinder unbinder;
 
     @Override
     protected HomeLocalFragmentPresenter createPresenter() {

@@ -12,11 +12,9 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 
 public class HotListFragmentAdapter extends RecyclerArrayAdapter<Song> {
-    private Context context;
 
     public HotListFragmentAdapter(Context context) {
         super(context);
-        this.context = context;
     }
 
     @Override

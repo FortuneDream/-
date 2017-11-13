@@ -8,7 +8,7 @@
 
     <include layout="@layout/include_appbar_toolbar" />
 
-    <include layout="@layout/include_top_logo" />
+    <include layout="@layout/include_top_flag" />
 
     <com.example.q.pocketmusic.view.widget.view.TextEdit
         android:id="@+id/name_tet"
@@ -18,29 +18,24 @@
         app:itemInputHint="曲谱名" />
 
 
-    <TextView
-        android:id="@+id/pic_number_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:text="目前已添加 0 张" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="32dp"
         android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/add_pic_iv"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+        <TextView
+            android:id="@+id/add_pic_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            app:srcCompat="@drawable/ic_vec_ico_add" />
+            android:background="@drawable/shape_add_pic"
+            android:text="点击添加图片"
+            android:textColor="@color/vec_red"
+            android:textSize="17sp" />
 
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/recycler"
@@ -54,8 +49,8 @@
         style="@style/TextPress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:background="@drawable/shape_text_press"
         android:text="本地导入" />
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
+import com.example.q.pocketmusic.data.model.LocalModel;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -129,10 +130,10 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
     }
 
     //进入分享
-    public void enterShareActivity(LocalSong localSong,int typeId) {
+    public void enterShareActivity(LocalSong localSong, int typeId) {
         Intent intent = new Intent(activity.getCurrentContext(), ShareActivity.class);
         intent.putExtra(ShareActivity.PARAM_LOCAL_SONG, localSong);
-        intent.putExtra(ShareActivity.PARAM_TYPE_ID,typeId);
+        intent.putExtra(ShareActivity.PARAM_TYPE_ID, typeId);
         activity.getCurrentContext().startActivity(intent);
     }
 

@@ -29,7 +29,7 @@ public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
 
     //打开图片管理器,得到选择的图片返回地址
     public void openPicture() {
-        localPhotoAlbumUtil.getLocalPicPaths(new LocalPhotoAlbumUtil.OnLoadLocalResult() {
+        localPhotoAlbumUtil.getLocalPicPaths(new LocalPhotoAlbumUtil.OnLoadMutiLocalResult() {
             @Override
             public void onPathList(List<String> list) {
                 activity.showSmallPic(list);//返回图片地址
@@ -37,6 +37,7 @@ public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
         });
     }
 
+    //本地导入乐谱
     public void leadSong(String name) {
         if (TextUtils.isEmpty(name)) {
             ToastUtil.showToast("名字不能为空");

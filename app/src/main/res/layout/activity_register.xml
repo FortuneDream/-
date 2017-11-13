@@ -7,7 +7,7 @@
 
     <include layout="@layout/include_appbar_toolbar" />
 
-    <include layout="@layout/include_top_logo"/>
+    <include layout="@layout/include_top_flag"/>
 
     <com.example.q.pocketmusic.view.widget.view.TextEdit
         android:id="@+id/account_tet"

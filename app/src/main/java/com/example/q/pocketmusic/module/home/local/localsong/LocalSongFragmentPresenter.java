@@ -6,20 +6,18 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
-import com.example.q.pocketmusic.data.db.ImgDao;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
-import com.example.q.pocketmusic.data.net.LoadLocalSongList;
-import com.example.q.pocketmusic.data.net.SynchronizeLocalSong;
+import com.example.q.pocketmusic.data.model.LocalModel;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.type.community.share.publish.ShareActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.SortUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
-import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 
 import java.util.List;
+
+import rx.functions.Action1;
 
 /**
  * Created by 鹏君 on 2016/9/2.
@@ -27,30 +25,28 @@ import java.util.List;
 public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentPresenter.IView> {
     private IView fragment;
     private LocalSongDao localSongDao;
-    private ImgDao imgDao;
+    private LocalModel localModel;
 
 
     //Dao有必要关闭吗？iterator呢？
     public LocalSongFragmentPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
+        localModel = new LocalModel(fragment.getAppContext());
         localSongDao = new LocalSongDao(fragment.getAppContext());
-        imgDao = new ImgDao(fragment.getAppContext());
-
     }
 
     public void loadLocalSong() {
         if (fragment.getAppContext() == null) {
             return;
         }
-        new LoadLocalSongList(localSongDao, fragment.getAppContext()) {
+        localModel.getLocalSongList(new Action1<List<LocalSong>>() {
             @Override
-            protected void onPostExecute(List<LocalSong> localSongs) {
-                super.onPostExecute(localSongs);
+            public void call(List<LocalSong> localSongs) {
                 fragment.setList(localSongs);
                 LogUtils.e(TAG, "本地乐谱数量：" + localSongs.size());
             }
-        }.execute();
+        });
     }
 
     //删除乐谱要删除数据库和list.position,还有本地的文件！
@@ -61,13 +57,12 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
     //同步乐谱
     public void synchronizedSong() {
         //先遍历文件夹的图片，添加到数据库（不重复添加），然后再从数据库取出来
-        new SynchronizeLocalSong(imgDao, localSongDao) {
+        localModel.synchronizeLocalSong(new Action1<Boolean>() {
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void call(Boolean aBoolean) {
                 loadLocalSong();
             }
-        }.execute();
+        });
     }
 
 
@@ -78,23 +73,18 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
         fragment.getCurrentContext().startActivity(intent);
     }
 
-    public void enterPictureActivity(LocalSong localSong) {
+    public void enterSongActivity(LocalSong localSong) {
         Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         Song song = new Song();
         song.setName(localSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_LOCAL, Constant.SHOW_NO_MENU, Constant.LOCAL);
-        intent.setExtrasClassLoader(getClass().getClassLoader());
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
         intent.putExtra(SongActivity.LOCAL_SONG, localSong);
         fragment.getCurrentContext().startActivity(intent);
     }
 
     public void setTop(LocalSong item) {
-        int top_value = SharedPrefsUtil.getInt(SortUtil.sort_key, SortUtil.sort_value);
-        top_value++;
-        item.setSort(top_value);
-        SharedPrefsUtil.putInt(SortUtil.sort_key, top_value);//修改最高值
-        localSongDao.update(item);
+        localModel.setTop(item);
         ToastUtil.showToast("已置顶");
         fragment.onRefresh();
     }

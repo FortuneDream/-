@@ -83,7 +83,7 @@ public class AskListFragment extends BaseFragment<AskListFragmentPresenter.IView
 
     @Override
     public void onMoreShow() {
-        presenter.getMore();
+        presenter.getPostList(false);
     }
 
     @Override

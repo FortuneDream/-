@@ -29,6 +29,7 @@ public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPrese
 
     //得到帖子列表
     public void getPostList(final boolean isRefreshing) {
+        mPage++;
         if (isRefreshing) {
             mPage = 0;
         }
@@ -44,12 +45,6 @@ public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPrese
                 fragment.setPostList(isRefreshing, list);
             }
         });
-    }
-
-    //加载更多
-    public void getMore() {
-        mPage++;
-        getPostList(false);
     }
 
     public void enterCommentActivity(AskSongPost askSongPost) {
