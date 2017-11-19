@@ -18,7 +18,6 @@ public class MyUser extends BmobUser {
     private String lastSignInDate;//最后一次签到时间
     private int contribution;//贡献值
     private BmobRelation collections;//某个用户收藏的所有曲谱
-    private BmobRelation converts;
     private BmobRelation interests;//关注
     private String versionFlag;//版本
 
@@ -30,13 +29,6 @@ public class MyUser extends BmobUser {
         this.interests = interests;
     }
 
-    public BmobRelation getConverts() {
-        return converts;
-    }
-
-    public void setConverts(BmobRelation converts) {
-        this.converts = converts;
-    }
 
     public String getLastSignInDate() {
         return lastSignInDate;

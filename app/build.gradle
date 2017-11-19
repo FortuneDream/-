@@ -8,8 +8,8 @@ android {
         applicationId "com.example.q.pocketmusic"
         minSdkVersion 18
         targetSdkVersion 25
-        versionCode 42
-        versionName "6.2"
+        versionCode 41
+        versionName "6.2 alpha"
         vectorDrawables.useSupportLibrary = true
     }
     signingConfigs {

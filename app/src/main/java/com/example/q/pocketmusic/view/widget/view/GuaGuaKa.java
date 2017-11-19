@@ -42,7 +42,7 @@ public class GuaGuaKa extends View {
     private boolean isComplete;
     private final int DEFAULT_ERASER_SIZE = ConvertUtil.Dp2Px(getContext(), 16);
     private final int DEFAULT_TEXT_SIZE = ConvertUtil.Dp2Px(getContext(), 20);
-    private final int DEFAULT_TEXT_COLOR = getResources().getColor(R.color.md_green_300);
+    private final int DEFAULT_TEXT_COLOR = getResources().getColor(R.color.md_red_400);
     private OnCompleteListener onCompleteListener;
     private String mTopContent = "刮开有奖";//顶层文字
 

@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/interest_tv"
-            style="@style/TwoTextSecond"
+            style="@style/TwoTextMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/user_signature_tv"

@@ -25,7 +25,7 @@ public class OtherProfilePresenter extends BasePresenter<OtherProfilePresenter.I
     public void interestOther(MyUser otherUser) {
         BmobRelation relation = new BmobRelation();
         relation.add(otherUser);
-        UserUtil.user.setConverts(relation);
+        UserUtil.user.setInterests(relation);
         UserUtil.user.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
