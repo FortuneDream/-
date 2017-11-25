@@ -53,8 +53,6 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     public final static String SHARE_SONG = "SHARE_SONG";//可选传递参数，用于传递shareSong
 
-    public final static String SPECIAL_SONG = "SPECIAL_SONG";//精品区
-
 
     private Handler handler = new Handler(Looper.myLooper()) {
         @Override

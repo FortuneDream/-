@@ -5,6 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -15,7 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 
 public class UserInterestActivity extends AuthActivity<UserInterestPresenter.IView, UserInterestPresenter>
-        implements UserInterestPresenter.IView, RecyclerArrayAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener,
+        implements UserInterestPresenter.IView, SwipeRefreshLayout.OnRefreshListener,
         RecyclerArrayAdapter.OnMoreListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -41,17 +42,17 @@ public class UserInterestActivity extends AuthActivity<UserInterestPresenter.IVi
         adapter = new UserInterestAdapter(this);
         initToolbar(toolbar, "我的关注");
         initRecyclerView(recycler, adapter, 1);
-        adapter.setOnItemClickListener(this);
+        adapter.setListener(new AbsOnClickItemHeadListener() {
+            @Override
+            public void onClickItem(int position) {
+                presenter.cancelInterest(adapter.getItem(position));//点击取消关注
+            }
+        });
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
         presenter.getList(true);
     }
 
-
-    @Override
-    public void onItemClick(int position) {
-        presenter.enterOtherActivity(adapter.getItem(position));
-    }
 
     @Override
     public void onRefresh() {

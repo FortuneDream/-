@@ -13,10 +13,11 @@
         android:layout_gravity="center" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="4dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
@@ -42,5 +43,13 @@
 
     </LinearLayout>
 
+    <TextView
+        android:textColor="@color/ui_grey_1"
+        android:background="@drawable/shape_cancel_interest"
+        android:id="@+id/cancel_interest_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="取消关注" />
 
 </LinearLayout>

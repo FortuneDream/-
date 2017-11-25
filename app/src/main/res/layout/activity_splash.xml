@@ -28,6 +28,6 @@
             android:layout_marginLeft="8dp"
             android:ellipsize="marquee"
             android:focusable="true"
-            android:maxLines="1" />
+            android:singleLine="true" />
     </LinearLayout>
 </RelativeLayout>

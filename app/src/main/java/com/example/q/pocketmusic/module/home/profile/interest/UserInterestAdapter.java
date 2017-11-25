@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.profile.interest;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,10 @@ public class UserInterestAdapter extends RecyclerArrayAdapter<MyUser> {
     private IDisplayStrategy displayStrategy;
     private AbsOnClickItemHeadListener listener;
 
+    public void setListener(AbsOnClickItemHeadListener listener) {
+        this.listener = listener;
+    }
+
     public UserInterestAdapter(Context context) {
         super(context);
         displayStrategy = new GlideStrategy();
@@ -35,6 +40,7 @@ public class UserInterestAdapter extends RecyclerArrayAdapter<MyUser> {
         TextView nickNameTv;
         TextView signatureTv;
         TextView coinTv;
+        TextView cancelInterestTv;
         ImageView headIv;
 
         public ViewHolder(ViewGroup parent) {
@@ -43,6 +49,7 @@ public class UserInterestAdapter extends RecyclerArrayAdapter<MyUser> {
             signatureTv = $(R.id.signature_tv);
             coinTv = $(R.id.coin_tv);
             headIv = $(R.id.head_iv);
+            cancelInterestTv = $(R.id.cancel_interest_tv);
         }
 
         @Override
@@ -52,6 +59,22 @@ public class UserInterestAdapter extends RecyclerArrayAdapter<MyUser> {
             nickNameTv.setText(data.getNickName());
             signatureTv.setText(data.getSignature());
             coinTv.setText(String.valueOf(data.getContribution()) + "枚");
+            cancelInterestTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onClickItem(getAdapterPosition());
+                    }
+                }
+            });
+            headIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        listener.onClickHead(getContext(),data);
+                    }
+                }
+            });
         }
     }
 }
