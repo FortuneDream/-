@@ -91,11 +91,11 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
             case Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE://下载，收藏，点赞，分享
                 break;
             case Constant.MENU_DOWNLOAD_COLLECTION_SHARE://下载和收藏，分享
-                agreeIv.setVisibility(View.GONE);
+                agreeLl.setVisibility(View.GONE);
                 break;
             case Constant.MENU_DOWNLOAD_SHARE://下载，分享
-                agreeIv.setVisibility(View.GONE);
-                collectionIv.setVisibility(View.GONE);
+                agreeLl.setVisibility(View.GONE);
+                collectionLl.setVisibility(View.GONE);
                 break;
         }
     }
