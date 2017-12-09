@@ -33,6 +33,18 @@ import butterknife.Unbinder;
 public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, SongMenuPresenter>
         implements SongMenuPresenter.IView {
 
+    @BindView(R.id.agree_iv)
+    AppCompatImageView agreeIv;
+    @BindView(R.id.download_iv)
+    AppCompatImageView downloadIv;
+    @BindView(R.id.collection_iv)
+    AppCompatImageView collectionIv;
+    @BindView(R.id.share_iv)
+    AppCompatImageView shareIv;
+    @BindView(R.id.recovery_iv)
+    AppCompatImageView recoveryIv;
+    @BindView(R.id.content_ll)
+    LinearLayout contentLl;
     @BindView(R.id.agree_ll)
     LinearLayout agreeLl;
     @BindView(R.id.download_ll)
@@ -43,8 +55,6 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     LinearLayout shareLl;
     @BindView(R.id.recovery_ll)
     LinearLayout recoveryLl;
-    @BindView(R.id.content_ll)
-    LinearLayout contentLl;
     Unbinder unbinder;
     private EditDialog editDialog;//编辑框
     private static final String PARAM_Intent = "param_1";
@@ -81,11 +91,11 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
             case Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE://下载，收藏，点赞，分享
                 break;
             case Constant.MENU_DOWNLOAD_COLLECTION_SHARE://下载和收藏，分享
-                agreeLl.setVisibility(View.GONE);
+                agreeIv.setVisibility(View.GONE);
                 break;
             case Constant.MENU_DOWNLOAD_SHARE://下载，分享
-                agreeLl.setVisibility(View.GONE);
-                collectionLl.setVisibility(View.GONE);
+                agreeIv.setVisibility(View.GONE);
+                collectionIv.setVisibility(View.GONE);
                 break;
         }
     }
@@ -99,15 +109,15 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.download_ll:
-                alertCheckDownloadDialog(view, Constant.REDUCE_DOWNLOAD);
+                alertCheckDownloadDialog(Constant.REDUCE_DOWNLOAD);
                 break;
             case R.id.agree_ll:
-                view.setEnabled(false);//点赞之后就不可再次点击
-                ((AppCompatImageView) view).setImageResource(R.drawable.ic_vec_song_bottom_agree_press);
+                agreeLl.setEnabled(false);//点赞之后就不可再次点击
+                agreeIv.setImageResource(R.drawable.ic_vec_song_bottom_agree_press);
                 presenter.agree();
                 break;
             case R.id.collection_ll:
-                alertCheckCollectionDialog(view, Constant.REDUCE_COLLECTION);
+                alertCheckCollectionDialog(Constant.REDUCE_COLLECTION);
                 break;
             case R.id.share_ll:
                 presenter.share();
@@ -119,14 +129,14 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     }
 
 
-    public void alertCheckCollectionDialog(final View view, int coin) {
+    public void alertCheckCollectionDialog(int coin) {
         new CoinDialogBuilder(getCurrentContext(), coin)
                 .setPositiveButton(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        view.setEnabled(false);//点击收藏之后不可再次点击
-                        ((AppCompatImageView) view).setImageResource(R.drawable.ic_vec_song_bottom_collection_press);//改变状态
+                        collectionLl.setEnabled(false);//点击收藏之后不可再次点击
+                        collectionIv.setImageResource(R.drawable.ic_vec_song_bottom_collection_press);//改变状态
                         presenter.addCollection();
                     }
                 })
@@ -182,13 +192,13 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                 .create().show();
     }
 
-    public void alertCheckDownloadDialog(final View view, int coin) {
+    public void alertCheckDownloadDialog(int coin) {
         new CoinDialogBuilder(getCurrentContext(), coin)
                 .setPositiveButton(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        alertDownloadDialog(view);
+                        alertDownloadDialog();
                     }
                 })
                 .setNegativeButton(new DialogInterface.OnClickListener() {
@@ -200,14 +210,14 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                 .show();
     }
 
-    private void alertDownloadDialog(final View view) {
+    private void alertDownloadDialog() {
         editDialog = new EditDialog.Builder(getActivity())
                 .setEditStr(presenter.getSong().getName())
                 .setListener(new EditDialog.Builder.OnSelectedListener() {
                     @Override
                     public void onSelectedOk(String str) {
                         ToastUtil.showToast("后台下载中~");
-                        view.setEnabled(false);//下载键
+                        downloadLl.setEnabled(false);//下载键
                         presenter.download(str);
                     }
 
@@ -225,17 +235,4 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
         editDialog.dismiss();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 }

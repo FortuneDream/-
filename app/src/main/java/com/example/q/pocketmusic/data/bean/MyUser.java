@@ -71,7 +71,7 @@ public class MyUser extends BmobUser {
         return contribution;
     }
 
-    public void setContribution(Integer contribution) {
+    public void setContribution(int contribution) {
         this.contribution = contribution;
     }
 

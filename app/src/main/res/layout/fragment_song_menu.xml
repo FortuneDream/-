@@ -17,6 +17,7 @@
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="wrap_content"
+            android:id="@+id/agree_iv"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vec_song_bottom_agree_normal" />
 
@@ -36,7 +37,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatImageView
-
+            android:id="@+id/download_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vec_song_bottom_download_normal" />
@@ -58,6 +59,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/collection_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vec_song_bottom_collection_normal" />
@@ -78,6 +80,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/share_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vec_song_bottom_share_normal" />
@@ -98,6 +101,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/recovery_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vec_song_bottom_recovery" />
