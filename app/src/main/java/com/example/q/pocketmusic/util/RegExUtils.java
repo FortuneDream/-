@@ -49,7 +49,7 @@ public class RegExUtils {
         Matcher matcher = pattern.matcher(html);
         ArrayList<String> list = new ArrayList<>();
         while (matcher.find()) {
-            list.add(matcher.group(1));
+            list.add(Constant.RECOMMEND_BASE_URL+matcher.group(1));
         }
         song.setIvUrl(list);
     }

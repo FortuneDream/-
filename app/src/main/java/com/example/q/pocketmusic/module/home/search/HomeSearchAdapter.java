@@ -14,14 +14,12 @@ import java.util.List;
 public class HomeSearchAdapter extends FragmentPagerAdapter {
     private List<String> tabAttrList;
     private List<Fragment> fragments;
-    private Context context;
 
 
-    public HomeSearchAdapter(Context context, FragmentManager fm, List<String> toolbarAttrList, List<Fragment> fragments) {
+    public HomeSearchAdapter( FragmentManager fm, List<String> toolbarAttrList, List<Fragment> fragments) {
         super(fm);
         this.tabAttrList = toolbarAttrList;
         this.fragments = fragments;
-        this.context = context;
     }
 
 

@@ -42,7 +42,6 @@ public class LocalRecordFragmentAdapter extends RecyclerArrayAdapter<RecordAudio
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(parent);
-
     }
 
     class MyViewHolder extends BaseViewHolder<RecordAudio> {

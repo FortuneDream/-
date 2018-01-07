@@ -12,4 +12,6 @@ public interface IBaseView extends IBase{
     int setContentResource();
 
     void initView();
+
+    boolean isViewValid();
 }

@@ -43,7 +43,7 @@ public class HomeSearchFragment extends BaseFragment<HomeSearchFragmentPresenter
         searchEdt.setOnKeyListener(this);
         searchIv.setOnClickListener(this);
         viewPager.addOnPageChangeListener(this);
-        adapter = new HomeSearchAdapter(getCurrentContext(), getChildFragmentManager(), presenter.getTabsTxt(), presenter.getFragments());
+        adapter = new HomeSearchAdapter(getChildFragmentManager(), presenter.getTabsTxt(), presenter.getFragments());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabTextColors(ContextCompat.getColor(getCurrentContext(), R.color.colorTitle), ContextCompat.getColor(getCurrentContext(), R.color.colorTitle));

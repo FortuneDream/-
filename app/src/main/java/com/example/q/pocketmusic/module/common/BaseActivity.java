@@ -46,7 +46,12 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     private static final int FLAG_DISMISS_DIALOG = 2001;
     public AlertDialog mLoadingDialog;//这个dialog一般在上传，下载，的时候才会用到
     private List<Drawable> drawableList = new ArrayList<>();
+    private boolean mIsViewValid = true;
 
+    @Override
+    public boolean isViewValid() {
+        return mIsViewValid;
+    }
 
     protected abstract T createPresenter();
 
@@ -230,6 +235,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mIsViewValid = false;
         drawableList.clear();
         mLoadingDialog.dismiss();
         presenter.detachView();

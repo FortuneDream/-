@@ -10,6 +10,8 @@ import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.db.ImgDao;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.util.common.LogUtils;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 
 import java.io.File;
@@ -158,12 +160,16 @@ public class DownloadUtil {
                 return;
             }
         }
-
+        if (urlType == null) {
+            ToastUtil.showToast("格式错误");
+            return;
+        }
         String type = urlType.replaceAll("image/", "");
         //建立歌曲名分包
         final String fileDir = Environment.getExternalStorageDirectory() + "/" + Constant.FILE_NAME + "/" + name + "/";
         for (int i = 0; i < urls.size(); i++) {//顺序下载
             final String url = urls.get(i);
+            LogUtils.e("下载url:" + url);
             final String fileName = name + "_" + (i + 1) + "." + type;//文件名
             final int finalI = i;
             pool.execute(new Runnable() {

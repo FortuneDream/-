@@ -7,8 +7,8 @@ android {
         applicationId "com.example.q.pocketmusic"
         minSdkVersion 18
         targetSdkVersion 25
-        versionCode 44
-        versionName "6.4"
+        versionCode 45
+        versionName "6.5"
         vectorDrawables.useSupportLibrary = true
     }
     signingConfigs {
@@ -39,7 +39,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/okhttp-3.8.1.jar')
-    compile 'cn.bmob.android:bmob-sdk:3.5.7'
+    compile 'cn.bmob.android:bmob-sdk:3.5.9'
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support:design:25.4.0'
     compile 'com.jakewharton:butterknife:8.5.1'
@@ -59,4 +59,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile 'org.greenrobot:eventbus:3.1.1'
 }
