@@ -16,6 +16,7 @@ import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 import com.example.q.pocketmusic.util.common.update.UpdateUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -36,6 +37,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
     private HomeLocalFragment homeLocalFragment;//3
     private HomeProfileFragment homeProfileFragment;//4
     private int FLAG;//标记当前Fragment
+    private HashMap<String,Fragment> map;//改用HashMap来取得fragment
 
 
     public HomePresenter(IView activity) {

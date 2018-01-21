@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.song.bottom;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
@@ -36,6 +37,7 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
@@ -43,6 +45,9 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
+import rx.Scheduler;
+import rx.Subscription;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by 鹏君 on 2017/5/31.
@@ -124,13 +129,13 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         }
         //硬币不足
         if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_DOWNLOAD)) {
-            return new DownloadInfo(CommonString.STR_NOT_ENOUGH_COIN, false);
+            return new DownloadInfo(fragment.getResString(R.string.coin_not_enough), false);
         }
         //扣除硬币
         UserUtil.increment(-Constant.REDUCE_DOWNLOAD, new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + (Constant.REDUCE_DOWNLOAD));
+                ToastUtil.showToast(fragment.getResString(R.string.reduce_coin) + (Constant.REDUCE_DOWNLOAD));
             }
         });
         return new DownloadInfo("", true);
@@ -269,6 +274,8 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             ToastUtil.showToast("图片为空");
             return;
         }
+
+
         //检测是否已经收藏
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         query.order("-updatedAt");
@@ -290,7 +297,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                 }
                 //贡献度是否足够
                 if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_COLLECTION)) {
-                    ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
+                    ToastUtil.showToast(fragment.getResString(R.string.coin_not_enough));
                     return;
                 }
                 //添加收藏记录
@@ -329,7 +336,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                                         UserUtil.increment(-Constant.REDUCE_COLLECTION, new ToastUpdateListener() {
                                             @Override
                                             public void onSuccess() {
-                                                ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_COLLECTION);
+                                                ToastUtil.showToast(fragment.getResString(R.string.reduce_coin) + Constant.REDUCE_COLLECTION);
                                             }
                                         });
                                         addCommunityState(Constant.COMMUNITY_STATE_COLLECTION);

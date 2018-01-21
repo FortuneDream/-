@@ -14,4 +14,6 @@ public interface IBaseView extends IBase{
     void initView();
 
     boolean isViewValid();
+
+    String getResString(int resId);
 }

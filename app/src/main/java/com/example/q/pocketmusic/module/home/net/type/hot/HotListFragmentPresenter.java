@@ -15,13 +15,13 @@ import java.util.List;
 
 
 public class HotListFragmentPresenter extends BasePresenter<HotListFragmentPresenter.IView> {
-    private IView activity;
+    private IView fragment;
     private int mPage;
     private int typeId;
 
     public HotListFragmentPresenter(IView activity) {
         attachView(activity);
-        this.activity = getIViewRef();
+        this.fragment = getIViewRef();
     }
 
     public int getmPage() {
@@ -36,9 +36,9 @@ public class HotListFragmentPresenter extends BasePresenter<HotListFragmentPrese
             protected void onPostExecute(List<Song> songs) {
                 super.onPostExecute(songs);
                 if (!isRefreshing) {
-                    activity.setList(songs);
+                    fragment.setList(songs);
                 } else {
-                    activity.setListWithRefreshing(songs);
+                    fragment.setListWithRefreshing(songs);
                 }
             }
         }.execute(url);
@@ -50,11 +50,10 @@ public class HotListFragmentPresenter extends BasePresenter<HotListFragmentPrese
     }
 
     public void enterSongActivity(Song song) {
-        Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, Constant.FROM_TYPE, Constant.MENU_DOWNLOAD_COLLECTION_SHARE, Constant.NET);
-        object.setCommunity(typeId);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, object);
-        activity.getCurrentContext().startActivity(intent);
+        fragment.getCurrentContext().startActivity(
+                SongActivity.buildTypeIntent(fragment.getCurrentContext(), object, typeId)
+        );
     }
 
     public void setTypeId(int typeId) {

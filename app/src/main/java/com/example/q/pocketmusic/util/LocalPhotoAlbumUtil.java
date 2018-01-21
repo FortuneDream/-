@@ -92,7 +92,7 @@ public class LocalPhotoAlbumUtil extends BaseModel {
             @Override
             public void onHanlderFailure(int requestCode, String errorMsg) {
                 iView.showLoading(false);
-                ToastUtil.showToast(CommonString.STR_ERROR_INFO + errorMsg);
+                ToastUtil.showToast(errorMsg);
             }
         });
     }

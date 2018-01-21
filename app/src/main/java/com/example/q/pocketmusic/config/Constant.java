@@ -6,8 +6,6 @@ package com.example.q.pocketmusic.config;
 //静态数据,存放标记，url
 public class Constant {
     public final static String APP_ID = "236163bbf4c3be6f2cc44de4405da6eb";
-    public final static String PATCH_VERSION = "1";//补丁版本
-
 
     //URL
     public final static String BASE_URL = "http://www.qupu123.com";

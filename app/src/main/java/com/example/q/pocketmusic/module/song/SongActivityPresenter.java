@@ -84,7 +84,7 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
             UserUtil.increment(-Constant.REDUCE_PUNISH, new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
-                    ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_PUNISH);
+                    ToastUtil.showToast(activity.getResString(R.string.reduce_coin) + Constant.REDUCE_PUNISH);
                 }
             });
         }

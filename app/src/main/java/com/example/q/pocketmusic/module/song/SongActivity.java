@@ -1,5 +1,7 @@
 package com.example.q.pocketmusic.module.song;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -15,9 +17,14 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.CommonString;
+import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.config.ScreenshotContentObserver;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
+import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
+import com.example.q.pocketmusic.data.bean.ask.AskSongPost;
+import com.example.q.pocketmusic.data.bean.local.LocalSong;
+import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.net.HackyViewPager;
@@ -74,6 +81,48 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         }).setActionTextColor(ContextCompat.getColor(getCurrentContext(), R.color.white)).show();
     }
 
+    //本地
+    public static Intent buildLocalIntent(Context context, SongObject songObject, LocalSong localSong){
+        Intent intent = new Intent(context, SongActivity.class);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+        intent.putExtra(SongActivity.LOCAL_SONG, localSong);
+        return intent;
+    }
+
+    //推荐
+    public static Intent buildRecommendIntent(Context context, SongObject songObject){
+        Intent intent = new Intent(context, SongActivity.class);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+        return intent;
+    }
+
+    //求谱
+    public static Intent buildAskIntent(Context context, SongObject songObject, int community, AskSongComment askSongComment){
+        Intent intent = new Intent(context, SongActivity.class);
+        songObject.setCommunity(community);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+        intent.putExtra(SongActivity.ASK_COMMENT, askSongComment);
+        return intent;
+    }
+
+    //分享
+    public static Intent buildShareIntent(Context context, SongObject songObject, int typeId, ShareSong shareSong){
+        Intent intent = new Intent(context, SongActivity.class);
+        songObject.setCommunity(typeId);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+        intent.putExtra(SongActivity.SHARE_SONG, shareSong);
+        return intent;
+    }
+
+    //乐器
+    public static Intent buildTypeIntent(Context context, SongObject songObject,int community){
+        Intent intent = new Intent(context, SongActivity.class);
+        songObject.setCommunity(community);
+        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+        return intent;
+    }
+
+
 
     @Override
     public int setContentResource() {
@@ -96,7 +145,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     //加载失败
     @Override
     public void loadFail() {
-        ToastUtil.showToast(CommonString.STR_NOT_NET);
+        ToastUtil.showToast(getResString(R.string.not_found_net_data));
         finish();
     }
 
@@ -108,7 +157,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     @Override
     public void setPicResult(List<String> ivUrl, int from) {
-        if (pageTv == null || viewPager == null) {
+        if (!isViewValid()){
             return;
         }
         //本地和网络加载图片的地址有所不同

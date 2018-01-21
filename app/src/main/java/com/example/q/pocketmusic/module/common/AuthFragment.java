@@ -26,11 +26,7 @@ public abstract class AuthFragment<V, T extends BasePresenter<V>> extends BaseFr
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.REQUEST_LOGIN) {//请求登录
-            if (resultCode == Constant.SUCCESS) {
-                UserUtil.user = (MyUser) data.getSerializableExtra(RESULT_USER);//成功登录并复制
-            } else if (resultCode == Constant.FAIL) {
-                UserUtil.user = null;//登录失败
-            }
+            UserUtil.onActivityResult(resultCode,data);
         }
     }
 

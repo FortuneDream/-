@@ -74,13 +74,10 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
     }
 
     public void enterSongActivity(LocalSong localSong) {
-        Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         Song song = new Song();
         song.setName(localSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_LOCAL, Constant.SHOW_NO_MENU, Constant.LOCAL);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
-        intent.putExtra(SongActivity.LOCAL_SONG, localSong);
-        fragment.getCurrentContext().startActivity(intent);
+        fragment.getCurrentContext().startActivity(SongActivity.buildLocalIntent(fragment.getCurrentContext(),songObject,localSong));
     }
 
     public void setTop(LocalSong item) {

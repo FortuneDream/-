@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
@@ -30,7 +31,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
     //登录
     public void login(final String account, String password) {
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
-            ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast(activity.getResString(R.string.complete_info));
             return;
         }
         activity.showLoading(true);

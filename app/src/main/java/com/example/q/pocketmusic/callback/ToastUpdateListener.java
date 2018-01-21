@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.callback;
 
 import android.content.Intent;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -39,8 +40,8 @@ public abstract class ToastUpdateListener extends UpdateListener {
     public void onFail(BmobException e) {
         if (baseView != null) {
             baseView.showLoading(false);
+            ToastUtil.showToast( baseView.getResString(R.string.send_error) + e.getMessage());
         }
-        ToastUtil.showToast( CommonString.STR_ERROR_INFO + e.getMessage());
         e.printStackTrace();
         if (e.getErrorCode() == 206) {//在其他地方已经登录
             MyUser.logOut();

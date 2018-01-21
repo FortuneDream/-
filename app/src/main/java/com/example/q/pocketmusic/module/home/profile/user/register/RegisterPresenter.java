@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.home.profile.user.register;
 import android.app.Activity;
 import android.text.TextUtils;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
@@ -35,7 +36,7 @@ public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
     public void register(String account, String password, String confirmPassword, String nickName) {
         Boolean isConfirm = checkAccount(account);//邮箱验证账号
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password) || TextUtils.isEmpty(nickName) || TextUtils.isEmpty(confirmPassword)) {
-            ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast(activity.getResString(R.string.complete_info));
         } else if (!isConfirm) {
             ToastUtil.showToast( "邮箱格式错误~");
         } else if (!confirmPassword.equals(password)) {

@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.config;
 
 import android.app.Application;
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
 
 import com.example.q.pocketmusic.R;
@@ -22,18 +23,20 @@ import cn.finalteam.galleryfinal.ThemeConfig;
  */
 
 public class MyApplication extends Application {
+    private Context context;
     @Override
     public void onCreate() {
         super.onCreate();
-        ToastUtil.init(this);
+        this.context=getApplicationContext();
+        ToastUtil.init(context);
         InstrumentFlagUtil.init();
-        SharedPrefsUtil.init(getApplicationContext());
-        Bmob.initialize(this, Constant.APP_ID, "Bmob");
+        SharedPrefsUtil.init(context);
+        Bmob.initialize(context, Constant.APP_ID, "Bmob");
         //官网SDK
         AppStat.i(Constant.APP_ID, "Bmob");
         //发布时，开启异常捕获器
         CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(this);
+        crashHandler.init(context);
         initGalleryFinal();
     }
 

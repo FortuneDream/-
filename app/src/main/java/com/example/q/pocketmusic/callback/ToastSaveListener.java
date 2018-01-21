@@ -1,5 +1,6 @@
 package com.example.q.pocketmusic.callback;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.common.ToastUtil;
@@ -37,11 +38,10 @@ public abstract class ToastSaveListener<T> extends SaveListener<T> {
     public void onFail(T t, BmobException e) {
         if (baseView != null) {
             baseView.showLoading(false);
+            ToastUtil.showToast( baseView.getResString(R.string.send_error) + e.getMessage());
         }
-        ToastUtil.showToast(CommonString.STR_ERROR_INFO + e.getMessage());
         e.printStackTrace();
-        //        CrashHandler handler=CrashHandler.getInstance();
-//        handler.uncaughtException(Thread.currentThread(),e);
+
     }
 
 

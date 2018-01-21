@@ -1,5 +1,6 @@
 package com.example.q.pocketmusic.callback;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.common.ToastUtil;
@@ -38,7 +39,7 @@ public class ToastUploadBatchListener implements UploadBatchListener {
     public void onError(int i, String s) {
         if (baseView != null) {
             baseView.showLoading(false);
-            ToastUtil.showToast( CommonString.STR_ERROR_INFO + "第" + i + "张图片上传错误:" + s);
+            ToastUtil.showToast( baseView.getResString(R.string.send_error) + "第" + i + "张图片上传错误:" + s);
         }
         //        CrashHandler handler=CrashHandler.getInstance();
 //        handler.uncaughtException(Thread.currentThread(),e);

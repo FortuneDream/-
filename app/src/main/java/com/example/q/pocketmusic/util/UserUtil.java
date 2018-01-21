@@ -17,6 +17,7 @@ import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 
 public class UserUtil {
     public static MyUser user;
+    public static final String RESULT_USER = "result_user";//返回的User
 
     public static boolean checkLocalUser(Fragment fragment) {
         MyUser user = MyUser.getCurrentUser(MyUser.class);
@@ -61,6 +62,14 @@ public class UserUtil {
         now = now + number;
         user.setContribution(now);
         user.update(listener);
+    }
+
+    public static void onActivityResult(int resultCode,Intent data){
+        if (resultCode == Constant.SUCCESS) {
+            UserUtil.user = (MyUser) data.getSerializableExtra(RESULT_USER);//成功登录并复制
+        } else if (resultCode == Constant.FAIL) {
+            UserUtil.user = null;//登录失败
+        }
     }
 
 }

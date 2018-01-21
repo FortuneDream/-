@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -68,7 +69,7 @@ public class HomeSearchFragmentPresenter extends BasePresenter<HomeSearchFragmen
         if (!TextUtils.isEmpty(query)) {
             return query;
         } else {
-            ToastUtil.showToast( CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast( fragment.getResString(R.string.complete_info));
             return null;
         }
     }

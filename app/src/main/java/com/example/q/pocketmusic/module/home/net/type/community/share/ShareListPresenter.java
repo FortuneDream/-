@@ -35,7 +35,7 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
 
     public void getMoreShareList() {
         mPage++;
-        model.getAllShareList(typeId,mPage, new ToastQueryListener<ShareSong>(fragment) {
+        model.getAllShareList(typeId, mPage, new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 fragment.setList(false, list);
@@ -48,7 +48,7 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
         if (isRefreshing) {
             mPage = 0;
         }
-        model.getAllShareList(typeId,mPage, new ToastQueryListener<ShareSong>(fragment) {
+        model.getAllShareList(typeId, mPage, new ToastQueryListener<ShareSong>(fragment) {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 fragment.setList(isRefreshing, list);
@@ -65,12 +65,10 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
         Song song = new Song();
         song.setContent(shareSong.getContent());
         song.setName(shareSong.getName());
-        Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         SongObject songObject = new SongObject(song, Constant.FROM_SHARE, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
-        songObject.setCommunity(typeId);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
-        intent.putExtra(SongActivity.SHARE_SONG, shareSong);
-        fragment.getCurrentContext().startActivity(intent);
+        fragment.getCurrentContext().startActivity(SongActivity.buildShareIntent(
+                fragment.getCurrentContext(), songObject, typeId, shareSong
+        ));
     }
 
     public void enterOtherProfileActivity(MyUser other) {
@@ -80,7 +78,7 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
     }
 
     public void setType(int typeId) {
-        this.typeId=typeId;
+        this.typeId = typeId;
     }
 
     interface IView extends IBaseView {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
@@ -59,7 +60,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                     public void done(BmobException e) {
                         if (e != null) {
                             fragment.showLoading(false);
-                            ToastUtil.showToast(CommonString.STR_ERROR_INFO + e.getMessage());
+                            ToastUtil.showToast(fragment.getResString(R.string.send_error) + e.getMessage());
                             return;
                         }
                         //修改用户表的headIv属性
@@ -99,7 +100,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                 UserUtil.user.update(new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
-                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + coin);
+                        ToastUtil.showToast(fragment.getResString(R.string.add_coin) + coin);
                     }
                 });
             }
@@ -146,7 +147,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
             UserUtil.increment(coin, new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
-                    ToastUtil.showToast("今天已签到：" + CommonString.ADD_COIN_BASE + coin);
+                    ToastUtil.showToast(fragment.getResString(R.string.add_coin) + coin);
                 }
             });//第一次都加5
         } else {
@@ -222,14 +223,14 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
                     UserUtil.increment(-Constant.REDUCE_CHANG_NICK_NAME, new ToastUpdateListener() {
                         @Override
                         public void onSuccess() {
-                            ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + Constant.REDUCE_CHANG_NICK_NAME);
+                            ToastUtil.showToast(fragment.getResString(R.string.reduce_coin) + Constant.REDUCE_CHANG_NICK_NAME);
                             fragment.setNickName(nickName);
                         }
                     });
                 }
             });
         } else {
-            ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
+            ToastUtil.showToast(fragment.getResString(R.string.coin_not_enough));
         }
     }
 

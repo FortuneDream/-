@@ -14,4 +14,13 @@
     <string name="money_explain">\t口袋乐谱从开发到现在已经接近了一年的时间了，喜欢这款App的小伙伴越来越多，服务器已经不堪重负Orz。口袋乐谱也承诺给大家，永远不会有任何形式的广告，
         没有资金的app是没有办法运营下去的，所以需要大家的支持~如果您也喜欢这款App，希望我能继续迭代开发，你可以选择捐赠支持我。捐赠的钱将用于服务器开销。在这里向已捐赠的用户表示由衷的感谢。
     ~ \n\t另外，您也会获得 5 硬币/元(私信我账号哦)  \n\t如果没有支付宝的小伙伴可以加群或者QQ号联系我 \n\t( QQ群：189465720 QQ:812568684 支付宝:15123100885 )~如果支付出现问题可以转到支付宝（并注明昵称哦~）~谢谢大家了 \n\t请输入整数</string>
+    <string name="not_found_net_data">没有网络~请打开网络数据后再尝试~</string>
+    <string name="send_error">发生错误：</string>
+    <string name="complete_info">是不是遺漏了一些信息啊？</string>
+
+
+    //硬币
+    <string name="add_coin">获得硬币数：</string>
+    <string name="reduce_coin">消耗硬币数：</string>
+    <string name="coin_not_enough">硬币不足了哟~</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.q.pocketmusic.module.home.profile.gift;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.CommonString;
@@ -70,7 +71,7 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
                     UserUtil.increment(finalSum, new ToastUpdateListener() {
                         @Override
                         public void onSuccess() {
-                            ToastUtil.showToast(CommonString.ADD_COIN_BASE + finalSum);
+                            ToastUtil.showToast(activity.getResString(R.string.add_coin) + finalSum);
                             activity.onRefresh();
                         }
                     });

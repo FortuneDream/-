@@ -5,6 +5,7 @@ import android.database.SQLException;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
@@ -174,7 +175,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                     @Override
                     public void onSuccess() {
                         activity.showLoading(false);
-                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                        ToastUtil.showToast(activity.getResString(R.string.add_coin) + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
                         activity.sendCommentResult(s, askSongComment);
                     }
                 }); //原子操作
@@ -196,7 +197,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                     @Override
                     public void onSuccess() {
                         activity.showLoading(false);
-                        ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                        ToastUtil.showToast(activity.getResString(R.string.add_coin) + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
                         activity.sendCommentResult(s, askSongComment);
                     }
                 }); //原子操作
@@ -225,7 +226,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                                 public void onSuccess() {
                                     activity.showLoading(false);
                                     mAskSongCommentModel.getPicUrls().clear();//清空
-                                    ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                                    ToastUtil.showToast(activity.getResString(R.string.add_coin) + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
                                     activity.sendCommentResult(s, askSongComment);
                                 }
                             }); //原子操作
@@ -243,7 +244,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
             public void onError(int i, String s) {
                 //文件上传失败
                 activity.showLoading(false);
-                ToastUtil.showToast(CommonString.STR_ERROR_INFO + s);
+                ToastUtil.showToast(activity.getResString(R.string.send_error) + s);
             }
         });
     }
@@ -267,7 +268,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
             @Override
             public void onHanlderFailure(int requestCode, String errorMsg) {
-                ToastUtil.showToast(CommonString.STR_ERROR_INFO + errorMsg);
+                ToastUtil.showToast(activity.getResString(R.string.send_error) + errorMsg);
             }
         });
     }
@@ -297,12 +298,10 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
     //进入SongActivity
     public void enterSongActivity(Song song, AskSongComment askSongComment) {
-        Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject songObject = new SongObject(song, Constant.FROM_ASK, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
-        songObject.setCommunity(post.getInstrument());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
-        intent.putExtra(SongActivity.ASK_COMMENT, askSongComment);
-        activity.getCurrentContext().startActivity(intent);
+        activity.getCurrentContext().startActivity(SongActivity.buildAskIntent(
+                activity.getCurrentContext(), songObject, post.getInstrument(), askSongComment
+        ));
     }
 
 

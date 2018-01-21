@@ -41,7 +41,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        isViewValid=true;
+        isViewValid = true;
     }
 
     protected abstract T createPresenter();
@@ -119,14 +119,22 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        isViewValid=false;
+        isViewValid = false;
         unbinder.unbind();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        isViewValid=false;
+        isViewValid = false;
         presenter.detachView();
+    }
+
+    @Override
+    public String getResString(int resId) {
+        if (getContext() == null) {
+            return "";
+        }
+        return getContext().getResources().getString(resId);
     }
 }

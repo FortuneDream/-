@@ -8,8 +8,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.RestrictTo;
+import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -188,8 +190,10 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         super.onRestoreInstanceState(savedInstanceState);
         Intent i = getBaseContext().getPackageManager()
                 .getLaunchIntentForPackage(getBaseContext().getPackageName());
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
+        if (i != null) {
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        }
     }
 
     @Override
@@ -239,6 +243,11 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         drawableList.clear();
         mLoadingDialog.dismiss();
         presenter.detachView();
+    }
+
+    @Override
+    public String getResString(@StringRes int resId){
+        return getAppContext().getResources().getString(resId);
     }
 
 }

@@ -12,6 +12,7 @@ import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 
@@ -56,7 +57,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter.IView,LoginPresen
     @Override
     public void loginToResult(Integer result, MyUser myUser) {
         Intent intent = new Intent();
-        intent.putExtra(AuthActivity.RESULT_USER, myUser);
+        intent.putExtra(UserUtil.RESULT_USER, myUser);
         setResult(result, intent);
     }
 

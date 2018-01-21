@@ -12,7 +12,7 @@ import com.example.q.pocketmusic.util.UserUtil;
 //用于验证的Activity
 public abstract class AuthActivity<V, T extends BasePresenter<V>> extends BaseActivity<V, T> {
     public static int a;
-    public static final String RESULT_USER = "result_user";//返回的User
+
 
     public abstract void initUserView();
 
@@ -28,11 +28,7 @@ public abstract class AuthActivity<V, T extends BasePresenter<V>> extends BaseAc
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.REQUEST_LOGIN) {//请求登录
-            if (resultCode == Constant.SUCCESS) {
-                UserUtil.user = (MyUser) data.getSerializableExtra(RESULT_USER);//成功登录并复制
-            } else if (resultCode == Constant.FAIL) {
-                UserUtil.user = null;//登录失败
-            }
+            UserUtil.onActivityResult(resultCode,data);
             finish();//把登录跳转前的界面(即将进入的页面)finish掉
         }
     }
