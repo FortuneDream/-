@@ -27,20 +27,20 @@
 
         <TextView
             android:id="@+id/coin_tv"
-            style="@style/ThreeTextSecond"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
+            android:textColor="@color/ui_red"
             tools:text="1枚" />
 
     </LinearLayout>
 
 
     <TextView
-        tools:text="2014 1 1"
         android:id="@+id/date_tv"
         style="@style/ThreeTextThird"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        tools:text="2014 1 1" />
 </LinearLayout>

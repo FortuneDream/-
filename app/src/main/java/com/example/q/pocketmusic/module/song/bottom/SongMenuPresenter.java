@@ -33,6 +33,7 @@ import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
+import com.example.q.pocketmusic.view.widget.net.ConfettiUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -210,7 +211,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             @Override
             public void onSuccess() {
                 //增加分享人的硬币
-                new GiftModel().addGift(shareSong.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
+                new GiftModel().addGift(shareSong.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, user,GiftModel.TYPE.SHARE,new ToastSaveListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         ToastUtil.showToast("已点赞");
@@ -233,7 +234,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         askSongComment.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                new GiftModel().addGift(askSongComment.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, new ToastSaveListener<String>() {
+                new GiftModel().addGift(askSongComment.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER,user,GiftModel.TYPE.COMMENT, new ToastSaveListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         ToastUtil.showToast("已点赞");
@@ -307,6 +308,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                                             }
                                         });
                                         addCommunityState(Constant.COMMUNITY_STATE_COLLECTION);
+                                        fragment.addCollectionResult();
                                     }
                                 });
                             }
@@ -431,5 +433,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         void downloadResult(Integer success, String str);
 
         void alertRecoveryDialog(String name, int isFrom);
+
+        void addCollectionResult();
     }
 }

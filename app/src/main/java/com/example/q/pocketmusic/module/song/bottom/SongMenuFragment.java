@@ -1,5 +1,6 @@
 package com.example.q.pocketmusic.module.song.bottom;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.LinearLayout;
 
 import com.example.q.pocketmusic.R;
@@ -55,7 +57,6 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     LinearLayout shareLl;
     @BindView(R.id.recovery_ll)
     LinearLayout recoveryLl;
-    Unbinder unbinder;
     private EditDialog editDialog;//编辑框
     private static final String PARAM_Intent = "param_1";
 
@@ -190,6 +191,22 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                     }
                 })
                 .create().show();
+    }
+
+    @Override
+    public void addCollectionResult() {
+        if (getActivity() != null) {
+            Activity activity = getActivity();
+            if (activity.getWindow() != null) {
+                Window window = activity.getWindow();
+                if (window.getDecorView() != null) {
+                    View view = window.getDecorView();
+                    if (view instanceof ViewGroup) {
+                        ConfettiUtil.getCommonConfetti((ViewGroup) view);
+                    }
+                }
+            }
+        }
     }
 
     public void alertCheckDownloadDialog(int coin) {
