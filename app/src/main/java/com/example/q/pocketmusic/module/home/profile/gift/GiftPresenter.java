@@ -3,7 +3,6 @@ package com.example.q.pocketmusic.module.home.profile.gift;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.data.bean.bmob.Gift;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -32,7 +31,7 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
         attachView(activity);
         this.activity = getIViewRef();
         model = new GiftModel();
-        this.mPage=0;
+        this.mPage = 0;
     }
 
 
@@ -49,7 +48,6 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
         });
 
     }
-
 
 
     //收礼物，批量更新

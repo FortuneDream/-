@@ -47,14 +47,12 @@ public class CoinRankAdapter extends RecyclerArrayAdapter<MyUser> {
         TextView nickNameTv;
         TextView rankTv;
         TextView coinTv;
-        TextView createdAtTv;
         Toolbar contentToolbar;
 
         public ViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_coin_rank);
             headIv = $(R.id.head_iv);
             rankTv = $(R.id.rank_tv);
-            createdAtTv = $(R.id.created_at_tv);
             nickNameTv = $(R.id.nick_name_tv);
             coinTv = $(R.id.coin_tv);
             contentToolbar = $(R.id.content_toolbar);
@@ -75,7 +73,6 @@ public class CoinRankAdapter extends RecyclerArrayAdapter<MyUser> {
             rankTv.setText(position + ".");
             displayStrategy.displayCircle(getContext(), data.getHeadImg(), headIv);
             nickNameTv.setText(data.getNickName());
-            createdAtTv.setText("注册时间：" + data.getCreatedAt());
             headIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

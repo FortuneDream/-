@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,23 +10,45 @@
     <com.example.q.pocketmusic.view.widget.net.HackyViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent" />
 
-    <View style="@style/SettingDivider" />
-
-    <FrameLayout
-        android:id="@+id/bottom_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-    <View style="@style/SettingDivider" />
 
     <TextView
         android:id="@+id/page_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:id="@+id/bottom_ll"
+        android:layout_above="@id/page_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View style="@style/SettingDivider" />
+
+        <FrameLayout
+            android:id="@+id/bottom_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View style="@style/SettingDivider" />
+    </LinearLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/hide_flat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp" />
-</LinearLayout>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        app:backgroundTint="@color/white"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_vec_show" />
+
+</RelativeLayout>

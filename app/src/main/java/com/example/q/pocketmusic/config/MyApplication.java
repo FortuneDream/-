@@ -23,11 +23,11 @@ import cn.finalteam.galleryfinal.ThemeConfig;
  */
 
 public class MyApplication extends Application {
-    private Context context;
+    public static Context context;
     @Override
     public void onCreate() {
         super.onCreate();
-        this.context=getApplicationContext();
+        context=getApplicationContext();
         ToastUtil.init(context);
         InstrumentFlagUtil.init();
         SharedPrefsUtil.init(context);

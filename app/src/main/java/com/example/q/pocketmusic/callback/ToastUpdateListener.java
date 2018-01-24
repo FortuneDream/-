@@ -3,10 +3,13 @@ package com.example.q.pocketmusic.callback;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.config.CommonString;
+import com.example.q.pocketmusic.config.MyApplication;
 import com.example.q.pocketmusic.data.bean.MyUser;
+import com.example.q.pocketmusic.data.event.LoadingDialogEvent;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.common.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
@@ -38,10 +41,8 @@ public abstract class ToastUpdateListener extends UpdateListener {
     }
 
     public void onFail(BmobException e) {
-        if (baseView != null) {
-            baseView.showLoading(false);
-            ToastUtil.showToast( baseView.getResString(R.string.send_error) + e.getMessage());
-        }
+        EventBus.getDefault().post(new LoadingDialogEvent(false));
+        ToastUtil.showToast( MyApplication.context.getResources().getString(R.string.send_error) + e.getMessage());
         e.printStackTrace();
         if (e.getErrorCode() == 206) {//在其他地方已经登录
             MyUser.logOut();

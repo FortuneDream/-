@@ -54,7 +54,7 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
     //先查询，后进入SongActivity
     public void queryAndEnterSongActivity(final CollectionSong collectionSong) {
         activity.showLoading(true);
-        userCollectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>(activity) {
+        userCollectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>() {
             @Override
             public void onSuccess(List<CollectionPic> list) {
                 activity.showLoading(false);

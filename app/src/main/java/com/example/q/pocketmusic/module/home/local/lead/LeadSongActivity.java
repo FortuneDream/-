@@ -51,7 +51,7 @@ public class LeadSongActivity extends BaseActivity<LeadSongPresenter.IView, Lead
     public void initView() {
         adapter = new SmallPicAdapter(this);
         adapter.setOnItemClickListener(this);
-        initToolbar(toolbar, "本地导入");
+        initToolbar(toolbar, getResString(R.string.title_lead_song));
         recycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         recycler.setAdapter(adapter);
     }

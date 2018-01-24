@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
-import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
@@ -24,7 +23,7 @@ public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
 
     public RegisterPresenter(IView activity) {
         attachView(activity);
-        this.activity=getIViewRef();
+        this.activity = getIViewRef();
     }
 
     public Boolean checkAccount(String email) {
@@ -38,9 +37,9 @@ public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password) || TextUtils.isEmpty(nickName) || TextUtils.isEmpty(confirmPassword)) {
             ToastUtil.showToast(activity.getResString(R.string.complete_info));
         } else if (!isConfirm) {
-            ToastUtil.showToast( "邮箱格式错误~");
+            ToastUtil.showToast("邮箱格式错误~");
         } else if (!confirmPassword.equals(password)) {
-            ToastUtil.showToast( "两次输入的密码要相同哦~");
+            ToastUtil.showToast("两次输入的密码要相同哦~");
         } else {
             activity.showLoading(true);
             final MyUser user = new MyUser();
@@ -48,11 +47,11 @@ public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
             user.setPassword(password);
             user.setEmail(account);//账号作为邮箱,打开邮箱验证
             user.setNickName(nickName);
-            user.signUp(new ToastSaveListener<MyUser>(activity) {
+            user.signUp(new ToastSaveListener<MyUser>() {
                 @Override
                 public void onSuccess(MyUser user) {
                     activity.showLoading(false);
-                    ToastUtil.showToast( "注册成功，\\(^o^)/~");
+                    ToastUtil.showToast("注册成功，\\(^o^)/~");
                     ((Activity) activity.getCurrentContext()).setResult(Constant.SUCCESS);
                     activity.finish();
                 }

@@ -58,7 +58,7 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
 
     public void enterSongActivity(final CollectionSong collectionSong) {
         fragment.showLoading(true);
-        userCollectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>(fragment) {
+        userCollectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>() {
             @Override
             public void onSuccess(List<CollectionPic> list) {
                 fragment.showLoading(false);

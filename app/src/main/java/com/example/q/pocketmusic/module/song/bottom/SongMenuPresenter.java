@@ -9,7 +9,6 @@ import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.BmobConstant;
-import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.data.BmobInfo;
 import com.example.q.pocketmusic.data.bean.DownloadInfo;
@@ -22,22 +21,21 @@ import com.example.q.pocketmusic.data.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
+import com.example.q.pocketmusic.data.model.UserCommunityStateModel;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.data.model.UserCommunityStateModel;
 import com.example.q.pocketmusic.module.home.profile.contribution.CoinRankModel;
 import com.example.q.pocketmusic.module.home.profile.gift.GiftModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.DownloadUtil;
+import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
@@ -45,9 +43,6 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
-import rx.Scheduler;
-import rx.Subscription;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by 鹏君 on 2017/5/31.
@@ -248,6 +243,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         });
     }
 
+    //添加活跃状态
     private void addCommunityState(int state) {
         SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
         new UserCommunityStateModel().addCommunityState(songObject.getCommunity(), state, songObject.getSong().getName(), new ToastSaveListener<String>() {
@@ -261,21 +257,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //添加收藏
     public void addCollection() {
-        if (!UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext())) {
-            ToastUtil.showToast("请先登录~");
-            return;
-        }
-        if (song == null) {
-            ToastUtil.showToast("发生未知错误，请重新打开乐谱后添加");
-            return;
-        }
-
-        if (song.getIvUrl() == null || song.getIvUrl().size() <= 0) {
-            ToastUtil.showToast("图片为空");
-            return;
-        }
-
-
+        if (checkCollection()) return;
         //检测是否已经收藏
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         query.order("-updatedAt");
@@ -283,22 +265,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         query.findObjects(new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
-                if (song == null || intent == null) {
-                    ToastUtil.showToast("发生未知错误，请重新打开乐谱后添加");
-                    return;
-                }
-
                 //是否已收藏
                 for (CollectionSong collectionSong : list) {
                     if (collectionSong.getName().equals(song.getName())) {
                         ToastUtil.showToast("已收藏");
                         return;
                     }
-                }
-                //贡献度是否足够
-                if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_COLLECTION)) {
-                    ToastUtil.showToast(fragment.getResString(R.string.coin_not_enough));
-                    return;
                 }
                 //添加收藏记录
                 final CollectionSong collectionSong = new CollectionSong();
@@ -309,11 +281,6 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
                     @Override
                     public void onSuccess(String s) {
-                        if (song == null) {
-                            ToastUtil.showToast("发生未知错误，请重新打开乐谱后添加");
-                            return;
-                        }
-
                         final int numPic = song.getIvUrl().size();
                         List<BmobObject> collectionPics = new ArrayList<>();
                         for (int i = 0; i < numPic; i++) {
@@ -349,6 +316,30 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             }
         });
 
+    }
+
+    //检验收藏
+    private boolean checkCollection() {
+        if (!UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext())) {
+            ToastUtil.showToast("请先登录~");
+            return false;
+        }
+        if (song == null || intent == null) {
+            ToastUtil.showToast("发生未知错误，请重新打开乐谱后添加");
+            return false;
+        }
+
+        if (song.getIvUrl() == null || song.getIvUrl().size() <= 0) {
+            ToastUtil.showToast("图片为空");
+            return false;
+        }
+
+        //贡献度是否足够
+        if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_COLLECTION)) {
+            ToastUtil.showToast(fragment.getResString(R.string.coin_not_enough));
+            return false;
+        }
+        return true;
     }
 
     //分享乐谱,本地和网络

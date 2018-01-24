@@ -3,11 +3,11 @@ package com.example.q.pocketmusic.module.home.net.type.community.share.publish;
 import android.database.SQLException;
 import android.text.TextUtils;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.data.bean.local.Img;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
@@ -92,7 +92,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
             activity.alertSelectCommunityDialog(name, content);
             //先检查是否已经存在相同的曲谱
         } else {
-            ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast(activity.getResString(R.string.complete_info));
         }
     }
 
@@ -101,7 +101,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
         activity.showLoading(true);
         BmobQuery<ShareSong> query = new BmobQuery<>();
         query.addWhereEqualTo("name", name);
-        query.findObjects(new ToastQueryListener<ShareSong>(activity) {
+        query.findObjects(new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 Boolean flag = true;
@@ -139,7 +139,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
             @Override
             public void onError(int i, String s) {
                 activity.showLoading(false);
-                ToastUtil.showToast(CommonString.STR_ERROR_INFO + "第" + i + "张：" + s);
+                ToastUtil.showToast(activity.getResString(R.string.send_error) + "第" + i + "张：" + s);
             }
         });
     }
@@ -149,7 +149,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
         final ShareSong shareSong = new ShareSong(UserUtil.user, name, content);
         shareSong.setInstrument(community);
         //添加分享曲谱记录
-        shareSong.save(new ToastSaveListener<String>(activity) {
+        shareSong.save(new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {
                 List<BmobObject> sharePics = new ArrayList<>();
@@ -158,14 +158,14 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
                     sharePics.add(sharePic);
                 }
                 //批量添加分享图片记录
-                new BmobBatch().insertBatch(sharePics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
+                new BmobBatch().insertBatch(sharePics).doBatch(new ToastQueryListListener<BatchResult>() {
 
                     @Override
                     public void onSuccess(List<BatchResult> list) {
                         UserUtil.increment(Constant.ADD_CONTRIBUTION_UPLOAD, new ToastUpdateListener() {
                             @Override
                             public void onSuccess() {
-                                ToastUtil.showToast(CommonString.ADD_COIN_BASE + (Constant.ADD_CONTRIBUTION_UPLOAD));
+                                ToastUtil.showToast(activity.getResString(R.string.add_coin) + (Constant.ADD_CONTRIBUTION_UPLOAD));
                                 activity.showLoading(false);
                                 activity.finish();
                             }

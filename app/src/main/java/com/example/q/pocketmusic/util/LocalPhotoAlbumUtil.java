@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.util;
 
-import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.module.common.BaseModel;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.common.ToastUtil;

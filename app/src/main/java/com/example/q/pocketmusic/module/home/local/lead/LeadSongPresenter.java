@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.local.lead;
 
 import android.text.TextUtils;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -40,7 +41,7 @@ public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
     //本地导入乐谱
     public void leadSong(String name) {
         if (TextUtils.isEmpty(name)) {
-            ToastUtil.showToast("名字不能为空");
+            ToastUtil.showToast(activity.getResString(R.string.complete_info));
             return;
         } else if (localPhotoAlbumUtil.getImgUrls().size() <= 0) {
             ToastUtil.showToast("请添加图片");

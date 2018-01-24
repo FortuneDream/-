@@ -24,10 +24,15 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.data.event.LoadingDialogEvent;
 import com.example.q.pocketmusic.util.common.ConvertUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
@@ -90,6 +95,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         super.onCreate(savedInstanceState);
         setContentView(setContentResource());
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         presenter = createPresenter();
         this.context = this;
         initView();
@@ -202,6 +208,11 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void showDialog(LoadingDialogEvent event){
+        showLoading(event.isShow());
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -239,6 +250,9 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
         mIsViewValid = false;
         drawableList.clear();
         mLoadingDialog.dismiss();
@@ -246,7 +260,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
     @Override
-    public String getResString(@StringRes int resId){
+    public String getResString(@StringRes int resId) {
         return getAppContext().getResources().getString(resId);
     }
 

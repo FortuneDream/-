@@ -32,7 +32,8 @@
 
                 <TextView
                     android:id="@+id/nick_name_tv"
-                    style="@style/TwoTextMain"
+                    android:textSize="16sp"
+                    android:textColor="@color/ui_black_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/top_iv"
@@ -41,11 +42,12 @@
 
                 <TextView
                     android:id="@+id/my_coin_tv"
+                    android:textColor="@color/ui_red"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/nick_name_tv"
                     android:layout_centerInParent="true"
-                    tools:text="123点贡献度 " />
+                    tools:text="123 " />
             </RelativeLayout>
 
 

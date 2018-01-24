@@ -31,7 +31,7 @@ public class ShareState extends BaseState implements IState {
     public void loadPic() {
         BmobQuery<SharePic> query = new BmobQuery<>();
         query.addWhereEqualTo("shareSong", new BmobPointer(shareSong));
-        query.findObjects(new ToastQueryListener<SharePic>(activity) {
+        query.findObjects(new ToastQueryListener<SharePic>() {
             @Override
             public void onSuccess(List<SharePic> list) {
                 List<String> pics = new ArrayList<>();

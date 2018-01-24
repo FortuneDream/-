@@ -12,9 +12,6 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
  */
 
 public abstract class AuthFragment<V, T extends BasePresenter<V>> extends BaseFragment<V, T> {
-    public static final String RESULT_USER = "result";
-
-
     @Override
     public void initView() {
         if (!UserUtil.checkLocalUser(this)){
@@ -29,6 +26,4 @@ public abstract class AuthFragment<V, T extends BasePresenter<V>> extends BaseFr
             UserUtil.onActivityResult(resultCode,data);
         }
     }
-
-
 }

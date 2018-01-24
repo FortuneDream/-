@@ -17,7 +17,7 @@
             android:layout_gravity="center"
             android:text="首页"
             android:textColor="@color/ui_black_1"
-            android:textSize="22sp" />
+            android:textSize="21sp" />
 
         <ImageView
             android:id="@+id/help_iv"

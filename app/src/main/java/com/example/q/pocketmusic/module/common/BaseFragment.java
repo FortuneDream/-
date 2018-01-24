@@ -13,10 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.data.event.LoadingDialogEvent;
 import com.example.q.pocketmusic.util.common.ConvertUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -66,6 +71,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(setContentResource(), container, false);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         initView();
         return view;
     }
@@ -115,10 +121,17 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         getActivity().finish();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void showDialog(LoadingDialogEvent event){
+        showLoading(event.isShow());
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
         isViewValid = false;
         unbinder.unbind();
     }

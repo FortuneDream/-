@@ -6,7 +6,6 @@ import android.text.TextUtils;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
-import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
@@ -38,7 +37,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
         final MyUser user = new MyUser();
         user.setUsername(account);
         user.setPassword(password);
-        user.login(new ToastSaveListener<MyUser>(activity) {
+        user.login(new ToastSaveListener<MyUser>() {
 
             @Override
             public void onSuccess(MyUser user) {
@@ -61,8 +60,6 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
         Intent intent = new Intent(activity.getCurrentContext(), RegisterActivity.class);
         ((Activity) activity.getCurrentContext()).startActivityForResult(intent, Constant.REQUEST_REGISTER);
     }
-
-
 
 
     public interface IView extends IBaseView {

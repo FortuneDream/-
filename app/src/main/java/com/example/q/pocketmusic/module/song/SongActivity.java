@@ -1,5 +1,6 @@
 package com.example.q.pocketmusic.module.song;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -7,22 +8,24 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.config.CommonString;
-import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.config.ScreenshotContentObserver;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
-import com.example.q.pocketmusic.data.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BaseActivity;
@@ -34,6 +37,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import pub.devrel.easypermissions.EasyPermissions;
 
 //查看大图界面
@@ -49,7 +53,12 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     FrameLayout bottomContent;
     @BindView(R.id.page_tv)
     TextView pageTv;
+    @BindView(R.id.hide_flat)
+    FloatingActionButton hideFlat;
+    @BindView(R.id.bottom_ll)
+    LinearLayout bottomLl;
     private SongActivityAdapter adapter;
+    private boolean sIsShowTopAndBottom = true;
 
 
     public final static String PARAM_SONG_OBJECT_SERIALIZABLE = "PARAM_SONG_OBJECT_SERIALIZABLE";//Serializeable
@@ -82,7 +91,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     }
 
     //本地
-    public static Intent buildLocalIntent(Context context, SongObject songObject, LocalSong localSong){
+    public static Intent buildLocalIntent(Context context, SongObject songObject, LocalSong localSong) {
         Intent intent = new Intent(context, SongActivity.class);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
         intent.putExtra(SongActivity.LOCAL_SONG, localSong);
@@ -90,14 +99,14 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     }
 
     //推荐
-    public static Intent buildRecommendIntent(Context context, SongObject songObject){
+    public static Intent buildRecommendIntent(Context context, SongObject songObject) {
         Intent intent = new Intent(context, SongActivity.class);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
         return intent;
     }
 
     //求谱
-    public static Intent buildAskIntent(Context context, SongObject songObject, int community, AskSongComment askSongComment){
+    public static Intent buildAskIntent(Context context, SongObject songObject, int community, AskSongComment askSongComment) {
         Intent intent = new Intent(context, SongActivity.class);
         songObject.setCommunity(community);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
@@ -106,7 +115,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     }
 
     //分享
-    public static Intent buildShareIntent(Context context, SongObject songObject, int typeId, ShareSong shareSong){
+    public static Intent buildShareIntent(Context context, SongObject songObject, int typeId, ShareSong shareSong) {
         Intent intent = new Intent(context, SongActivity.class);
         songObject.setCommunity(typeId);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
@@ -115,13 +124,12 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     }
 
     //乐器
-    public static Intent buildTypeIntent(Context context, SongObject songObject,int community){
+    public static Intent buildTypeIntent(Context context, SongObject songObject, int community) {
         Intent intent = new Intent(context, SongActivity.class);
         songObject.setCommunity(community);
         intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
         return intent;
     }
-
 
 
     @Override
@@ -140,6 +148,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         initToolbar(toolbar, song.getName());//toolbar
         presenter.loadPic();  //查找图片
         presenter.showBottomFragment(songObject.getFrom());//显示底部Fragment
+        showTopAndBottom();//默认显示
     }
 
     //加载失败
@@ -157,7 +166,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     @Override
     public void setPicResult(List<String> ivUrl, int from) {
-        if (!isViewValid()){
+        if (!isViewValid()) {
             return;
         }
         //本地和网络加载图片的地址有所不同
@@ -214,4 +223,51 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         super.onStop();
         ScreenshotContentObserver.stopObserve();
     }
+
+
+    //显示和隐藏标题和底部
+    @OnClick(R.id.hide_flat)
+    public void onViewClicked() {
+        showTopAndBottom();
+    }
+
+    private void showTopAndBottom() {
+        if (sIsShowTopAndBottom) {
+            hideFlat.setImageResource(R.drawable.ic_vec_show);
+            showAnim();
+        } else {
+            hideFlat.setImageResource(R.drawable.ic_vec_hide);
+            hideAnim();
+        }
+        sIsShowTopAndBottom = !sIsShowTopAndBottom;
+    }
+
+    //参考点0,是图像原来所在的点的左上角的点
+    private void showAnim() {
+        ObjectAnimator appBarAnimator = ObjectAnimator.ofFloat(appBar, "translationY", -appBar.getMeasuredHeight(), 0);
+        appBarAnimator.setDuration(700);
+        appBarAnimator.start();
+
+        Display display = context.getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+        ObjectAnimator bottomAnimator = ObjectAnimator.ofFloat(bottomLl, "translationY", bottomLl.getMeasuredHeight() + pageTv.getMeasuredHeight(), 0);
+        bottomAnimator.setDuration(700);
+        bottomAnimator.start();
+    }
+
+    private void hideAnim() {
+        ObjectAnimator appBarAnimator = ObjectAnimator.ofFloat(appBar, "translationY", 0, -appBar.getMeasuredHeight());
+        appBarAnimator.setDuration(700);
+        appBarAnimator.start();
+
+        Display display = context.getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+        ObjectAnimator bottomAnimator = ObjectAnimator.ofFloat(bottomLl, "translationY", 0, bottomLl.getMeasuredHeight() + pageTv.getMeasuredHeight());
+        bottomAnimator.setDuration(700);
+        bottomAnimator.start();
+    }
+
+
 }

@@ -2,9 +2,9 @@ package com.example.q.pocketmusic.module.home.net.type.community.ask.publish;
 
 import android.text.TextUtils;
 
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.data.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BaseActivity;
@@ -30,12 +30,12 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
     //指数*2+基础求谱硬币
     public void checkAsk(String title, final String content) {
         if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title)) {
-            ToastUtil.showToast(CommonString.STR_COMPLETE_INFO);
+            ToastUtil.showToast(activity.getResString(R.string.complete_info));
             return;
         }
         int coin = Constant.REDUCE_ASK + index * 2;
         if (!UserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
-            ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
+            ToastUtil.showToast(activity.getResString(R.string.coin_not_enough));
             return;
         }
         activity.alertCoinDialog(coin, title, content);
@@ -46,19 +46,19 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
     public void askForSong(String title, String content) {
         final int coin = Constant.REDUCE_ASK + index * 2;
         if (!UserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
-            ToastUtil.showToast(CommonString.STR_NOT_ENOUGH_COIN);
+            ToastUtil.showToast(activity.getResString(R.string.coin_not_enough));
             return;
         }
         activity.showLoading(true);
         AskSongPost askSongPost = new AskSongPost(UserUtil.user, title, typeId, content);
         askSongPost.setIndex(index);
-        askSongPost.save(new ToastSaveListener<String>(activity) {
+        askSongPost.save(new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {
                 UserUtil.increment(-coin, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
-                        ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + coin);
+                        ToastUtil.showToast(activity.getResString(R.string.reduce_coin) + coin);
                         activity.showLoading(false);
                         activity.setAskResult(Constant.SUCCESS);
                         activity.finish();

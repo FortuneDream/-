@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;

@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.module.home.net.type.community.ask.comment;
 
-import android.content.Intent;
 import android.database.SQLException;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -10,7 +9,6 @@ import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.CommonString;
 import com.example.q.pocketmusic.config.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
@@ -24,11 +22,11 @@ import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.bean.share.SharePic;
 import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
+import com.example.q.pocketmusic.data.model.UserCollectionModel;
+import com.example.q.pocketmusic.data.model.UserShareModel;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.data.model.UserCollectionModel;
-import com.example.q.pocketmusic.data.model.UserShareModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
@@ -130,7 +128,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         activity.showLoading(true);
         activity.setCommentInput("");//空
         //添加评论表记录
-        askSongComment.save(new ToastSaveListener<String>(activity) {
+        askSongComment.save(new ToastSaveListener<String>() {
             @Override
             public void onSuccess(final String s) {
                 //帖子表的评论数+1
@@ -168,7 +166,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
             askSongPics.add(askSongPic);
         }
         //批量添加AskSongPic表
-        new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
+        new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>() {
             @Override
             public void onSuccess(List<BatchResult> list) {
                 UserUtil.increment(Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC, new ToastUpdateListener() {
@@ -190,7 +188,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
             askSongPics.add(askSongPic);
         }
         //批量添加AskSongPic表
-        new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
+        new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>() {
             @Override
             public void onSuccess(List<BatchResult> list) {
                 UserUtil.increment(Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC, new ToastUpdateListener() {
@@ -218,7 +216,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                         askSongPics.add(askSongPic);
                     }
                     //批量添加AskSongPic表
-                    new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>(activity) {
+                    new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>() {
                         @Override
                         public void onSuccess(List<BatchResult> list) {
                             UserUtil.increment(Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC, new ToastUpdateListener() {
@@ -278,7 +276,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         if (askSongComment.getHasPic()) {
             activity.showLoading(true);
             //查询有多少张图片
-            mAskSongCommentModel.getPicList(askSongComment, new ToastQueryListener<AskSongPic>(activity) {
+            mAskSongCommentModel.getPicList(askSongComment, new ToastQueryListener<AskSongPic>() {
                 @Override
                 public void onSuccess(List<AskSongPic> list) {
                     final Song song = new Song(askSongComment.getContent(), null);//将评论者的内容当做标题
@@ -346,7 +344,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 UserUtil.increment(-coin, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
-                        ToastUtil.showToast(CommonString.REDUCE_COIN_BASE + coin);
+                        ToastUtil.showToast(activity.getResString(R.string.reduce_coin) + coin);
                         activity.addHotIndex();
                     }
                 });

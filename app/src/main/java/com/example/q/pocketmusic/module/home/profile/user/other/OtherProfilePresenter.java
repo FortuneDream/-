@@ -1,5 +1,8 @@
 package com.example.q.pocketmusic.module.home.profile.user.other;
 
+import android.text.TextUtils;
+
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
@@ -23,6 +26,10 @@ public class OtherProfilePresenter extends BasePresenter<OtherProfilePresenter.I
     }
 
     public void interestOther(MyUser otherUser) {
+        if (TextUtils.equals(otherUser.getObjectId(), UserUtil.user.getObjectId())) {
+            ToastUtil.showToast(activity.getResString(R.string.no_interest_self));
+            return;
+        }
         BmobRelation relation = new BmobRelation();
         relation.add(otherUser);
         UserUtil.user.setInterests(relation);

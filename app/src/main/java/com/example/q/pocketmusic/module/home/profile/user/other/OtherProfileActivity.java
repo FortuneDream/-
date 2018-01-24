@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.home.profile.user.other;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,5 +59,6 @@ public class OtherProfileActivity extends AuthActivity<OtherProfilePresenter.IVi
     @OnClick(R.id.interest_tv)
     public void onViewClicked() {
         presenter.interestOther(otherUser);
+        interestTv.setVisibility(View.INVISIBLE);
     }
 }

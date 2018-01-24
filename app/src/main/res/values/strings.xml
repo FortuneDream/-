@@ -17,10 +17,15 @@
     <string name="not_found_net_data">没有网络~请打开网络数据后再尝试~</string>
     <string name="send_error">发生错误：</string>
     <string name="complete_info">是不是遺漏了一些信息啊？</string>
+    <string name="no_interest_self">不能自己关注自己哦</string>
 
 
     //硬币
     <string name="add_coin">获得硬币数：</string>
     <string name="reduce_coin">消耗硬币数：</string>
     <string name="coin_not_enough">硬币不足了哟~</string>
+
+
+    //title
+    <string name="title_lead_song">本地导入</string>
 </resources>

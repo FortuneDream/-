@@ -27,7 +27,7 @@ public class SplashPresenter extends BasePresenter<SplashPresenter.IView> {
     }
 
     public void getBmobInfo() {
-        bmobUtil.getInitListWithEqual(BmobInfo.class, null, "type", Constant.BMOB_INFO_LABA, new ToastQueryListener<BmobInfo>(activity) {
+        bmobUtil.getInitListWithEqual(BmobInfo.class, null, "type", Constant.BMOB_INFO_LABA, new ToastQueryListener<BmobInfo>() {
             @Override
             public void onSuccess(List<BmobInfo> list) {
                 activity.setLaBaText(list.get(0));

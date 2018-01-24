@@ -1,9 +1,12 @@
 package com.example.q.pocketmusic.callback;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.config.CommonString;
+import com.example.q.pocketmusic.config.MyApplication;
+import com.example.q.pocketmusic.data.event.LoadingDialogEvent;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.common.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -13,13 +16,9 @@ import cn.bmob.v3.listener.SaveListener;
  */
 //封装添加，失败后会消除loadingView，且弹出Toast和错误信息
 public abstract class ToastSaveListener<T> extends SaveListener<T> {
-    private IBaseView baseView;
 
     public abstract void onSuccess(T t);
 
-    public ToastSaveListener(IBaseView baseView) {
-        this.baseView = baseView;
-    }
 
     public ToastSaveListener() {
     }
@@ -36,12 +35,9 @@ public abstract class ToastSaveListener<T> extends SaveListener<T> {
 
 
     public void onFail(T t, BmobException e) {
-        if (baseView != null) {
-            baseView.showLoading(false);
-            ToastUtil.showToast( baseView.getResString(R.string.send_error) + e.getMessage());
-        }
+        EventBus.getDefault().post(new LoadingDialogEvent(false));
+        ToastUtil.showToast( MyApplication.context.getResources().getString(R.string.send_error) + e.getMessage());
         e.printStackTrace();
-
     }
 
 

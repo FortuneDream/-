@@ -165,7 +165,7 @@ public class LocalModel {
         //所有图片
         File[] imgFiles = file.listFiles();
         //没有图片,直接删除文件夹
-        if (imgFiles.length == 0) {
+        if (imgFiles==null) {
             file.delete();
             return;
         }

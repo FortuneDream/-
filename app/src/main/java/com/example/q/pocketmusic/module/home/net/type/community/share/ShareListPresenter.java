@@ -35,7 +35,7 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
 
     public void getMoreShareList() {
         mPage++;
-        model.getAllShareList(typeId, mPage, new ToastQueryListener<ShareSong>(fragment) {
+        model.getAllShareList(typeId, mPage, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 fragment.setList(false, list);
@@ -48,7 +48,7 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
         if (isRefreshing) {
             mPage = 0;
         }
-        model.getAllShareList(typeId, mPage, new ToastQueryListener<ShareSong>(fragment) {
+        model.getAllShareList(typeId, mPage, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
                 fragment.setList(isRefreshing, list);
