@@ -5,7 +5,8 @@ import android.support.annotation.NonNull;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
+import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.collection.CollectionPic;
@@ -66,7 +67,7 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
             private void enterSongActivity(Song song) {
                 Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
                 SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.MENU_DOWNLOAD_SHARE, Constant.NET);
-                intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+                intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, songObject);
                 activity.getCurrentContext().startActivity(intent);
             }
 

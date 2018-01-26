@@ -3,7 +3,11 @@ package com.example.q.pocketmusic.util.common;
 import android.support.annotation.Nullable;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+
+import okhttp3.Response;
 
 /**
  * Created by 鹏君 on 2016/10/2.
@@ -63,6 +67,48 @@ public class FileUtils {
             return file;
         } else {
             return null;
+        }
+    }
+
+
+    public static File saveFile(Response response, String dirPath, String destPath) throws IOException {
+        InputStream is = null;
+        FileOutputStream fos = null;
+        byte[] buff = new byte[1024 * 2];
+        int len = 0;//每次读取的字节长度
+        int sum = 0;//总得字节长度
+        File destFile = new File(destPath);
+        File dirFile = new File(dirPath);
+        if (!dirFile.exists()) {
+            dirFile.mkdirs();
+        }
+        try {
+            fos = new FileOutputStream(destFile);
+            is = response.body().byteStream();
+            while ((len = is.read(buff)) != -1) {
+                sum += len;//
+                fos.write(buff, 0, len);
+            }
+            fos.flush();
+            return destFile;
+        } finally {
+            response.body().close();
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
         }
     }
 }

@@ -8,8 +8,9 @@ import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.BmobConstant;
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.BmobConstant;
+import com.example.q.pocketmusic.config.constant.Constant;
+import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.BmobInfo;
 import com.example.q.pocketmusic.data.bean.DownloadInfo;
 import com.example.q.pocketmusic.data.bean.MyUser;
@@ -21,6 +22,7 @@ import com.example.q.pocketmusic.data.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
+import com.example.q.pocketmusic.data.model.UserCollectionModel;
 import com.example.q.pocketmusic.data.model.UserCommunityStateModel;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
@@ -33,7 +35,6 @@ import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
-import com.example.q.pocketmusic.view.widget.net.ConfettiUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +56,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     private boolean isEnableAgree = true;//是否能够点赞
     private Song song;
     private int isFrom;
-    private CoinRankModel coinRankModel;
+    private UserCollectionModel userCollectionModel;
 
     public SongMenuPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
-        coinRankModel = new CoinRankModel();
+        userCollectionModel=new UserCollectionModel();
     }
 
 
@@ -98,7 +99,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     //添加下载量
     private void addDownLoadNum() {
         if (isFrom == Constant.FROM_SHARE) {
-            ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
+            ShareSong shareSong = (ShareSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_SHARE_SONG);
             shareSong.increment(BmobConstant.BMOB_DOWNLOAD_NUM);
             shareSong.update(new ToastUpdateListener() {
                 @Override
@@ -141,7 +142,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     public void checkAskHasAgree() {
         BmobQuery<MyUser> query = new BmobQuery<>();
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
-        AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
+        AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_ASK_COMMENT);
         query.addWhereRelatedTo(BmobConstant.BMOB_AGREES, new BmobPointer(askSongComment));
         query.findObjects(new ToastQueryListener<MyUser>() {
             @Override
@@ -162,7 +163,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     private void checkShareHasAgree() {
         BmobQuery<MyUser> query = new BmobQuery<>();
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
-        ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
+        ShareSong shareSong = (ShareSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_SHARE_SONG);
         query.addWhereRelatedTo("agrees", new BmobPointer(shareSong));
         query.findObjects(new ToastQueryListener<MyUser>() {
             @Override
@@ -204,14 +205,14 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         BmobRelation relation = new BmobRelation();
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         relation.add(user);
-        final ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
+        final ShareSong shareSong = (ShareSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_SHARE_SONG);
         shareSong.setAgrees(relation);
         shareSong.increment(BmobConstant.BMOB_AGREE_NUM);//原子操作，点赞数加一
         shareSong.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
                 //增加分享人的硬币
-                new GiftModel().addGift(shareSong.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, user,GiftModel.TYPE.SHARE,new ToastSaveListener<String>() {
+                new GiftModel().addGift(shareSong.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, user, GiftModel.TYPE.SHARE, new ToastSaveListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         ToastUtil.showToast("已点赞");
@@ -228,13 +229,13 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         BmobRelation relation = new BmobRelation();
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         relation.add(user);
-        final AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
+        final AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_ASK_COMMENT);
         askSongComment.setAgrees(relation);
         askSongComment.increment(BmobConstant.BMOB_AGREE_NUM);//原子操作，点赞数加一
         askSongComment.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                new GiftModel().addGift(askSongComment.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER,user,GiftModel.TYPE.COMMENT, new ToastSaveListener<String>() {
+                new GiftModel().addGift(askSongComment.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, user, GiftModel.TYPE.COMMENT, new ToastSaveListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         ToastUtil.showToast("已点赞");
@@ -246,7 +247,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //添加活跃状态
     private void addCommunityState(int state) {
-        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
+        SongObject songObject = (SongObject) intent.getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT);
         new UserCommunityStateModel().addCommunityState(songObject.getCommunity(), state, songObject.getSong().getName(), new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {
@@ -258,96 +259,35 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //添加收藏
     public void addCollection() {
-        if (checkCollection()) return;
-        //检测是否已经收藏
-        BmobQuery<CollectionSong> query = new BmobQuery<>();
-        query.order("-updatedAt");
-        query.addWhereRelatedTo(BmobConstant.BMOB_COLLECTIONS, new BmobPointer(UserUtil.user));//在user表的Collections找user
-        query.findObjects(new ToastQueryListener<CollectionSong>() {
+        userCollectionModel.addCollection(fragment.getCurrentContext(), song, intent, new UserCollectionModel.OnAddCollectionResult() {
             @Override
-            public void onSuccess(List<CollectionSong> list) {
-                //是否已收藏
-                for (CollectionSong collectionSong : list) {
-                    if (collectionSong.getName().equals(song.getName())) {
-                        ToastUtil.showToast("已收藏");
-                        return;
-                    }
-                }
-                //添加收藏记录
-                final CollectionSong collectionSong = new CollectionSong();
-                collectionSong.setName(song.getName());
-                collectionSong.setIsFrom(((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE)).getFrom());
-                collectionSong.setContent(song.getContent());
-                collectionSong.save(new ToastSaveListener<String>() {
-
-                    @Override
-                    public void onSuccess(String s) {
-                        final int numPic = song.getIvUrl().size();
-                        List<BmobObject> collectionPics = new ArrayList<>();
-                        for (int i = 0; i < numPic; i++) {
-                            CollectionPic collectionPic = new CollectionPic();
-                            collectionPic.setCollectionSong(collectionSong);
-                            collectionPic.setUrl(song.getIvUrl().get(i));
-                            collectionPics.add(collectionPic);
-                        }
-                        //批量修改
-                        new BmobBatch().insertBatch(collectionPics).doBatch(new ToastQueryListListener<BatchResult>() {
-                            @Override
-                            public void onSuccess(List<BatchResult> list) {
-                                BmobRelation relation = new BmobRelation();
-                                relation.add(collectionSong);
-                                UserUtil.user.setCollections(relation);//添加用户收藏
-                                UserUtil.user.update(new ToastUpdateListener() {
-                                    @Override
-                                    public void onSuccess() {
-                                        ToastUtil.showToast("已收藏");
-                                        UserUtil.increment(-Constant.REDUCE_COLLECTION, new ToastUpdateListener() {
-                                            @Override
-                                            public void onSuccess() {
-                                                ToastUtil.showToast(fragment.getResString(R.string.reduce_coin) + Constant.REDUCE_COLLECTION);
-                                            }
-                                        });
-                                        addCommunityState(Constant.COMMUNITY_STATE_COLLECTION);
-                                        fragment.addCollectionResult();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
+            public void onResult() {
+                addCommunityState(Constant.COMMUNITY_STATE_COLLECTION);
+                //如果是分享的曲谱，就添加收藏记录
+                addCollectionNum();
+                fragment.addCollectionResult();
             }
         });
-
     }
 
-    //检验收藏
-    private boolean checkCollection() {
-        if (!UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext())) {
-            ToastUtil.showToast("请先登录~");
-            return false;
+    //添加收藏量
+    private void addCollectionNum() {
+        if (isFrom == Constant.FROM_SHARE) {
+            ShareSong shareSong = (ShareSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_SHARE_SONG);
+            shareSong.increment(BmobConstant.BMOB_COLLECTION_NUM);
+            shareSong.update(new ToastUpdateListener() {
+                @Override
+                public void onSuccess() {
+                    LogUtils.e("收藏量+1");
+                }
+            });
         }
-        if (song == null || intent == null) {
-            ToastUtil.showToast("发生未知错误，请重新打开乐谱后添加");
-            return false;
-        }
-
-        if (song.getIvUrl() == null || song.getIvUrl().size() <= 0) {
-            ToastUtil.showToast("图片为空");
-            return false;
-        }
-
-        //贡献度是否足够
-        if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_COLLECTION)) {
-            ToastUtil.showToast(fragment.getResString(R.string.coin_not_enough));
-            return false;
-        }
-        return true;
     }
 
     //分享乐谱,本地和网络
     public void share() {
         List<String> list = null;
-        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
+        SongObject songObject = (SongObject) intent.getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT);
         int loadingWay = songObject.getLoadingWay();
         switch (loadingWay) {
             case Constant.NET:
@@ -373,7 +313,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     //得到本地图片
     @NonNull
     private List<String> getLocalImgs() {
-        LocalSong localsong = (LocalSong) intent.getSerializableExtra(SongActivity.LOCAL_SONG);
+        LocalSong localsong = (LocalSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_LOCAL_SONG);
         LocalSongDao localSongDao = new LocalSongDao(fragment.getCurrentContext());
         return localSongDao.getLocalImgsPath(fragment.getCurrentContext(), localsong);
     }
@@ -383,7 +323,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     }
 
     public void init() {
-        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
+        SongObject songObject = (SongObject) intent.getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT);
         isFrom = songObject.getFrom();
         song = songObject.getSong();
 
@@ -400,12 +340,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
 
     public int getShowMenuFlag() {
-        return ((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE)).getShowMenu();
+        return ((SongObject) intent.getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT)).getShowMenu();
     }
 
     //纠错
     public void recovery() {
-        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
+        SongObject songObject = (SongObject) intent.getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT);
         int isFrom = songObject.getFrom();
         String name = songObject.getSong().getName();
         fragment.alertRecoveryDialog(name, isFrom);

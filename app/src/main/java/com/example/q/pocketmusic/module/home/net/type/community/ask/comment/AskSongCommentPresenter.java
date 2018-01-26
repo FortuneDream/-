@@ -9,7 +9,8 @@ import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.BmobConstant;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
@@ -92,7 +93,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     }
 
     //获得初始列表
-    public void getInitCommentList(final boolean isRefreshing) {
+    public void getCommentList(final boolean isRefreshing) {
+        mPage++;
         if (isRefreshing) {
             mPage = 0;
         }
@@ -104,22 +106,11 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         });
     }
 
-    //获得更多
-    public void getMoreCommentList() {
-        mPage++;
-        mAskSongCommentModel.getUserCommentList(post, mPage, new ToastQueryListener<AskSongComment>() {
-            @Override
-            public void onSuccess(List<AskSongComment> list) {
-                activity.setCommentList(false, list);
-            }
-        });
-    }
-
 
     //发送评论
     public void sendComment(final String comment) {
         if (TextUtils.isEmpty(comment)) {
-            ToastUtil.showToast("评论文字不能为空哦~");
+            ToastUtil.showToast(activity.getResString(R.string.complete_info));
             return;
         }
         Boolean hasPic;
@@ -132,7 +123,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
             @Override
             public void onSuccess(final String s) {
                 //帖子表的评论数+1
-                post.increment("commentNum", 1);
+                post.increment(BmobConstant.BMOB_COMMENT_NUM, 1);
                 post.update(new ToastUpdateListener(activity) {
                     @Override
                     public void onSuccess() {

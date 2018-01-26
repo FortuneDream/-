@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.AbsOnClickItemHeadListener;
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.example.q.pocketmusic.data.bean.CommunityState;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;

@@ -4,7 +4,7 @@ import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.data.BmobInfo;
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.HomeActivity;

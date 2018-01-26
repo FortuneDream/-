@@ -1,6 +1,6 @@
 package com.example.q.pocketmusic.data.bean;
 
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobRelation;

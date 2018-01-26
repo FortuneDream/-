@@ -68,6 +68,20 @@
                 android:id="@+id/agree_num_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_vec_collection_num"
+                android:id="@+id/collection_num_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="8dp"
+                tools:text="2"
+                android:id="@+id/collection_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <View

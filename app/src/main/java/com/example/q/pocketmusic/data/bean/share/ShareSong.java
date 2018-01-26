@@ -16,10 +16,19 @@ public class ShareSong extends BmobObject {
     private BmobRelation agrees;//点赞的多个用户，多对多
     private int agreeNum;//分享数量
     private int downloadNum;//下载量
+    private int collectionNum;//收藏量
     private int instrument;//所属月
 
     public ShareSong() {
 
+    }
+
+    public int getCollectionNum() {
+        return collectionNum;
+    }
+
+    public void setCollectionNum(int collectionNum) {
+        this.collectionNum = collectionNum;
     }
 
     public int getInstrument() {
@@ -37,6 +46,7 @@ public class ShareSong extends BmobObject {
         this.agreeNum = 0;
         this.downloadNum = 0;
         this.instrument = 0;
+        this.collectionNum=0;
     }
 
     public BmobRelation getAgrees() {
@@ -47,11 +57,11 @@ public class ShareSong extends BmobObject {
         this.agrees = agrees;
     }
 
-    public Integer getAgreeNum() {
+    public int getAgreeNum() {
         return agreeNum;
     }
 
-    public void setAgreeNum(Integer agreeNum) {
+    public void setAgreeNum(int agreeNum) {
         this.agreeNum = agreeNum;
     }
 

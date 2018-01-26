@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.local.lead.LeadSongActivity;
+import com.example.q.pocketmusic.module.home.profile.gift.GiftModel;
 import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import butterknife.BindView;
@@ -55,8 +56,8 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     public void initView() {
         presenter.setFragmentManager(getChildFragmentManager());
         topTabView.setListener(this);
-        topTabView.setCheck(0);
-        presenter.clickSong();
+        topTabView.setCheck(HomeLocalFragmentPresenter.TabType.SONG);
+        presenter.clickBottomTab(HomeLocalFragmentPresenter.TabType.SONG);
     }
 
 
@@ -70,31 +71,31 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LeadSongActivity.REQUEST_LEAD && resultCode == LeadSongActivity.RESULT_OK) {
-            topTabView.setCheck(0);
-            presenter.clickSong();
+            topTabView.setCheck(HomeLocalFragmentPresenter.TabType.SONG);
+            presenter.clickBottomTab(HomeLocalFragmentPresenter.TabType.SONG);
         }
     }
 
     @Override
     public void setTopTabCheck(int position) {
         switch (position) {
-            case 0:
-                presenter.clickSong();
+            case HomeLocalFragmentPresenter.TabType.SONG:
+                presenter.clickBottomTab(HomeLocalFragmentPresenter.TabType.SONG);
                 break;
-            case 1:
-                presenter.clickRecord();
+            case HomeLocalFragmentPresenter.TabType.RECORD:
+                presenter.clickBottomTab(HomeLocalFragmentPresenter.TabType.RECORD);
                 break;
         }
     }
 
     @Override
     public void onSelectRecord() {
-        topTabView.setCheck(1);
+        topTabView.setCheck(HomeLocalFragmentPresenter.TabType.RECORD);
     }
 
     @Override
     public void onSelectSong() {
-        topTabView.setCheck(0);
+        topTabView.setCheck(HomeLocalFragmentPresenter.TabType.SONG);
     }
 
 

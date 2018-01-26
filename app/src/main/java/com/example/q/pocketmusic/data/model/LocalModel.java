@@ -5,7 +5,7 @@ import android.media.MediaPlayer;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.local.Img;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.bean.local.RecordAudio;

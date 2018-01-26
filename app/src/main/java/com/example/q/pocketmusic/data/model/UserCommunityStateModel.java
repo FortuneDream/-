@@ -2,7 +2,7 @@ package com.example.q.pocketmusic.data.model;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
-import com.example.q.pocketmusic.config.BmobConstant;
+import com.example.q.pocketmusic.config.constant.BmobConstant;
 import com.example.q.pocketmusic.data.bean.CommunityState;
 import com.example.q.pocketmusic.module.common.BaseModel;
 import com.example.q.pocketmusic.util.UserUtil;

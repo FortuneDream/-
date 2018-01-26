@@ -1,6 +1,6 @@
 package com.example.q.pocketmusic.util;
 
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 
 import java.util.ArrayList;

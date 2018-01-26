@@ -3,8 +3,9 @@ package com.example.q.pocketmusic.module.home.profile.user.other.collection;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.config.BmobConstant;
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.BmobConstant;
+import com.example.q.pocketmusic.config.constant.Constant;
+import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
@@ -72,7 +73,7 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
                 song.setIvUrl(urls);
                 Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
                 SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.MENU_DOWNLOAD_SHARE, Constant.NET);
-                intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+                intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, songObject);
                 fragment.getCurrentContext().startActivity(intent);
             }
         });

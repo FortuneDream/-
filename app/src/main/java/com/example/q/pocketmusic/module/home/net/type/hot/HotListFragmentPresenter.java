@@ -1,8 +1,6 @@
 package com.example.q.pocketmusic.module.home.net.type.hot;
 
-import android.content.Intent;
-
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.net.LoadTypeSongList;

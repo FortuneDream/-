@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -24,19 +25,23 @@ import java.util.List;
  */
 
 public class HomePresenter extends BasePresenter<HomePresenter.IView> {
+
+    public interface TabIndex {
+        int NET_INDEX=0;
+        int SEARCH_INDEX = 1;
+        int LOCAL_INDEX = 2;
+        int PROFILE_INDEX = 3;
+        int INIT_INDEX=-1;//初始值
+    }
     private IView activity;
     private List<Fragment> fragments;
     private FragmentManager fm;
     private Fragment totalFragment;
-    public static final int FLAG_SELECT_NET = 1001;
-    public static final int FLAG_SELECT_SEARCH = 1002;
-    public static final int FLAG_SELECT_LOCAL = 1003;
-    public static final int FLAG_SELECT_PROFILE = 1004;
     private HomeNetFragment homeNetFragment;//1
     private HomeSearchFragment homeSearchFragment;//2
     private HomeLocalFragment homeLocalFragment;//3
     private HomeProfileFragment homeProfileFragment;//4
-    private int FLAG;//标记当前Fragment
+    private int mCurIndex = TabIndex.INIT_INDEX;//标记当前Fragment
     private HashMap<String,Fragment> map;//改用HashMap来取得fragment
 
 
@@ -52,45 +57,17 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
         homeSearchFragment = new HomeSearchFragment();
         homeLocalFragment = new HomeLocalFragment();
         homeProfileFragment = new HomeProfileFragment();
-        fragments.add(homeNetFragment);
-        fragments.add(homeSearchFragment);
-        fragments.add(homeLocalFragment);
-        fragments.add(homeProfileFragment);
+        fragments.add(TabIndex.NET_INDEX,homeNetFragment);
+        fragments.add(TabIndex.SEARCH_INDEX,homeSearchFragment);
+        fragments.add(TabIndex.LOCAL_INDEX,homeLocalFragment);
+        fragments.add(TabIndex.PROFILE_INDEX,homeProfileFragment);
     }
 
-    //网络
-    public void clickNet() {
-        if (FLAG != FLAG_SELECT_NET) {
-            FLAG = FLAG_SELECT_NET;
-            showFragment(fragments.get(0));
-            activity.onSelectNet();
-        }
-    }
-
-
-    //搜索
-    public void clickSearch() {
-        if (FLAG != FLAG_SELECT_SEARCH) {
-            FLAG = FLAG_SELECT_SEARCH;
-            showFragment(fragments.get(1));
-            activity.onSelectConvert();
-        }
-    }
-
-    //本地
-    public void clickLocal() {
-        if (FLAG != FLAG_SELECT_LOCAL) {
-            FLAG = FLAG_SELECT_LOCAL;
-            showFragment(fragments.get(2));
-            activity.onSelectLocal();
-        }
-    }
-
-    public void clickProfile() {
-        if (FLAG != FLAG_SELECT_PROFILE) {
-            FLAG = FLAG_SELECT_PROFILE;
-            showFragment(fragments.get(3));
-            activity.onSelectProfile();
+    public void clickBottomTab(int searchIndex) {
+        if (mCurIndex!=searchIndex){
+            showFragment(fragments.get(searchIndex));
+            activity.onSelectTabResult(mCurIndex,searchIndex);
+            mCurIndex = searchIndex;
         }
     }
 
@@ -134,14 +111,9 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
 
     public interface IView extends IBaseView {
 
-        void onSelectLocal();
-
-        void onSelectNet();
-
-        void onSelectConvert();
-
-        void onSelectProfile();
 
         void alertSupportDialog();
+
+        void onSelectTabResult(int oldIndex, int index);
     }
 }

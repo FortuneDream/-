@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.config;
+package com.example.q.pocketmusic.config.constant;
 
 /**
  * Created by 鹏君 on 2017/7/30.
@@ -14,6 +14,6 @@ public class BmobConstant {
     public static final String BMOB_COLLECTIONS = "collections";
     public static final String BMOB_DOWNLOAD_NUM = "downloadNum";
     public static final String BMOB_INSTRUMENT = "instrument";
-    public static final String BMOB_CONVERTS = "converts";
     public static final String BMOB_COMMENT_NUM="commentNum";
+    public static final String BMOB_COLLECTION_NUM="collectionNum";
 }

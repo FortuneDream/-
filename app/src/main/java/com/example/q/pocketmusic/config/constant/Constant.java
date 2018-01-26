@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.config;
+package com.example.q.pocketmusic.config.constant;
 
 /**
  * Created by 鹏君 on 2016/8/28.

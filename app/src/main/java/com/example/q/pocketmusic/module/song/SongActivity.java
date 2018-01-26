@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.ScreenshotContentObserver;
+import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
@@ -61,15 +62,6 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     private boolean sIsShowTopAndBottom = true;
 
 
-    public final static String PARAM_SONG_OBJECT_SERIALIZABLE = "PARAM_SONG_OBJECT_SERIALIZABLE";//Serializeable
-
-    public final static String LOCAL_SONG = "PARAM_LOCAL_SONG";//可选的传递参数，用于传递本地的localSong
-
-    public final static String ASK_COMMENT = "ASK_COMMENT";//可选的传递参数，用于传递某条有图的Comment
-
-    public final static String SHARE_SONG = "SHARE_SONG";//可选传递参数，用于传递shareSong
-
-
     private Handler handler = new Handler(Looper.myLooper()) {
         @Override
         public void handleMessage(Message msg) {
@@ -93,15 +85,15 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     //本地
     public static Intent buildLocalIntent(Context context, SongObject songObject, LocalSong localSong) {
         Intent intent = new Intent(context, SongActivity.class);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
-        intent.putExtra(SongActivity.LOCAL_SONG, localSong);
+        intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, songObject);
+        intent.putExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_LOCAL_SONG, localSong);
         return intent;
     }
 
     //推荐
     public static Intent buildRecommendIntent(Context context, SongObject songObject) {
         Intent intent = new Intent(context, SongActivity.class);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+        intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, songObject);
         return intent;
     }
 
@@ -109,8 +101,8 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     public static Intent buildAskIntent(Context context, SongObject songObject, int community, AskSongComment askSongComment) {
         Intent intent = new Intent(context, SongActivity.class);
         songObject.setCommunity(community);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
-        intent.putExtra(SongActivity.ASK_COMMENT, askSongComment);
+        intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, songObject);
+        intent.putExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_ASK_COMMENT, askSongComment);
         return intent;
     }
 
@@ -118,8 +110,8 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     public static Intent buildShareIntent(Context context, SongObject songObject, int typeId, ShareSong shareSong) {
         Intent intent = new Intent(context, SongActivity.class);
         songObject.setCommunity(typeId);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
-        intent.putExtra(SongActivity.SHARE_SONG, shareSong);
+        intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, songObject);
+        intent.putExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_SHARE_SONG, shareSong);
         return intent;
     }
 
@@ -127,7 +119,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
     public static Intent buildTypeIntent(Context context, SongObject songObject, int community) {
         Intent intent = new Intent(context, SongActivity.class);
         songObject.setCommunity(community);
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
+        intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, songObject);
         return intent;
     }
 
@@ -143,7 +135,7 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         presenter.setIntent(getIntent());//设置intent
         presenter.init(getSupportFragmentManager());//初始化
-        SongObject songObject = (SongObject) getIntent().getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
+        SongObject songObject = (SongObject) getIntent().getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT);
         Song song = songObject.getSong();
         initToolbar(toolbar, song.getName());//toolbar
         presenter.loadPic();  //查找图片

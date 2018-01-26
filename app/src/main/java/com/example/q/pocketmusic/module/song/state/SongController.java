@@ -2,7 +2,8 @@ package com.example.q.pocketmusic.module.song.state;
 
 import android.content.Intent;
 
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
+import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
@@ -24,20 +25,20 @@ public class SongController {
     }
 
     public static SongController getInstance(Intent intent, SongActivityPresenter.IView activity) {
-        SongObject songObject = (SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE);
+        SongObject songObject = (SongObject) intent.getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT);
         Song song = songObject.getSong();
         int isFrom = songObject.getFrom();
         switch (isFrom) {
             case Constant.FROM_SHARE:
-                ShareSong shareSong = (ShareSong) intent.getSerializableExtra(SongActivity.SHARE_SONG);
+                ShareSong shareSong = (ShareSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_SHARE_SONG);
                 return new SongController(new ShareState(song, shareSong, activity));//分享
             case Constant.FROM_ASK:
-                AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(SongActivity.ASK_COMMENT);
+                AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_ASK_COMMENT);
                 return new SongController(new AskState(song, askSongComment, activity));//求谱
             case Constant.FROM_COLLECTION:
                 return new SongController(new CollectionState(song, activity));//收藏
             case Constant.FROM_LOCAL:
-                LocalSong localsong = (LocalSong) intent.getSerializableExtra(SongActivity.LOCAL_SONG);
+                LocalSong localsong = (LocalSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_LOCAL_SONG);
                 return new SongController(new LocalState(song, localsong, activity));//本地
             case Constant.FROM_RECOMMEND:
                 return new SongController(new RecommendState(song, activity));//推荐

@@ -3,7 +3,8 @@ package com.example.q.pocketmusic.module.home.profile.share;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
+import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.share.ShareSong;
@@ -50,12 +51,11 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
         Song song = new Song();
         song.setContent(shareSong.getContent());
         song.setName(shareSong.getName());
-        Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
         SongObject songObject = new SongObject(song, Constant.FROM_SHARE, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
         songObject.setCommunity(shareSong.getInstrument());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, songObject);
-        intent.putExtra(SongActivity.SHARE_SONG, shareSong);
-        activity.getCurrentContext().startActivity(intent);
+        activity.getCurrentContext().startActivity(
+                SongActivity.buildShareIntent(activity.getCurrentContext(),songObject,shareSong.getInstrument(),shareSong)
+        );
     }
 
 

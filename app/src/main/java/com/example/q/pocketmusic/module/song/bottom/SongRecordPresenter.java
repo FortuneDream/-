@@ -10,7 +10,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
+import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.local.RecordAudio;
@@ -51,7 +52,7 @@ public class SongRecordPresenter extends BasePresenter<SongRecordPresenter.IView
 
     public void init() {
         //初始化song
-        song = ((SongObject) intent.getSerializableExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE)).getSong();
+        song = ((SongObject) intent.getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT)).getSong();
     }
 
     public enum RECORD_STATUS {

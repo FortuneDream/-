@@ -1,7 +1,7 @@
 package com.example.q.pocketmusic.module.home.profile.contribution;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.config.BmobConstant;
+import com.example.q.pocketmusic.config.constant.BmobConstant;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BaseModel;
 

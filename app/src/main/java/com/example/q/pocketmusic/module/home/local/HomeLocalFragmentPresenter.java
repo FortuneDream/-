@@ -12,6 +12,7 @@ import com.example.q.pocketmusic.module.home.local.lead.LeadSongActivity;
 import com.example.q.pocketmusic.module.home.local.localrecord.LocalRecordFragment;
 import com.example.q.pocketmusic.module.home.local.localsong.LocalSongFragment;
 
+import java.net.PortUnreachableException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +21,14 @@ import java.util.List;
  */
 
 public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentPresenter.IView> {
+    public interface TabType {
+        int SONG = 0;
+        int RECORD = 1;
+        int DEFALUT_INDEX = -1;
+    }
+
     private IView fragment;
-    private int FLAG;
-    public static final int FLAG_SELECT_SONG = 1001;
-    public static final int FLAG_SELECT_RECORD = 1002;
+    private int mCurIndex = TabType.DEFALUT_INDEX;
     private List<Fragment> fragments;
     private LocalRecordFragment localRecordFragment;
     private LocalSongFragment localSongFragment;
@@ -44,26 +49,15 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
         fragments = new ArrayList<>();
         localRecordFragment = new LocalRecordFragment();
         localSongFragment = new LocalSongFragment();
-        fragments.add(localSongFragment);
-        fragments.add(localRecordFragment);
+        fragments.add(TabType.SONG, localSongFragment);
+        fragments.add(TabType.RECORD, localRecordFragment);
     }
 
-    //乐曲
-    public void clickSong() {
-        if (FLAG != FLAG_SELECT_SONG) {
-            FLAG = FLAG_SELECT_SONG;
-            showFragment(fragments.get(0));
+    public void clickBottomTab(int index) {
+        if (mCurIndex != index) {
+            showFragment(fragments.get(index));
             fragment.onSelectSong();
-        }
-    }
-
-
-    //录音
-    public void clickRecord() {
-        if (FLAG != FLAG_SELECT_RECORD) {
-            FLAG = FLAG_SELECT_RECORD;
-            showFragment(fragments.get(1));
-            fragment.onSelectRecord();
+            mCurIndex = index;
         }
     }
 

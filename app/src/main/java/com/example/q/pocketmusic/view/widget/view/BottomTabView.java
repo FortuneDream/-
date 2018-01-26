@@ -1,5 +1,8 @@
 package com.example.q.pocketmusic.view.widget.view;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.content.ContextCompat;
@@ -10,6 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 鹏君 on 2017/2/11.
@@ -56,6 +62,9 @@ public class BottomTabView extends LinearLayout {
             ico.setImageResource(noSelectResource);
         }
     }
+
+
+
 
     public <T extends View> T getView(int id) {
         return (T) findViewById(id);

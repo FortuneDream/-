@@ -93,7 +93,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
                 presenter.alertPicDialog(adapter.getItem(position));  //弹出简略图
             }
         });
-        presenter.getInitCommentList(true);
+        presenter.getCommentList(true);
     }
 
 
@@ -259,7 +259,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
 
     @Override
     public void onRefresh() {
-        presenter.getInitCommentList(true);
+        presenter.getCommentList(true);
     }
 
 
@@ -293,7 +293,7 @@ public class AskSongCommentActivity extends AuthActivity<AskSongCommentPresenter
 
     @Override
     public void onMoreShow() {
-        presenter.getMoreCommentList();
+        presenter.getCommentList(false);
     }
 
     @Override

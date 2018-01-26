@@ -2,25 +2,22 @@ package com.example.q.pocketmusic.util;
 
 import android.content.Context;
 import android.os.Environment;
+import android.support.annotation.Nullable;
 
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.DownloadInfo;
-import com.example.q.pocketmusic.data.bean.local.Img;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.db.ImgDao;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.util.common.FileUtils;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
@@ -40,7 +37,6 @@ public class DownloadUtil {
     private ExecutorService pool = Executors.newSingleThreadExecutor();
     private OnDownloadListener onDownloadListener;
     private LocalSongDao localSongDao;
-    private ImgDao imgDao;
     private LocalSong mDownloadSong;
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
     private Context context;
@@ -48,7 +44,6 @@ public class DownloadUtil {
 
     public DownloadUtil(Context context) {
         localSongDao = new LocalSongDao(context);
-        imgDao = new ImgDao(context);
         this.context = context;
     }
 
@@ -71,8 +66,8 @@ public class DownloadUtil {
         Request request = new Request.Builder().url(url).build();
         try {
             Response response = client.newCall(request).execute();
-            saveFile(response, dirPath, destPath);//保存文件
-            saveLocalSongToDatabase(name, InstrumentFlagUtil.getTypeName(typeId), destPath);//保存到数据库
+            FileUtils.saveFile(response, dirPath, destPath);//保存文件
+            localSongDao.saveLocalSong(mDownloadSong, name, InstrumentFlagUtil.getTypeName(typeId), destPath, format);//保存到数据库
         } catch (IOException e) {
             e.printStackTrace();
             ((BaseActivity) context).runOnUiThread(new Runnable() {
@@ -86,84 +81,13 @@ public class DownloadUtil {
         }
     }
 
-    /**
-     * @param response 返回包
-     * @param dirPath  文件目录路径
-     * @param destPath 文件路径
-     * @return 文件
-     * @throws IOException
-     */
-    private File saveFile(Response response, String dirPath, String destPath) throws IOException {
-        InputStream is = null;
-        FileOutputStream fos = null;
-        byte[] buff = new byte[1024 * 2];
-        int len = 0;//每次读取的字节长度
-        int sum = 0;//总得字节长度
-        File destFile = new File(destPath);
-        File dirFile = new File(dirPath);
-        if (!dirFile.exists()) {
-            dirFile.mkdirs();
-        }
-        try {
-            fos = new FileOutputStream(destFile);
-            is = response.body().byteStream();
-            while ((len = is.read(buff)) != -1) {
-                sum += len;//
-                fos.write(buff, 0, len);
-            }
-            fos.flush();
-            return destFile;
-        } finally {
-            response.body().close();
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }
-    }
-
     //批量下载图片
     public void downloadBatchPic(final String name, final List<String> urls, final int typeId) {
         if (onDownloadListener != null) {
             downloadInfo = onDownloadListener.onStart();
         }
-        if (!downloadInfo.isStart()) {
-            if (onDownloadListener != null) {
-                onDownloadListener.onFailed(downloadInfo.getInfo());
-                return;
-            }
-        }
-        //截取格式
-        if (urls == null || urls.size() == 0) {
-            if (onDownloadListener != null) {
-                onDownloadListener.onFailed("地址错误");
-                return;
-            }
-        }
-        String urlType = URLConnection.guessContentTypeFromName(urls.get(0));
-
-        if (urlType == null) {
-            if (onDownloadListener != null) {
-                onDownloadListener.onFailed("图片格式错误");
-                return;
-            }
-        }
-        if (urlType == null) {
-            ToastUtil.showToast("格式错误");
-            return;
-        }
+        String urlType = getUrlType(urls);
+        if (urlType == null) return;
         String type = urlType.replaceAll("image/", "");
         //建立歌曲名分包
         final String fileDir = Environment.getExternalStorageDirectory() + "/" + Constant.FILE_NAME + "/" + name + "/";
@@ -192,23 +116,39 @@ public class DownloadUtil {
         }
     }
 
+    @Nullable
+    private String getUrlType(List<String> urls) {
+        if (!downloadInfo.isStart()) {
+            if (onDownloadListener != null) {
+                onDownloadListener.onFailed(downloadInfo.getInfo());
+                return null;
+            }
+        }
+        //截取格式
+        if (urls == null || urls.size() == 0) {
+            if (onDownloadListener != null) {
+                onDownloadListener.onFailed("地址错误");
+            }
+            return null;
+        }
+        String urlType = URLConnection.guessContentTypeFromName(urls.get(0));
+
+        if (urlType == null) {
+            if (onDownloadListener != null) {
+                onDownloadListener.onFailed("图片格式错误");
+                return null;
+            }
+        }
+        if (urlType == null) {
+            ToastUtil.showToast("格式错误");
+            return null;
+        }
+        return urlType;
+    }
+
     private void onFinish() {
         pool.shutdown();//关闭线程池
         mDownloadSong = null;
     }
 
-    private void saveLocalSongToDatabase(String name, String type, String url) {
-        if (mDownloadSong == null) {
-            mDownloadSong = new LocalSong();
-            mDownloadSong.setName(name);
-            mDownloadSong.setDate(format.format(new Date()));
-            mDownloadSong.setSort(SortUtil.getSort());
-            mDownloadSong.setType(type);
-            localSongDao.add(mDownloadSong);
-        }
-        Img img = new Img();
-        img.setUrl(url);
-        img.setLocalSong(mDownloadSong);
-        imgDao.add(img);
-    }
 }

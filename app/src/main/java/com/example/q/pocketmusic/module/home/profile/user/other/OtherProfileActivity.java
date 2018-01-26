@@ -1,5 +1,8 @@
 package com.example.q.pocketmusic.module.home.profile.user.other;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -59,6 +62,14 @@ public class OtherProfileActivity extends AuthActivity<OtherProfilePresenter.IVi
     @OnClick(R.id.interest_tv)
     public void onViewClicked() {
         presenter.interestOther(otherUser);
-        interestTv.setVisibility(View.INVISIBLE);
+        interestAnim();//关注动画
+    }
+    private void interestAnim() {
+        ObjectAnimator scaleXAnimator=ObjectAnimator.ofFloat(interestTv,"scaleX",1f,0f);
+        ObjectAnimator scaleYAnimator=ObjectAnimator.ofFloat(interestTv,"scaleY",0f,1f);
+        AnimatorSet set=new AnimatorSet();
+        set.playTogether(scaleXAnimator,scaleYAnimator);
+        set.setDuration(500);
+        set.start();
     }
 }

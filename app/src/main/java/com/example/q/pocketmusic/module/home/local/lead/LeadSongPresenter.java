@@ -47,7 +47,7 @@ public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
             ToastUtil.showToast("请添加图片");
             return;
         }
-        localSongDao.saveLocalSong(name, localPhotoAlbumUtil.getImgUrls());
+        localSongDao.saveLocalSongMove(name, localPhotoAlbumUtil.getImgUrls());
         activity.returnActivity();
     }
 

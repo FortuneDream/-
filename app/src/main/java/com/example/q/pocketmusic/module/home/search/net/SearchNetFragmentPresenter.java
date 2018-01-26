@@ -2,7 +2,8 @@ package com.example.q.pocketmusic.module.home.search.net;
 
 import android.content.Intent;
 
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
+import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.net.LoadSearchSongList;
@@ -49,7 +50,7 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
         Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
         SongObject object = new SongObject(song, song.getSearchFrom(), Constant.MENU_DOWNLOAD_COLLECTION_SHARE, Constant.NET);
         intent.setExtrasClassLoader(getClass().getClassLoader());
-        intent.putExtra(SongActivity.PARAM_SONG_OBJECT_SERIALIZABLE, object);
+        intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, object);
         fragment.getCurrentContext().startActivity(intent);
     }
 

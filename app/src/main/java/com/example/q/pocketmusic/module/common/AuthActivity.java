@@ -2,8 +2,7 @@ package com.example.q.pocketmusic.module.common;
 
 import android.content.Intent;
 
-import com.example.q.pocketmusic.config.Constant;
-import com.example.q.pocketmusic.data.bean.MyUser;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.util.UserUtil;
 
 /**
@@ -11,8 +10,6 @@ import com.example.q.pocketmusic.util.UserUtil;
  */
 //用于验证的Activity
 public abstract class AuthActivity<V, T extends BasePresenter<V>> extends BaseActivity<V, T> {
-    public static int a;
-
 
     public abstract void initUserView();
 

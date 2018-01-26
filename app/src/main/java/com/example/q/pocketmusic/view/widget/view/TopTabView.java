@@ -18,7 +18,7 @@ import java.util.List;
  * Created by 鹏君 on 2017/5/17.
  */
 //顶部双选View
-public class TopTabView extends LinearLayout {
+public class TopTabView extends LinearLayout  {
     private TopTabListener listener;
     private int FLAG;//当前tab
     private List<TextView> views;

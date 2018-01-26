@@ -46,6 +46,7 @@ public class ShareListAdapter extends RecyclerArrayAdapter<ShareSong> {
         TextView downloadNumTv;
         ImageView headIv;
         LinearLayout contentRl;
+        TextView collectionNumTv;
 
         public UploadViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_combination_upload);
@@ -54,6 +55,7 @@ public class ShareListAdapter extends RecyclerArrayAdapter<ShareSong> {
             contentRl = $(R.id.content_rl);
             headIv = $(R.id.head_iv);
             agreeNumTv = $(R.id.agree_num_tv);
+            collectionNumTv=$(R.id.collection_num_tv);
             downloadNumTv = $(R.id.download_num_tv);
             contentRl.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,6 +86,7 @@ public class ShareListAdapter extends RecyclerArrayAdapter<ShareSong> {
             });
             downloadNumTv.setText(String.valueOf(data.getDownloadNum()));
             agreeNumTv.setText(String.valueOf(data.getAgreeNum()));
+            collectionNumTv.setText(String.valueOf(data.getCollectionNum()));
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.example.q.pocketmusic.data.bean;
 
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 
 import java.io.Serializable;
 import java.util.List;
@@ -92,6 +92,7 @@ public class Song implements Serializable {
 
     public Song() {
     }
+
 
     public Song(String name, String url) {
         this.name = name;

@@ -5,7 +5,7 @@ import android.os.Environment;
 import android.util.Log;
 
 
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.local.Img;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
@@ -19,6 +19,7 @@ import com.j256.ormlite.dao.ForeignCollection;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List; /**
@@ -182,7 +183,7 @@ public class LocalSongDao {
 
 
     //移动，并加入数据库
-    public void saveLocalSong(String name, List<String> list) {
+    public void saveLocalSongMove(String name, List<String> list) {
         //建立目标文件
         String FILE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Constant.FILE_NAME + "/";
         File dir = new File(FILE_DIR + name);
@@ -204,6 +205,22 @@ public class LocalSongDao {
             img.setLocalSong(localSong);
             imgDao.add(img);
         }
+    }
+
+
+    public void saveLocalSong(LocalSong localSong, String name, String type, String url, SimpleDateFormat format) {
+        if (localSong == null) {
+            localSong = new LocalSong();
+            localSong.setName(name);
+            localSong.setDate(format.format(new Date()));
+            localSong.setSort(SortUtil.getSort());
+            localSong.setType(type);
+            add(localSong);
+        }
+        Img img = new Img();
+        img.setUrl(url);
+        img.setLocalSong(localSong);
+        new ImgDao(context).add(img);
     }
 
 

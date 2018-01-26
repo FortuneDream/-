@@ -3,7 +3,7 @@ package com.example.q.pocketmusic.module.song.state;
 import android.database.SQLException;
 import android.support.annotation.NonNull;
 
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.local.Img;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;

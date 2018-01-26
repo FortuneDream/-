@@ -1,14 +1,29 @@
 package com.example.q.pocketmusic.data.model;
 
+import android.content.Context;
+import android.content.Intent;
+
+import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
-import com.example.q.pocketmusic.config.BmobConstant;
+import com.example.q.pocketmusic.config.MyApplication;
+import com.example.q.pocketmusic.config.constant.BmobConstant;
+import com.example.q.pocketmusic.config.constant.Constant;
+import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.MyUser;
+import com.example.q.pocketmusic.data.bean.Song;
+import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.collection.CollectionPic;
 import com.example.q.pocketmusic.data.bean.collection.CollectionSong;
+import com.example.q.pocketmusic.data.bean.share.ShareSong;
+import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BaseModel;
 import com.example.q.pocketmusic.util.UserUtil;
+import com.example.q.pocketmusic.util.common.LogUtils;
+import com.example.q.pocketmusic.util.common.ToastUtil;
+import com.j256.ormlite.stmt.query.In;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +40,10 @@ import cn.bmob.v3.datatype.BmobRelation;
  */
 
 public class UserCollectionModel extends BaseModel {
+
+    public interface OnAddCollectionResult {
+        void onResult();
+    }
 
     public UserCollectionModel() {
     }
@@ -90,5 +109,92 @@ public class UserCollectionModel extends BaseModel {
     public void updateConnectionName(CollectionSong item, String str, ToastUpdateListener listener) {
         item.setName(str);
         item.update(listener);
+    }
+
+    //添加收藏
+    //添加收藏
+    public void addCollection(Context context, final Song song, final Intent intent, final OnAddCollectionResult onAddCollectionResult) {
+        if (checkCollection(context, song, intent)) return;
+        //检测是否已经收藏
+        BmobQuery<CollectionSong> query = new BmobQuery<>();
+        query.order("-updatedAt");
+        query.addWhereRelatedTo(BmobConstant.BMOB_COLLECTIONS, new BmobPointer(UserUtil.user));//在user表的Collections找user
+        query.findObjects(new ToastQueryListener<CollectionSong>() {
+            @Override
+            public void onSuccess(List<CollectionSong> list) {
+                //是否已收藏
+                for (CollectionSong collectionSong : list) {
+                    if (collectionSong.getName().equals(song.getName())) {
+                        ToastUtil.showToast("你已经收藏了同名的曲谱哦~");
+                        return;
+                    }
+                }
+                //添加收藏记录
+                final CollectionSong collectionSong = new CollectionSong();
+                collectionSong.setName(song.getName());
+                collectionSong.setIsFrom(((SongObject) (intent.getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT))).getFrom());
+                collectionSong.setContent(song.getContent());
+                collectionSong.save(new ToastSaveListener<String>() {
+
+                    @Override
+                    public void onSuccess(String s) {
+                        final int numPic = song.getIvUrl().size();
+                        List<BmobObject> collectionPics = new ArrayList<>();
+                        for (int i = 0; i < numPic; i++) {
+                            CollectionPic collectionPic = new CollectionPic();
+                            collectionPic.setCollectionSong(collectionSong);
+                            collectionPic.setUrl(song.getIvUrl().get(i));
+                            collectionPics.add(collectionPic);
+                        }
+                        //批量修改
+                        new BmobBatch().insertBatch(collectionPics).doBatch(new ToastQueryListListener<BatchResult>() {
+                            @Override
+                            public void onSuccess(List<BatchResult> list) {
+                                BmobRelation relation = new BmobRelation();
+                                relation.add(collectionSong);
+                                UserUtil.user.setCollections(relation);//添加用户收藏
+                                UserUtil.user.update(new ToastUpdateListener() {
+                                    @Override
+                                    public void onSuccess() {
+                                        ToastUtil.showToast("成功收藏");
+                                        UserUtil.increment(-Constant.REDUCE_COLLECTION, new ToastUpdateListener() {
+                                            @Override
+                                            public void onSuccess() {
+                                                ToastUtil.showToast(MyApplication.context.getResources().getString(R.string.reduce_coin) + Constant.REDUCE_COLLECTION);
+                                                onAddCollectionResult.onResult();
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    //检验收藏
+    private boolean checkCollection(Context context, Song song, Intent intent) {
+        if (!UserUtil.checkLocalUser((BaseActivity) context)) {
+            ToastUtil.showToast("请先登录~");
+            return false;
+        }
+        if (song == null || intent == null) {
+            ToastUtil.showToast("发生未知错误，请重新打开乐谱后添加");
+            return false;
+        }
+
+        if (song.getIvUrl() == null || song.getIvUrl().size() <= 0) {
+            ToastUtil.showToast("图片为空");
+            return false;
+        }
+
+        //贡献度是否足够
+        if (!UserUtil.checkUserContribution(((BaseActivity) context), Constant.REDUCE_COLLECTION)) {
+            ToastUtil.showToast(((BaseActivity) context).getResString(R.string.coin_not_enough));
+            return false;
+        }
+        return true;
     }
 }

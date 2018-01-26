@@ -1,7 +1,7 @@
 package com.example.q.pocketmusic.module.home.net.type.community.ask.comment;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.config.BmobConstant;
+import com.example.q.pocketmusic.config.constant.BmobConstant;
 import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.data.bean.ask.AskSongPic;
 import com.example.q.pocketmusic.data.bean.ask.AskSongPost;

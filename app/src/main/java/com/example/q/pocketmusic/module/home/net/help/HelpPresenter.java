@@ -1,7 +1,7 @@
 package com.example.q.pocketmusic.module.home.net.help;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
-import com.example.q.pocketmusic.config.Constant;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.BmobInfo;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 
