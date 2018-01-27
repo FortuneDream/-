@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.util;
+package com.example.q.pocketmusic.config.constant;
 
 import com.example.q.pocketmusic.R;
 
@@ -7,7 +7,7 @@ import com.example.q.pocketmusic.R;
  * （￣m￣）
  */
 
-public class InstrumentFlagUtil {
+public class InstrumentConstant {
 
     public final static int FLAG_QU_BU = 0;
     public final static int FLAG_HU_LU = 1;
@@ -66,7 +66,7 @@ public class InstrumentFlagUtil {
             "shoufengqin/", "tiqin/", "tongguan/", "yangqin/"};
 
 
-    private InstrumentFlagUtil() {
+    private InstrumentConstant() {
 
     }
 

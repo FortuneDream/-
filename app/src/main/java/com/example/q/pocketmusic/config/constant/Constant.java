@@ -84,20 +84,6 @@ public class Constant {
     public final static String COMMON_HEAD_IV_URL = "http://bmob-cdn-6553.b0.upaiyun.com/2017/05/04/af2010244002047a80bccc5e1d1a4e81.jpg";//默认头像地址
 
 
-    //贡献度+
-    public final static int ADD_CONTRIBUTION_INIT = 20;//初始
-    public final static int ADD_CONTRIBUTION_UPLOAD = 3;//上传
-    public final static int ADD_CONTRIBUTION_COMMENT_WITH_PIC = 5;//评论加图
-    public final static int ADD_CONTRIBUTION_AGREE_OTHER = 2;//被点赞的额外加成
-
-    //贡献度-
-    public final static int REDUCE_ASK = 8;//求谱
-    public final static int REDUCE_DOWNLOAD = 4;//下载
-    public final static int REDUCE_COLLECTION = 5;//收藏
-    public final static int REDUCE_CHANG_NICK_NAME = 10;//修改昵称
-    public final static int REDUCE_PUNISH = 10;//惩罚
-
-
     //求谱类型,最好用Hap映射
     public static final int ji_ta_pu = 0;//吉他
     public static final int jian_pu = 1;//简谱

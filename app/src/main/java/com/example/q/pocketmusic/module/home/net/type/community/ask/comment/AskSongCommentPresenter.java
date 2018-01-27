@@ -10,6 +10,7 @@ import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.constant.BmobConstant;
+import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
@@ -160,11 +161,11 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>() {
             @Override
             public void onSuccess(List<BatchResult> list) {
-                UserUtil.increment(Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC, new ToastUpdateListener() {
+                UserUtil.increment(CoinConstant.ADD_COIN_COMMENT_WITH_PIC, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
                         activity.showLoading(false);
-                        ToastUtil.showToast(activity.getResString(R.string.add_coin) + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                        ToastUtil.showToast(activity.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_COMMENT_WITH_PIC));
                         activity.sendCommentResult(s, askSongComment);
                     }
                 }); //原子操作
@@ -182,11 +183,11 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>() {
             @Override
             public void onSuccess(List<BatchResult> list) {
-                UserUtil.increment(Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC, new ToastUpdateListener() {
+                UserUtil.increment(CoinConstant.ADD_COIN_COMMENT_WITH_PIC, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
                         activity.showLoading(false);
-                        ToastUtil.showToast(activity.getResString(R.string.add_coin) + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                        ToastUtil.showToast(activity.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_COMMENT_WITH_PIC));
                         activity.sendCommentResult(s, askSongComment);
                     }
                 }); //原子操作
@@ -210,12 +211,12 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                     new BmobBatch().insertBatch(askSongPics).doBatch(new ToastQueryListListener<BatchResult>() {
                         @Override
                         public void onSuccess(List<BatchResult> list) {
-                            UserUtil.increment(Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC, new ToastUpdateListener() {
+                            UserUtil.increment(CoinConstant.ADD_COIN_COMMENT_WITH_PIC, new ToastUpdateListener() {
                                 @Override
                                 public void onSuccess() {
                                     activity.showLoading(false);
                                     mAskSongCommentModel.getPicUrls().clear();//清空
-                                    ToastUtil.showToast(activity.getResString(R.string.add_coin) + (Constant.ADD_CONTRIBUTION_COMMENT_WITH_PIC));
+                                    ToastUtil.showToast(activity.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_COMMENT_WITH_PIC));
                                     activity.sendCommentResult(s, askSongComment);
                                 }
                             }); //原子操作

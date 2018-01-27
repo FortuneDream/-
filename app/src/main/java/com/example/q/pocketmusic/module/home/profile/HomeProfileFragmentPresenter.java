@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
@@ -141,7 +142,7 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
     //检测是否已经签到
     public void SignIn() {
         if (UserUtil.user.getLastSignInDate() == null) {//之前没有这个列
-            final int coin = 5;
+            final int coin = CoinConstant.ADD_COIN_SIGN_DEFAULT;
             UserUtil.user.setLastSignInDate(dateFormat.format(new Date()));//设置当前时间为最后时间
             UserUtil.increment(coin, new ToastUpdateListener() {
                 @Override
@@ -213,16 +214,16 @@ public class HomeProfileFragmentPresenter extends BasePresenter<HomeProfileFragm
 
     //修改昵称
     public void setNickName(final String nickName) {
-        boolean isEnough = UserUtil.checkUserContribution((BaseActivity) fragment.getCurrentContext(), Constant.REDUCE_CHANG_NICK_NAME);
+        boolean isEnough = UserUtil.checkUserContribution((BaseActivity) fragment.getCurrentContext(), CoinConstant.REDUCE_COIN_CHANG_NICK_NAME);
         if (isEnough) {
             UserUtil.user.setNickName(nickName);
             UserUtil.user.update(new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
-                    UserUtil.increment(-Constant.REDUCE_CHANG_NICK_NAME, new ToastUpdateListener() {
+                    UserUtil.increment(-CoinConstant.REDUCE_COIN_CHANG_NICK_NAME, new ToastUpdateListener() {
                         @Override
                         public void onSuccess() {
-                            ToastUtil.showToast(fragment.getResString(R.string.reduce_coin) + Constant.REDUCE_CHANG_NICK_NAME);
+                            ToastUtil.showToast(fragment.getResString(R.string.reduce_coin) + CoinConstant.REDUCE_COIN_CHANG_NICK_NAME);
                             fragment.setNickName(nickName);
                         }
                     });

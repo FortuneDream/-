@@ -10,7 +10,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.flag.BannerBean;
 import com.example.q.pocketmusic.data.flag.ContentLL;
-import com.example.q.pocketmusic.util.InstrumentFlagUtil;
+import com.example.q.pocketmusic.config.constant.InstrumentConstant;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.rollviewpager.RollPagerView;
@@ -91,7 +91,7 @@ public class NetFragmentAdapter extends RecyclerArrayAdapter<Object> {
         @Override
         public void onClick(View v) {
             if (listener != null) {
-                int position = InstrumentFlagUtil.getFlag(v.getId());
+                int position = InstrumentConstant.getFlag(v.getId());
                 listener.onSelectType(position);
             }
         }

@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.LinearLayout;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.HomeActivity;
@@ -107,7 +108,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.download_ll:
-                alertCheckDownloadDialog(Constant.REDUCE_DOWNLOAD);
+                alertCheckDownloadDialog(CoinConstant.REDUCE_COIN_DOWNLOAD);
                 break;
             case R.id.agree_ll:
                 agreeLl.setEnabled(false);//点赞之后就不可再次点击
@@ -115,7 +116,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                 presenter.agree();
                 break;
             case R.id.collection_ll:
-                alertCheckCollectionDialog(Constant.REDUCE_COLLECTION);
+                alertCheckCollectionDialog(CoinConstant.REDUCE_COIN_COLLECTION);
                 break;
             case R.id.share_ll:
                 presenter.share();

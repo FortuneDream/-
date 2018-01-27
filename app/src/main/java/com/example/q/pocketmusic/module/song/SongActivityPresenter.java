@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
@@ -79,11 +80,11 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
 
     public void punish() {
         MyUser user = BmobUser.getCurrentUser(MyUser.class);
-        if (user != null && user.getContribution() >= Constant.REDUCE_PUNISH) {
-            UserUtil.increment(-Constant.REDUCE_PUNISH, new ToastUpdateListener() {
+        if (user != null && user.getContribution() >= CoinConstant.REDUCE_COIN_PUNISH) {
+            UserUtil.increment(-CoinConstant.REDUCE_COIN_PUNISH, new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
-                    ToastUtil.showToast(activity.getResString(R.string.reduce_coin) + Constant.REDUCE_PUNISH);
+                    ToastUtil.showToast(activity.getResString(R.string.reduce_coin) + CoinConstant.REDUCE_COIN_PUNISH);
                 }
             });
         }

@@ -5,9 +5,9 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 
 import com.example.q.pocketmusic.config.constant.Constant;
+import com.example.q.pocketmusic.config.constant.InstrumentConstant;
 import com.example.q.pocketmusic.data.bean.DownloadInfo;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
-import com.example.q.pocketmusic.data.db.ImgDao;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.common.FileUtils;
@@ -67,7 +67,7 @@ public class DownloadUtil {
         try {
             Response response = client.newCall(request).execute();
             FileUtils.saveFile(response, dirPath, destPath);//保存文件
-            localSongDao.saveLocalSong(mDownloadSong, name, InstrumentFlagUtil.getTypeName(typeId), destPath, format);//保存到数据库
+            localSongDao.saveLocalSong(mDownloadSong, name, InstrumentConstant.getTypeName(typeId), destPath, format);//保存到数据库
         } catch (IOException e) {
             e.printStackTrace();
             ((BaseActivity) context).runOnUiThread(new Runnable() {

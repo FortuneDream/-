@@ -8,6 +8,7 @@ import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.local.Img;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
@@ -162,10 +163,10 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
                     @Override
                     public void onSuccess(List<BatchResult> list) {
-                        UserUtil.increment(Constant.ADD_CONTRIBUTION_UPLOAD, new ToastUpdateListener() {
+                        UserUtil.increment(CoinConstant.ADD_COIN_UPLOAD, new ToastUpdateListener() {
                             @Override
                             public void onSuccess() {
-                                ToastUtil.showToast(activity.getResString(R.string.add_coin) + (Constant.ADD_CONTRIBUTION_UPLOAD));
+                                ToastUtil.showToast(activity.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_UPLOAD));
                                 activity.showLoading(false);
                                 activity.finish();
                             }

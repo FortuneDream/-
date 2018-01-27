@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.util.InstrumentFlagUtil;
+import com.example.q.pocketmusic.config.constant.InstrumentConstant;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -82,7 +82,7 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePrese
     public void alertSelectCommunityDialog(final String name, final String content) {
         new AlertDialog.Builder(getCurrentContext())
                 .setTitle("选择圈子")
-                .setSingleChoiceItems(InstrumentFlagUtil.typeNames, 0, new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(InstrumentConstant.typeNames, 0, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 //                        LogUtils.e("which:"+which);

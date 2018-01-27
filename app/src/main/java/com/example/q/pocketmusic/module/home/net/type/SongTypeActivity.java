@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.util.InstrumentFlagUtil;
+import com.example.q.pocketmusic.config.constant.InstrumentConstant;
 import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import java.util.List;
@@ -48,7 +48,7 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
         //获取乐器类型
         typeId = getIntent().getIntExtra(PARAM_POSITION, 0);
         //设置顶部图片
-        topIv.setBackgroundResource(InstrumentFlagUtil.getTopDrawableResource(typeId));
+        topIv.setBackgroundResource(InstrumentConstant.getTopDrawableResource(typeId));
 
         //初始化Fragemnt
         presenter.setFragmentManager(getSupportFragmentManager());

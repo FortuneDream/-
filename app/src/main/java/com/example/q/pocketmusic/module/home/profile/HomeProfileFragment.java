@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.example.q.pocketmusic.module.common.AuthFragment;
@@ -121,7 +122,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                     ToastUtil.showToast("不能为空");
                     return;
                 }
-                new CoinDialogBuilder(getCurrentContext(), Constant.REDUCE_CHANG_NICK_NAME)
+                new CoinDialogBuilder(getCurrentContext(), CoinConstant.REDUCE_COIN_CHANG_NICK_NAME)
                         .setPositiveButton(new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -231,7 +232,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
         signInIv.setVisibility(View.GONE);
         //随机签到
         Random random = new Random();
-        final int reward = random.nextInt(8) + 1;//随机1--8点
+        final int reward = random.nextInt(CoinConstant.ADD_COIN_SIGN_MAX) + CoinConstant.ADD_COIN_SIGN_MIN;//随机1--8点
         View view = View.inflate(getContext(), R.layout.dialog_sign_in, null);
         final TextView titleTv = (TextView) view.findViewById(R.id.title_tv);
         GuaGuaKa guaGuaKa = (GuaGuaKa) view.findViewById(R.id.gua_gua_ka);

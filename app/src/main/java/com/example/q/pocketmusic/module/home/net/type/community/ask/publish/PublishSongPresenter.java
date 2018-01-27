@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
+import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.ask.AskSongPost;
 import com.example.q.pocketmusic.module.common.BaseActivity;
@@ -33,7 +34,7 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
             ToastUtil.showToast(activity.getResString(R.string.complete_info));
             return;
         }
-        int coin = Constant.REDUCE_ASK + index * 2;
+        int coin = CoinConstant.REDUCE_COIN_ASK + index * 2;
         if (!UserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
             ToastUtil.showToast(activity.getResString(R.string.coin_not_enough));
             return;
@@ -44,7 +45,7 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
 
     //求谱
     public void askForSong(String title, String content) {
-        final int coin = Constant.REDUCE_ASK + index * 2;
+        final int coin = CoinConstant.REDUCE_COIN_ASK + index * 2;
         if (!UserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
             ToastUtil.showToast(activity.getResString(R.string.coin_not_enough));
             return;

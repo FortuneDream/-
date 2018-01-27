@@ -10,20 +10,17 @@ import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.MyApplication;
 import com.example.q.pocketmusic.config.constant.BmobConstant;
-import com.example.q.pocketmusic.config.constant.Constant;
+import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.collection.CollectionPic;
 import com.example.q.pocketmusic.data.bean.collection.CollectionSong;
-import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BaseModel;
 import com.example.q.pocketmusic.util.UserUtil;
-import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
-import com.j256.ormlite.stmt.query.In;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,10 +154,10 @@ public class UserCollectionModel extends BaseModel {
                                     @Override
                                     public void onSuccess() {
                                         ToastUtil.showToast("成功收藏");
-                                        UserUtil.increment(-Constant.REDUCE_COLLECTION, new ToastUpdateListener() {
+                                        UserUtil.increment(-CoinConstant.REDUCE_COIN_COLLECTION, new ToastUpdateListener() {
                                             @Override
                                             public void onSuccess() {
-                                                ToastUtil.showToast(MyApplication.context.getResources().getString(R.string.reduce_coin) + Constant.REDUCE_COLLECTION);
+                                                ToastUtil.showToast(MyApplication.context.getResources().getString(R.string.reduce_coin) + CoinConstant.REDUCE_COIN_COLLECTION);
                                                 onAddCollectionResult.onResult();
                                             }
                                         });
@@ -191,7 +188,7 @@ public class UserCollectionModel extends BaseModel {
         }
 
         //贡献度是否足够
-        if (!UserUtil.checkUserContribution(((BaseActivity) context), Constant.REDUCE_COLLECTION)) {
+        if (!UserUtil.checkUserContribution(((BaseActivity) context), CoinConstant.REDUCE_COIN_COLLECTION)) {
             ToastUtil.showToast(((BaseActivity) context).getResString(R.string.coin_not_enough));
             return false;
         }

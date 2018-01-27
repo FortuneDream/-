@@ -1,5 +1,6 @@
 package com.example.q.pocketmusic.data.bean;
 
+import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 
 import cn.bmob.v3.BmobUser;
@@ -43,7 +44,7 @@ public class MyUser extends BmobUser {
         this.signature = "这个人没有签名哦~";
         this.nickName = "匿名";
         this.headImg = Constant.COMMON_HEAD_IV_URL;
-        this.contribution = Constant.ADD_CONTRIBUTION_INIT;
+        this.contribution = CoinConstant.ADD_COIN_INIT;
     }
 
 

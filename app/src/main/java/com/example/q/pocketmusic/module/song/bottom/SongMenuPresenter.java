@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.constant.BmobConstant;
+import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.BmobInfo;
@@ -17,8 +17,6 @@ import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
-import com.example.q.pocketmusic.data.bean.collection.CollectionPic;
-import com.example.q.pocketmusic.data.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
@@ -27,22 +25,16 @@ import com.example.q.pocketmusic.data.model.UserCommunityStateModel;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.profile.contribution.CoinRankModel;
 import com.example.q.pocketmusic.module.home.profile.gift.GiftModel;
-import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.DownloadUtil;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
 import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import cn.bmob.v3.BmobBatch;
-import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
 
@@ -125,14 +117,14 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             return new DownloadInfo("找不到用户", false);
         }
         //硬币不足
-        if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), Constant.REDUCE_DOWNLOAD)) {
+        if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), CoinConstant.REDUCE_COIN_DOWNLOAD)) {
             return new DownloadInfo(fragment.getResString(R.string.coin_not_enough), false);
         }
         //扣除硬币
-        UserUtil.increment(-Constant.REDUCE_DOWNLOAD, new ToastUpdateListener() {
+        UserUtil.increment(-CoinConstant.REDUCE_COIN_DOWNLOAD, new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                ToastUtil.showToast(fragment.getResString(R.string.reduce_coin) + (Constant.REDUCE_DOWNLOAD));
+                ToastUtil.showToast(fragment.getResString(R.string.reduce_coin) + (CoinConstant.REDUCE_COIN_DOWNLOAD));
             }
         });
         return new DownloadInfo("", true);
@@ -212,7 +204,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             @Override
             public void onSuccess() {
                 //增加分享人的硬币
-                new GiftModel().addGift(shareSong.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, user, GiftModel.TYPE.SHARE, new ToastSaveListener<String>() {
+                new GiftModel().addGift(shareSong.getUser(), CoinConstant.ADD_COIN_AGREE_OTHER, user, GiftModel.TYPE.SHARE, new ToastSaveListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         ToastUtil.showToast("已点赞");
@@ -235,7 +227,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         askSongComment.update(new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                new GiftModel().addGift(askSongComment.getUser(), Constant.ADD_CONTRIBUTION_AGREE_OTHER, user, GiftModel.TYPE.COMMENT, new ToastSaveListener<String>() {
+                new GiftModel().addGift(askSongComment.getUser(), CoinConstant.ADD_COIN_AGREE_OTHER, user, GiftModel.TYPE.COMMENT, new ToastSaveListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         ToastUtil.showToast("已点赞");
