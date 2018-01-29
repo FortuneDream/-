@@ -3,4 +3,5 @@
     <item name="image_tag" type="id"/>
     <item name="adapter_item_tag_key" type="id"/>
     <item name="title_bar_setting_icon" type="id"/>
+    <item name="item_dialog_text" type="id"/>
 </resources>

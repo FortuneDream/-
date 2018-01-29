@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.q.pocketmusic.module.home.net.type.study.StudyActivity">
-
+    <include layout="@layout/include_appbar_toolbar"/>
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"

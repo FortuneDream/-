@@ -81,12 +81,12 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
     @Override
     public void alertLocalListDialog(final List<LocalSong> localSongs, List<String> strings) {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getCurrentContext()
-                , android.R.layout.select_dialog_item
-                , android.R.id.text1
+                , R.layout.item_dialog_text
+                , R.id.item_dialog_text
                 , strings);
 
         new AlertDialog.Builder(getCurrentContext())
-                .setTitle("本地乐谱")
+                .setTitle("分享曲谱")
                 .setAdapter(adapter, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

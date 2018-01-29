@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vec_type_study" />
 
+
         <ImageView
             android:id="@+id/share_iv"
             android:layout_width="wrap_content"

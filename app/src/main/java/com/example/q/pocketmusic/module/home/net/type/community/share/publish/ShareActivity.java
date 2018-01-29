@@ -100,7 +100,7 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePrese
             nameTet.setInputString(name);
         }
         adapter.clear();
-        addPicTv.setText("目前已添加 " + mNumberPic + " 张");
+        addPicTv.setText(mNumberPic + " 张");
         adapter.addAll(filePaths);
     }
 

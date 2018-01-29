@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.data.model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
@@ -136,7 +137,7 @@ public class UserCollectionModel extends BaseModel {
                     @Override
                     public void onSuccess(String s) {
                         final int numPic = song.getIvUrl().size();
-                        List<BmobObject> collectionPics = new ArrayList<>();
+                        final List<BmobObject> collectionPics = new ArrayList<>();
                         for (int i = 0; i < numPic; i++) {
                             CollectionPic collectionPic = new CollectionPic();
                             collectionPic.setCollectionSong(collectionSong);
