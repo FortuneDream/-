@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.song.bottom;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
@@ -25,7 +26,7 @@ import com.example.q.pocketmusic.data.model.UserCommunityStateModel;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.module.home.profile.gift.GiftModel;
+import com.example.q.pocketmusic.data.model.GiftModel;
 import com.example.q.pocketmusic.util.DownloadUtil;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
@@ -53,7 +54,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     public SongMenuPresenter(IView fragment) {
         attachView(fragment);
         this.fragment = getIViewRef();
-        userCollectionModel=new UserCollectionModel();
+        userCollectionModel = new UserCollectionModel();
     }
 
 
@@ -194,10 +195,14 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //分享点赞
     private void agreeWithSharePic() {
-        BmobRelation relation = new BmobRelation();
-        final MyUser user = MyUser.getCurrentUser(MyUser.class);
-        relation.add(user);
         final ShareSong shareSong = (ShareSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_SHARE_SONG);
+        final MyUser user = MyUser.getCurrentUser(MyUser.class);
+        if (TextUtils.equals(shareSong.getUser().getObjectId(), user.getObjectId())) {
+            ToastUtil.showToast(fragment.getResString(R.string.no_agree_self));
+            return;
+        }
+        BmobRelation relation = new BmobRelation();
+        relation.add(user);
         shareSong.setAgrees(relation);
         shareSong.increment(BmobConstant.BMOB_AGREE_NUM);//原子操作，点赞数加一
         shareSong.update(new ToastUpdateListener() {
@@ -218,10 +223,14 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //评论图片点赞
     private void agreeWithCommentPic() {
-        BmobRelation relation = new BmobRelation();
-        final MyUser user = MyUser.getCurrentUser(MyUser.class);
-        relation.add(user);
         final AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_ASK_COMMENT);
+        final MyUser user = MyUser.getCurrentUser(MyUser.class);
+        if (TextUtils.equals(askSongComment.getUser().getObjectId(), user.getObjectId())) {
+            ToastUtil.showToast(fragment.getResString(R.string.no_agree_self));
+            return;
+        }
+        BmobRelation relation = new BmobRelation();
+        relation.add(user);
         askSongComment.setAgrees(relation);
         askSongComment.increment(BmobConstant.BMOB_AGREE_NUM);//原子操作，点赞数加一
         askSongComment.update(new ToastUpdateListener() {

@@ -1,4 +1,4 @@
-package com.example.q.pocketmusic.module.home.profile.contribution;
+package com.example.q.pocketmusic.data.model;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.constant.BmobConstant;

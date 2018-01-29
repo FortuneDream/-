@@ -4,6 +4,7 @@ import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.data.bean.bmob.Gift;
+import com.example.q.pocketmusic.data.model.GiftModel;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.UserUtil;

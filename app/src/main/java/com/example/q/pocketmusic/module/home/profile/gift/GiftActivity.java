@@ -43,7 +43,7 @@ public class GiftActivity extends AuthActivity<GiftPresenter.IView, GiftPresente
     @Override
     public void initUserView() {
         adapter = new GiftAdapter(getCurrentContext());
-        initToolbar(toolbar, "礼包中心");
+        initToolbar(toolbar, getResString(R.string.title_gift));
         initRecyclerView(recycler, adapter, 1);
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);

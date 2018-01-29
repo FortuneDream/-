@@ -111,7 +111,7 @@ public class UserCollectionModel extends BaseModel {
     //添加收藏
     //添加收藏
     public void addCollection(Context context, final Song song, final Intent intent, final OnAddCollectionResult onAddCollectionResult) {
-        if (checkCollection(context, song, intent)) return;
+        if (!checkCollection(context, song, intent)) return;
         //检测是否已经收藏
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         query.order("-updatedAt");

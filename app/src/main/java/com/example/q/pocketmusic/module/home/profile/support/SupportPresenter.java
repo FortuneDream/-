@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.data.bean.MoneySupport;
+import com.example.q.pocketmusic.data.model.SupportModel;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.common.ToastUtil;

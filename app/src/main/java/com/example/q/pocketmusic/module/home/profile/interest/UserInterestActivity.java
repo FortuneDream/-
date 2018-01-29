@@ -40,7 +40,7 @@ public class UserInterestActivity extends AuthActivity<UserInterestPresenter.IVi
     @Override
     public void initUserView() {
         adapter = new UserInterestAdapter(this);
-        initToolbar(toolbar, "我的关注");
+        initToolbar(toolbar, getResString(R.string.title_my_interest));
         initRecyclerView(recycler, adapter, 1);
         adapter.setListener(new AbsOnClickItemHeadListener() {
             @Override

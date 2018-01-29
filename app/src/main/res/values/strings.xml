@@ -18,6 +18,7 @@
     <string name="send_error">发生错误：</string>
     <string name="complete_info">是不是遺漏了一些信息啊？</string>
     <string name="no_interest_self">不能自己关注自己哦</string>
+    <string name="no_agree_self">不能自己点赞自己哦</string>
 
 
     //硬币
@@ -28,4 +29,6 @@
 
     //title
     <string name="title_lead_song">本地导入</string>
+    <string name="title_gift">礼包中心</string>
+    <string name="title_my_interest">我的关注</string>
 </resources>

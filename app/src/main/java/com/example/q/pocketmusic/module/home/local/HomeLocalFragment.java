@@ -3,9 +3,7 @@ package com.example.q.pocketmusic.module.home.local;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,13 +11,10 @@ import android.widget.LinearLayout;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.local.lead.LeadSongActivity;
-import com.example.q.pocketmusic.module.home.profile.gift.GiftModel;
 import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 
 /**
@@ -89,13 +84,8 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
     }
 
     @Override
-    public void onSelectRecord() {
-        topTabView.setCheck(HomeLocalFragmentPresenter.TabType.RECORD);
-    }
-
-    @Override
-    public void onSelectSong() {
-        topTabView.setCheck(HomeLocalFragmentPresenter.TabType.SONG);
+    public void onSelectTabResult(int oldIndex, int index) {
+        topTabView.setCheck(index);
     }
 
 
@@ -107,6 +97,7 @@ public class HomeLocalFragment extends BaseFragment<HomeLocalFragmentPresenter.I
                 break;
         }
     }
+
 
 
 }

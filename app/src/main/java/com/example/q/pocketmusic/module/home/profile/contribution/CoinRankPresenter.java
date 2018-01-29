@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.profile.contribution;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.data.bean.MyUser;
+import com.example.q.pocketmusic.data.model.CoinRankModel;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 

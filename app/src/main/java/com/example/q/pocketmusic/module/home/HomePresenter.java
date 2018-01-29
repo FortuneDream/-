@@ -63,11 +63,11 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
         fragments.add(TabIndex.PROFILE_INDEX,homeProfileFragment);
     }
 
-    public void clickBottomTab(int searchIndex) {
-        if (mCurIndex!=searchIndex){
-            showFragment(fragments.get(searchIndex));
-            activity.onSelectTabResult(mCurIndex,searchIndex);
-            mCurIndex = searchIndex;
+    public void clickBottomTab(int index) {
+        if (mCurIndex!=index){
+            showFragment(fragments.get(index));
+            activity.onSelectTabResult(mCurIndex,index);
+            mCurIndex = index;
         }
     }
 
