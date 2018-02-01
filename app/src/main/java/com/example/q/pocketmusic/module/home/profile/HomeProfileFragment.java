@@ -19,6 +19,7 @@ import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.example.q.pocketmusic.module.common.AuthFragment;
+import com.example.q.pocketmusic.util.GuidePopHelper;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
@@ -106,6 +107,8 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 }
             });
             presenter.setUserBelongToVersion();//用户属于哪个版本
+            GuidePopHelper.showChangeHead(headIv);
+            GuidePopHelper.showChangeNickName(toolbar);
         }
     }
 

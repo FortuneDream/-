@@ -15,6 +15,11 @@
         <item>录音</item>
     </string-array>
 
+    <string-array name="support_tab_names">
+        <item>复制支付宝账号</item>
+        <item>获取二维码</item>
+    </string-array>
+
     <string-array name="profile_tab_names">
         <item>转谱贴</item>
         <item>暂存</item>

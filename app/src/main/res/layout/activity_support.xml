@@ -12,20 +12,37 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_vec_rose" />
+        android:layout_height="wrap_content">
 
         <TextView
-            style="@style/TwoTextMain"
-            android:layout_width="wrap_content"
+            android:id="@+id/alipay_tv"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="捐赠说明 (•̀ᴗ•́)و ̑̑ " />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/ui_red"
+            android:text="支付宝" />
+        <View
+            android:background="@color/ui_black_3"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/weixin_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/ui_red"
+            android:text="微信" />
     </LinearLayout>
 
 
@@ -38,37 +55,14 @@
         android:padding="8dp"
         android:text="@string/money_explain" />
 
+    <View style="@style/SettingBigDivider" />
+
     <TextView
-        android:id="@+id/copy_alipay_tv"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:background="@drawable/shape_button"
-        android:gravity="center"
-       android:text="点击复制支付宝号" />
-    <TextView
-        android:id="@+id/get_dimension_tv"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:background="@drawable/shape_button"
-        android:gravity="center"
-        android:text="点击获取二维码" />
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_vec_rose" />
-
-        <TextView
-            style="@style/TwoTextMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="捐献榜单 ✪ε✪" />
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:text="捐献榜单 ✪ε✪" />
 
     <View style="@style/SettingDivider" />
 

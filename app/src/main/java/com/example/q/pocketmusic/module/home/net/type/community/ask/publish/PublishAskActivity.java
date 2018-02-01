@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.GuidePopHelper;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 
@@ -51,9 +52,10 @@ public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView,
 
     @Override
     public void initUserView() {
-        initToolbar(toolbar, "发布求谱信息");
+        initToolbar(toolbar, "发布求谱");
         presenter.setIndex(0);
         presenter.setTypeId(getIntent().getIntExtra(PARAM_TYPE_ID, 0));
+        GuidePopHelper.showHot(addIndexIv);
     }
 
 
@@ -104,17 +106,9 @@ public class PublishAskActivity extends AuthActivity<PublishSongPresenter.IView,
         setResult(success);
     }
 
-
     @Override
     protected PublishSongPresenter createPresenter() {
         return new PublishSongPresenter(this);
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

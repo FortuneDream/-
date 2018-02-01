@@ -30,6 +30,7 @@ import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.util.GuidePopHelper;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.net.HackyViewPager;
 import com.example.q.pocketmusic.view.widget.net.SnackBarUtil;
@@ -141,6 +142,8 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         presenter.loadPic();  //查找图片
         presenter.showBottomFragment(songObject.getFrom());//显示底部Fragment
         showTopAndBottom();//默认显示
+        GuidePopHelper.showHideTopBottom(hideFlat);
+
     }
 
     //加载失败

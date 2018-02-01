@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.bmob.Gift;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.example.q.pocketmusic.util.GuidePopHelper;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -48,6 +49,7 @@ public class GiftActivity extends AuthActivity<GiftPresenter.IView, GiftPresente
         recycler.setRefreshListener(this);
         adapter.setMore(R.layout.view_more, this);
         onRefresh();
+        GuidePopHelper.showGetCoinPop(receivedCoinIv);
     }
 
 

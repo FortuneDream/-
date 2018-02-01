@@ -11,9 +11,7 @@
     <string name="IDSECRET">101091-1</string>
     <string name="APPSECRET">236b8e66855d10faed0940ddd49620a3</string>
     <string name="RSASECRET">MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCB90+0PiGrDgLNj5Wi57Q8kB95ni/NvsmHFraNc7+bzO5o+yimqkbr0DDoeAawEmPBLtFr6wdVCdArL+0zWlXJKKcKKre/dq/tNzEyFvtFe641UdERcRDNdXeIIbjZ7z/xkt/72fANAzDz7pF5W3Ts5WVc8OSRO1lLcpbejz1PrxE1AF3W1VZNmbiJ1tVC+JeJsTn7sTqK3cPaMace5HvvLfeyFjagQn04a4HBlWoX2ZwM4/Zzx6RK64jjLqqqg8jbvDoXaWeB9RnFceKVx7XEEN6NdiHVY/K3svd4vgi2gS6cchs1llfxqS/uOk3JSYX83cbilhauBKV7BtMIU4DPAgMBAAECggEAAJI1p3UecMH/AShAYBbkk9+OQ9qOGzlbaVyQMM7xaJ3d7lgsNY9KAH9Jt7vPS7bI+XBbOz4tKhKA96+eOzuKZPfoxAKsDAtZepFjhfTT5dpFSbayVIFKsZxyigab6VlDzqv2kATFKUl6TZgey4m7Wc8oQuBMINdB7TLztsaqXk9FB5rZ0RF9Y5YgTDNppYbNGafQDc6n2jCOYr2Zi4N/MnyrVmf6t8lKHZMNhwrALzdYkyA1dyecMwrcn7l08sgVEgk9BHb0wbaz69/YwmUq9EnEaewSF4WxxtdohGWudzEm+xQhv1FL4OZlfvud0zt7NxoPIZMxz98nf2KWBp1VAQKBgQDJr55YR1V/gxNd6tWvNa6Ut9Vs5WXHFLx/PqJNpRkp2BSMVdCpmqdkC7BUl70y3OB1f00R5Hfl/EfpTIceg41b1t8uYMch7ssbh3nbpQk7R4qmRRTLFGC92VWUMOFOgJsbfMjeGxP12ivHe0/hb5IfMjUf3dflNlgWVVxoS0kRlQKBgQCk90RQTI9uuS2RcQosVACQotMrpan50jYXAq8YfGx3cBtaZ4uprLXaLz+Hvu48l9XH6VZeA7BRSFzPET/Wm2E5W7M4a/2hbIiKLGWvnUDVov58HUhwATPUZGwuHsv14Oey6x3We1v8lXe5ACYmQzjIDRTjyclnoXtXjnrwyEc30wKBgBUJkIa8yhpG3dpKCIgCHXe9xTFarEcbzp2nNt7KfdlzhJEu0lkenJ8+6OGqAj4v8+nNoYhgQHFo40deiCmSp0gRHa6EwcC0W9M/SmKy0Eeyqq+1PPoB4iVrahXPE3FQ0N0JIxqn0GkwnKhuIGLvdFp0rj3osgBirsWFmeH3GGQRAoGBAIsxYGDo2LWyZjKsUMsqbfeci9XuSMfUiXNM/nUIt3ToEQxtBjk6046wA0kE33wdGXM+/XMCZcmP50+I3Ha2UIjXSRe4dx+3tlXwNDTD2SrqBxSumKp5OURjH6yiq7Jh/N7I6DpLiEhNzeE5sPbkDYsvDotNfjWE2c/9FtsIAp+lAoGAfnS/Fff6QU9AOb0aon64cG8ufyynXvQU91xpdHSysntozMmpdZqR2R8T/lnI6me+aoz0g3BkJTJujosKWaRm6y+WAXdwMaUwpt1eIdFagpT7Krp+cTigsJyt8OC86VQx9wBCr1vE9+gzJ7VpR+RJpGbRqSbO6ffDY3ABTCJUuYc=</string>
-    <string name="money_explain">\t口袋乐谱从开发到现在已经接近了一年的时间了，喜欢这款App的小伙伴越来越多，服务器已经不堪重负Orz。口袋乐谱也承诺给大家，永远不会有任何形式的广告，
-        没有资金的app是没有办法运营下去的，所以需要大家的支持~如果您也喜欢这款App，希望我能继续迭代开发，你可以选择捐赠支持我。捐赠的钱将用于服务器开销。在这里向已捐赠的用户表示由衷的感谢。
-    ~ \n\t另外，您也会获得 5 硬币/元(私信我账号哦)  \n\t如果没有支付宝的小伙伴可以加群或者QQ号联系我 \n\t( QQ群：189465720 QQ:812568684 支付宝:15123100885 )~如果支付出现问题可以转到支付宝（并注明昵称哦~）~谢谢大家了 \n\t请输入整数</string>
+    <string name="money_explain">\t口袋乐谱从开发到现在已经一年多的时间啦，使用这款APP的小伙伴也越来越多，很高兴你们能陪口袋乐谱慢慢成长。一直以来，都只想给大家呈现一个干净、有情怀的APP，所以口袋乐谱拒绝了一切商业广告行为。但没有资金来源的APP是很难运营下去的，现在我们的服务器已经不堪重负惹......所以，如果你也喜欢这款APP，希望口袋乐谱能继续迭代开发，你可以选择通过点击上方的菜单栏，以微信或支付宝形式进行捐赠支持。捐赠所得的一切资金，这边都将用于服务器开销。在这里向所有捐赠的小伙伴们表示由衷感谢。并奉上1元/5枚硬币（私信我账号澳~）</string>
     <string name="not_found_net_data">没有网络~请打开网络数据后再尝试~</string>
     <string name="send_error">发生错误：</string>
     <string name="complete_info">是不是遺漏了一些信息啊？</string>
@@ -31,4 +29,5 @@
     <string name="title_lead_song">本地导入</string>
     <string name="title_gift">礼包中心</string>
     <string name="title_my_interest">我的关注</string>
+    <string name="title_share">上传曲谱</string>
 </resources>

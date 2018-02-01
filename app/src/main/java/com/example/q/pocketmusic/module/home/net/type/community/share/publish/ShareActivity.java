@@ -54,7 +54,7 @@ public class ShareActivity extends AuthActivity<SharePresenter.IView, SharePrese
     public void initUserView() {
         adapter = new SmallPicAdapter(this);
         adapter.setOnItemClickListener(this);
-        initToolbar(toolbar, "上传曲谱");
+        initToolbar(toolbar, getResString(R.string.title_share));
         LocalSong localSong = (LocalSong) getIntent().getSerializableExtra(PARAM_LOCAL_SONG);
         int typeId = getIntent().getIntExtra(PARAM_TYPE_ID, 0);
         presenter.setTypeId(typeId);

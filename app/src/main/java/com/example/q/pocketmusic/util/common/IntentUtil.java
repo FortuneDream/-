@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.v4.content.FileProvider;
 
 import java.io.File;
+import java.net.URLEncoder;
 
 /**
  * Created by 鹏君 on 2017/7/3.
@@ -67,5 +68,40 @@ public class IntentUtil {
         context.startActivity(intent);
     }
 
+    public static void enterAlipay(Context context) {
+        String url = "HTTPS://QR.ALIPAY.COM/FKX07871CN2F2NE98FNBDF";
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        if (intent.resolveActivity(context.getPackageManager()) != null) { //可以接收
+            context.startActivity(intent);
+        } else {
+            ToastUtil.showToast("你的手机没有安装支付宝");
+        }
+    }
+
+    public static void openAliPay2Pay(Context context) {
+        String qrcode = "HTTPS://QR.ALIPAY.COM/FKX07871CN2F2NE98FNBDF";
+        if (!openAlipayPayPage(context, qrcode)) {
+            ToastUtil.showToast("调起支付宝失败");
+        }
+    }
+
+    private static boolean openAlipayPayPage(Context context, String qrcode) {
+        try {
+            qrcode = URLEncoder.encode(qrcode, "utf-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            final String alipayqr = "alipayqr://platformapi/startapp?saId=10000007&clientVersion=3.7.0.0718&qrcode=" + qrcode;
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(alipayqr + "%3F_s%3Dweb-other&_t=" + System.currentTimeMillis()));
+            context.startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }

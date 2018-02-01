@@ -6,11 +6,17 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.config.constant.GuideConstant;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.config.constant.InstrumentConstant;
+import com.example.q.pocketmusic.util.GuidePopHelper;
+import com.example.q.pocketmusic.util.common.ConvertUtil;
+import com.example.q.pocketmusic.util.common.GuidePopupWindow;
+import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import java.util.List;
@@ -58,14 +64,16 @@ public class SongTypeActivity extends BaseActivity<SongTypeActivityPresenter.IVi
         typeTabView.setListener(this);
         typeTabView.setCheck(0);
         presenter.clickHotList();
+        GuidePopHelper.showAskSongPop(askIv);
+        GuidePopHelper.showShareSongPop(shareIv);
     }
+
 
 
     @Override
     protected SongTypeActivityPresenter createPresenter() {
         return new SongTypeActivityPresenter(this);
     }
-
 
 
     @Override
