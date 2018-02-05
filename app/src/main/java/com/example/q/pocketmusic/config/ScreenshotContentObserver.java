@@ -1,6 +1,5 @@
 package com.example.q.pocketmusic.config;
 
-import android.app.job.JobScheduler;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -19,21 +18,23 @@ public class ScreenshotContentObserver extends ContentObserver {
     private Context mContext;
     private Handler handler;
 
-    public ScreenshotContentObserver(Handler handler,Context context) {
+    public ScreenshotContentObserver(Handler handler, Context context) {
         super(null);//传入Null，表示onChange操作在Binder线程中，所以要自己创建handler发到自己的MessageQueue中
         this.mContext = context.getApplicationContext();
-        this.handler=handler;
+        this.handler = handler;
     }
 
-    public static void startObserve(Handler handler,Context context) {
+    public static void startObserve(Handler handler, Context context) {
         if (instance == null) {
-            instance = new ScreenshotContentObserver(handler,context);
+            instance = new ScreenshotContentObserver(handler, context);
             instance.register();
         }
     }
 
     public static void stopObserve() {
-        instance.unregister();
+        if (instance != null) {
+            instance.unregister();
+        }
         instance = null;
     }
 
@@ -66,7 +67,9 @@ public class ScreenshotContentObserver extends ContentObserver {
                 String filePath = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
                 long addTime = cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.DATE_ADDED));
                 if (matchAddTime(addTime) && matchPath(filePath) && matchSize(filePath)) {
+                    if (handler != null) {
                         handler.sendEmptyMessage(1);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -83,9 +86,14 @@ public class ScreenshotContentObserver extends ContentObserver {
     }
 
 
-
     private boolean matchSize(String filePath) {
+        if (mContext == null) {
+            return false;
+        }
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        if (wm == null) {
+            return false;
+        }
         int width = wm.getDefaultDisplay().getWidth();
         int height = wm.getDefaultDisplay().getHeight();
         Point size = new Point(width, height);

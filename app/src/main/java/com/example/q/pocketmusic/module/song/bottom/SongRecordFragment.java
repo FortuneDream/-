@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.song.bottom;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,7 +25,7 @@ import butterknife.OnClick;
 public class SongRecordFragment extends BaseFragment<SongRecordPresenter.IView, SongRecordPresenter>
         implements SongRecordPresenter.IView {
     @BindView(R.id.record_play_iv)
-    ImageView recordPlayIv;
+    AppCompatImageView recordPlayIv;
     @BindView(R.id.time_tv)
     TextView timeTv;
     @BindView(R.id.avi)
@@ -74,10 +75,10 @@ public class SongRecordFragment extends BaseFragment<SongRecordPresenter.IView, 
     @Override
     public void setBtnStatus(SongRecordPresenter.RECORD_STATUS status) {
         if (status == SongRecordPresenter.RECORD_STATUS.STOP) {
-            recordPlayIv.setImageResource(R.drawable.ico_media_record_stop);
+            recordPlayIv.setImageResource(R.drawable.ic_vec_media_record_stop);
             avi.setVisibility(View.VISIBLE);
         } else {
-            recordPlayIv.setImageResource(R.drawable.ico_media_record);
+            recordPlayIv.setImageResource(R.drawable.ic_vec_media_record);
             avi.setVisibility(View.INVISIBLE);
         }
     }

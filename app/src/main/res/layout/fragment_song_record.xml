@@ -7,12 +7,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/record_play_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:src="@drawable/ico_media_record" />
+        app:srcCompat="@drawable/ic_vec_media_record" />
 
     <TextView
         android:id="@+id/time_tv"

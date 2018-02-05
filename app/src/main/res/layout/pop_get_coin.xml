@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_pop_ask_song"
-    android:drawablePadding="2dp"
-    android:drawableRight="@drawable/ic_vec_point_top"
-    android:gravity="center"
-    android:text="领取硬币"
-    android:textColor="@color/ui_white"
-    android:textSize="12sp" />
+    android:background="@drawable/shape_pop_ask_song">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="领取硬币"
+        android:textColor="@color/ui_white"
+        android:textSize="12sp" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/text"
+        app:srcCompat="@drawable/ic_vec_point_top" />
+</RelativeLayout>

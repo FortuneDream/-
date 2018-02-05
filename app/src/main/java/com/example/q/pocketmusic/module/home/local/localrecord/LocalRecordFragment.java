@@ -76,7 +76,7 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
 
     @Override
     public void onSelectDelete(int position) {
-        RecordAudio recordAudio=adapter.getItem(position);
+        RecordAudio recordAudio = adapter.getItem(position);
         presenter.deleteRecord(recordAudio);
         adapter.remove(recordAudio);
     }
@@ -94,12 +94,11 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
     @Override
     public void setPlayOrPauseImage(boolean status) {
         if (status) {
-            playIv.setImageResource(R.drawable.ico_media_play);
+            playIv.setImageResource(R.drawable.ic_vec_media_record);
         } else {
-            playIv.setImageResource(R.drawable.ico_media_pause);
+            playIv.setImageResource(R.drawable.ic_vec_media_record_stop);
         }
     }
-
 
 
     //刷新
@@ -204,7 +203,6 @@ public class LocalRecordFragment extends BaseFragment<LocalRecordFragmentPresent
         seekBar.setProgress(currentPosition);
         durationTv.setText(time);
     }
-
 
 
 //    //退出前台,关闭音乐
