@@ -26,6 +26,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
 import rx.functions.Action1;
 
 /**
@@ -48,21 +50,19 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
     //同步录音
     public void synchronizedRecord() {
         //先遍历文件夹的录音，添加到数据库（不重复添加），然后再从数据库取出来
-        localModel.synchronizeRecordAudio(new Action1<Boolean>() {
-            @Override
-            public void call(Boolean aBoolean) {
-                if (fragment.getAppContext() == null) {
-                    return;
-                }
-                //读取列表
-                localModel.getLocalRecordList(new Action1<List<RecordAudio>>() {
+        localModel.synchronizeRecordAudio()
+                .filter(new Predicate<List<RecordAudio>>() {
                     @Override
-                    public void call(List<RecordAudio> recordAudios) {
+                    public boolean test(List<RecordAudio> recordAudios) throws Exception {
+                        return fragment != null;
+                    }
+                })
+                .subscribe(new Consumer<List<RecordAudio>>() {
+                    @Override
+                    public void accept(List<RecordAudio> recordAudios) throws Exception {
                         fragment.setList(recordAudios);
                     }
                 });
-            }
-        });
     }
 
     //长按删除记录

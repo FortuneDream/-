@@ -39,7 +39,10 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/okhttp-3.8.1.jar')
-    compile 'cn.bmob.android:bmob-sdk:3.5.9'
+    compile ('cn.bmob.android:bmob-sdk:3.5.9'){
+        exclude group :'io.reactivex.rxandroid'
+        exclude group :'io.reactivex.rxjava'
+    }
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support:design:25.4.0'
     compile 'com.jakewharton:butterknife:8.5.1'
@@ -60,4 +63,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'org.greenrobot:eventbus:3.1.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.8'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 }

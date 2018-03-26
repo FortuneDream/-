@@ -12,6 +12,7 @@ import com.example.q.pocketmusic.data.bean.local.RecordAudio;
 import com.example.q.pocketmusic.data.db.ImgDao;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.data.db.RecordAudioDao;
+import com.example.q.pocketmusic.util.RxApi;
 import com.example.q.pocketmusic.util.SortUtil;
 import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 
@@ -21,12 +22,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Single;
 
 /**
  * Created by 鹏君 on 2017/7/27.
@@ -46,56 +44,35 @@ public class LocalModel {
     }
 
     //同步本地录音
-    public void synchronizeRecordAudio(Action1<Boolean> isSucceedListener) {
-        Observable.create(new Observable.OnSubscribe<Boolean>() {
+    public Single<List<RecordAudio>> synchronizeRecordAudio() {
+        return RxApi.create(new Callable<List<RecordAudio>>() {
             @Override
-            public void call(Subscriber<? super Boolean> subscriber) {
-                boolean isSucceed = updateRecordAudio();
-                subscriber.onNext(isSucceed);
+            public List<RecordAudio> call() throws Exception {
+                updateRecordAudio();
+                return recordAudioDao.queryForAll();
             }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(isSucceedListener);
-    }
-
-    //得到本地录音列表
-    public void getLocalRecordList(Action1<List<RecordAudio>> localRecordListener) {
-        Observable.create(new Observable.OnSubscribe<List<RecordAudio>>() {
-            @Override
-            public void call(Subscriber<? super List<RecordAudio>> subscriber) {
-                subscriber.onNext(recordAudioDao.queryForAll());
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(localRecordListener);
+        });
     }
 
     //同步本地曲谱
-    public void synchronizeLocalSong(final Action1<Boolean> isSucceedListener) {
-        Observable.create(new Observable.OnSubscribe<Boolean>() {
+    public Single<List<LocalSong>> synchronizeLocalSong() {
+        return RxApi.create(new Callable<List<LocalSong>>() {
             @Override
-            public void call(Subscriber<? super Boolean> subscriber) {
-                subscriber.onNext(updateLocalSong());
+            public List<LocalSong> call() throws Exception {
+                updateLocalSong();
+                return localSongDao.queryForAll();
             }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(isSucceedListener);
+        });
     }
 
     //得到本地曲谱列表
-    public void getLocalSongList(Action1<List<LocalSong>> localSongListener) {
-        Observable.create(new Observable.OnSubscribe<List<LocalSong>>() {
+    public Single<List<LocalSong>> getLocalSongList() {
+        return RxApi.create(new Callable<List<LocalSong>>() {
             @Override
-            public void call(Subscriber<? super List<LocalSong>> subscriber) {
-                subscriber.onNext(localSongDao.queryForAll());
+            public List<LocalSong> call() throws Exception {
+                return localSongDao.queryForAll();
             }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(localSongListener);
+        });
     }
 
     //置顶
@@ -109,22 +86,20 @@ public class LocalModel {
 
 
     //更新记录
-    private Boolean updateRecordAudio() {
+    private void updateRecordAudio() {
         MediaPlayer mediaPlayer = new MediaPlayer();
-        boolean isSucceed = true;
         File dir = new File(Environment.getExternalStorageDirectory() + "/" + Constant.RECORD_FILE);
         if (dir.exists()) {
             File[] files = dir.listFiles();
             for (File file : files) {
                 try {
                     RecordAudio recordAudio = getRecordAudio(mediaPlayer, file);
-                    isSucceed = recordAudioDao.add(recordAudio);//同步时有可能出现名字相同的情况
+                    recordAudioDao.add(recordAudio);//同步时有可能出现名字相同的情况
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-        return isSucceed;
     }
 
     //测量，并得到RecordAudio
@@ -165,7 +140,7 @@ public class LocalModel {
         //所有图片
         File[] imgFiles = file.listFiles();
         //没有图片,直接删除文件夹
-        if (imgFiles==null) {
+        if (imgFiles == null) {
             file.delete();
             return;
         }

@@ -32,6 +32,9 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
+import rx.Observable;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by 鹏君 on 2017/4/22.

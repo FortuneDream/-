@@ -17,6 +17,8 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
 
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
 import rx.functions.Action1;
 
 /**
@@ -37,16 +39,20 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
     }
 
     public void loadLocalSong() {
-        if (fragment.getAppContext() == null) {
-            return;
-        }
-        localModel.getLocalSongList(new Action1<List<LocalSong>>() {
-            @Override
-            public void call(List<LocalSong> localSongs) {
-                fragment.setList(localSongs);
-                LogUtils.e(TAG, "本地乐谱数量：" + localSongs.size());
-            }
-        });
+        localModel.getLocalSongList()
+                .filter(new Predicate<List<LocalSong>>() {
+                    @Override
+                    public boolean test(List<LocalSong> localSongs) throws Exception {
+                        return fragment != null;
+                    }
+                })
+                .subscribe(new Consumer<List<LocalSong>>() {
+                    @Override
+                    public void accept(List<LocalSong> localSongs) throws Exception {
+                        fragment.setList(localSongs);
+                        LogUtils.e(TAG, "本地乐谱数量：" + localSongs.size());
+                    }
+                });
     }
 
     //删除乐谱要删除数据库和list.position,还有本地的文件！
@@ -57,12 +63,20 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
     //同步乐谱
     public void synchronizedSong() {
         //先遍历文件夹的图片，添加到数据库（不重复添加），然后再从数据库取出来
-        localModel.synchronizeLocalSong(new Action1<Boolean>() {
-            @Override
-            public void call(Boolean aBoolean) {
-                loadLocalSong();
-            }
-        });
+        localModel.synchronizeLocalSong()
+                .filter(new Predicate<List<LocalSong>>() {
+                    @Override
+                    public boolean test(List<LocalSong> localSongs) throws Exception {
+                        return fragment != null;
+                    }
+                })
+                .subscribe(new Consumer<List<LocalSong>>() {
+                    @Override
+                    public void accept(List<LocalSong> localSongs) throws Exception {
+                        fragment.setList(localSongs);
+                        LogUtils.e(TAG, "本地乐谱数量：" + localSongs.size());
+                    }
+                });
     }
 
 
@@ -77,7 +91,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
         Song song = new Song();
         song.setName(localSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_LOCAL, Constant.SHOW_NO_MENU, Constant.LOCAL);
-        fragment.getCurrentContext().startActivity(SongActivity.buildLocalIntent(fragment.getCurrentContext(),songObject,localSong));
+        fragment.getCurrentContext().startActivity(SongActivity.buildLocalIntent(fragment.getCurrentContext(), songObject, localSong));
     }
 
     public void setTop(LocalSong item) {
@@ -89,8 +103,6 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
 
     public interface IView extends IBaseView {
         void setList(List<LocalSong> list);
-
-
         void onRefresh();
     }
 }
