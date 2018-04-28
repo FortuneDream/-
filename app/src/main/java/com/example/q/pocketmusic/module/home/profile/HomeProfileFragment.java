@@ -16,9 +16,16 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.CoinConstant;
-import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;
 import com.example.q.pocketmusic.module.common.AuthFragment;
+import com.example.q.pocketmusic.module.home.profile.collection.UserCollectionActivity;
+import com.example.q.pocketmusic.module.home.profile.contribution.CoinRankActivity;
+import com.example.q.pocketmusic.module.home.profile.gift.GiftActivity;
+import com.example.q.pocketmusic.module.home.profile.interest.UserInterestActivity;
+import com.example.q.pocketmusic.module.home.profile.post.UserPostActivity;
+import com.example.q.pocketmusic.module.home.profile.setting.SettingActivity;
+import com.example.q.pocketmusic.module.home.profile.share.UserShareActivity;
+import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
 import com.example.q.pocketmusic.util.GuidePopHelper;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
@@ -172,7 +179,7 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.support_me_item:
-                presenter.enterSupportActivity();
+                presenter.startActivity(SupportActivity.class);
                 break;
             case R.id.head_iv://设置头像
                 presenter.setHeadIv();
@@ -181,19 +188,19 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
                 presenter.grade();
                 break;
             case R.id.share_item://我的分享
-                presenter.enterUserShareActivity();
+                presenter.startActivity(UserShareActivity.class);
                 break;
             case R.id.post_item://用户求谱帖子
-                presenter.enterUserPostActivity();
+                presenter.startActivity(UserPostActivity.class);
                 break;
             case R.id.setting_item://设置界面
-                presenter.enterSettingActivity();
+                presenter.startActivity(SettingActivity.class);
                 break;
             case R.id.collection_item://进入收藏列表界面
-                presenter.enterCollectionActivity();
+                presenter.startActivity(UserCollectionActivity.class);
                 break;
             case R.id.coin_item://进入ContributionActivity
-                presenter.enterContributionActivity();
+                presenter.startActivity(CoinRankActivity.class);
                 break;
             case R.id.sign_in_iv://签到
                 presenter.SignIn();
@@ -204,11 +211,11 @@ public class HomeProfileFragment extends AuthFragment<HomeProfileFragmentPresent
             case R.id.user_signature_tv:
                 alertSignatureDialog();//修改签名
                 break;
-            case R.id.gift_item:
-                presenter.enterGiftActivity();//进入礼包中心
+            case R.id.gift_item://进入礼包中心
+                presenter.startActivity(GiftActivity.class);
                 break;
             case R.id.interest_item://进入关注列表
-                presenter.enterInterestActivity();
+                presenter.startActivity(UserInterestActivity.class);
                 break;
         }
     }

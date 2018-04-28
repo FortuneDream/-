@@ -17,12 +17,10 @@ import java.util.List;
  */
 
 public class SplashPresenter extends BasePresenter<SplashPresenter.IView> {
-    private IView activity;
     private BmobUtil bmobUtil;
 
     public SplashPresenter(IView activity) {
-        attachView(activity);//需要传过一个强引用
-        this.activity = getIViewRef();//得到一个弱引用
+        super(activity);
         bmobUtil = new BmobUtil();
     }
 
@@ -30,14 +28,11 @@ public class SplashPresenter extends BasePresenter<SplashPresenter.IView> {
         bmobUtil.getInitListWithEqual(BmobInfo.class, null, "type", Constant.BMOB_INFO_LABA, new ToastQueryListener<BmobInfo>() {
             @Override
             public void onSuccess(List<BmobInfo> list) {
-                activity.setLaBaText(list.get(0));
+                mView.setLaBaText(list.get(0));
             }
         });
     }
 
-    public void enterHomeActivity() {
-        activity.getCurrentContext().startActivity(new Intent(activity.getCurrentContext(), HomeActivity.class));
-    }
 
     public interface IView extends IBaseView {
 

@@ -9,7 +9,7 @@ import com.example.q.pocketmusic.util.UserUtil;
  * Created by 鹏君 on 2017/1/13.
  */
 //用于验证的Activity
-public abstract class AuthActivity<V, T extends BasePresenter<V>> extends BaseActivity<V, T> {
+public abstract class AuthActivity<V extends IBaseView, T extends BasePresenter<V>> extends BaseActivity<V, T> {
 
     public abstract void initUserView();
 

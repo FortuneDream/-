@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.ScreenshotContentObserver;
+import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
@@ -67,9 +68,11 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            showSnack();
-            presenter.punish();
-
+            //如果是本地就不扣硬币：
+            if (presenter.getIsFrom() != Constant.FROM_LOCAL) {
+                showSnack();
+                presenter.punish();
+            }
         }
     };
 
@@ -140,7 +143,8 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         Song song = songObject.getSong();
         initToolbar(toolbar, song.getName());//toolbar
         presenter.loadPic();  //查找图片
-        presenter.showBottomFragment(songObject.getFrom());//显示底部Fragment
+        presenter.setIsFrom(songObject.getFrom());
+        presenter.showBottomFragment();//显示底部Fragment
         showTopAndBottom();//默认显示
         GuidePopHelper.showHideTopBottom(hideFlat);
 
@@ -228,10 +232,10 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
 
     private void showTopAndBottom() {
         if (sIsShowTopAndBottom) {
-            hideFlat.setImageResource(R.drawable.ic_vec_show);
+            hideFlat.setImageResource(R.drawable.ico_show);
             showAnim();
         } else {
-            hideFlat.setImageResource(R.drawable.ic_vec_hide);
+            hideFlat.setImageResource(R.drawable.ico_hide);
             hideAnim();
         }
         sIsShowTopAndBottom = !sIsShowTopAndBottom;

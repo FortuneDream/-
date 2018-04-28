@@ -11,9 +11,9 @@ import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.collection.CollectionPic;
 import com.example.q.pocketmusic.data.bean.collection.CollectionSong;
+import com.example.q.pocketmusic.data.model.UserCollectionModel;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.data.model.UserCollectionModel;
 import com.example.q.pocketmusic.module.song.SongActivity;
 
 import java.util.ArrayList;
@@ -28,13 +28,11 @@ import cn.bmob.v3.datatype.BmobPointer;
  */
 
 public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPresenter.IView> {
-    private IView fragment;
     private UserCollectionModel userCollectionModel;
     private int mPage;
 
     public OtherCollectionPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
         userCollectionModel = new UserCollectionModel();
     }
 
@@ -42,14 +40,14 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
         BmobQuery<CollectionSong> query = new BmobQuery<>();
         query.setLimit(10);
         query.addWhereRelatedTo("collections", new BmobPointer(other));
-        query.order( BmobConstant.BMOB_CREATE_AT);
+        query.order(BmobConstant.BMOB_CREATE_AT);
         query.findObjects(new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
                 if (!isRefreshing) {
-                    fragment.setOtherCollectionList(list);
+                    mView.setOtherCollectionList(list);
                 } else {
-                    fragment.setOtherCollectionListWithRefreshing(list);
+                    mView.setOtherCollectionListWithRefreshing(list);
                 }
 
             }
@@ -58,11 +56,11 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
     }
 
     public void enterSongActivity(final CollectionSong collectionSong) {
-        fragment.showLoading(true);
+        mView.showLoading(true);
         userCollectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>() {
             @Override
             public void onSuccess(List<CollectionPic> list) {
-                fragment.showLoading(false);
+                mView.showLoading(false);
                 Song song = new Song();
                 song.setName(collectionSong.getName());
                 song.setContent(collectionSong.getContent());
@@ -71,10 +69,10 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
                     urls.add(pic.getUrl());
                 }
                 song.setIvUrl(urls);
-                Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
+                Intent intent = new Intent(mContext, SongActivity.class);
                 SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.MENU_DOWNLOAD_SHARE, Constant.NET);
                 intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, songObject);
-                fragment.getCurrentContext().startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
     }
@@ -89,11 +87,11 @@ public class OtherCollectionPresenter extends BasePresenter<OtherCollectionPrese
         query.addWhereRelatedTo("collections", new BmobPointer(other));
         query.setLimit(10);
         query.setSkip(mPage * 10);
-        query.order( BmobConstant.BMOB_CREATE_AT);
+        query.order(BmobConstant.BMOB_CREATE_AT);
         query.findObjects(new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
-                fragment.setOtherCollectionList(list);
+                mView.setOtherCollectionList(list);
 
             }
         });

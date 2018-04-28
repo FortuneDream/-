@@ -10,7 +10,7 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
  * Created by 鹏君 on 2017/1/26.
  */
 
-public abstract class AuthFragment<V, T extends BasePresenter<V>> extends BaseFragment<V, T> {
+public abstract class AuthFragment<V extends IBaseView, T extends BasePresenter<V>> extends BaseFragment<V, T> {
     @Override
     public void initView() {
         if (!UserUtil.checkLocalUser(this)){

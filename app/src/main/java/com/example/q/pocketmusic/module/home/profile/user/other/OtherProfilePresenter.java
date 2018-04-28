@@ -18,16 +18,14 @@ import cn.bmob.v3.datatype.BmobRelation;
  */
 
 public class OtherProfilePresenter extends BasePresenter<OtherProfilePresenter.IView> {
-    private IView activity;
 
     public OtherProfilePresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
     }
 
     public void interestOther(MyUser otherUser) {
         if (TextUtils.equals(otherUser.getObjectId(), UserUtil.user.getObjectId())) {
-            ToastUtil.showToast(activity.getResString(R.string.no_interest_self));
+            ToastUtil.showToast(mView.getResString(R.string.no_interest_self));
             return;
         }
         BmobRelation relation = new BmobRelation();

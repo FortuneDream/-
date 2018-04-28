@@ -97,4 +97,9 @@ public class Constant {
     public static final int COMMUNITY_STATE_AGREE = 3;//点赞
 
 
+    //弹出支持开发的dialog
+    public static final String SUPPORT_DATE="support_date";
+    public static final String SUPPORT_TIME="support_time";
+
+
 }

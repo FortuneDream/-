@@ -17,7 +17,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="曲谱名"
-            android:textSize="@dimen/item_two_txt_main" />
+            android:textSize="@dimen/item_three_txt_main" />
+
+        <TextView
+            android:id="@+id/instrument_tv"
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="乐器"
+            android:textSize="@dimen/item_three_txt_second" />
 
         <TextView
             android:id="@+id/content_tv"
@@ -25,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="曲谱描述"
-            android:textSize="@dimen/item_two_txt_second" />
+            android:textSize="@dimen/item_three_txt_third" />
     </LinearLayout>
 
     <ImageView

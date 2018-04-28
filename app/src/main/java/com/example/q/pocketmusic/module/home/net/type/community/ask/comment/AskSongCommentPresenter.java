@@ -59,7 +59,6 @@ import rx.schedulers.Schedulers;
  */
 
 public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresenter.IView> {
-    private IView activity;
     private AskSongCommentModel mAskSongCommentModel;
     private UserShareModel mUserShareModel;
     private UserCollectionModel mUserCollectionModel;
@@ -77,8 +76,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
 
     public AskSongCommentPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
         mAskSongCommentModel = new AskSongCommentModel();
         mUserShareModel = new UserShareModel();
         mUserCollectionModel = new UserCollectionModel();
@@ -102,7 +100,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         mAskSongCommentModel.getUserCommentList(post, mPage, new ToastQueryListener<AskSongComment>() {
             @Override
             public void onSuccess(List<AskSongComment> list) {
-                activity.setCommentList(isRefreshing, list);
+               mView.setCommentList(isRefreshing, list);
             }
         });
     }
@@ -111,26 +109,26 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     //发送评论
     public void sendComment(final String comment) {
         if (TextUtils.isEmpty(comment)) {
-            ToastUtil.showToast(activity.getResString(R.string.complete_info));
+            ToastUtil.showToast(mView.getResString(R.string.complete_info));
             return;
         }
         Boolean hasPic;
         hasPic = mAskSongCommentModel.getPicUrls().size() > 0;
         final AskSongComment askSongComment = new AskSongComment(UserUtil.user, post, comment, hasPic);
-        activity.showLoading(true);
-        activity.setCommentInput("");//空
+        mView.showLoading(true);
+        mView.setCommentInput("");//空
         //添加评论表记录
         askSongComment.save(new ToastSaveListener<String>() {
             @Override
             public void onSuccess(final String s) {
                 //帖子表的评论数+1
                 post.increment(BmobConstant.BMOB_COMMENT_NUM, 1);
-                post.update(new ToastUpdateListener(activity) {
+                post.update(new ToastUpdateListener(mView) {
                     @Override
                     public void onSuccess() {
                         if (mAskSongCommentModel.getPicUrls().size() <= 0) {//无图
-                            activity.showLoading(false);
-                            activity.sendCommentResult(s, askSongComment);
+                            mView.showLoading(false);
+                            mView.sendCommentResult(s, askSongComment);
                             return;
                         }
                         //批量上传图片
@@ -164,9 +162,9 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 UserUtil.increment(CoinConstant.ADD_COIN_COMMENT_WITH_PIC, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
-                        activity.showLoading(false);
-                        ToastUtil.showToast(activity.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_COMMENT_WITH_PIC));
-                        activity.sendCommentResult(s, askSongComment);
+                        mView.showLoading(false);
+                        ToastUtil.showToast(mView.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_COMMENT_WITH_PIC));
+                        mView.sendCommentResult(s, askSongComment);
                     }
                 }); //原子操作
             }
@@ -186,9 +184,9 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 UserUtil.increment(CoinConstant.ADD_COIN_COMMENT_WITH_PIC, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
-                        activity.showLoading(false);
-                        ToastUtil.showToast(activity.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_COMMENT_WITH_PIC));
-                        activity.sendCommentResult(s, askSongComment);
+                        mView.showLoading(false);
+                        ToastUtil.showToast(mView.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_COMMENT_WITH_PIC));
+                        mView.sendCommentResult(s, askSongComment);
                     }
                 }); //原子操作
             }
@@ -214,10 +212,10 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                             UserUtil.increment(CoinConstant.ADD_COIN_COMMENT_WITH_PIC, new ToastUpdateListener() {
                                 @Override
                                 public void onSuccess() {
-                                    activity.showLoading(false);
+                                    mView.showLoading(false);
                                     mAskSongCommentModel.getPicUrls().clear();//清空
-                                    ToastUtil.showToast(activity.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_COMMENT_WITH_PIC));
-                                    activity.sendCommentResult(s, askSongComment);
+                                    ToastUtil.showToast(mView.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_COMMENT_WITH_PIC));
+                                    mView.sendCommentResult(s, askSongComment);
                                 }
                             }); //原子操作
                         }
@@ -233,8 +231,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
             @Override
             public void onError(int i, String s) {
                 //文件上传失败
-                activity.showLoading(false);
-                ToastUtil.showToast(activity.getResString(R.string.send_error) + s);
+                mView.showLoading(false);
+                ToastUtil.showToast(mView.getResString(R.string.send_error) + s);
             }
         });
     }
@@ -253,12 +251,12 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                     mAskSongCommentModel.getPicUrls().add(photoInfo.getPhotoPath());
                 }
                 mUploadTypeFlag = LOCAL;
-                activity.addPicResult(mAskSongCommentModel.getPicUrls());
+                mView.addPicResult(mAskSongCommentModel.getPicUrls());
             }
 
             @Override
             public void onHanlderFailure(int requestCode, String errorMsg) {
-                ToastUtil.showToast(activity.getResString(R.string.send_error) + errorMsg);
+                ToastUtil.showToast(mView.getResString(R.string.send_error) + errorMsg);
             }
         });
     }
@@ -266,7 +264,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     //得到所有图片，显示dialog
     public void alertPicDialog(final AskSongComment askSongComment) {
         if (askSongComment.getHasPic()) {
-            activity.showLoading(true);
+            mView.showLoading(true);
             //查询有多少张图片
             mAskSongCommentModel.getPicList(askSongComment, new ToastQueryListener<AskSongPic>() {
                 @Override
@@ -278,8 +276,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                         urls.add(askSongPic.getUrl());
                     }
                     song.setIvUrl(urls);
-                    activity.showLoading(false);
-                    activity.showPicDialog(song, askSongComment);
+                    mView.showLoading(false);
+                    mView.showPicDialog(song, askSongComment);
                 }
             });
         }
@@ -289,15 +287,15 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     //进入SongActivity
     public void enterSongActivity(Song song, AskSongComment askSongComment) {
         SongObject songObject = new SongObject(song, Constant.FROM_ASK, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
-        activity.getCurrentContext().startActivity(SongActivity.buildAskIntent(
-                activity.getCurrentContext(), songObject, post.getInstrument(), askSongComment
+        mView.getCurrentContext().startActivity(SongActivity.buildAskIntent(
+                mView.getCurrentContext(), songObject, post.getInstrument(), askSongComment
         ));
     }
 
 
     @NonNull
     private List<String> getLocalImgs(String name) {
-        LocalSongDao localSongDao = new LocalSongDao(activity.getCurrentContext());
+        LocalSongDao localSongDao = new LocalSongDao(mView.getCurrentContext());
         List<String> imgUrls = new ArrayList<>();
         LocalSong localSong = localSongDao.findByName(name);
         if (localSong == null) {
@@ -324,7 +322,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
     //消耗硬币，置顶
     public void reduceIndexCoin() {
         final int coin = 2;
-        if (!UserUtil.checkUserContribution((BaseActivity) activity, coin)) {
+        if (!UserUtil.checkUserContribution((BaseActivity) mView, coin)) {
             ToastUtil.showToast("硬币不够哦~");
             return;
         }
@@ -336,8 +334,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 UserUtil.increment(-coin, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
-                        ToastUtil.showToast(activity.getResString(R.string.reduce_coin) + coin);
-                        activity.addHotIndex();
+                        ToastUtil.showToast(mView.getResString(R.string.reduce_coin) + coin);
+                        mView.addHotIndex();
                     }
                 });
             }
@@ -350,7 +348,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         mUserCollectionModel.getAllUserCollectionList(UserUtil.user, new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
-                activity.alertCollectionListDialog(list);
+                mView.alertCollectionListDialog(list);
             }
         });
     }
@@ -361,7 +359,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         mUserShareModel.getAllUserShareList(UserUtil.user, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                activity.alertShareListDialog(list);
+                mView.alertShareListDialog(list);
             }
         });
     }
@@ -378,8 +376,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 mAskSongCommentModel.getPicUrls().clear();
                 mAskSongCommentModel.getPicUrls().addAll(strList);
                 mUploadTypeFlag = COLLECTION;
-                activity.addPicResult(mAskSongCommentModel.getPicUrls());
-                activity.setCommentInput(collection.getName());
+                mView.addPicResult(mAskSongCommentModel.getPicUrls());
+                mView.setCommentInput(collection.getName());
             }
         });
     }
@@ -397,8 +395,8 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 mAskSongCommentModel.getPicUrls().clear();
                 mAskSongCommentModel.getPicUrls().addAll(strList);
                 mUploadTypeFlag = SHARE;
-                activity.addPicResult(mAskSongCommentModel.getPicUrls());
-                activity.setCommentInput(shareSong.getName());
+                mView.addPicResult(mAskSongCommentModel.getPicUrls());
+                mView.setCommentInput(shareSong.getName());
             }
         });
     }
@@ -408,7 +406,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
         rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
             @Override
             public void call(Subscriber<? super List<String>> subscriber) {
-                LocalSongDao dao = new LocalSongDao(activity.getCurrentContext());
+                LocalSongDao dao = new LocalSongDao(mView.getCurrentContext());
                 List<LocalSong> list = dao.queryForAll();
                 List<String> names = new ArrayList<String>();
                 for (LocalSong localSong : list) {
@@ -422,7 +420,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                 .subscribe(new Action1<List<String>>() {
                     @Override
                     public void call(List<String> strings) {
-                        activity.alertLocalListDialog(strings);
+                        mView.alertLocalListDialog(strings);
                     }
                 });
     }
@@ -443,7 +441,7 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
                         mAskSongCommentModel.getPicUrls().clear();
                         mAskSongCommentModel.getPicUrls().addAll(strings);
                         mUploadTypeFlag = LOCAL;
-                        activity.addPicResult(mAskSongCommentModel.getPicUrls());
+                        mView.addPicResult(mAskSongCommentModel.getPicUrls());
                     }
                 });
     }

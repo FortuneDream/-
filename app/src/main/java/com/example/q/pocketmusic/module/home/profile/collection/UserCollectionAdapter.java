@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.config.constant.InstrumentConstant;
 import com.example.q.pocketmusic.data.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.view.widget.view.MorePopupWindow;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -34,6 +35,7 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
         void onSelectItem(int position);
 
         void onSelectModify(int position);
+
     }
 
     @Override
@@ -46,6 +48,7 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
         TextView contentTv;
         ImageView moreIv;
         RelativeLayout contentRl;
+        TextView instrumentTv;
 
         public MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_collection);
@@ -53,6 +56,7 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
             contentTv = $(R.id.content_tv);
             moreIv = $(R.id.more_iv);
             contentRl = $(R.id.content_rl);
+            instrumentTv = $(R.id.instrument_tv);
         }
 
         @Override
@@ -64,7 +68,7 @@ public class UserCollectionAdapter extends RecyclerArrayAdapter<CollectionSong> 
             } else {
                 contentTv.setText("描述：" + data.getContent());
             }
-
+            instrumentTv.setText(InstrumentConstant.getTypeName(data.getIsFrom()));
             contentRl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

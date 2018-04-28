@@ -30,7 +30,7 @@ import butterknife.Unbinder;
  * Created by 鹏君 on 2017/1/16.
  */
 
-public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment implements IBaseView {
+public abstract class BaseFragment<V extends IBaseView, T extends BasePresenter<V>> extends Fragment implements IBaseView {
     protected T presenter;
     public static AlertDialog mLoadingDialog;
     public Context context;
@@ -56,7 +56,6 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         super.onCreate(savedInstanceState);
         this.context = getContext();
         presenter = createPresenter();
-        presenter.attachView((V) this);
         if (mLoadingDialog == null) {
             mLoadingDialog = new AlertDialog.Builder(getActivity())
                     .setView(R.layout.view_loading_wait)

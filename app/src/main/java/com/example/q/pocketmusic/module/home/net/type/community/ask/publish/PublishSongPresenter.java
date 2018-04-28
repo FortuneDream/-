@@ -19,38 +19,36 @@ import com.example.q.pocketmusic.util.common.ToastUtil;
  */
 
 public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IView> {
-    private IView activity;
     private int index;
     private int typeId;
 
     public PublishSongPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
     }
 
     //指数*2+基础求谱硬币
     public void checkAsk(String title, final String content) {
         if (TextUtils.isEmpty(content) || TextUtils.isEmpty(title)) {
-            ToastUtil.showToast(activity.getResString(R.string.complete_info));
+            ToastUtil.showToast(mView.getResString(R.string.complete_info));
             return;
         }
         int coin = CoinConstant.REDUCE_COIN_ASK + index * 2;
-        if (!UserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
-            ToastUtil.showToast(activity.getResString(R.string.coin_not_enough));
+        if (!UserUtil.checkUserContribution((BaseActivity) mContext, coin)) {
+            ToastUtil.showToast(mView.getResString(R.string.coin_not_enough));
             return;
         }
-        activity.alertCoinDialog(coin, title, content);
+        mView.alertCoinDialog(coin, title, content);
     }
 
 
     //求谱
     public void askForSong(String title, String content) {
         final int coin = CoinConstant.REDUCE_COIN_ASK + index * 2;
-        if (!UserUtil.checkUserContribution((BaseActivity) activity.getCurrentContext(), coin)) {
-            ToastUtil.showToast(activity.getResString(R.string.coin_not_enough));
+        if (!UserUtil.checkUserContribution((BaseActivity) mContext, coin)) {
+            ToastUtil.showToast(mView.getResString(R.string.coin_not_enough));
             return;
         }
-        activity.showLoading(true);
+        mView.showLoading(true);
         AskSongPost askSongPost = new AskSongPost(UserUtil.user, title, typeId, content);
         askSongPost.setIndex(index);
         askSongPost.save(new ToastSaveListener<String>() {
@@ -59,10 +57,10 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
                 UserUtil.increment(-coin, new ToastUpdateListener() {
                     @Override
                     public void onSuccess() {
-                        ToastUtil.showToast(activity.getResString(R.string.reduce_coin) + coin);
-                        activity.showLoading(false);
-                        activity.setAskResult(Constant.SUCCESS);
-                        activity.finish();
+                        ToastUtil.showToast(mView.getResString(R.string.reduce_coin) + coin);
+                        mView.showLoading(false);
+                        mView.setAskResult(Constant.SUCCESS);
+                        mView.finish();
                     }
                 });
             }
@@ -70,13 +68,13 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
     }
 
     public void setIndex(int i) {
-        index = 0;
-        activity.changeIndex(index);
+        index = i;
+        mView.changeIndex(index);
     }
 
     public void addIndex() {
         index++;
-        activity.changeIndex(index);
+        mView.changeIndex(index);
     }
 
     public void reduceIndex() {
@@ -84,7 +82,7 @@ public class PublishSongPresenter extends BasePresenter<PublishSongPresenter.IVi
             return;
         }
         index--;
-        activity.changeIndex(index);
+        mView.changeIndex(index);
     }
 
     public void setTypeId(int typeId) {

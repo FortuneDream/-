@@ -20,20 +20,19 @@ import cn.bmob.v3.exception.BmobException;
  */
 
 public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
-    private IView activity;
+
 
     public LoginPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
     }
 
     //登录
     public void login(final String account, String password) {
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
-            ToastUtil.showToast(activity.getResString(R.string.complete_info));
+            ToastUtil.showToast(mView.getResString(R.string.complete_info));
             return;
         }
-        activity.showLoading(true);
+        mView.showLoading(true);
         final MyUser user = new MyUser();
         user.setUsername(account);
         user.setPassword(password);
@@ -42,14 +41,14 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
             @Override
             public void onSuccess(MyUser user) {
                 ToastUtil.showToast("欢迎尊贵的VIP！ ");
-                activity.loginToResult(Constant.SUCCESS, user);
-                activity.finish();//关闭登录界面
+                mView.loginToResult(Constant.SUCCESS, user);
+                mView.finish();//关闭登录界面
             }
 
             @Override
             public void onFail(MyUser user, BmobException e) {
                 super.onFail(user, e);
-                activity.loginToResult(Constant.FAIL, null);
+                mView.loginToResult(Constant.FAIL, null);
             }
         });
 
@@ -57,8 +56,8 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.IView> {
 
     //跳转到RegistererActivity，如果注册成功就不finish到此页
     public void enterRegisterActivity() {
-        Intent intent = new Intent(activity.getCurrentContext(), RegisterActivity.class);
-        ((Activity) activity.getCurrentContext()).startActivityForResult(intent, Constant.REQUEST_REGISTER);
+        Intent intent = new Intent(mContext, RegisterActivity.class);
+        ((Activity) mContext).startActivityForResult(intent, Constant.REQUEST_REGISTER);
     }
 
 

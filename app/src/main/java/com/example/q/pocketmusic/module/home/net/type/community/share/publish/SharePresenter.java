@@ -9,7 +9,6 @@ import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.constant.CoinConstant;
-import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.local.Img;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.bean.share.SharePic;
@@ -50,8 +49,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
 
     public SharePresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+       super(activity);
     }
 
 

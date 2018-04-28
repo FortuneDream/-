@@ -24,12 +24,10 @@ import cn.bmob.v3.datatype.BmobPointer;
  */
 
 public class OtherSharePresenter extends BasePresenter<OtherSharePresenter.IView> {
-    private IView fragment;
     private int mPage;
 
     public OtherSharePresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
     }
 
 
@@ -38,8 +36,8 @@ public class OtherSharePresenter extends BasePresenter<OtherSharePresenter.IView
         song.setContent(shareSong.getContent());
         song.setName(shareSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_SHARE, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
-        fragment.getCurrentContext().startActivity(
-                SongActivity.buildShareIntent(fragment.getCurrentContext(),songObject,shareSong.getInstrument(),shareSong));
+        mContext.startActivity(
+                SongActivity.buildShareIntent(mContext,songObject,shareSong.getInstrument(),shareSong));
     }
 
     public void getOtherCollectionList(MyUser other, final boolean isRefreshing) {
@@ -52,9 +50,9 @@ public class OtherSharePresenter extends BasePresenter<OtherSharePresenter.IView
             @Override
             public void onSuccess(List<ShareSong> list) {
                 if (!isRefreshing) {
-                    fragment.setOtherShareList(list);
+                    mView.setOtherShareList(list);
                 } else {
-                    fragment.setOtherShareListWithRefreshing(list);
+                    mView.setOtherShareListWithRefreshing(list);
                 }
 
             }
@@ -76,7 +74,7 @@ public class OtherSharePresenter extends BasePresenter<OtherSharePresenter.IView
         query.findObjects(new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                fragment.setOtherShareList(list);
+                mView.setOtherShareList(list);
             }
         });
     }

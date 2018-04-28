@@ -26,7 +26,6 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
         int DEFAULT_INDEX = -1;
     }
 
-    private IView fragment;
     private int mCurIndex = TabType.DEFAULT_INDEX;
     private List<Fragment> fragments;
     private LocalRecordFragment localRecordFragment;
@@ -39,8 +38,7 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
     }
 
     public HomeLocalFragmentPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+       super(fragment);
         initFragment();
     }
 
@@ -55,7 +53,7 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
     public void clickBottomTab(int index) {
         if (mCurIndex != index) {
             showFragment(fragments.get(index));
-            fragment.onSelectTabResult(mCurIndex,index);
+            mView.onSelectTabResult(mCurIndex,index);
             mCurIndex = index;
         }
     }
@@ -75,8 +73,8 @@ public class HomeLocalFragmentPresenter extends BasePresenter<HomeLocalFragmentP
     }
 
     public void enterLeadActivity() {
-        Intent intent = new Intent(fragment.getCurrentContext(), LeadSongActivity.class);
-        ((BaseActivity) fragment.getCurrentContext()).startActivityForResult(intent, LeadSongActivity.REQUEST_LEAD);
+        Intent intent = new Intent(mView.getCurrentContext(), LeadSongActivity.class);
+        ((BaseActivity) mView.getCurrentContext()).startActivityForResult(intent, LeadSongActivity.REQUEST_LEAD);
     }
 
 

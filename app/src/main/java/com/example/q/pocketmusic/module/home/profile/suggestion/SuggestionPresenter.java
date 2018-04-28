@@ -17,14 +17,12 @@ import java.util.List;
  */
 
 public class SuggestionPresenter extends BasePresenter<SuggestionPresenter.IView> {
-    private IView activity;
     private UserSuggestionModel model;
     private int mPage;
 
 
     public SuggestionPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
         model = new UserSuggestionModel();
         this.mPage = 0;
     }
@@ -37,7 +35,7 @@ public class SuggestionPresenter extends BasePresenter<SuggestionPresenter.IView
         model.sendSuggestion(suggestion, new ToastSaveListener<String>() {
             @Override
             public void onSuccess(String s) {
-                activity.setSuggestionList(true, null);
+                mView.setSuggestionList(true, null);
             }
         });
     }
@@ -50,7 +48,7 @@ public class SuggestionPresenter extends BasePresenter<SuggestionPresenter.IView
         model.getList(mPage, new ToastQueryListener<UserSuggestion>() {
             @Override
             public void onSuccess(List<UserSuggestion> list) {
-                activity.setSuggestionList(isRefreshing, list);
+                mView.setSuggestionList(isRefreshing, list);
             }
         });
     }

@@ -19,11 +19,10 @@ import java.util.regex.Pattern;
  */
 
 public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
-    private IView activity;
+
 
     public RegisterPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
     }
 
     public Boolean checkAccount(String email) {
@@ -35,13 +34,13 @@ public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
     public void register(String account, String password, String confirmPassword, String nickName) {
         Boolean isConfirm = checkAccount(account);//邮箱验证账号
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password) || TextUtils.isEmpty(nickName) || TextUtils.isEmpty(confirmPassword)) {
-            ToastUtil.showToast(activity.getResString(R.string.complete_info));
+            ToastUtil.showToast(mView.getResString(R.string.complete_info));
         } else if (!isConfirm) {
             ToastUtil.showToast("邮箱格式错误~");
         } else if (!confirmPassword.equals(password)) {
             ToastUtil.showToast("两次输入的密码要相同哦~");
         } else {
-            activity.showLoading(true);
+            mView.showLoading(true);
             final MyUser user = new MyUser();
             user.setUsername(account);
             user.setPassword(password);
@@ -50,10 +49,10 @@ public class RegisterPresenter extends BasePresenter<RegisterPresenter.IView> {
             user.signUp(new ToastSaveListener<MyUser>() {
                 @Override
                 public void onSuccess(MyUser user) {
-                    activity.showLoading(false);
+                    mView.showLoading(false);
                     ToastUtil.showToast("注册成功，\\(^o^)/~");
-                    ((Activity) activity.getCurrentContext()).setResult(Constant.SUCCESS);
-                    activity.finish();
+                    ((Activity) mContext).setResult(Constant.SUCCESS);
+                    mView.finish();
                 }
             });
         }

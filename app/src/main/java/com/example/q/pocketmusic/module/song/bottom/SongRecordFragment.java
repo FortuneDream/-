@@ -4,15 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dell.fortune.tools.dialog.DialogEditSureCancel;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.util.common.ToastUtil;
-import com.example.q.pocketmusic.view.dialog.EditDialog;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
@@ -32,7 +32,7 @@ public class SongRecordFragment extends BaseFragment<SongRecordPresenter.IView, 
     AVLoadingIndicatorView avi;
     @BindView(R.id.record_rl)
     RelativeLayout recordRl;
-    private EditDialog editDialog;//编辑框
+    private DialogEditSureCancel editSureCancel;
     private final static String PARAM_Intent = "intent";
 
 
@@ -92,21 +92,27 @@ public class SongRecordFragment extends BaseFragment<SongRecordPresenter.IView, 
     //保存录音dialog
     @Override
     public void showAddDialog(final String s) {
-        editDialog = new EditDialog.Builder(getCurrentContext())
-                .setEditStr(s)
-                .setListener(new EditDialog.Builder.OnSelectedListener() {
-                    @Override
-                    public void onSelectedOk(String str) {
-                        presenter.saveRecordAudio(str);
-                    }
-
-                    @Override
-                    public void onSelectedCancel() {
-                        editDialog.dismiss();
-                    }
-                })
-                .create();
-        editDialog.show();
+        editSureCancel = new DialogEditSureCancel(context);
+        editSureCancel.getTvTitle().setText("保存录音名");
+        editSureCancel.getEditText().setText(s);
+        editSureCancel.getTvSure().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = editSureCancel.getEditText().getText().toString();
+                if (TextUtils.isEmpty(name)) {
+//                    Toasts.error(context,"不能为空哦~",Toast.LENGTH_SHORT,true).show();
+                    return;
+                }
+                presenter.saveRecordAudio(name);
+            }
+        });
+        editSureCancel.getTvCancel().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editSureCancel.cancel();
+            }
+        });
+        editSureCancel.show();
     }
 
     //是否保存成功
@@ -114,7 +120,7 @@ public class SongRecordFragment extends BaseFragment<SongRecordPresenter.IView, 
     public void setAddResult(boolean isSucceed) {
         if (isSucceed) {
             ToastUtil.showToast("保存成功！");
-            editDialog.dismiss();
+            editSureCancel.dismiss();
         } else {
             ToastUtil.showToast("不能添加同名的语音");
         }

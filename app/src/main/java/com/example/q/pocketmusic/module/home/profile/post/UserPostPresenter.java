@@ -16,14 +16,12 @@ import java.util.List;
  */
 
 public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
-    private IView activity;
     private UserPostModel model;
     private int mPage;
 
 
     public UserPostPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
         model = new UserPostModel();
     }
 
@@ -35,17 +33,17 @@ public class UserPostPresenter extends BasePresenter<UserPostPresenter.IView> {
         model.getUserPostList(mPage, new ToastQueryListener<AskSongPost>() {
             @Override
             public void onSuccess(List<AskSongPost> list) {
-                activity.setUserPostList(isRefreshing, list);
+                mView.setUserPostList(isRefreshing, list);
             }
         });
 
     }
 
     public void enterPostInfo(AskSongPost item) {
-        Intent intent = new Intent(activity.getCurrentContext(), AskSongCommentActivity.class);
+        Intent intent = new Intent(mContext, AskSongCommentActivity.class);
         intent.putExtra(AskSongCommentActivity.PARAM_POST, item);
         intent.putExtra(AskSongCommentActivity.PARAM_IS_FROM_USER, true);
-        activity.getCurrentContext().startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     public interface IView extends IBaseView {

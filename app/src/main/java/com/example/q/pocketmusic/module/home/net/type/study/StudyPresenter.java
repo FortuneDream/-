@@ -9,11 +9,10 @@ import com.example.q.pocketmusic.module.common.IBaseView;
  */
 
 public class StudyPresenter extends BasePresenter<StudyPresenter.IView> {
-    private IView activity;
+
 
     public StudyPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+       super(activity);
     }
 
     interface IView extends IBaseView {

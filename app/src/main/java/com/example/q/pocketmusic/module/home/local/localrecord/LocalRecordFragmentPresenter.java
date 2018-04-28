@@ -36,13 +36,11 @@ import rx.functions.Action1;
 
 public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragmentPresenter.IView> {
     private static final int PROGRESS = 0;
-    private IView fragment;
     private RecordAudioDao recordAudioDao;
     private LocalModel localModel;
 
     public LocalRecordFragmentPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
         recordAudioDao = new RecordAudioDao(fragment.getAppContext());
         localModel = new LocalModel(fragment.getAppContext());
     }
@@ -54,13 +52,13 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
                 .filter(new Predicate<List<RecordAudio>>() {
                     @Override
                     public boolean test(List<RecordAudio> recordAudios) throws Exception {
-                        return fragment != null;
+                        return mView != null;
                     }
                 })
                 .subscribe(new Consumer<List<RecordAudio>>() {
                     @Override
                     public void accept(List<RecordAudio> recordAudios) throws Exception {
-                        fragment.setList(recordAudios);
+                        mView.setList(recordAudios);
                     }
                 });
     }
@@ -120,7 +118,7 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
                     try {
                         currentPosition = mService.getCurrentPosition();
                         String time = durationFormat.format(new Date(mService.getCurrentPosition())) + "/" + durationFormat.format(new Date(mService.getDuration()));
-                        fragment.updateProgress(currentPosition, time);
+                        mView.updateProgress(currentPosition, time);
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
@@ -139,12 +137,12 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
                     String name = mService.getAudioName();
                     String time = durationFormat.format(new Date(mService.getCurrentPosition())) + "/" + durationFormat.format(new Date(mService.getDuration()));
                     int duration = mService.getDuration();
-                    fragment.setViewStatus(name, time, duration);
+                    mView.setViewStatus(name, time, duration);
                     isDestroy = false;
                     mHandler.sendEmptyMessage(PROGRESS);
                 } else if (notify.equals(MediaPlayerService.COMPLETE)) {//结束
                     isDestroy = true;
-                    fragment.setPlayOrPauseImage(true);
+                    mView.setPlayOrPauseImage(true);
                     mService.openAudio(position);//初始化
 //                    mService.pause();//这里不能直接暂停，因为是异步播放的
 
@@ -160,15 +158,15 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
     public void registerReceiver() {
         IntentFilter filter = new IntentFilter(MediaPlayerService.RECEIVER_ACTION);
         mMediaReceiver = new MediaReceiver();
-        fragment.getCurrentContext().registerReceiver(mMediaReceiver, filter);
+        mContext.registerReceiver(mMediaReceiver, filter);
         //Log.e("TAG", "registerReceiver()");
     }
 
     //绑定服务,设定位置
     public void bindService(int position) {
         this.position = position;
-        Intent intent = new Intent(fragment.getCurrentContext(), MediaPlayerService.class);
-        fragment.getCurrentContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
+        Intent intent = new Intent(mContext, MediaPlayerService.class);
+        mContext.bindService(intent, connection, Context.BIND_AUTO_CREATE);
         //Log.e("TAG", "bindService");
     }
 
@@ -204,8 +202,8 @@ public class LocalRecordFragmentPresenter extends BasePresenter<LocalRecordFragm
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        fragment.getCurrentContext().unbindService(connection);
-        fragment.getCurrentContext().unregisterReceiver(mMediaReceiver);
+        mContext.unbindService(connection);
+        mContext.unregisterReceiver(mMediaReceiver);
         mMediaReceiver = null;
     }
 

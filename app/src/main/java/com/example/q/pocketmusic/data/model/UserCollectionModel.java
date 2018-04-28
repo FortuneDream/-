@@ -107,7 +107,7 @@ public class UserCollectionModel extends BaseModel {
 
 
     //修改收藏名字
-    public void updateConnectionName(CollectionSong item, String str, ToastUpdateListener listener) {
+    public void updateCollectionName(CollectionSong item, String str, ToastUpdateListener listener) {
         item.setName(str);
         item.update(listener);
     }

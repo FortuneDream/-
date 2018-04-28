@@ -18,12 +18,10 @@ import java.util.List;
  */
 
 public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentPresenter.IView> {
-    private IView fragment;
     private int mPage;
 
     public SearchNetFragmentPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
     }
 
     public int getmPage() {
@@ -36,7 +34,7 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
             @Override
             protected void onPostExecute(final List<Song> list) {
                 //默认是刷新操作，主线程adapter.clear,所以要保证list不为空
-                fragment.setList(list);
+                mView.setList(list);
             }
         }.execute(query);
     }
@@ -47,11 +45,11 @@ public class SearchNetFragmentPresenter extends BasePresenter<SearchNetFragmentP
     }
 
     public void enterSongActivity(Song song) {
-        Intent intent = new Intent(fragment.getCurrentContext(), SongActivity.class);
+        Intent intent = new Intent(mContext, SongActivity.class);
         SongObject object = new SongObject(song, song.getSearchFrom(), Constant.MENU_DOWNLOAD_COLLECTION_SHARE, Constant.NET);
         intent.setExtrasClassLoader(getClass().getClassLoader());
         intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, object);
-        fragment.getCurrentContext().startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     public interface IView extends IBaseView {

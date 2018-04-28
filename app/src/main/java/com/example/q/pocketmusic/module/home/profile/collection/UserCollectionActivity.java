@@ -3,11 +3,14 @@ package com.example.q.pocketmusic.module.home.profile.collection;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.View;
 
+import com.dell.fortune.tools.dialog.DialogEditSureCancel;
+import com.dell.fortune.tools.toast.Toasts;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.collection.CollectionSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.view.dialog.EditDialog;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -28,6 +31,7 @@ public class UserCollectionActivity extends AuthActivity<UserCollectionPresenter
     @BindView(R.id.recycler)
     EasyRecyclerView recycler;
     private UserCollectionAdapter adapter;
+    private DialogEditSureCancel dialogEditSureCancel;
 
     @Override
     public int setContentResource() {
@@ -81,20 +85,27 @@ public class UserCollectionActivity extends AuthActivity<UserCollectionPresenter
 
     @Override
     public void onSelectModify(final int position) {
-        new EditDialog.Builder(getCurrentContext())
-                .setTitle("修改名字")
-                .setListener(new EditDialog.Builder.OnSelectedListener() {
-                    @Override
-                    public void onSelectedOk(String str) {
-                        presenter.updateConnectionName(adapter.getItem(position), str);
-                    }
-
-                    @Override
-                    public void onSelectedCancel() {
-
-                    }
-                })
-                .create().show();
+        dialogEditSureCancel=new DialogEditSureCancel(context);
+        dialogEditSureCancel.getTvTitle().setText("修改名字");
+        dialogEditSureCancel.getTvSure().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nickName=dialogEditSureCancel.getEditText().getText().toString();
+                if (TextUtils.isEmpty(nickName)){
+                    Toasts.error("不能为空哦~");
+                    return;
+                }
+                dialogEditSureCancel.dismiss();
+                presenter.updateCollectionName(adapter.getItem(position), nickName);
+            }
+        });
+        dialogEditSureCancel.getTvCancel().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogEditSureCancel.cancel();
+            }
+        });
+        dialogEditSureCancel.show();
     }
 
     //加载更多
@@ -107,6 +118,7 @@ public class UserCollectionActivity extends AuthActivity<UserCollectionPresenter
     public void onMoreClick() {
 
     }
+
 
     @Override
     protected UserCollectionPresenter createPresenter() {

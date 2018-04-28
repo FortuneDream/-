@@ -18,13 +18,11 @@ import cn.bmob.v3.BmobQuery;
  */
 
 public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPresenter.IView> {
-    private IView fragment;
     private int mPage;
     private int typeId;
 
     public AskListFragmentPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
     }
 
     //得到帖子列表
@@ -42,16 +40,16 @@ public class AskListFragmentPresenter extends BasePresenter<AskListFragmentPrese
         query.findObjects(new ToastQueryListener<AskSongPost>() {
             @Override
             public void onSuccess(List<AskSongPost> list) {
-                fragment.setPostList(isRefreshing, list);
+                mView.setPostList(isRefreshing, list);
             }
         });
     }
 
     public void enterCommentActivity(AskSongPost askSongPost) {
-        Intent intent = new Intent(fragment.getCurrentContext(), AskSongCommentActivity.class);
+        Intent intent = new Intent(mView.getCurrentContext(), AskSongCommentActivity.class);
         intent.putExtra(AskSongCommentActivity.PARAM_POST, askSongPost);
         intent.putExtra(AskSongCommentActivity.PARAM_IS_FROM_USER, false);
-        fragment.getCurrentContext().startActivity(intent);
+        mView.getCurrentContext().startActivity(intent);
 
     }
 

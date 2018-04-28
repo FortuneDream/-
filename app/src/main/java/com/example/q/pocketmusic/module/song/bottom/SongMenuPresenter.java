@@ -21,12 +21,13 @@ import com.example.q.pocketmusic.data.bean.ask.AskSongComment;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
+import com.example.q.pocketmusic.data.model.GiftModel;
 import com.example.q.pocketmusic.data.model.UserCollectionModel;
 import com.example.q.pocketmusic.data.model.UserCommunityStateModel;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.data.model.GiftModel;
 import com.example.q.pocketmusic.util.DownloadUtil;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.IntentUtil;
@@ -44,7 +45,6 @@ import cn.bmob.v3.datatype.BmobRelation;
  */
 
 public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
-    private IView fragment;
     private Intent intent;
     private boolean isEnableAgree = true;//是否能够点赞
     private Song song;
@@ -52,8 +52,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     private UserCollectionModel userCollectionModel;
 
     public SongMenuPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
         userCollectionModel = new UserCollectionModel();
     }
 
@@ -65,11 +64,11 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //下载
     public void download(final String name) {
-        DownloadUtil downloadUtil = new DownloadUtil(fragment.getCurrentContext());
+        DownloadUtil downloadUtil = new DownloadUtil(mContext);
         downloadUtil.setOnDownloadListener(new DownloadUtil.OnDownloadListener() {
                                                @Override
                                                public DownloadInfo onStart() {
-                                                   fragment.dismissEditDialog();
+                                                   mView.dismissEditDialog();
                                                    return downloadStartCheck();
                                                }
 
@@ -77,12 +76,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
                                                public void onSuccess() {
                                                    addDownLoadNum();//增加下载量
                                                    addCommunityState(Constant.COMMUNITY_STATE_DOWNLOAD);//添加动态
-                                                   fragment.downloadResult(Constant.SUCCESS, "下载成功");
+                                                   mView.downloadResult(Constant.SUCCESS, "下载成功");
                                                }
 
                                                @Override
                                                public void onFailed(String info) {
-                                                   fragment.downloadResult(Constant.FAIL, info);
+                                                   mView.downloadResult(Constant.FAIL, info);
                                                }
                                            }
         ).downloadBatchPic(name, song.getIvUrl(), song.getTypeId());
@@ -110,22 +109,22 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             return new DownloadInfo("没有图片", false);
         }
         //如果本地已经存在
-        if (new LocalSongDao(fragment.getCurrentContext()).isExist(song.getName())) {
+        if (new LocalSongDao(mContext).isExist(song.getName())) {
             return new DownloadInfo("本地已存在", false);
         }
         //找不到用户
-        if (!UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext())) {
+        if (!UserUtil.checkLocalUser((BaseActivity) mContext)) {
             return new DownloadInfo("找不到用户", false);
         }
         //硬币不足
-        if (!UserUtil.checkUserContribution(((BaseActivity) fragment.getCurrentContext()), CoinConstant.REDUCE_COIN_DOWNLOAD)) {
-            return new DownloadInfo(fragment.getResString(R.string.coin_not_enough), false);
+        if (!UserUtil.checkUserContribution(((BaseActivity) mContext), CoinConstant.REDUCE_COIN_DOWNLOAD)) {
+            return new DownloadInfo(mView.getResString(R.string.coin_not_enough), false);
         }
         //扣除硬币
         UserUtil.increment(-CoinConstant.REDUCE_COIN_DOWNLOAD, new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                ToastUtil.showToast(fragment.getResString(R.string.reduce_coin) + (CoinConstant.REDUCE_COIN_DOWNLOAD));
+                ToastUtil.showToast(mView.getResString(R.string.reduce_coin) + (CoinConstant.REDUCE_COIN_DOWNLOAD));
             }
         });
         return new DownloadInfo("", true);
@@ -133,6 +132,11 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //判断当前的评论的图片是否可以点赞
     public void checkAskHasAgree() {
+        if (UserUtil.user == null) {
+            //没有登录默认可以点赞
+            isEnableAgree = true;
+            return;
+        }
         BmobQuery<MyUser> query = new BmobQuery<>();
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_ASK_COMMENT);
@@ -198,7 +202,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         final ShareSong shareSong = (ShareSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_SHARE_SONG);
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         if (TextUtils.equals(shareSong.getUser().getObjectId(), user.getObjectId())) {
-            ToastUtil.showToast(fragment.getResString(R.string.no_agree_self));
+            ToastUtil.showToast(mView.getResString(R.string.no_agree_self));
             return;
         }
         BmobRelation relation = new BmobRelation();
@@ -226,7 +230,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         final AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_ASK_COMMENT);
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
         if (TextUtils.equals(askSongComment.getUser().getObjectId(), user.getObjectId())) {
-            ToastUtil.showToast(fragment.getResString(R.string.no_agree_self));
+            ToastUtil.showToast(mView.getResString(R.string.no_agree_self));
             return;
         }
         BmobRelation relation = new BmobRelation();
@@ -260,13 +264,13 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
     //添加收藏
     public void addCollection() {
-        userCollectionModel.addCollection(fragment.getCurrentContext(), song, intent, new UserCollectionModel.OnAddCollectionResult() {
+        userCollectionModel.addCollection(mContext, song, intent, new UserCollectionModel.OnAddCollectionResult() {
             @Override
             public void onResult() {
                 addCommunityState(Constant.COMMUNITY_STATE_COLLECTION);
                 //如果是分享的曲谱，就添加收藏记录
                 addCollectionNum();
-                fragment.addCollectionResult();
+                mView.addCollectionResult();
             }
         });
     }
@@ -305,18 +309,18 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
         StringBuilder sb = new StringBuilder();
         for (String url : list) {
-            sb.append(url).append(",");
+            sb.append(url).append("---");
         }
         //分享
-        IntentUtil.shareText(fragment.getCurrentContext(), "推荐一首歌：" + "<<" + song.getName() + ">>:" + sb.toString());
+        IntentUtil.shareText(mContext, "推荐一首歌：" + "<<" + song.getName() + ">>:" + sb.toString());
     }
 
     //得到本地图片
     @NonNull
     private List<String> getLocalImgs() {
         LocalSong localsong = (LocalSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_LOCAL_SONG);
-        LocalSongDao localSongDao = new LocalSongDao(fragment.getCurrentContext());
-        return localSongDao.getLocalImgsPath(fragment.getCurrentContext(), localsong);
+        LocalSongDao localSongDao = new LocalSongDao(mContext);
+        return localSongDao.getLocalImgsPath(mContext, localsong);
     }
 
     public void setIntent(Intent intent) {
@@ -344,36 +348,12 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
         return ((SongObject) intent.getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT)).getShowMenu();
     }
 
-    //纠错
-    public void recovery() {
-        SongObject songObject = (SongObject) intent.getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT);
-        int isFrom = songObject.getFrom();
-        String name = songObject.getSong().getName();
-        fragment.alertRecoveryDialog(name, isFrom);
-    }
-
-    //发送纠错信息
-    public void sendRecovery(String name, int isFrom, String info) {
-        if (UserUtil.checkLocalUser((BaseActivity) fragment.getCurrentContext())) {
-            String content = "用户：" + UserUtil.user.getObjectId() + "  " + "来自：" + Constant.getFromType(isFrom) + "  " + "曲谱名：" + name + "  " + "错误描述：" + info;
-            BmobInfo bmobInfo = new BmobInfo(Constant.BMOB_INFO_RECOVERY, content);
-            bmobInfo.save(new ToastSaveListener<String>() {
-                @Override
-                public void onSuccess(String s) {
-                    ToastUtil.showToast("已反馈，若属实将获得硬币奖励");
-                }
-            });
-        }
-    }
-
 
     interface IView extends IBaseView {
 
         void dismissEditDialog();
 
         void downloadResult(Integer success, String str);
-
-        void alertRecoveryDialog(String name, int isFrom);
 
         void addCollectionResult();
     }

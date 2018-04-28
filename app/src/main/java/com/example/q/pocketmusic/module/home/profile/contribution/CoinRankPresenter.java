@@ -13,12 +13,10 @@ import java.util.List;
  */
 
 public class CoinRankPresenter extends BasePresenter<CoinRankPresenter.IView> {
-    private IView activity;
     private CoinRankModel coinRankModel;
 
     public CoinRankPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
         coinRankModel = new CoinRankModel();
     }
 
@@ -27,7 +25,7 @@ public class CoinRankPresenter extends BasePresenter<CoinRankPresenter.IView> {
         coinRankModel.getCoinRankList(new ToastQueryListener<MyUser>() {
             @Override
             public void onSuccess(List<MyUser> list) {
-                activity.setCoinRankList(list);
+                mView.setCoinRankList(list);
             }
         });
     }

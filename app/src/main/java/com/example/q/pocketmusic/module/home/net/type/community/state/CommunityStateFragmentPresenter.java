@@ -9,16 +9,14 @@ import com.example.q.pocketmusic.module.common.IBaseView;
 import java.util.List;
 
 public class CommunityStateFragmentPresenter extends BasePresenter<CommunityStateFragmentPresenter.IView> {
-    private IView fragment;
     private int mPage;
     private int type;
     private UserCommunityStateModel model;
 
     public CommunityStateFragmentPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
         this.mPage = 0;
-        model=new UserCommunityStateModel();
+        model = new UserCommunityStateModel();
     }
 
     public void getList(final boolean isRefreshing) {
@@ -29,7 +27,7 @@ public class CommunityStateFragmentPresenter extends BasePresenter<CommunityStat
         model.getList(type, mPage, new ToastQueryListener<CommunityState>() {
             @Override
             public void onSuccess(List<CommunityState> list) {
-                fragment.setList(isRefreshing,list);
+                mView.setList(isRefreshing, list);
             }
         });
     }

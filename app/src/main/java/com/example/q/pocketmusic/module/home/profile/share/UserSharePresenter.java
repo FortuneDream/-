@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.home.profile.share;
 import android.content.Intent;
 
 import com.example.q.pocketmusic.callback.ToastQueryListener;
+import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.Song;
@@ -13,6 +14,7 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.song.SongActivity;
 import com.example.q.pocketmusic.util.UserUtil;
+import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
 
@@ -21,13 +23,12 @@ import java.util.List;
  */
 
 public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> {
-    private IView activity;
+
     private int mPage;
     private UserShareModel model;
 
     public UserSharePresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
         model = new UserShareModel();
         this.mPage=0;
     }
@@ -40,7 +41,7 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
         model.getUserShareList(UserUtil.user, mPage, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                activity.setList(isRefreshing, list);
+                mView.setList(isRefreshing, list);
             }
         });
     }
@@ -53,11 +54,37 @@ public class UserSharePresenter extends BasePresenter<UserSharePresenter.IView> 
         song.setName(shareSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_SHARE, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
         songObject.setCommunity(shareSong.getInstrument());
-        activity.getCurrentContext().startActivity(
-                SongActivity.buildShareIntent(activity.getCurrentContext(),songObject,shareSong.getInstrument(),shareSong)
+        mView.getCurrentContext().startActivity(
+                SongActivity.buildShareIntent(mView.getCurrentContext(),songObject,shareSong.getInstrument(),shareSong)
         );
     }
 
+    public void updateShareName(ShareSong item, String nickName) {
+        model.updateShareName(item, nickName, new ToastUpdateListener() {
+            @Override
+            public void onSuccess() {
+                mView.setList(true, null);
+            }
+        });
+    }
+
+    public void deleteShareSong(ShareSong shareSong) {
+        model.deleteShareSong(shareSong, new ToastUpdateListener() {
+            @Override
+            public void onSuccess() {
+                ToastUtil.showToast("已删除");
+            }
+        });
+    }
+
+    public void updateShareType(ShareSong item,int type) {
+        model.updateShareType(item,type, new ToastUpdateListener() {
+            @Override
+            public void onSuccess() {
+                getUserShareList(true);//刷新一下
+            }
+        });
+    }
 
 
     interface IView extends IBaseView {

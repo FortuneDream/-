@@ -26,13 +26,11 @@ import java.util.List;
  */
 
 public class UserCollectionPresenter extends BasePresenter<UserCollectionPresenter.IView> {
-    private IView activity;
     private UserCollectionModel userCollectionModel;
     private int mPage;
 
     public UserCollectionPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
         userCollectionModel = new UserCollectionModel();
         this.mPage = 0;
     }
@@ -46,7 +44,7 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
         userCollectionModel.getUserCollectionList(UserUtil.user, mPage, new ToastQueryListener<CollectionSong>() {
             @Override
             public void onSuccess(List<CollectionSong> list) {
-                activity.setCollectionList(isRefreshing, list);
+                mView.setCollectionList(isRefreshing, list);
             }
         });
     }
@@ -54,21 +52,21 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
 
     //先查询，后进入SongActivity
     public void queryAndEnterSongActivity(final CollectionSong collectionSong) {
-        activity.showLoading(true);
+        mView.showLoading(true);
         userCollectionModel.getCollectionPicList(collectionSong, new ToastQueryListener<CollectionPic>() {
             @Override
             public void onSuccess(List<CollectionPic> list) {
-                activity.showLoading(false);
+                mView.showLoading(false);
                 Song song = getSong(list);
                 enterSongActivity(song);
             }
 
             //进入SongActivity
             private void enterSongActivity(Song song) {
-                Intent intent = new Intent(activity.getCurrentContext(), SongActivity.class);
+                Intent intent = new Intent(mContext, SongActivity.class);
                 SongObject songObject = new SongObject(song, Constant.FROM_COLLECTION, Constant.MENU_DOWNLOAD_SHARE, Constant.NET);
                 intent.putExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT, songObject);
-                activity.getCurrentContext().startActivity(intent);
+                mContext.startActivity(intent);
             }
 
             //CollectionPic--->Song
@@ -99,11 +97,11 @@ public class UserCollectionPresenter extends BasePresenter<UserCollectionPresent
 
 
     //更新收藏曲谱名字
-    public void updateConnectionName(CollectionSong item, String str) {
-        userCollectionModel.updateConnectionName(item, str, new ToastUpdateListener() {
+    public void updateCollectionName(CollectionSong item, String str) {
+        userCollectionModel.updateCollectionName(item, str, new ToastUpdateListener() {
             @Override
             public void onSuccess() {
-                activity.setCollectionList(true, null);
+                mView.setCollectionList(true, null);
             }
         });
     }

@@ -35,7 +35,6 @@ import pub.devrel.easypermissions.EasyPermissions;
  */
 
 public class SongRecordPresenter extends BasePresenter<SongRecordPresenter.IView> {
-    private IView fragment;
     //显示文字状态
     private RECORD_STATUS status = RECORD_STATUS.STOP;
     private Song song;
@@ -82,15 +81,14 @@ public class SongRecordPresenter extends BasePresenter<SongRecordPresenter.IView
             switch (msg.what) {
                 case ADD_TIME:
                     mRecordTime++;
-                    fragment.changedTimeTv(String.valueOf(mRecordTime));
+                    mView.changedTimeTv(String.valueOf(mRecordTime));
                     break;
             }
         }
     };
 
     public SongRecordPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+       super(fragment);
         recordAudioDao = new RecordAudioDao(fragment.getCurrentContext());
         File file = new File(RECORD_DIR);
         if (!file.exists()) {
@@ -103,12 +101,12 @@ public class SongRecordPresenter extends BasePresenter<SongRecordPresenter.IView
     public void record() {
         //请求权限,有可能出错
         String[] perms = {Manifest.permission.RECORD_AUDIO};
-        if (!EasyPermissions.hasPermissions(fragment.getCurrentContext(), perms)) {
-            EasyPermissions.requestPermissions((BaseActivity) fragment.getCurrentContext(), "录音权限", REQUEST_RECORD_AUDIO, perms);
+        if (!EasyPermissions.hasPermissions(mContext, perms)) {
+            EasyPermissions.requestPermissions((BaseActivity) mContext, "录音权限", REQUEST_RECORD_AUDIO, perms);
             return;
         }
 
-        fragment.setBtnStatus(status);
+        mView.setBtnStatus(status);
         //开始录音
         if (status == RECORD_STATUS.STOP) {
             //设置按钮文字
@@ -146,19 +144,12 @@ public class SongRecordPresenter extends BasePresenter<SongRecordPresenter.IView
             mHandler.removeMessages(ADD_TIME);
             mRecordTimer.cancel();
             mRecordTime = 0;
-            fragment.changedTimeTv(String.valueOf(mRecordTime));
+            mView.changedTimeTv(String.valueOf(mRecordTime));
             //加入弹出dialog
-            fragment.showAddDialog(song.getName());
+            mView.showAddDialog(song.getName());
         }
     }
 
-    //进入系统设置中心
-    public void enterSystemSetting() {
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", fragment.getCurrentContext().getPackageName(), null);
-        intent.setData(uri);
-        fragment.getCurrentContext().startActivity(intent);
-    }
 
     //s:歌曲名=editText的输入
     public void saveRecordAudio(final String s) {
@@ -178,7 +169,7 @@ public class SongRecordPresenter extends BasePresenter<SongRecordPresenter.IView
                     recordAudio.setDate(dateFormat.format(new Date()));//以存入的时间不同来区别不同
                     recordAudio.setPath(RECORD_DIR + s + ".3gp");
                     boolean isSucceed = recordAudioDao.add(recordAudio);
-                    fragment.setAddResult(isSucceed);//返回结果
+                    mView.setAddResult(isSucceed);//返回结果
                     //只有当没有重名的时候才移动文件
                     //将tempRecord移动到指定文件夹
                     if (isSucceed) {
@@ -208,8 +199,8 @@ public class SongRecordPresenter extends BasePresenter<SongRecordPresenter.IView
 
         //初始化
         status = RECORD_STATUS.STOP;
-        fragment.setBtnStatus(RECORD_STATUS.PLAY);
-        fragment.changedTimeTv(String.valueOf(0));
+        mView.setBtnStatus(RECORD_STATUS.PLAY);
+        mView.changedTimeTv(String.valueOf(0));
     }
 
     //释放资源

@@ -8,6 +8,7 @@ import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.MyUser;
+import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -26,11 +27,11 @@ import cn.bmob.v3.BmobUser;
  */
 public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.IView> implements IBasePresenter {
     private Intent intent;
-    private IView activity;
     private SongController controller;//状态控制器,用于加载图片
     private FragmentManager fm;
     private SongMenuFragment songMenuFragment;
     private SongRecordFragment songRecordFragment;
+    private int isFrom;
 
 
     public void setFragmentManager(FragmentManager fragmentManager) {
@@ -39,17 +40,21 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
 
 
     public SongActivityPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
     }
 
-
+    public void setIsFrom(int isFrom){
+        this.isFrom=isFrom;
+    }
+    public int getIsFrom(){
+        return isFrom;
+    }
     public void setIntent(Intent intent) {
         this.intent = intent;
-        controller = SongController.getInstance(intent, activity);
+        controller = SongController.getInstance(intent, mView);
         if (controller == null) {
             ToastUtil.showToast("无法进入页面");
-            activity.finish();
+            mView.finish();
         }
     }
 
@@ -63,7 +68,7 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
     }
 
 
-    public void showBottomFragment(int isFrom) {
+    public void showBottomFragment() {
         if (isFrom == Constant.FROM_LOCAL) {
             songRecordFragment = SongRecordFragment.newInstance(intent);
             fm.beginTransaction().replace(R.id.bottom_content, songRecordFragment).commit();
@@ -79,12 +84,11 @@ public class SongActivityPresenter extends BasePresenter<SongActivityPresenter.I
     }
 
     public void punish() {
-        MyUser user = BmobUser.getCurrentUser(MyUser.class);
-        if (user != null && user.getContribution() >= CoinConstant.REDUCE_COIN_PUNISH) {
+        if (UserUtil.checkLocalUser((BaseActivity)mContext) && UserUtil.user.getContribution() >= CoinConstant.REDUCE_COIN_PUNISH) {
             UserUtil.increment(-CoinConstant.REDUCE_COIN_PUNISH, new ToastUpdateListener() {
                 @Override
                 public void onSuccess() {
-                    ToastUtil.showToast(activity.getResString(R.string.reduce_coin) + CoinConstant.REDUCE_COIN_PUNISH);
+                    ToastUtil.showToast(mView.getResString(R.string.reduce_coin) + CoinConstant.REDUCE_COIN_PUNISH);
                 }
             });
         }

@@ -20,11 +20,10 @@ import cn.bmob.v3.update.UpdateStatus;
  */
 
 public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
-    private IView activity;
+
 
     public SettingPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+       super(activity);
     }
 
     public void checkUpdate() {
@@ -39,7 +38,7 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
                 }
             }
         });
-        BmobUpdateAgent.forceUpdate(activity.getCurrentContext());
+        BmobUpdateAgent.forceUpdate(mContext);
 
     }
 
@@ -47,15 +46,15 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
     public void logOut() {
         MyUser.logOut();
         android.os.Process.killProcess(android.os.Process.myPid());
-        ContextWrapper wrapper = ((ContextWrapper) activity.getCurrentContext());
+        ContextWrapper wrapper = ((ContextWrapper) mContext);
         Intent i = wrapper.getBaseContext().getPackageManager()
                 .getLaunchIntentForPackage(wrapper.getBaseContext().getPackageName());
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        activity.getCurrentContext().startActivity(i);//重启app
+        mContext.startActivity(i);//重启app
     }
 
     public void appUpdate() {
-        UpdateUtils.getInstance().update(activity.getCurrentContext());
+        UpdateUtils.getInstance().update(mContext);
     }
 
 

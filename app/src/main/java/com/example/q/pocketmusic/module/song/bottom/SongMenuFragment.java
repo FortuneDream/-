@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
 
+import com.dell.fortune.tools.dialog.DialogEditSureCancel;
+import com.dell.fortune.tools.toast.Toasts;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
@@ -19,12 +23,13 @@ import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.HomeActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
-import com.example.q.pocketmusic.view.dialog.EditDialog;
 import com.example.q.pocketmusic.view.widget.net.ConfettiUtil;
 import com.example.q.pocketmusic.view.widget.net.SnackBarUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by 鹏君 on 2017/5/31.
@@ -32,30 +37,26 @@ import butterknife.OnClick;
 
 public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, SongMenuPresenter>
         implements SongMenuPresenter.IView {
-
     @BindView(R.id.agree_iv)
     AppCompatImageView agreeIv;
-    @BindView(R.id.download_iv)
-    AppCompatImageView downloadIv;
-    @BindView(R.id.collection_iv)
-    AppCompatImageView collectionIv;
-    @BindView(R.id.share_iv)
-    AppCompatImageView shareIv;
-    @BindView(R.id.recovery_iv)
-    AppCompatImageView recoveryIv;
-    @BindView(R.id.content_ll)
-    LinearLayout contentLl;
     @BindView(R.id.agree_ll)
     LinearLayout agreeLl;
+    @BindView(R.id.download_iv)
+    AppCompatImageView downloadIv;
     @BindView(R.id.download_ll)
     LinearLayout downloadLl;
+    @BindView(R.id.collection_iv)
+    AppCompatImageView collectionIv;
     @BindView(R.id.collection_ll)
     LinearLayout collectionLl;
+    @BindView(R.id.share_iv)
+    AppCompatImageView shareIv;
     @BindView(R.id.share_ll)
     LinearLayout shareLl;
-    @BindView(R.id.recovery_ll)
-    LinearLayout recoveryLl;
-    private EditDialog editDialog;//编辑框
+    @BindView(R.id.content_ll)
+    LinearLayout contentLl;
+    Unbinder unbinder;
+    private DialogEditSureCancel editSureCancel;
     private static final String PARAM_Intent = "param_1";
 
 
@@ -104,7 +105,7 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
         return new SongMenuPresenter(this);
     }
 
-    @OnClick({R.id.download_ll, R.id.agree_ll, R.id.collection_ll, R.id.share_ll, R.id.recovery_ll})
+    @OnClick({R.id.download_ll, R.id.agree_ll, R.id.collection_ll, R.id.share_ll})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.download_ll:
@@ -120,9 +121,6 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
                 break;
             case R.id.share_ll:
                 presenter.share();
-                break;
-            case R.id.recovery_ll:
-                presenter.recovery();
                 break;
         }
     }
@@ -172,24 +170,6 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
         }
     }
 
-    @Override
-    public void alertRecoveryDialog(final String name, final int isFrom) {
-        new EditDialog.Builder(getCurrentContext())
-                .setTitle("错误曲谱名：" + name)
-                .setHint("描述")
-                .setListener(new EditDialog.Builder.OnSelectedListener() {
-                    @Override
-                    public void onSelectedOk(String str) {
-                        presenter.sendRecovery(name, isFrom, str);
-                    }
-
-                    @Override
-                    public void onSelectedCancel() {
-
-                    }
-                })
-                .create().show();
-    }
 
     @Override
     public void addCollectionResult() {
@@ -226,28 +206,34 @@ public class SongMenuFragment extends BaseFragment<SongMenuPresenter.IView, Song
     }
 
     private void alertDownloadDialog() {
-        editDialog = new EditDialog.Builder(getActivity())
-                .setEditStr(presenter.getSong().getName())
-                .setListener(new EditDialog.Builder.OnSelectedListener() {
-                    @Override
-                    public void onSelectedOk(String str) {
-                        ToastUtil.showToast("后台下载中~");
-                        downloadLl.setEnabled(false);//下载键
-                        presenter.download(str);
-                    }
-
-                    @Override
-                    public void onSelectedCancel() {
-                        editDialog.dismiss();
-                    }
-                })
-                .create();
-        editDialog.show();
+        editSureCancel = new DialogEditSureCancel(context);
+        editSureCancel.getTvTitle().setText("保存曲谱名");
+        editSureCancel.getEditText().setText(presenter.getSong().getName());
+        editSureCancel.getTvSure().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = editSureCancel.getEditText().getText().toString();
+                if (TextUtils.isEmpty(name)) {
+//                    Toasts.error(context, "名字不能为空哦~", Toast.LENGTH_SHORT,true).show();
+                    return;
+                }
+                editSureCancel.dismiss();
+                ToastUtil.showToast("后台下载中~");
+                downloadLl.setEnabled(false);//下载键
+                presenter.download(name);
+            }
+        });
+        editSureCancel.getTvCancel().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editSureCancel.cancel();
+            }
+        });
+        editSureCancel.show();
     }
 
     @Override
     public void dismissEditDialog() {
-        editDialog.dismiss();
+        editSureCancel.dismiss();
     }
-
 }

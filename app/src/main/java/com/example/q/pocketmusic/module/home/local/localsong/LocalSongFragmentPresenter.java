@@ -19,21 +19,18 @@ import java.util.List;
 
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
-import rx.functions.Action1;
 
 /**
  * Created by 鹏君 on 2016/9/2.
  */
 public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentPresenter.IView> {
-    private IView fragment;
     private LocalSongDao localSongDao;
     private LocalModel localModel;
 
 
     //Dao有必要关闭吗？iterator呢？
     public LocalSongFragmentPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
         localModel = new LocalModel(fragment.getAppContext());
         localSongDao = new LocalSongDao(fragment.getAppContext());
     }
@@ -43,13 +40,13 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
                 .filter(new Predicate<List<LocalSong>>() {
                     @Override
                     public boolean test(List<LocalSong> localSongs) throws Exception {
-                        return fragment != null;
+                        return mView != null;
                     }
                 })
                 .subscribe(new Consumer<List<LocalSong>>() {
                     @Override
                     public void accept(List<LocalSong> localSongs) throws Exception {
-                        fragment.setList(localSongs);
+                        mView.setList(localSongs);
                         LogUtils.e(TAG, "本地乐谱数量：" + localSongs.size());
                     }
                 });
@@ -57,7 +54,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
 
     //删除乐谱要删除数据库和list.position,还有本地的文件！
     public void deleteSong(LocalSong localSong) {
-        localSongDao.deleteLocalRelation(fragment.getCurrentContext(), localSong);
+        localSongDao.deleteLocalRelation(mContext, localSong);
     }
 
     //同步乐谱
@@ -67,13 +64,13 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
                 .filter(new Predicate<List<LocalSong>>() {
                     @Override
                     public boolean test(List<LocalSong> localSongs) throws Exception {
-                        return fragment != null;
+                        return mView != null;
                     }
                 })
                 .subscribe(new Consumer<List<LocalSong>>() {
                     @Override
                     public void accept(List<LocalSong> localSongs) throws Exception {
-                        fragment.setList(localSongs);
+                        mView.setList(localSongs);
                         LogUtils.e(TAG, "本地乐谱数量：" + localSongs.size());
                     }
                 });
@@ -81,23 +78,23 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
 
 
     public void enterShareActivity(LocalSong localSong) {
-        Intent intent = new Intent(fragment.getCurrentContext(), ShareActivity.class);
+        Intent intent = new Intent(mContext, ShareActivity.class);
         intent.putExtra(ShareActivity.PARAM_LOCAL_SONG, localSong);
         intent.putExtra(ShareActivity.PARAM_TYPE_ID, 0);
-        fragment.getCurrentContext().startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     public void enterSongActivity(LocalSong localSong) {
         Song song = new Song();
         song.setName(localSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_LOCAL, Constant.SHOW_NO_MENU, Constant.LOCAL);
-        fragment.getCurrentContext().startActivity(SongActivity.buildLocalIntent(fragment.getCurrentContext(), songObject, localSong));
+        mContext.startActivity(SongActivity.buildLocalIntent(mContext, songObject, localSong));
     }
 
     public void setTop(LocalSong item) {
         localModel.setTop(item);
         ToastUtil.showToast("已置顶");
-        fragment.onRefresh();
+        mView.onRefresh();
     }
 
 

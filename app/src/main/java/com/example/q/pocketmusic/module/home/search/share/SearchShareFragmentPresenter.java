@@ -1,10 +1,7 @@
 package com.example.q.pocketmusic.module.home.search.share;
 
-import android.content.Intent;
-
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.constant.Constant;
-import com.example.q.pocketmusic.config.constant.IntentConstant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
 import com.example.q.pocketmusic.data.bean.share.ShareSong;
@@ -21,11 +18,10 @@ import cn.bmob.v3.BmobQuery;
  */
 
 public class SearchShareFragmentPresenter extends BasePresenter<SearchShareFragmentPresenter.IView> {
-    private IView fragment;
+
 
     public SearchShareFragmentPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
     }
 
     public void queryFromShareSongList(String s) {
@@ -34,7 +30,7 @@ public class SearchShareFragmentPresenter extends BasePresenter<SearchShareFragm
         query.findObjects(new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                fragment.setShareSongList(list);
+                mView.setShareSongList(list);
             }
         });
     }
@@ -44,8 +40,8 @@ public class SearchShareFragmentPresenter extends BasePresenter<SearchShareFragm
         song.setContent(shareSong.getContent());
         song.setName(shareSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_SHARE, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
-        fragment.getCurrentContext().startActivity(
-                SongActivity.buildShareIntent(fragment.getCurrentContext(),songObject,shareSong.getInstrument(),shareSong));
+        mContext.startActivity(
+                SongActivity.buildShareIntent(mContext,songObject,shareSong.getInstrument(),shareSong));
     }
 
     interface IView extends IBaseView {

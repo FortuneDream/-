@@ -16,11 +16,10 @@ import java.util.List;
  */
 
 public class CommunityPresenter extends BasePresenter<CommunityPresenter.IView> {
-    private IView fragment;
+
 
     public CommunityPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
     }
 
     public List<Fragment> initFragment(int typeId) {

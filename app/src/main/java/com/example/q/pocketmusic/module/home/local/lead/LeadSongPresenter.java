@@ -17,13 +17,11 @@ import java.util.List;
  */
 
 public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
-    private IView activity;
     private LocalSongDao localSongDao;
     private LocalPhotoAlbumUtil localPhotoAlbumUtil;
 
     public LeadSongPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
         localSongDao = new LocalSongDao(activity.getAppContext());
         localPhotoAlbumUtil = new LocalPhotoAlbumUtil();
     }
@@ -33,7 +31,7 @@ public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
         localPhotoAlbumUtil.getLocalPicPaths(new LocalPhotoAlbumUtil.OnLoadMutiLocalResult() {
             @Override
             public void onPathList(List<String> list) {
-                activity.showSmallPic(list);//返回图片地址
+                mView.showSmallPic(list);//返回图片地址
             }
         });
     }
@@ -41,14 +39,14 @@ public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
     //本地导入乐谱
     public void leadSong(String name) {
         if (TextUtils.isEmpty(name)) {
-            ToastUtil.showToast(activity.getResString(R.string.complete_info));
+            ToastUtil.showToast(mView.getResString(R.string.complete_info));
             return;
         } else if (localPhotoAlbumUtil.getImgUrls().size() <= 0) {
             ToastUtil.showToast("请添加图片");
             return;
         }
         localSongDao.saveLocalSongMove(name, localPhotoAlbumUtil.getImgUrls());
-        activity.returnActivity();
+        mView.returnActivity();
     }
 
     public void checkPic(String path) {

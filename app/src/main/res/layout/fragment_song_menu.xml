@@ -92,27 +92,7 @@
             android:text="分享" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/recovery_ll"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/recovery_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_vec_song_bottom_recovery" />
-
-        <TextView
-            style="@style/TwoTextMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="纠错" />
-
-    </LinearLayout>
 
 
 </LinearLayout>

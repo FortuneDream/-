@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeSearchFragmentPresenter extends BasePresenter<HomeSearchFragmentPresenter.IView> {
-    private IView fragment;
     private SearchNetFragment netFragment;
     private SearchShareFragment shareFragment;
     public static final int POSITION_NET_FRAGMENT = 0;//第一个位置
@@ -28,8 +27,7 @@ public class HomeSearchFragmentPresenter extends BasePresenter<HomeSearchFragmen
 
 
     public HomeSearchFragmentPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
         getFragments();
         getTabsTxt();
     }
@@ -67,7 +65,7 @@ public class HomeSearchFragmentPresenter extends BasePresenter<HomeSearchFragmen
         if (!TextUtils.isEmpty(query)) {
             return query;
         } else {
-            ToastUtil.showToast(fragment.getResString(R.string.complete_info));
+            ToastUtil.showToast(mView.getResString(R.string.complete_info));
             return null;
         }
     }

@@ -14,8 +14,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.dell.fortune.tools.dialog.DialogSureCancel;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.BottomTabView;
@@ -73,22 +75,23 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
     }
 
     public void alertSupportDialog() {
-        new AlertDialog.Builder(getCurrentContext())
-                .setTitle("支持开发者")
-                .setMessage("如果您觉得这款应用做的不错~可以支持一下我~")
-                .setPositiveButton("好的", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        presenter.enterSupportActivity();
-                    }
-                })
-                .setNegativeButton("算了", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
+        final DialogSureCancel dialogSureCancel = new DialogSureCancel(context);
+        dialogSureCancel.getTvTitle().setText("支持开发者");
+        dialogSureCancel.getTvContent().setText("如果您觉得这款应用做的不错~可以支持一下我~");
+        dialogSureCancel.getTvCancel().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogSureCancel.cancel();
+            }
+        });
+        dialogSureCancel.getTvSure().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogSureCancel.dismiss();
+                presenter.startActivity( SupportActivity.class);
+            }
+        });
+        dialogSureCancel.show();
     }
 
     @Override
@@ -114,7 +117,7 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        if (TextUtils.equals(intent.getAction(),ACTION_RETURN_HOME)){
+        if (TextUtils.equals(intent.getAction(), ACTION_RETURN_HOME)) {
             presenter.clickBottomTab(HomePresenter.TabIndex.NET_INDEX);
         }
     }

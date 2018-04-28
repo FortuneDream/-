@@ -23,9 +23,9 @@
 
     <LinearLayout
         android:id="@+id/bottom_ll"
-        android:layout_above="@id/page_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/page_tv"
         android:orientation="vertical">
 
         <View style="@style/SettingDivider" />
@@ -47,8 +47,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
+        android:src="@drawable/ico_show"
         app:backgroundTint="@color/white"
-        app:fabSize="mini"
-        app:srcCompat="@drawable/ic_vec_show" />
+        app:fabSize="mini" />
 
 </RelativeLayout>

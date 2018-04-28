@@ -24,13 +24,11 @@ import cn.bmob.v3.listener.QueryListListener;
  */
 
 public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
-    private IView activity;
     private GiftModel model;
     private int mPage;
 
     public GiftPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
         model = new GiftModel();
         this.mPage = 0;
     }
@@ -44,7 +42,7 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
         model.getGiftList(UserUtil.user, mPage, new ToastQueryListener<Gift>() {
             @Override
             public void onSuccess(List<Gift> list) {
-                activity.setGiftList(list, isRefreshing);
+                mView.setGiftList(list, isRefreshing);
             }
         });
 
@@ -53,7 +51,7 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
 
     //收礼物，批量更新
     public void receivedAllCoin(List<Gift> allData) {
-        activity.showLoading(true);
+        mView.showLoading(true);
         int sum = 0;
         List<BmobObject> gifts = new ArrayList<>();
         for (Gift gift : allData) {
@@ -65,13 +63,13 @@ public class GiftPresenter extends BasePresenter<GiftPresenter.IView> {
         new BmobBatch().updateBatch(gifts).doBatch(new QueryListListener<BatchResult>() {
             @Override
             public void done(List<BatchResult> list, BmobException e) {
-                activity.showLoading(false);
+                mView.showLoading(false);
                 if (e == null) {
                     UserUtil.increment(finalSum, new ToastUpdateListener() {
                         @Override
                         public void onSuccess() {
-                            ToastUtil.showToast(activity.getResString(R.string.add_coin) + finalSum);
-                            activity.onRefresh();
+                            ToastUtil.showToast(mView.getResString(R.string.add_coin) + finalSum);
+                            mView.onRefresh();
                         }
                     });
                 }

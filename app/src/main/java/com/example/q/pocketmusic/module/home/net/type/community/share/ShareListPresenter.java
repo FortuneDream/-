@@ -22,14 +22,12 @@ import java.util.List;
  */
 
 public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> {
-    private IView fragment;
     private UserShareModel model;
     private int mPage;
     private int typeId;
 
     public ShareListPresenter(IView fragment) {
-        attachView(fragment);
-        this.fragment = getIViewRef();
+        super(fragment);
         model = new UserShareModel();
     }
 
@@ -38,7 +36,7 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
         model.getAllShareList(typeId, mPage, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                fragment.setList(false, list);
+                mView.setList(false, list);
             }
         });
 
@@ -51,7 +49,7 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
         model.getAllShareList(typeId, mPage, new ToastQueryListener<ShareSong>() {
             @Override
             public void onSuccess(List<ShareSong> list) {
-                fragment.setList(isRefreshing, list);
+                mView.setList(isRefreshing, list);
             }
         });
     }
@@ -66,15 +64,15 @@ public class ShareListPresenter extends BasePresenter<ShareListPresenter.IView> 
         song.setContent(shareSong.getContent());
         song.setName(shareSong.getName());
         SongObject songObject = new SongObject(song, Constant.FROM_SHARE, Constant.MENU_DOWNLOAD_COLLECTION_AGREE_SHARE, Constant.NET);
-        fragment.getCurrentContext().startActivity(SongActivity.buildShareIntent(
-                fragment.getCurrentContext(), songObject, typeId, shareSong
+        mContext.startActivity(SongActivity.buildShareIntent(
+               mContext, songObject, typeId, shareSong
         ));
     }
 
     public void enterOtherProfileActivity(MyUser other) {
-        Intent intent = new Intent(fragment.getCurrentContext(), OtherProfileActivity.class);
+        Intent intent = new Intent(mContext, OtherProfileActivity.class);
         intent.putExtra(OtherProfileActivity.PARAM_USER, other);
-        fragment.getCurrentContext().startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     public void setType(int typeId) {

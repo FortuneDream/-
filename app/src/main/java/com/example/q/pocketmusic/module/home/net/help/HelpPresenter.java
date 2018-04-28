@@ -4,6 +4,7 @@ import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.BmobInfo;
 import com.example.q.pocketmusic.module.common.BasePresenter;
+import com.example.q.pocketmusic.module.common.IBaseView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +16,9 @@ import cn.bmob.v3.BmobQuery;
  */
 
 public class HelpPresenter extends BasePresenter<HelpPresenter.IView> {
-    private IView activity;
 
     public HelpPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
     }
 
     public void getList() {
@@ -37,12 +36,12 @@ public class HelpPresenter extends BasePresenter<HelpPresenter.IView> {
                 for (BmobInfo bmobInfo:list){
                     strings.add(bmobInfo.getContent());
                 }
-                activity.setList(strings);
+                mView.setList(strings);
             }
         });
     }
 
-    interface IView {
+    interface IView extends IBaseView{
 
         void setList(List<String> strings);
     }

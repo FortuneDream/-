@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.BmobInfo;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.example.q.pocketmusic.module.home.HomeActivity;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter.IView, SplashPr
             switch (msg.what) {
                 case ENTER_HOME_ACTIVITY:
                     if (!isEnter) {
-                        presenter.enterHomeActivity();
+                        presenter.startActivity(HomeActivity.class);
                         isEnter = true;
                     }
                     finish();

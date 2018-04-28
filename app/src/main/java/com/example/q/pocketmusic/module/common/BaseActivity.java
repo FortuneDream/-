@@ -46,7 +46,7 @@ import butterknife.ButterKnife;
  * Created by 鹏君 on 2016/10/1.
  */
 
-public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity<V extends IBaseView, T  extends BasePresenter<V>> extends AppCompatActivity implements IBaseView {
     public Activity context;
     protected T presenter;
     public final String TAG = this.getClass().getName();

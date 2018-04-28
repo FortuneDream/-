@@ -8,15 +8,14 @@ import android.support.v4.app.FragmentManager;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
-import com.example.q.pocketmusic.data.model.LocalModel;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.type.community.CommunityFragment;
 import com.example.q.pocketmusic.module.home.net.type.community.ask.publish.PublishAskActivity;
+import com.example.q.pocketmusic.module.home.net.type.community.share.publish.ShareActivity;
 import com.example.q.pocketmusic.module.home.net.type.hot.HotListFragment;
 import com.example.q.pocketmusic.module.home.net.type.study.StudyActivity;
-import com.example.q.pocketmusic.module.home.net.type.community.share.publish.ShareActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,6 @@ import rx.schedulers.Schedulers;
  * Created by 鹏君 on 2016/8/29.
  */
 public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPresenter.IView> {
-    private IView activity;
     private static int FLAG_SELECT_HOT_LIST = 1001;
     private static int FLAG_SELECT_COMMUNITY = 1002;
     private HotListFragment hotListFragment;
@@ -42,15 +40,14 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
     private List<Fragment> fragments = new ArrayList<>();
 
     public SongTypeActivityPresenter(IView activity) {
-        attachView(activity);
-        this.activity = getIViewRef();
+        super(activity);
     }
 
     //进入学习版块
     public void enterStudyActivity(Integer typeId) {
-        Intent intent = new Intent(activity.getCurrentContext(), StudyActivity.class);
+        Intent intent = new Intent(mContext, StudyActivity.class);
         intent.putExtra(StudyActivity.PARAM_TYPE, typeId);
-        activity.getCurrentContext().startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     public void initFragment(int typeId) {
@@ -66,7 +63,7 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
         if (FLAG != FLAG_SELECT_HOT_LIST) {
             FLAG = FLAG_SELECT_HOT_LIST;
             showFragment(fragments.get(0));
-            activity.onSelectHotList();
+            mView.onSelectHotList();
         }
     }
 
@@ -75,7 +72,7 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
         if (FLAG != FLAG_SELECT_COMMUNITY) {
             FLAG = FLAG_SELECT_COMMUNITY;
             showFragment(fragments.get(1));
-            activity.onSelectCommunity();
+            mView.onSelectCommunity();
         }
     }
 
@@ -99,10 +96,10 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
 
     //跳转到AskSongActivity
     public void enterPublishAskActivity(int typeId) {
-        Intent intent = new Intent(activity.getCurrentContext(), PublishAskActivity.class);
+        Intent intent = new Intent(mContext, PublishAskActivity.class);
         //注意这里使用的是Fragment的方法，而不能用Activity的方法
         intent.putExtra(PublishAskActivity.PARAM_TYPE_ID, typeId);
-        ((BaseActivity) activity).startActivityForResult(intent, PublishAskActivity.REQUEST_ASK);
+        ((BaseActivity) mView).startActivityForResult(intent, PublishAskActivity.REQUEST_ASK);
     }
 
     //查找本地
@@ -110,7 +107,7 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
         rx.Observable.create(new rx.Observable.OnSubscribe<List<LocalSong>>() {
             @Override
             public void call(Subscriber<? super List<LocalSong>> subscriber) {
-                LocalSongDao dao = new LocalSongDao(activity.getCurrentContext());
+                LocalSongDao dao = new LocalSongDao(mContext);
                 List<LocalSong> list = dao.queryForAll();
                 subscriber.onNext(list);
             }
@@ -124,17 +121,17 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
                         for (int i = 0; i < localSongs.size(); i++) {
                             strings.add(localSongs.get(i).getName());
                         }
-                        activity.alertLocalListDialog(localSongs, strings);
+                        mView.alertLocalListDialog(localSongs, strings);
                     }
                 });
     }
 
     //进入分享
     public void enterShareActivity(LocalSong localSong, int typeId) {
-        Intent intent = new Intent(activity.getCurrentContext(), ShareActivity.class);
+        Intent intent = new Intent(mContext, ShareActivity.class);
         intent.putExtra(ShareActivity.PARAM_LOCAL_SONG, localSong);
         intent.putExtra(ShareActivity.PARAM_TYPE_ID, typeId);
-        activity.getCurrentContext().startActivity(intent);
+        mContext.startActivity(intent);
     }
 
 

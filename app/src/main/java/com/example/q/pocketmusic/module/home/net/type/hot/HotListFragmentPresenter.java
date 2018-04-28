@@ -13,13 +13,11 @@ import java.util.List;
 
 
 public class HotListFragmentPresenter extends BasePresenter<HotListFragmentPresenter.IView> {
-    private IView fragment;
     private int mPage;
     private int typeId;
 
     public HotListFragmentPresenter(IView activity) {
-        attachView(activity);
-        this.fragment = getIViewRef();
+       super(activity);
     }
 
     public int getmPage() {
@@ -34,9 +32,9 @@ public class HotListFragmentPresenter extends BasePresenter<HotListFragmentPrese
             protected void onPostExecute(List<Song> songs) {
                 super.onPostExecute(songs);
                 if (!isRefreshing) {
-                    fragment.setList(songs);
+                    mView.setList(songs);
                 } else {
-                    fragment.setListWithRefreshing(songs);
+                    mView.setListWithRefreshing(songs);
                 }
             }
         }.execute(url);
@@ -49,8 +47,8 @@ public class HotListFragmentPresenter extends BasePresenter<HotListFragmentPrese
 
     public void enterSongActivity(Song song) {
         SongObject object = new SongObject(song, Constant.FROM_TYPE, Constant.MENU_DOWNLOAD_COLLECTION_SHARE, Constant.NET);
-        fragment.getCurrentContext().startActivity(
-                SongActivity.buildTypeIntent(fragment.getCurrentContext(), object, typeId)
+        mView.getCurrentContext().startActivity(
+                SongActivity.buildTypeIntent(mView.getCurrentContext(), object, typeId)
         );
     }
 
