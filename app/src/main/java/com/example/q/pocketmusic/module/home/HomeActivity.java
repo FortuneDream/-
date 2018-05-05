@@ -65,6 +65,7 @@ public class HomeActivity extends BaseActivity<HomePresenter.IView, HomePresente
         initBottomTabList();
         presenter.clickBottomTab(HomePresenter.TabIndex.NET_INDEX);
         presenter.checkAlertSupportDialog();
+        presenter.checkSignature(getPackageManager());//签名校验
     }
 
     private void initBottomTabList() {

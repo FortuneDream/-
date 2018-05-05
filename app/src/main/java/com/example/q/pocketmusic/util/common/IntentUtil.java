@@ -42,7 +42,7 @@ public class IntentUtil {
         return intent;
     }
 
-    //分享apk
+    //分享Text
     public static void shareText(Context context, String content) {
         Intent intent = getShareTextIntent(content);
         if (intent.resolveActivity(context.getPackageManager()) != null) {

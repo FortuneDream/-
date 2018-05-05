@@ -42,14 +42,13 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
  */
 
 public class SharePresenter extends BasePresenter<SharePresenter.IView> {
-    private IView activity;
     private int mNumberPic;//图片数量
     private String[] filePaths;//本地图片路径
     private int typeId;
 
 
     public SharePresenter(IView activity) {
-       super(activity);
+        super(activity);
     }
 
 
@@ -71,9 +70,9 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
                         String url = resultList.get(i).getPhotoPath();
                         filePaths[i] = url;
                         mNumberPic++;
-                        LogUtils.e(TAG, url);
+                        LogUtils.e("曲谱途径：", url);
                     }
-                    activity.setSelectPicResult(mNumberPic, filePaths, null);
+                    mView.setSelectPicResult(mNumberPic, filePaths, null);
                 }
             }
 
@@ -86,18 +85,18 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
     public void upLoad(final String name, final String content) {
 
-        if ((!TextUtils.isEmpty(name)) && (!TextUtils.isEmpty(content)) && (mNumberPic > 0) && UserUtil.checkLocalUser((BaseActivity) activity.getCurrentContext())) {
+        if ((!TextUtils.isEmpty(name)) && (!TextUtils.isEmpty(content)) && (mNumberPic > 0) && UserUtil.checkLocalUser((BaseActivity) mView.getCurrentContext())) {
             //上传服务器,弹出Dialog，成功后finish，弹出Toast;
-            activity.alertSelectCommunityDialog(name, content);
+            mView.alertSelectCommunityDialog(name, content);
             //先检查是否已经存在相同的曲谱
         } else {
-            ToastUtil.showToast(activity.getResString(R.string.complete_info));
+            ToastUtil.showToast(mView.getResString(R.string.complete_info));
         }
     }
 
     //检查是否已经存在
     public void checkHasSong(final String name, final String content, final int community) {
-        activity.showLoading(true);
+        mView.showLoading(true);
         BmobQuery<ShareSong> query = new BmobQuery<>();
         query.addWhereEqualTo("name", name);
         query.findObjects(new ToastQueryListener<ShareSong>() {
@@ -108,10 +107,10 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
                     flag = false;//没有相同的额曲谱
                 }
                 if (flag) {
-                    activity.showLoading(false);
+                    mView.showLoading(false);
                     ToastUtil.showToast("已经存在相同曲谱~");
                 } else {
-                    LogUtils.e(TAG, "开始批量上传");
+                    LogUtils.e("批量上传", "开始");
                     //批量上传文件
                     uploadBatch(name, content, community);
                 }
@@ -137,8 +136,8 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
             @Override
             public void onError(int i, String s) {
-                activity.showLoading(false);
-                ToastUtil.showToast(activity.getResString(R.string.send_error) + "第" + i + "张：" + s);
+                mView.showLoading(false);
+                ToastUtil.showToast(mView.getResString(R.string.send_error) + "第" + i + "张：" + s);
             }
         });
     }
@@ -164,9 +163,9 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
                         UserUtil.increment(CoinConstant.ADD_COIN_UPLOAD, new ToastUpdateListener() {
                             @Override
                             public void onSuccess() {
-                                ToastUtil.showToast(activity.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_UPLOAD));
-                                activity.showLoading(false);
-                                activity.finish();
+                                ToastUtil.showToast(mView.getResString(R.string.add_coin) + (CoinConstant.ADD_COIN_UPLOAD));
+                                mView.showLoading(false);
+                                mView.finish();
                             }
                         });
                     }
@@ -177,7 +176,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
 
     public void getPicAndName(LocalSong localSong) {
-        LocalSongDao localSongDao = new LocalSongDao(activity.getAppContext());
+        LocalSongDao localSongDao = new LocalSongDao(mView.getAppContext());
         ForeignCollection<Img> imgs = localSongDao.findBySongId(localSong.getId()).getImgs();
         CloseableIterator<Img> iterator = imgs.closeableIterator();
         int i = 0;
@@ -188,7 +187,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
                 filePaths[i++] = img.getUrl();
             }
             mNumberPic = filePaths.length;
-            activity.setSelectPicResult(filePaths.length, filePaths, localSong.getName());
+            mView.setSelectPicResult(filePaths.length, filePaths, localSong.getName());
         } finally {
             try {
                 iterator.close();
@@ -200,7 +199,7 @@ public class SharePresenter extends BasePresenter<SharePresenter.IView> {
 
     //查看图片
     public void checkPic(String path) {
-        LogUtils.e(TAG, path);//22  15  1500  1.5  1.2  3-4  16 6
+        LogUtils.e("图片路径", path);//22  15  1500  1.5  1.2  3-4  16 6
         GalleryFinal.openEdit(2, path, new GalleryFinal.OnHanlderResultCallback() {
             @Override
             public void onHanlderSuccess(int requestCode, List<PhotoInfo> resultList) {

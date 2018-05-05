@@ -1,5 +1,9 @@
 package com.example.q.pocketmusic.module.home;
 
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -11,6 +15,7 @@ import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
 import com.example.q.pocketmusic.module.home.search.HomeSearchFragment;
+import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 import com.example.q.pocketmusic.util.common.update.UpdateUtils;
 
@@ -23,6 +28,7 @@ import java.util.List;
  */
 
 public class HomePresenter extends BasePresenter<HomePresenter.IView> {
+
 
     public interface TabIndex {
         int NET_INDEX = 0;
@@ -102,6 +108,34 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
             time++;
             SharedPrefsUtil.putInt(Constant.SUPPORT_TIME, time);
             mView.alertSupportDialog();
+        }
+    }
+
+    //与把签名放到C++防重打包
+    public void checkSignature(PackageManager pm) {
+        if (!isApkDebug()) {//release版本
+            try {
+                PackageInfo packageInfo = pm.getPackageInfo("com.example.q.pocketmusic", PackageManager.GET_SIGNATURES);
+                StringBuffer sb = new StringBuffer();
+                for (Signature signature : packageInfo.signatures) {
+                    sb.append(signature.toCharsString());
+                }
+                //通过JNI调用把签名放到C++层
+                if (!mView.getResString(R.string.signature).equals(sb.toString())) {
+                    LogUtils.e("你使用的是盗版应用（可能会盗取您的个人信息）,请加入QQ群后下载正版");
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private boolean isApkDebug() {
+        try {
+            ApplicationInfo info = mContext.getApplicationInfo();
+            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Exception e) {
+            return false;
         }
     }
 

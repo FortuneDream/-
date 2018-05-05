@@ -309,7 +309,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
 
         StringBuilder sb = new StringBuilder();
         for (String url : list) {
-            sb.append(url).append("---");
+            sb.append(url).append("和");
         }
         //分享
         IntentUtil.shareText(mContext, "推荐一首歌：" + "<<" + song.getName() + ">>:" + sb.toString());

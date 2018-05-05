@@ -47,7 +47,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
                     @Override
                     public void accept(List<LocalSong> localSongs) throws Exception {
                         mView.setList(localSongs);
-                        LogUtils.e(TAG, "本地乐谱数量：" + localSongs.size());
+                        LogUtils.e("本地曲谱数量",  String.valueOf(localSongs.size()) );
                     }
                 });
     }
@@ -71,7 +71,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
                     @Override
                     public void accept(List<LocalSong> localSongs) throws Exception {
                         mView.setList(localSongs);
-                        LogUtils.e(TAG, "本地乐谱数量：" + localSongs.size());
+                        LogUtils.e("本地曲谱数量",  String.valueOf(localSongs.size()) );
                     }
                 });
     }

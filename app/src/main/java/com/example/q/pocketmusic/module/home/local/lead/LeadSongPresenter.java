@@ -50,7 +50,7 @@ public class LeadSongPresenter extends BasePresenter<LeadSongPresenter.IView> {
     }
 
     public void checkPic(String path) {
-        LogUtils.e(TAG, path);
+        LogUtils.e("图片路径", path);
         localPhotoAlbumUtil.checkPic(path);
     }
 
