@@ -27,12 +27,12 @@
             android:layout_height="wrap_content"
             tools:text="化身孤岛的鲸鱼" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <TextView
             android:id="@+id/money_tv"
-            android:gravity="center"
-            android:drawableLeft="@drawable/ic_vec_item_money_support"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_item_money_support"
+            android:gravity="center"
             android:textColor="@color/md_red_300"
             tools:text="0.22元" />
 

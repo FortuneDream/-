@@ -8,8 +8,6 @@ import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.home.profile.user.login.LoginActivity;
-import com.example.q.pocketmusic.util.common.LogUtils;
-import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 
 /**
  * Created by 鹏君 on 2017/1/26.
@@ -27,7 +25,6 @@ public class UserUtil {
             return false;
         } else {
             UserUtil.user = user;
-            LogUtils.e(SharedPrefsUtil.getString("user", ""));
             return true;
         }
     }
@@ -40,7 +37,6 @@ public class UserUtil {
             return false;
         } else {
             UserUtil.user = user;
-            LogUtils.e(SharedPrefsUtil.getString("user", ""));
             return true;
         }
     }

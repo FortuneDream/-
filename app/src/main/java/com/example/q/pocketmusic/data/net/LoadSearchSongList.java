@@ -2,10 +2,10 @@ package com.example.q.pocketmusic.data.net;
 
 import android.os.AsyncTask;
 
+import com.dell.fortune.tools.info.LogUtils;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.util.RegExUtils;
-import com.example.q.pocketmusic.util.common.LogUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

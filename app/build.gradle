@@ -6,8 +6,8 @@ android {
         applicationId "com.example.q.pocketmusic"
         minSdkVersion 18
         targetSdkVersion 26
-        versionCode 50
-        versionName "7.0"
+        versionCode 51
+        versionName "7.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -59,7 +59,7 @@ dependencies {
     // OKhttp
     implementation files('libs/okhttp-3.8.1.jar')
     //Bmob
-    api ('cn.bmob.android:bmob-sdk:3.5.9'){
+    api ('cn.bmob.android:bmob-sdk:3.6.0'){
         exclude group :'io.reactivex.rxandroid'
         exclude group :'io.reactivex.rxjava'
     }

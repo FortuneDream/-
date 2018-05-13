@@ -13,24 +13,25 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
-import com.example.q.pocketmusic.util.common.LogUtils;
 
 import android.annotation.SuppressLint;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 
-public class DownFileThread implements Runnable {
+import com.dell.fortune.tools.info.LogUtils;
+
+public class UpdateThread implements Runnable {
     public final static int DOWNLOAD_COMPLETE = -2;
     public final static int DOWNLOAD_FAIL = -1;
-    public final static String TAG = "DownFileThread";
+    public final static String TAG = "UpdateThread";
     private Handler mHandler; // 传入的Handler,用于像Activity或service通知下载进度
     private String urlStr; // 下载URL
     private File apkFile; // 文件保存路径
     private boolean isFinished; // 下载是否完成
     private boolean interrupted = false; // 是否强制停止下载线程
 
-    public DownFileThread(Handler handler, String urlStr, File file) {
+    public UpdateThread(Handler handler, String urlStr, File file) {
         LogUtils.i(TAG, urlStr);
         this.mHandler = handler;
         this.urlStr = urlStr;

@@ -39,7 +39,7 @@
                 android:layout_height="@dimen/ico_launcher_72dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="24dp"
-                android:src="@mipmap/ico_launcher" />
+                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/user_signature_tv"

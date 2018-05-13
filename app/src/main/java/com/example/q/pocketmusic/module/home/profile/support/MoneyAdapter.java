@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.module.home.profile.support;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class MoneyAdapter extends RecyclerArrayAdapter<MoneySupport> {
     class MyViewHolder extends BaseViewHolder<MoneySupport> {
         ImageView headIv;
         TextView nickNameTv;
-        AppCompatTextView moneyTv;
+        TextView moneyTv;
         TextView contentTv;
         TextView dateTv;
 

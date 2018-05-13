@@ -7,7 +7,10 @@ import android.content.pm.Signature;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.dell.fortune.tools.info.LogUtils;
+import com.dell.fortune.tools.info.SharedPrefsUtil;
 import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
@@ -15,13 +18,15 @@ import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
 import com.example.q.pocketmusic.module.home.search.HomeSearchFragment;
-import com.example.q.pocketmusic.util.common.LogUtils;
-import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
-import com.example.q.pocketmusic.util.common.update.UpdateUtils;
+import com.example.q.pocketmusic.util.common.update.UpdateBuilder;
+import com.example.q.pocketmusic.util.common.update.UpdateNotificationConfiguration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.update.AppVersion;
 
 /**
  * Created by 鹏君 on 2016/11/22.
@@ -89,7 +94,32 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
 
     //检查版本更新
     public void checkVersion() {
-        UpdateUtils.getInstance().update(mContext);
+        try {
+            final PackageInfo pi = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), PackageManager.GET_ACTIVITIES);
+            BmobQuery<AppVersion> query = new BmobQuery<>();
+            query.addWhereGreaterThan("version_i", pi.versionCode);
+            query.findObjects(new ToastQueryListener<AppVersion>() {
+                @Override
+                public void onSuccess(List<AppVersion> list) {
+                    if (list.size() >= 1) {
+                        AppVersion appVersion = list.get(list.size() - 1);
+                        String versionContent = appVersion.getUpdate_log();
+                        String versionCodeStr = appVersion.getVersion();
+                        String url = appVersion.getPath().getUrl();
+                        boolean isForce = appVersion.getIsforce();
+                        UpdateNotificationConfiguration configuration = new UpdateNotificationConfiguration(R.mipmap.ic_launcher, pi.applicationInfo.processName);
+                        UpdateBuilder updateBuilder = new UpdateBuilder(mContext, configuration);
+                        updateBuilder.setVersionCodeStr(versionCodeStr)
+                                .setVersionContent(versionContent)
+                                .setUrl(url)
+                                .setIsForce(isForce)
+                                .update();
+                    }
+                }
+            });
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -116,7 +146,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
         if (!isApkDebug()) {//release版本
             try {
                 PackageInfo packageInfo = pm.getPackageInfo("com.example.q.pocketmusic", PackageManager.GET_SIGNATURES);
-                StringBuffer sb = new StringBuffer();
+                StringBuilder sb = new StringBuilder();
                 for (Signature signature : packageInfo.signatures) {
                     sb.append(signature.toCharsString());
                 }

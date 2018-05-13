@@ -2,6 +2,7 @@ package com.example.q.pocketmusic.module.home.local.localsong;
 
 import android.content.Intent;
 
+import com.dell.fortune.tools.info.LogUtils;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
@@ -12,7 +13,6 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.type.community.share.publish.ShareActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
@@ -47,7 +47,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
                     @Override
                     public void accept(List<LocalSong> localSongs) throws Exception {
                         mView.setList(localSongs);
-                        LogUtils.e("本地曲谱数量",  String.valueOf(localSongs.size()) );
+                        LogUtils.e("本地曲谱数量", String.valueOf(localSongs.size()));
                     }
                 });
     }
@@ -71,7 +71,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
                     @Override
                     public void accept(List<LocalSong> localSongs) throws Exception {
                         mView.setList(localSongs);
-                        LogUtils.e("本地曲谱数量",  String.valueOf(localSongs.size()) );
+                        LogUtils.e("本地曲谱数量", String.valueOf(localSongs.size()));
                     }
                 });
     }
@@ -100,6 +100,7 @@ public class LocalSongFragmentPresenter extends BasePresenter<LocalSongFragmentP
 
     public interface IView extends IBaseView {
         void setList(List<LocalSong> list);
+
         void onRefresh();
     }
 }

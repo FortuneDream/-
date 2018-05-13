@@ -10,10 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.dell.fortune.tools.info.LogUtils;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.local.RecordAudio;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.util.common.LogUtils;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 

@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.module.home.net.type.community.share.publish;
 import android.database.SQLException;
 import android.text.TextUtils;
 
+import com.dell.fortune.tools.info.LogUtils;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListListener;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
@@ -18,7 +19,6 @@ import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.UserUtil;
-import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;

@@ -30,7 +30,7 @@ public class GlideStrategy implements IDisplayStrategy {
     public void displayCircle(final Context context, String url, final ImageView imageView) {
         Glide.with(context.getApplicationContext())
                 .load(url)
-                .placeholder(R.mipmap.ico_launcher)
+                .placeholder(R.mipmap.ic_launcher)
                 .bitmapTransform(new CropCircleTransformation(context))
                 .into(imageView);
     }
@@ -39,7 +39,7 @@ public class GlideStrategy implements IDisplayStrategy {
     public void displayCorner(Context context, String url, ImageView imageView) {
         Glide.with(context.getApplicationContext())
                 .load(url)
-                .placeholder(R.mipmap.ico_launcher)
+                .placeholder(R.mipmap.ic_launcher)
                 .bitmapTransform(new RoundedCornersTransformation(context,5,5))
                 .into(imageView);
     }

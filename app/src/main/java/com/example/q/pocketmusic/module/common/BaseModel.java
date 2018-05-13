@@ -32,6 +32,4 @@ public class BaseModel<T> {
     public void getList(Object equalsObject, int page, ToastQueryListener<T> listener) {
         //可选
     }
-
-
 }

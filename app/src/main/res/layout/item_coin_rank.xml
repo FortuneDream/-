@@ -16,7 +16,7 @@
         android:id="@+id/head_iv"
         android:layout_width="@dimen/item_head"
         android:layout_height="@dimen/item_head"
-        android:src="@mipmap/ico_launcher" />
+        android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:layout_width="wrap_content"

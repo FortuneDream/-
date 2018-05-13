@@ -2,12 +2,12 @@ package com.example.q.pocketmusic.module.home.local.lead;
 
 import android.text.TextUtils;
 
+import com.dell.fortune.tools.info.LogUtils;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.LocalPhotoAlbumUtil;
-import com.example.q.pocketmusic.util.common.LogUtils;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;

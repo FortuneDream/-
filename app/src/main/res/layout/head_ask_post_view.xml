@@ -17,7 +17,7 @@
             android:id="@+id/post_user_head_iv"
             android:layout_width="@dimen/item_head"
             android:layout_height="@dimen/item_head"
-            android:src="@mipmap/ico_launcher" />
+            android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             style="@style/TwoTextLinear"

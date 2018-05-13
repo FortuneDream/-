@@ -14,8 +14,7 @@ import android.widget.RemoteViews;
 
 import com.example.q.pocketmusic.R;
 
-public class DownloadApkNotification {
-    public final static int DOWNLOAD_COMPLETE = -2;
+public class UpdateNotification {
     public final static int DOWNLOAD_FAIL = -1;
     private Context mContext; // Activity或Service上下文
     private Notification notification; // notification
@@ -30,7 +29,7 @@ public class DownloadApkNotification {
      * @param contentIntent 点击通知后的动作
      * @param id            通知的唯一标示ID
      */
-    public DownloadApkNotification(Context context, PendingIntent contentIntent, int id) {
+    public UpdateNotification(Context context, PendingIntent contentIntent, int id) {
         mContext = context;
         notificationID = id;
         this.contentIntent = contentIntent;
@@ -46,7 +45,7 @@ public class DownloadApkNotification {
      */
     public void showCustomizeNotification(int icoId, String titleStr,
                                           int layoutId) {
-        notification = new Notification(R.mipmap.ico_launcher, titleStr, when);
+        notification = new Notification(R.mipmap.ic_launcher, titleStr, when);
         notification.flags = Notification.FLAG_ONLY_ALERT_ONCE;
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         notification.contentIntent = this.contentIntent;

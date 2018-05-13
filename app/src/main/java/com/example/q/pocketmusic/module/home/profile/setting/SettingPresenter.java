@@ -2,15 +2,24 @@ package com.example.q.pocketmusic.module.home.profile.setting;
 
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
+import com.example.q.pocketmusic.R;
+import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.common.ToastUtil;
-import com.example.q.pocketmusic.util.common.update.UpdateUtils;
+import com.example.q.pocketmusic.util.common.update.UpdateBuilder;
+import com.example.q.pocketmusic.util.common.update.UpdateNotificationConfiguration;
 
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.BmobUpdateListener;
+import cn.bmob.v3.update.AppVersion;
 import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.bmob.v3.update.UpdateResponse;
 import cn.bmob.v3.update.UpdateStatus;
@@ -23,7 +32,7 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
 
 
     public SettingPresenter(IView activity) {
-       super(activity);
+        super(activity);
     }
 
     public void checkUpdate() {
@@ -54,7 +63,32 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
     }
 
     public void appUpdate() {
-        UpdateUtils.getInstance().update(mContext);
+        try {
+            final PackageInfo pi = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), PackageManager.GET_ACTIVITIES);
+            BmobQuery<AppVersion> query = new BmobQuery<>();
+            query.addWhereGreaterThan("version_i", pi.versionCode);
+            query.findObjects(new ToastQueryListener<AppVersion>() {
+                @Override
+                public void onSuccess(List<AppVersion> list) {
+                    if (list.size() >= 1) {
+                        AppVersion appVersion = list.get(list.size() - 1);
+                        String versionContent = appVersion.getUpdate_log();
+                        String versionCodeStr = appVersion.getVersion();
+                        String url = appVersion.getPath().getUrl();
+                        boolean isForce = appVersion.getIsforce();
+                        UpdateNotificationConfiguration configuration = new UpdateNotificationConfiguration(R.mipmap.ic_launcher, pi.applicationInfo.processName);
+                        UpdateBuilder updateBuilder = new UpdateBuilder(mContext, configuration);
+                        updateBuilder.setVersionCodeStr(versionCodeStr)
+                                .setVersionContent(versionContent)
+                                .setUrl(url)
+                                .setIsForce(isForce)
+                                .update();
+                    }
+                }
+            });
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

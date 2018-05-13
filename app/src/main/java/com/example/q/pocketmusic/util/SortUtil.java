@@ -1,6 +1,6 @@
 package com.example.q.pocketmusic.util;
 
-import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
+import com.dell.fortune.tools.info.SharedPrefsUtil;
 
 /**
  * Created by 鹏君 on 2017/7/20.

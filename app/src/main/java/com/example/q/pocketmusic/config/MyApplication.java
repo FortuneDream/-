@@ -4,11 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 
+import com.dell.fortune.tools.info.SharedPrefsUtil;
+import com.dell.fortune.tools.info.crash.CrashCatch;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.pic.GlideImageLoader;
 import com.example.q.pocketmusic.config.constant.InstrumentConstant;
-import com.example.q.pocketmusic.util.common.SharedPrefsUtil;
 import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import cn.bmob.v3.Bmob;
@@ -36,8 +37,9 @@ public class MyApplication extends Application {
         //官网SDK
         AppStat.i(Constant.APP_ID, "Bmob");
         //发布时，开启异常捕获器
-        CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(context);
+        CrashCatch crashCatch = CrashCatch.getInstance();
+        crashCatch.setListener(new CrashDefaultHandler(this));
+        crashCatch.init();
         initGalleryFinal();
     }
 

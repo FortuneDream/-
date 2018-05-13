@@ -10,13 +10,12 @@ import android.view.View;
 
 import com.dell.fortune.tools.dialog.DialogEditSureCancel;
 import com.dell.fortune.tools.dialog.DialogSureCancel;
+import com.dell.fortune.tools.info.LogUtils;
 import com.dell.fortune.tools.toast.Toasts;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.InstrumentConstant;
 import com.example.q.pocketmusic.data.bean.share.ShareSong;
 import com.example.q.pocketmusic.module.common.AuthActivity;
-import com.example.q.pocketmusic.util.common.LogUtils;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
