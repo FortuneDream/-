@@ -4,7 +4,8 @@ import android.content.Context;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 
-import com.dell.fortune.tools.info.LogUtils;
+import com.dell.fortune.tools.LogUtils;
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.constant.InstrumentConstant;
 import com.example.q.pocketmusic.data.bean.DownloadInfo;
@@ -12,7 +13,7 @@ import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.common.FileUtils;
-import com.example.q.pocketmusic.util.common.ToastUtil;
+
 
 
 import java.io.IOException;

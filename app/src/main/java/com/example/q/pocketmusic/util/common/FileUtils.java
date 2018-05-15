@@ -2,6 +2,8 @@ package com.example.q.pocketmusic.util.common;
 
 import android.support.annotation.Nullable;
 
+import com.dell.fortune.tools.toast.ToastUtil;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,7 +18,6 @@ import okhttp3.Response;
 public class FileUtils {
 
     public static void copyFile(String oldPath, String newPath) {
-
         if (oldPath != null) {
             File s = new File(oldPath);
             if (s.exists()) {

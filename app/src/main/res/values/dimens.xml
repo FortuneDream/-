@@ -2,7 +2,6 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="title_right_margin">16dp</dimen>
     <dimen name="text">15sp</dimen>
-    <dimen name="sub_text">13sp</dimen>
 
     <dimen name="banner_height">215dp</dimen>
 
@@ -23,9 +22,6 @@
 
     <dimen name="button_send_width">48dp</dimen>
     <dimen name="button_send_height">32dp</dimen>
-
-    <dimen name="button_sign_width">48dp</dimen>
-    <dimen name="button_sign_height">32dp</dimen>
 
     <dimen name="edit_send_height">@dimen/button_send_height</dimen>
 

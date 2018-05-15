@@ -6,8 +6,8 @@ android {
         applicationId "com.example.q.pocketmusic"
         minSdkVersion 18
         targetSdkVersion 26
-        versionCode 51
-        versionName "7.1"
+        versionCode 52
+        versionName "7.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

@@ -4,14 +4,13 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
-
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.local.Img;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.util.SortUtil;
 import com.example.q.pocketmusic.util.common.FileUtils;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.ForeignCollection;

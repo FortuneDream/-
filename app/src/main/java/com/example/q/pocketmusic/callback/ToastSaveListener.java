@@ -1,10 +1,11 @@
 package com.example.q.pocketmusic.callback;
 
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.MyApplication;
 import com.example.q.pocketmusic.data.event.LoadingDialogEvent;
-import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.common.ToastUtil;
+
+
 
 import org.greenrobot.eventbus.EventBus;
 

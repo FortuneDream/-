@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.dell.fortune.tools.IntentUtil;
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.util.GuidePopHelper;
-import com.example.q.pocketmusic.util.common.IntentUtil;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

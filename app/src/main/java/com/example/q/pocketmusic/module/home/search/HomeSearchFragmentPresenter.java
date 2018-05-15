@@ -3,12 +3,12 @@ package com.example.q.pocketmusic.module.home.search;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.search.net.SearchNetFragment;
 import com.example.q.pocketmusic.module.home.search.share.SearchShareFragment;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;

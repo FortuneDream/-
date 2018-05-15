@@ -3,10 +3,12 @@ package com.example.q.pocketmusic.util;
 import android.view.View;
 import android.widget.PopupWindow;
 
-import com.dell.fortune.tools.info.SharedPrefsUtil;
+
+import com.dell.fortune.tools.SharedPrefsUtil;
+import com.dell.fortune.tools.view.GuidePopupWindow;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.GuideConstant;
-import com.example.q.pocketmusic.util.common.GuidePopupWindow;
+
 
 /**
  * Created by 81256 on 2018/2/1.

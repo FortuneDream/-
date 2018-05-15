@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
 
-import com.dell.fortune.tools.info.crash.OnOccurCrashListener;
+import com.dell.fortune.tools.crash.OnOccurCrashListener;
 import com.example.q.pocketmusic.data.bean.bmob.ExceptionBean;
 
 import java.text.SimpleDateFormat;

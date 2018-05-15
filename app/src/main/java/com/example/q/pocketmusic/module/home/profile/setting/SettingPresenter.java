@@ -5,15 +5,14 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.dell.fortune.tools.toast.ToastUtil;
+import com.dell.fortune.tools.update.UpdateBuilder;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.common.ToastUtil;
-import com.example.q.pocketmusic.util.common.update.UpdateBuilder;
-import com.example.q.pocketmusic.util.common.update.UpdateNotificationConfiguration;
 
 import java.util.List;
 
@@ -76,8 +75,7 @@ public class SettingPresenter extends BasePresenter<SettingPresenter.IView> {
                         String versionCodeStr = appVersion.getVersion();
                         String url = appVersion.getPath().getUrl();
                         boolean isForce = appVersion.getIsforce();
-                        UpdateNotificationConfiguration configuration = new UpdateNotificationConfiguration(R.mipmap.ic_launcher, pi.applicationInfo.processName);
-                        UpdateBuilder updateBuilder = new UpdateBuilder(mContext, configuration);
+                        UpdateBuilder updateBuilder = new UpdateBuilder(mContext);
                         updateBuilder.setVersionCodeStr(versionCodeStr)
                                 .setVersionContent(versionContent)
                                 .setUrl(url)

@@ -4,13 +4,13 @@ import android.app.Application;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 
-import com.dell.fortune.tools.info.SharedPrefsUtil;
-import com.dell.fortune.tools.info.crash.CrashCatch;
+import com.dell.fortune.tools.SharedPrefsUtil;
+import com.dell.fortune.tools.crash.CrashCatch;
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.pic.GlideImageLoader;
 import com.example.q.pocketmusic.config.constant.InstrumentConstant;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.statistics.AppStat;

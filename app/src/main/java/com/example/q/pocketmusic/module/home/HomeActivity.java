@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2018.
+ * 版权归于Github.FortuneDream所有
+ *
+ */
+
 package com.example.q.pocketmusic.module.home;
 
 import android.animation.Animator;
@@ -15,11 +21,11 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.dell.fortune.tools.dialog.DialogSureCancel;
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.home.profile.support.SupportActivity;
 import com.example.q.pocketmusic.util.UserUtil;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.BottomTabView;
 
 import java.util.ArrayList;

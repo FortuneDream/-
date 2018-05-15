@@ -2,13 +2,13 @@ package com.example.q.pocketmusic.module.home.profile.suggestion;
 
 import android.text.TextUtils;
 
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
 import com.example.q.pocketmusic.data.bean.bmob.UserSuggestion;
 import com.example.q.pocketmusic.data.model.UserSuggestionModel;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
 

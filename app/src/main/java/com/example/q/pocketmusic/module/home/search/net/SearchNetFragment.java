@@ -1,11 +1,11 @@
 package com.example.q.pocketmusic.module.home.search.net;
 
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.home.search.HomeSearchFragment;
 import com.example.q.pocketmusic.module.home.search.ISearchFragment;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -46,7 +46,7 @@ public class SearchNetFragment extends BaseFragment<SearchNetFragmentPresenter.I
 
     @Override
     public void getInitSearchList() {
-        HomeSearchFragment homeSearchFragment = (HomeSearchFragment)(getActivity().getSupportFragmentManager().findFragmentByTag(HomeSearchFragment.class.getName()));
+        HomeSearchFragment homeSearchFragment = (HomeSearchFragment) (getActivity().getSupportFragmentManager().findFragmentByTag(HomeSearchFragment.class.getName()));
         query = homeSearchFragment.getQueryStr();
         if (query == null) {
             return;

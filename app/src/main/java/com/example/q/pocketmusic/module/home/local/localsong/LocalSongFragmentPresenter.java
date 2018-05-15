@@ -2,7 +2,8 @@ package com.example.q.pocketmusic.module.home.local.localsong;
 
 import android.content.Intent;
 
-import com.dell.fortune.tools.info.LogUtils;
+import com.dell.fortune.tools.LogUtils;
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.SongObject;
@@ -13,7 +14,6 @@ import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.module.home.net.type.community.share.publish.ShareActivity;
 import com.example.q.pocketmusic.module.song.SongActivity;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
 

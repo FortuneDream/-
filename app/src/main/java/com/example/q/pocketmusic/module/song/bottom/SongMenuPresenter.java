@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.dell.fortune.tools.info.LogUtils;
+import com.dell.fortune.tools.IntentUtil;
+import com.dell.fortune.tools.LogUtils;
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.callback.ToastSaveListener;
@@ -13,7 +15,6 @@ import com.example.q.pocketmusic.config.constant.BmobConstant;
 import com.example.q.pocketmusic.config.constant.CoinConstant;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.config.constant.IntentConstant;
-import com.example.q.pocketmusic.data.BmobInfo;
 import com.example.q.pocketmusic.data.bean.DownloadInfo;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.data.bean.Song;
@@ -26,13 +27,10 @@ import com.example.q.pocketmusic.data.model.GiftModel;
 import com.example.q.pocketmusic.data.model.UserCollectionModel;
 import com.example.q.pocketmusic.data.model.UserCommunityStateModel;
 import com.example.q.pocketmusic.module.common.BaseActivity;
-import com.example.q.pocketmusic.module.common.BaseFragment;
 import com.example.q.pocketmusic.module.common.BasePresenter;
 import com.example.q.pocketmusic.module.common.IBaseView;
 import com.example.q.pocketmusic.util.DownloadUtil;
 import com.example.q.pocketmusic.util.UserUtil;
-import com.example.q.pocketmusic.util.common.IntentUtil;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.List;
 

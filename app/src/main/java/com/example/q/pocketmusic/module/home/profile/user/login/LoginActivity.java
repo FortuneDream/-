@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.UserUtil;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
 
 import butterknife.BindView;
@@ -22,7 +22,7 @@ import butterknife.OnClick;
  * Created by 鹏君 on 2016/11/14.
  */
 
-public class LoginActivity extends BaseActivity<LoginPresenter.IView,LoginPresenter>
+public class LoginActivity extends BaseActivity<LoginPresenter.IView, LoginPresenter>
         implements LoginPresenter.IView {
 
     @BindView(R.id.toolbar)
@@ -51,7 +51,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter.IView,LoginPresen
     }
 
 
-
     //通过基类AuthActivity跳转来，登录成功后返回user，没有则返回null
     @Override
     public void loginToResult(Integer result, MyUser myUser) {
@@ -61,7 +60,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter.IView,LoginPresen
     }
 
 
-    @OnClick({R.id.ok_txt, R.id.register_txt,R.id.forget_password_iv})
+    @OnClick({R.id.ok_txt, R.id.register_txt, R.id.forget_password_iv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ok_txt://点击确定

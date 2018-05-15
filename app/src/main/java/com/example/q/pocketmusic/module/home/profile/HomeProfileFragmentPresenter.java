@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.dell.fortune.tools.IntentUtil;
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastUpdateListener;
 import com.example.q.pocketmusic.config.constant.CoinConstant;
@@ -15,8 +17,6 @@ import com.example.q.pocketmusic.module.home.profile.gift.GiftActivity;
 import com.example.q.pocketmusic.module.home.profile.interest.UserInterestActivity;
 import com.example.q.pocketmusic.util.LocalPhotoAlbumUtil;
 import com.example.q.pocketmusic.util.UserUtil;
-import com.example.q.pocketmusic.util.common.IntentUtil;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.io.File;
 import java.text.ParseException;

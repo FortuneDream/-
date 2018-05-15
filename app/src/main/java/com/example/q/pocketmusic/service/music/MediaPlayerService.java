@@ -7,10 +7,10 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.IAudioPlayerService;
 import com.example.q.pocketmusic.data.bean.local.RecordAudio;
 import com.example.q.pocketmusic.data.db.RecordAudioDao;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.io.IOException;
 import java.util.List;

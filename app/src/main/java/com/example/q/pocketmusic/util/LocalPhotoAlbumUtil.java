@@ -1,8 +1,8 @@
 package com.example.q.pocketmusic.util;
 
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.module.common.BaseModel;
 import com.example.q.pocketmusic.module.common.IBaseView;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,8 +7,9 @@ import android.content.pm.Signature;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import com.dell.fortune.tools.info.LogUtils;
-import com.dell.fortune.tools.info.SharedPrefsUtil;
+import com.dell.fortune.tools.LogUtils;
+import com.dell.fortune.tools.SharedPrefsUtil;
+import com.dell.fortune.tools.update.UpdateBuilder;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.constant.Constant;
@@ -18,8 +19,6 @@ import com.example.q.pocketmusic.module.home.local.HomeLocalFragment;
 import com.example.q.pocketmusic.module.home.net.HomeNetFragment;
 import com.example.q.pocketmusic.module.home.profile.HomeProfileFragment;
 import com.example.q.pocketmusic.module.home.search.HomeSearchFragment;
-import com.example.q.pocketmusic.util.common.update.UpdateBuilder;
-import com.example.q.pocketmusic.util.common.update.UpdateNotificationConfiguration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,8 +106,7 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
                         String versionCodeStr = appVersion.getVersion();
                         String url = appVersion.getPath().getUrl();
                         boolean isForce = appVersion.getIsforce();
-                        UpdateNotificationConfiguration configuration = new UpdateNotificationConfiguration(R.mipmap.ic_launcher, pi.applicationInfo.processName);
-                        UpdateBuilder updateBuilder = new UpdateBuilder(mContext, configuration);
+                        UpdateBuilder updateBuilder = new UpdateBuilder(mContext);
                         updateBuilder.setVersionCodeStr(versionCodeStr)
                                 .setVersionContent(versionContent)
                                 .setUrl(url)

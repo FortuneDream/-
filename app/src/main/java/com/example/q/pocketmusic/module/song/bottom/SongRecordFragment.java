@@ -10,9 +10,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dell.fortune.tools.dialog.DialogEditSureCancel;
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseFragment;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;

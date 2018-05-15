@@ -3,13 +3,13 @@ package com.example.q.pocketmusic.module.song.state;
 import android.database.SQLException;
 import android.support.annotation.NonNull;
 
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 import com.example.q.pocketmusic.data.bean.local.Img;
 import com.example.q.pocketmusic.data.bean.local.LocalSong;
 import com.example.q.pocketmusic.data.db.LocalSongDao;
 import com.example.q.pocketmusic.module.song.SongActivityPresenter;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
 
@@ -43,7 +43,7 @@ public class LocalState extends BaseState implements IState {
         ArrayList<String> imgUrls = new ArrayList<>();
         LocalSong localSong = localSongDao.findBySongId(this.localSong.getId());
         if (localSong == null) {
-            ToastUtil.showToast( "曲谱消失在了异次元。");
+            ToastUtil.showToast("曲谱消失在了异次元。");
             activity.finish();
             return new ArrayList<>();
         }

@@ -8,9 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.dell.fortune.tools.LogUtils;
 import com.dell.fortune.tools.dialog.DialogEditSureCancel;
 import com.dell.fortune.tools.dialog.DialogSureCancel;
-import com.dell.fortune.tools.info.LogUtils;
 import com.dell.fortune.tools.toast.Toasts;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.InstrumentConstant;

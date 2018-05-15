@@ -3,8 +3,8 @@ package com.example.q.pocketmusic.module.common;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
-import com.example.q.pocketmusic.util.common.ToastUtil;
 import com.example.q.pocketmusic.view.widget.view.TopTabView;
 
 import butterknife.BindView;
