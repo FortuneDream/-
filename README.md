@@ -8,34 +8,31 @@
 当漫天飞雨，当心绪使然，当练习音乐……也许你突然想拿起身边的乐器，或琴，或筝，或笛，或古风，或西洋。你苦于乐谱难寻，音乐难叙，此时此刻，此景此情，唯有口袋乐谱在你身边。奇妙的口袋里，有你想要的一切乐谱，你可以随时、随地、随心玩你想要的音乐。产品特色：及时提供各种乐器的乐谱，上传你想与他人分享的乐曲，经典的，流行的，应有尽有，支持古筝，口琴，钢琴，吉他等十余种乐器，更有志同道合的乐友与你同在。我随缘为你寻谱，你随缘为我演奏。音乐不止，乐谱不尽，口袋乐谱在音乐的旅途中与你同行。
 
  
-**搜索乐谱**：可以搜索到任意最新，最全的曲谱，包括网络搜索，本站搜索。
+**搜索乐谱**：可以搜索到任意最新，最全的曲谱。
 
-**支持多种曲谱类型**：支持十五种乐器，包括吉他谱，钢琴谱，简谱等等。
+**支持多种曲谱类型**：支持十五种乐器，包括吉他谱，钢琴谱，口琴谱等等。
 
-**一键下载**：喜欢的乐谱一键下载，不让您错过每一次感动。
+**本地曲谱**：喜欢的乐谱可以通过下载或从相册导入到本App，在没有网络不好的时候可以看哦。
 
 **每日推荐**：每天自动更新最时尚、最潮流的乐谱。
 
-**演奏模式**：喜欢的曲子一定要自己演奏出来才有意思啊~
+**用户系统**：可以看到自己的收藏，分享，求谱，关注
 
-**分享乐谱**：好的曲子分享给大家也不失为一种快乐。
+**谱友圈子**：在谱友圈子你可以看到谱友的动态，谱友分享的曲谱，以及需要帮忙的求谱贴。
 
-**求谱系统**：搜索不到怎么办？发帖子向谱友求助吧！花费少量的硬币可以提升求谱指数哦~
-
-**用户系统**：我的收藏，我的分享，硬币系统，每日签到，支持开发者~~（圈钱大法好）~~
-
-**其他功能**：帮助系统，版本介绍，电子钢琴（尝鲜版）,分享小口袋
+**其他功能**：帮助系统，用户反馈，分享小口袋，硬币系统（可持续发展），支持开发者。
 
 
 ### 示例：
 
 #### Splash
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_0.png)
-* ~~嘿嘿嘿，好像有什么奇怪的东西加进来了~~
+* 把音乐装进口袋
 
-#### 乐谱界面
-* 本地曲谱可以录音
-* 网络曲谱可以下载，收藏，分享
+#### 网络曲谱
+* 提供各种乐器类型的铺子
+* 左上角为提交意见和建议，右上角为帮助
+* 顶部的Banner可以弹出加QQ群的提示框
 
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_1.png)
 
@@ -45,49 +42,39 @@
 
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_2.png)
 
-#### 网络乐谱
-* 直接搜索
-* 推荐曲谱
-* 乐器类型
-* 信息反馈
+#### 搜索曲谱
+* 直接搜索,基本都能搜到
+* 本站搜索（暂时停用）
 
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_3.png)
 
-#### 求谱
-* 谱友来荐
-* 求谱帖子
-* 点击右下角的小飞机发布求谱帖~
+#### 个人页面
+* 我的关注
+* 我的求谱帖
+* 我的收藏
+* 我的分享
+* 硬币与捐赠系统系统
+* 应用商城好评
+* 分享App
 
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_4.png)
 
-#### 个人界面
-* 应用评分
-* 我的硬币（通过每日签到或者分享曲谱可以获得）
-* 我的求谱
-* 我的收藏
-* 我的分享
-* 帮助文档
-* 设置中心
+#### 曲谱界面
+* 手势操作可放大和缩小
+* 点击右上角可以隐藏标题栏和底部录音栏
+* 本地曲谱底部界面显示为录音，网路曲谱底部界面显示为下载，收藏，分享。
 
 ![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_5.png)
 
-
-#### 直接搜索
-* 网络搜索
-* 本站搜索
-
-![image](https://github.com/FortuneDream/PocketMusic/blob/master/readme_6.png)
-
 ### 实现
 * **T-MVP** 架构
-* iOS 与 Android的混合UI风格
 * 加载图片 [Glide](https://github.com/bumptech/glide)
 * 展示图片 [PhotoView](https://github.com/chrisbanes/PhotoView)
 * 网络请求 [OkHttp](https://github.com/square/okhttp)
 * 数据库 [OrmLite](https://github.com/j256/ormlite-android)
 * 爬虫 [Jsoup](https://github.com/jhy/jsoup)
 * Bmob云服务器 [Bmob](http://www.bmob.cn/)
-* 各种UI轮子
+* Design包的各种UI轮子,以及自定义View
 
 ### 技术尝试
 * 设计模式：
@@ -100,12 +87,11 @@
     * Factory
 * Recycler通过viewType实现多种ViewHolder
 * Activity的异常生命周期处理和启动模式
-* 数据库
-    * 一对多
-    * 多对多
+* 数据库设计(一对多，多对多)
 * T-MVP与弱引用
-* 利用线程池的阻塞队列实现顺序下载
-* 压缩apk包以及屏幕适配（VectorDrawable，Webp,权限系统）
+* 利用线程池的阻塞队列实现顺序下载(也可以采用IntentService)
+* 压缩apk包（VectorDrawable，Webp）
+* 版本适配（包括权限，通知栏，应用内apk安装等），目前适配到Android 8.0 Oreo
 
 ### 下载安装
 
@@ -123,4 +109,4 @@
     * 录制音频需要开启录音权限（运行时权限）
 
 #### By 鹏君
-项目大小：Java：3万行，历时一年，独立开发
+项目大小：Java：3万行，历时两年，独立开发
