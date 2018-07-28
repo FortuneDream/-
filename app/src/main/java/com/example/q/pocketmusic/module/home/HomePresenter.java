@@ -4,12 +4,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.dell.fortune.tools.LogUtils;
 import com.dell.fortune.tools.SharedPrefsUtil;
 import com.dell.fortune.tools.update.UpdateBuilder;
+import com.dell.fortune.tools.update.UpdateConfiguration;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.callback.ToastQueryListener;
 import com.example.q.pocketmusic.config.constant.Constant;
@@ -107,11 +109,8 @@ public class HomePresenter extends BasePresenter<HomePresenter.IView> {
                         String url = appVersion.getPath().getUrl();
                         boolean isForce = appVersion.getIsforce();
                         UpdateBuilder updateBuilder = new UpdateBuilder(mContext);
-                        updateBuilder.setVersionCodeStr(versionCodeStr)
-                                .setVersionContent(versionContent)
-                                .setUrl(url)
-                                .setIsForce(isForce)
-                                .update();
+                        updateBuilder.setConfiguration(new UpdateConfiguration(versionCodeStr, versionContent, url, isForce, Environment.getExternalStorageDirectory() + "", R.mipmap.ic_launcher));
+                        updateBuilder.update();
                     }
                 }
             });

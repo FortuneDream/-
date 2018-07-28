@@ -92,6 +92,7 @@
 * 利用线程池的阻塞队列实现顺序下载(也可以采用IntentService)
 * 压缩apk包（VectorDrawable，Webp）
 * 版本适配（包括权限，通知栏，应用内apk安装等），目前适配到Android 8.0 Oreo
+* ActivityLifecycle和LoadingDialog联动
 
 ### 下载安装
 

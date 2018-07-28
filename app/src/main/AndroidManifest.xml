@@ -28,7 +28,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
         <activity
             android:name=".module.common.TestModuleActivity"
             android:screenOrientation="portrait" />
@@ -110,12 +109,6 @@
         <activity
             android:name=".module.home.profile.share.UserShareActivity"
             android:screenOrientation="portrait" />
-
-        <service
-            android:name=".util.common.update.UpdateService"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity
             android:name=".module.home.profile.support.SupportActivity"
             android:screenOrientation="portrait" />
@@ -132,10 +125,6 @@
             android:name=".module.home.profile.interest.UserInterestActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".module.home.profile.support.DimensionActivity" />
-
-        <service
-            android:name=".util.common.update.UpdateIntentService"
-            android:exported="false"></service>
     </application>
 
 </manifest>

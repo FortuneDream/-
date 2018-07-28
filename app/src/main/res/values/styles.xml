@@ -75,5 +75,10 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="PopupAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_enter</item>
+        <item name="android:windowExitAnimation">@anim/pop_dismiss</item>
+    </style>
+
 
 </resources>

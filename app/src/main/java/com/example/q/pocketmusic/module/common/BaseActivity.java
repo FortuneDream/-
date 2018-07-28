@@ -23,6 +23,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.dell.fortune.tools.dialog.shapeloadingview.DialogShapeLoading;
+import com.dell.fortune.tools.dialog.shapeloadingview.LoadingDialogUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.event.LoadingDialogEvent;
 import com.example.q.pocketmusic.util.common.ConvertUtil;
@@ -46,12 +48,11 @@ import butterknife.ButterKnife;
  * Created by 鹏君 on 2016/10/1.
  */
 
-public abstract class BaseActivity<V extends IBaseView, T  extends BasePresenter<V>> extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity<V extends IBaseView, T extends BasePresenter<V>> extends AppCompatActivity implements IBaseView {
     public Activity context;
     protected T presenter;
     public final String TAG = this.getClass().getName();
     private static final int FLAG_DISMISS_DIALOG = 2001;
-    public AlertDialog mLoadingDialog;//这个dialog一般在上传，下载，的时候才会用到
     private List<Drawable> drawableList = new ArrayList<>();
     private boolean mIsViewValid = true;
 
@@ -62,33 +63,17 @@ public abstract class BaseActivity<V extends IBaseView, T  extends BasePresenter
 
     protected abstract T createPresenter();
 
-    private Handler handler = new UIHandler(this);
-
-    //防止dialog内存泄漏
-    private static class UIHandler extends Handler {
-        WeakReference<BaseActivity> softActivity;
-
-        UIHandler(BaseActivity baseActivity) {
-            softActivity = new WeakReference<>(baseActivity);//使用弱引用+static 一是为了Activity可以在只有Handler引用的情况下立即被清除，而是为了可以调用activity的方法。
-        }
-
+    private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what) {
+            switch (msg.what){
                 case FLAG_DISMISS_DIALOG:
-                    BaseActivity activity = softActivity.get();
-                    if (activity == null) {
-                        return;
-                    }
-                    if (activity.mLoadingDialog != null && activity.mLoadingDialog.isShowing()) {
-                        activity.mLoadingDialog.dismiss();
-                    }
+                    LoadingDialogUtil.dismiss(context);
                     break;
             }
         }
-    }
-
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,7 +84,6 @@ public abstract class BaseActivity<V extends IBaseView, T  extends BasePresenter
         presenter = createPresenter();
         this.context = this;
         initView();
-        initLoadingView();
     }
 
 
@@ -145,20 +129,12 @@ public abstract class BaseActivity<V extends IBaseView, T  extends BasePresenter
     }
 
 
-    private void initLoadingView() {
-        //初始化一个LoadingDialog
-        mLoadingDialog = new AlertDialog.Builder(this)
-                .setView(R.layout.view_loading_wait)
-                .setCancelable(false)
-                .create();
-    }
-
     public void showLoading(boolean isShow) {
         if (isShow) {
-            mLoadingDialog.show();
-            handler.sendEmptyMessageDelayed(FLAG_DISMISS_DIALOG, 5 * 1000);
+            LoadingDialogUtil.show(this);
+            handler.sendEmptyMessage(FLAG_DISMISS_DIALOG);
         } else {
-            mLoadingDialog.dismiss();
+            LoadingDialogUtil.dismiss(this);
         }
     }
 
@@ -172,23 +148,6 @@ public abstract class BaseActivity<V extends IBaseView, T  extends BasePresenter
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    //反射显示图标
-//    @Override
-//    protected boolean onPrepareOptionsPanel(View view, Menu menu) {
-//        if (menu != null) {
-//            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
-//                try {
-//                    Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
-//                    m.setAccessible(true);
-//                    m.invoke(menu, true);
-//                } catch (Exception e) {
-//                    Log.e(getClass().getSimpleName(), "onMenuOpened...unable to set icons for overflow menu", e);
-//                }
-//            }
-//        }
-//        return super.onPrepareOptionsPanel(view, menu);
-//    }
 
     //直接重启应用，cleartop
     @Override
@@ -208,11 +167,11 @@ public abstract class BaseActivity<V extends IBaseView, T  extends BasePresenter
     }
 
 
-
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void showDialog(LoadingDialogEvent event){
+    public void showDialog(LoadingDialogEvent event) {
         showLoading(event.isShow());
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -255,8 +214,8 @@ public abstract class BaseActivity<V extends IBaseView, T  extends BasePresenter
         }
         mIsViewValid = false;
         drawableList.clear();
-        mLoadingDialog.dismiss();
         presenter.detachView();
+        handler.removeCallbacksAndMessages(null);
     }
 
     @Override

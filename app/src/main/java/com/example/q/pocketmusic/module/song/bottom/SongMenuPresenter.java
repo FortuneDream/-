@@ -143,7 +143,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             @Override
             public void onSuccess(List<MyUser> list) {
                 for (MyUser other : list) {
-                    if (other.getObjectId().equals(user.getObjectId())) {
+                    if (other == null || other.getObjectId().equals(user.getObjectId())) {
                         //已经点赞
                         isEnableAgree = false;
                         break;
@@ -164,7 +164,7 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
             @Override
             public void onSuccess(List<MyUser> list) {
                 for (MyUser other : list) {
-                    if (other.getObjectId().equals(user.getObjectId())) {
+                    if (other == null || other.getObjectId().equals(user.getObjectId())) {
                         //已经点赞
                         isEnableAgree = false;
                         break;
@@ -199,6 +199,9 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     private void agreeWithSharePic() {
         final ShareSong shareSong = (ShareSong) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_SHARE_SONG);
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
+        if (shareSong.getUser() == null) {
+            return;
+        }
         if (TextUtils.equals(shareSong.getUser().getObjectId(), user.getObjectId())) {
             ToastUtil.showToast(mView.getResString(R.string.no_agree_self));
             return;
@@ -227,6 +230,9 @@ public class SongMenuPresenter extends BasePresenter<SongMenuPresenter.IView> {
     private void agreeWithCommentPic() {
         final AskSongComment askSongComment = (AskSongComment) intent.getSerializableExtra(IntentConstant.EXTRA_OPTIONAL_SONG_ACTIVITY_ASK_COMMENT);
         final MyUser user = MyUser.getCurrentUser(MyUser.class);
+        if (askSongComment.getUser() == null) {
+            return;
+        }
         if (TextUtils.equals(askSongComment.getUser().getObjectId(), user.getObjectId())) {
             ToastUtil.showToast(mView.getResString(R.string.no_agree_self));
             return;

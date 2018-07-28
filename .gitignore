@@ -1,0 +1,17 @@
+*.iml
+.gradle/
+.idea/
+build/
+captures/
+gradle/
+local.properties
+gradle.properties
+gradlew
+gradlew.bat
+settings.gradle
+.DS_Store
+/app/build
+/app/key.jks
+
+
+

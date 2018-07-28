@@ -23,6 +23,7 @@ public class GuidePopHelper {
             View view = View.inflate(targetView.getContext(), R.layout.pop_ask_song, null);
             GuidePopupWindow popupWindow = new GuidePopupWindow();
             popupWindow.reset()
+                    .setAnimationStyle(R.style.PopupAnimation)
                     .setDelayShow(400)
                     .setShowDuration(2000)
                     .setPositionRelateToTarget(GuidePopupWindow.BOTTOM)
@@ -48,6 +49,7 @@ public class GuidePopHelper {
             View view = View.inflate(targetView.getContext(), R.layout.pop_share_song, null);
             GuidePopupWindow popupWindow = new GuidePopupWindow();
             popupWindow.reset()
+                    .setAnimationStyle(R.style.PopupAnimation)
                     .setDelayShow(400)
                     .setShowDuration(2000)
                     .setPositionRelateToTarget(GuidePopupWindow.BOTTOM)
@@ -70,6 +72,7 @@ public class GuidePopHelper {
             View view = View.inflate(targetView.getContext(), R.layout.pop_get_coin, null);
             GuidePopupWindow popupWindow = new GuidePopupWindow();
             popupWindow.reset()
+                    .setAnimationStyle(R.style.PopupAnimation)
                     .setDelayShow(400)
                     .setShowDuration(2000)
                     .setPositionRelateToTarget(GuidePopupWindow.BOTTOM)
@@ -92,6 +95,7 @@ public class GuidePopHelper {
             View view = View.inflate(targetView.getContext(), R.layout.pop_hide_top_bottom, null);
             GuidePopupWindow popupWindow = new GuidePopupWindow();
             popupWindow.reset()
+                    .setAnimationStyle(R.style.PopupAnimation)
                     .setDelayShow(100)
                     .setOutSideTouchable(true)
                     .setShowDuration(1500)
@@ -115,6 +119,7 @@ public class GuidePopHelper {
             View view = View.inflate(targetView.getContext(), R.layout.pop_hot, null);
             GuidePopupWindow popupWindow = new GuidePopupWindow();
             popupWindow.reset()
+                    .setAnimationStyle(R.style.PopupAnimation)
                     .setDelayShow(400)
                     .setShowDuration(2000)
                     .setPositionRelateToTarget(GuidePopupWindow.BOTTOM)
@@ -136,6 +141,7 @@ public class GuidePopHelper {
             View view = View.inflate(targetView.getContext(), R.layout.pop_change_head, null);
             GuidePopupWindow popupWindow = new GuidePopupWindow();
             popupWindow.reset()
+                    .setAnimationStyle(R.style.PopupAnimation)
                     .setDelayShow(400)
                     .setShowDuration(2000)
                     .setPositionRelateToTarget(GuidePopupWindow.BOTTOM)
@@ -161,6 +167,7 @@ public class GuidePopHelper {
             View view = View.inflate(targetView.getContext(), R.layout.pop_change_nick_name, null);
             GuidePopupWindow popupWindow = new GuidePopupWindow();
             popupWindow.reset()
+                    .setAnimationStyle(R.style.PopupAnimation)
                     .setDelayShow(400)
                     .setShowDuration(2000)
                     .setPositionRelateToTarget(GuidePopupWindow.BOTTOM)
@@ -181,6 +188,7 @@ public class GuidePopHelper {
             View view = View.inflate(targetView.getContext(), R.layout.pop_lead_song, null);
             GuidePopupWindow popupWindow = new GuidePopupWindow();
             popupWindow.reset()
+                    .setAnimationStyle(R.style.PopupAnimation)
                     .setDelayShow(400)
                     .setOutSideTouchable(true)
                     .setShowDuration(2000)
@@ -203,6 +211,7 @@ public class GuidePopHelper {
         View view = View.inflate(targetView.getContext(), R.layout.pop_click_ma, null);
         GuidePopupWindow popupWindow = new GuidePopupWindow();
         popupWindow.reset()
+                .setAnimationStyle(R.style.PopupAnimation)
                 .setDelayShow(400)
                 .setOutSideTouchable(true)
                 .setShowDuration(2000)

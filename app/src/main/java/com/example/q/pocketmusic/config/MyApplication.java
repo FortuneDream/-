@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.dell.fortune.tools.SharedPrefsUtil;
 import com.dell.fortune.tools.crash.CrashCatch;
+import com.dell.fortune.tools.dialog.shapeloadingview.LoadingDialogUtil;
 import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.Constant;
@@ -26,21 +27,21 @@ import cn.finalteam.galleryfinal.ThemeConfig;
 
 public class MyApplication extends Application {
     public static Context context;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        context=getApplicationContext();
+        context = getApplicationContext();
         ToastUtil.init(context);
         InstrumentConstant.init();
         SharedPrefsUtil.init(context);
-        Bmob.initialize(context, Constant.APP_ID, "Bmob");
-        //官网SDK
-        AppStat.i(Constant.APP_ID, "Bmob");
+        Bmob.initialize(context, Constant.APP_ID);
         //发布时，开启异常捕获器
         CrashCatch crashCatch = CrashCatch.getInstance();
         crashCatch.setListener(new CrashDefaultHandler(this));
         crashCatch.init();
         initGalleryFinal();
+        LoadingDialogUtil.init(context);
     }
 
     private void initGalleryFinal() {

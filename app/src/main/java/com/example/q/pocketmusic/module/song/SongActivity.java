@@ -139,6 +139,10 @@ public class SongActivity extends BaseActivity<SongActivityPresenter.IView, Song
         presenter.setIntent(getIntent());//设置intent
         presenter.init(getSupportFragmentManager());//初始化
         SongObject songObject = (SongObject) getIntent().getSerializableExtra(IntentConstant.EXTRA_SONG_ACTIVITY_SONG_OBJECT);
+        if (songObject == null) {
+            ToastUtil.showToast("发生错误，没有获取到歌曲");
+            finish();
+        }
         Song song = songObject.getSong();
         initToolbar(toolbar, song.getName());//toolbar
         presenter.loadPic();  //查找图片

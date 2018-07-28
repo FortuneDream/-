@@ -3,6 +3,7 @@ package com.example.q.pocketmusic.data.net;
 import android.os.AsyncTask;
 
 
+import com.dell.fortune.tools.LogUtils;
 import com.example.q.pocketmusic.config.constant.Constant;
 import com.example.q.pocketmusic.data.bean.Song;
 
@@ -36,8 +37,9 @@ public class LoadSearchSongPic extends AsyncTask<Song, Void, Integer> {
             Element content = box.select("div.content").get(0);
             Elements imgs = content.getElementsByTag("img");
             for (Element img : imgs) {
-                String src = img.attr("src");
-                list.add(Constant.SO_PU_BASE + src);
+                String url = Constant.SO_PU_BASE + img.attr("src");
+                list.add(url);
+                LogUtils.e("url:" + url);
             }
             song.setIvUrl(list);
         } catch (Exception e) {

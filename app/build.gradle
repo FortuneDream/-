@@ -59,9 +59,9 @@ dependencies {
     // OKhttp
     implementation files('libs/okhttp-3.8.1.jar')
     //Bmob
-    api ('cn.bmob.android:bmob-sdk:3.6.0'){
-        exclude group :'io.reactivex.rxandroid'
-        exclude group :'io.reactivex.rxjava'
+    api('cn.bmob.android:bmob-sdk:3.6.0') {
+        exclude group: 'io.reactivex.rxandroid'
+        exclude group: 'io.reactivex.rxjava'
     }
     //Jsoup
     implementation 'org.jsoup:jsoup:1.9.2'
@@ -92,5 +92,7 @@ dependencies {
     //RxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation(name:'tools', ext:'aar')
+    implementation(name: 'tools', ext: 'aar')
+
+
 }
