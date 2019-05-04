@@ -2,23 +2,19 @@ package com.example.q.pocketmusic.module.home.search;
 
 
 import android.graphics.drawable.Animatable;
-import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseFragment;
+import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class HomeSearchFragment extends BaseFragment<HomeSearchFragmentPresenter.IView, HomeSearchFragmentPresenter>
         implements HomeSearchFragmentPresenter.IView, View.OnKeyListener, View.OnClickListener, ViewPager.OnPageChangeListener,
@@ -97,6 +93,7 @@ public class HomeSearchFragment extends BaseFragment<HomeSearchFragmentPresenter
     public void onPageScrollStateChanged(int state) {
 
     }
+
     @Override
     protected HomeSearchFragmentPresenter createPresenter() {
         return new HomeSearchFragmentPresenter(this);

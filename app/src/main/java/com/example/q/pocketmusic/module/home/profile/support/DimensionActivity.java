@@ -3,10 +3,11 @@ package com.example.q.pocketmusic.module.home.profile.support;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.dell.fortune.tools.IntentUtil;
 import com.dell.fortune.tools.toast.ToastUtil;

@@ -1,9 +1,10 @@
 package com.example.q.pocketmusic.view.widget.net;
 
-import android.content.Context;
-import android.support.v4.view.ViewPager;
+import android.content.Context;;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by 鹏君 on 2016/9/20.

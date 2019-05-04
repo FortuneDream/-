@@ -2,7 +2,8 @@ package com.example.q.pocketmusic.config;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
+
+import androidx.core.content.ContextCompat;
 
 import com.dell.fortune.tools.SharedPrefsUtil;
 import com.dell.fortune.tools.crash.CrashCatch;
@@ -14,7 +15,6 @@ import com.example.q.pocketmusic.config.pic.GlideImageLoader;
 import com.example.q.pocketmusic.config.constant.InstrumentConstant;
 
 import cn.bmob.v3.Bmob;
-import cn.bmob.v3.statistics.AppStat;
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;

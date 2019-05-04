@@ -1,16 +1,17 @@
 package com.example.q.pocketmusic.module.home.profile.suggestion;
 
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.bmob.UserSuggestion;
 import com.example.q.pocketmusic.module.common.AuthActivity;
+import com.google.android.material.appbar.AppBarLayout;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
 import java.util.List;

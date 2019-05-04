@@ -1,7 +1,8 @@
 package com.example.q.pocketmusic.module.common;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;

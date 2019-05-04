@@ -1,18 +1,18 @@
 package com.example.q.pocketmusic.module.home.net.type.community.ask.publish;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.util.GuidePopHelper;
 import com.example.q.pocketmusic.view.dialog.CoinDialogBuilder;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
+import com.google.android.material.appbar.AppBarLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -11,10 +11,11 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.support.annotation.IdRes;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.IdRes;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.util.common.ConvertUtil;

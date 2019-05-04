@@ -2,10 +2,11 @@ package com.example.q.pocketmusic.module.song;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.Constant;

@@ -3,7 +3,8 @@ package com.example.q.pocketmusic.data.model;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Environment;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.dell.fortune.tools.SharedPrefsUtil;
 import com.example.q.pocketmusic.config.constant.Constant;

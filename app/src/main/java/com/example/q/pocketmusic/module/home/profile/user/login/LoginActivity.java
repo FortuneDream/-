@@ -1,11 +1,11 @@
 package com.example.q.pocketmusic.module.home.profile.user.login;
 
 import android.content.Intent;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;
@@ -14,6 +14,7 @@ import com.example.q.pocketmusic.data.bean.MyUser;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.util.UserUtil;
 import com.example.q.pocketmusic.view.widget.view.TextEdit;
+import com.google.android.material.appbar.AppBarLayout;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -1,8 +1,9 @@
 package com.example.q.pocketmusic.module.home.net.type.community.ask.comment;
 
 import android.database.SQLException;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.R;

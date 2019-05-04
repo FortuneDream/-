@@ -1,14 +1,14 @@
 package com.example.q.pocketmusic.module.home.net.type.study;
 
-import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.widget.Toolbar;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.InstrumentConstant;
 import com.example.q.pocketmusic.module.common.BaseActivity;
+import com.google.android.material.appbar.AppBarLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

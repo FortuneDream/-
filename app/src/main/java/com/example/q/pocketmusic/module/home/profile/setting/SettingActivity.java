@@ -2,15 +2,16 @@ package com.example.q.pocketmusic.module.home.profile.setting;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.AuthActivity;
 import com.example.q.pocketmusic.view.widget.view.IcoTextItem;
+import com.google.android.material.appbar.AppBarLayout;
 
 import butterknife.BindView;
 import butterknife.OnClick;

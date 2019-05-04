@@ -1,9 +1,9 @@
 package com.example.q.pocketmusic.module.home.search;
 
-import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class HomeSearchAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
 
 
-    public HomeSearchAdapter( FragmentManager fm, List<String> toolbarAttrList, List<Fragment> fragments) {
+    public HomeSearchAdapter(FragmentManager fm, List<String> toolbarAttrList, List<Fragment> fragments) {
         super(fm);
         this.tabAttrList = toolbarAttrList;
         this.fragments = fragments;

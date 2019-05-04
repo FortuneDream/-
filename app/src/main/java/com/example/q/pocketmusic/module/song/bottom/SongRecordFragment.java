@@ -2,12 +2,13 @@ package com.example.q.pocketmusic.module.song.bottom;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.dell.fortune.tools.dialog.DialogEditSureCancel;
 import com.dell.fortune.tools.toast.ToastUtil;

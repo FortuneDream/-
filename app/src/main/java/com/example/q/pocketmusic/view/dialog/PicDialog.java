@@ -1,10 +1,11 @@
 package com.example.q.pocketmusic.view.dialog;
 
 import android.content.Context;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.pic.DisplayStrategy;

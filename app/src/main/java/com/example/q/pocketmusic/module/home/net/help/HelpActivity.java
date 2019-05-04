@@ -1,14 +1,15 @@
 package com.example.q.pocketmusic.module.home.net.help;
 
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.module.common.BaseActivity;
 import com.example.q.pocketmusic.module.home.profile.suggestion.LeftAndRightTagDecoration;
+import com.google.android.material.appbar.AppBarLayout;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
 import java.util.List;

@@ -1,8 +1,9 @@
 package com.example.q.pocketmusic.module.common;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by 鹏君 on 2016/10/11.

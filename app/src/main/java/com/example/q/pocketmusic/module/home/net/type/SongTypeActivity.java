@@ -1,11 +1,12 @@
 package com.example.q.pocketmusic.module.home.net.type;
 
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.config.constant.InstrumentConstant;

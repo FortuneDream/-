@@ -1,7 +1,8 @@
 package com.example.q.pocketmusic.module.song.state;
 
 import android.database.SQLException;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.config.constant.Constant;

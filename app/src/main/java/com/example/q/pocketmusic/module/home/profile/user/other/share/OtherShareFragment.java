@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.module.home.profile.user.other.share;
 
-import android.support.v4.widget.SwipeRefreshLayout;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.data.bean.MyUser;

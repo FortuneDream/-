@@ -1,7 +1,6 @@
 package com.example.q.pocketmusic.view.widget.net;
 
 import android.graphics.Color;
-import android.support.design.widget.Snackbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.q.pocketmusic.R;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * Created by 鹏君 on 2016/9/24.

@@ -2,11 +2,12 @@ package com.example.q.pocketmusic.view.widget.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.example.q.pocketmusic.R;
 import com.example.q.pocketmusic.util.common.ConvertUtil;

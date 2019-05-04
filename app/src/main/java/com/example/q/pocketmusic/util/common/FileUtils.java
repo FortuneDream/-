@@ -1,6 +1,7 @@
 package com.example.q.pocketmusic.util.common;
 
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.dell.fortune.tools.toast.ToastUtil;
 

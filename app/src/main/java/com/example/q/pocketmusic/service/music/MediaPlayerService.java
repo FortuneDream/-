@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.dell.fortune.tools.toast.ToastUtil;
 import com.example.q.pocketmusic.IAudioPlayerService;
