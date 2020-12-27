@@ -19,7 +19,7 @@ allprojects {
         mavenCentral()  // GPUImage for Android
         google()
         maven { url "https://jitpack.io" }
-        maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }//Bmob
+        maven {url 'https://dl.bintray.com/chaozhouzhang/maven' }
     }
 }
 task clean(type: Delete) {

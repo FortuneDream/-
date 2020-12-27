@@ -33,6 +33,17 @@ android {
     sourceSets {
         main.jniLibs.srcDirs = ['libs']
     }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java', 'src/main/aidl']
+            resources.srcDirs = ['src/main/java', 'src/main/aidl']
+            aidl.srcDirs = ['src/main/aidl']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+        }
+    }
 }
 
 repositories {
@@ -53,12 +64,10 @@ dependencies {
     //EasyRecyclerView
     implementation 'com.jude:easyrecyclerview:4.4.2'
     // OKhttp
-    implementation files('libs/okhttp-3.8.1.jar')
+    implementation 'com.squareup.okhttp3:okhttp:3.14.1'
+    implementation 'com.squareup.okio:okio:2.2.2'
     //Bmob
-    api('cn.bmob.android:bmob-sdk:3.6.0') {
-        exclude group: 'io.reactivex.rxandroid'
-        exclude group: 'io.reactivex.rxjava'
-    }
+    implementation 'cn.bmob.android:bmob-sdk:3.7.8'
     //Jsoup
     implementation 'org.jsoup:jsoup:1.9.2'
     //ButterKnife

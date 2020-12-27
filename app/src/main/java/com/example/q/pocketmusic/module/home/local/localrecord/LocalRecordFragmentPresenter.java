@@ -28,7 +28,6 @@ import java.util.Locale;
 
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
-import rx.functions.Action1;
 
 /**
  * Created by 鹏君 on 2016/10/23.

@@ -21,10 +21,6 @@ import com.example.q.pocketmusic.module.home.net.type.study.StudyActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 
 /**

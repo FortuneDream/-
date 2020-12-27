@@ -36,6 +36,8 @@ import com.example.q.pocketmusic.util.UserUtil;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
 
+import org.reactivestreams.Subscriber;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +52,12 @@ import cn.bmob.v3.listener.UploadBatchListener;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 鹏君 on 2016/11/14.
@@ -404,23 +408,25 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
     //RxJava,先查询本地曲谱的列表
     public void queryLocalSongList() {
-        rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
+        Observable.create(new ObservableOnSubscribe<List<String>>() {
             @Override
-            public void call(Subscriber<? super List<String>> subscriber) {
+            public void subscribe(@io.reactivex.annotations.NonNull ObservableEmitter<List<String>> emitter) throws Exception {
                 LocalSongDao dao = new LocalSongDao(mView.getCurrentContext());
                 List<LocalSong> list = dao.queryForAll();
                 List<String> names = new ArrayList<String>();
                 for (LocalSong localSong : list) {
                     names.add(localSong.getName());
                 }
-                subscriber.onNext(names);
+                emitter.onNext(names);
             }
+
+
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<String>>() {
+                .subscribe(new Consumer<List<String>>() {
                     @Override
-                    public void call(List<String> strings) {
+                    public void accept(List<String> strings) throws Exception {
                         mView.alertLocalListDialog(strings);
                     }
                 });
@@ -428,17 +434,18 @@ public class AskSongCommentPresenter extends BasePresenter<AskSongCommentPresent
 
     //通过曲谱的名字找到本地图片的路径，并添加，显示已添加的图片数量
     public void addPicByLocalSong(final String name) {
-        rx.Observable.create(new rx.Observable.OnSubscribe<List<String>>() {
+        Observable.create(new ObservableOnSubscribe<List<String>>() {
             @Override
-            public void call(Subscriber<? super List<String>> subscriber) {
-                subscriber.onNext(getLocalImgs(name));
+            public void subscribe(@io.reactivex.annotations.NonNull ObservableEmitter<List<String>> emitter) throws Exception {
+                emitter.onNext(getLocalImgs(name));
             }
+
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<String>>() {
+                .subscribe(new Consumer<List<String>>() {
                     @Override
-                    public void call(List<String> strings) {
+                    public void accept(List<String> strings) throws Exception {
                         mAskSongCommentModel.getPicUrls().clear();
                         mAskSongCommentModel.getPicUrls().addAll(strings);
                         mUploadTypeFlag = LOCAL;
