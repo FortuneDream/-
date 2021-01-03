@@ -10,6 +10,10 @@ android {
         versionName "7.2"
         vectorDrawables.useSupportLibrary = true
     }
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     signingConfigs {
         myConfig {
             storeFile file("D:\\key.jks")

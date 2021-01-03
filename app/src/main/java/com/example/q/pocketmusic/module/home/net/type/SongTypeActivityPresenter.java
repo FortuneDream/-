@@ -18,9 +18,18 @@ import com.example.q.pocketmusic.module.home.net.type.community.share.publish.Sh
 import com.example.q.pocketmusic.module.home.net.type.hot.HotListFragment;
 import com.example.q.pocketmusic.module.home.net.type.study.StudyActivity;
 
+import org.reactivestreams.Subscriber;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -101,25 +110,27 @@ public class SongTypeActivityPresenter extends BasePresenter<SongTypeActivityPre
 
     //查找本地
     public void queryLocalSongList() {
-        rx.Observable.create(new rx.Observable.OnSubscribe<List<LocalSong>>() {
+        Observable.create(new ObservableOnSubscribe<List<LocalSong>>() {
             @Override
-            public void call(Subscriber<? super List<LocalSong>> subscriber) {
+            public void subscribe(@NonNull ObservableEmitter<List<LocalSong>> emitter) throws Exception {
                 LocalSongDao dao = new LocalSongDao(mContext);
                 List<LocalSong> list = dao.queryForAll();
-                subscriber.onNext(list);
+                emitter.onNext(list);
             }
+
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<LocalSong>>() {
+                .subscribe(new Consumer<List<LocalSong>>() {
                     @Override
-                    public void call(List<LocalSong> localSongs) {
+                    public void accept(List<LocalSong> localSongs) throws Exception {
                         List<String> strings = new ArrayList<String>();
                         for (int i = 0; i < localSongs.size(); i++) {
                             strings.add(localSongs.get(i).getName());
                         }
                         mView.alertLocalListDialog(localSongs, strings);
                     }
+
                 });
     }
 
